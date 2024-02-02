@@ -1,7 +1,8 @@
-// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+import 'package:netplayer_next/Views/components/loginInput.dart';
 
 class loginView extends StatefulWidget {
   const loginView({super.key});
@@ -28,6 +29,13 @@ Future<void> showDialog() async {
 }
 
 class _loginViewState extends State<loginView> {
+
+  TextEditingController inputURL=TextEditingController();
+  TextEditingController inputUsername=TextEditingController();
+  TextEditingController inputPassword=TextEditingController();
+
+  bool mouseInButton=false;
+
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -47,6 +55,86 @@ class _loginViewState extends State<loginView> {
                 spreadRadius: 1.0,
               ),
             ],
+          ),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    SizedBox(height: 15,),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(width: 10,),
+                        Icon(
+                          Icons.chevron_right_rounded,
+                          size: 30,
+                        ),
+                        SizedBox(width: 5,),
+                        Text(
+                          "连接到你的音乐库",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // URL地址输入框
+                          loginInputComponent(isPassword: false, controller: inputURL, inputName: 'URL地址',),
+                          SizedBox(height: 20,),
+                          // 用户名输入框
+                          loginInputComponent(isPassword: false, controller: inputUsername, inputName: '用户名',),
+                          SizedBox(height: 20,),
+                          // 密码输入框
+                          loginInputComponent(isPassword: true, controller: inputPassword, inputName: '密码',),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 40,)
+                  ],
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: MouseRegion(
+                  onEnter: (event){
+                    setState(() {
+                      mouseInButton=true;
+                    });
+                  },
+                  onExit: (event){
+                    setState(() {
+                      mouseInButton=false;
+                    });
+                  },
+                  cursor: SystemMouseCursors.click,
+                  child: AnimatedContainer(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: mouseInButton ? Colors.blue[700] : Colors.blue,
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(10)
+                      )
+                    ),
+                    duration: Duration(milliseconds: 200),
+                    child: Center(
+                      child: Icon(
+                        Icons.arrow_forward_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
+              )
+            ] 
           ),
         ),  
       ),
