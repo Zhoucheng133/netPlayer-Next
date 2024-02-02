@@ -101,32 +101,37 @@ class _loginViewState extends State<loginView> {
             Positioned(
               bottom: 0,
               right: 0,
-              child: MouseRegion(
-                onEnter: (event){
-                  setState(() {
-                    mouseInButton=true;
-                  });
+              child: GestureDetector(
+                onTap: (){
+                  // TODO 登录操作
                 },
-                onExit: (event){
-                  setState(() {
-                    mouseInButton=false;
-                  });
-                },
-                cursor: SystemMouseCursors.click,
-                child: AnimatedContainer(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: mouseInButton ? Colors.blue[700] : Colors.blue,
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(10)
-                    )
-                  ),
-                  duration: Duration(milliseconds: 200),
-                  child: Center(
-                    child: Icon(
-                      Icons.arrow_forward_rounded,
-                      color: Colors.white,
+                child: MouseRegion(
+                  onEnter: (event){
+                    setState(() {
+                      mouseInButton=true;
+                    });
+                  },
+                  onExit: (event){
+                    setState(() {
+                      mouseInButton=false;
+                    });
+                  },
+                  cursor: SystemMouseCursors.click,
+                  child: AnimatedContainer(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: mouseInButton ? Colors.blue[700] : Colors.blue,
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(10)
+                      )
+                    ),
+                    duration: Duration(milliseconds: 200),
+                    child: Center(
+                      child: Icon(
+                        Icons.arrow_forward_rounded,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
