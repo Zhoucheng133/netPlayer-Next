@@ -40,7 +40,11 @@ class _MainAppState extends State<MainApp> {
                 ),
               ),
             ),
-            loginView()
+            AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              color: Color.fromARGB(255, 240, 240, 240),
+              child: loginView(),
+            )
           ],
         )
       ),
