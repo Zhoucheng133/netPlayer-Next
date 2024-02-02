@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:netplayer_next/Views/loginView.dart';
 
 void main() {
   runApp(const MainApp());
@@ -31,25 +32,15 @@ class _MainAppState extends State<MainApp> {
             Positioned(
               top: 0,
               left: 0,
-              child: Container(
+              child: SizedBox(
                 height: 30,
                 width: MediaQuery.of(context).size.width,
-                color: Colors.red,
                 child: WindowTitleBarBox(
                   child: MoveWindow(),
                 ),
               ),
             ),
-            // Column(
-            //   children: [
-            //     Text("hello world!")
-            //   ],
-            // )
-            Positioned(
-              top: 0,
-              left: 0,
-              child: Text("hello world!")
-            )
+            loginView()
           ],
         )
       ),

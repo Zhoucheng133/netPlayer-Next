@@ -10,6 +10,7 @@ dependencies:
   bitsdojo_window: ^0.1.6
   flutter:
     sdk: flutter
+  flutter_platform_alert: ^0.5.1
 
 dev_dependencies:
   flutter_test:
