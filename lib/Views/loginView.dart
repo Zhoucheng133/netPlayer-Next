@@ -36,13 +36,31 @@ class _loginViewState extends State<loginView> {
 
   bool mouseInButton=false;
 
+  Future<void> systemAlert(String title, String content) async {
+    await FlutterPlatformAlert.showCustomAlert(
+      windowTitle: title, 
+      text: content,
+      positiveButtonTitle: "好"
+    );
+  }
+
+  bool isURL(String url){
+    if(url.startsWith("http://") || url.startsWith("https://")){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   void loginController(){
     if(inputURL.text.isEmpty){
-      
+      systemAlert("无法登录", "没有输入音乐服务器的URL地址");
+    }else if(!isURL(inputURL.text)){
+      systemAlert("无法登录", "音乐服务器的URL地址不合法");
     }else if(inputUsername.text.isEmpty){
-
+      systemAlert("无法登录", "没有输入音乐服务器的用户名");
     }else if(inputPassword.text.isEmpty){
-
+      systemAlert("无法登录", "没有输入音乐服务器的密码");
     }else{
       
     }
