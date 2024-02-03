@@ -36,6 +36,18 @@ class _loginViewState extends State<loginView> {
 
   bool mouseInButton=false;
 
+  void loginController(){
+    if(inputURL.text.isEmpty){
+      
+    }else if(inputUsername.text.isEmpty){
+
+    }else if(inputPassword.text.isEmpty){
+
+    }else{
+      
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Center(
@@ -103,7 +115,7 @@ class _loginViewState extends State<loginView> {
               right: 0,
               child: GestureDetector(
                 onTap: (){
-                  // TODO 登录操作
+                  loginController();
                 },
                 child: MouseRegion(
                   onEnter: (event){
