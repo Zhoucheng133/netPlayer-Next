@@ -1,8 +1,9 @@
 // ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:netplayer_next/Views/components/loginInput.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 
 class loginView extends StatefulWidget {
   const loginView({super.key});
@@ -11,22 +12,22 @@ class loginView extends StatefulWidget {
   State<loginView> createState() => _loginViewState();
 }
 
-Future<void> showDialog() async {
-  final result = await FlutterPlatformAlert.showCustomAlert(
-    windowTitle: '是否继续?',
-    text: 'BodyTest',
-    positiveButtonTitle: "继续",
-    negativeButtonTitle: "取消",
-    // neutralButtonTitle: "Neutral",
-    options: PlatformAlertOptions(
-      windows: WindowsAlertOptions(
-        additionalWindowTitle: 'Window title',
-        showAsLinks: true,
-      ),
-    ),
-  );
-  print(result);
-}
+// Future<void> showDialog() async {
+//   final result = await FlutterPlatformAlert.showCustomAlert(
+//     windowTitle: '是否继续?',
+//     text: 'BodyTest',
+//     positiveButtonTitle: "继续",
+//     negativeButtonTitle: "取消",
+//     // neutralButtonTitle: "Neutral",
+//     options: PlatformAlertOptions(
+//       windows: WindowsAlertOptions(
+//         additionalWindowTitle: 'Window title',
+//         showAsLinks: true,
+//       ),
+//     ),
+//   );
+//   print(result);
+// }
 
 class _loginViewState extends State<loginView> {
 
@@ -96,7 +97,7 @@ class _loginViewState extends State<loginView> {
                     children: [
                       SizedBox(width: 10,),
                       Icon(
-                        Icons.chevron_right_rounded,
+                        FluentIcons.chevron_right_med,
                         size: 30,
                       ),
                       SizedBox(width: 5,),
@@ -151,7 +152,7 @@ class _loginViewState extends State<loginView> {
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: mouseInButton ? Colors.blue[700] : Colors.blue,
+                      color: mouseInButton ? Colors.blue.darker : Colors.blue,
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(10)
                       )
@@ -159,7 +160,7 @@ class _loginViewState extends State<loginView> {
                     duration: Duration(milliseconds: 200),
                     child: Center(
                       child: Icon(
-                        Icons.arrow_forward_rounded,
+                        FluentIcons.chrome_back_mirrored,
                         color: Colors.white,
                       ),
                     ),

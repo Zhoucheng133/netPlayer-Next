@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 
 class loginInputComponent extends StatefulWidget {
 
@@ -45,19 +46,9 @@ class _loginInputComponentState extends State<loginInputComponent> {
           ),
           child: Padding(
             padding: const EdgeInsets.only(left: 7, right: 7),
-            child: TextField(
+            child: TextBox(
               controller: widget.controller,
-              autocorrect: false,
-              enableSuggestions: false,
               obscureText: widget.isPassword,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(vertical: 0),
-                border: OutlineInputBorder(borderSide: BorderSide.none),
-              ),
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.grey[700]
-              ),
             ),
           )
         ),
