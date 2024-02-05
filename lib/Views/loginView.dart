@@ -98,7 +98,7 @@ class _loginViewState extends State<loginView> {
                       SizedBox(width: 10,),
                       Icon(
                         FluentIcons.chevron_right_med,
-                        size: 30,
+                        size: 17,
                       ),
                       SizedBox(width: 5,),
                       Text(

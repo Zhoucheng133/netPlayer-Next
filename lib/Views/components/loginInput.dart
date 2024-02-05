@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 // import 'package:flutter/material.dart';
 import 'package:fluent_ui/fluent_ui.dart';
@@ -30,28 +30,28 @@ class _loginInputComponentState extends State<loginInputComponent> {
                 widget.inputName,
                 style: TextStyle(
                   fontSize: 15,
-                  color: Colors.grey[700]
+                  color: Colors.black
                 ),
               ),
             ],
           ),
         ),
         SizedBox(width: 10,),
-        Container(
+        SizedBox(
           width: 250,
-          height: 35,
-          decoration: BoxDecoration(
-            border: Border.all(color: Color.fromARGB(200, 200, 200, 200)),
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 7, right: 7),
-            child: TextBox(
-              controller: widget.controller,
-              obscureText: widget.isPassword,
+          height: 30,
+          child: TextBox(
+            controller: widget.controller,
+            obscureText: widget.isPassword,
+            autocorrect: false,
+            enableSuggestions: false,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(70, 100, 100, 100),
+              )
             ),
-          )
-        ),
+          ),
+        )
       ],
     );
   }
