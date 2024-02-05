@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_platform_alert: ^0.5.1
+  get: ^4.6.6
   shared_preferences: ^2.2.2
 
 dev_dependencies:
