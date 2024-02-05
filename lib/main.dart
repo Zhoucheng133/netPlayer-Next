@@ -7,10 +7,10 @@ import 'package:netplayer_next/Views/loginView.dart';
 void main() {
   runApp(const MainApp());
   doWhenWindowReady(() {
-    const initialSize = Size(1100, 770);
-    appWindow.minSize = initialSize;
-    appWindow.size = initialSize;
+    appWindow.minSize = Size(1100, 770);
+    appWindow.size = Size(1100, 770);
     appWindow.alignment = Alignment.center;
+    appWindow.title="netPlayer Next";
     appWindow.show();
   });
 }
