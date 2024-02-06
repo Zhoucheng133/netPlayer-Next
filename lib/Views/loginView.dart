@@ -25,6 +25,8 @@ class _loginViewState extends State<loginView> {
 
   bool mouseInButton=false;
 
+  bool isLoading=false;
+
   Future<void> systemAlert(String title, String content) async {
     showDialog(
       context: context, 
@@ -50,6 +52,12 @@ class _loginViewState extends State<loginView> {
   }
 
   Future<void> loginController() async {
+    if(isLoading==true){
+      return;
+    }
+    setState(() {
+      isLoading=true;
+    });
     if(inputURL.text.isEmpty){
       systemAlert("无法登录", "没有输入音乐服务器的URL地址");
     }else if(!isURL(inputURL.text)){
@@ -82,6 +90,9 @@ class _loginViewState extends State<loginView> {
         }
       }
     }
+    setState(() {
+      isLoading=false;
+    });
   }
 
   @override
@@ -164,7 +175,7 @@ class _loginViewState extends State<loginView> {
                       mouseInButton=false;
                     });
                   },
-                  cursor: SystemMouseCursors.click,
+                  cursor: isLoading ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
                   child: AnimatedContainer(
                     width: 60,
                     height: 60,
