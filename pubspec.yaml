@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.5
+  http: ^0.13.6
   shared_preferences: ^2.2.2
 
 dev_dependencies:
