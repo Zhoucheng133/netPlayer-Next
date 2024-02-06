@@ -2,8 +2,10 @@
 
 // import 'package:flutter/material.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:get/get.dart';
 import 'package:net_player_next/functions/request.dart';
 
+import '../paras/paras.dart';
 import 'components/loginInput.dart';
 
 class loginView extends StatefulWidget {
@@ -14,6 +16,8 @@ class loginView extends StatefulWidget {
 }
 
 class _loginViewState extends State<loginView> {
+
+  final Controller c = Get.put(Controller());
 
   TextEditingController inputURL=TextEditingController();
   TextEditingController inputUsername=TextEditingController();
@@ -56,13 +60,26 @@ class _loginViewState extends State<loginView> {
       systemAlert("无法登录", "没有输入音乐服务器的密码");
     }else{
       var resp = await loginRequest(inputURL.text, inputUsername.text, inputPassword.text);
-      print(resp);
+      // print(resp);
       if(resp['status']=="failed"){
         systemAlert("无法登录", "用户名或密码不正确");
       }else if(resp['status']=="URL Err"){
         systemAlert("无法登录", "URL地址错误");
       }else{
-        systemAlert("登录成功!", "");
+        try {
+          Map<String, String> userInfo={
+            'url': resp['url'],
+            'username': resp['username'],
+            'salt': resp['salt'],
+            'token': resp['token'],
+          };
+          // print(userInfo);
+          c.updateUserInfo(userInfo);
+          print(c.userInfo.value);
+        } catch (e) {
+          print(e);
+          systemAlert("无法登录", "请求用户信息失败");
+        }
       }
     }
   }

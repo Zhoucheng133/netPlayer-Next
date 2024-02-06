@@ -66,7 +66,7 @@ Future<Map> loginRequest(String url, String username, String password) async {
   response["url"]=url;
   response["username"]=username;
   response["salt"]=salt;
-  response["token"]=token;
+  response["token"]=token.toString();
   return response;
 }
 
