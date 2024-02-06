@@ -65,7 +65,7 @@ class _loginViewState extends State<loginView> {
         systemAlert("无法登录", "用户名或密码不正确");
       }else if(resp['status']=="URL Err"){
         systemAlert("无法登录", "URL地址错误");
-      }else{
+      }else if(resp['status']=="ok"){
         try {
           Map<String, String> userInfo={
             'url': resp['url'],
