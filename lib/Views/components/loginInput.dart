@@ -39,12 +39,13 @@ class _loginInputComponentState extends State<loginInputComponent> {
         SizedBox(width: 10,),
         SizedBox(
           width: 250,
-          height: 30,
+          height: 35,
           child: TextBox(
             controller: widget.controller,
             obscureText: widget.isPassword,
             autocorrect: false,
             enableSuggestions: false,
+            padding: EdgeInsetsDirectional.fromSTEB(10, 8, 6, 6),
             decoration: BoxDecoration(
               border: Border.all(
                 color: Color.fromARGB(70, 100, 100, 100),

@@ -1,9 +1,9 @@
 // ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 // import 'package:flutter/material.dart';
-import 'package:flutter_platform_alert/flutter_platform_alert.dart';
-import 'package:netplayer_next/Views/components/loginInput.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+
+import 'components/loginInput.dart';
 
 class loginView extends StatefulWidget {
   const loginView({super.key});
@@ -11,23 +11,6 @@ class loginView extends StatefulWidget {
   @override
   State<loginView> createState() => _loginViewState();
 }
-
-// Future<void> showDialog() async {
-//   final result = await FlutterPlatformAlert.showCustomAlert(
-//     windowTitle: '是否继续?',
-//     text: 'BodyTest',
-//     positiveButtonTitle: "继续",
-//     negativeButtonTitle: "取消",
-//     // neutralButtonTitle: "Neutral",
-//     options: PlatformAlertOptions(
-//       windows: WindowsAlertOptions(
-//         additionalWindowTitle: 'Window title',
-//         showAsLinks: true,
-//       ),
-//     ),
-//   );
-//   print(result);
-// }
 
 class _loginViewState extends State<loginView> {
 
@@ -38,10 +21,18 @@ class _loginViewState extends State<loginView> {
   bool mouseInButton=false;
 
   Future<void> systemAlert(String title, String content) async {
-    await FlutterPlatformAlert.showCustomAlert(
-      windowTitle: title, 
-      text: content,
-      positiveButtonTitle: "好"
+    showDialog(
+      context: context, 
+      builder: (context) => ContentDialog(
+        title: Text(title),
+        content: Text(content),
+        actions: [
+          FilledButton(
+            child: Text("好"),
+            onPressed: () => Navigator.pop(context)
+          )
+        ],
+      ),
     );
   }
 
@@ -98,9 +89,9 @@ class _loginViewState extends State<loginView> {
                       SizedBox(width: 10,),
                       Icon(
                         FluentIcons.chevron_right_med,
-                        size: 17,
+                        size: 15,
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(width: 10,),
                       Text(
                         "连接到你的音乐库",
                         style: TextStyle(

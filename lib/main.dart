@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace
 
-import 'package:fluent_ui/fluent_ui.dart';
 // import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:netplayer_next/Views/loginView.dart';
+import 'package:fluent_ui/fluent_ui.dart';
+
+import 'Views/loginView.dart';
 
 void main() {
   runApp(MyApp());
