@@ -3,8 +3,11 @@
 // import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:get/get.dart';
+import 'package:net_player_next/Views/mainView.dart';
 
 import 'Views/loginView.dart';
+import 'paras/paras.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,6 +39,9 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+
+  final Controller c = Get.put(Controller());
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -51,10 +57,12 @@ class _MainAppState extends State<MainApp> {
             ),
           ),
         ),
-        AnimatedContainer(
-          duration: Duration(milliseconds: 300),
-          color: Color.fromARGB(255, 240, 240, 240),
-          child: loginView(),
+        Obx(() => 
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            color: c.userInfo.isEmpty ? Color.fromARGB(255, 240, 240, 240) : Colors.white,
+            child: c.userInfo.isEmpty ? loginView() : mainView(),
+          )
         )
       ],
     );
