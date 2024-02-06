@@ -2,6 +2,7 @@
 
 // import 'package:flutter/material.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:net_player_next/functions/request.dart';
 
 import 'components/loginInput.dart';
 
@@ -28,7 +29,7 @@ class _loginViewState extends State<loginView> {
         content: Text(content),
         actions: [
           FilledButton(
-            child: Text("好"),
+            child: Text("好的"),
             onPressed: () => Navigator.pop(context)
           )
         ],
@@ -44,7 +45,7 @@ class _loginViewState extends State<loginView> {
     }
   }
 
-  void loginController(){
+  Future<void> loginController() async {
     if(inputURL.text.isEmpty){
       systemAlert("无法登录", "没有输入音乐服务器的URL地址");
     }else if(!isURL(inputURL.text)){
@@ -54,7 +55,13 @@ class _loginViewState extends State<loginView> {
     }else if(inputPassword.text.isEmpty){
       systemAlert("无法登录", "没有输入音乐服务器的密码");
     }else{
-      // TODO 登录操作
+      var resp = await loginRequest(inputURL.text, inputUsername.text, inputPassword.text);
+      print(resp);
+      if(resp['status']!="ok"){
+        systemAlert("无法登录", "服务器登录失败");
+      }else{
+        systemAlert("登录成功", "登录成功啦！！！");
+      }
     }
   }
 

@@ -45,7 +45,7 @@ class _loginInputComponentState extends State<loginInputComponent> {
             obscureText: widget.isPassword,
             autocorrect: false,
             enableSuggestions: false,
-            padding: EdgeInsetsDirectional.fromSTEB(10, 8, 6, 6),
+            padding: EdgeInsetsDirectional.fromSTEB(10, 9, 6, 6),
             decoration: BoxDecoration(
               border: Border.all(
                 color: Color.fromARGB(70, 100, 100, 100),
