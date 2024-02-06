@@ -18,7 +18,8 @@ Future<Map<String, dynamic>> httpRequest(String url, {int timeoutInSeconds = 5})
       return data;
     } else {
       Map<String, dynamic> data = {};
-      throw Exception(data);
+      // throw Exception(data);
+      return data;
     }
   } on TimeoutException {
     // 请求超时处理逻辑

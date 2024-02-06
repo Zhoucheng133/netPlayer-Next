@@ -57,10 +57,12 @@ class _loginViewState extends State<loginView> {
     }else{
       var resp = await loginRequest(inputURL.text, inputUsername.text, inputPassword.text);
       print(resp);
-      if(resp['status']!="ok"){
-        systemAlert("无法登录", "服务器登录失败");
+      if(resp['status']=="failed"){
+        systemAlert("无法登录", "用户名或密码不正确");
+      }else if(resp['status']=="URL Err"){
+        systemAlert("无法登录", "URL地址错误");
       }else{
-        systemAlert("登录成功", "登录成功啦！！！");
+        systemAlert("登录成功!", "");
       }
     }
   }
