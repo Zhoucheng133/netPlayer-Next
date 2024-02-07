@@ -3,6 +3,7 @@
 // import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../components/dialogs.dart';
 
@@ -24,8 +25,10 @@ class _aboutViewState extends State<aboutView> {
     });
   }
 
-  void showInGit(){
-    // TODO 打开GitHub仓库
+  Future<void> showInGit() async {
+    // TODO 需要修改URL地址
+    final Uri url = Uri.parse('https://github.com');
+    await launchUrl(url);
   }
 
   void showLicense(BuildContext context){
