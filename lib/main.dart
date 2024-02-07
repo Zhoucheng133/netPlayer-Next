@@ -52,7 +52,6 @@ class _MainAppState extends State<MainApp> {
     if(userInfo!=null){
       Map info=jsonDecode(userInfo);
       var resp = await autoLoginRequest(info['url'], info['username'], info['salt'], info['token']);
-      print(resp);
       if(resp['status']=='ok'){
         c.updateUserInfo(info);
       }

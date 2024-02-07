@@ -92,9 +92,7 @@ class _loginViewState extends State<loginView> {
           // print(userInfo);
           c.updateUserInfo(userInfo);
           savePref();
-          print(c.userInfo.value);
         } catch (e) {
-          print(e);
           systemAlert("无法登录", "请求用户信息失败");
         }
       }

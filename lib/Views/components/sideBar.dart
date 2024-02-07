@@ -41,7 +41,6 @@ class _sideBarState extends State<sideBar> {
   }
 
   void changePage(Map val){
-    print(val);
     Map<String, String> data={
       "name": val["name"],
       "id": val["id"] ?? "",
@@ -66,12 +65,10 @@ class _sideBarState extends State<sideBar> {
 
   void addPlayList(){
     // TODO 添加歌单
-    print("添加歌单");
   }
 
   void randomPlay(){
     // TODO 随机播放
-    print("随机播放");
   }
   
 
