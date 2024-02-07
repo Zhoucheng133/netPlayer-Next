@@ -48,13 +48,17 @@ class _sideBarState extends State<sideBar> {
   }
 
   void toAbout(){
-    // TODO 跳转到关于
-    print("跳转到关于");
+    c.updateNowPage({
+      "name": "关于",
+      "id": "",
+    });
   }
 
   void toSettings(){
-    // TODO 跳转到设置
-    print("前往设置");
+    c.updateNowPage({
+      "name": "设置",
+      "id": "",
+    });
   }
 
   void addPlayList(){

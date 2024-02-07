@@ -2,6 +2,8 @@
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/Views/mainViews/aboutView.dart';
+import 'package:net_player_next/Views/mainViews/settingsView.dart';
 import 'package:net_player_next/Views/searchview.dart';
 
 import '../paras/paras.dart';
@@ -34,6 +36,8 @@ class _mainViewState extends State<mainView> {
     lovedSongsView(),
     searchView(),
     playListView(),
+    settingsView(),
+    aboutView(),
   ];
 
   List indexVal=[
@@ -43,6 +47,8 @@ class _mainViewState extends State<mainView> {
     "喜欢的歌曲",
     "搜索",
     "歌单",
+    "设置",
+    "关于"
   ];
 
   @override
