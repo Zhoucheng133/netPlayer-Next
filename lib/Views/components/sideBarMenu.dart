@@ -57,10 +57,13 @@ class _sideBarMenuState extends State<sideBarMenu> {
                   size: widget.menuIcon==Icons.playlist_play_rounded ? 20 : 18,
                 ),
                 SizedBox(width: 8,),
-                Text(
-                  widget.menuName,
-                  style: TextStyle(
-                    fontSize: 16,
+                Expanded(
+                  child: Text(
+                    widget.menuName,
+                    style: TextStyle(
+                      fontSize: 16,
+                      overflow: TextOverflow.ellipsis
+                    ),
                   ),
                 ),
               ],
