@@ -10,5 +10,5 @@ class Controller extends GetxController{
 
   void updateUserInfo(data) => userInfo.value=data;
   void updateNowPage(data) => nowPage.value=data;
-  void updateAllPlayList(data) => allPlayList=data;
+  void updateAllPlayList(data) => allPlayList.value=data;
 }
