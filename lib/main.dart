@@ -75,6 +75,13 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        Obx(() => 
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            color: c.userInfo.isEmpty || isLoading ? Color.fromARGB(255, 240, 240, 240) : Colors.white,
+            child: isLoading ? Container() : c.userInfo.isEmpty ? loginView() : mainView(),
+          )
+        ),
         Positioned(
           top: 0,
           left: 0,
@@ -86,13 +93,6 @@ class _MainAppState extends State<MainApp> {
             ),
           ),
         ),
-        Obx(() => 
-          AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            color: c.userInfo.isEmpty || isLoading ? Color.fromARGB(255, 240, 240, 240) : Colors.white,
-            child: isLoading ? Container() : c.userInfo.isEmpty ? loginView() : mainView(),
-          )
-        )
       ],
     );
   }
