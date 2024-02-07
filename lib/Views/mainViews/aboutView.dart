@@ -13,7 +13,15 @@ class _aboutViewState extends State<aboutView> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("关于"),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            "assets/icon.png",
+            width: 200,
+          )
+        ],
+      ),
     );
   }
 }
