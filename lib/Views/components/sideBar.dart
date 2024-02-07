@@ -4,6 +4,7 @@
 
 // import 'package:fluent_ui/fluent_ui.dart';
 
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/sideBarMenu.dart';
@@ -28,6 +29,24 @@ class _sideBarState extends State<sideBar> {
     await prefs.remove('userInfo');
   }
 
+  bool isSelected(String name, {String? id}){
+    if(id!=null && name==c.nowPage['name'] && id==c.nowPage[id]){
+      return true;
+    }else if(name==c.nowPage['name']){
+      return true;
+    }
+    return false;
+  }
+
+  void changePage(String val, {String? id}){
+    c.updateNowPage(
+      {
+        "name": val,
+        "id": id ?? "",
+      }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,11 +55,14 @@ class _sideBarState extends State<sideBar> {
         padding: EdgeInsets.fromLTRB(10, 50, 10, 0),
         child: Column(
           children: [
-            sideBarMenu(menuName: "专辑", menuIcon: Icons.album_rounded, selected: false),
-            sideBarMenu(menuName: "艺人", menuIcon: Icons.mic_rounded, selected: false),
-            sideBarMenu(menuName: "所有歌曲", menuIcon: Icons.queue_music_rounded, selected: false),
-            sideBarMenu(menuName: "喜欢的歌曲", menuIcon: Icons.favorite_rounded, selected: false),
-            sideBarMenu(menuName: "搜索", menuIcon: Icons.search_rounded, selected: false),
+            Obx(() => sideBarMenu(menuName: "专辑", menuIcon: Icons.album_rounded, selected: isSelected("专辑"), changePage: (val) => changePage(val),),),
+            Obx(() => sideBarMenu(menuName: "艺人", menuIcon: Icons.mic_rounded, selected: isSelected("艺人"), changePage: (val) => changePage(val),),),
+            Obx(() => sideBarMenu(menuName: "所有歌曲", menuIcon: Icons.queue_music_rounded, selected: isSelected("所有歌曲"), changePage: (val) => changePage(val),),),
+            Obx(() => sideBarMenu(menuName: "喜欢的歌曲", menuIcon: Icons.favorite_rounded, selected: isSelected("喜欢的歌曲"), changePage: (val) => changePage(val),),),
+            Obx(() => sideBarMenu(menuName: "搜索", menuIcon: Icons.search_rounded, selected: isSelected("搜索"), changePage: (val) => changePage(val),),),
+            SizedBox(height: 5,),
+            Divider(),
+            SizedBox(height: 5,)
           ],
         ),
       ),
