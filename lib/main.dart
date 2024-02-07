@@ -76,8 +76,7 @@ class _MainAppState extends State<MainApp> {
     return Stack(
       children: [
         Obx(() => 
-          AnimatedContainer(
-            duration: Duration(milliseconds: 300),
+          Container(
             color: c.userInfo.isEmpty ? isLoading ? Colors.white : Color.fromARGB(255, 240, 240, 240) : Colors.white,
             child: isLoading ? Container() : c.userInfo.isEmpty ? loginView() : mainView(),
           )
