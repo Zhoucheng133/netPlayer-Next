@@ -1,9 +1,12 @@
 // ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 // import 'package:flutter/material.dart';
+import 'dart:convert';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/functions/request.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../paras/paras.dart';
 import 'components/loginInput.dart';
@@ -51,6 +54,11 @@ class _loginViewState extends State<loginView> {
     }
   }
 
+  Future<void> savePref() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userInfo', jsonEncode(c.userInfo));
+  }
+
   Future<void> loginController() async {
     if(isLoading==true){
       return;
@@ -83,6 +91,7 @@ class _loginViewState extends State<loginView> {
           };
           // print(userInfo);
           c.updateUserInfo(userInfo);
+          savePref();
           print(c.userInfo.value);
         } catch (e) {
           print(e);

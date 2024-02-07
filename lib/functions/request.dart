@@ -46,6 +46,28 @@ String generateRandomString(int length) {
   return result;
 }
 
+// 自动登录请求
+Future<Map> autoLoginRequest(String url, String username, String salt, String token) async {
+  if(url.endsWith("/")){
+    url=url.substring(0, url.length - 1);
+  }
+  Map response=await httpRequest("${url}/rest/ping.view?v=1.12.0&c=myapp&f=json&u=${username}&t=${token}&s=${salt}");
+  if(response.isEmpty){
+    return {"status": "URL Err"};
+  }
+  try{
+    response=response["subsonic-response"];
+  }catch(e){
+    return {"status": "URL Err"};
+  }
+  response["url"]=url;
+  response["username"]=username;
+  response["salt"]=salt;
+  response["token"]=token.toString();
+  return response;
+}
+
+
 // 登录请求
 Future<Map> loginRequest(String url, String username, String password) async {
   if(url.endsWith("/")){
