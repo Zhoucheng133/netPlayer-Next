@@ -14,6 +14,7 @@ import 'functions/request.dart';
 import 'paras/paras.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
   doWhenWindowReady(() {
     appWindow.minSize = Size(1100, 770);
