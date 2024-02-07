@@ -30,21 +30,22 @@ class _sideBarState extends State<sideBar> {
   }
 
   bool isSelected(String name, {String? id}){
-    if(id!=null && name==c.nowPage['name'] && id==c.nowPage[id]){
+    if(id!=null && c.nowPage['name']=="歌单" && id==c.nowPage['id']){
       return true;
-    }else if(name==c.nowPage['name']){
+    }else if(name==c.nowPage['name'] && c.nowPage['name']!="歌单"){
       return true;
     }
     return false;
   }
 
-  void changePage(String val, {String? id}){
-    c.updateNowPage(
-      {
-        "name": val,
-        "id": id ?? "",
-      }
-    );
+  void changePage(Map val){
+    print(val);
+    Map<String, String> data={
+      "name": val["name"],
+      "id": val["id"] ?? "",
+    };
+
+    c.updateNowPage(data);
   }
 
   void toAbout(){
@@ -111,8 +112,14 @@ class _sideBarState extends State<sideBar> {
                 )
               ],
             ),
+            SizedBox(height: 10,),
             Expanded(
-              child: Placeholder()
+              child: Obx(() => 
+                ListView.builder(
+                  itemCount: c.allPlayList.length,
+                  itemBuilder: (BuildContext context, int index) => Obx(() => sideBarMenu(menuName: c.allPlayList[index]["name"], menuIcon: Icons.playlist_play_rounded, selected: isSelected("歌单", id: c.allPlayList[index]["id"]), changePage: (val) => changePage(val),id: c.allPlayList[index]["id"],))
+                )
+              )
             ),
             SizedBox(height: 10,),
             Row(

@@ -25,7 +25,17 @@ class _sideBarMenuState extends State<sideBarMenu> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.changePage(widget.menuName);
+        if(widget.id!=null){
+          widget.changePage({
+            "name": "歌单",
+            "id": widget.id,
+          });
+        }else{
+          widget.changePage({
+            "name": widget.menuName,
+            "id": null,
+          });
+        }
       },
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
