@@ -9,8 +9,9 @@ class sideBarMenu extends StatefulWidget {
   final IconData menuIcon;
   final bool selected;
   final ValueChanged changePage;
+  final dynamic id;
 
-  const sideBarMenu({super.key, required this.menuName, required this.menuIcon, required this.selected, required this.changePage});
+  const sideBarMenu({super.key, required this.menuName, required this.menuIcon, required this.selected, required this.changePage, this.id});
 
   @override
   State<sideBarMenu> createState() => _sideBarMenuState();
