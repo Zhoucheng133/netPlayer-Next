@@ -78,7 +78,7 @@ class _MainAppState extends State<MainApp> {
         Obx(() => 
           AnimatedContainer(
             duration: Duration(milliseconds: 300),
-            color: c.userInfo.isEmpty || isLoading ? Color.fromARGB(255, 240, 240, 240) : Colors.white,
+            color: c.userInfo.isEmpty ? isLoading ? Colors.white : Color.fromARGB(255, 240, 240, 240) : Colors.white,
             child: isLoading ? Container() : c.userInfo.isEmpty ? loginView() : mainView(),
           )
         ),
