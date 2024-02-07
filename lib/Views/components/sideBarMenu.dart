@@ -43,7 +43,8 @@ class _sideBarMenuState extends State<sideBarMenu> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(
-                  widget.menuIcon
+                  widget.menuIcon,
+                  size: widget.menuIcon==Icons.playlist_play_rounded ? 20 : 18,
                 ),
                 SizedBox(width: 8,),
                 Text(
@@ -93,7 +94,10 @@ class _sideBarMiniState extends State<sideBarMini> {
           child: Padding(
             padding: EdgeInsets.all(12),
             child: Center(
-              child: Icon(widget.icon),
+              child: Icon(
+                widget.icon,
+                size: 18,
+              ),
             ),
           ),
         ),
