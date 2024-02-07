@@ -60,3 +60,81 @@ class _sideBarMenuState extends State<sideBarMenu> {
     );
   }
 }
+
+class sideBarMini extends StatefulWidget {
+  final IconData icon;
+  final VoidCallback func;
+  final bool isSelected;
+
+  const sideBarMini({super.key, required this.icon, required this.func, required this.isSelected});
+
+  @override
+  State<sideBarMini> createState() => _sideBarMiniState();
+}
+
+class _sideBarMiniState extends State<sideBarMini> {
+
+  bool isHover=false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => widget.func(),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (event) => setState(() { isHover=true; }),
+        onExit: (event) => setState(() { isHover=false; }),
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 200),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: isHover ? Color.fromARGB(255, 220, 220, 220) : Color.fromARGB(0, 220, 220, 220)
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(12),
+            child: Center(
+              child: Icon(widget.icon),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class aboutTextButton extends StatefulWidget {
+
+  final VoidCallback toAbout;
+
+  const aboutTextButton({super.key, required this.toAbout});
+
+  @override
+  State<aboutTextButton> createState() => _aboutTextButtonState();
+}
+
+class _aboutTextButtonState extends State<aboutTextButton> {
+
+  bool isHover=false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => widget.toAbout(),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (event) => setState(() { isHover=true; }),
+        onExit: (event) => setState(() { isHover=false; }),
+        child: AnimatedDefaultTextStyle(
+          duration: Duration(milliseconds: 200),
+          style: TextStyle(
+            fontSize: 14,
+            color: isHover ? Colors.blue : Colors.grey[400],
+          ),
+          child: Text(
+            "关于 netPlayer",
+          ),
+        ),
+      ),
+    );
+  }
+}

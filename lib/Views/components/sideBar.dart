@@ -47,6 +47,26 @@ class _sideBarState extends State<sideBar> {
     );
   }
 
+  void toAbout(){
+    // TODO 跳转到关于
+    print("跳转到关于");
+  }
+
+  void toSettings(){
+    // TODO 跳转到设置
+    print("前往设置");
+  }
+
+  void addPlayList(){
+    // TODO 添加歌单
+    print("添加歌单");
+  }
+
+  void randomPlay(){
+    // TODO 随机播放
+    print("随机播放");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,7 +82,49 @@ class _sideBarState extends State<sideBar> {
             Obx(() => sideBarMenu(menuName: "搜索", menuIcon: Icons.search_rounded, selected: isSelected("搜索"), changePage: (val) => changePage(val),),),
             SizedBox(height: 5,),
             Divider(),
-            SizedBox(height: 5,)
+            SizedBox(height: 5,),
+            Row(
+              children: [
+                Expanded(
+                  child: sideBarMini(icon: Icons.add_rounded, func: addPlayList, isSelected: false,)
+                ),
+                SizedBox(width: 10,),
+                Expanded(
+                  // TODO 需要根据情况判定isSelected状态
+                  child: sideBarMini(icon: Icons.shuffle_rounded, func: randomPlay, isSelected: false,)
+                )
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              children: [
+                SizedBox(width: 15,),
+                Text(
+                  "创建的歌单",
+                  style: TextStyle(
+                    color: Colors.grey[500],
+                  ),
+                )
+              ],
+            ),
+            Expanded(
+              child: Placeholder()
+            ),
+            SizedBox(height: 10,),
+            Row(
+              children: [
+                Expanded(
+                  child: sideBarMini(icon: Icons.logout_rounded, func: logout, isSelected: false,)
+                ),
+                SizedBox(width: 10,),
+                Expanded(
+                  child: sideBarMini(icon: Icons.settings_rounded, func: toSettings, isSelected: false,)
+                )
+              ],
+            ),
+            SizedBox(height: 5,),
+            aboutTextButton(toAbout: toAbout,),
+            SizedBox(height: 20,)
           ],
         ),
       ),
