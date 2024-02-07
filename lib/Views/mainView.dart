@@ -6,6 +6,7 @@ import 'package:net_player_next/Views/mainViews/aboutView.dart';
 import 'package:net_player_next/Views/mainViews/settingsView.dart';
 import 'package:net_player_next/Views/searchview.dart';
 
+import '../functions/request.dart';
 import '../paras/paras.dart';
 import 'components/sideBar.dart';
 import 'mainViews/albumsView.dart';
@@ -24,6 +25,19 @@ class mainView extends StatefulWidget {
 class _mainViewState extends State<mainView> {
 
   final Controller c = Get.put(Controller());
+
+  Future<void> getPlayLists() async {
+    // allListsRequest();
+    // print(await allListsRequest());
+    c.updateAllPlayList(await allListsRequest());
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getPlayLists();
+  }
 
   int getIndex(){
     return !indexVal.contains(c.nowPage['name']) ? 0 : indexVal.indexOf(c.nowPage['name']);

@@ -6,7 +6,9 @@ class Controller extends GetxController{
     "name": "所有歌曲",
     "id": "",
   }.obs;
+  var allPlayList=[].obs;
 
   void updateUserInfo(data) => userInfo.value=data;
   void updateNowPage(data) => nowPage.value=data;
+  void updateAllPlayList(data) => allPlayList=data;
 }
