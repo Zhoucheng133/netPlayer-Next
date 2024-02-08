@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:net_player_next/Views/components/songsHeader.dart';
 import 'package:net_player_next/Views/components/titleBar.dart';
 
 class allSongsView extends StatefulWidget {
@@ -26,7 +27,10 @@ class _allSongsViewState extends State<allSongsView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          titleBox(searchController: search, title: "所有歌曲", subtitle: "合计x首歌", controller: searchInput,)
+          // TODO 注意传递副标题
+          titleBox(searchController: search, title: "所有歌曲", subtitle: "合计x首歌", controller: searchInput,),
+          SizedBox(height: 10,),
+          songsHeader(),
         ],
       ),
     );
