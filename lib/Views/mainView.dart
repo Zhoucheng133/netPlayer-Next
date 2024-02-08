@@ -83,21 +83,21 @@ class _mainViewState extends State<mainView> {
                   children: views,
                 )
               ),
-              AnimatedPositioned(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                child: Column(
-                  children: [
-                    Expanded(child: Container()),
-                    SizedBox(
-                      height: 110,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20,0,20,10),
-                        child: playBar(),
-                      ),
+              Obx(() => 
+                AnimatedPositioned(
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                  bottom: c.showLyric.value ? -150 : 0,
+                  left: 0,
+                  right: 0,
+                  child: SizedBox(
+                    height: 110,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(40,0,40,10),
+                      child: playBar(),
                     ),
-                  ],
-                ),
+                  ),
+                )
               )
             ],
           )

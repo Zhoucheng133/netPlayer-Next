@@ -11,9 +11,12 @@ class Controller extends GetxController{
   var allPlayList=[].obs;
   // 选择的歌单名称
   var selectedListName="".obs;
+  // 显示歌词
+  var showLyric=false.obs;
 
   void updateUserInfo(data) => userInfo.value=data;
   void updateNowPage(data) => nowPage.value=data;
   void updateAllPlayList(data) => allPlayList.value=data;
   void updateSelectedListName(data) => selectedListName.value=data;
+  void updateShowLyric(data) => showLyric.value=data;
 }
