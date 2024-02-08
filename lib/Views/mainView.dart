@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/playBar.dart';
 import 'package:net_player_next/Views/mainViews/aboutView.dart';
 import 'package:net_player_next/Views/mainViews/settingsView.dart';
-import 'package:net_player_next/Views/searchview.dart';
+import 'package:net_player_next/Views/mainViews/searchview.dart';
 
 import '../functions/request.dart';
 import '../paras/paras.dart';
