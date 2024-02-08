@@ -19,6 +19,10 @@ class _allSongsViewState extends State<allSongsView> {
     print(value);
   }
 
+  void reload(){
+    // TODO 刷新列表
+  }
+
   TextEditingController searchInput=TextEditingController();
 
   @override
@@ -28,9 +32,13 @@ class _allSongsViewState extends State<allSongsView> {
       child: Column(
         children: [
           // TODO 注意传递副标题
-          titleBox(searchController: search, title: "所有歌曲", subtitle: "合计x首歌", controller: searchInput,),
+          titleBox(searchController: search, title: "所有歌曲", subtitle: "合计x首歌", controller: searchInput, reloadList: () => reload(),),
           SizedBox(height: 10,),
           songsHeader(),
+          Expanded(
+            // 歌曲列表显示在这里
+            child: Container(),
+          )
         ],
       ),
     );

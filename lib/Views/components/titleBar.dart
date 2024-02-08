@@ -11,8 +11,9 @@ class titleBox extends StatefulWidget {
   final String title;
   final String subtitle;
   final TextEditingController controller;
+  final VoidCallback reloadList;
 
-  const titleBox({super.key, required this.searchController, required this.title, required this.subtitle, required this.controller});
+  const titleBox({super.key, required this.searchController, required this.title, required this.subtitle, required this.controller, required this.reloadList});
 
   @override
   State<titleBox> createState() => _titleBoxState();
@@ -21,6 +22,7 @@ class titleBox extends StatefulWidget {
 class _titleBoxState extends State<titleBox> {
 
   bool hoverLocate=false;
+  bool hoverReload=false;
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +58,6 @@ class _titleBoxState extends State<titleBox> {
               cursor: SystemMouseCursors.click,
               onEnter: (event) => setState(() { hoverLocate=true; }),
               onExit: (event) => setState(() { hoverLocate=false; }),
-              // child: Icon(
-              //   Icons.my_location_rounded,
-              //   size: 20,
-              // ),
               child: TweenAnimationBuilder(
                 duration: Duration(milliseconds: 200),
                 tween: ColorTween(begin: Colors.grey[800], end: hoverLocate ? Colors.blue : Colors.grey[800]),
@@ -134,18 +132,27 @@ class _titleBoxState extends State<titleBox> {
             ],
           ),
           SizedBox(width: 20,),
-          Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Center(
-              child: Icon(
-                Icons.refresh_rounded,
-                color: Colors.white,
-                size: 18,
+          GestureDetector(
+            onTap: () => widget.reloadList(),
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              onEnter: (event) => setState(() { hoverReload=true; }),
+              onExit: (event) => setState(() { hoverReload=false; }),
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 200),
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  color: hoverReload ? Colors.blue[700] : Colors.blue,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.refresh_rounded,
+                    color: Colors.white,
+                    size: 18,
+                  ),
+                ),
               ),
             ),
           )
