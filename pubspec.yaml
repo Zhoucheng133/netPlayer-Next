@@ -9,7 +9,6 @@ environment:
 dependencies:
   bitsdojo_window: ^0.1.5
   crypto: ^3.0.3
-  fluent_ui: ^4.5.1
   flutter:
     sdk: flutter
   get: ^4.6.5

@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace
 
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:fluent_ui/fluent_ui.dart';
+// import 'package:fluent_ui/fluent_ui.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/mainView.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,8 +31,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FluentApp(
-      home: MainApp(),
+    return MaterialApp(
+      home: Scaffold(body: MainApp(),),
     );
   }
 }
@@ -77,7 +78,7 @@ class _MainAppState extends State<MainApp> {
       children: [
         Obx(() => 
           Container(
-            color: c.userInfo.isEmpty ? isLoading ? Colors.white : Color.fromARGB(255, 240, 240, 240) : Colors.white,
+            color: c.userInfo.isEmpty ? isLoading ? Color.fromARGB(255, 255, 255, 255) : Color.fromARGB(255, 240, 240, 240) : Color.fromARGB(255, 255, 255, 255),
             child: isLoading ? Container() : c.userInfo.isEmpty ? loginView() : mainView(),
           )
         ),

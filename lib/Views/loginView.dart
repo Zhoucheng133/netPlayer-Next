@@ -3,7 +3,7 @@
 // import 'package:flutter/material.dart';
 import 'dart:convert';
 
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/functions/request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,7 +33,7 @@ class _loginViewState extends State<loginView> {
   Future<void> systemAlert(String title, String content) async {
     showDialog(
       context: context, 
-      builder: (context) => ContentDialog(
+      builder: (context) => AlertDialog(
         title: Text(title),
         content: Text(content),
         actions: [
@@ -132,7 +132,8 @@ class _loginViewState extends State<loginView> {
                     children: [
                       SizedBox(width: 10,),
                       Icon(
-                        FluentIcons.chevron_right_med,
+                        // FluentIcons.chevron_right_med,
+                        Icons.chevron_right_rounded,
                         size: 15,
                       ),
                       SizedBox(width: 10,),
@@ -187,7 +188,7 @@ class _loginViewState extends State<loginView> {
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: mouseInButton ? Colors.blue.darker : Colors.blue,
+                      color: mouseInButton ? Colors.blue[700] : Colors.blue,
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(10)
                       )
@@ -195,7 +196,7 @@ class _loginViewState extends State<loginView> {
                     duration: Duration(milliseconds: 200),
                     child: Center(
                       child: Icon(
-                        FluentIcons.chrome_back_mirrored,
+                        Icons.arrow_forward_rounded,
                         color: Colors.white,
                       ),
                     ),

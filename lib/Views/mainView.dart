@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors
 
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/mainViews/aboutView.dart';
 import 'package:net_player_next/Views/mainViews/settingsView.dart';

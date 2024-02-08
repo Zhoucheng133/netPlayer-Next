@@ -113,14 +113,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.1.4"
-  fluent_ui:
-    dependency: "direct main"
-    description:
-      name: fluent_ui
-      sha256: "334144996f2699bb9dd678a9fe9a8e65a2e0b89bda9328ed4f0d49a8768f1416"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "4.5.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -134,11 +126,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.3"
-  flutter_localizations:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -173,14 +160,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.2"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.17.0"
   js:
     dependency: transitive
     description:
@@ -213,14 +192,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.0"
-  math_expressions:
-    dependency: transitive
-    description:
-      name: math_expressions
-      sha256: "3576593617c3870d75728a751f6ec6e606706d44e363f088ac394b5a28a98064"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.4.0"
   meta:
     dependency: transitive
     description:
@@ -293,22 +264,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.6"
-  recase:
-    dependency: transitive
-    description:
-      name: recase
-      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "4.1.0"
-  scroll_pos:
-    dependency: transitive
-    description:
-      name: scroll_pos
-      sha256: cfca311b6b8d51538ff90e206fbe6ce3b36e7125ea6da4a40eb626c7f9f083b1
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.3.0"
   shared_preferences:
     dependency: "direct main"
     description:

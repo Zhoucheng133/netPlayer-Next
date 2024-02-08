@@ -1,11 +1,11 @@
 // ignore_for_file: file_names, prefer_const_constructors
 
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart';
 
 Future<void> showLicenseDialog(BuildContext context) async {
   await showDialog(
     context: context, 
-    builder: (context) => ContentDialog(
+    builder: (context) => AlertDialog(
       title: Text("版权信息"),
       content: Text("版权信息balabala"),
       actions: [
