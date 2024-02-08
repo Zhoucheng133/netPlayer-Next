@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/Views/components/playBar.dart';
 import 'package:net_player_next/Views/mainViews/aboutView.dart';
 import 'package:net_player_next/Views/mainViews/settingsView.dart';
 import 'package:net_player_next/Views/searchview.dart';
@@ -74,12 +75,32 @@ class _mainViewState extends State<mainView> {
           child: sideBar(),
         ),
         Expanded(
-          child: Obx(() => 
-            IndexedStack(
-              index: getIndex(),
-              children: views,
-            )
-          ),
+          child: Stack(
+            children: [
+              Obx(() => 
+                IndexedStack(
+                  index: getIndex(),
+                  children: views,
+                )
+              ),
+              AnimatedPositioned(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                child: Column(
+                  children: [
+                    Expanded(child: Container()),
+                    SizedBox(
+                      height: 110,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20,0,20,10),
+                        child: playBar(),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )
         )
       ],
     );
