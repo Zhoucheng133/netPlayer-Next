@@ -1,7 +1,7 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:net_player_next/Views/components/songsHeader.dart';
+import 'package:net_player_next/Views/components/tableHeader.dart';
 import 'package:net_player_next/Views/components/titleBar.dart';
 
 class allSongsView extends StatefulWidget {

@@ -3,14 +3,9 @@
 import 'package:flutter/material.dart';
 
 
-class songsHeader extends StatefulWidget {
+class songsHeader extends StatelessWidget {
   const songsHeader({super.key});
 
-  @override
-  State<songsHeader> createState() => _songsHeaderState();
-}
-
-class _songsHeaderState extends State<songsHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,6 +57,22 @@ class _songsHeaderState extends State<songsHeader> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class artistsHeader extends StatelessWidget {
+  const artistsHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      color: Color.fromARGB(255, 242, 242, 242),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        
       ),
     );
   }

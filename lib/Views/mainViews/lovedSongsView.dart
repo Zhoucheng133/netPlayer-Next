@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../components/songsHeader.dart';
+import '../components/tableHeader.dart';
 import '../components/titleBar.dart';
 
 class lovedSongsView extends StatefulWidget {
