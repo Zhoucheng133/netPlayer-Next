@@ -121,3 +121,55 @@ class artistsHeader extends StatelessWidget {
     );
   }
 }
+
+class albumHeader extends StatelessWidget {
+  const albumHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      color: Color.fromARGB(255, 242, 242, 242),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 50,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                "序号",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                "专辑名称",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            )
+          ),
+          SizedBox(
+            width: 100,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                "歌曲数",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
