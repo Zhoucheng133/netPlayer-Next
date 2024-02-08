@@ -1,6 +1,6 @@
 // import 'package:flutter/src/widgets/framework.dart';
 // import 'package:flutter/src/widgets/placeholder.dart';
-// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 // import 'package:fluent_ui/fluent_ui.dart';
 
@@ -26,9 +26,31 @@ class _sideBarState extends State<sideBar> {
   ScrollController playlistScroll=ScrollController();
 
   Future<void> logout() async {
-    c.updateUserInfo({});
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('userInfo');
+
+    await showDialog(
+      context: context, 
+      builder: (BuildContext context){
+        return AlertDialog(
+          title: Text("注销当前账户?"),
+          content: Text("这会停止播放并且回到登录界面"),
+          actions: [
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context), 
+              child: Text("取消")
+            ),
+            FilledButton(
+              onPressed: () async {
+                c.updateUserInfo({});
+                final SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.remove('userInfo');
+                Navigator.pop(context);
+              }, 
+              child: Text("注销")
+            ),
+          ],
+        );
+      }
+    );
   }
 
   bool isSelected(String name, {String? id}){
