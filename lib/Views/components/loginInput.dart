@@ -9,8 +9,9 @@ class loginInputComponent extends StatefulWidget {
   final bool isPassword;
   final TextEditingController controller;
   final String inputName;
+  final VoidCallback loginController;
 
-  const loginInputComponent({super.key, required this.isPassword, required this.controller, required this.inputName});
+  const loginInputComponent({super.key, required this.isPassword, required this.controller, required this.inputName, required this.loginController});
 
   @override
   State<loginInputComponent> createState() => _loginInputComponentState();
@@ -51,6 +52,12 @@ class _loginInputComponentState extends State<loginInputComponent> {
               border: OutlineInputBorder(),
               isCollapsed: true,
               contentPadding: EdgeInsets.fromLTRB(8, 10, 8, 11),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 210, 210, 210),
+                  width: 1,
+                )
+              ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.blue,
@@ -58,6 +65,7 @@ class _loginInputComponentState extends State<loginInputComponent> {
                 ),
               )
             ),
+            onSubmitted: (_) => widget.loginController(),
             obscureText: widget.isPassword,
             autocorrect: false,
             enableSuggestions: false,

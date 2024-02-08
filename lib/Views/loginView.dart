@@ -151,13 +151,13 @@ class _loginViewState extends State<loginView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // URL地址输入框
-                        loginInputComponent(isPassword: false, controller: inputURL, inputName: 'URL地址',),
+                        loginInputComponent(isPassword: false, controller: inputURL, inputName: 'URL地址', loginController: () => loginController(),),
                         SizedBox(height: 20,),
                         // 用户名输入框
-                        loginInputComponent(isPassword: false, controller: inputUsername, inputName: '用户名',),
+                        loginInputComponent(isPassword: false, controller: inputUsername, inputName: '用户名', loginController: () => loginController(),),
                         SizedBox(height: 20,),
                         // 密码输入框
-                        loginInputComponent(isPassword: true, controller: inputPassword, inputName: '密码',),
+                        loginInputComponent(isPassword: true, controller: inputPassword, inputName: '密码', loginController: () => loginController(),),
                       ],
                     ),
                   ),
