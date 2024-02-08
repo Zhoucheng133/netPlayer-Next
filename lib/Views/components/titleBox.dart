@@ -3,7 +3,7 @@
 // import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 
 class titleBox extends StatefulWidget {
 
@@ -19,53 +19,135 @@ class titleBox extends StatefulWidget {
 }
 
 class _titleBoxState extends State<titleBox> {
+
+  bool hoverLocate=false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.red,
+      // color: Color.fromARGB(255, 203, 255, 144),
       height: 50,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            widget.title,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              overflow: TextOverflow.ellipsis
-            ),
-          ),
-          SizedBox(width: 15,),
-          Text(
-            widget.subtitle,
-            style: TextStyle(
-              color: Colors.grey[700],
-            ),
-          ),
-          Expanded(child: Container()),
-          SizedBox(
-            width: 200,
-            child: CupertinoTextField(
-              controller: widget.controller,
-              style: TextStyle(
-                fontSize: 14,
-              ),
-              suffix: GestureDetector(
-                onTap: () => widget.searchController(widget.controller.text),
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Row(
-                    children: [
-                      Icon(Icons.search_rounded),
-                      SizedBox(width: 7,)
-                    ],
+          Expanded(
+            child: Row(
+              children: [
+                Text(
+                  widget.title,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis
                   ),
                 ),
-              ),
-              padding: EdgeInsets.fromLTRB(8, 6, 5, 9),
-              textAlignVertical: TextAlignVertical.center,
-              onEditingComplete: () => widget.searchController(widget.controller.text),
+                SizedBox(width: 15,),
+                Text(
+                  widget.subtitle,
+                  style: TextStyle(
+                    color: Colors.grey[700],
+                  ),
+                ),
+              ],
             )
+          ),
+          GestureDetector(
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              onEnter: (event) => setState(() { hoverLocate=true; }),
+              onExit: (event) => setState(() { hoverLocate=false; }),
+              // child: Icon(
+              //   Icons.my_location_rounded,
+              //   size: 20,
+              // ),
+              child: TweenAnimationBuilder(
+                duration: Duration(milliseconds: 200),
+                tween: ColorTween(begin: Colors.grey[800], end: hoverLocate ? Colors.blue : Colors.grey[800]),
+                builder: (_, value, __){
+                  return Icon(
+                    Icons.my_location_rounded,
+                    size: 20,
+                    color: value,
+                  );
+                },
+              ),
+            ),
+          ),
+          SizedBox(width: 10,),
+          Stack(
+            children: [
+              SizedBox(
+                width: 200,
+                child: Center(
+                  child: TextField(
+                    controller: widget.controller,
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.fromLTRB(10, 10, 25, 11),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blue,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(5)
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 210, 210, 210),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(5)
+                      ),
+                    ),
+                    textAlignVertical: TextAlignVertical.center,
+                    onEditingComplete: () => widget.searchController(widget.controller.text),
+                  ),
+                )
+              ),
+              Positioned(
+                child: SizedBox(
+                  width: 200,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(child: Container()),
+                      GestureDetector(
+                        onTap: () => widget.searchController(widget.controller.text),
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Icon(
+                            Icons.search_rounded,
+                            size: 18,
+                            color: Colors.grey[400],
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 5,)
+                    ],
+                  )
+                )
+              ),
+            ],
+          ),
+          SizedBox(width: 20,),
+          Container(
+            width: 30,
+            height: 30,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Center(
+              child: Icon(
+                Icons.refresh_rounded,
+                color: Colors.white,
+                size: 18,
+              ),
+            ),
           )
         ],
       ),
