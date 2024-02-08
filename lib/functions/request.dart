@@ -118,6 +118,29 @@ Future<Map> loginRequest(String url, String username, String password) async {
   return response;
 }
 
+// 获取某个歌单
+Future<Map> playListRequest(String id) async {
+  final Controller c = Get.put(Controller());
+  String url="${c.userInfo["url"]}/rest/getPlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${id}";
+  Map response=await httpRequest(url);
+  if(response.isEmpty){
+    return {};
+  }
+  try{
+    response=response["subsonic-response"];
+  }catch(e){
+    return {};
+  }
+  if(response["status"]!="ok"){
+    return {};
+  }
+  if(response["playlist"]!=null){
+    return response["playlist"];
+  }else{
+    return {};
+  }
+}
+
 Future<void> main(List<String> args) async {
-  
+
 }
