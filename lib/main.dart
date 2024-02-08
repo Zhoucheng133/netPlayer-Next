@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -62,11 +62,37 @@ class _MainAppState extends State<MainApp> {
       var resp = await autoLoginRequest(info['url'], info['username'], info['salt'], info['token']);
       if(resp['status']=='ok'){
         c.updateUserInfo(info);
+        setState(() {
+          isLoading=false;
+        });
+      }else{
+        showDialog(
+          context: context, 
+          builder: (context) => AlertDialog(
+            title: Text("自动的登录失败"),
+            content: Text("你可以尝试重新登录或者重试"),
+            actions: [
+              ElevatedButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                  setState(() {
+                    isLoading=false;
+                  });
+                },
+                child: Text("重新登录")
+              ),
+              FilledButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                  autoLogin();
+                }, 
+                child: Text("重试")
+              )
+            ],
+          )
+        );
       }
     }
-    setState(() {
-      isLoading=false;
-    });
   }
 
   bool isLoading=true;
