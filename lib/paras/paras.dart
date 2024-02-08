@@ -14,9 +14,22 @@ class Controller extends GetxController{
   // 显示歌词
   var showLyric=false.obs;
 
+  // 所有专辑
+  var allAlbums=[].obs;
+  // 所有艺人
+  var allArtists=[].obs;
+  // 所有歌曲
+  var allSongs=[].obs;
+  // 喜欢的歌曲 => 注意及时刷新
+  var lovedSongs=[].obs;
+
   void updateUserInfo(data) => userInfo.value=data;
   void updateNowPage(data) => nowPage.value=data;
   void updateAllPlayList(data) => allPlayList.value=data;
   void updateSelectedListName(data) => selectedListName.value=data;
   void updateShowLyric(data) => showLyric.value=data;
+  void updateAllAlbums(data) => allAlbums.value=data;
+  void updateAllArtists(data) => allArtists.value=data;
+  void updateAllSongs(data) => allSongs.value=data;
+  void updateLovedSongs(data) => lovedSongs.value=data;
 }
