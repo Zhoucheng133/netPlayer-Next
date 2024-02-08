@@ -16,7 +16,6 @@ class _allSongsViewState extends State<allSongsView> {
 
   void search(value){
     // TODO 搜索歌曲
-    print(value);
   }
 
   void reload(){

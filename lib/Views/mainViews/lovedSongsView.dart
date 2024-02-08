@@ -16,7 +16,6 @@ class _lovedSongsViewState extends State<lovedSongsView> {
 
   void search(value){
     // TODO 搜索歌曲
-    print(value);
   }
 
   void reload(){

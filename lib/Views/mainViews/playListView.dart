@@ -24,7 +24,6 @@ class _playListViewState extends State<playListView> {
 
     void search(value){
     // TODO 搜索歌曲
-    print(value);
   }
 
   void reload(){
