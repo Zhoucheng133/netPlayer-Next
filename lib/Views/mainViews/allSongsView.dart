@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:net_player_next/Views/components/tableHeader.dart';
 import 'package:net_player_next/Views/components/titleBar.dart';
 
+import '../../functions/request.dart';
+
 class allSongsView extends StatefulWidget {
   const allSongsView({super.key});
 
@@ -20,6 +22,41 @@ class _allSongsViewState extends State<allSongsView> {
 
   void reload(){
     // TODO 刷新列表
+  }
+
+  void warning(String title, String content){
+    showDialog(
+      context: context, 
+      builder: (BuildContext context){
+        return AlertDialog(
+          title: Text("请求所有歌曲失败"),
+          content: Text(content),
+          actions: [
+            FilledButton(
+              onPressed: () => Navigator.pop(context), 
+              child: Text("好的"),
+            )
+          ],
+        );
+      }
+    );
+  }
+
+  Future<void> loadList() async {
+    var resp=await allSongsRequest();
+    
+    if(resp["status"]=="ok"){
+
+    }else{
+      warning("请求所有歌曲失败", "请检查互联网连接");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    loadList();
   }
 
   TextEditingController searchInput=TextEditingController();
