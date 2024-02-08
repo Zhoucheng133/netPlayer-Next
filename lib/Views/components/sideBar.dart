@@ -112,7 +112,7 @@ class _sideBarState extends State<sideBar> {
                 )
               ],
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 5,),
             Expanded(
               child: Scrollbar(
                 controller: playlistScroll,
