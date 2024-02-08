@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../components/titleBar.dart';
+
 class settingsView extends StatefulWidget {
   const settingsView({super.key});
 
@@ -10,10 +12,27 @@ class settingsView extends StatefulWidget {
 }
 
 class _settingsViewState extends State<settingsView> {
+
+  // 注意！无意义的参数
+  TextEditingController searchInput=TextEditingController();
+
+  void reload(){/** 空函数 */}
+
+  void search(val){ /** 空函数 */}
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("设置"),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20,30,20,20),
+      child: Column(
+        children: [
+          titleBox(searchController: search, title: "设置", subtitle: "", controller: searchInput, reloadList: () => reload(),),
+          SizedBox(height: 10,),
+          Expanded(
+            // 主要的内容
+            child: Container(),
+          )
+        ],
+      ),
     );
   }
 }

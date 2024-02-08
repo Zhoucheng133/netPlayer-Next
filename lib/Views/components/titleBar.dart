@@ -53,7 +53,7 @@ class _titleBoxState extends State<titleBox> {
               ],
             )
           ),
-          widget.title!="专辑" && widget.title!="艺人" && widget.title!="搜索" ?
+          widget.title!="专辑" && widget.title!="艺人" && widget.title!="搜索" && widget.title!="设置" ?
           GestureDetector(
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
@@ -73,7 +73,7 @@ class _titleBoxState extends State<titleBox> {
             ),
           ): Container(),
           SizedBox(width: 10,),
-          widget.title!="搜索" ?
+          widget.title!="搜索" && widget.title!="设置" ?
           Stack(
             children: [
               SizedBox(
@@ -134,7 +134,7 @@ class _titleBoxState extends State<titleBox> {
             ],
           ) : Container(),
           SizedBox(width: 20,),
-          widget.title!="搜索" ?
+          widget.title!="搜索" && widget.title!="设置" ?
           GestureDetector(
             onTap: () => widget.reloadList(),
             child: MouseRegion(
