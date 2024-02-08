@@ -73,6 +73,7 @@ class _titleBoxState extends State<titleBox> {
             ),
           ): Container(),
           SizedBox(width: 10,),
+          widget.title!="搜索" ?
           Stack(
             children: [
               SizedBox(
@@ -131,8 +132,9 @@ class _titleBoxState extends State<titleBox> {
                 )
               ),
             ],
-          ),
+          ) : Container(),
           SizedBox(width: 20,),
+          widget.title!="搜索" ?
           GestureDetector(
             onTap: () => widget.reloadList(),
             child: MouseRegion(
@@ -156,7 +158,7 @@ class _titleBoxState extends State<titleBox> {
                 ),
               ),
             ),
-          )
+          ) : Container(),
         ],
       ),
     );
