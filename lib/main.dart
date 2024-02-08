@@ -32,7 +32,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(body: MainApp(),),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)
+      ),
+      home: Scaffold(
+        body: MainApp(),
+      ),
     );
   }
 }
