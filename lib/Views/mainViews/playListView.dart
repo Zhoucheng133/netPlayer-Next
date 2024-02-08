@@ -59,7 +59,6 @@ class _playListViewState extends State<playListView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          // TODO 注意传递副标题
           titleBox(searchController: search, title: title, subtitle: "合计${list.length}首歌", controller: searchInput, reloadList: () => reload(),),
           SizedBox(height: 10,),
           songsHeader(),
