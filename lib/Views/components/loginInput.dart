@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 // import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 
 class loginInputComponent extends StatefulWidget {
 
@@ -56,13 +56,15 @@ class _loginInputComponentState extends State<loginInputComponent> {
                 borderSide: BorderSide(
                   color: Color.fromARGB(255, 210, 210, 210),
                   width: 1,
-                )
+                ),
+                borderRadius: BorderRadius.circular(5)
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.blue,
                   width: 2,
                 ),
+                borderRadius: BorderRadius.circular(5)
               )
             ),
             onSubmitted: (_) => widget.loginController(),
