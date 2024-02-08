@@ -40,15 +40,27 @@ class _loginInputComponentState extends State<loginInputComponent> {
         SizedBox(width: 10,),
         SizedBox(
           width: 250,
-          child: CupertinoTextField(
+          child: TextField(
+            contextMenuBuilder: (_,__)=>Container(),
             controller: widget.controller,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 14
+            ),
+            textAlignVertical: TextAlignVertical.center,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              isCollapsed: true,
+              contentPadding: EdgeInsets.fromLTRB(8, 10, 8, 11),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.blue,
+                  width: 2,
+                ),
+              )
             ),
             obscureText: widget.isPassword,
             autocorrect: false,
             enableSuggestions: false,
-            padding: EdgeInsets.fromLTRB(7, 8, 5, 9),
           ),
         )
       ],
