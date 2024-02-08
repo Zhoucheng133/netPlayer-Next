@@ -1,7 +1,8 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-// import 'package:flutter/material.dart';
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart';
+// import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/cupertino.dart';
 
 class loginInputComponent extends StatefulWidget {
 
@@ -39,17 +40,15 @@ class _loginInputComponentState extends State<loginInputComponent> {
         SizedBox(width: 10,),
         SizedBox(
           width: 250,
-          height: 35,
-          child: TextBox(
+          height: 30,
+          child: CupertinoTextField(
             controller: widget.controller,
             obscureText: widget.isPassword,
             autocorrect: false,
             enableSuggestions: false,
-            padding: EdgeInsetsDirectional.fromSTEB(10, 9, 6, 6),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.fromARGB(70, 100, 100, 100),
-              )
+            padding: EdgeInsetsDirectional.fromSTEB(8, 5, 8, 6),
+            style: TextStyle(
+              fontSize: 15,
             ),
           ),
         )
