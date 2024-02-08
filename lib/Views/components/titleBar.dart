@@ -153,7 +153,7 @@ class _titleBoxState extends State<titleBox> {
                   child: Icon(
                     Icons.refresh_rounded,
                     color: Colors.white,
-                    size: 18,
+                    size: 16,
                   ),
                 ),
               ),
