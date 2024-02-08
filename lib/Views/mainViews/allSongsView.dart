@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,31 +28,27 @@ class _allSongsViewState extends State<allSongsView> {
     // TODO 刷新列表
   }
 
-  void warning(String title, String content){
-    showDialog(
-      context: context, 
-      builder: (BuildContext context){
-        return AlertDialog(
-          title: Text("请求所有歌曲失败"),
-          content: Text(content),
-          actions: [
-            FilledButton(
-              onPressed: () => Navigator.pop(context), 
-              child: Text("好的"),
-            )
-          ],
-        );
-      }
-    );
-  }
-
   Future<void> loadList() async {
     var resp=await allSongsRequest();
     
     if(resp["status"]=="ok"){
       c.updateAllSongs(resp["randomSongs"]["song"]);
     }else{
-      warning("请求所有歌曲失败", "请检查互联网连接");
+      showDialog(
+        context: context, 
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: Text("请求所有歌曲失败"),
+            content: Text("请检查互联网连接"),
+            actions: [
+              FilledButton(
+                onPressed: () => Navigator.pop(context), 
+                child: Text("好的"),
+              )
+            ],
+          );
+        }
+      );
     }
   }
 
