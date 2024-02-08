@@ -40,16 +40,15 @@ class _loginInputComponentState extends State<loginInputComponent> {
         SizedBox(width: 10,),
         SizedBox(
           width: 250,
-          height: 30,
           child: CupertinoTextField(
             controller: widget.controller,
-            obscureText: widget.isPassword,
-            autocorrect: false,
-            enableSuggestions: false,
-            padding: EdgeInsetsDirectional.fromSTEB(8, 5, 8, 6),
             style: TextStyle(
               fontSize: 15,
             ),
+            obscureText: widget.isPassword,
+            autocorrect: false,
+            enableSuggestions: false,
+            padding: EdgeInsets.fromLTRB(7, 8, 5, 9),
           ),
         )
       ],
