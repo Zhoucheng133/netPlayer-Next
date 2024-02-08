@@ -53,6 +53,7 @@ class _titleBoxState extends State<titleBox> {
               ],
             )
           ),
+          widget.title!="专辑" && widget.title!="艺人" && widget.title!="搜索" ?
           GestureDetector(
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
@@ -70,7 +71,7 @@ class _titleBoxState extends State<titleBox> {
                 },
               ),
             ),
-          ),
+          ): Container(),
           SizedBox(width: 10,),
           Stack(
             children: [

@@ -19,14 +19,22 @@ class songsHeader extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                "序号"
+                "序号",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ),
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text("标题"),
+              child: Text(
+                "标题",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
             )
           ),
           SizedBox(
@@ -72,7 +80,43 @@ class artistsHeader extends StatelessWidget {
       color: Color.fromARGB(255, 242, 242, 242),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        
+        children: [
+          SizedBox(
+            width: 50,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                "序号",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                "艺人",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            )
+          ),
+          SizedBox(
+            width: 100,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                "专辑数量",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
