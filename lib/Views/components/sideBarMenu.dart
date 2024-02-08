@@ -3,6 +3,9 @@
 // import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../paras/paras.dart';
 
 class sideBarMenu extends StatefulWidget {
   final String menuName;
@@ -20,6 +23,7 @@ class sideBarMenu extends StatefulWidget {
 class _sideBarMenuState extends State<sideBarMenu> {
 
   bool isHover=false;
+  final Controller c = Get.put(Controller());
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +34,7 @@ class _sideBarMenuState extends State<sideBarMenu> {
             "name": "歌单",
             "id": widget.id,
           });
+          c.updateSelectedListName(widget.menuName);
         }else{
           widget.changePage({
             "name": widget.menuName,

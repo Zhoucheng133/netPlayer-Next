@@ -20,7 +20,7 @@ class _playListViewState extends State<playListView> {
   final Controller c = Get.put(Controller());
 
   var list=[];
-  var title="";
+  var subtitle="";
 
     void search(value){
     // TODO 搜索歌曲
@@ -37,8 +37,8 @@ class _playListViewState extends State<playListView> {
       var resp=await playListRequest(c.nowPage["id"]!);
       try {
         setState(() {
-          title=resp["name"];
           list=resp["entry"];
+          subtitle="合计${resp["entry"].length}首歌";
         });
       } catch (_) {}
     }
@@ -59,7 +59,9 @@ class _playListViewState extends State<playListView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          titleBox(searchController: search, title: title, subtitle: "合计${list.length}首歌", controller: searchInput, reloadList: () => reload(),),
+          Obx(() => 
+            titleBox(searchController: search, title: c.selectedListName.value, subtitle: "合计${list.length}首歌", controller: searchInput, reloadList: () => reload(),),
+          ),
           SizedBox(height: 10,),
           songsHeader(),
           Expanded(
