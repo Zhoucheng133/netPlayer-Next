@@ -44,7 +44,6 @@ class _titleBoxState extends State<titleBox> {
                   widget.title,
                   style: TextStyle(
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
                     overflow: TextOverflow.ellipsis
                   ),
                 ),

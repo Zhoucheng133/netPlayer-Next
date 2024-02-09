@@ -70,7 +70,6 @@ class _aboutViewState extends State<aboutView> {
           Text(
             "Next v${version}",
             style: TextStyle(
-              fontWeight: FontWeight.w400,
               color: Colors.grey[600],
             ),
           ),

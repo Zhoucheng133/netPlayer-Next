@@ -18,23 +18,13 @@ class songsHeader extends StatelessWidget {
             width: 50,
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                "序号",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold
-                ),
-              ),
+              child: Text("序号",),
             ),
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                "标题",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold
-                ),
-              ),
+              child: Text("标题"),
             )
           ),
           SizedBox(
@@ -85,35 +75,20 @@ class artistsHeader extends StatelessWidget {
             width: 50,
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                "序号",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold
-                ),
-              ),
+              child: Text("序号",),
             ),
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                "艺人",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold
-                ),
-              ),
+              child: Text("艺人",),
             )
           ),
           SizedBox(
             width: 100,
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                "专辑数量",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: Text("专辑数量",),
             ),
           )
         ],
@@ -137,35 +112,20 @@ class albumHeader extends StatelessWidget {
             width: 50,
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                "序号",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold
-                ),
-              ),
+              child: Text("序号",),
             ),
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                "专辑名称",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold
-                ),
-              ),
+              child: Text("专辑名称",),
             )
           ),
           SizedBox(
             width: 100,
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                "歌曲数",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: Text("歌曲数",),
             ),
           )
         ],
