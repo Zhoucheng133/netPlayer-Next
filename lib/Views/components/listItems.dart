@@ -10,8 +10,9 @@ class songItem extends StatefulWidget {
   final String artist;
   final int duration;
   final bool isLoved;
+  final VoidCallback playSong;
 
-  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved,});
+  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved, required this.playSong,});
 
   @override
   State<songItem> createState() => _songItemState();
@@ -23,6 +24,7 @@ class _songItemState extends State<songItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onDoubleTap: () => widget.playSong(),
       child: MouseRegion(
         onEnter: (_)=>setState(() {isHover=true;}),
         onExit: (_)=>setState(() {isHover=false;}),

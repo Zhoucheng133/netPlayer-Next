@@ -72,6 +72,11 @@ class _allSongsViewState extends State<allSongsView> {
 
   var controller=ScrollController();
 
+  void playSongFromAllSongs(int index){
+    // TODO 播放歌曲
+    print(index);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -92,11 +97,11 @@ class _allSongsViewState extends State<allSongsView> {
                   return index==c.allSongs.length-1 ? 
                   Column(
                     children: [
-                      songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]),),
+                      songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index),),
                       SizedBox(height: 120,),
                     ],
                   ):
-                  songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]),);
+                  songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index),);
                 }
               )
             )

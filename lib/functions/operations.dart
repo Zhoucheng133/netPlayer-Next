@@ -64,4 +64,8 @@ class operations{
     String formattedSec = sec.toString().padLeft(2, '0');
     return "$min:$formattedSec";
   }
+
+  void playSong(String playFrom, String songId, String title, String artist, int duration, List playList, String album){
+    // TODO 播放歌曲
+  }
 }
