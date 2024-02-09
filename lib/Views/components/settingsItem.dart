@@ -22,34 +22,37 @@ class _switchItemState extends State<switchItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 150,
-          child: Row(
-            children: [
-              Expanded(child: Container()),
-              Text(
-                widget.text,
-                textAlign: TextAlign.left,
-              ),
-            ],
+    return SizedBox(
+      height: 40,
+      child: Row(
+        children: [
+          SizedBox(
+            width: 150,
+            child: Row(
+              children: [
+                Expanded(child: Container()),
+                Text(
+                  widget.text,
+                  textAlign: TextAlign.left,
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(width: 5,),
-        Transform.scale(
-          scale: 0.8,
-          child: Switch(
-            hoverColor: Colors.white,
-            thumbColor: MaterialStateProperty.resolveWith(getSwitchColor),
-            splashRadius: 0,
-            onChanged: (bool value) { 
-              widget.setValue(value);
-            }, 
-            value: widget.value,
-          ),
-        )
-      ],
+          SizedBox(width: 5,),
+          Transform.scale(
+            scale: 0.8,
+            child: Switch(
+              hoverColor: Colors.white,
+              thumbColor: MaterialStateProperty.resolveWith(getSwitchColor),
+              splashRadius: 0,
+              onChanged: (bool value) { 
+                widget.setValue(value);
+              }, 
+              value: widget.value,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
