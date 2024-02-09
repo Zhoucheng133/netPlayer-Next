@@ -24,9 +24,17 @@ class _switchItemState extends State<switchItem> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          widget.text,
-          textAlign: TextAlign.left,
+        SizedBox(
+          width: 150,
+          child: Row(
+            children: [
+              Expanded(child: Container()),
+              Text(
+                widget.text,
+                textAlign: TextAlign.left,
+              ),
+            ],
+          ),
         ),
         SizedBox(width: 5,),
         Transform.scale(
