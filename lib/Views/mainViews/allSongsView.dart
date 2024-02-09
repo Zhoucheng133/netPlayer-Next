@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/listItems.dart';
 import 'package:net_player_next/Views/components/tableHeader.dart';
 import 'package:net_player_next/Views/components/titleBar.dart';
-
+import 'package:net_player_next/functions/operations.dart';
 import '../../functions/request.dart';
 import '../../paras/paras.dart';
 
@@ -65,7 +65,7 @@ class _allSongsViewState extends State<allSongsView> {
   void initState() {
     super.initState();
 
-    loadList();
+    operations().getAllSongs(context);
   }
 
   TextEditingController searchInput=TextEditingController();
@@ -92,11 +92,11 @@ class _allSongsViewState extends State<allSongsView> {
                   return index==c.allSongs.length-1 ? 
                   Column(
                     children: [
-                      songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"]),
+                      songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]),),
                       SizedBox(height: 120,),
                     ],
                   ):
-                  songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"]);
+                  songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]),);
                 }
               )
             )

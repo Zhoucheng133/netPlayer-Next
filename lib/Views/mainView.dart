@@ -6,8 +6,7 @@ import 'package:net_player_next/Views/components/playBar.dart';
 import 'package:net_player_next/Views/mainViews/aboutView.dart';
 import 'package:net_player_next/Views/mainViews/settingsView.dart';
 import 'package:net_player_next/Views/mainViews/searchview.dart';
-
-import '../functions/request.dart';
+import 'package:net_player_next/functions/operations.dart';
 import '../paras/paras.dart';
 import 'components/sideBar.dart';
 import 'mainViews/albumsView.dart';
@@ -27,20 +26,12 @@ class _mainViewState extends State<mainView> {
 
   final Controller c = Get.put(Controller());
 
-  Future<void> getPlayLists() async {
-    c.updateAllPlayList(await allListsRequest());
-  }
-
-  Future<void> getLovedSongs() async {
-    c.updateLovedSongs(await lovedSongRequest());
-  }
-
   @override
   void initState() {
     super.initState();
 
-    getPlayLists();
-    getLovedSongs();
+    operations().getPlayLists();
+    operations().getLovedSongs();
   }
 
   int getIndex(){
