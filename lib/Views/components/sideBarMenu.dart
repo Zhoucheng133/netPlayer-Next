@@ -136,6 +136,8 @@ class aboutTextButton extends StatefulWidget {
 
 class _aboutTextButtonState extends State<aboutTextButton> {
 
+  final Controller c = Get.put(Controller());
+
   bool isHover=false;
 
   @override
@@ -150,7 +152,7 @@ class _aboutTextButtonState extends State<aboutTextButton> {
           duration: Duration(milliseconds: 200),
           style: TextStyle(
             fontSize: 14,
-            color: isHover ? Colors.blue : Colors.grey[400],
+            color: isHover ? c.hoverColor : Colors.grey[400],
           ),
           child: Text(
             "关于 netPlayer",

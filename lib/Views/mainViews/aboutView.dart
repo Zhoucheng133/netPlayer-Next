@@ -2,9 +2,11 @@
 
 // import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../paras/paras.dart';
 import '../components/dialogs.dart';
 
 class aboutView extends StatefulWidget {
@@ -17,6 +19,8 @@ class aboutView extends StatefulWidget {
 class _aboutViewState extends State<aboutView> {
 
   String version="";
+
+  final Controller c = Get.put(Controller());
 
   Future<void> getVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -87,7 +91,7 @@ class _aboutViewState extends State<aboutView> {
                   child: AnimatedDefaultTextStyle(
                     duration: Duration(milliseconds: 200),
                     style: TextStyle(
-                      color: hoverGit ? Colors.blue : Colors.grey[400],
+                      color: hoverGit ? c.hoverColor : Colors.grey[400],
                     ),
                     child: Text(
                       "在GitHub中查看",
@@ -105,7 +109,7 @@ class _aboutViewState extends State<aboutView> {
                   child: AnimatedDefaultTextStyle(
                     duration: Duration(milliseconds: 200),
                     style: TextStyle(
-                      color: hoverLicense ? Colors.blue : Colors.grey[400],
+                      color: hoverLicense ? c.hoverColor : Colors.grey[400],
                     ),
                     child: Text(
                       "关于License",
