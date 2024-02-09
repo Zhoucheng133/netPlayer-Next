@@ -148,8 +148,8 @@ class _titleBoxState extends State<titleBox> {
               onExit: (event) => setState(() { hoverReload=false; }),
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 200),
-                width: 30,
-                height: 30,
+                width: 32,
+                height: 32,
                 decoration: BoxDecoration(
                   color: hoverReload ? c.hoverColor : c.primaryColor,
                   borderRadius: BorderRadius.circular(30),
