@@ -57,4 +57,11 @@ class operations{
     }
     return false;
   }
+
+  String timeConvert(int time){
+    int min = time ~/ 60;
+    int sec = time % 60;
+    String formattedSec = sec.toString().padLeft(2, '0');
+    return "$min:$formattedSec";
+  }
 }

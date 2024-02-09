@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, file_names, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:net_player_next/functions/operations.dart';
 
 class songItem extends StatefulWidget {
 
@@ -8,8 +9,9 @@ class songItem extends StatefulWidget {
   final String title;
   final String artist;
   final int duration;
+  final bool isLoved;
 
-  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration});
+  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved,});
 
   @override
   State<songItem> createState() => _songItemState();
@@ -56,26 +58,24 @@ class _songItemState extends State<songItem> {
           SizedBox(
             width: 70,
             child: Center(
-              child: Icon(
-                Icons.timer_outlined,
+              child: Text(operations().timeConvert(widget.duration)),
+            )
+          ),
+          SizedBox(
+            width: 50,
+            child: Center(
+              child: widget.isLoved ? Icon(
+                Icons.favorite_rounded,
+                color: Colors.red,
                 size: 18,
-              ),
+              ) : Container()
             ),
           ),
           SizedBox(
             width: 50,
             child: Center(
               child: Icon(
-                Icons.favorite_border_rounded,
-                size: 18,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 50,
-            child: Center(
-              child: Icon(
-                Icons.menu_rounded,
+                Icons.more_vert_rounded,
                 size: 18,
               ),
             ),
