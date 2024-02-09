@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/Views/components/listItems.dart';
 import 'package:net_player_next/Views/components/tableHeader.dart';
 import 'package:net_player_next/Views/components/titleBar.dart';
 
@@ -73,9 +74,15 @@ class _allSongsViewState extends State<allSongsView> {
           SizedBox(height: 10,),
           songsHeader(),
           Expanded(
-            // 歌曲列表显示在这里
-            child: Container(),
-          )
+            child: Obx(() => 
+              ListView.builder(
+                itemCount: c.allSongs.length,
+                itemBuilder: (BuildContext context, int index){
+                  return songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"]);
+                }
+              )
+            )
+          ),
         ],
       ),
     );
