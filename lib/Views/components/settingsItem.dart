@@ -33,7 +33,6 @@ class _switchItemState extends State<switchItem> {
                 Expanded(child: Container()),
                 Text(
                   widget.text,
-                  textAlign: TextAlign.left,
                 ),
               ],
             ),
