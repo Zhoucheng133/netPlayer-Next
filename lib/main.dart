@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace, use_build_context_synchronously, unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -56,6 +56,16 @@ class _MainAppState extends State<MainApp> {
 
   Future<void> autoLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final bool? loginContinue = prefs.getBool('autoLogin');
+    if(loginContinue==false){
+      c.updateAutoLogin(false);
+      setState(() {
+        isLoading=false;
+      });
+      return;
+    }
+
     final String? userInfo = prefs.getString('userInfo');
     if(userInfo!=null){
       Map info=jsonDecode(userInfo);
