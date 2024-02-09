@@ -1,6 +1,9 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../paras/paras.dart';
 // import 'package:fluent_ui/fluent_ui.dart';
 // import 'package:flutter/cupertino.dart';
 
@@ -18,6 +21,9 @@ class loginInputComponent extends StatefulWidget {
 }
 
 class _loginInputComponentState extends State<loginInputComponent> {
+
+  final Controller c = Get.put(Controller());
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -61,7 +67,7 @@ class _loginInputComponentState extends State<loginInputComponent> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.blue,
+                  color: c.primaryColor,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(5)

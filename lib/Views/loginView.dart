@@ -188,7 +188,7 @@ class _loginViewState extends State<loginView> {
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
-                      color: mouseInButton ? Colors.blue[700] : Colors.blue,
+                      color: mouseInButton ? c.hoverColor : c.primaryColor,
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(10)
                       )

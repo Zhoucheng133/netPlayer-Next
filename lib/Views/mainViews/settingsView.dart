@@ -104,7 +104,20 @@ class _settingsViewState extends State<settingsView> {
                           ),
                         ],
                       ),
-                    )
+                    ),
+                    SizedBox(height: 5,),
+                    Row(
+                      children: [
+                        SizedBox(width: 160,),
+                        FilledButton(
+                          onPressed: (){
+                            // TODO 浏览器打开服务器
+                          }, 
+                          child: Text("用浏览器打开")
+                        )
+                      ],
+                    ),
+
                   ],
                 ),
               ),

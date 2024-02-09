@@ -1,6 +1,12 @@
+import 'dart:ui';
+
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class Controller extends GetxController{
+  // 各种颜色
+  var primaryColor=const Color.fromARGB(255, 0, 97, 164);
+  var hoverColor=const Color.fromARGB(255, 20, 109, 171);
+
   // 用户信息
   var userInfo={}.obs;
   // 当前页面，注意，默认情况下id为空

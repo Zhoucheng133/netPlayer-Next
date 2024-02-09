@@ -3,6 +3,9 @@
 // import 'package:fluent_ui/fluent_ui.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../paras/paras.dart';
 // import 'package:flutter/cupertino.dart';
 
 class titleBox extends StatefulWidget {
@@ -20,6 +23,8 @@ class titleBox extends StatefulWidget {
 }
 
 class _titleBoxState extends State<titleBox> {
+
+  final Controller c = Get.put(Controller());
 
   bool hoverLocate=false;
   bool hoverReload=false;
@@ -61,7 +66,7 @@ class _titleBoxState extends State<titleBox> {
               onExit: (event) => setState(() { hoverLocate=false; }),
               child: TweenAnimationBuilder(
                 duration: Duration(milliseconds: 200),
-                tween: ColorTween(begin: Colors.grey[800], end: hoverLocate ? Colors.blue : Colors.grey[800]),
+                tween: ColorTween(begin: Colors.grey[800], end: hoverLocate ? c.hoverColor : Colors.grey[800]),
                 builder: (_, value, __){
                   return Icon(
                     Icons.my_location_rounded,
@@ -90,7 +95,7 @@ class _titleBoxState extends State<titleBox> {
                       contentPadding: EdgeInsets.fromLTRB(10, 10, 25, 11),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.blue,
+                          color: c.hoverColor,
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(5)
@@ -146,7 +151,7 @@ class _titleBoxState extends State<titleBox> {
                 width: 30,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: hoverReload ? Colors.blue[700] : Colors.blue,
+                  color: hoverReload ? c.hoverColor : c.primaryColor,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Center(
