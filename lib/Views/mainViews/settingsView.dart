@@ -27,17 +27,24 @@ class _settingsViewState extends State<settingsView> {
 
   bool saveSongPlayed=true;
 
+  TextEditingController controller =TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller.text=c.userInfo["url"];
+  }
+
+  void setSavePlay(val){
+    c.updateSavePlay(val);
+  }
+  void setAutoLogin(val){
+    c.updateAutoLogin(val);
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    void setSavePlay(val){
-      c.updateSavePlay(val);
-    }
-
-    void setAutoLogin(val){
-      c.updateAutoLogin(val);
-    }
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
@@ -47,11 +54,57 @@ class _settingsViewState extends State<settingsView> {
           Expanded(
             child: Center(
               child: SizedBox(
-                width: 300,
+                width: 400,
                 child: Column(
                   children: [
                     Obx(() => switchItem(value: c.savePlay.value, text: "自动保存播放的歌曲", setValue: setSavePlay)),
-                    Obx(() => switchItem(value: c.autoLogin.value, text: "自动登录", setValue: setAutoLogin))
+                    Obx(() => switchItem(value: c.autoLogin.value, text: "自动登录", setValue: setAutoLogin)),
+                    SizedBox(
+                      height: 40,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 150,
+                            child: Row(
+                              children: [
+                                Expanded(child: Container()),
+                                Text("服务器地址")
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Expanded(
+                            child: TextField(
+                              enabled: false,
+                              controller: controller,
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                isCollapsed: true,
+                                contentPadding: EdgeInsets.fromLTRB(10, 10, 25, 11),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.blue,
+                                    width: 2,
+                                  ),
+                                  borderRadius: BorderRadius.circular(5)
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 210, 210, 210),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(5)
+                                ),
+                              ),
+                              textAlignVertical: TextAlignVertical.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
