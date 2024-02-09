@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Controller extends GetxController{
   // 用户信息
   var userInfo={}.obs;
@@ -37,6 +38,14 @@ class Controller extends GetxController{
   void updateAllSongs(data) => allSongs.value=data;
   void updateLovedSongs(data) => lovedSongs.value=data;
 
-  void updateSavePlay(data) => savePlay.value=data;
-  void updateAutoLogin(data) => autoLogin.value=data;
+  Future<void> updateSavePlay(data) async {
+    savePlay.value=data;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("savePlay", data);
+  }
+  Future<void> updateAutoLogin(data) async {
+    autoLogin.value=data;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("autoLogin", data);
+  }
 }
