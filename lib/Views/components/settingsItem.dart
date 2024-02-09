@@ -36,9 +36,7 @@ class _switchItemState extends State<switchItem> {
             thumbColor: MaterialStateProperty.resolveWith(getSwitchColor),
             splashRadius: 0,
             onChanged: (bool value) { 
-              setState(() {
-                widget.setValue(value);
-              });
+              widget.setValue(value);
             }, 
             value: widget.value,
           ),
