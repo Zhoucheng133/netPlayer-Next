@@ -28,9 +28,11 @@ class _mainViewState extends State<mainView> {
   final Controller c = Get.put(Controller());
 
   Future<void> getPlayLists() async {
-    // allListsRequest();
-    // print(await allListsRequest());
     c.updateAllPlayList(await allListsRequest());
+  }
+
+  Future<void> getLovedSongs() async {
+    c.updateLovedSongs(await lovedSongRequest());
   }
 
   @override
@@ -38,6 +40,7 @@ class _mainViewState extends State<mainView> {
     super.initState();
 
     getPlayLists();
+    getLovedSongs();
   }
 
   int getIndex(){
