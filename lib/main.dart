@@ -102,6 +102,10 @@ class _MainAppState extends State<MainApp> {
           )
         );
       }
+    }else{
+      setState(() {
+        isLoading=false;
+      });
     }
   }
 
