@@ -25,5 +25,17 @@ dev_dependencies:
 
 flutter:
   assets:
-      - assets/
+    - assets/
   uses-material-design: true
+  fonts:
+    - family: "Noto"
+      fonts:
+        - asset: assets/fonts/NotoSansSC-Black.ttf
+        - asset: assets/fonts/NotoSansSC-Bold.ttf
+        - asset: assets/fonts/NotoSansSC-ExtraBold.ttf
+        - asset: assets/fonts/NotoSansSC-ExtraLight.ttf
+        - asset: assets/fonts/NotoSansSC-Light.ttf
+        - asset: assets/fonts/NotoSansSC-Medium.ttf
+        - asset: assets/fonts/NotoSansSC-Regular.ttf
+        - asset: assets/fonts/NotoSansSC-SemiBold.ttf
+        - asset: assets/fonts/NotoSansSC-Thin.ttf
