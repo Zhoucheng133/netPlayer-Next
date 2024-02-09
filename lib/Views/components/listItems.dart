@@ -18,69 +18,81 @@ class songItem extends StatefulWidget {
 }
 
 class _songItemState extends State<songItem> {
+  bool isHover=false;
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 50,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text((widget.index+1).toString()),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    widget.title,
-                    overflow: TextOverflow.ellipsis,
+    return GestureDetector(
+      child: MouseRegion(
+        onEnter: (_)=>setState(() {isHover=true;}),
+        onExit: (_)=>setState(() {isHover=false;}),
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 200),
+          color: isHover ? Color.fromARGB(255, 240, 240, 240) : Colors.white,
+          child: SizedBox(
+            height: 50,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 50,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text((widget.index+1).toString()),
                   ),
-                  Text(
-                    widget.artist,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[400],
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.title,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          widget.artist,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[400],
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      ],
                     ),
-                    overflow: TextOverflow.ellipsis,
                   )
-                ],
-              ),
-            )
-          ),
-          SizedBox(
-            width: 70,
-            child: Center(
-              child: Text(operations().timeConvert(widget.duration)),
-            )
-          ),
-          SizedBox(
-            width: 50,
-            child: Center(
-              child: widget.isLoved ? Icon(
-                Icons.favorite_rounded,
-                color: Colors.red,
-                size: 18,
-              ) : Container()
+                ),
+                SizedBox(
+                  width: 70,
+                  child: Center(
+                    child: Text(operations().timeConvert(widget.duration)),
+                  )
+                ),
+                SizedBox(
+                  width: 50,
+                  child: Center(
+                    child: widget.isLoved ? Icon(
+                      Icons.favorite_rounded,
+                      color: Colors.red,
+                      size: 18,
+                    ) : Container()
+                  ),
+                ),
+                SizedBox(
+                  width: 50,
+                  child: Center(
+                    child: Icon(
+                      Icons.more_vert_rounded,
+                      size: 18,
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
-          SizedBox(
-            width: 50,
-            child: Center(
-              child: Icon(
-                Icons.more_vert_rounded,
-                size: 18,
-              ),
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
