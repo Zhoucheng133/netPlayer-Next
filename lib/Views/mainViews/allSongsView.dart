@@ -30,10 +30,18 @@ class _allSongsViewState extends State<allSongsView> {
   }
 
   Future<void> loadList() async {
+    if(c.allSongs.isNotEmpty){
+      return;
+    }
     var resp=await allSongsRequest();
-    
     if(resp["status"]=="ok"){
-      c.updateAllSongs(resp["randomSongs"]["song"]);
+      var tmpList=resp["randomSongs"]["song"];
+      tmpList.sort((a, b) {
+        DateTime dateTimeA = DateTime.parse(a['created']);
+        DateTime dateTimeB = DateTime.parse(b['created']);
+        return dateTimeB.compareTo(dateTimeA);
+      });
+      c.updateAllSongs(tmpList);
     }else{
       showDialog(
         context: context, 
@@ -62,6 +70,8 @@ class _allSongsViewState extends State<allSongsView> {
 
   TextEditingController searchInput=TextEditingController();
 
+  var controller=ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -76,9 +86,17 @@ class _allSongsViewState extends State<allSongsView> {
           Expanded(
             child: Obx(() => 
               ListView.builder(
+                controller: controller,
                 itemCount: c.allSongs.length,
                 itemBuilder: (BuildContext context, int index){
-                  return songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"]);
+                  return index==c.allSongs.length-1 ? 
+                  Column(
+                    children: [
+                      songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"]),
+                      SizedBox(height: 120,),
+                    ],
+                  ):
+                  songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"]);
                 }
               )
             )
