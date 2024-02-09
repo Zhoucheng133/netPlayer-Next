@@ -115,6 +115,24 @@ class _settingsViewState extends State<settingsView> {
                         )
                       ],
                     ),
+                    SizedBox(
+                      height: 40,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 150,
+                            child: Row(
+                              children: [
+                                Expanded(child: Container()),
+                                Text("netPlayer版本")
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Text("netPlayer Next")
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
