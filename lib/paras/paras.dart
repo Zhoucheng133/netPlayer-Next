@@ -23,6 +23,10 @@ class Controller extends GetxController{
   // 喜欢的歌曲 => 注意及时刷新
   var lovedSongs=[].obs;
 
+  // 设置部分
+  var savePlay=true.obs;
+  var autoLogin=true.obs;
+
   void updateUserInfo(data) => userInfo.value=data;
   void updateNowPage(data) => nowPage.value=data;
   void updateAllPlayList(data) => allPlayList.value=data;
@@ -32,4 +36,7 @@ class Controller extends GetxController{
   void updateAllArtists(data) => allArtists.value=data;
   void updateAllSongs(data) => allSongs.value=data;
   void updateLovedSongs(data) => lovedSongs.value=data;
+
+  void updateSavePlay(data) => savePlay.value=data;
+  void updateAutoLogin(data) => autoLogin.value=data;
 }
