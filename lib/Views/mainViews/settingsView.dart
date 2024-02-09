@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/settingsItem.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../paras/paras.dart';
 import '../components/titleBar.dart';
@@ -41,6 +42,10 @@ class _settingsViewState extends State<settingsView> {
   }
   void setAutoLogin(val){
     c.updateAutoLogin(val);
+  }
+
+  Future<void> openURL(String url) async {
+    await launchUrl(Uri.parse(url));
   }
 
   @override
@@ -84,13 +89,6 @@ class _settingsViewState extends State<settingsView> {
                                 border: OutlineInputBorder(),
                                 isCollapsed: true,
                                 contentPadding: EdgeInsets.fromLTRB(10, 10, 25, 11),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.blue,
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(5)
-                                ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color.fromARGB(255, 210, 210, 210),
@@ -111,13 +109,12 @@ class _settingsViewState extends State<settingsView> {
                         SizedBox(width: 160,),
                         FilledButton(
                           onPressed: (){
-                            // TODO 浏览器打开服务器
+                            openURL(controller.text);
                           }, 
                           child: Text("用浏览器打开")
                         )
                       ],
                     ),
-
                   ],
                 ),
               ),
