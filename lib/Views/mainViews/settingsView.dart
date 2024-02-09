@@ -1,8 +1,9 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/settingsItem.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../paras/paras.dart';
@@ -30,10 +31,19 @@ class _settingsViewState extends State<settingsView> {
 
   TextEditingController controller =TextEditingController();
 
+  String version="";
+  
+  Future<void> getVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      version=packageInfo.version;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-
+    getVersion();
     controller.text=c.userInfo["url"];
   }
 
@@ -129,7 +139,21 @@ class _settingsViewState extends State<settingsView> {
                             ),
                           ),
                           SizedBox(width: 10,),
-                          Text("netPlayer Next")
+                          Text("Next v${version}"),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 5,),
+                    SizedBox(
+                      child: Row(
+                        children: [
+                          SizedBox(width: 160),
+                          TextButton(
+                            onPressed: (){
+                              // TODO 检查更新操作
+                            }, 
+                            child: Text("检查更新")
+                          )
                         ],
                       ),
                     )
