@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        fontFamily: "Noto"
+        fontFamily: "Noto",
+        splashColor: Colors.transparent
       ),
       home: Scaffold(
         body: MainApp(),
