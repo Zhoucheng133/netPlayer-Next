@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/functions/operations.dart';
 
 import '../../paras/paras.dart';
 
@@ -15,10 +16,6 @@ class playBar extends StatefulWidget {
 class _playBarState extends State<playBar> {
 
   final Controller c = Get.put(Controller());
-
-  void preSong(){}
-  void toggleSong(){}
-  void nextSong(){}
 
   @override
   Widget build(BuildContext context) {
@@ -115,19 +112,100 @@ class _playBarState extends State<playBar> {
               ),
             ),
             SizedBox(width: 25,),
-            GestureDetector(
-              child: Icon(
-                Icons.repeat_rounded,
-                size: 20,
-              ),
-            ),
+            playMode(),
             SizedBox(width: 15,),
-            playBarItem(icon: Icons.skip_previous_rounded, func: preSong),
+            playBarItem(icon: Icons.skip_previous_rounded, func: operations().preSong),
             SizedBox(width: 5,),
-            playBarItem(icon: Icons.pause_rounded, func: toggleSong, iconSize: 35.0, containerSize: 50.0,),
+            playBarItem(icon: Icons.pause_rounded, func: operations().toggleSong, iconSize: 35.0, containerSize: 50.0,),
             SizedBox(width: 5,),
-            playBarItem(icon: Icons.skip_next_rounded, func: nextSong)
+            playBarItem(icon: Icons.skip_next_rounded, func: operations().nextSong)
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class playMode extends StatefulWidget {
+  const playMode({super.key});
+
+  @override
+  State<playMode> createState() => _playModeState();
+}
+
+class _playModeState extends State<playMode> {
+
+  void menuShown(BuildContext context, TapDownDetails details){
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+    final Offset position = overlay.localToGlobal(details.globalPosition);
+    showMenu(
+      context: context,
+      surfaceTintColor: Colors.white,
+      position: RelativeRect.fromLTRB(
+        position.dx,
+        position.dy,
+        position.dx + 50,
+        position.dy + 50,
+      ), 
+      items: [
+        PopupMenuItem(
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.repeat_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("顺序播放")
+            ],
+          ),
+        ),
+        PopupMenuItem(
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.shuffle_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("随机播放")
+            ],
+          ),
+        ),
+        PopupMenuItem(
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.repeat_one_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("单曲循环")
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: (details) => menuShown(context, details),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: Icon(
+          Icons.repeat_rounded,
+          size: 20,
         ),
       ),
     );
