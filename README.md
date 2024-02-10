@@ -1,3 +1,5 @@
-# net_player_next
+# netPlayer Next版本
 
-A new Flutter project.
+netPlayer桌面客户端版本，基于Flutter
+
+施工中
