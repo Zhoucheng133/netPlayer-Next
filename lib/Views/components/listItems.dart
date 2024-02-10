@@ -21,9 +21,36 @@ class songItem extends StatefulWidget {
 class _songItemState extends State<songItem> {
   bool isHover=false;
 
+  void menuShow(BuildContext context, TapDownDetails details){
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+    final Offset position = overlay.localToGlobal(details.globalPosition);
+    showMenu(
+      context: context,
+        surfaceTintColor: Colors.white,
+      position: RelativeRect.fromLTRB(
+        position.dx,
+        position.dy,
+        position.dx + 50,
+        position.dy + 50,
+      ),
+      items: <PopupMenuEntry>[
+        PopupMenuItem(
+          height: 35,
+          child: Text('菜单项 1'),
+        ),
+        PopupMenuItem(
+          height: 35,
+          child: Text('菜单项 2'),
+        ),
+        // 添加更多的菜单项
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onSecondaryTapDown: (val) => menuShow(context, val),
       onDoubleTap: () => widget.playSong(),
       child: MouseRegion(
         onEnter: (_)=>setState(() {isHover=true;}),
@@ -82,12 +109,19 @@ class _songItemState extends State<songItem> {
                     ) : Container()
                   ),
                 ),
-                SizedBox(
-                  width: 50,
-                  child: Center(
-                    child: Icon(
-                      Icons.more_vert_rounded,
-                      size: 18,
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTapDown: (val) => menuShow(context, val),
+                    child: Container(
+                      color: Colors.transparent,
+                      width: 50,
+                      child: Center(
+                        child: Icon(
+                          Icons.more_vert_rounded,
+                          size: 18,
+                        ),
+                      ),
                     ),
                   ),
                 )
