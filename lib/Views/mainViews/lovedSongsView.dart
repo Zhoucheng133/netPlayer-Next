@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../functions/operations.dart';
 import '../../paras/paras.dart';
+import '../components/listItems.dart';
 import '../components/tableHeader.dart';
 import '../components/titleBar.dart';
 
@@ -26,7 +28,13 @@ class _lovedSongsViewState extends State<lovedSongsView> {
     // TODO 刷新列表
   }
 
+  void playSongFromLovedSongs(int index){
+    // TODO 播放歌曲
+  }
+
   TextEditingController searchInput=TextEditingController();
+
+  var controller=ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +47,22 @@ class _lovedSongsViewState extends State<lovedSongsView> {
           songsHeader(),
           Expanded(
             // 歌曲列表显示在这里
-            child: Container(),
+            child: Obx(() => 
+              ListView.builder(
+                controller: controller,
+                itemCount: c.lovedSongs.length,
+                itemBuilder: (BuildContext context, int index){
+                  return index==c.lovedSongs.length-1 ? 
+                  Column(
+                    children: [
+                      songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index),),
+                      SizedBox(height: 120,),
+                    ],
+                  ):
+                  songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index),);
+                }
+              )
+            )
           )
         ],
       ),
