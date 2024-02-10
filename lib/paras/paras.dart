@@ -20,6 +20,8 @@ class Controller extends GetxController{
   var selectedListName="".obs;
   // 显示歌词
   var showLyric=false.obs;
+  // 播放进度
+  RxDouble playProgress=0.0.obs;
 
   // 所有专辑
   var allAlbums=[].obs;
@@ -43,6 +45,7 @@ class Controller extends GetxController{
   void updateAllArtists(data) => allArtists.value=data;
   void updateAllSongs(data) => allSongs.value=data;
   void updateLovedSongs(data) => lovedSongs.value=data;
+  void updatePlayProgress(data) => playProgress.value=data;
 
   Future<void> updateSavePlay(data) async {
     savePlay.value=data;
