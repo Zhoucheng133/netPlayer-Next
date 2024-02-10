@@ -58,7 +58,7 @@ class _songItemState extends State<songItem> {
             children: [
               Icon(
                 Icons.playlist_add_rounded,
-                size: 16,
+                size: 18,
               ),
               SizedBox(width: 5,),
               Text("添加到歌单")
@@ -104,8 +104,8 @@ class _songItemState extends State<songItem> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.favorite,
-                size: 14,
+                Icons.playlist_remove_rounded,
+                size: 18,
               ),
               SizedBox(width: 5,),
               Text("从歌单中删除")
