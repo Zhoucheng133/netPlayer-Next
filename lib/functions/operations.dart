@@ -68,4 +68,19 @@ class operations{
   void playSong(String playFrom, String songId, String title, String artist, int duration, List playList, String album){
     // TODO 播放歌曲
   }
+
+  void toggleSong(){
+    print("暂停/播放");
+    // TODO 暂停/播放
+  }
+
+  void nextSong(){
+    print("下一首");
+    // TODO 下一首
+  }
+
+  void preSong(){
+    print("上一首");
+    // TODO 上一首
+  }
 }
