@@ -23,12 +23,12 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     });
     player.playerStateStream.listen((state) {
       if(state.processingState == ProcessingState.completed) {
-        print("complete");
         skipToNext();
       }
     });
   }
 
+  // 播放
   @override
   Future<void> play() async {
     if(c.playInfo["id"]==null){
@@ -43,23 +43,80 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     playUrl=url;
     c.updateIsPlay(true);
   }
+
+  // 暂停
   @override
   Future<void> pause() async {
+    if(c.playInfo["id"]==null){
+      return;
+    }
     await player.pause();
     c.updateIsPlay(false);
   }
+
+  // 停止播放
   @override
   Future<void> stop() async {
+    if(c.playInfo["id"]==null){
+      return;
+    }
     await player.stop();
   }
+
+  // 跳转
   @override
   Future<void> seek(Duration position) async {
+    if(c.playInfo["id"]==null){
+      return;
+    }
     c.updateIsPlay(false);
     await player.seek(position);
     await play();
   }
+
+  // 上一首
   @override
-  Future<void> skipToNext()async{
+  Future<void> skipToPrevious() async {
+    if(c.playInfo.isEmpty){
+      return;
+    }
+    if(c.playMode.value=="顺序播放" || c.playMode.value=="随机播放"){
+      var playInfo={};
+      if(c.playInfo["index"]==0){
+        playInfo={
+          "playFrom": c.playInfo["playFrom"],
+          "id": c.playInfo["list"][c.playInfo["list"].length-1]["id"],
+          "title": c.playInfo["list"][c.playInfo["list"].length-1]["title"],
+          "artist": c.playInfo["list"][c.playInfo["list"].length-1]["artist"],
+          "duration": c.playInfo["list"][c.playInfo["list"].length-1]["duration"],
+          "listId": c.playInfo["id"],
+          "index": c.playInfo["list"].length-1,
+          "list": c.playInfo["list"],
+        };
+      }else{
+        var newIndex=c.playInfo["index"]-1;
+        playInfo={
+          "playFrom": c.playInfo["playFrom"],
+          "id": c.playInfo["list"][newIndex]["id"],
+          "title": c.playInfo["list"][newIndex]["title"],
+          "artist": c.playInfo["list"][newIndex]["artist"],
+          "duration": c.playInfo["list"][newIndex]["duration"],
+          "listId": c.playInfo["id"],
+          "index": newIndex,
+          "list": c.playInfo["list"],
+        };
+      }
+      c.updatePlayInfo(playInfo);
+      play();
+    }else{
+      playUrl="";
+      play();
+    }
+  }
+
+  // 下一首
+  @override
+  Future<void> skipToNext() async {
     if(c.playInfo.isEmpty){
       return;
     }

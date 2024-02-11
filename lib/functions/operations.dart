@@ -97,7 +97,7 @@ class operations{
   }
 
   void preSong(){
-    // TODO 上一首
+    c.handler.skipToPrevious();
   }
 
   void seek(Duration d){
