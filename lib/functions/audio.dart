@@ -112,7 +112,8 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       }
       break;
       case "单曲循环": {
-
+        playUrl="";
+        play();
       }
       break;
     }
