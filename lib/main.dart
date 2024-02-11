@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace, use_build_context_synchronously, unrelated_type_equality_checks
 
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
@@ -8,14 +9,24 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 // import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/mainView.dart';
+import 'package:net_player_next/functions/audio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Views/loginView.dart';
 import 'functions/request.dart';
 import 'paras/paras.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final Controller c = Get.put(Controller());
+  c.handler=await AudioService.init(
+    builder: () => audioHandler(),
+    config: AudioServiceConfig(
+      androidNotificationChannelId: 'com.zhouc.netPlayer.channel.audio',
+      androidNotificationChannelName: 'Music playback',
+    ),
+  );
+
   runApp(MyApp());
   doWhenWindowReady(() {
     appWindow.minSize = Size(1100, 770);

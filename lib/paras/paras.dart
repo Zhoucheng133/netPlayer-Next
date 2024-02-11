@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_init_to_null, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, avoid_init_to_null, non_constant_identifier_names, prefer_typing_uninitialized_variables
 
 import 'dart:ui';
 
@@ -24,6 +24,8 @@ class Controller extends GetxController{
   var showLyric=false.obs;
   // 播放进度
   RxDouble playProgress=0.0.obs;
+
+  var handler;
 
   var playInfo={}.obs;
   var playInfo_example={
