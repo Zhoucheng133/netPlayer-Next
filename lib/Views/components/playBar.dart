@@ -95,8 +95,7 @@ class _playBarState extends State<playBar> {
                     ), 
                     child: Obx(() => 
                       Slider(
-                        // TODO 临时参数，需要修改
-                        value: c.playProgress.value, 
+                        value: c.playInfo["duration"]==null ? 0.0 : (c.playProgress.value/1000/c.playInfo["duration"]), 
                         onChanged: (value) => c.updatePlayProgress(value)
                       )
                     )

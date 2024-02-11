@@ -11,6 +11,20 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   final Controller c = Get.put(Controller());
   final player = AudioPlayer();
 
+  audioHandler(){
+    // TODO 添加播放State
+    player.positionStream.listen((position) {
+      c.updatePlayProgress(position.inMilliseconds);
+      // print(c.nowDuration);
+    });
+    player.playerStateStream.listen((state) {
+      if(state.processingState == ProcessingState.completed) {
+        print("complete");
+        skipToNext();
+      }
+    });
+  }
+
   @override
   Future<void> play() async {
     if(c.playInfo["id"]==null){
@@ -30,6 +44,10 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   }
   @override
   Future<void> seek(Duration position) async {
-
+    // TODO跳转到某个时间点
+  }
+  @override
+  Future<void> skipToNext()async{
+    // TODO 下一首的操作
   }
 }

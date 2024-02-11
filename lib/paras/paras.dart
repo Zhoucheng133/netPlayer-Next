@@ -22,8 +22,8 @@ class Controller extends GetxController{
   var selectedListName="".obs;
   // 显示歌词
   var showLyric=false.obs;
-  // 播放进度
-  RxDouble playProgress=0.0.obs;
+  // 播放进度(以毫秒计算)
+  var playProgress=0.obs;
 
   var handler;
 
