@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +16,23 @@ class playBar extends StatefulWidget {
 class _playBarState extends State<playBar> {
 
   final Controller c = Get.put(Controller());
+
+  void jumpDuration(val){
+    
+  }
+
+  String convertTime(){
+    if(c.playInfo["duration"]==null){
+      return "00:00/00:00";
+    }else{
+      var nowPlay = c.playProgress ~/ 1000;
+      var nowPlayDisplay = "${(nowPlay ~/ 60).toString().padLeft(2, '0')}:${(nowPlay % 60).toString().padLeft(2, '0')}";
+      
+      var durationDisplay = "${(c.playInfo["duration"] ~/ 60).toString().padLeft(2, '0')}:${(c.playInfo["duration"] % 60).toString().padLeft(2, '0')}";
+      
+      return "$nowPlayDisplay/$durationDisplay";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,18 +72,22 @@ class _playBarState extends State<playBar> {
                     padding: const EdgeInsets.only(left: 5),
                     child: Row(
                       children: [
-                        Text(
-                          "歌曲Info",
-                          style: TextStyle(
-                            fontSize: 16
+                        Obx(() => 
+                          Text(
+                            c.playInfo["title"] ?? "",
+                            style: TextStyle(
+                              fontSize: 16
+                            ),
                           ),
                         ),
-                        Text(
-                          " - 艺人",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[400],
-                          ),
+                        Obx(() => 
+                          Text(
+                            " - ${c.playInfo["artist"] ?? ""}",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey[400],
+                            ),
+                          )
                         )
                       ],
                     ),
@@ -74,12 +95,14 @@ class _playBarState extends State<playBar> {
                   SizedBox(height: 3,),
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
-                    child: Text(
-                      "时间",
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey[400],
-                      ),
+                    child: Obx(() => 
+                      Text(
+                        convertTime(),
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey[400],
+                        ),
+                      )
                     )
                   ),
                   SliderTheme(
@@ -95,8 +118,8 @@ class _playBarState extends State<playBar> {
                     ), 
                     child: Obx(() => 
                       Slider(
-                        value: c.playInfo["duration"]==null ? 0.0 : (c.playProgress.value/1000/c.playInfo["duration"]), 
-                        onChanged: (value) => c.updatePlayProgress(value)
+                        value: c.playInfo["duration"]==null ? 0.0 : (c.playProgress.value/1000/c.playInfo["duration"]) <= 1 ? (c.playProgress.value/1000/c.playInfo["duration"]) : 1,
+                        onChanged: (value) => jumpDuration(value)
                       )
                     )
                   )
