@@ -73,8 +73,7 @@ class _allSongsViewState extends State<allSongsView> {
   var controller=ScrollController();
 
   void playSongFromAllSongs(int index){
-    // TODO 播放歌曲
-    print(index);
+    operations().playSong("所有歌曲", "", index, c.allSongs);
   }
 
   @override

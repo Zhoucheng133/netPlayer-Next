@@ -77,6 +77,7 @@ class operations{
       "list": list,
     };
     c.updatePlayInfo(playInfo);
+    c.handler.play();
   }
 
   void toggleSong(){
