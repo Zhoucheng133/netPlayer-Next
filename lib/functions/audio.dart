@@ -22,11 +22,11 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   }
   @override
   Future<void> pause() async {
-
+    player.pause();
   }
   @override
   Future<void> stop() async {
-
+    player.stop();
   }
   @override
   Future<void> seek(Duration position) async {
