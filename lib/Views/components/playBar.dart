@@ -88,22 +88,33 @@ class _playBarState extends State<playBar> {
                     padding: const EdgeInsets.only(left: 5),
                     child: Row(
                       children: [
-                        Obx(() => 
-                          Text(
-                            c.playInfo["title"] ?? "",
-                            style: TextStyle(
-                              fontSize: 16
+                        Container(
+                          constraints: BoxConstraints(
+                            maxWidth: 250.0,
+                          ),
+                          child: Obx(() => 
+                            Text(
+                              c.playInfo["title"] ?? "",
+                              style: TextStyle(
+                                fontSize: 16,
+                                overflow: TextOverflow.ellipsis
+                              ),
                             ),
                           ),
                         ),
-                        Obx(() => 
-                          Text(
-                            " - ${c.playInfo["artist"] ?? ""}",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[400],
-                            ),
-                          )
+                        Container(
+                          constraints: BoxConstraints(
+                            maxWidth: 200.0,
+                          ),
+                          child: Obx(() => 
+                            Text(
+                              " - ${c.playInfo["artist"] ?? ""}",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey[400],
+                              ),
+                            )
+                          ),
                         )
                       ],
                     ),
