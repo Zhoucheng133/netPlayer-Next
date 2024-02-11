@@ -26,6 +26,8 @@ class Controller extends GetxController{
   var playProgress=0.obs;
   // 是否在播放
   var isPlay=false.obs;
+  // 播放模式
+  var playMode="顺序播放".obs;
 
   var handler;
 
@@ -66,6 +68,7 @@ class Controller extends GetxController{
   void updatePlayProgress(data) => playProgress.value=data;
   void updatePlayInfo(data) => playInfo.value=data;
   void updateIsPlay(data) => isPlay.value=data;
+  void updatePlayMode(data) => playMode.value=data;
 
   Future<void> updateSavePlay(data) async {
     savePlay.value=data;

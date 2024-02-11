@@ -177,10 +177,22 @@ class playMode extends StatefulWidget {
 
 class _playModeState extends State<playMode> {
 
-  void menuShown(BuildContext context, TapDownDetails details){
+  final Controller c = Get.put(Controller());
+
+  IconData playModeIcon(){
+    if(c.playMode.value=="顺序播放"){
+      return Icons.repeat_rounded;
+    }else if(c.playMode.value=="随机播放"){
+      return Icons.shuffle_rounded;
+    }else{
+      return Icons.repeat_one_rounded;
+    }
+  }
+
+  Future<void> menuShown(BuildContext context, TapDownDetails details) async {
     final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
     final Offset position = overlay.localToGlobal(details.globalPosition);
-    showMenu(
+    var val = await showMenu(
       context: context,
       surfaceTintColor: Colors.white,
       position: RelativeRect.fromLTRB(
@@ -191,6 +203,7 @@ class _playModeState extends State<playMode> {
       ), 
       items: [
         PopupMenuItem(
+          value: "顺序播放",
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -206,6 +219,7 @@ class _playModeState extends State<playMode> {
           ),
         ),
         PopupMenuItem(
+          value: "随机播放",
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -221,6 +235,7 @@ class _playModeState extends State<playMode> {
           ),
         ),
         PopupMenuItem(
+          value: "单曲循环",
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -237,6 +252,7 @@ class _playModeState extends State<playMode> {
         ),
       ],
     );
+    c.updatePlayMode(val);
   }
 
   @override
@@ -245,10 +261,12 @@ class _playModeState extends State<playMode> {
       onTapDown: (details) => menuShown(context, details),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
-        child: Icon(
-          Icons.repeat_rounded,
-          size: 20,
-        ),
+        child: Obx(() => 
+          Icon(
+            playModeIcon(),
+            size: 20,
+          ),
+        )
       ),
     );
   }
