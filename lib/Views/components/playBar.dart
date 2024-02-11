@@ -74,9 +74,19 @@ class _playBarState extends State<playBar> {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: Colors.red,
+                // color: Colors.red,
                 borderRadius: BorderRadius.circular(10)
               ),
+              child: Obx(() =>
+                c.playInfo["id"]==null ? 
+                Image.asset(
+                  "assets/blank.jpg",
+                  fit: BoxFit.contain,
+                ) : Image.network(
+                  "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.playInfo["id"]}",
+                  fit: BoxFit.contain,
+                ),
+              )
             ),
             SizedBox(width: 10,),
             Expanded(
@@ -264,7 +274,8 @@ class _playModeState extends State<playMode> {
       ],
     );
     if(val!=null){
-    c.updatePlayMode(val);
+      c.updatePlayMode(val);
+    }
   }
 
   @override
