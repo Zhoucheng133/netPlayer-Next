@@ -24,6 +24,8 @@ class Controller extends GetxController{
   var showLyric=false.obs;
   // 播放进度(以毫秒计算)
   var playProgress=0.obs;
+  // 是否在播放
+  var isPlay=false.obs;
 
   var handler;
 
@@ -63,6 +65,7 @@ class Controller extends GetxController{
   void updateLovedSongs(data) => lovedSongs.value=data;
   void updatePlayProgress(data) => playProgress.value=data;
   void updatePlayInfo(data) => playInfo.value=data;
+  void updateIsPlay(data) => isPlay.value=data;
 
   Future<void> updateSavePlay(data) async {
     savePlay.value=data;

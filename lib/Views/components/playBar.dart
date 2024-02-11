@@ -154,7 +154,10 @@ class _playBarState extends State<playBar> {
             SizedBox(width: 15,),
             playBarItem(icon: Icons.skip_previous_rounded, func: operations().preSong),
             SizedBox(width: 5,),
-            playBarItem(icon: Icons.pause_rounded, func: operations().toggleSong, iconSize: 35.0, containerSize: 50.0,),
+            Obx(() => 
+              c.isPlay.value ? playBarItem(icon: Icons.pause_rounded, func: operations().toggleSong, iconSize: 35.0, containerSize: 50.0,) : 
+              playBarItem(icon: Icons.play_arrow_rounded, func: operations().toggleSong, iconSize: 35.0, containerSize: 50.0,)
+            ),
             SizedBox(width: 5,),
             playBarItem(icon: Icons.skip_next_rounded, func: operations().nextSong),
             SizedBox(width: 10,)

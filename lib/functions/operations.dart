@@ -81,7 +81,11 @@ class operations{
   }
 
   void toggleSong(){
-    // TODO 暂停/播放
+    if(c.isPlay.value){
+      c.handler.pause();
+    }else{
+      c.handler.play();
+    }
   }
 
   void pause(){

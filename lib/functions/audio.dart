@@ -39,10 +39,12 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     }
     player.play();
     playUrl=url;
+    c.updateIsPlay(true);
   }
   @override
   Future<void> pause() async {
     await player.pause();
+    c.updateIsPlay(false);
   }
   @override
   Future<void> stop() async {
@@ -50,6 +52,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   }
   @override
   Future<void> seek(Duration position) async {
+    c.updateIsPlay(false);
     await player.seek(position);
     await play();
   }
