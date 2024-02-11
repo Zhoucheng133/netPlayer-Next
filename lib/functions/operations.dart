@@ -93,7 +93,7 @@ class operations{
   }
 
   void nextSong(){
-    // TODO 下一首
+    c.handler.skipToNext();
   }
 
   void preSong(){

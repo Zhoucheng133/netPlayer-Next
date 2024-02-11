@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
+// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, invalid_use_of_protected_member
 
 import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
@@ -59,5 +59,45 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<void> skipToNext()async{
     // TODO 下一首的操作
+    switch (c.playMode.value){
+      case "顺序播放": {
+        var playInfo={};
+        if(c.playInfo["index"]==c.playInfo["list"].length-1){
+          playInfo={
+            "playFrom": c.playInfo["playFrom"],
+            "id": c.playInfo["list"][0]["id"],
+            "title": c.playInfo["list"][0]["title"],
+            "artist": c.playInfo["list"][0]["artist"],
+            "duration": c.playInfo["list"][0]["duration"],
+            "listId": c.playInfo["id"],
+            "index": 0,
+            "list": c.playInfo["list"],
+          };
+        }else{
+          var newIndex=c.playInfo["index"]+1;
+          playInfo={
+            "playFrom": c.playInfo["playFrom"],
+            "id": c.playInfo["list"][newIndex]["id"],
+            "title": c.playInfo["list"][newIndex]["title"],
+            "artist": c.playInfo["list"][newIndex]["artist"],
+            "duration": c.playInfo["list"][newIndex]["duration"],
+            "listId": c.playInfo["id"],
+            "index": newIndex,
+            "list": c.playInfo["list"],
+          };
+        }
+        c.updatePlayInfo(playInfo);
+        play();
+      }
+      break;
+      case "随机播放": {
+
+      }
+      break;
+      case "单曲循环": {
+
+      }
+      break;
+    }
   }
 }
