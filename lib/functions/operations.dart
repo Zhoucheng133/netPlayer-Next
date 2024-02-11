@@ -65,8 +65,18 @@ class operations{
     return "$min:$formattedSec";
   }
 
-  void playSong(String playFrom, String songId, String title, String artist, int duration, List playList, String album){
-    // TODO 播放歌曲
+  void playSong(String playFrom, String listId, int index, List list){
+    var playInfo={
+      "playFrom": playFrom,
+      "id": list[index]["id"],
+      "title": list[index]["title"],
+      "artist": list[index]["artist"],
+      "duration": list[index]["duration"],
+      "listId": listId,
+      "index": index,
+      "list": list,
+    };
+    c.updatePlayInfo(playInfo);
   }
 
   void toggleSong(){

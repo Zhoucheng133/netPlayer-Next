@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_init_to_null, non_constant_identifier_names
+
 import 'dart:ui';
 
 import 'package:get/get.dart';
@@ -23,6 +25,18 @@ class Controller extends GetxController{
   // 播放进度
   RxDouble playProgress=0.0.obs;
 
+  var playInfo={}.obs;
+  var playInfo_example={
+    "playFrom": "所有歌曲",
+    "id": "songId",
+    "title": "songTitle",
+    "artist": "ryan",
+    "duration": 1234,
+    "listId": "abcd",
+    "index": 0,
+    "list": [],
+  };
+
   // 所有专辑
   var allAlbums=[].obs;
   // 所有艺人
@@ -46,6 +60,7 @@ class Controller extends GetxController{
   void updateAllSongs(data) => allSongs.value=data;
   void updateLovedSongs(data) => lovedSongs.value=data;
   void updatePlayProgress(data) => playProgress.value=data;
+  void updatePlayInfo(data) => playInfo.value=data;
 
   Future<void> updateSavePlay(data) async {
     savePlay.value=data;
