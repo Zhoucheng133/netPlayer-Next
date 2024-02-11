@@ -80,7 +80,6 @@ class _allSongsViewState extends State<allSongsView> {
     if(c.playInfo["playFrom"]!="所有歌曲"){
       return false;
     }else{
-      print(c.playInfo["index"]);
       if(c.playInfo["index"]==index){
         return true;
       }
