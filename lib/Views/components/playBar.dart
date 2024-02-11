@@ -263,6 +263,7 @@ class _playModeState extends State<playMode> {
         ),
       ],
     );
+    if(val!=null){
     c.updatePlayMode(val);
   }
 
