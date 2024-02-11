@@ -1,5 +1,7 @@
 // ignore_for_file: file_names, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_brace_in_string_interps
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/functions/operations.dart';
@@ -17,8 +19,22 @@ class _playBarState extends State<playBar> {
 
   final Controller c = Get.put(Controller());
 
-  void jumpDuration(val){
-    
+  Timer? _debounce;
+
+  void jumpDuration(double val){
+    operations().pause();
+    var progress=c.playInfo["duration"]*1000*val;
+     c.updatePlayProgress(progress.toInt());
+    if (_debounce?.isActive ?? false) {
+      _debounce?.cancel();
+    }
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      if(c.playInfo["duration"]==null){
+        return;
+      }else{
+        operations().seek(Duration(milliseconds: progress.toInt()));
+      }
+    });
   }
 
   String convertTime(){

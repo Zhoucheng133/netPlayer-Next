@@ -10,6 +10,8 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   final Controller c = Get.put(Controller());
   final player = AudioPlayer();
+  
+  var playUrl="";
 
   audioHandler(){
     // TODO 添加播放State
@@ -31,20 +33,25 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       return;
     }
     var url="${c.userInfo["url"]}/rest/stream?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.playInfo["id"]}";
-    player.setUrl(url);
+
+    if(playUrl!=url){
+      player.setUrl(url);
+    }
     player.play();
+    playUrl=url;
   }
   @override
   Future<void> pause() async {
-    player.pause();
+    await player.pause();
   }
   @override
   Future<void> stop() async {
-    player.stop();
+    await player.stop();
   }
   @override
   Future<void> seek(Duration position) async {
-    // TODO跳转到某个时间点
+    await player.seek(position);
+    await play();
   }
   @override
   Future<void> skipToNext()async{

@@ -84,11 +84,19 @@ class operations{
     // TODO 暂停/播放
   }
 
+  void pause(){
+    c.handler.pause();
+  }
+
   void nextSong(){
     // TODO 下一首
   }
 
   void preSong(){
     // TODO 上一首
+  }
+
+  void seek(Duration d){
+    c.handler.seek(d);
   }
 }
