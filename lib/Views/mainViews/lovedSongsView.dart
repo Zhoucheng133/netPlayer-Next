@@ -29,12 +29,23 @@ class _lovedSongsViewState extends State<lovedSongsView> {
   }
 
   void playSongFromLovedSongs(int index){
-    // TODO 播放歌曲
+    operations().playSong("喜欢的歌曲", "", index, c.lovedSongs);
   }
 
   TextEditingController searchInput=TextEditingController();
 
   var controller=ScrollController();
+
+    bool isPlaying(index){
+    if(c.playInfo["playFrom"]!="喜欢的歌曲"){
+      return false;
+    }else{
+      if(c.playInfo["index"]==index){
+        return true;
+      }
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +66,11 @@ class _lovedSongsViewState extends State<lovedSongsView> {
                   return index==c.lovedSongs.length-1 ? 
                   Column(
                     children: [
-                      songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index),),
+                      Obx(() => songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index), isPlaying: isPlaying(index),),),
                       SizedBox(height: 120,),
                     ],
                   ):
-                  songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index),);
+                  Obx(() => songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index), isPlaying: isPlaying(index),),);
                 }
               )
             )

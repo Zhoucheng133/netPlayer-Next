@@ -12,8 +12,9 @@ class songItem extends StatefulWidget {
   final bool isLoved;
   final VoidCallback playSong;
   final dynamic id;
+  final bool isPlaying;
 
-  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved, required this.playSong, this.id,});
+  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved, required this.playSong, this.id, required this.isPlaying,});
 
   @override
   State<songItem> createState() => _songItemState();
@@ -136,7 +137,16 @@ class _songItemState extends State<songItem> {
                   width: 50,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
-                    child: Text((widget.index+1).toString()),
+                    child: widget.isPlaying ? Row(
+                      children: [
+                        Icon(
+                          Icons.play_arrow_rounded,
+                          size: 18,
+                          color: Color.fromARGB(255, 0, 130, 222),
+                        ),
+                        Expanded(child: Container())
+                      ],
+                    ) : Text((widget.index+1).toString()),
                   ),
                 ),
                 Expanded(
@@ -149,6 +159,9 @@ class _songItemState extends State<songItem> {
                         Text(
                           widget.title,
                           overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: widget.isPlaying ? Color.fromARGB(255, 0, 130, 222) : Colors.black,
+                          ),
                         ),
                         Text(
                           widget.artist,
@@ -165,7 +178,12 @@ class _songItemState extends State<songItem> {
                 SizedBox(
                   width: 70,
                   child: Center(
-                    child: Text(operations().timeConvert(widget.duration)),
+                    child: Text(
+                      operations().timeConvert(widget.duration),
+                      style: TextStyle(
+                        color: widget.isPlaying ? Color.fromARGB(255, 0, 130, 222) : Colors.black,
+                      ),
+                    ),
                   )
                 ),
                 SizedBox(
@@ -189,6 +207,7 @@ class _songItemState extends State<songItem> {
                         child: Icon(
                           Icons.more_vert_rounded,
                           size: 18,
+                          color: widget.isPlaying ? Color.fromARGB(255, 0, 130, 222) : Colors.black,
                         ),
                       ),
                     ),

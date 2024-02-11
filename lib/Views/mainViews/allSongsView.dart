@@ -76,6 +76,18 @@ class _allSongsViewState extends State<allSongsView> {
     operations().playSong("所有歌曲", "", index, c.allSongs);
   }
 
+  bool isPlaying(index){
+    if(c.playInfo["playFrom"]!="所有歌曲"){
+      return false;
+    }else{
+      print(c.playInfo["index"]);
+      if(c.playInfo["index"]==index){
+        return true;
+      }
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -96,11 +108,11 @@ class _allSongsViewState extends State<allSongsView> {
                   return index==c.allSongs.length-1 ? 
                   Column(
                     children: [
-                      songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index),),
+                      Obx(() => songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index), isPlaying: isPlaying(index),),),
                       SizedBox(height: 120,),
                     ],
                   ):
-                  songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index),);
+                  Obx(() => songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index), isPlaying: isPlaying(index),),);
                 }
               )
             )
