@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace, use_build_context_synchronously, unrelated_type_equality_checks
 
+import 'dart:io';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:flutter/services.dart';
 // import 'package:fluent_ui/fluent_ui.dart';
 // import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -67,6 +70,7 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
 
   final Controller c = Get.put(Controller());
+  bool isLogin=false;
 
   Future<void> autoLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -124,12 +128,25 @@ class _MainAppState extends State<MainApp> {
   }
 
   bool isLoading=true;
+
+  void isLoginCheck(){
+    if(c.userInfo.isEmpty){
+      setState(() {
+        isLogin=false;
+      });
+    }else{
+      setState(() {
+        isLogin=true;
+      });
+    }
+  }
   
   @override
   void initState() {
     super.initState();
 
     autoLogin();
+    ever(c.userInfo, (callback) => isLoginCheck());
   }
 
   @override
@@ -153,6 +170,133 @@ class _MainAppState extends State<MainApp> {
             ),
           ),
         ),
+        Platform.isMacOS ? PlatformMenuBar(menus: 
+          [
+            PlatformMenu(
+              label: "netPlayer", 
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "关于 netPlayer",
+                      onSelected: isLogin ? (){
+                        c.updateNowPage({
+                          "name": "关于",
+                          "id": "",
+                        });
+                      } : null
+                    )
+                  ]
+                ),
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "设置...",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.comma,
+                        meta: true,
+                      ),
+                      onSelected: isLogin ? () => c.updateNowPage({
+                        "name": "设置",
+                        "id": "",
+                      }) : null
+                    ),
+                  ]
+                ),
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.hide,
+                    ),
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.quit,
+                    ),
+                  ]
+                )
+              ]
+            ),
+            PlatformMenu(
+              label: "编辑",
+              menus: [
+                PlatformMenuItem(
+                  label: "拷贝",
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyC,
+                    meta: true
+                  ),
+                  onSelected: (){}
+                ),
+                PlatformMenuItem(
+                  label: "粘贴",
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyV,
+                    meta: true
+                  ),
+                  onSelected: (){}
+                ),
+                PlatformMenuItem(
+                  label: "全选",
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyA,
+                    meta: true
+                  ),
+                  onSelected: (){}
+                )
+              ]
+            ),
+            PlatformMenu(
+              label: "操作", 
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "暂停/播放",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.space,
+                      ),
+                      onSelected: (){},
+                    ),
+                    PlatformMenuItem(
+                      label: "上一首",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.arrowLeft,
+                        meta: true,
+                      ),
+                      onSelected: ()=>{},
+                    ),
+                    PlatformMenuItem(
+                      label: "下一首",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.arrowRight,
+                        meta: true,
+                      ),
+                      onSelected: ()=>{},
+                    )
+                  ]
+                )
+              ]
+            ),
+            PlatformMenu(
+              label: "窗口", 
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.minimizeWindow,
+                    ),
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.toggleFullScreen,
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ) : Container(),
       ],
     );
   }
