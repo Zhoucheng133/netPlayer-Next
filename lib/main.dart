@@ -170,8 +170,8 @@ class _MainAppState extends State<MainApp> {
             ),
           ),
         ),
-        Platform.isMacOS ? PlatformMenuBar(menus: 
-          [
+        Platform.isMacOS ? PlatformMenuBar(
+          menus: [
             PlatformMenu(
               label: "netPlayer", 
               menus: [
