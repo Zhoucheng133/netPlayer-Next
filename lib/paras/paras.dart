@@ -56,6 +56,9 @@ class Controller extends GetxController{
   var savePlay=true.obs;
   var autoLogin=true.obs;
 
+  // 是否聚焦在输入框上
+  var focusTextField=false.obs;
+
   void updateUserInfo(data) => userInfo.value=data;
   void updateNowPage(data) => nowPage.value=data;
   void updateAllPlayList(data) => allPlayList.value=data;
@@ -69,6 +72,7 @@ class Controller extends GetxController{
   void updatePlayInfo(data) => playInfo.value=data;
   void updateIsPlay(data) => isPlay.value=data;
   void updatePlayMode(data) => playMode.value=data;
+  void updateFocusTextField(data) => focusTextField.value=data;
 
   Future<void> updateSavePlay(data) async {
     savePlay.value=data;

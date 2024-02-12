@@ -26,8 +26,23 @@ class _titleBoxState extends State<titleBox> {
 
   final Controller c = Get.put(Controller());
 
+  FocusNode textfocus=FocusNode();
+
   bool hoverLocate=false;
   bool hoverReload=false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    textfocus.addListener(() { 
+      if(textfocus.hasFocus){
+        c.updateFocusTextField(true);
+      }else{
+        c.updateFocusTextField(false);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +99,7 @@ class _titleBoxState extends State<titleBox> {
                 width: 200,
                 child: Center(
                   child: TextField(
+                    focusNode: textfocus,
                     controller: widget.controller,
                     style: TextStyle(
                       fontSize: 14,

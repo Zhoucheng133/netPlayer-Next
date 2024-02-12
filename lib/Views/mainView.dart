@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:net_player_next/Views/components/playBar.dart';
 import 'package:net_player_next/Views/mainViews/aboutView.dart';
 import 'package:net_player_next/Views/mainViews/settingsView.dart';
@@ -26,10 +27,26 @@ class _mainViewState extends State<mainView> {
 
   final Controller c = Get.put(Controller());
 
+  Future<void> registerHotKey() async {
+    HotKey _hotKey = HotKey(
+      KeyCode.space,
+      scope: HotKeyScope.inapp,
+    );
+    await hotKeyManager.register(
+      _hotKey,
+      keyDownHandler: (hotKey) {
+        if(!c.focusTextField.value){
+          operations().toggleSong();
+        }
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
 
+    registerHotKey();
     operations().getPlayLists();
     operations().getLovedSongs();
   }
