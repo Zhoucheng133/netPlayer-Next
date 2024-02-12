@@ -8,8 +8,7 @@ import 'dart:convert';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/services.dart';
-// import 'package:fluent_ui/fluent_ui.dart';
-// import 'package:flutter/cupertino.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/mainView.dart';
 import 'package:net_player_next/functions/audio.dart';
@@ -21,6 +20,7 @@ import 'paras/paras.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await hotKeyManager.unregisterAll();
   final Controller c = Get.put(Controller());
   c.handler=await AudioService.init(
     builder: () => audioHandler(),
@@ -170,7 +170,7 @@ class _MainAppState extends State<MainApp> {
             ),
           ),
         ),
-        Platform.isMacOS ? PlatformMenuBar(
+        if(Platform.isMacOS) PlatformMenuBar(
           menus: [
             PlatformMenu(
               label: "netPlayer", 
@@ -296,7 +296,7 @@ class _MainAppState extends State<MainApp> {
               ]
             )
           ]
-        ) : Container(),
+        ),
       ],
     );
   }
