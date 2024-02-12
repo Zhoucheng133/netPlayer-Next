@@ -1,5 +1,7 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
@@ -28,12 +30,12 @@ class _mainViewState extends State<mainView> {
   final Controller c = Get.put(Controller());
 
   Future<void> registerHotKey() async {
-    HotKey _hotKey = HotKey(
+    HotKey toggle = HotKey(
       KeyCode.space,
       scope: HotKeyScope.inapp,
     );
     await hotKeyManager.register(
-      _hotKey,
+      toggle,
       keyDownHandler: (hotKey) {
         if(!c.focusTextField.value){
           operations().toggleSong();

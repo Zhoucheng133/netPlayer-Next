@@ -12,6 +12,7 @@ import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/mainView.dart';
 import 'package:net_player_next/functions/audio.dart';
+import 'package:net_player_next/functions/operations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Views/loginView.dart';
@@ -264,7 +265,7 @@ class _MainAppState extends State<MainApp> {
                         LogicalKeyboardKey.arrowLeft,
                         meta: true,
                       ),
-                      onSelected: ()=>{},
+                      onSelected: ()=>operations().preSong(),
                     ),
                     PlatformMenuItem(
                       label: "下一首",
@@ -272,7 +273,7 @@ class _MainAppState extends State<MainApp> {
                         LogicalKeyboardKey.arrowRight,
                         meta: true,
                       ),
-                      onSelected: ()=>{},
+                      onSelected: ()=>operations().nextSong(),
                     )
                   ]
                 )
