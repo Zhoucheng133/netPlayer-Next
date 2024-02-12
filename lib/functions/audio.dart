@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, invalid_use_of_protected_member
+// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, invalid_use_of_protected_member, prefer_const_constructors
 
 import 'dart:math';
 
@@ -16,7 +16,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   var playUrl="";
 
   audioHandler(){
-    // TODO 添加播放State
+
     player.positionStream.listen((position) {
       c.updatePlayProgress(position.inMilliseconds);
       // print(c.nowDuration);
@@ -26,6 +26,29 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
         skipToNext();
       }
     });
+  }
+
+  MediaItem item=MediaItem(id: "", title: "");
+
+  // 设置播放Info
+  Future<void> setInfo(bool isPlay) async {
+    item=MediaItem(
+      id: c.playInfo["id"],
+      album: c.playInfo["album"],
+      title: c.playInfo["title"],
+      artist: c.playInfo["artist"],
+      artUri: Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.playInfo["id"]}"),
+    );
+    mediaItem.add(item);
+
+    playbackState.add(playbackState.value.copyWith(
+      playing: isPlay,
+      controls: [
+        MediaControl.skipToPrevious,
+        isPlay ? MediaControl.pause : MediaControl.play,
+        MediaControl.skipToNext,
+      ],
+    ));
   }
 
   // 播放
@@ -42,6 +65,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     player.play();
     playUrl=url;
     c.updateIsPlay(true);
+    setInfo(true);
   }
 
   // 暂停
@@ -52,6 +76,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     }
     await player.pause();
     c.updateIsPlay(false);
+    setInfo(false);
   }
 
   // 停止播放
@@ -72,6 +97,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     c.updateIsPlay(false);
     await player.seek(position);
     await play();
+    setInfo(true);
   }
 
   // 上一首
@@ -112,6 +138,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       playUrl="";
       play();
     }
+    setInfo(true);
   }
 
   // 下一首
@@ -174,5 +201,6 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       }
       break;
     }
+    setInfo(true);
   }
 }
