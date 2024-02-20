@@ -3,8 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/functions/request.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
+import '../../functions/operations.dart';
 import '../../paras/paras.dart';
+import '../components/listItems.dart';
 import '../components/tableHeader.dart';
 import '../components/titleBar.dart';
 
@@ -52,6 +55,23 @@ class _playListViewState extends State<playListView> {
       getPlayList();
     });
   }
+
+  var controller=AutoScrollController();
+
+  void playSongFromPlaylist(index){
+
+  }
+
+  bool isPlaying(index){
+    if(c.playInfo["playFrom"]!="歌单"){
+      return false;
+    }else{
+      if(c.playInfo["index"]==index && c.playInfo["listId"]==c.nowPage["id"]){
+        return true;
+      }
+      return false;
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -66,7 +86,25 @@ class _playListViewState extends State<playListView> {
           songsHeader(),
           Expanded(
             // 歌曲列表显示在这里
-            child: Container(),
+            child: ListView.builder(
+              controller: controller,
+              itemCount: list.length,
+              itemBuilder: (BuildContext context, int index){
+                return AutoScrollTag(
+                  key: ValueKey(index), 
+                  controller: controller, 
+                  index: index,
+                  child: index==list.length-1 ? 
+                    Column(
+                      children: [
+                        Obx(() => songItem(artist: list[index]["artist"], duration: list[index]["duration"], index: index, title: list[index]["title"], isLoved: operations().isLoved(list[index]["id"]), playSong: ()=>playSongFromPlaylist(index), isPlaying: isPlaying(index),),),
+                        SizedBox(height: 120,),
+                      ],
+                    ):
+                    Obx(() => songItem(artist: list[index]["artist"], duration: list[index]["duration"], index: index, title: list[index]["title"], isLoved: operations().isLoved(list[index]["id"]), playSong: ()=>playSongFromPlaylist(index), isPlaying: isPlaying(index),),),
+                );
+              }
+            )
           )
         ],
       ),
