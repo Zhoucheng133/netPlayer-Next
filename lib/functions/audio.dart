@@ -115,7 +115,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
           "title": c.playInfo["list"][c.playInfo["list"].length-1]["title"],
           "artist": c.playInfo["list"][c.playInfo["list"].length-1]["artist"],
           "duration": c.playInfo["list"][c.playInfo["list"].length-1]["duration"],
-          "listId": c.playInfo["id"],
+          "listId": c.playInfo["listId"],
           "index": c.playInfo["list"].length-1,
           "list": c.playInfo["list"],
         };
@@ -127,7 +127,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
           "title": c.playInfo["list"][newIndex]["title"],
           "artist": c.playInfo["list"][newIndex]["artist"],
           "duration": c.playInfo["list"][newIndex]["duration"],
-          "listId": c.playInfo["id"],
+          "listId": c.playInfo["listId"],
           "index": newIndex,
           "list": c.playInfo["list"],
         };
@@ -157,7 +157,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
             "title": c.playInfo["list"][0]["title"],
             "artist": c.playInfo["list"][0]["artist"],
             "duration": c.playInfo["list"][0]["duration"],
-            "listId": c.playInfo["id"],
+            "listId": c.playInfo["listId"],
             "index": 0,
             "list": c.playInfo["list"],
           };
@@ -169,7 +169,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
             "title": c.playInfo["list"][newIndex]["title"],
             "artist": c.playInfo["list"][newIndex]["artist"],
             "duration": c.playInfo["list"][newIndex]["duration"],
-            "listId": c.playInfo["id"],
+            "listId": c.playInfo["listId"],
             "index": newIndex,
             "list": c.playInfo["list"],
           };
@@ -187,7 +187,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
           "title": c.playInfo["list"][newIndex]["title"],
           "artist": c.playInfo["list"][newIndex]["artist"],
           "duration": c.playInfo["list"][newIndex]["duration"],
-          "listId": c.playInfo["id"],
+          "listId": c.playInfo["listId"],
           "index": newIndex,
           "list": c.playInfo["list"],
         };
