@@ -215,6 +215,7 @@ class _playModeState extends State<playMode> {
     final Offset position = overlay.localToGlobal(details.globalPosition);
     var val = await showMenu(
       context: context,
+      color: Colors.white,
       surfaceTintColor: Colors.white,
       position: RelativeRect.fromLTRB(
         position.dx,
