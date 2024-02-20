@@ -25,8 +25,6 @@ class _settingsViewState extends State<settingsView> {
 
   void reload(){/** 空函数 */}
 
-  void search(val){ /** 空函数 */}
-
   bool saveSongPlayed=true;
 
   TextEditingController controller =TextEditingController();
@@ -64,7 +62,7 @@ class _settingsViewState extends State<settingsView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          titleBox(searchController: search, title: "设置", subtitle: "", controller: searchInput, reloadList: () => reload(),),
+          titleBox(title: "设置", subtitle: "", controller: searchInput, reloadList: () => reload(),),
           SizedBox(height: 5,),
           Expanded(
             child: Center(

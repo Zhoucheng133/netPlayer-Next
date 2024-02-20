@@ -31,7 +31,7 @@ class _albumsViewState extends State<albumsView> {
       child: Column(
         children: [
           // TODO 注意传递副标题
-          titleBox(searchController: search, title: "专辑", subtitle: "合计x个专辑", controller: searchInput, reloadList: () => reload(),),
+          titleBox(title: "专辑", subtitle: "合计x个专辑", controller: searchInput, reloadList: () => reload(),),
           SizedBox(height: 10,),
           albumHeader(),
           Expanded(

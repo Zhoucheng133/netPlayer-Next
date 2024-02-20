@@ -102,7 +102,7 @@ class _playListViewState extends State<playListView> {
       child: Column(
         children: [
           Obx(() => 
-            titleBox(searchController: search, title: c.selectedListName.value, subtitle: subtitle, controller: searchInput, reloadList: () => reload(), scrollToIndex: ()=>scrollToIndex(),),
+            titleBox(title: c.selectedListName.value, subtitle: subtitle, controller: searchInput, reloadList: () => reload(), scrollToIndex: ()=>scrollToIndex(),),
           ),
           SizedBox(height: 10,),
           songsHeader(),

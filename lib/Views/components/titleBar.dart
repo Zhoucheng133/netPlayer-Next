@@ -10,14 +10,13 @@ import '../../paras/paras.dart';
 
 class titleBox extends StatefulWidget {
 
-  final ValueChanged searchController;
   final String title;
   final String subtitle;
   final TextEditingController controller;
   final VoidCallback reloadList;
   final dynamic scrollToIndex;
 
-  const titleBox({super.key, required this.searchController, required this.title, required this.subtitle, required this.controller, required this.reloadList, this.scrollToIndex});
+  const titleBox({super.key, required this.title, required this.subtitle, required this.controller, required this.reloadList, this.scrollToIndex});
 
   @override
   State<titleBox> createState() => _titleBoxState();
@@ -130,7 +129,6 @@ class _titleBoxState extends State<titleBox> {
                       ),
                     ),
                     textAlignVertical: TextAlignVertical.center,
-                    onEditingComplete: () => widget.searchController(widget.controller.text),
                   ),
                 )
               ),
@@ -141,15 +139,12 @@ class _titleBoxState extends State<titleBox> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(child: Container()),
-                      GestureDetector(
-                        onTap: () => widget.searchController(widget.controller.text),
-                        child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: Icon(
-                            Icons.search_rounded,
-                            size: 18,
-                            color: Colors.grey[400],
-                          ),
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: Icon(
+                          Icons.search_rounded,
+                          size: 18,
+                          color: Colors.grey[400],
                         ),
                       ),
                       SizedBox(width: 5,)

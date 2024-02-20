@@ -23,7 +23,7 @@ class _allSongsViewState extends State<allSongsView> {
   final Controller c = Get.put(Controller());
 
   void search(value){
-    // TODO 搜索歌曲
+    print(value);
   }
 
   // 重新计算Index的值
@@ -85,6 +85,9 @@ class _allSongsViewState extends State<allSongsView> {
     super.initState();
 
     operations().getAllSongs(context);
+    searchInput.addListener(() {
+      search(searchInput.text);
+    });
   }
 
   TextEditingController searchInput=TextEditingController();
@@ -119,7 +122,7 @@ class _allSongsViewState extends State<allSongsView> {
       child: Column(
         children: [
           Obx(() => 
-            titleBox(searchController: search, title: "所有歌曲", subtitle: "合计${c.allSongs.length}首歌", controller: searchInput, reloadList: () => reload(), scrollToIndex: () => scrollToIndex(),),
+            titleBox(title: "所有歌曲", subtitle: "合计${c.allSongs.length}首歌", controller: searchInput, reloadList: () => reload(), scrollToIndex: () => scrollToIndex(),),
           ),
           SizedBox(height: 10,),
           songsHeader(),

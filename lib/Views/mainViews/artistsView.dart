@@ -31,7 +31,7 @@ class _artistsViewState extends State<artistsView> {
       child: Column(
         children: [
           // TODO 注意传递副标题
-          titleBox(searchController: search, title: "艺人", subtitle: "合计x个艺人", controller: searchInput, reloadList: () => reload(),),
+          titleBox(title: "艺人", subtitle: "合计x个艺人", controller: searchInput, reloadList: () => reload(),),
           SizedBox(height: 10,),
           artistsHeader(),
           Expanded(

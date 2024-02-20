@@ -18,8 +18,6 @@ class _searchViewState extends State<searchView> {
 
   void reload(){/** 空函数 */}
 
-  void search(val){ /** 空函数 */}
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class _searchViewState extends State<searchView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          titleBox(searchController: search, title: "搜索", subtitle: "", controller: searchInput, reloadList: () => reload(),),
+          titleBox(title: "搜索", subtitle: "", controller: searchInput, reloadList: () => reload(),),
           SizedBox(height: 10,),
           Expanded(
             // 主要的内容
