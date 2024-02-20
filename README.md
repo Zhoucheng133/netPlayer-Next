@@ -8,3 +8,13 @@
 版本号在标准版netPlayer之后，这个版本的netPlayer版本号从`2.0.0`开始
 
 这个版本的netPlayer (Next)不支持在Windows系统上隐藏到任务栏，如果对该功能有需求建议下载[1.5.0](https://github.com/Zhoucheng133/net-player/releases/tag/v1.5.0)版本
+
+## 在你的设备上配置netPlayer Next
+
+## 更新日志
+
+## 一些API
+
+[Subsonic API](http://www.subsonic.org/pages/api.jsp)
+
+[lrclib API](https://lrclib.net/docs)
