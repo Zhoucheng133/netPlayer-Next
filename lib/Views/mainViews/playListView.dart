@@ -59,7 +59,7 @@ class _playListViewState extends State<playListView> {
   var controller=AutoScrollController();
 
   void playSongFromPlaylist(index){
-
+    operations().playSong("歌单", c.nowPage["id"]!, index, list);
   }
 
   bool isPlaying(index){
@@ -72,6 +72,12 @@ class _playListViewState extends State<playListView> {
       return false;
     }
   }
+
+  void scrollToIndex(){
+    if(c.playInfo["index"]!=null && c.playInfo["playFrom"]=="歌单" && c.playInfo["listId"]==c.nowPage["id"]){
+      controller.scrollToIndex(c.playInfo["index"], preferPosition: AutoScrollPosition.begin);
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -80,7 +86,7 @@ class _playListViewState extends State<playListView> {
       child: Column(
         children: [
           Obx(() => 
-            titleBox(searchController: search, title: c.selectedListName.value, subtitle: subtitle, controller: searchInput, reloadList: () => reload(),),
+            titleBox(searchController: search, title: c.selectedListName.value, subtitle: subtitle, controller: searchInput, reloadList: () => reload(), scrollToIndex: ()=>scrollToIndex(),),
           ),
           SizedBox(height: 10,),
           songsHeader(),
