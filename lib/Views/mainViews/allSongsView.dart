@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously, invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,8 +26,26 @@ class _allSongsViewState extends State<allSongsView> {
     // TODO 搜索歌曲
   }
 
-  void reload(){
-    // TODO 刷新列表
+  // 重新计算Index的值
+  void reCalIndex(){
+    int index = c.allSongs.indexWhere((element) => element["id"] == c.playInfo["id"]);
+    if(index==-1){
+      operations().stop();
+      c.updatePlayInfo({});
+      return;
+    }
+    var tmpPlayInfo=c.playInfo.value;
+    tmpPlayInfo["index"]=index;
+    tmpPlayInfo["list"]=c.allSongs.value;
+    c.updatePlayInfo(tmpPlayInfo);
+  }
+
+  Future<void> reload() async {
+    await operations().getAllSongs(context);
+    if(c.playInfo["playFrom"]=="所有歌曲"){
+      reCalIndex();
+    }
+    
   }
 
   Future<void> loadList() async {

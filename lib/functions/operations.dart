@@ -10,9 +10,6 @@ class operations{
   final Controller c = Get.put(Controller());
 
   Future<void> getAllSongs(BuildContext context) async {
-    if(c.allSongs.isNotEmpty){
-      return;
-    }
     var resp=await allSongsRequest();
     if(resp["status"]=="ok"){
       var tmpList=resp["randomSongs"]["song"];
@@ -86,6 +83,10 @@ class operations{
     }else{
       c.handler.play();
     }
+  }
+
+  void stop(){
+    c.handler.stop();
   }
 
   void pause(){
