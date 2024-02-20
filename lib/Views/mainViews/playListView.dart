@@ -70,6 +70,10 @@ class _playListViewState extends State<playListView> {
     ever(c.nowPage, (callback){
       getPlayList();
     });
+
+    searchInput.addListener(() {
+      search(searchInput.text);
+    });
   }
 
   var controller=AutoScrollController();

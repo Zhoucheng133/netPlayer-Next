@@ -23,7 +23,7 @@ class _allSongsViewState extends State<allSongsView> {
   final Controller c = Get.put(Controller());
 
   void search(value){
-    print(value);
+    // TODO 搜索
   }
 
   // 重新计算Index的值

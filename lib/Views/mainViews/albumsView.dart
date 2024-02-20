@@ -25,6 +25,15 @@ class _albumsViewState extends State<albumsView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    searchInput.addListener(() {
+      search(searchInput.text);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20,30,20,20),

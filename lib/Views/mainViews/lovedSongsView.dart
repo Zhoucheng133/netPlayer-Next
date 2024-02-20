@@ -25,6 +25,15 @@ class _lovedSongsViewState extends State<lovedSongsView> {
     // TODO 搜索歌曲
   }
 
+  @override
+  void initState() {
+    super.initState();
+
+    searchInput.addListener(() {
+      search(searchInput.text);
+    });
+  }
+
   // 重新计算Index的值
   void reCalIndex(){
     int index = c.lovedSongs.indexWhere((element) => element["id"] == c.playInfo["id"]);
