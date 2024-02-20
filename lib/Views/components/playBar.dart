@@ -28,7 +28,7 @@ class _playBarState extends State<playBar> {
     if (_debounce?.isActive ?? false) {
       _debounce?.cancel();
     }
-    _debounce = Timer(const Duration(milliseconds: 500), () {
+    _debounce = Timer(const Duration(milliseconds: 100), () {
       if(c.playInfo["duration"]==null){
         return;
       }else{
