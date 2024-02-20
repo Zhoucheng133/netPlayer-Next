@@ -27,7 +27,6 @@ class _searchViewState extends State<searchView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          // TODO 注意传递副标题
           titleBox(searchController: search, title: "搜索", subtitle: "", controller: searchInput, reloadList: () => reload(),),
           SizedBox(height: 10,),
           Expanded(
