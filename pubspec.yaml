@@ -17,6 +17,7 @@ dependencies:
   http: ^0.13.6
   just_audio: ^0.9.36
   package_info_plus: ^3.1.2
+  scroll_to_index: ^3.0.1
   shared_preferences: ^2.2.2
   url_launcher: ^6.1.11
 
