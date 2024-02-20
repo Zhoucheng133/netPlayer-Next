@@ -28,7 +28,8 @@ class _songItemState extends State<songItem> {
     final Offset position = overlay.localToGlobal(details.globalPosition);
     var val=await showMenu(
       context: context,
-        surfaceTintColor: Colors.white,
+      surfaceTintColor: Colors.white,
+      color: Colors.white,
       position: RelativeRect.fromLTRB(
         position.dx,
         position.dy,
