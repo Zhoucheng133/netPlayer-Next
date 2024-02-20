@@ -23,10 +23,10 @@ class songItem extends StatefulWidget {
 class _songItemState extends State<songItem> {
   bool isHover=false;
 
-  void menuShow(BuildContext context, TapDownDetails details){
+  Future<void> menuShow(BuildContext context, TapDownDetails details) async {
     final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
     final Offset position = overlay.localToGlobal(details.globalPosition);
-    showMenu(
+    var val=await showMenu(
       context: context,
         surfaceTintColor: Colors.white,
       position: RelativeRect.fromLTRB(
@@ -37,6 +37,7 @@ class _songItemState extends State<songItem> {
       ),
       items: <PopupMenuEntry>[
         PopupMenuItem(
+          value: "play",
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -52,6 +53,7 @@ class _songItemState extends State<songItem> {
           ),
         ),
         PopupMenuItem(
+          value: "addToList",
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -68,6 +70,7 @@ class _songItemState extends State<songItem> {
         ),
         widget.isLoved ?
         PopupMenuItem(
+          value: "delove",
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -83,6 +86,7 @@ class _songItemState extends State<songItem> {
           ),
         ):
         PopupMenuItem(
+          value: "love",
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -115,6 +119,10 @@ class _songItemState extends State<songItem> {
         )
       ],
     );
+
+    if(val=="play"){
+      widget.playSong();
+    }
   }
 
   @override
