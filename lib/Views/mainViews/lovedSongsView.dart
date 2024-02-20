@@ -34,7 +34,7 @@ class _lovedSongsViewState extends State<lovedSongsView> {
   }
 
   void scrollToIndex(){
-    if(c.playInfo["index"]!=null){
+    if(c.playInfo["index"]!=null && c.playInfo["playFrom"]=="喜欢的歌曲"){
       controller.scrollToIndex(c.playInfo["index"], preferPosition: AutoScrollPosition.begin);
     }
   }
@@ -43,7 +43,7 @@ class _lovedSongsViewState extends State<lovedSongsView> {
 
   var controller=AutoScrollController();
 
-    bool isPlaying(index){
+  bool isPlaying(index){
     if(c.playInfo["playFrom"]!="喜欢的歌曲"){
       return false;
     }else{

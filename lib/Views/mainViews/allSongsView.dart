@@ -89,7 +89,7 @@ class _allSongsViewState extends State<allSongsView> {
   }
 
   void scrollToIndex(){
-    if(c.playInfo["index"]!=null){
+    if(c.playInfo["index"]!=null && c.playInfo["playFrom"]=="所有歌曲"){
       controller.scrollToIndex(c.playInfo["index"], preferPosition: AutoScrollPosition.begin);
     }
   }
