@@ -6,6 +6,7 @@ import 'package:net_player_next/Views/components/listItems.dart';
 import 'package:net_player_next/Views/components/tableHeader.dart';
 import 'package:net_player_next/Views/components/titleBar.dart';
 import 'package:net_player_next/functions/operations.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../functions/request.dart';
 import '../../paras/paras.dart';
 
@@ -70,7 +71,7 @@ class _allSongsViewState extends State<allSongsView> {
 
   TextEditingController searchInput=TextEditingController();
 
-  var controller=ScrollController();
+  var controller=AutoScrollController();
 
   void playSongFromAllSongs(int index){
     operations().playSong("所有歌曲", "", index, c.allSongs);
@@ -87,6 +88,12 @@ class _allSongsViewState extends State<allSongsView> {
     }
   }
 
+  void scrollToIndex(){
+    if(c.playInfo["index"]!=null){
+      controller.scrollToIndex(c.playInfo["index"], preferPosition: AutoScrollPosition.begin);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -94,7 +101,7 @@ class _allSongsViewState extends State<allSongsView> {
       child: Column(
         children: [
           Obx(() => 
-            titleBox(searchController: search, title: "所有歌曲", subtitle: "合计${c.allSongs.length}首歌", controller: searchInput, reloadList: () => reload(),),
+            titleBox(searchController: search, title: "所有歌曲", subtitle: "合计${c.allSongs.length}首歌", controller: searchInput, reloadList: () => reload(), scrollToIndex: () => scrollToIndex(),),
           ),
           SizedBox(height: 10,),
           songsHeader(),
@@ -104,14 +111,19 @@ class _allSongsViewState extends State<allSongsView> {
                 controller: controller,
                 itemCount: c.allSongs.length,
                 itemBuilder: (BuildContext context, int index){
-                  return index==c.allSongs.length-1 ? 
-                  Column(
-                    children: [
+                  return AutoScrollTag(
+                    key: ValueKey(index), 
+                    controller: controller, 
+                    index: index,
+                    child: index==c.allSongs.length-1 ? 
+                      Column(
+                        children: [
+                          Obx(() => songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index), isPlaying: isPlaying(index),),),
+                          SizedBox(height: 120,),
+                        ],
+                      ):
                       Obx(() => songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index), isPlaying: isPlaying(index),),),
-                      SizedBox(height: 120,),
-                    ],
-                  ):
-                  Obx(() => songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index), isPlaying: isPlaying(index),),);
+                  );
                 }
               )
             )

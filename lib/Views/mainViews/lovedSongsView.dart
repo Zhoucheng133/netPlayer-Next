@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../functions/operations.dart';
 import '../../paras/paras.dart';
@@ -32,9 +33,15 @@ class _lovedSongsViewState extends State<lovedSongsView> {
     operations().playSong("喜欢的歌曲", "", index, c.lovedSongs);
   }
 
+  void scrollToIndex(){
+    if(c.playInfo["index"]!=null){
+      controller.scrollToIndex(c.playInfo["index"], preferPosition: AutoScrollPosition.begin);
+    }
+  }
+
   TextEditingController searchInput=TextEditingController();
 
-  var controller=ScrollController();
+  var controller=AutoScrollController();
 
     bool isPlaying(index){
     if(c.playInfo["playFrom"]!="喜欢的歌曲"){
@@ -53,7 +60,7 @@ class _lovedSongsViewState extends State<lovedSongsView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          Obx(() => titleBox(searchController: search, title: "喜欢的歌曲", subtitle: "合计${c.lovedSongs.length}首歌", controller: searchInput, reloadList: () => reload(),)),
+          Obx(() => titleBox(searchController: search, title: "喜欢的歌曲", subtitle: "合计${c.lovedSongs.length}首歌", controller: searchInput, reloadList: () => reload(), scrollToIndex: ()=>scrollToIndex(),)),
           SizedBox(height: 10,),
           songsHeader(),
           Expanded(
@@ -63,14 +70,19 @@ class _lovedSongsViewState extends State<lovedSongsView> {
                 controller: controller,
                 itemCount: c.lovedSongs.length,
                 itemBuilder: (BuildContext context, int index){
-                  return index==c.lovedSongs.length-1 ? 
-                  Column(
-                    children: [
+                  return AutoScrollTag(
+                    key: ValueKey(index), 
+                    controller: controller, 
+                    index: index,
+                    child: index==c.lovedSongs.length-1 ? 
+                      Column(
+                        children: [
+                          Obx(() => songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index), isPlaying: isPlaying(index),),),
+                          SizedBox(height: 120,),
+                        ],
+                      ):
                       Obx(() => songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index), isPlaying: isPlaying(index),),),
-                      SizedBox(height: 120,),
-                    ],
-                  ):
-                  Obx(() => songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index), isPlaying: isPlaying(index),),);
+                  );
                 }
               )
             )

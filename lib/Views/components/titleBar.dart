@@ -15,8 +15,9 @@ class titleBox extends StatefulWidget {
   final String subtitle;
   final TextEditingController controller;
   final VoidCallback reloadList;
+  final dynamic scrollToIndex;
 
-  const titleBox({super.key, required this.searchController, required this.title, required this.subtitle, required this.controller, required this.reloadList});
+  const titleBox({super.key, required this.searchController, required this.title, required this.subtitle, required this.controller, required this.reloadList, this.scrollToIndex});
 
   @override
   State<titleBox> createState() => _titleBoxState();
@@ -82,10 +83,15 @@ class _titleBoxState extends State<titleBox> {
                 duration: Duration(milliseconds: 200),
                 tween: ColorTween(begin: Colors.grey[800], end: hoverLocate ? c.hoverColor : Colors.grey[800]),
                 builder: (_, value, __){
-                  return Icon(
-                    Icons.my_location_rounded,
-                    size: 20,
-                    color: value,
+                  return GestureDetector(
+                    onTap: (){
+                      widget.scrollToIndex();
+                    },
+                    child: Icon(
+                      Icons.my_location_rounded,
+                      size: 20,
+                      color: value,
+                    ),
                   );
                 },
               ),
