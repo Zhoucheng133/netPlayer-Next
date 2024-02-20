@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,8 +29,24 @@ class _playListViewState extends State<playListView> {
     // TODO 搜索歌曲
   }
 
-  void reload(){
-    // TODO 刷新列表
+  void reCalIndex(){
+    int index = list.indexWhere((element) => element["id"] == c.playInfo["id"]);
+    if(index==-1){
+      operations().stop();
+      c.updatePlayInfo({});
+      return;
+    }
+    var tmpPlayInfo=c.playInfo.value;
+    tmpPlayInfo["index"]=index;
+    tmpPlayInfo["list"]=list;
+    c.updatePlayInfo(tmpPlayInfo);
+  }
+
+  Future<void> reload() async {
+    await getPlayList();
+    if(c.playInfo["playFrom"]=="歌单" && c.playInfo["listId"]==c.nowPage["id"]){
+      reCalIndex();
+    }
   }
   TextEditingController searchInput=TextEditingController();
   
