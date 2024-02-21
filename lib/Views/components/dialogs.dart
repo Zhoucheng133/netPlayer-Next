@@ -13,6 +13,15 @@ Future<void> showLicenseDialog(BuildContext context) async {
         children: [
           Row(
             children: [
+              Text("netPlayer"),
+              Expanded(child: Container()),
+              Text("MIT"),
+              SizedBox(width: 5,),
+            ],
+          ),
+          Divider(),
+          Row(
+            children: [
               Text("Flutter"),
               Expanded(child: Container()),
               Text("BSD-3"),
