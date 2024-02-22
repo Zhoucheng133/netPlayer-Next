@@ -1,8 +1,11 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/tableHeader.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
+import '../../paras/paras.dart';
 import '../components/titleBar.dart';
 
 class artistsView extends StatefulWidget {
@@ -33,14 +36,16 @@ class _artistsViewState extends State<artistsView> {
     });
   }
 
+  final Controller c = Get.put(Controller());
+  var controller=AutoScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          // TODO 注意传递副标题
-          titleBox(title: "艺人", subtitle: "合计x个艺人", controller: searchInput, reloadList: () => reload(),),
+          Obx(() => titleBox(title: "艺人", subtitle: "合计${c.allArtists.length}位艺人", controller: searchInput, reloadList: () => reload(),),),
           SizedBox(height: 10,),
           artistsHeader(),
           Expanded(
