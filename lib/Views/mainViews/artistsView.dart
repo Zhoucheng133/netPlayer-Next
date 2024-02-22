@@ -6,6 +6,7 @@ import 'package:net_player_next/Views/components/listItems.dart';
 import 'package:net_player_next/Views/components/tableHeader.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
+import '../../functions/operations.dart';
 import '../../paras/paras.dart';
 import '../components/titleBar.dart';
 
@@ -20,8 +21,8 @@ class _artistsViewState extends State<artistsView> {
 
   TextEditingController searchInput=TextEditingController();
 
-  void reload(){
-    // TODO 刷新列表
+  Future<void> reload() async {
+    await operations().getArtist();
   }
 
   void search(val){
