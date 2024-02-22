@@ -52,6 +52,7 @@ class _mainViewState extends State<mainView> {
     operations().getPlayLists();
     operations().getLovedSongs();
     operations().getAlbums();
+    operations().getArtist();
   }
 
   int getIndex(){

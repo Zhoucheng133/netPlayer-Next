@@ -50,6 +50,10 @@ class operations{
     c.updateAllAlbums(await albumsRequest());
   }
 
+  Future<void> getArtist() async {
+    c.updateAllArtists(await artistsRequest());
+  }
+
   bool isLoved(String id){
     for (var val in c.lovedSongs) {
       if(val["id"]==id){
