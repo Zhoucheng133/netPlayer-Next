@@ -24,7 +24,7 @@ class _artistsViewState extends State<artistsView> {
   TextEditingController searchInput=TextEditingController();
 
   Future<void> reload(context) async {
-    // await operations().getArtist();
+    await operations().getArtist();
     showFlash(
       duration: const Duration(milliseconds: 1500),
       transitionDuration: const Duration(milliseconds: 200),
