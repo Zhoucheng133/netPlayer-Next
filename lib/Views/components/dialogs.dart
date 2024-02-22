@@ -96,7 +96,7 @@ Future<void> showLicenseDialog(BuildContext context) async {
             children: [
               Text("just_audio"),
               Expanded(child: Container()),
-              Text("Apache & MIT"),
+              Text("Apache-2 & MIT"),
               SizedBox(width: 5,),
             ],
           ),
@@ -121,6 +121,14 @@ Future<void> showLicenseDialog(BuildContext context) async {
               Text("url_launcher"),
               Expanded(child: Container()),
               Text("BSD-3"),
+              SizedBox(width: 5,),
+            ],
+          ),
+          Row(
+            children: [
+              Text("flash"),
+              Expanded(child: Container()),
+              Text("Apache-2"),
               SizedBox(width: 5,),
             ],
           ),
