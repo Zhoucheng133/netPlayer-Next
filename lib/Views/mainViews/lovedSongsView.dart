@@ -1,5 +1,6 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, invalid_use_of_protected_member
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, invalid_use_of_protected_member, use_build_context_synchronously
 
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -48,11 +49,42 @@ class _lovedSongsViewState extends State<lovedSongsView> {
     c.updatePlayInfo(tmpPlayInfo);
   }
 
+  // 刷新
   Future<void> reload() async {
     await operations().getLovedSongs();
     if(c.playInfo["playFrom"]=="喜欢的歌曲"){
       reCalIndex();
     }
+    showFlash(
+      duration: const Duration(milliseconds: 1500),
+      transitionDuration: const Duration(milliseconds: 200),
+      reverseTransitionDuration: const Duration(milliseconds: 200), 
+      builder: (context, controller) => FlashBar(
+        behavior: FlashBehavior.floating,
+        position: FlashPosition.top,
+        backgroundColor: Colors.green[400],
+        iconColor: Colors.white,
+        margin: EdgeInsets.only(
+          top: 30,
+          left: (MediaQuery.of(context).size.width-280)/2,
+          right: (MediaQuery.of(context).size.width-280)/2
+        ),
+        icon: Icon(
+          Icons.done,
+        ),
+        controller: controller, 
+        content: Text(
+          "刷新完成",
+          style: TextStyle(
+            color: Colors.white
+          ),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+      ),
+      context: context
+    );
   }
 
   void playSongFromLovedSongs(int index){
