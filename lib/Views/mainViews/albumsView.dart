@@ -1,7 +1,11 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:net_player_next/Views/components/listItems.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
+import '../../paras/paras.dart';
 import '../components/tableHeader.dart';
 import '../components/titleBar.dart';
 
@@ -33,19 +37,40 @@ class _albumsViewState extends State<albumsView> {
     });
   }
 
+  final Controller c = Get.put(Controller());
+  var controller=AutoScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          // TODO 注意传递副标题
-          titleBox(title: "专辑", subtitle: "合计x个专辑", controller: searchInput, reloadList: () => reload(),),
+          titleBox(title: "专辑", subtitle: "合计${c.allAlbums.length}个专辑", controller: searchInput, reloadList: () => reload(),),
           SizedBox(height: 10,),
           albumHeader(),
           Expanded(
-            // 歌曲列表显示在这里
-            child: Container(),
+            child: Obx(() => 
+              ListView.builder(
+                controller: controller,
+                itemCount: c.allAlbums.length,
+                itemBuilder: (BuildContext context, int index){
+                  return AutoScrollTag(
+                    key: ValueKey(index), 
+                    controller: controller, 
+                    index: index,
+                    child: index==c.allAlbums.length-1 ? 
+                      Column(
+                        children: [
+                          Obx(() => albumItem(index: index, title: c.allAlbums[index]["title"], count: c.allAlbums[index]["songCount"], id: c.allAlbums[index]["id"], artist: c.allAlbums[index]["artist"],)),
+                          SizedBox(height: 120,),
+                        ],
+                      ):
+                      Obx(() => albumItem(index: index, title: c.allAlbums[index]["title"], count: c.allAlbums[index]["songCount"], id: c.allAlbums[index]["id"], artist: c.allAlbums[index]["artist"])),
+                  );
+                }
+              )
+            ),
           )
         ],
       ),

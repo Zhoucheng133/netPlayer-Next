@@ -51,6 +51,7 @@ class _mainViewState extends State<mainView> {
     registerHotKey();
     operations().getPlayLists();
     operations().getLovedSongs();
+    operations().getAlbums();
   }
 
   int getIndex(){

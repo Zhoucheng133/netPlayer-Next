@@ -52,7 +52,7 @@ String generateRandomString(int length) {
 // 获取所有专辑
 Future<List> albumsRequest()async {
   final Controller c = Get.put(Controller());
-  String url="${c.userInfo["url"]}/rest/getAlbumList?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&type=recent";
+  String url="${c.userInfo["url"]}/rest/getAlbumList?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&type=newest&size=500";
   Map response=await httpRequest(url);
   if(response.isEmpty){
     return [];
