@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/Views/components/listItems.dart';
 import 'package:net_player_next/Views/components/tableHeader.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -49,8 +50,27 @@ class _artistsViewState extends State<artistsView> {
           SizedBox(height: 10,),
           artistsHeader(),
           Expanded(
-            // 歌曲列表显示在这里
-            child: Container(),
+            child: Obx(() => 
+              ListView.builder(
+                controller: controller,
+                itemCount: c.allArtists.length,
+                itemBuilder: (BuildContext context, int index){
+                  return AutoScrollTag(
+                    key: ValueKey(index), 
+                    controller: controller, 
+                    index: index,
+                    child: index==c.allArtists.length-1 ? 
+                      Column(
+                        children: [
+                          Obx(() => artistItem(index: index, id: c.allArtists[index]["id"], name: c.allArtists[index]["name"], count: c.allArtists[index]["albumCount"])),
+                          SizedBox(height: 120,),
+                        ],
+                      ):
+                      Obx(() => artistItem(index: index, id: c.allArtists[index]["id"], name: c.allArtists[index]["name"], count: c.allArtists[index]["albumCount"])),
+                  );
+                }
+              )
+            ),
           )
         ],
       ),

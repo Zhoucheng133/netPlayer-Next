@@ -310,3 +310,68 @@ class _albumItemState extends State<albumItem> {
     );
   }
 }
+
+class artistItem extends StatefulWidget {
+  final int index;
+  final String id;
+  final String name;
+  final int count;
+
+  const artistItem({super.key, required this.index, required this.id, required this.name, required this.count});
+
+  @override
+  State<artistItem> createState() => _artistItemState();
+}
+
+class _artistItemState extends State<artistItem> {
+
+  bool isHover=false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        // TODO 点击操作
+      },
+      child: MouseRegion(
+        onEnter: (_)=>setState(() {isHover=true;}),
+        onExit: (_)=>setState(() {isHover=false;}),
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 200),
+          color: isHover ? Color.fromARGB(255, 240, 240, 240) : Colors.white,
+          child: SizedBox(
+            height: 50,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 50,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text((widget.index+1).toString()),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      widget.name, 
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                ),
+                SizedBox(
+                  width: 100,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 25),
+                    child: Text(widget.count.toString()),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
