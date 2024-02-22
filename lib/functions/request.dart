@@ -49,6 +49,29 @@ String generateRandomString(int length) {
   return result;
 }
 
+// 获取所有专辑
+Future<List> albumsRequest()async {
+  final Controller c = Get.put(Controller());
+  String url="${c.userInfo["url"]}/rest/getAlbumList?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&type=recent";
+  Map response=await httpRequest(url);
+  if(response.isEmpty){
+    return [];
+  }
+  try{
+    response=response["subsonic-response"];
+  }catch(e){
+    return [];
+  }
+  if(response["status"]!="ok"){
+    return [];
+  }
+  if(response["albumList"]["album"]!=null){
+    return response["albumList"]["album"];
+  }else{
+    return [];
+  }
+}
+
 // 获取喜欢的歌曲
 Future<List> lovedSongRequest()async {
   final Controller c = Get.put(Controller());

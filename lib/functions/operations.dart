@@ -46,6 +46,10 @@ class operations{
     c.updateLovedSongs(await lovedSongRequest());
   }
 
+  Future<void> getAlbums() async {
+    c.updateAllAlbums(await albumsRequest());
+  }
+
   bool isLoved(String id){
     for (var val in c.lovedSongs) {
       if(val["id"]==id){
