@@ -363,7 +363,7 @@ class _artistItemState extends State<artistItem> {
                 SizedBox(
                   width: 100,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 25),
+                    padding: const EdgeInsets.only(left: 30),
                     child: Text(widget.count.toString()),
                   ),
                 ),
