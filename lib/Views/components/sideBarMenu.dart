@@ -298,7 +298,184 @@ class _playListMenu extends State<playListMenu> {
       }
     }else if(val=="rename"){
       // operations().renameList(widget.id, newName)
-      // TODO 重命名歌单
+      reNameList(context);
+    }
+  }
+
+  FocusNode textfocus=FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    textfocus.addListener(() { 
+      if(textfocus.hasFocus){
+        c.updateFocusTextField(true);
+      }else{
+        c.updateFocusTextField(false);
+      }
+    });
+  }
+
+  Future<void> reNameList(BuildContext context) async {
+    var controller=TextEditingController();
+
+    await showDialog(
+      context: context, 
+      builder: (context)=>AlertDialog(
+        title: Text("重命名歌单"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("歌单名称:"),
+            SizedBox(height: 10,),
+            TextField(
+              focusNode: textfocus,
+              controller: controller,
+              style: TextStyle(
+                fontSize: 14,
+              ),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                isCollapsed: true,
+                contentPadding: EdgeInsets.fromLTRB(10, 10, 25, 11),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: c.hoverColor,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(5)
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 210, 210, 210),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(5)
+                ),
+              ),
+              textAlignVertical: TextAlignVertical.center,
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: Text("取消")
+          ),
+          FilledButton(
+            onPressed: () {
+              if(controller.text==""){
+                showFlash(
+                  duration: const Duration(milliseconds: 1500),
+                  transitionDuration: const Duration(milliseconds: 200),
+                  reverseTransitionDuration: const Duration(milliseconds: 200), 
+                  builder: (context, controller) => FlashBar(
+                    behavior: FlashBehavior.floating,
+                    position: FlashPosition.top,
+                    backgroundColor: Colors.red,
+                    iconColor: Colors.white,
+                    margin: EdgeInsets.only(
+                      top: 30,
+                      left: (MediaQuery.of(context).size.width-280)/2,
+                      right: (MediaQuery.of(context).size.width-280)/2
+                    ),
+                    icon: Icon(
+                      Icons.close,
+                    ),
+                    controller: controller, 
+                    content: Text(
+                      "歌单名称不能为空",
+                      style: TextStyle(
+                        color: Colors.white
+                      ),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  context: context
+                );
+              }else{
+                // operations().renameList(widget.id, controller.text);
+                renameController(controller.text);
+                Navigator.pop(context);
+              }
+            }, 
+            child: Text("完成")
+          )
+        ],
+      )
+    );
+  }
+
+  Future<void> renameController(String newName) async {
+    var val=await operations().renameList(widget.id, newName);
+    if(val){
+      showFlash(
+        duration: const Duration(milliseconds: 1500),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200), 
+        builder: (context, controller) => FlashBar(
+          behavior: FlashBehavior.floating,
+          position: FlashPosition.top,
+          backgroundColor: Colors.green[400],
+          iconColor: Colors.white,
+          margin: EdgeInsets.only(
+            top: 30,
+            left: (MediaQuery.of(context).size.width-280)/2,
+            right: (MediaQuery.of(context).size.width-280)/2
+          ),
+          icon: Icon(
+            Icons.done,
+          ),
+          controller: controller, 
+          content: Text(
+            "修改成功",
+            style: TextStyle(
+              color: Colors.white
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+        context: context
+      );
+    }else{
+      showFlash(
+        duration: const Duration(milliseconds: 1500),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200), 
+        builder: (context, controller) => FlashBar(
+          behavior: FlashBehavior.floating,
+          position: FlashPosition.top,
+          backgroundColor: Colors.red,
+          iconColor: Colors.white,
+          margin: EdgeInsets.only(
+            top: 30,
+            left: (MediaQuery.of(context).size.width-280)/2,
+            right: (MediaQuery.of(context).size.width-280)/2
+          ),
+          icon: Icon(
+            Icons.close,
+          ),
+          controller: controller, 
+          content: Text(
+            "修改失败",
+            style: TextStyle(
+              color: Colors.white
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+        context: context
+      );
     }
   }
 

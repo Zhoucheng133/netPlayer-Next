@@ -167,7 +167,11 @@ class operations{
     return val;
   }
 
-  void renameList(String id, String newName){
-
+  Future<bool> renameList(String id, String newName) async {
+    var val =await reNameList(id, newName);
+    if(val){
+      await getPlayLists();
+    }
+    return val;
   }
 }
