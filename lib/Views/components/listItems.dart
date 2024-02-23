@@ -110,6 +110,7 @@ class _songItemState extends State<songItem> {
         ),
         PopupMenuItem(
           height: 35,
+          value: "delFromList",
           enabled: widget.listId!=null,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -135,6 +136,8 @@ class _songItemState extends State<songItem> {
       await operations().delove(widget.id);
     }else if(val=="addToList"){
       showAddList(context);
+    }else if(val=="delFromList"){
+      operations().delFromList(widget.listId, widget.index);
     }
   }
 

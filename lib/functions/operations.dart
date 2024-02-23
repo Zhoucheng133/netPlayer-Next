@@ -179,4 +179,8 @@ class operations{
     var val=await addToList(listId, songId);
     return val;
   }
+
+  void delFromList(String listId, int index){
+    // TODO 从歌单中删除
+  }
 }
