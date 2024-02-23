@@ -101,7 +101,12 @@ class _playListViewState extends State<playListView> {
           list=resp["entry"];
           subtitle="合计${resp["entry"].length}首歌";
         });
-      } catch (_) {}
+      } catch (_) {
+        setState(() {
+          list=[];
+          subtitle="合计0首歌";
+        });
+      }
     }
   }
 
