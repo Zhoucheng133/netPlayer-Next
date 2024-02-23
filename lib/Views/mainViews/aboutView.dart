@@ -31,7 +31,7 @@ class _aboutViewState extends State<aboutView> {
 
   Future<void> showInGit() async {
     // TODO 需要修改URL地址
-    final Uri url = Uri.parse('https://github.com');
+    final Uri url = Uri.parse('https://github.com/Zhoucheng133/netPlayer-Next');
     await launchUrl(url);
   }
 
