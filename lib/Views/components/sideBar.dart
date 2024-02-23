@@ -319,7 +319,7 @@ class _sideBarState extends State<sideBar> {
                     ListView.builder(
                       controller: playlistScroll,
                       itemCount: c.allPlayList.length,
-                      itemBuilder: (BuildContext context, int index) => Obx(() => sideBarMenu(menuName: c.allPlayList[index]["name"], menuIcon: Icons.playlist_play_rounded, selected: isSelected("歌单", id: c.allPlayList[index]["id"]), changePage: (val) => changePage(val),id: c.allPlayList[index]["id"],))
+                      itemBuilder: (BuildContext context, int index) => Obx(() => playListMenu(menuName: c.allPlayList[index]["name"], menuIcon: Icons.playlist_play_rounded, selected: isSelected("歌单", id: c.allPlayList[index]["id"]), changePage: (val) => changePage(val),id: c.allPlayList[index]["id"],))
                     )
                   ),
                 ),
