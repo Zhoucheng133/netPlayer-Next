@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, file_names, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:net_player_next/functions/operations.dart';
+
+import '../../paras/paras.dart';
 
 class songItem extends StatefulWidget {
 
@@ -23,6 +26,7 @@ class songItem extends StatefulWidget {
 
 class _songItemState extends State<songItem> {
   bool isHover=false;
+  final Controller c = Get.put(Controller());
 
   Future<void> menuShow(BuildContext context, TapDownDetails details) async {
     final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
@@ -134,10 +138,50 @@ class _songItemState extends State<songItem> {
   }
 
   Future<void> showAddList(BuildContext context) async {
+    final ScrollController controller=ScrollController();
+
+    var selectItem = c.allPlayList[0]["id"];
+
     await showDialog(
       context: context, 
-      builder: (context) => AlertDialog(
+      builder: (BuildContext context) => AlertDialog(
         title: Text("添加到歌单..."),
+        content: StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return SizedBox(
+              height: 200,
+              width: 300,
+              child: Obx(() => 
+                ListView.builder(
+                  controller: controller,
+                  itemCount: c.allPlayList.length,
+                  itemBuilder: (BuildContext context, int index){
+                    return SizedBox(
+                      height: 40,
+                      child: Row(
+                        children: [
+                          Radio(
+                            splashRadius: 0,
+                            value: c.allPlayList[index]["id"], 
+                            groupValue: selectItem,
+                            onChanged: (val){
+                              setState(() {
+                                selectItem=val;
+                              });
+                            }
+                          ),
+                          Text(
+                            c.allPlayList[index]["name"]
+                          )
+                        ],
+                      ),
+                    );
+                  }
+                )
+              ),
+            );
+          }
+        )
       )
     );
   }
