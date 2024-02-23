@@ -137,6 +137,25 @@ Future<List> artistsRequest()async {
   }
 }
 
+// 删除歌单
+Future<bool> delListRequest(String listId) async {
+  final Controller c = Get.put(Controller());
+  String url="${c.userInfo["url"]}/rest/deletePlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${listId}";
+  Map response=await httpRequest(url);
+  if(response.isEmpty){
+    return false;
+  }
+  try{
+    response=response["subsonic-response"];
+  }catch(e){
+    return false;
+  }
+  if(response["status"]!="ok"){
+    return false;
+  }
+  return true;
+}
+
 // 获取所有专辑
 Future<List> albumsRequest()async {
   final Controller c = Get.put(Controller());
