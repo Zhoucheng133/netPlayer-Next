@@ -58,8 +58,18 @@ class _albumsViewState extends State<albumsView> {
   }
 
   // 搜索
-  void search(val){
-    // TODO 搜索
+  bool onSearch=false;
+
+  void search(value){
+    if(value==""){
+      setState(() {
+        onSearch=false;
+      });
+    }else{
+      setState(() {
+        onSearch=true;
+      });
+    }
   }
 
   @override
@@ -74,6 +84,12 @@ class _albumsViewState extends State<albumsView> {
   final Controller c = Get.put(Controller());
   var controller=AutoScrollController();
 
+  List filterBySearch(){
+    return c.allAlbums.where((item) => item["title"]!.toLowerCase().contains(searchInput.text.toLowerCase())).toList();
+  }
+
+  final ScrollController searchController=ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -84,7 +100,22 @@ class _albumsViewState extends State<albumsView> {
           SizedBox(height: 10,),
           albumHeader(),
           Expanded(
-            child: Obx(() => 
+            child: onSearch ? 
+            Obx(() => 
+              ListView.builder(
+                controller: searchController,
+                itemCount: filterBySearch().length,
+                itemBuilder: (BuildContext context, int index){
+                  return index==filterBySearch().length-1 ? Column(
+                    children: [
+                      albumItem(index: index, title: filterBySearch()[index]["title"], count: filterBySearch()[index]["songCount"], id: filterBySearch()[index]["id"], artist: filterBySearch()[index]["artist"],),
+                      SizedBox(height: 120,),
+                    ],
+                  ) :
+                  albumItem(index: index, title: filterBySearch()[index]["title"], count: filterBySearch()[index]["songCount"], id: filterBySearch()[index]["id"], artist: filterBySearch()[index]["artist"],);
+                }
+              )
+            ) : Obx(() => 
               ListView.builder(
                 controller: controller,
                 itemCount: c.allAlbums.length,

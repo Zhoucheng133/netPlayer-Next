@@ -57,9 +57,26 @@ class _artistsViewState extends State<artistsView> {
     );
   }
 
-  void search(val){
-    // TODO 搜索
+  bool onSearch=false;
+
+  // 搜索
+  void search(value){
+    if(value==""){
+      setState(() {
+        onSearch=false;
+      });
+    }else{
+      setState(() {
+        onSearch=true;
+      });
+    }
   }
+
+  List filterBySearch(){
+    return c.allArtists.where((item) => item["name"]!.toLowerCase().contains(searchInput.text.toLowerCase())).toList();
+  }
+
+  final ScrollController searchController=ScrollController();
 
   @override
   void initState() {
@@ -83,7 +100,22 @@ class _artistsViewState extends State<artistsView> {
           SizedBox(height: 10,),
           artistsHeader(),
           Expanded(
-            child: Obx(() => 
+            child: onSearch ? 
+            Obx(() => 
+              ListView.builder(
+                controller: searchController,
+                itemCount: filterBySearch().length,
+                itemBuilder: (BuildContext context, int index){
+                  return index==filterBySearch().length-1 ? Column(
+                    children: [
+                      artistItem(index: index, id: filterBySearch()[index]["id"], name: filterBySearch()[index]["name"], count: filterBySearch()[index]["albumCount"]),
+                      SizedBox(height: 120,),
+                    ],
+                  ) :
+                  artistItem(index: index, id: filterBySearch()[index]["id"], name: filterBySearch()[index]["name"], count: filterBySearch()[index]["albumCount"]);
+                }
+              )
+            ) : Obx(() => 
               ListView.builder(
                 controller: controller,
                 itemCount: c.allArtists.length,
