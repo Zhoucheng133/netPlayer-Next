@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, use_build_context_synchronously, prefer_const_constructors
+// ignore_for_file: camel_case_types, use_build_context_synchronously, prefer_const_constructors, invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -111,5 +111,43 @@ class operations{
 
   void seek(Duration d){
     c.handler.seek(d);
+  }
+
+  Future<bool> love(String id) async {
+    var val = await setLove(id);
+    if(val){
+      await getLovedSongs();
+    }
+    if(c.playInfo["playFrom"]=="喜欢的歌曲"){
+      int index = c.lovedSongs.indexWhere((element) => element["id"] == c.playInfo["id"]);
+      if(index==-1){
+        operations().stop();
+        c.updatePlayInfo({});
+      }
+      var tmpPlayInfo=c.playInfo.value;
+      tmpPlayInfo["index"]=index;
+      tmpPlayInfo["list"]=c.lovedSongs.value;
+      c.updatePlayInfo(tmpPlayInfo);
+    }
+    return val;
+  }
+
+  Future<bool> delove(String id) async {
+    var val = await setDelove(id);
+    if(val){
+      await getLovedSongs();
+    }
+    if(c.playInfo["playFrom"]=="喜欢的歌曲"){
+      int index = c.lovedSongs.indexWhere((element) => element["id"] == c.playInfo["id"]);
+      if(index==-1){
+        operations().stop();
+        c.updatePlayInfo({});
+      }
+      var tmpPlayInfo=c.playInfo.value;
+      tmpPlayInfo["index"]=index;
+      tmpPlayInfo["list"]=c.lovedSongs.value;
+      c.updatePlayInfo(tmpPlayInfo);
+    }
+    return val;
   }
 }

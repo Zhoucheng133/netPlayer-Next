@@ -125,7 +125,9 @@ class _songItemState extends State<songItem> {
     if(val=="play"){
       widget.playSong();
     }else if(val=="love"){
-
+      await operations().love(widget.id);
+    }else if(val=="delove"){
+      await operations().delove(widget.id);
     }
   }
 
