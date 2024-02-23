@@ -170,11 +170,29 @@ class _allSongsViewState extends State<allSongsView> {
                     child: index==c.allSongs.length-1 ? 
                       Column(
                         children: [
-                          Obx(() => songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index), isPlaying: isPlaying(index),),),
+                          Obx(() => songItem(
+                            artist: c.allSongs[index]["artist"], 
+                            duration: c.allSongs[index]["duration"], 
+                            index: index, 
+                            title: c.allSongs[index]["title"], 
+                            isLoved: operations().isLoved(c.allSongs[index]["id"]), 
+                            playSong: ()=>playSongFromAllSongs(index), 
+                            isPlaying: isPlaying(index), 
+                            id: c.allSongs[index]["id"],
+                          ),),
                           SizedBox(height: 120,),
                         ],
                       ):
-                      Obx(() => songItem(artist: c.allSongs[index]["artist"], duration: c.allSongs[index]["duration"], index: index, title: c.allSongs[index]["title"], isLoved: operations().isLoved(c.allSongs[index]["id"]), playSong: ()=>playSongFromAllSongs(index), isPlaying: isPlaying(index),),),
+                      Obx(() => songItem(
+                        artist: c.allSongs[index]["artist"], 
+                        duration: c.allSongs[index]["duration"], 
+                        index: index, 
+                        title: c.allSongs[index]["title"], 
+                        isLoved: operations().isLoved(c.allSongs[index]["id"]), 
+                        playSong: ()=>playSongFromAllSongs(index), 
+                        isPlaying: isPlaying(index), 
+                        id: c.allSongs[index]["id"],
+                      ),),
                   );
                 }
               )

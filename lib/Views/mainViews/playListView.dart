@@ -155,11 +155,30 @@ class _playListViewState extends State<playListView> {
                   child: index==list.length-1 ? 
                     Column(
                       children: [
-                        Obx(() => songItem(artist: list[index]["artist"], duration: list[index]["duration"], index: index, title: list[index]["title"], isLoved: operations().isLoved(list[index]["id"]), playSong: ()=>playSongFromPlaylist(index), isPlaying: isPlaying(index), listId: c.nowPage["id"],),),
+                        Obx(() => songItem(
+                          artist: list[index]["artist"], 
+                          duration: list[index]["duration"], 
+                          index: index, title: list[index]["title"], 
+                          isLoved: operations().isLoved(list[index]["id"]), 
+                          playSong: ()=>playSongFromPlaylist(index), 
+                          isPlaying: isPlaying(index), 
+                          listId: c.nowPage["id"],
+                          id: list[index]["id"],
+                        ),),
                         SizedBox(height: 120,),
                       ],
                     ):
-                    Obx(() => songItem(artist: list[index]["artist"], duration: list[index]["duration"], index: index, title: list[index]["title"], isLoved: operations().isLoved(list[index]["id"]), playSong: ()=>playSongFromPlaylist(index), isPlaying: isPlaying(index), listId: c.nowPage["id"],),),
+                    Obx(() => songItem(
+                      artist: list[index]["artist"], 
+                      duration: list[index]["duration"], 
+                      index: index, 
+                      title: list[index]["title"], 
+                      isLoved: operations().isLoved(list[index]["id"]), 
+                      playSong: ()=>playSongFromPlaylist(index), 
+                      isPlaying: isPlaying(index), 
+                      listId: c.nowPage["id"],
+                      id: list[index]["id"],
+                    ),),
                 );
               }
             )

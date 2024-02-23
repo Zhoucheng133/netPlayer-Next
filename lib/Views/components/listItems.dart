@@ -13,8 +13,9 @@ class songItem extends StatefulWidget {
   final VoidCallback playSong;
   final dynamic listId;
   final bool isPlaying;
+  final String id;
 
-  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved, required this.playSong, this.listId, required this.isPlaying,});
+  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved, required this.playSong, this.listId, required this.isPlaying, required this.id,});
 
   @override
   State<songItem> createState() => _songItemState();

@@ -135,11 +135,28 @@ class _lovedSongsViewState extends State<lovedSongsView> {
                     child: index==c.lovedSongs.length-1 ? 
                       Column(
                         children: [
-                          Obx(() => songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index), isPlaying: isPlaying(index),),),
+                          Obx(() => songItem(
+                            artist: c.lovedSongs[index]["artist"], 
+                            duration: c.lovedSongs[index]["duration"], 
+                            index: index, title: c.lovedSongs[index]["title"], 
+                            isLoved: operations().isLoved(c.lovedSongs[index]["id"]), 
+                            playSong: ()=>playSongFromLovedSongs(index), 
+                            isPlaying: isPlaying(index),
+                            id: c.lovedSongs[index]["id"],
+                          ),),
                           SizedBox(height: 120,),
                         ],
                       ):
-                      Obx(() => songItem(artist: c.lovedSongs[index]["artist"], duration: c.lovedSongs[index]["duration"], index: index, title: c.lovedSongs[index]["title"], isLoved: operations().isLoved(c.lovedSongs[index]["id"]), playSong: ()=>playSongFromLovedSongs(index), isPlaying: isPlaying(index),),),
+                      Obx(() => songItem(
+                        artist: c.lovedSongs[index]["artist"], 
+                        duration: c.lovedSongs[index]["duration"], 
+                        index: index, 
+                        title: c.lovedSongs[index]["title"], 
+                        isLoved: operations().isLoved(c.lovedSongs[index]["id"]), 
+                        playSong: ()=>playSongFromLovedSongs(index), 
+                        isPlaying: isPlaying(index), 
+                        id: c.lovedSongs[index]["id"],
+                      ),),
                   );
                 }
               )
