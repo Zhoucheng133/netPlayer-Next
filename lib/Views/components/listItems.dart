@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, file_names, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/functions/operations.dart';
@@ -140,7 +141,7 @@ class _songItemState extends State<songItem> {
   Future<void> showAddList(BuildContext context) async {
     final ScrollController controller=ScrollController();
 
-    var selectItem = c.allPlayList[0]["id"];
+    String selectItem = c.allPlayList[0]["id"];
 
     await showDialog(
       context: context, 
@@ -170,8 +171,18 @@ class _songItemState extends State<songItem> {
                               });
                             }
                           ),
-                          Text(
-                            c.allPlayList[index]["name"]
+                          GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                selectItem=c.allPlayList[index]["id"];
+                              });
+                            },
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: Text(
+                                c.allPlayList[index]["name"]
+                              ),
+                            ),
                           )
                         ],
                       ),
@@ -181,9 +192,91 @@ class _songItemState extends State<songItem> {
               ),
             );
           }
-        )
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: Text("取消")
+          ),
+          FilledButton(
+            onPressed: () async {
+              await addToListController(selectItem);
+              Navigator.pop(context);
+            }, 
+            child: Text("完成")
+          )
+        ],
       )
     );
+  }
+
+  Future<void> addToListController(String listId) async {
+    var val=await operations().songAddList(listId, widget.id);
+    if(val){
+      showFlash(
+        duration: const Duration(milliseconds: 1500),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200), 
+        builder: (context, controller) => FlashBar(
+          behavior: FlashBehavior.floating,
+          position: FlashPosition.top,
+          backgroundColor: Colors.green[400],
+          iconColor: Colors.white,
+          margin: EdgeInsets.only(
+            top: 30,
+            left: (MediaQuery.of(context).size.width-280)/2,
+            right: (MediaQuery.of(context).size.width-280)/2
+          ),
+          icon: Icon(
+            Icons.done,
+          ),
+          controller: controller, 
+          content: Text(
+            "添加成功",
+            style: TextStyle(
+              color: Colors.white
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+        context: context
+      );
+    }else{
+      showFlash(
+        duration: const Duration(milliseconds: 1500),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200), 
+        builder: (context, controller) => FlashBar(
+          behavior: FlashBehavior.floating,
+          position: FlashPosition.top,
+          backgroundColor: Colors.red,
+          iconColor: Colors.white,
+          margin: EdgeInsets.only(
+            top: 30,
+            left: (MediaQuery.of(context).size.width-280)/2,
+            right: (MediaQuery.of(context).size.width-280)/2
+          ),
+          icon: Icon(
+            Icons.close,
+          ),
+          controller: controller, 
+          content: Text(
+            "添加失败",
+            style: TextStyle(
+              color: Colors.white
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+        context: context
+      );
+    }
   }
 
   @override

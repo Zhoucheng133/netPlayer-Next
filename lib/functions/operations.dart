@@ -174,4 +174,9 @@ class operations{
     }
     return val;
   }
+
+  Future<bool> songAddList(String listId, String songId) async {
+    var val=await addToList(listId, songId);
+    return val;
+  }
 }

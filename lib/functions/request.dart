@@ -179,6 +179,25 @@ Future<List> albumsRequest()async {
   }
 }
 
+// 将某首歌添加到歌单
+Future<bool> addToList(String listId, String songId) async {
+  final Controller c = Get.put(Controller());
+  String url="${c.userInfo["url"]}/rest/updatePlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&playlistId=${listId}&songIdToAdd=${songId}";
+  Map response=await httpRequest(url);
+  if(response.isEmpty){
+    return false;
+  }
+  try{
+    response=response["subsonic-response"];
+  }catch(e){
+    return false;
+  }
+  if(response["status"]!="ok"){
+    return false;
+  }
+  return true;
+}
+
 Future<bool> reNameList(String listId, String name) async {
   final Controller c = Get.put(Controller());
   String url="${c.userInfo["url"]}/rest/updatePlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&playlistId=${listId}&name=${name}";
