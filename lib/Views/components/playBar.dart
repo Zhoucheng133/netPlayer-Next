@@ -50,6 +50,14 @@ class _playBarState extends State<playBar> {
     }
   }
 
+  void loveToggle(){
+    if(operations().isLoved(c.playInfo["id"])){
+      operations().delove(c.playInfo["id"]);
+    }else{
+      operations().love(c.playInfo["id"]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -165,10 +173,21 @@ class _playBarState extends State<playBar> {
             ),
             SizedBox(width: 20,),
             GestureDetector(
-              child: Icon(
-                Icons.favorite_border_outlined,
-                size: 20,
-              ),
+              onTap: () => loveToggle(),
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: Obx(() => 
+                  c.playInfo["id"]!=null &&  operations().isLoved(c.playInfo["id"]) ?
+                  Icon(
+                    Icons.favorite_rounded,
+                    color: Colors.red,
+                    size: 20,
+                  ) : Icon(
+                    Icons.favorite_border_outlined,
+                    size: 20,
+                  )
+                ),
+              )
             ),
             SizedBox(width: 25,),
             playMode(),
