@@ -26,8 +26,18 @@ class _playListViewState extends State<playListView> {
   var list=[];
   var subtitle="";
 
-    void search(value){
-    // TODO 搜索歌曲
+  bool onSearch=false;
+
+  void search(value){
+    if(value==""){
+      setState(() {
+        onSearch=false;
+      });
+    }else{
+      setState(() {
+        onSearch=true;
+      });
+    }
   }
 
   void reCalIndex(){
@@ -130,6 +140,16 @@ class _playListViewState extends State<playListView> {
       controller.scrollToIndex(c.playInfo["index"], preferPosition: AutoScrollPosition.begin);
     }
   }
+
+  List filterBySearch(){
+    return list.where((item) => item["title"]!.toLowerCase().contains(searchInput.text.toLowerCase())).toList();
+  }
+
+  void playFromSearch(index){
+    operations().playSong("歌单", c.nowPage["id"]!, list.indexWhere((item) => item["id"]==filterBySearch()[index]["id"]), list);
+  }
+
+  final ScrollController searchController=ScrollController();
   
   @override
   Widget build(BuildContext context) {
@@ -144,7 +164,37 @@ class _playListViewState extends State<playListView> {
           songsHeader(),
           Expanded(
             // 歌曲列表显示在这里
-            child: ListView.builder(
+            child: onSearch ? ListView.builder(
+              controller: searchController,
+              itemCount: filterBySearch().length,
+              itemBuilder: (BuildContext context, int index){
+                return index==filterBySearch().length-1 ? Column(
+                  children: [
+                    songItem(
+                      artist: filterBySearch()[index]["artist"], 
+                      duration: filterBySearch()[index]["duration"], 
+                      index: index, 
+                      title: filterBySearch()[index]["title"], 
+                      isLoved: operations().isLoved(filterBySearch()[index]["id"]), 
+                      playSong: ()=>playFromSearch(index), 
+                      isPlaying: false, 
+                      id: filterBySearch()[index]["id"],
+                    ),
+                    SizedBox(height: 120,),
+                  ],
+                ) :
+                songItem(
+                  artist: filterBySearch()[index]["artist"], 
+                  duration: filterBySearch()[index]["duration"], 
+                  index: index, 
+                  title: filterBySearch()[index]["title"], 
+                  isLoved: operations().isLoved(filterBySearch()[index]["id"]), 
+                  playSong: ()=>playFromSearch(index), 
+                  isPlaying: false, 
+                  id: filterBySearch()[index]["id"],
+                );
+              }
+            ) : ListView.builder(
               controller: controller,
               itemCount: list.length,
               itemBuilder: (BuildContext context, int index){

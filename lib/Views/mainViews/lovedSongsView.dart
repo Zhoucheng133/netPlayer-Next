@@ -22,8 +22,18 @@ class _lovedSongsViewState extends State<lovedSongsView> {
 
   final Controller c = Get.put(Controller());
 
+  bool onSearch=false;
+
   void search(value){
-    // TODO 搜索歌曲
+    if(value==""){
+      setState(() {
+        onSearch=false;
+      });
+    }else{
+      setState(() {
+        onSearch=true;
+      });
+    }
   }
 
   @override
@@ -112,6 +122,16 @@ class _lovedSongsViewState extends State<lovedSongsView> {
     }
   }
 
+  List filterBySearch(){
+    return c.lovedSongs.where((item) => item["title"]!.toLowerCase().contains(searchInput.text.toLowerCase())).toList();
+  }
+
+  void playFromSearch(index){
+    operations().playSong("喜欢的歌曲", "", c.lovedSongs.indexWhere((item) => item["id"]==filterBySearch()[index]["id"]), c.lovedSongs);
+  }
+
+  final ScrollController searchController=ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -123,7 +143,40 @@ class _lovedSongsViewState extends State<lovedSongsView> {
           songsHeader(),
           Expanded(
             // 歌曲列表显示在这里
-            child: Obx(() => 
+            child: onSearch ? 
+            Obx(() => 
+              ListView.builder(
+                controller: searchController,
+                itemCount: filterBySearch().length,
+                itemBuilder: (BuildContext context, int index){
+                  return index==filterBySearch().length-1 ? Column(
+                    children: [
+                      songItem(
+                        artist: filterBySearch()[index]["artist"], 
+                        duration: filterBySearch()[index]["duration"], 
+                        index: index, 
+                        title: filterBySearch()[index]["title"], 
+                        isLoved: operations().isLoved(filterBySearch()[index]["id"]), 
+                        playSong: ()=>playFromSearch(index), 
+                        isPlaying: false, 
+                        id: filterBySearch()[index]["id"],
+                      ),
+                      SizedBox(height: 120,),
+                    ],
+                  ) :
+                  songItem(
+                    artist: filterBySearch()[index]["artist"], 
+                    duration: filterBySearch()[index]["duration"], 
+                    index: index, 
+                    title: filterBySearch()[index]["title"], 
+                    isLoved: operations().isLoved(filterBySearch()[index]["id"]), 
+                    playSong: ()=>playFromSearch(index), 
+                    isPlaying: false, 
+                    id: filterBySearch()[index]["id"],
+                  );
+                }
+              )
+            ) : Obx(() => 
               ListView.builder(
                 controller: controller,
                 itemCount: c.lovedSongs.length,

@@ -184,7 +184,7 @@ class _allSongsViewState extends State<allSongsView> {
                 controller: searchController,
                 itemCount: filterBySearch().length,
                 itemBuilder: (BuildContext context, int index){
-                  return index==c.allSongs.length-1 ? Column(
+                  return index==filterBySearch().length-1 ? Column(
                     children: [
                       songItem(
                         artist: filterBySearch()[index]["artist"], 
@@ -211,8 +211,7 @@ class _allSongsViewState extends State<allSongsView> {
                   );
                 }
               )
-            )
-            :Obx(() => 
+            ) : Obx(() => 
               ListView.builder(
                 controller: controller,
                 itemCount: c.allSongs.length,
