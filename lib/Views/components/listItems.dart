@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, camel_case_types, file_names, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, camel_case_types, file_names, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:net_player_next/functions/operations.dart';
@@ -128,7 +128,18 @@ class _songItemState extends State<songItem> {
       await operations().love(widget.id);
     }else if(val=="delove"){
       await operations().delove(widget.id);
+    }else if(val=="addToList"){
+      showAddList(context);
     }
+  }
+
+  Future<void> showAddList(BuildContext context) async {
+    await showDialog(
+      context: context, 
+      builder: (context) => AlertDialog(
+        title: Text("添加到歌单..."),
+      )
+    );
   }
 
   @override
