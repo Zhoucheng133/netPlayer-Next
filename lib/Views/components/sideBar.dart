@@ -5,6 +5,7 @@
 // import 'package:fluent_ui/fluent_ui.dart';
 
 
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/sideBarMenu.dart';
@@ -85,8 +86,117 @@ class _sideBarState extends State<sideBar> {
     });
   }
 
-  void addPlayList(){
-    // TODO 添加歌单
+  @override
+  void initState() {
+    super.initState();
+
+    textfocus.addListener(() { 
+      if(textfocus.hasFocus){
+        c.updateFocusTextField(true);
+      }else{
+        c.updateFocusTextField(false);
+      }
+    });
+  }
+
+  FocusNode textfocus=FocusNode();
+
+  void addListController(String title){
+
+  }
+
+  Future<void> addPlayList(BuildContext context) async {
+    var controller=TextEditingController();
+
+    await showDialog(
+      context: context, 
+      builder: (context)=>AlertDialog(
+        title: Text("添加歌单"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("歌单名称:"),
+            SizedBox(height: 10,),
+            TextField(
+              focusNode: textfocus,
+              controller: controller,
+              style: TextStyle(
+                fontSize: 14,
+              ),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                isCollapsed: true,
+                contentPadding: EdgeInsets.fromLTRB(10, 10, 25, 11),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: c.hoverColor,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(5)
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 210, 210, 210),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(5)
+                ),
+              ),
+              textAlignVertical: TextAlignVertical.center,
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: Text("取消")
+          ),
+          FilledButton(
+            onPressed: (){
+              if(controller.text==""){
+                showFlash(
+                  duration: const Duration(milliseconds: 1500),
+                  transitionDuration: const Duration(milliseconds: 200),
+                  reverseTransitionDuration: const Duration(milliseconds: 200), 
+                  builder: (context, controller) => FlashBar(
+                    behavior: FlashBehavior.floating,
+                    position: FlashPosition.top,
+                    backgroundColor: Colors.red,
+                    iconColor: Colors.white,
+                    margin: EdgeInsets.only(
+                      top: 30,
+                      left: (MediaQuery.of(context).size.width-280)/2,
+                      right: (MediaQuery.of(context).size.width-280)/2
+                    ),
+                    icon: Icon(
+                      Icons.close,
+                    ),
+                    controller: controller, 
+                    content: Text(
+                      "歌单名称不能为空",
+                      style: TextStyle(
+                        color: Colors.white
+                      ),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  context: context
+                );
+              }else{
+                addListController(controller.text);
+                Navigator.pop(context);
+              }
+            }, 
+            child: Text("完成")
+          )
+        ],
+      )
+    );
   }
 
   void randomPlay(){
@@ -113,7 +223,7 @@ class _sideBarState extends State<sideBar> {
             Row(
               children: [
                 Expanded(
-                  child: sideBarMini(icon: Icons.add_rounded, func: addPlayList, isSelected: false,)
+                  child: GestureDetector(child: sideBarMini(icon: Icons.add_rounded, func: (){addPlayList(context);}, isSelected: false,))
                 ),
                 SizedBox(width: 10,),
                 Expanded(
