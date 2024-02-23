@@ -150,4 +150,12 @@ class operations{
     }
     return val;
   }
+
+  Future<bool> addList(String title) async {
+    var val = await newList(title);
+    if(val){
+      await getPlayLists();
+    }
+    return val;
+  }
 }

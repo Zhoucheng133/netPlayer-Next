@@ -9,6 +9,7 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/sideBarMenu.dart';
+import 'package:net_player_next/functions/operations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../paras/paras.dart';
@@ -101,8 +102,71 @@ class _sideBarState extends State<sideBar> {
 
   FocusNode textfocus=FocusNode();
 
-  void addListController(String title){
-
+  Future<void> addListController(String title, BuildContext context) async {
+    var val=await operations().addList(title);
+    if(val){
+      showFlash(
+        duration: const Duration(milliseconds: 1500),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200), 
+        builder: (context, controller) => FlashBar(
+          behavior: FlashBehavior.floating,
+          position: FlashPosition.top,
+          backgroundColor: Colors.green[400],
+          iconColor: Colors.white,
+          margin: EdgeInsets.only(
+            top: 30,
+            left: (MediaQuery.of(context).size.width-280)/2,
+            right: (MediaQuery.of(context).size.width-280)/2
+          ),
+          icon: Icon(
+            Icons.close,
+          ),
+          controller: controller, 
+          content: Text(
+            "添加成功",
+            style: TextStyle(
+              color: Colors.white
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+        context: context
+      );
+    }else{
+      showFlash(
+        duration: const Duration(milliseconds: 1500),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200), 
+        builder: (context, controller) => FlashBar(
+          behavior: FlashBehavior.floating,
+          position: FlashPosition.top,
+          backgroundColor: Colors.red,
+          iconColor: Colors.white,
+          margin: EdgeInsets.only(
+            top: 30,
+            left: (MediaQuery.of(context).size.width-280)/2,
+            right: (MediaQuery.of(context).size.width-280)/2
+          ),
+          icon: Icon(
+            Icons.close,
+          ),
+          controller: controller, 
+          content: Text(
+            "添加失败",
+            style: TextStyle(
+              color: Colors.white
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+        context: context
+      );
+    }
   }
 
   Future<void> addPlayList(BuildContext context) async {
@@ -155,7 +219,7 @@ class _sideBarState extends State<sideBar> {
             child: Text("取消")
           ),
           FilledButton(
-            onPressed: (){
+            onPressed: () async {
               if(controller.text==""){
                 showFlash(
                   duration: const Duration(milliseconds: 1500),
@@ -188,7 +252,7 @@ class _sideBarState extends State<sideBar> {
                   context: context
                 );
               }else{
-                addListController(controller.text);
+                await addListController(controller.text, context);
                 Navigator.pop(context);
               }
             }, 
