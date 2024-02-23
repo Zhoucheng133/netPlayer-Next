@@ -22,6 +22,9 @@ class _playBarState extends State<playBar> {
   Timer? _debounce;
 
   void jumpDuration(double val){
+    if(c.playInfo.isEmpty){
+      return;
+    }
     operations().pause();
     var progress=c.playInfo["duration"]*1000*val;
      c.updatePlayProgress(progress.toInt());
