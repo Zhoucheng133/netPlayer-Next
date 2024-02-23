@@ -1,9 +1,11 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 // import 'package:fluent_ui/fluent_ui.dart';
 
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/functions/operations.dart';
 
 import '../../paras/paras.dart';
 
@@ -230,8 +232,72 @@ class _playListMenu extends State<playListMenu> {
       ]
     );
     if(val=="del"){
-      // TODO 删除歌单
+      var val=await operations().delList(widget.id);
+      if(val){
+        showFlash(
+          duration: const Duration(milliseconds: 1500),
+          transitionDuration: const Duration(milliseconds: 200),
+          reverseTransitionDuration: const Duration(milliseconds: 200), 
+          builder: (context, controller) => FlashBar(
+            behavior: FlashBehavior.floating,
+            position: FlashPosition.top,
+            backgroundColor: Colors.green[400],
+            iconColor: Colors.white,
+            margin: EdgeInsets.only(
+              top: 30,
+              left: (MediaQuery.of(context).size.width-280)/2,
+              right: (MediaQuery.of(context).size.width-280)/2
+            ),
+            icon: Icon(
+              Icons.done,
+            ),
+            controller: controller, 
+            content: Text(
+              "删除成功!",
+              style: TextStyle(
+                color: Colors.white
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+          ),
+          context: context
+        );
+      }else{
+        showFlash(
+          duration: const Duration(milliseconds: 1500),
+          transitionDuration: const Duration(milliseconds: 200),
+          reverseTransitionDuration: const Duration(milliseconds: 200), 
+          builder: (context, controller) => FlashBar(
+            behavior: FlashBehavior.floating,
+            position: FlashPosition.top,
+            backgroundColor: Colors.red,
+            iconColor: Colors.white,
+            margin: EdgeInsets.only(
+              top: 30,
+              left: (MediaQuery.of(context).size.width-280)/2,
+              right: (MediaQuery.of(context).size.width-280)/2
+            ),
+            icon: Icon(
+              Icons.done,
+            ),
+            controller: controller, 
+            content: Text(
+              "删除失败!",
+              style: TextStyle(
+                color: Colors.white
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+          ),
+          context: context
+        );
+      }
     }else if(val=="rename"){
+      // operations().renameList(widget.id, newName)
       // TODO 重命名歌单
     }
   }

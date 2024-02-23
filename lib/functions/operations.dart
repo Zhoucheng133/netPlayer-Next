@@ -158,4 +158,16 @@ class operations{
     }
     return val;
   }
+
+  Future<bool> delList(String id) async {
+    var val=await delListRequest(id);
+    if(val){
+      await getPlayLists();
+    }
+    return val;
+  }
+
+  void renameList(String id, String newName){
+
+  }
 }
