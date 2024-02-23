@@ -120,7 +120,7 @@ class _sideBarState extends State<sideBar> {
             right: (MediaQuery.of(context).size.width-280)/2
           ),
           icon: Icon(
-            Icons.close,
+            Icons.done,
           ),
           controller: controller, 
           content: Text(
