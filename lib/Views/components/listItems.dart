@@ -11,10 +11,10 @@ class songItem extends StatefulWidget {
   final int duration;
   final bool isLoved;
   final VoidCallback playSong;
-  final dynamic id;
+  final dynamic listId;
   final bool isPlaying;
 
-  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved, required this.playSong, this.id, required this.isPlaying,});
+  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved, required this.playSong, this.listId, required this.isPlaying,});
 
   @override
   State<songItem> createState() => _songItemState();
@@ -104,7 +104,7 @@ class _songItemState extends State<songItem> {
         ),
         PopupMenuItem(
           height: 35,
-          enabled: widget.id!=null,
+          enabled: widget.listId!=null,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -123,6 +123,8 @@ class _songItemState extends State<songItem> {
 
     if(val=="play"){
       widget.playSong();
+    }else if(val=="love"){
+
     }
   }
 
