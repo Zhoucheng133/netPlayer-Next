@@ -229,6 +229,7 @@ class _titleBoxWithBackState extends State<titleBoxWithBack> {
                     style: TextStyle(
                       fontSize: 20,
                       overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
                 SizedBox(width: 15,),
