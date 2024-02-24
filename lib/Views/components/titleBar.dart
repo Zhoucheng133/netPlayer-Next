@@ -185,3 +185,63 @@ class _titleBoxState extends State<titleBox> {
     );
   }
 }
+
+class titleBoxWithBack extends StatefulWidget {
+  final String title;
+  final String subtitle;
+  
+  const titleBoxWithBack({super.key, required this.title, required this.subtitle});
+
+  @override
+  State<titleBoxWithBack> createState() => _titleBoxWithBackState();
+}
+
+class _titleBoxWithBackState extends State<titleBoxWithBack> {
+
+  final Controller c = Get.put(Controller());
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    c.updateNowPage({
+                      "name": "专辑",
+                      "id": "",
+                    });
+                  },
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Icon(Icons.arrow_back_rounded)
+                  ),
+                ),
+                SizedBox(width: 10,),
+                Text(
+                  widget.title,
+                  style: TextStyle(
+                    fontSize: 20,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                SizedBox(width: 15,),
+                Text(
+                  widget.subtitle,
+                  style: TextStyle(
+                    color: Colors.grey[700],
+                  ),
+                ),
+              ],
+            )
+          ),
+        ],
+      ),
+    );
+  }
+}
