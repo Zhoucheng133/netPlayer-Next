@@ -156,8 +156,9 @@ class _playListViewState extends State<playListView> {
 
   final ScrollController searchController=ScrollController();
 
-  void silentReload(){
-    print("重新加载");
+  Future<void> silentReload() async {
+    await getPlayList();
+    reCalIndex();
   }
   
   @override
