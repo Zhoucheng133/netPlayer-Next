@@ -180,7 +180,8 @@ class operations{
     return val;
   }
 
-  void delFromList(String listId, int index){
-    // TODO 从歌单中删除
+  Future<bool> delFromList(String listId, int index) async {
+    var val=await delFromListRequest(listId, index);
+    return val;
   }
 }
