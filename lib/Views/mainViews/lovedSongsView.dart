@@ -160,6 +160,7 @@ class _lovedSongsViewState extends State<lovedSongsView> {
                         playSong: ()=>playFromSearch(index), 
                         isPlaying: false, 
                         id: filterBySearch()[index]["id"],
+                        silentReload: () {},
                       ),
                       SizedBox(height: 120,),
                     ],
@@ -173,6 +174,7 @@ class _lovedSongsViewState extends State<lovedSongsView> {
                     playSong: ()=>playFromSearch(index), 
                     isPlaying: false, 
                     id: filterBySearch()[index]["id"],
+                    silentReload: () {},
                   );
                 }
               )
@@ -196,6 +198,7 @@ class _lovedSongsViewState extends State<lovedSongsView> {
                             playSong: ()=>playSongFromLovedSongs(index), 
                             isPlaying: isPlaying(index),
                             id: c.lovedSongs[index]["id"],
+                            silentReload: () {},
                           ),),
                           SizedBox(height: 120,),
                         ],
@@ -209,6 +212,7 @@ class _lovedSongsViewState extends State<lovedSongsView> {
                         playSong: ()=>playSongFromLovedSongs(index), 
                         isPlaying: isPlaying(index), 
                         id: c.lovedSongs[index]["id"],
+                        silentReload: () {},
                       ),),
                   );
                 }

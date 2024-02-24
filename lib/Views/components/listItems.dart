@@ -18,8 +18,9 @@ class songItem extends StatefulWidget {
   final dynamic listId;
   final bool isPlaying;
   final String id;
+  final VoidCallback silentReload;
 
-  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved, required this.playSong, this.listId, required this.isPlaying, required this.id,});
+  const songItem({super.key, required this.index, required this.title, required this.artist, required this.duration, required this.isLoved, required this.playSong, this.listId, required this.isPlaying, required this.id, required this.silentReload,});
 
   @override
   State<songItem> createState() => _songItemState();
@@ -137,7 +138,12 @@ class _songItemState extends State<songItem> {
     }else if(val=="addToList"){
       showAddList(context);
     }else if(val=="delFromList"){
-      operations().delFromList(widget.listId, widget.index);
+      if(widget.listId!=null){
+        var val=await operations().delFromList(widget.listId, widget.index);
+        if(val){
+          widget.silentReload();
+        }
+      }
     }
   }
 

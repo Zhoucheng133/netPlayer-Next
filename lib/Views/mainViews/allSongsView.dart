@@ -194,7 +194,8 @@ class _allSongsViewState extends State<allSongsView> {
                         isLoved: operations().isLoved(filterBySearch()[index]["id"]), 
                         playSong: ()=>playFromSearch(index), 
                         isPlaying: false, 
-                        id: filterBySearch()[index]["id"],
+                        id: filterBySearch()[index]["id"], 
+                        silentReload: () {},
                       ),
                       SizedBox(height: 120,),
                     ],
@@ -208,6 +209,7 @@ class _allSongsViewState extends State<allSongsView> {
                     playSong: ()=>playFromSearch(index), 
                     isPlaying: false, 
                     id: filterBySearch()[index]["id"],
+                    silentReload: () {},
                   );
                 }
               )
@@ -232,6 +234,7 @@ class _allSongsViewState extends State<allSongsView> {
                             playSong: ()=>playSongFromAllSongs(index), 
                             isPlaying: isPlaying(index), 
                             id: c.allSongs[index]["id"],
+                            silentReload: () {},
                           ),),
                           SizedBox(height: 120,),
                         ],
@@ -245,6 +248,7 @@ class _allSongsViewState extends State<allSongsView> {
                         playSong: ()=>playSongFromAllSongs(index), 
                         isPlaying: isPlaying(index), 
                         id: c.allSongs[index]["id"],
+                        silentReload: () {},
                       ),),
                   );
                 }

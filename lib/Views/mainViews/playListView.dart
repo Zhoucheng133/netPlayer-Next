@@ -155,6 +155,10 @@ class _playListViewState extends State<playListView> {
   }
 
   final ScrollController searchController=ScrollController();
+
+  void silentReload(){
+    print("重新加载");
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -184,6 +188,7 @@ class _playListViewState extends State<playListView> {
                       playSong: ()=>playFromSearch(index), 
                       isPlaying: false, 
                       id: filterBySearch()[index]["id"],
+                      silentReload: () {},
                     ),
                     SizedBox(height: 120,),
                   ],
@@ -197,6 +202,7 @@ class _playListViewState extends State<playListView> {
                   playSong: ()=>playFromSearch(index), 
                   isPlaying: false, 
                   id: filterBySearch()[index]["id"],
+                  silentReload: () {},
                 );
               }
             ) : ListView.builder(
@@ -219,6 +225,7 @@ class _playListViewState extends State<playListView> {
                           isPlaying: isPlaying(index), 
                           listId: c.nowPage["id"],
                           id: list[index]["id"],
+                          silentReload: ()=>silentReload(),
                         ),),
                         SizedBox(height: 120,),
                       ],
@@ -233,6 +240,7 @@ class _playListViewState extends State<playListView> {
                       isPlaying: isPlaying(index), 
                       listId: c.nowPage["id"],
                       id: list[index]["id"],
+                      silentReload: ()=>silentReload()
                     ),),
                 );
               }
