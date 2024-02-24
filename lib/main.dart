@@ -8,6 +8,7 @@ import 'dart:convert';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/mainView.dart';
@@ -128,6 +129,35 @@ class _MainAppState extends State<MainApp> {
     }
   }
 
+  Future<void> autoSavePlayInfo() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("playInfo", jsonEncode(c.playInfo));
+    prefs.setString("playMode", c.playMode.value);
+    prefs.setBool("fullRandom", c.fullRandomPlay.value);
+  }
+
+  Future<void> autoLoadPlayInfo() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool? savePlay=prefs.getBool("savePlay");
+    if(savePlay==false){
+      c.updateSavePlay(false);
+      return;
+    }
+
+    final String? playInfo=prefs.getString("playInfo");
+    final String? playMode=prefs.getString("playMode");
+    final bool? fullRandom=prefs.getBool("fullRandom");
+    if(playInfo!=null){
+      c.updatePlayInfo(jsonDecode(playInfo));
+    }
+    if(playMode!=null){
+      c.updatePlayMode(playMode);
+    }
+    if(fullRandom!=null){
+      c.updateFullRandomPlay(fullRandom);
+    }
+  }
+
   bool isLoading=true;
 
   void isLoginCheck(){
@@ -147,7 +177,9 @@ class _MainAppState extends State<MainApp> {
     super.initState();
 
     autoLogin();
+    autoLoadPlayInfo();
     ever(c.userInfo, (callback) => isLoginCheck());
+    ever(c.playInfo, (callback) => autoSavePlayInfo());
   }
 
   @override
