@@ -213,7 +213,7 @@ class _titleBoxWithBackState extends State<titleBoxWithBack> {
                 GestureDetector(
                   onTap: (){
                     c.updateNowPage({
-                      "name": "专辑",
+                      "name": c.nowPage["name"]??"所有歌曲",
                       "id": "",
                     });
                   },
