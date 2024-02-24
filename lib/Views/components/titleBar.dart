@@ -223,11 +223,12 @@ class _titleBoxWithBackState extends State<titleBoxWithBack> {
                   ),
                 ),
                 SizedBox(width: 10,),
-                Text(
-                  widget.title,
-                  style: TextStyle(
-                    fontSize: 20,
-                    overflow: TextOverflow.ellipsis,
+                Expanded(
+                  child: Text(
+                    widget.title,
+                    style: TextStyle(
+                      fontSize: 20,
+                      overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 SizedBox(width: 15,),
