@@ -28,6 +28,8 @@ class Controller extends GetxController{
   var isPlay=false.obs;
   // 播放模式
   var playMode="顺序播放".obs;
+  // 完全随机播放
+  var fullRandomPlay=false.obs;
 
   var handler;
 
@@ -77,6 +79,7 @@ class Controller extends GetxController{
   void updatePlayMode(data) => playMode.value=data;
   void updateFocusTextField(data) => focusTextField.value=data;
   void updateAlbumContentData(data) => albumContentData.value=data;
+  void updateFullRandomPlay(data) => fullRandomPlay.value=data;
 
   Future<void> updateSavePlay(data) async {
     savePlay.value=data;
