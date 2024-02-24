@@ -24,6 +24,9 @@ class _albumContentViewState extends State<albumContentView> {
   var list=[];
 
   Future<void> getData() async {
+    if(c.nowPage["id"]=="" || c.nowPage["name"]!="专辑"){
+      return;
+    }
     var data={};
     if(c.nowPage["id"]!=null){
       data=await operations().getAlbumData(c.nowPage["id"]??"");
