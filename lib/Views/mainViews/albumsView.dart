@@ -94,7 +94,7 @@ class _albumsViewState extends State<albumsView> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => 
-      c.nowPage["id"]=="" ? 
+      c.nowPage["id"]=="" && c.nowPage["name"]=="专辑"  ? 
       Padding(
         padding: const EdgeInsets.fromLTRB(20,30,20,20),
         child: Column(
