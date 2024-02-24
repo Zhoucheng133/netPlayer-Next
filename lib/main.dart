@@ -8,7 +8,6 @@ import 'dart:convert';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/mainView.dart';
