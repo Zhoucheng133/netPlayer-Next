@@ -26,7 +26,7 @@ class _albumContentViewState extends State<albumContentView> {
   Future<void> getData() async {
     var data={};
     if(c.nowPage["id"]!=null){
-      data=await operations().getAlbumData(c.nowPage["id"]!);
+      data=await operations().getAlbumData(c.nowPage["id"]??"");
     }
     setState(() {
       title=data["title"];
@@ -44,7 +44,18 @@ class _albumContentViewState extends State<albumContentView> {
   final ScrollController controller=ScrollController();
 
   void playFromAlbum(int index){
-    
+    operations().playSong("专辑", c.nowPage["id"]??"", index, list);
+  }
+
+  bool isPlaying(index){
+    if(c.playInfo["playFrom"]!="专辑"){
+      return false;
+    }else{
+      if(c.playInfo["index"]==index && c.playInfo["listId"]==c.nowPage["id"]){
+        return true;
+      }
+      return false;
+    }
   }
 
   @override
@@ -63,30 +74,34 @@ class _albumContentViewState extends State<albumContentView> {
               itemBuilder: (BuildContext context, int index){
                 return index==list.length-1 ? Column(
                   children: [
-                    songItem(
-                      artist: list[index]["artist"], 
-                      duration: list[index]["duration"], 
-                      index: index, 
-                      title: list[index]["title"], 
-                      isLoved: operations().isLoved(list[index]["id"]), 
-                      playSong: ()=>playFromAlbum(index), 
-                      isPlaying: false, 
-                      id: list[index]["id"], 
-                      silentReload: () {},
+                    Obx(() => 
+                      songItem(
+                        artist: list[index]["artist"], 
+                        duration: list[index]["duration"], 
+                        index: index, 
+                        title: list[index]["title"], 
+                        isLoved: operations().isLoved(list[index]["id"]), 
+                        playSong: ()=>playFromAlbum(index), 
+                        isPlaying: isPlaying(index), 
+                        id: list[index]["id"], 
+                        silentReload: () {},
+                      ),
                     ),
                     SizedBox(height: 120,),
                   ],
                 ) :
-                songItem(
-                  artist: list[index]["artist"], 
-                  duration: list[index]["duration"], 
-                  index: index, 
-                  title: list[index]["title"], 
-                  isLoved: operations().isLoved(list[index]["id"]), 
-                  playSong: ()=>playFromAlbum(index), 
-                  isPlaying: false, 
-                  id: list[index]["id"],
-                  silentReload: () {},
+                Obx(() => 
+                  songItem(
+                    artist: list[index]["artist"], 
+                    duration: list[index]["duration"], 
+                    index: index, 
+                    title: list[index]["title"], 
+                    isLoved: operations().isLoved(list[index]["id"]), 
+                    playSong: ()=>playFromAlbum(index), 
+                    isPlaying: isPlaying(index), 
+                    id: list[index]["id"],
+                    silentReload: () {},
+                  )
                 );
               }
             ),
