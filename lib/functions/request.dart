@@ -179,6 +179,26 @@ Future<List> albumsRequest()async {
   }
 }
 
+// 获取某个艺人信息
+Future<Map> artistDataRequest(String id) async {
+  final Controller c = Get.put(Controller());
+  String url="${c.userInfo["url"]}/rest/getArtist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${id}";
+  Map response=await httpRequest(url);
+  if(response.isEmpty){
+    return {};
+  }
+  try {
+    var name=response["subsonic-response"]["artist"]["name"];
+    var list=response["subsonic-response"]["artist"]["album"];
+    return {
+      "title": name,
+      "list": list,
+    };
+  } catch (e) {
+    return {};
+  }
+}
+
 // 获取某个专辑信息
 Future<Map> albumDataRequest(String id) async {
   final Controller c = Get.put(Controller());
