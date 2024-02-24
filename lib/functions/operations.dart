@@ -188,4 +188,8 @@ class operations{
   Future<Map> getAlbumData(String id) async {
     return await albumDataRequest(id);
   }
+
+  Future<Map> getArtistData(String id) async {
+    return await artistDataRequest(id);
+  }
 }

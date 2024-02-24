@@ -1,6 +1,11 @@
-// ignore_for_file: camel_case_types, file_names
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../functions/operations.dart';
+import '../../paras/paras.dart';
+import '../components/titleBar.dart';
 
 class artistContentView extends StatefulWidget {
   const artistContentView({super.key});
@@ -10,8 +15,42 @@ class artistContentView extends StatefulWidget {
 }
 
 class _artistContentViewState extends State<artistContentView> {
+
+  final Controller c = Get.put(Controller());
+
+  var title="";
+  var list=[];
+
+  Future<void> getData() async {
+    if(c.nowPage["id"]=="" || c.nowPage["name"]!="艺人"){
+      return;
+    }
+    var data={};
+    if(c.nowPage["id"]!=null){
+      data=await operations().getArtistData(c.nowPage["id"]??"");
+    }
+    setState(() {
+      title=data["title"];
+      list=data["list"];
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20,30,20,20),
+      child: Column(
+        children: [
+          titleBoxWithBack(title: "艺人: $title", subtitle: "含有专辑${list.length}个",),
+        ],
+      ),
+    );
   }
 }
