@@ -20,34 +20,10 @@ class _albumContentViewState extends State<albumContentView> {
 
   final Controller c = Get.put(Controller());
 
-  var title="";
-  var list=[];
-
-  Future<void> getData() async {
-    if(c.nowPage["id"]=="" || c.nowPage["name"]!="专辑"){
-      return;
-    }
-    var data={};
-    if(c.nowPage["id"]!=null){
-      data=await operations().getAlbumData(c.nowPage["id"]??"");
-    }
-    setState(() {
-      title=data["title"];
-      list=data["list"];
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    getData();
-  }
-
   final ScrollController controller=ScrollController();
 
   void playFromAlbum(int index){
-    operations().playSong("专辑", c.nowPage["id"]??"", index, list);
+    operations().playSong("专辑", c.nowPage["id"]??"", index, c.albumContentData["list"]);
   }
 
   bool isPlaying(index){
@@ -67,47 +43,50 @@ class _albumContentViewState extends State<albumContentView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          titleBoxWithBack(title: "专辑: $title", subtitle: "含有歌曲${list.length}首",),
+          Obx(() => titleBoxWithBack(title: "专辑: ${c.albumContentData["title"]??''}", subtitle: "含有歌曲${c.albumContentData["list"]==null?'0':c.albumContentData["list"].length}首",),),
           SizedBox(height: 10,),
           songsHeader(),
           Expanded(
-            child: ListView.builder(
-              controller: controller,
-              itemCount: list.length,
-              itemBuilder: (BuildContext context, int index){
-                return index==list.length-1 ? Column(
-                  children: [
-                    Obx(() => 
-                      songItem(
-                        artist: list[index]["artist"], 
-                        duration: list[index]["duration"], 
-                        index: index, 
-                        title: list[index]["title"], 
-                        isLoved: operations().isLoved(list[index]["id"]), 
-                        playSong: ()=>playFromAlbum(index), 
-                        isPlaying: isPlaying(index), 
-                        id: list[index]["id"], 
-                        silentReload: () {},
+            child: Obx(() => 
+              c.albumContentData.isNotEmpty ?
+              ListView.builder(
+                controller: controller,
+                itemCount: c.albumContentData["list"].length,
+                itemBuilder: (BuildContext context, int index){
+                  return index==c.albumContentData["list"].length-1 ? Column(
+                    children: [
+                      Obx(() => 
+                        songItem(
+                          artist: c.albumContentData["list"][index]["artist"], 
+                          duration: c.albumContentData["list"][index]["duration"], 
+                          index: index, 
+                          title: c.albumContentData["list"][index]["title"], 
+                          isLoved: operations().isLoved(c.albumContentData["list"][index]["id"]), 
+                          playSong: ()=>playFromAlbum(index), 
+                          isPlaying: isPlaying(index), 
+                          id: c.albumContentData["list"][index]["id"], 
+                          silentReload: () {},
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 120,),
-                  ],
-                ) :
-                Obx(() => 
-                  songItem(
-                    artist: list[index]["artist"], 
-                    duration: list[index]["duration"], 
-                    index: index, 
-                    title: list[index]["title"], 
-                    isLoved: operations().isLoved(list[index]["id"]), 
-                    playSong: ()=>playFromAlbum(index), 
-                    isPlaying: isPlaying(index), 
-                    id: list[index]["id"],
-                    silentReload: () {},
-                  )
-                );
-              }
-            ),
+                      SizedBox(height: 120,),
+                    ],
+                  ) :
+                  Obx(() => 
+                    songItem(
+                      artist: c.albumContentData["list"][index]["artist"], 
+                      duration: c.albumContentData["list"][index]["duration"], 
+                      index: index, 
+                      title: c.albumContentData["list"][index]["title"], 
+                      isLoved: operations().isLoved(c.albumContentData["list"][index]["id"]), 
+                      playSong: ()=>playFromAlbum(index), 
+                      isPlaying: isPlaying(index), 
+                      id: c.albumContentData["list"][index]["id"],
+                      silentReload: () {},
+                    )
+                  );
+                }
+              ): Container(),
+            )
           )
         ],
       ),

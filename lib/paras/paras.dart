@@ -59,6 +59,9 @@ class Controller extends GetxController{
   // 是否聚焦在输入框上
   var focusTextField=false.obs;
 
+  // 专辑信息
+  var albumContentData={}.obs;
+
   void updateUserInfo(data) => userInfo.value=data;
   void updateNowPage(data) => nowPage.value=data;
   void updateAllPlayList(data) => allPlayList.value=data;
@@ -73,6 +76,7 @@ class Controller extends GetxController{
   void updateIsPlay(data) => isPlay.value=data;
   void updatePlayMode(data) => playMode.value=data;
   void updateFocusTextField(data) => focusTextField.value=data;
+  void updateAlbumContentData(data) => albumContentData.value=data;
 
   Future<void> updateSavePlay(data) async {
     savePlay.value=data;

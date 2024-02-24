@@ -414,11 +414,12 @@ class _albumItemState extends State<albumItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: (){
+      onDoubleTap: () async {
         c.updateNowPage({
           "name": "专辑",
           "id": widget.id
         });
+        c.updateAlbumContentData(await operations().getAlbumData(widget.id));
       },
       child: MouseRegion(
         onEnter: (_)=>setState(() {isHover=true;}),

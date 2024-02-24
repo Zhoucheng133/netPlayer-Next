@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 
 import '../../functions/operations.dart';
 import '../../paras/paras.dart';
+import '../components/listItems.dart';
+import '../components/tableHeader.dart';
 import '../components/titleBar.dart';
 
 class artistContentView extends StatefulWidget {
@@ -42,6 +44,8 @@ class _artistContentViewState extends State<artistContentView> {
     getData();
   }
 
+  final ScrollController controller=ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,6 +53,23 @@ class _artistContentViewState extends State<artistContentView> {
       child: Column(
         children: [
           titleBoxWithBack(title: "艺人: $title", subtitle: "含有专辑${list.length}个",),
+          SizedBox(height: 10,),
+          albumHeader(),
+          Expanded(
+            child: ListView.builder(
+              controller: controller,
+              itemCount: list.length,
+              itemBuilder: (BuildContext context, int index){
+                return index==list.length-1 ? Column(
+                  children: [
+                    albumItem(index: index, title: list[index]["title"], count: list[index]["songCount"], id: list[index]["id"], artist: list[index]["artist"],),
+                    SizedBox(height: 120,),
+                  ],
+                ):
+                albumItem(index: index, title: list[index]["title"], count: list[index]["songCount"], id: list[index]["id"], artist: list[index]["artist"]);
+              }
+            )
+          )
         ],
       ),
     );
