@@ -184,4 +184,8 @@ class operations{
     var val=await delFromListRequest(listId, index);
     return val;
   }
+
+  Future<Map> getAlbumData(String id) async {
+    return await albumDataRequest(id);
+  }
 }
