@@ -492,12 +492,16 @@ class artistItem extends StatefulWidget {
 class _artistItemState extends State<artistItem> {
 
   bool isHover=false;
+  final Controller c = Get.put(Controller());
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        // TODO 点击操作
+      onDoubleTap: (){
+        c.updateNowPage({
+          "name": "艺人",
+          "id": widget.id
+        });
       },
       child: MouseRegion(
         onEnter: (_)=>setState(() {isHover=true;}),
