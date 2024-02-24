@@ -409,12 +409,16 @@ class albumItem extends StatefulWidget {
 class _albumItemState extends State<albumItem> {
 
   bool isHover=false;
+  final Controller c = Get.put(Controller());
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        // TODO 点击操作
+      onDoubleTap: (){
+        c.updateNowPage({
+          "name": "专辑",
+          "id": widget.id
+        });
       },
       child: MouseRegion(
         onEnter: (_)=>setState(() {isHover=true;}),

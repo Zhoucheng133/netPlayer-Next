@@ -4,6 +4,7 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/listItems.dart';
+import 'package:net_player_next/Views/mainViews/albumContentView.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../functions/operations.dart';
@@ -92,53 +93,56 @@ class _albumsViewState extends State<albumsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20,30,20,20),
-      child: Column(
-        children: [
-          Obx(() => titleBox(title: "专辑", subtitle: "合计${c.allAlbums.length}个专辑", controller: searchInput, reloadList: () => reload(),),),
-          SizedBox(height: 10,),
-          albumHeader(),
-          Expanded(
-            child: onSearch ? 
-            Obx(() => 
-              ListView.builder(
-                controller: searchController,
-                itemCount: filterBySearch().length,
-                itemBuilder: (BuildContext context, int index){
-                  return index==filterBySearch().length-1 ? Column(
-                    children: [
-                      albumItem(index: index, title: filterBySearch()[index]["title"], count: filterBySearch()[index]["songCount"], id: filterBySearch()[index]["id"], artist: filterBySearch()[index]["artist"],),
-                      SizedBox(height: 120,),
-                    ],
-                  ) :
-                  albumItem(index: index, title: filterBySearch()[index]["title"], count: filterBySearch()[index]["songCount"], id: filterBySearch()[index]["id"], artist: filterBySearch()[index]["artist"],);
-                }
-              )
-            ) : Obx(() => 
-              ListView.builder(
-                controller: controller,
-                itemCount: c.allAlbums.length,
-                itemBuilder: (BuildContext context, int index){
-                  return AutoScrollTag(
-                    key: ValueKey(index), 
-                    controller: controller, 
-                    index: index,
-                    child: index==c.allAlbums.length-1 ? 
-                      Column(
-                        children: [
-                          Obx(() => albumItem(index: index, title: c.allAlbums[index]["title"], count: c.allAlbums[index]["songCount"], id: c.allAlbums[index]["id"], artist: c.allAlbums[index]["artist"],)),
-                          SizedBox(height: 120,),
-                        ],
-                      ):
-                      Obx(() => albumItem(index: index, title: c.allAlbums[index]["title"], count: c.allAlbums[index]["songCount"], id: c.allAlbums[index]["id"], artist: c.allAlbums[index]["artist"])),
-                  );
-                }
-              )
-            ),
-          )
-        ],
-      ),
+    return Obx(() => 
+      c.nowPage["id"]=="" ? 
+      Padding(
+        padding: const EdgeInsets.fromLTRB(20,30,20,20),
+        child: Column(
+          children: [
+            Obx(() => titleBox(title: "专辑", subtitle: "合计${c.allAlbums.length}个专辑", controller: searchInput, reloadList: () => reload(),),),
+            SizedBox(height: 10,),
+            albumHeader(),
+            Expanded(
+              child: onSearch ? 
+              Obx(() => 
+                ListView.builder(
+                  controller: searchController,
+                  itemCount: filterBySearch().length,
+                  itemBuilder: (BuildContext context, int index){
+                    return index==filterBySearch().length-1 ? Column(
+                      children: [
+                        albumItem(index: index, title: filterBySearch()[index]["title"], count: filterBySearch()[index]["songCount"], id: filterBySearch()[index]["id"], artist: filterBySearch()[index]["artist"],),
+                        SizedBox(height: 120,),
+                      ],
+                    ) :
+                    albumItem(index: index, title: filterBySearch()[index]["title"], count: filterBySearch()[index]["songCount"], id: filterBySearch()[index]["id"], artist: filterBySearch()[index]["artist"],);
+                  }
+                )
+              ) : Obx(() => 
+                ListView.builder(
+                  controller: controller,
+                  itemCount: c.allAlbums.length,
+                  itemBuilder: (BuildContext context, int index){
+                    return AutoScrollTag(
+                      key: ValueKey(index), 
+                      controller: controller, 
+                      index: index,
+                      child: index==c.allAlbums.length-1 ? 
+                        Column(
+                          children: [
+                            Obx(() => albumItem(index: index, title: c.allAlbums[index]["title"], count: c.allAlbums[index]["songCount"], id: c.allAlbums[index]["id"], artist: c.allAlbums[index]["artist"],)),
+                            SizedBox(height: 120,),
+                          ],
+                        ):
+                        Obx(() => albumItem(index: index, title: c.allAlbums[index]["title"], count: c.allAlbums[index]["songCount"], id: c.allAlbums[index]["id"], artist: c.allAlbums[index]["artist"])),
+                    );
+                  }
+                )
+              ),
+            )
+          ],
+        ),
+      ) : albumContentView()
     );
   }
 }
