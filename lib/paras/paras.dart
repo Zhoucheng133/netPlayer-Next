@@ -76,7 +76,11 @@ class Controller extends GetxController{
   void updatePlayProgress(data) => playProgress.value=data;
   void updatePlayInfo(data) => playInfo.value=data;
   void updateIsPlay(data) => isPlay.value=data;
-  void updatePlayMode(data) => playMode.value=data;
+  Future<void> updatePlayMode(data) async {
+    playMode.value=data;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("playMode", data);
+  }
   void updateFocusTextField(data) => focusTextField.value=data;
   void updateAlbumContentData(data) => albumContentData.value=data;
   void updateFullRandomPlay(data) => fullRandomPlay.value=data;
