@@ -223,7 +223,10 @@ class _titleBoxWithBackState extends State<titleBoxWithBack> {
                   ),
                 ),
                 SizedBox(width: 10,),
-                Expanded(
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: 600,
+                  ),
                   child: Text(
                     widget.title,
                     style: TextStyle(
