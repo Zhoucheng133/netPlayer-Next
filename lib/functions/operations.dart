@@ -192,4 +192,9 @@ class operations{
   Future<Map> getArtistData(String id) async {
     return await artistDataRequest(id);
   }
+
+  Map getRandomSong(){
+    
+    return {};
+  }
 }

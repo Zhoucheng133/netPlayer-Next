@@ -147,6 +147,13 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     if(c.playInfo.isEmpty){
       return;
     }
+
+    if(c.fullRandomPlay.value){
+      // TODO 完全随机播放
+      play();
+      return;
+    }
+    
     switch (c.playMode.value){
       case "顺序播放": {
         var playInfo={};
