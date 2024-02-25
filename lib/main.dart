@@ -198,7 +198,14 @@ class _MainAppState extends State<MainApp> {
             height: 30,
             width: MediaQuery.of(context).size.width,
             child: WindowTitleBarBox(
-              child: MoveWindow(),
+              child: Platform.isMacOS ? MoveWindow() : Row(
+                children: [
+                  Expanded(child: MoveWindow()),
+                  MinimizeWindowButton(),
+                  MaximizeWindowButton(),
+                  CloseWindowButton(),
+                ],
+              )
             ),
           ),
         ),
