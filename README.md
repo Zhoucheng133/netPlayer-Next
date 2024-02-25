@@ -18,69 +18,7 @@
 
 另：**`Flutter^3.9`** 或者更新的版本 **`Flutter`** 在 macOS系统会出现黑屏闪烁的问题，`Windows`版本未知
 
-对于需要在Windows设备上配置运行，可以参考下面的修改操作：
-
-```dart
-// lib/main.dart
-
-```
-
-```dart
-// lib/functions/audio.dart
-
-final Controller c = Get.put(Controller());
-final player = AudioPlayer();
-var playUrl="";
-
-
-+ Timer? _debounce;
-
-audioHandler(){
-  // ...
-  player.playerStateStream.listen((state) {
-+   skipToNext();
-+   if(state.processingState == ProcessingState.completed) {
-+     if (_debounce?.isActive ?? false) {
-+       _debounce?.cancel();
-+     }
-+     _debounce = Timer(const Duration(milliseconds: 50), () {
-+       skipToNext();
-+     });
-+    }
-  });
-}
-
-// ...
-
-// 播放
-@override
-Future<void> play() async {
-  // ...
-  player.play();
-  playUrl=url;
-  c.updateIsPlay(true);
-  setInfo(true);
-  + if(!player.playing){
-  +   play();
-  + }
-}
-
-// ...
-
-// 上一首
-@override
-Future<void> skipToPrevious() async {
-  + await pause();
-  // ...
-}
-
-@override
-Future<void> skipToNext() async {
-  + await pause();
-  // ...
-}
-```
-
+对于需要在Windows设备上配置运行，可以参考文件：`Test/Windows`文档里的`main.dart`和`audio.dart`文件，将这两个文件替换原有的`lib/main.dart`和`lib/functions/audio.dart`
 ## 更新日志
 
 ## 一些API
