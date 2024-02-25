@@ -32,20 +32,21 @@ final Controller c = Get.put(Controller());
 final player = AudioPlayer();
 var playUrl="";
 
+
 + Timer? _debounce;
 
 audioHandler(){
   // ...
   player.playerStateStream.listen((state) {
-    - skipToNext();
-    + if(state.processingState == ProcessingState.completed) {
-    +    if (_debounce?.isActive ?? false) {
-    +     _debounce?.cancel();
-    +   }
-    +   _debounce = Timer(const Duration(milliseconds: 50), () {
-    +     skipToNext();
-    +   });
-    + }
++   skipToNext();
++   if(state.processingState == ProcessingState.completed) {
++     if (_debounce?.isActive ?? false) {
++       _debounce?.cancel();
++     }
++     _debounce = Timer(const Duration(milliseconds: 50), () {
++       skipToNext();
++     });
++    }
   });
 }
 
