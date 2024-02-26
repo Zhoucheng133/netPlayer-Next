@@ -13,13 +13,25 @@
 
 **注意，由于Flutter的macOS和Windows中有一些依赖代码有区分，本项目默认使用的是macOS的代码**  
 一些存在代码无法双向兼容的依赖:
-- **`bitsdojo_window`**，在Windows上使用的是`window_manager`，前者在Windows上有概率白屏或者黑屏，后者在macOS系统上窗口会黑屏闪烁（可能是`Flutter`的问题）
+
 - **`just_audio`**，在Windows上使用`just_audio_windows`（非官方的just_audio Windows支持版本）前者没有问题，后者极大概率会出现加载完成歌曲无法播放的问题，并且很大概率出现回调函数重复重复执行的问题
 
-另：**`Flutter^3.9`** 或者更新的版本 **`Flutter`** 在 macOS系统会出现黑屏闪烁的问题，`Windows`版本未知
+- **`Flutter^3.9`** 以后版本的 **`Flutter`** ，在 macOS系统可能出现黑屏闪烁的问题，`Windows`版本未知
 
-对于需要在Windows设备上配置运行，可以参考文件：`Test/Windows`文档里的`main.dart`和`audio.dart`文件，将这两个文件替换原有的`lib/main.dart`和`lib/functions/audio.dart`
+对于需要在Windows设备上配置运行，将`lib/functions/audio_windows.dart`文件替换`lib/functions/audio.dart`文件（也就是说将前者文件内容覆盖后者文件内容）
+
 ## 更新日志
+
+### 2.0.0 Beta (2024/2/26)
+- 使用Flutter重构了整个项目
+- 添加单曲循环播放模式
+- 添加记住播放模式功能
+- 添加了歌曲项中右键菜单
+- 改进歌曲显示的布局
+- 改进滚动到播放歌曲
+- 🚫全局功能暂时无法使用
+- 🚫检查更新功能暂时无法使用
+- 🚫Windows版隐藏到状态栏暂时无法使用
 
 ## 一些API
 
