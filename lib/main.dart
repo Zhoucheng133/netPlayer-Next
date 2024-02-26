@@ -78,7 +78,7 @@ class MainApp extends StatefulWidget {
   State<MainApp> createState() => _MainAppState();
 }
 
-class _MainAppState extends State<MainApp> {
+class _MainAppState extends State<MainApp> with WindowListener {
 
   final Controller c = Get.put(Controller());
   bool isLogin=false;
@@ -184,11 +184,24 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-
+    windowManager.addListener(this);
     autoLogin();
     autoLoadPlayInfo();
     ever(c.userInfo, (callback) => isLoginCheck());
     ever(c.playInfo, (callback) => autoSavePlayInfo());
+  }
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  void onWindowFocus() {
+    // Make sure to call once.
+    setState(() {});
+    // do something
   }
 
   bool isMax=false;
