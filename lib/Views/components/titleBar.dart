@@ -44,6 +44,17 @@ class _titleBoxState extends State<titleBox> {
     });
   }
 
+  bool enablePosition(){
+    if(c.nowPage["name"]==c.playInfo["playFrom"]){
+      if(c.nowPage["name"]=="所有歌曲" || c.nowPage["name"]=="喜欢的歌曲"){
+        return true;
+      }else if(c.nowPage["id"]==c.playInfo["listId"]){
+        return true;
+      }
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -73,8 +84,8 @@ class _titleBoxState extends State<titleBox> {
             )
           ),
           widget.title!="专辑" && widget.title!="艺人" && widget.title!="搜索" && widget.title!="设置" ?
-          GestureDetector(
-            child: MouseRegion(
+          Obx(() => enablePosition() ? 
+            MouseRegion(
               cursor: SystemMouseCursors.click,
               onEnter: (event) => setState(() { hoverLocate=true; }),
               onExit: (event) => setState(() { hoverLocate=false; }),
@@ -94,7 +105,14 @@ class _titleBoxState extends State<titleBox> {
                   );
                 },
               ),
-            ),
+            ) : MouseRegion(
+              cursor: SystemMouseCursors.forbidden,
+              child: Icon(
+                Icons.my_location_rounded,
+                size: 20,
+                color: Colors.grey,
+              ),
+            ) ,
           ): Container(),
           SizedBox(width: 10,),
           widget.title!="搜索" && widget.title!="设置" ?
