@@ -4,6 +4,8 @@
 
 <img src="assets/icon.png" width="100px">
 
+**★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
+
 **注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本**  
 版本号在标准版netPlayer之后，这个版本的netPlayer版本号从`2.0.0`开始
 
