@@ -22,6 +22,7 @@ dependencies:
   scroll_to_index: ^3.0.1
   shared_preferences: ^2.2.2
   url_launcher: ^6.1.11
+  window_manager: ^0.3.7
 
 dev_dependencies:
   flutter_test:

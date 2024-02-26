@@ -5,7 +5,9 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   bitsdojo_window_linux
   hotkey_manager
+  screen_retriever
   url_launcher_linux
+  window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
