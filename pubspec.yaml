@@ -8,7 +8,6 @@ environment:
 
 dependencies:
   audio_service: ^0.18.12
-  bitsdojo_window: ^0.1.5
   crypto: ^3.0.3
   flash: ^3.0.5+2
   flutter:

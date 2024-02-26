@@ -6,7 +6,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
-import 'package:bitsdojo_window/bitsdojo_window.dart';
+// import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/services.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:get/get.dart';
@@ -14,6 +14,7 @@ import 'package:net_player_next/Views/mainView.dart';
 import 'package:net_player_next/functions/audio.dart';
 import 'package:net_player_next/functions/operations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'Views/loginView.dart';
 import 'functions/request.dart';
@@ -21,6 +22,7 @@ import 'paras/paras.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
   await hotKeyManager.unregisterAll();
   final Controller c = Get.put(Controller());
   c.handler=await AudioService.init(
@@ -31,14 +33,21 @@ Future<void> main() async {
     ),
   );
 
-  runApp(MyApp());
-  doWhenWindowReady(() {
-    appWindow.minSize = Size(1100, 770);
-    appWindow.size = Size(1100, 770);
-    appWindow.alignment = Alignment.center;
-    appWindow.title="netPlayer Next";
-    appWindow.show();
+  WindowOptions windowOptions = WindowOptions(
+    size: Size(1100, 770),
+    center: true,
+    minimumSize: Size(1100, 770),
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.hidden,
+    title: "netPlayer"
+  );
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
   });
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -197,16 +206,9 @@ class _MainAppState extends State<MainApp> {
           child: SizedBox(
             height: 30,
             width: MediaQuery.of(context).size.width,
-            child: WindowTitleBarBox(
-              child: Platform.isMacOS ? MoveWindow() : Row(
-                children: [
-                  Expanded(child: MoveWindow()),
-                  MinimizeWindowButton(),
-                  MaximizeWindowButton(),
-                  CloseWindowButton(),
-                ],
-              )
-            ),
+            child: DragToMoveArea(
+              child: Container()
+            )
           ),
         ),
         if(Platform.isMacOS) PlatformMenuBar(
