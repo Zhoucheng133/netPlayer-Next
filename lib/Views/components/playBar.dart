@@ -61,6 +61,8 @@ class _playBarState extends State<playBar> {
     }
   }
 
+  bool onHover=false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -81,23 +83,69 @@ class _playBarState extends State<playBar> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                // color: Colors.red,
-                borderRadius: BorderRadius.circular(10)
-              ),
-              child: Obx(() =>
-                c.playInfo["id"]==null ? 
-                Image.asset(
-                  "assets/blank.jpg",
-                  fit: BoxFit.contain,
-                ) : Image.network(
-                  "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.playInfo["id"]}",
-                  fit: BoxFit.contain,
+            GestureDetector(
+              onTap: (){
+                // TODO 显示歌词
+              },
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                onEnter: (val) {
+                  setState(() {
+                    onHover=true;
+                  });
+                },
+                onExit: (val) {
+                  setState(() {
+                    onHover=false;
+                  });
+                },
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Obx(() =>
+                          c.playInfo["id"]==null ? 
+                          Image.asset(
+                            "assets/blank.jpg",
+                            fit: BoxFit.contain,
+                          ) : Image.network(
+                            "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.playInfo["id"]}",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      )
+                    ),
+                    Positioned(
+                      left: 0,
+                      top: 0,
+                      child: AnimatedOpacity(
+                        opacity: onHover?1:0, 
+                        duration: Duration(milliseconds: 200),
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(100, 0, 0, 0)
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.arrow_upward_rounded,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      )
+                    )
+                  ]
                 ),
-              )
+              ),
             ),
             SizedBox(width: 10,),
             Expanded(
