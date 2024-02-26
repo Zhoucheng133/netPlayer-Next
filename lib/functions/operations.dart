@@ -81,6 +81,11 @@ class operations{
       "index": index,
       "list": list,
     };
+    if(playFrom=="随机播放"){
+      c.updateFullRandomPlay(true);
+    }else{
+      c.updateFullRandomPlay(false);
+    }
     c.updatePlayInfo(playInfo);
     c.handler.play();
   }
@@ -193,8 +198,15 @@ class operations{
     return await artistDataRequest(id);
   }
 
-  Map getRandomSong(){
-    
-    return {};
+  Future<void> playRandomSong() async {
+    var data=await randomSongRequest();
+    // print(data);
+    if(data["status"]=="ok"){
+      try {
+        playSong("随机播放", "", 0, data["randomSongs"]["song"]);
+      } catch (e) {
+        stop();
+      }
+    }
   }
 }

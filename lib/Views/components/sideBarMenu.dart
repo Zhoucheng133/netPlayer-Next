@@ -117,6 +117,7 @@ class _sideBarMiniState extends State<sideBarMini> {
               child: Icon(
                 widget.icon,
                 size: 18,
+                color: widget.isSelected ? Colors.blue : Colors.black,
               ),
             ),
           ),

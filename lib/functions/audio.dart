@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:net_player_next/functions/operations.dart';
 
 import '../paras/paras.dart';
 
@@ -106,6 +107,13 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     if(c.playInfo.isEmpty){
       return;
     }
+    
+    if(c.fullRandomPlay.value){
+      operations().playRandomSong();
+      play();
+      return;
+    }
+
     if(c.playMode.value=="顺序播放" || c.playMode.value=="随机播放"){
       var playInfo={};
       if(c.playInfo["index"]==0){
@@ -149,7 +157,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     }
 
     if(c.fullRandomPlay.value){
-      // TODO 完全随机播放
+      operations().playRandomSong();
       play();
       return;
     }

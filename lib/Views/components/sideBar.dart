@@ -264,7 +264,7 @@ class _sideBarState extends State<sideBar> {
   }
 
   void randomPlay(){
-    // TODO 随机播放
+    operations().playRandomSong();
   }
   
 
@@ -291,8 +291,7 @@ class _sideBarState extends State<sideBar> {
                 ),
                 SizedBox(width: 10,),
                 Expanded(
-                  // TODO 需要根据情况判定isSelected状态
-                  child: sideBarMini(icon: Icons.shuffle_rounded, func: randomPlay, isSelected: false,)
+                  child: Obx(() => sideBarMini(icon: Icons.shuffle_rounded, func: randomPlay, isSelected: c.fullRandomPlay.value,))
                 )
               ],
             ),

@@ -35,6 +35,26 @@ Future<Map<String, dynamic>> httpRequest(String url, {int timeoutInSeconds = 5})
   }
 }
 
+// 获取一个随机的歌曲
+Future<Map> randomSongRequest() async {
+  final Controller c = Get.put(Controller());
+
+  String url="${c.userInfo["url"]}/rest/getRandomSongs?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&size=1";
+  Map response=await httpRequest(url);
+  if(response.isEmpty){
+    return {"status": "URL Err"};
+  }
+  try{
+    response=response["subsonic-response"];
+  }catch(e){
+    return {"status": "URL Err"};
+  }
+  if(response["status"]!="ok"){
+    return {"status": "Pass Err"};
+  }
+  return response;
+}
+
 // 获取随机数
 String generateRandomString(int length) {
   const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
