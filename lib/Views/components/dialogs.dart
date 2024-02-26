@@ -30,7 +30,7 @@ Future<void> showLicenseDialog(BuildContext context) async {
           ),
           Row(
             children: [
-              Text("bitsdojo_window"),
+              Text("window_manager"),
               Expanded(child: Container()),
               Text("MIT"),
               SizedBox(width: 5,),
