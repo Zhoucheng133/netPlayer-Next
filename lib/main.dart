@@ -231,7 +231,10 @@ class _MainAppState extends State<MainApp> {
           child: SizedBox(
             height: 30,
             width: MediaQuery.of(context).size.width,
-            child: Row(
+            child: Platform.isMacOS ? 
+              DragToMoveArea(
+                child: Container()
+              ) : Row(
               children: [
                 Expanded(
                   child: DragToMoveArea(
