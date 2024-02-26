@@ -133,6 +133,7 @@ class _playBarState extends State<playBar> {
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[400],
+                                overflow: TextOverflow.ellipsis
                               ),
                             )
                           ),
