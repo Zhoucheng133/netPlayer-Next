@@ -6,7 +6,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
-// import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/services.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:get/get.dart';
@@ -22,7 +22,9 @@ import 'paras/paras.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await windowManager.ensureInitialized();
+  if(Platform.isWindows){
+    await windowManager.ensureInitialized();
+  }
   await hotKeyManager.unregisterAll();
   final Controller c = Get.put(Controller());
   c.handler=await AudioService.init(
@@ -33,19 +35,31 @@ Future<void> main() async {
     ),
   );
 
-  WindowOptions windowOptions = WindowOptions(
-    size: Size(1100, 770),
-    center: true,
-    minimumSize: Size(1100, 770),
-    backgroundColor: Colors.transparent,
-    skipTaskbar: false,
-    titleBarStyle: TitleBarStyle.hidden,
-    title: "netPlayer"
-  );
-  windowManager.waitUntilReadyToShow(windowOptions, () async {
-    await windowManager.show();
-    await windowManager.focus();
-  });
+  if(Platform.isWindows){
+    WindowOptions windowOptions = WindowOptions(
+      size: Size(1100, 770),
+      center: true,
+      minimumSize: Size(1100, 770),
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.hidden,
+      title: "netPlayer"
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
+
+  if(Platform.isMacOS){
+    doWhenWindowReady(() {
+      const initialSize = Size(1100, 770);
+      appWindow.minSize = initialSize;
+      appWindow.size = initialSize;
+      appWindow.alignment = Alignment.center;
+      appWindow.show();
+    });
+  }
 
   runApp(MyApp());
 }
@@ -78,7 +92,7 @@ class MainApp extends StatefulWidget {
   State<MainApp> createState() => _MainAppState();
 }
 
-class _MainAppState extends State<MainApp> with WindowListener {
+class _MainAppState extends State<MainApp> {
 
   final Controller c = Get.put(Controller());
   bool isLogin=false;
@@ -184,24 +198,10 @@ class _MainAppState extends State<MainApp> with WindowListener {
   @override
   void initState() {
     super.initState();
-    windowManager.addListener(this);
     autoLogin();
     autoLoadPlayInfo();
     ever(c.userInfo, (callback) => isLoginCheck());
     ever(c.playInfo, (callback) => autoSavePlayInfo());
-  }
-
-  @override
-  void dispose() {
-    windowManager.removeListener(this);
-    super.dispose();
-  }
-
-  @override
-  void onWindowFocus() {
-    // Make sure to call once.
-    setState(() {});
-    // do something
   }
 
   bool isMax=false;
@@ -245,7 +245,7 @@ class _MainAppState extends State<MainApp> with WindowListener {
             height: 30,
             width: MediaQuery.of(context).size.width,
             child: Platform.isMacOS ? 
-              DragToMoveArea(
+              MoveWindow(
                 child: Container()
               ) : Row(
               children: [
