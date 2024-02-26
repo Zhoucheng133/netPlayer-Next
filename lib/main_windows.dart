@@ -19,7 +19,7 @@ class main_windows extends StatefulWidget {
   State<main_windows> createState() => _main_windowsState();
 }
 
-class _main_windowsState extends State<main_windows> {
+class _main_windowsState extends State<main_windows> with WindowListener {
   final Controller c = Get.put(Controller());
   bool isLogin=false;
 
@@ -120,10 +120,25 @@ class _main_windowsState extends State<main_windows> {
       });
     }
   }
+
+  @override
+  void onWindowMaximize(){
+    setState(() {
+      isMax=true;
+    });
+  }
+
+  @override
+  void onWindowRestore() {
+    setState(() {
+      isMax=false;
+    });
+  }
   
   @override
   void initState() {
     super.initState();
+    windowManager.addListener(this);
     autoLogin();
     autoLoadPlayInfo();
     ever(c.userInfo, (callback) => isLoginCheck());
