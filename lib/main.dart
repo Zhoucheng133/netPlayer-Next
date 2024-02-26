@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace, use_build_context_synchronously, unrelated_type_equality_checks
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sized_box_for_whitespace, use_build_context_synchronously, unrelated_type_equality_checks, camel_case_types
 
 import 'dart:io';
 
@@ -56,6 +56,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
@@ -190,6 +191,30 @@ class _MainAppState extends State<MainApp> {
     ever(c.playInfo, (callback) => autoSavePlayInfo());
   }
 
+  bool isMax=false;
+
+  void resizeWindow(){
+    setState(() {
+      isMax=false;
+    });
+    windowManager.restore();
+  }
+
+  void minWindow(){
+    windowManager.minimize();
+  }
+
+  void maxWindow(){
+    setState(() {
+      isMax=true;
+    });
+    windowManager.maximize();
+  }
+
+  void closeWindow(){
+    windowManager.close();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -206,8 +231,26 @@ class _MainAppState extends State<MainApp> {
           child: SizedBox(
             height: 30,
             width: MediaQuery.of(context).size.width,
-            child: DragToMoveArea(
-              child: Container()
+            child: Row(
+              children: [
+                Expanded(
+                  child: DragToMoveArea(
+                    child: Container()
+                  ),
+                ),
+                WindowCaptionButton.minimize(
+                  onPressed: () => minWindow(),
+                ),
+                !isMax ?
+                WindowCaptionButton.maximize(
+                  onPressed: () => maxWindow(),
+                ) : WindowCaptionButton.unmaximize(
+                  onPressed: () => resizeWindow(),
+                ),
+                WindowCaptionButton.close(
+                  onPressed: () => closeWindow(),
+                ),
+              ],
             )
           ),
         ),
