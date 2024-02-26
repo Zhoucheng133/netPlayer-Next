@@ -223,6 +223,10 @@ class _playModeState extends State<playMode> {
   final Controller c = Get.put(Controller());
 
   IconData playModeIcon(){
+    if(c.fullRandomPlay.value){
+      return Icons.shuffle_rounded;
+    }
+
     if(c.playMode.value=="顺序播放"){
       return Icons.repeat_rounded;
     }else if(c.playMode.value=="随机播放"){
@@ -233,6 +237,9 @@ class _playModeState extends State<playMode> {
   }
 
   Future<void> menuShown(BuildContext context, TapDownDetails details) async {
+    if(c.fullRandomPlay.value){
+      return;
+    }
     final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
     final Offset position = overlay.localToGlobal(details.globalPosition);
     var val = await showMenu(
@@ -305,15 +312,18 @@ class _playModeState extends State<playMode> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapDown: (details) => menuShown(context, details),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Obx(() => 
-          Icon(
-            playModeIcon(),
-            size: 20,
-          ),
-        )
-      ),
+      child: Obx(() => 
+        MouseRegion(
+          cursor: c.fullRandomPlay.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+          child: Obx(() => 
+            Icon(
+              playModeIcon(),
+              size: 20,
+              color: c.fullRandomPlay.value ? Colors.grey : Colors.black
+            ),
+          )
+        ),
+      )
     );
   }
 }
