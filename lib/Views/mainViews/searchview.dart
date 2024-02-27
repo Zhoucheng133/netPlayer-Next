@@ -59,7 +59,7 @@ class _searchViewState extends State<searchView> {
   ScrollController artistController=ScrollController();
 
   void playFromSearch(int index){
-    // TODO 从搜索界面播放歌曲
+    operations().playSong("搜索", searchInput.text, index, songList);
   }
 
   bool isPlaying(index){
@@ -95,7 +95,7 @@ class _searchViewState extends State<searchView> {
                       return index==songList.length-1 ? 
                           Column(
                             children: [
-                              songItem(
+                              Obx(() => songItem(
                                 artist: songList[index]["artist"], 
                                 duration: songList[index]["duration"], 
                                 index: index, 
@@ -105,20 +105,22 @@ class _searchViewState extends State<searchView> {
                                 isPlaying: isPlaying(index), 
                                 id: songList[index]["id"],
                                 silentReload: ()=>{},
-                              ),
+                              ),),
                               SizedBox(height: 120,),
                             ],
                           ):
-                          songItem(
-                            artist: songList[index]["artist"], 
-                            duration: songList[index]["duration"], 
-                            index: index, 
-                            title: songList[index]["title"], 
-                            isLoved: operations().isLoved(songList[index]["id"]), 
-                            playSong: ()=>playFromSearch(index), 
-                            isPlaying: isPlaying(index), 
-                            id: songList[index]["id"],
-                            silentReload: ()=>{},
+                          Obx(() => 
+                            songItem(
+                              artist: songList[index]["artist"], 
+                              duration: songList[index]["duration"], 
+                              index: index, 
+                              title: songList[index]["title"], 
+                              isLoved: operations().isLoved(songList[index]["id"]), 
+                              playSong: ()=>playFromSearch(index), 
+                              isPlaying: isPlaying(index), 
+                              id: songList[index]["id"],
+                              silentReload: ()=>{},
+                            )
                           );
                     }
                   ) : type=="艺人" ? ListView.builder(
