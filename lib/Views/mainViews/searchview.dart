@@ -112,7 +112,20 @@ class _searchViewState extends State<searchView> {
                             silentReload: ()=>{},
                           );
                     }
-                  ): Container()
+                  ) : type=="艺人" ? ListView.builder(
+                    controller: artistController,
+                    itemCount: artistList.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return index==artistList.length-1 ? 
+                      Column(
+                        children: [
+                          artistItem(index: index, id: artistList[index]["id"], name: artistList[index]["name"], count: artistList[index]["albumCount"]),
+                          SizedBox(height: 120,),
+                        ],
+                      ):
+                      artistItem(index: index, id: artistList[index]["id"], name:artistList[index]["name"], count: artistList[index]["albumCount"]);
+                    }
+                  ) : Container()
                 )
               ],
             ),
