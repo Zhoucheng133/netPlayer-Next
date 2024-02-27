@@ -10,7 +10,7 @@ import 'package:just_audio/just_audio.dart';
 import '../paras/paras.dart';
 import 'operations.dart';
 
-class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
+class audioHandler_windows extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   final Controller c = Get.put(Controller());
   final player = AudioPlayer();
@@ -19,7 +19,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   
   Timer? _debounce;
 
-  audioHandler(){
+  audioHandler_windows(){
 
     player.positionStream.listen((position) {
       c.updatePlayProgress(position.inMilliseconds);

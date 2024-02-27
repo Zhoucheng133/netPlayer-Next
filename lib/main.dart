@@ -9,6 +9,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/functions/audio.dart';
+import 'package:net_player_next/functions/audio_windows.dart';
 import 'package:net_player_next/main_macos.dart';
 import 'package:net_player_next/main_windows.dart';
 import 'package:window_manager/window_manager.dart';
@@ -22,13 +23,26 @@ Future<void> main() async {
   }
   await hotKeyManager.unregisterAll();
   final Controller c = Get.put(Controller());
-  c.handler=await AudioService.init(
-    builder: () => audioHandler(),
-    config: AudioServiceConfig(
-      androidNotificationChannelId: 'com.zhouc.netPlayer.channel.audio',
-      androidNotificationChannelName: 'Music playback',
-    ),
-  );
+
+  if(Platform.isMacOS){
+    c.handler=await AudioService.init(
+      builder: () => audioHandler(),
+      config: AudioServiceConfig(
+        androidNotificationChannelId: 'com.zhouc.netPlayer.channel.audio',
+        androidNotificationChannelName: 'Music playback',
+      ),
+    );
+  }else{
+    c.handler=await AudioService.init(
+      builder: () => audioHandler_windows(),
+      config: AudioServiceConfig(
+        androidNotificationChannelId: 'com.zhouc.netPlayer.channel.audio',
+        androidNotificationChannelName: 'Music playback',
+      ),
+    );
+  }
+
+  
 
   if(Platform.isWindows){
     WindowOptions windowOptions = WindowOptions(
