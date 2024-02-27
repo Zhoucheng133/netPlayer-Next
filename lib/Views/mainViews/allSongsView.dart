@@ -173,7 +173,7 @@ class _allSongsViewState extends State<allSongsView> {
       child: Column(
         children: [
           Obx(() => 
-            titleBox(title: "所有歌曲", subtitle: "合计${c.allSongs.length}首歌", controller: searchInput, reloadList: () => reload(), scrollToIndex: () => scrollToIndex(),),
+            titleBox(title: "所有歌曲", subtitle: "合计${c.allSongs.length}首歌", controller: searchInput, reloadList: () => reload(), scrollToIndex: () => scrollToIndex(), searchType: (value) {  },),
           ),
           SizedBox(height: 10,),
           songsHeader(),

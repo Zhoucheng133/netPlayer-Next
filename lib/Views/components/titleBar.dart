@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/Views/components/searchType.dart';
 
 import '../../paras/paras.dart';
 // import 'package:flutter/cupertino.dart';
@@ -15,8 +16,9 @@ class titleBox extends StatefulWidget {
   final TextEditingController controller;
   final VoidCallback reloadList;
   final dynamic scrollToIndex;
+  final ValueChanged searchType;
 
-  const titleBox({super.key, required this.title, required this.subtitle, required this.controller, required this.reloadList, this.scrollToIndex});
+  const titleBox({super.key, required this.title, required this.subtitle, required this.controller, required this.reloadList, this.scrollToIndex, required this.searchType});
 
   @override
   State<titleBox> createState() => _titleBoxState();
@@ -55,6 +57,10 @@ class _titleBoxState extends State<titleBox> {
     return false;
   }
 
+  void searchTypeChange(val){
+    widget.searchType(val);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,6 +86,8 @@ class _titleBoxState extends State<titleBox> {
                     color: Colors.grey[700],
                   ),
                 ),
+                SizedBox(width: 30,),
+                if(widget.title=="搜索") searchType(typeChanged: (value) => searchTypeChange(value))
               ],
             )
           ),
@@ -115,7 +123,7 @@ class _titleBoxState extends State<titleBox> {
             ) ,
           ): Container(),
           SizedBox(width: 10,),
-          widget.title!="搜索" && widget.title!="设置" ?
+          widget.title!="设置" ?
           Stack(
             children: [
               SizedBox(

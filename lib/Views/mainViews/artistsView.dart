@@ -99,7 +99,7 @@ class _artistsViewState extends State<artistsView> {
         padding: const EdgeInsets.fromLTRB(20,30,20,20),
         child: Column(
           children: [
-            Obx(() => titleBox(title: "艺人", subtitle: "合计${c.allArtists.length}位艺人", controller: searchInput, reloadList: () => reload(context),),),
+            Obx(() => titleBox(title: "艺人", subtitle: "合计${c.allArtists.length}位艺人", controller: searchInput, reloadList: () => reload(context), searchType: (value) {  },),),
             SizedBox(height: 10,),
             artistsHeader(),
             Expanded(

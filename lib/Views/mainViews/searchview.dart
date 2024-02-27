@@ -1,6 +1,8 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:net_player_next/Views/components/searchType.dart';
+import 'package:net_player_next/Views/components/tableHeader.dart';
 
 import '../components/titleBar.dart';
 
@@ -18,6 +20,7 @@ class _searchViewState extends State<searchView> {
 
   void reload(){/** 空函数 */}
 
+  var type="歌曲";
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,16 @@ class _searchViewState extends State<searchView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          titleBox(title: "搜索", subtitle: "", controller: searchInput, reloadList: () => reload(),),
+          titleBox(title: "搜索", subtitle: "", controller: searchInput, reloadList: () => reload(), searchType: (value) { setState(() { type=value; }); },),
           SizedBox(height: 10,),
           Expanded(
-            // 主要的内容
-            child: Container(),
+            child: Column(
+              children: [
+                if(type=="歌曲") songsHeader()
+                else if(type=="专辑") albumHeader()
+                else artistsHeader(),
+              ],
+            ),
           )
         ],
       ),

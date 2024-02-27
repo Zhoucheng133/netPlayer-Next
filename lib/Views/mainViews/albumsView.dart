@@ -99,7 +99,7 @@ class _albumsViewState extends State<albumsView> {
         padding: const EdgeInsets.fromLTRB(20,30,20,20),
         child: Column(
           children: [
-            Obx(() => titleBox(title: "专辑", subtitle: "合计${c.allAlbums.length}个专辑", controller: searchInput, reloadList: () => reload(),),),
+            Obx(() => titleBox(title: "专辑", subtitle: "合计${c.allAlbums.length}个专辑", controller: searchInput, reloadList: () => reload(), searchType: (value) {  },),),
             SizedBox(height: 10,),
             albumHeader(),
             Expanded(

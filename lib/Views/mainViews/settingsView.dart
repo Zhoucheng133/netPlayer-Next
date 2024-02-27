@@ -64,7 +64,7 @@ class _settingsViewState extends State<settingsView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          titleBox(title: "设置", subtitle: "", controller: searchInput, reloadList: () => reload(),),
+          titleBox(title: "设置", subtitle: "", controller: searchInput, reloadList: () => reload(), searchType: (value) {  },),
           SizedBox(height: 5,),
           Expanded(
             child: Center(

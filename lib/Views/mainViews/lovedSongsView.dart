@@ -138,7 +138,7 @@ class _lovedSongsViewState extends State<lovedSongsView> {
       padding: const EdgeInsets.fromLTRB(20,30,20,20),
       child: Column(
         children: [
-          Obx(() => titleBox(title: "喜欢的歌曲", subtitle: "合计${c.lovedSongs.length}首歌", controller: searchInput, reloadList: () => reload(), scrollToIndex: ()=>scrollToIndex(),)),
+          Obx(() => titleBox(title: "喜欢的歌曲", subtitle: "合计${c.lovedSongs.length}首歌", controller: searchInput, reloadList: () => reload(), scrollToIndex: ()=>scrollToIndex(), searchType: (value) {  },)),
           SizedBox(height: 10,),
           songsHeader(),
           Expanded(
