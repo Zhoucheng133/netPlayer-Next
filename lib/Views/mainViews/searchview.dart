@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:net_player_next/Views/components/tableHeader.dart';
+import 'package:net_player_next/functions/operations.dart';
 
+import '../components/listItems.dart';
 import '../components/titleBar.dart';
 
 class searchView extends StatefulWidget {
@@ -29,13 +31,38 @@ class _searchViewState extends State<searchView> {
   var artistList=[];
   var albumList=[];
 
-  void search(String val){
-    // TODO 搜索函数
+  Future<void> search(String val) async {
+    if(val==""){
+      setState(() {
+        songList=[];
+        artistList=[];
+        albumList=[];
+      });
+    }
+    var data=await operations().searchHandler(val);
+    setState(() {
+      songList=data["songs"];
+      artistList=data["artists"];
+      albumList=data["albums"];
+    });
   }
 
   void reload(){/** 空函数 */}
 
   var type="歌曲";
+
+  ScrollController songController=ScrollController();
+  ScrollController albumController=ScrollController();
+  ScrollController artistController=ScrollController();
+
+  void playFromSearch(int index){
+    // TODO 从搜索界面播放歌曲
+  }
+
+  bool isPlaying(index){
+    // 判定是否播放
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +75,45 @@ class _searchViewState extends State<searchView> {
           Expanded(
             child: Column(
               children: [
-                if(type=="歌曲") songsHeader()
-                else if(type=="专辑") albumHeader()
-                else artistsHeader(),
-
-
+                type=="歌曲" ? songsHeader() :
+                type=="专辑" ? albumHeader() :
+                artistsHeader(),
+                Expanded(
+                  child: type=="歌曲" ? ListView.builder(
+                    controller: songController,
+                    itemCount: songList.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return index==songList.length-1 ? 
+                          Column(
+                            children: [
+                              songItem(
+                                artist: songList[index]["artist"], 
+                                duration: songList[index]["duration"], 
+                                index: index, 
+                                title: songList[index]["title"], 
+                                isLoved: operations().isLoved(songList[index]["id"]), 
+                                playSong: ()=>playFromSearch(index), 
+                                isPlaying: isPlaying(index), 
+                                id: songList[index]["id"],
+                                silentReload: ()=>{},
+                              ),
+                              SizedBox(height: 120,),
+                            ],
+                          ):
+                          songItem(
+                            artist: songList[index]["artist"], 
+                            duration: songList[index]["duration"], 
+                            index: index, 
+                            title: songList[index]["title"], 
+                            isLoved: operations().isLoved(songList[index]["id"]), 
+                            playSong: ()=>playFromSearch(index), 
+                            isPlaying: isPlaying(index), 
+                            id: songList[index]["id"],
+                            silentReload: ()=>{},
+                          );
+                    }
+                  ): Container()
+                )
               ],
             ),
           )
