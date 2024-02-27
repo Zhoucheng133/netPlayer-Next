@@ -66,7 +66,7 @@ class _searchViewState extends State<searchView> {
     if(c.playInfo["playFrom"]!="搜索"){
       return false;
     }else{
-      if(c.playInfo["index"]==index && c.playInfo["listId"]==c.nowPage["id"]){
+      if(c.playInfo["index"]==index && c.playInfo["listId"]==searchInput.text){
         return true;
       }
       return false;
