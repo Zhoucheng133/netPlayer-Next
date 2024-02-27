@@ -125,7 +125,20 @@ class _searchViewState extends State<searchView> {
                       ):
                       artistItem(index: index, id: artistList[index]["id"], name:artistList[index]["name"], count: artistList[index]["albumCount"]);
                     }
-                  ) : Container()
+                  ) : ListView.builder(
+                    controller: albumController,
+                    itemCount: albumList.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return index==albumList.length-1 ? 
+                          Column(
+                            children: [
+                              albumItem(index: index, title: albumList[index]["title"], count: albumList[index]["songCount"], id: albumList[index]["id"], artist: albumList[index]["artist"],),
+                              SizedBox(height: 120,),
+                            ],
+                          ):
+                          albumItem(index: index, title: albumList[index]["title"], count: albumList[index]["songCount"], id: albumList[index]["id"], artist: albumList[index]["artist"]);
+                    }
+                  )
                 )
               ],
             ),
