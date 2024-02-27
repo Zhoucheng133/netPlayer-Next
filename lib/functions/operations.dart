@@ -213,4 +213,8 @@ class operations{
   Future<String> updateChecker() async {
     return await versionCheck();
   }
+
+  Future<Map> searchHandler(String value) async {
+    return await searchRequest(value);
+  }
 }

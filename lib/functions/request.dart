@@ -69,6 +69,33 @@ String generateRandomString(int length) {
   return result;
 }
 
+// 搜索
+Future<Map> searchRequest(String value) async {
+  final Controller c = Get.put(Controller());
+  var data={
+    "songs": [],
+    "albums": [],
+    "artists": [],
+  };
+  String url="${c.userInfo["url"]}/rest/search2?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&query=${value}";
+  Map response=await httpRequest(url);
+  if(response.isEmpty){
+    return data;
+  }
+  try{
+    // print(response);
+    response=response["subsonic-response"]["searchResult2"];
+    data={
+      "songs": response["song"],
+      "albums": response["album"],
+      "artists": response["artist"]
+    };
+  }catch(e){
+    return data;
+  }
+  return data;
+}
+
 // 将某一首歌从喜欢中删除
 Future<bool> setDelove(String id)async {
   final Controller c = Get.put(Controller());
