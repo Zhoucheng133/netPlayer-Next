@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showLicenseDialog(BuildContext context) async {
@@ -151,5 +152,71 @@ Future<void> showLicenseDialog(BuildContext context) async {
         )
       ],
     )
+  );
+}
+
+void showUpdaterDialog(bool needUpdate, BuildContext context){
+  showFlash(
+    duration: const Duration(milliseconds: 1500),
+    transitionDuration: const Duration(milliseconds: 200),
+    reverseTransitionDuration: const Duration(milliseconds: 200), 
+    builder: (context, controller) => FlashBar(
+      behavior: FlashBehavior.floating,
+      position: FlashPosition.top,
+      backgroundColor: needUpdate ? Colors.orange : Colors.green[400],
+      iconColor: Colors.white,
+      margin: EdgeInsets.only(
+        top: 30,
+        left: (MediaQuery.of(context).size.width-280)/2,
+        right: (MediaQuery.of(context).size.width-280)/2
+      ),
+      icon: Icon(
+        Icons.info_outline_rounded,
+      ),
+      controller: controller, 
+      content: Text(
+        needUpdate ? "有可用的更新" : "已是最新版本",
+        style: TextStyle(
+          color: Colors.white
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+    ),
+    context: context
+  );
+}
+
+void showUpdaterErrorDialog(BuildContext context){
+  showFlash(
+    duration: const Duration(milliseconds: 1500),
+    transitionDuration: const Duration(milliseconds: 200),
+    reverseTransitionDuration: const Duration(milliseconds: 200), 
+    builder: (context, controller) => FlashBar(
+      behavior: FlashBehavior.floating,
+      position: FlashPosition.top,
+      backgroundColor: Colors.red,
+      iconColor: Colors.white,
+      margin: EdgeInsets.only(
+        top: 30,
+        left: (MediaQuery.of(context).size.width-280)/2,
+        right: (MediaQuery.of(context).size.width-280)/2
+      ),
+      icon: Icon(
+        Icons.close,
+      ),
+      controller: controller, 
+      content: Text(
+        "请求失败",
+        style: TextStyle(
+          color: Colors.white
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+    ),
+    context: context
   );
 }

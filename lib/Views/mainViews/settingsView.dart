@@ -1,8 +1,10 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_brace_in_string_interps
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_brace_in_string_interps, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/Views/components/dialogs.dart';
 import 'package:net_player_next/Views/components/settingsItem.dart';
+import 'package:net_player_next/functions/operations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -147,8 +149,15 @@ class _settingsViewState extends State<settingsView> {
                         children: [
                           SizedBox(width: 160),
                           TextButton(
-                            onPressed: (){
-                              // TODO 检查更新操作
+                            onPressed: () async {
+                              var ltversion=await operations().updateChecker();
+                              if(ltversion==""){
+                                showUpdaterErrorDialog(context);
+                              }else if("v${version}"==ltversion){
+                                showUpdaterDialog(false, context);
+                              }else{
+                                showUpdaterDialog(true, context);
+                              }
                             }, 
                             child: Text("检查更新")
                           )

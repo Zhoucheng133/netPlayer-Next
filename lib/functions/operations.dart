@@ -209,4 +209,8 @@ class operations{
       }
     }
   }
+
+  Future<String> updateChecker() async {
+    return await versionCheck();
+  }
 }

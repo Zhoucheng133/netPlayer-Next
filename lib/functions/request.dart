@@ -362,6 +362,19 @@ Future<Map> autoLoginRequest(String url, String username, String salt, String to
   return response;
 }
 
+// 检查更新
+Future<String> versionCheck() async {
+  String url="https://api.github.com/repos/Zhoucheng133/net-player/releases/latest";
+  Map response=await httpRequest(url);
+  if(response.isEmpty){
+    return "";
+  }
+  try {
+    return response["name"];
+  } catch (e) {
+    return "";
+  }
+}
 
 // 登录请求
 Future<Map> loginRequest(String url, String username, String password) async {
