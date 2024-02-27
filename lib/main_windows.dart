@@ -129,7 +129,7 @@ class _main_windowsState extends State<main_windows> with WindowListener {
   }
 
   @override
-  void onWindowRestore() {
+  void onWindowUnmaximize() {
     setState(() {
       isMax=false;
     });
