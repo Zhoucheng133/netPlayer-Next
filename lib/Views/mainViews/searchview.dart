@@ -1,9 +1,11 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/tableHeader.dart';
 import 'package:net_player_next/functions/operations.dart';
 
+import '../../paras/paras.dart';
 import '../components/listItems.dart';
 import '../components/titleBar.dart';
 
@@ -16,6 +18,7 @@ class searchView extends StatefulWidget {
 
 class _searchViewState extends State<searchView> {
 
+  final Controller c = Get.put(Controller());
   TextEditingController searchInput=TextEditingController();
 
   @override
@@ -60,8 +63,14 @@ class _searchViewState extends State<searchView> {
   }
 
   bool isPlaying(index){
-    // 判定是否播放
-    return false;
+    if(c.playInfo["playFrom"]!="搜索"){
+      return false;
+    }else{
+      if(c.playInfo["index"]==index && c.playInfo["listId"]==c.nowPage["id"]){
+        return true;
+      }
+      return false;
+    }
   }
 
   @override
