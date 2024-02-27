@@ -165,7 +165,6 @@ class audioHandler_windows extends BaseAudioHandler with QueueHandler, SeekHandl
 
   @override
   Future<void> skipToNext() async {
-    print("==> Call Next <==");
     await pause();
     if(c.playInfo.isEmpty){
       return;
