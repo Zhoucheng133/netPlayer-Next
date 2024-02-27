@@ -87,7 +87,7 @@ class _titleBoxState extends State<titleBox> {
                   ),
                 ),
                 SizedBox(width: 30,),
-                if(widget.title=="搜索") searchType(typeChanged: (value) => searchTypeChange(value))
+                widget.title=="搜索" ? searchType(typeChanged: (value) => searchTypeChange(value)) : Container()
               ],
             )
           ),
