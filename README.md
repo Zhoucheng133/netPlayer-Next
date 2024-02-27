@@ -20,8 +20,6 @@
 
 - **`Flutter^3.9`** 以后版本的 **`Flutter`** ，在 macOS系统可能出现黑屏闪烁的问题，`Windows`版本未知
 
-对于需要在Windows设备上配置运行，将`lib/functions/audio_windows.dart`文件替换`lib/functions/audio.dart`文件（也就是说将前者文件内容覆盖后者文件内容）
-
 ## 更新日志
 
 ### 2.0.1 (开发中)
