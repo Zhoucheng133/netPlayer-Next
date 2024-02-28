@@ -6,21 +6,24 @@
 
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
-**注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本，正在测试中 【搁置状态，Windows电脑出了点问题( ´•︵•\` )  】**  
+**注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本**  
 版本号在标准版netPlayer之后，这个版本的netPlayer版本号从`2.0.0`开始
 
 这个版本的netPlayer (Next)不支持在Windows系统上隐藏到任务栏，如果对该功能有需求建议下载[1.5.0](https://github.com/Zhoucheng133/net-player/releases/tag/v1.5.0)版本
 
 ## 在你的设备上配置netPlayer Next
 
-**注意，由于Flutter的macOS和Windows中有一些依赖代码有区分，本项目默认使用的是macOS的代码**  
-一些存在代码无法双向兼容的依赖:
-- **`window_manager`**，在macOS上会出现打开App无法聚焦窗口的问题<sup>\*</sup>，因此在macOS上使用 **`bitsdojo_window`**，另外新版本的`Flutter`使用`bitsdojo_window`在macOS系统上会出现无法显示窗口的问题<sup>\*</sup>，因此本项目使用旧版的`Flutter`
-- **`just_audio`**，在Windows上使用 **`just_audio_windows`**（非官方的just_audio Windows支持版本）前者没有问题，后者极大概率会出现加载完成歌曲无法播放的问题，并且很大概率出现回调函数重复重复执行的问题
-- **`audioplayers`**，理论上支持macOS和Windows，但是不知道为什么在我的Windows设备上无法添加该依赖
-- **`Flutter^3.9`** 以后版本的 **`Flutter`** ，在 macOS系统可能出现黑屏闪烁的问题，Windows版本不存在这样的问题
+**注意，由于Flutter的macOS和Windows中有一些依赖代码有区分，详细如下**
+
+- 窗口管理功能，在Widnows上使用的是`window_manager`依赖，在macOS系统上会出现无法聚焦到窗口的问题<sup>*</sup>，因此替换为`bitsdojo_window`，后者在Windows上有概率会出现白屏的情况
+- 音频播放，在Windows上使用的是`just_audio_windows`，在macOS系统上使用的是`just_audio`，前者极大概率会出现加载完成歌曲无法播放的问题，并且很大概率出现回调函数重复重复执行的问题，在本项目中使用特定代码避免了这些问题
 
 <sup>*</sup>该问题已向作者反馈
+
+**不过无论你使用的是什么系统，均可直接使用`Fluter^3.7`直接在你的设备上编译运行**
+
+另注：
+> 如果你有`Flutter`开发经验，并且主力设备是**Windows系统**，允许的话可以帮测试一下`Flutter3.7`使用`audioplayers`或者`mediakit`是否可以在Windows系统上编译运行，我使用虚拟机在macOS系统上使用这两个依赖无法正确运行
 
 ## 更新日志
 
