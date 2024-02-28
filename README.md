@@ -11,6 +11,14 @@
 
 这个版本的netPlayer (Next)不支持在Windows系统上隐藏到任务栏，如果对该功能有需求建议下载[1.5.0](https://github.com/Zhoucheng133/net-player/releases/tag/v1.5.0)版本
 
+## 截图
+<img src="./build/demo1.png" height="400px"/>
+
+**点击歌曲封面可以查看歌词**
+
+<img src="./build/demo2.png" height="400px"/>
+
+
 ## 在你的设备上配置netPlayer Next
 
 **注意，由于Flutter的macOS和Windows中有一些依赖代码有区分，详细如下**
