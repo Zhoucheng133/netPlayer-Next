@@ -10,7 +10,6 @@ import 'package:window_manager/window_manager.dart';
 
 import 'Views/loginView.dart';
 import 'Views/mainView.dart';
-import 'functions/operations.dart';
 import 'functions/request.dart';
 
 class main_windows extends StatefulWidget {
