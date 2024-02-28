@@ -4,6 +4,8 @@ import 'dart:ui';
 
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../functions/request.dart';
 class Controller extends GetxController{
   // 各种颜色
   var primaryColor=const Color.fromARGB(255, 0, 97, 164);
@@ -30,6 +32,10 @@ class Controller extends GetxController{
   var playMode="顺序播放".obs;
   // 完全随机播放
   var fullRandomPlay=false.obs;
+  // 当前歌词到第几行了
+  var lyricLine=0.obs;
+  // 歌词
+  var lyric=[].obs;
 
   var handler;
 
@@ -43,6 +49,7 @@ class Controller extends GetxController{
     "listId": "abcd",
     "index": 0,
     "list": [],
+    "album": "albumName"
   };
 
   // 所有专辑
@@ -74,7 +81,17 @@ class Controller extends GetxController{
   void updateAllSongs(data) => allSongs.value=data;
   void updateLovedSongs(data) => lovedSongs.value=data;
   void updatePlayProgress(data) => playProgress.value=data;
-  void updatePlayInfo(data) => playInfo.value=data;
+  Future<void> updatePlayInfo(data) async {
+    playInfo.value=data; 
+    lyric.value=[
+      {
+        'time': 0,
+        'content': '正在查找歌词...',
+      }
+    ];
+    String lyricPain=await getLyric(data['title'], data['album'], data['artist'], data['duration'].toString());
+
+  }
   void updateIsPlay(data) => isPlay.value=data;
   Future<void> updatePlayMode(data) async {
     playMode.value=data;

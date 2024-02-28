@@ -77,6 +77,7 @@ class operations{
       "title": list[index]["title"],
       "artist": list[index]["artist"],
       "duration": list[index]["duration"],
+      "album": list[index]["album"],
       "listId": listId,
       "index": index,
       "list": list,
@@ -216,9 +217,5 @@ class operations{
 
   Future<Map> searchHandler(String value) async {
     return await searchRequest(value);
-  }
-
-  void getLyric(){
-    print("getLyric");
   }
 }

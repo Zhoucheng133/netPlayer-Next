@@ -84,9 +84,6 @@ class _main_windowsState extends State<main_windows> with WindowListener {
     prefs.setString("playInfo", jsonEncode(c.playInfo));
     prefs.setString("playMode", c.playMode.value);
     prefs.setBool("fullRandom", c.fullRandomPlay.value);
-
-    // 获取歌词
-    operations().getLyric();
   }
 
   Future<void> autoLoadPlayInfo() async {
