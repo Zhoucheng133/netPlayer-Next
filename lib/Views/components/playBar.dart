@@ -85,7 +85,7 @@ class _playBarState extends State<playBar> {
           children: [
             GestureDetector(
               onTap: (){
-                // TODO 显示歌词
+                c.updateShowLyric(!c.showLyric.value);
               },
               child: MouseRegion(
                 cursor: SystemMouseCursors.click,
@@ -135,10 +135,12 @@ class _playBarState extends State<playBar> {
                             color: Color.fromARGB(100, 0, 0, 0)
                           ),
                           child: Center(
-                            child: Icon(
-                              Icons.arrow_upward_rounded,
-                              color: Colors.white,
-                            ),
+                            child: Obx(() => 
+                              Icon(
+                                c.showLyric.value ? Icons.arrow_downward_rounded : Icons.arrow_upward_rounded,
+                                color: Colors.white,
+                              ),
+                            )
                           ),
                         ),
                       )

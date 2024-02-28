@@ -1,10 +1,11 @@
-// ignore_for_file: camel_case_types, file_names, prefer_const_constructors
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:net_player_next/Views/components/playBar.dart';
 import 'package:net_player_next/Views/mainViews/aboutView.dart';
+import 'package:net_player_next/Views/mainViews/lyricView.dart';
 import 'package:net_player_next/Views/mainViews/settingsView.dart';
 import 'package:net_player_next/Views/mainViews/searchview.dart';
 import 'package:net_player_next/functions/operations.dart';
@@ -81,40 +82,53 @@ class _mainViewState extends State<mainView> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Stack(
       children: [
-        SizedBox(
-          width: 200,
-          child: sideBar(),
-        ),
-        Expanded(
-          child: Stack(
-            children: [
-              Obx(() => 
+        Row(
+          children: [
+            SizedBox(
+              width: 200,
+              child: sideBar(),
+            ),
+            Expanded(
+              child: Obx(() => 
                 IndexedStack(
                   index: getIndex(),
                   children: views,
                 )
               ),
-              Obx(() => 
-                AnimatedPositioned(
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                  bottom: c.showLyric.value ? -150 : 0,
-                  left: 0,
-                  right: 0,
-                  child: SizedBox(
-                    height: 110,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(40,0,40,10),
-                      child: playBar(),
-                    ),
-                  ),
-                )
-              )
-            ],
+            )
+          ],
+        ),
+        Obx(() => 
+          AnimatedPositioned(
+            duration: Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+            top: c.showLyric.value ? 0 : MediaQuery.of(context).size.height,
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              child: lyricView(),
+            ),
+          ),
+        ),
+        Obx(() => 
+          AnimatedPositioned(
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            bottom: 0,
+            left: c.showLyric.value ? 0 : 200,
+            right: 0,
+            child: SizedBox(
+              height: 110,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(40,0,40,10),
+                child: playBar(),
+              ),
+            ),
           )
-        )
+        ),
       ],
     );
   }
