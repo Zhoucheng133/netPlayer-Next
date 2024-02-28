@@ -217,4 +217,8 @@ class operations{
   Future<Map> searchHandler(String value) async {
     return await searchRequest(value);
   }
+
+  void getLyric(){
+    print("getLyric");
+  }
 }
