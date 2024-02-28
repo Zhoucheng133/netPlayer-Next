@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, avoid_init_to_null, non_constant_identifier_names, prefer_typing_uninitialized_variables
 
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:get/get.dart';
@@ -71,6 +72,19 @@ class Controller extends GetxController{
   // 专辑信息
   var albumContentData={}.obs;
 
+  // 将时间戳转换成毫秒
+  int timeToMilliseconds(timeString) {
+    List<String> parts = timeString.split(':');
+    int minutes = int.parse(parts[0]);
+    List<String> secondsParts = parts[1].split('.');
+    int seconds = int.parse(secondsParts[0]);
+    int milliseconds = int.parse(secondsParts[1]);
+
+    // 将分钟、秒和毫秒转换为总毫秒数
+    return (minutes * 60 * 1000) + (seconds * 1000) + milliseconds;
+  }
+
+
   void updateUserInfo(data) => userInfo.value=data;
   void updateNowPage(data) => nowPage.value=data;
   void updateAllPlayList(data) => allPlayList.value=data;
@@ -80,7 +94,26 @@ class Controller extends GetxController{
   void updateAllArtists(data) => allArtists.value=data;
   void updateAllSongs(data) => allSongs.value=data;
   void updateLovedSongs(data) => lovedSongs.value=data;
-  void updatePlayProgress(data) => playProgress.value=data;
+  void updateLyricLine(data) => lyricLine.value=data;
+  void updatePlayProgress(data){
+    playProgress.value=data;
+    if(lyric.isNotEmpty && lyric.length!=1){
+      for (var i = 0; i < lyric.length; i++) {
+        if(i==lyric.length-1){
+          updateLyricLine(lyric.length);
+          break;
+        }else if(i==0 && data<lyric[i]['time']){
+          updateLyricLine(0);
+          break;
+        }else if(data>=lyric[i]['time'] && data<lyric[i+1]['time']){
+          updateLyricLine(i+1);
+          break;
+        }
+      }
+    }else if(lyric.length==1){
+      updateLyricLine(0);
+    }
+  }
   Future<void> updatePlayInfo(data) async {
     playInfo.value=data; 
     lyric.value=[
@@ -90,7 +123,26 @@ class Controller extends GetxController{
       }
     ];
     String lyricPain=await getLyric(data['title'], data['album'], data['artist'], data['duration'].toString());
-
+    if(lyricPain=='没有找到歌词'){
+      lyric.value=[
+        {
+          'time': 0,
+          'content': '没有找到歌词',
+        }
+      ];
+      return;
+    }
+    List lyricCovert=[];
+    List<String> lines = LineSplitter.split(lyricPain).toList();
+    for(String line in lines){
+      int pos1=line.indexOf("[");
+      int pos2=line.indexOf("]");
+      lyricCovert.add({
+        'time': timeToMilliseconds(line.substring(pos1+1, pos2)),
+        'content': line.substring(pos2 + 1).trim(),
+      });
+    }
+    lyric.value=lyricCovert;
   }
   void updateIsPlay(data) => isPlay.value=data;
   Future<void> updatePlayMode(data) async {
