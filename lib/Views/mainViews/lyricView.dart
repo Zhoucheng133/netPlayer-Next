@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, file_names
+// ignore_for_file: camel_case_types, file_names, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 
@@ -12,6 +12,12 @@ class lyricView extends StatefulWidget {
 class _lyricViewState extends State<lyricView> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(40, 60, 40, 130),
+        child: Container(color: Colors.red,),
+      ),
+    );
   }
 }
