@@ -15,10 +15,12 @@
 
 **注意，由于Flutter的macOS和Windows中有一些依赖代码有区分，本项目默认使用的是macOS的代码**  
 一些存在代码无法双向兼容的依赖:
+- **`window_manager`**，在macOS上会出现打开App无法聚焦窗口的问题<sup>\*</sup>，因此在macOS上使用 **`bitsdojo_window`**，另外新版本的`Flutter`使用`bitsdojo_window`在macOS系统上会出现无法显示窗口的问题<sup>\*</sup>，因此本项目使用旧版的`Flutter`
+- **`just_audio`**，在Windows上使用 **`just_audio_windows`**（非官方的just_audio Windows支持版本）前者没有问题，后者极大概率会出现加载完成歌曲无法播放的问题，并且很大概率出现回调函数重复重复执行的问题
+- **`audioplayers`**，理论上支持macOS和Windows，但是不知道为什么在我的Windows设备上无法添加该依赖
+- **`Flutter^3.9`** 以后版本的 **`Flutter`** ，在 macOS系统可能出现黑屏闪烁的问题，Windows版本不存在这样的问题
 
-- **`just_audio`**，在Windows上使用`just_audio_windows`（非官方的just_audio Windows支持版本）前者没有问题，后者极大概率会出现加载完成歌曲无法播放的问题，并且很大概率出现回调函数重复重复执行的问题
-
-- **`Flutter^3.9`** 以后版本的 **`Flutter`** ，在 macOS系统可能出现黑屏闪烁的问题，`Windows`版本未知
+<sup>*</sup>该问题已向作者反馈
 
 ## 更新日志
 
