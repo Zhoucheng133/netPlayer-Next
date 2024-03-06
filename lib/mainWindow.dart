@@ -125,6 +125,16 @@ class _main_windowState extends State<main_window> with WindowListener {
   }
 
   @override
+  void onWindowFocus(){
+    c.updateWindowFocus(true);
+  }
+
+  @override
+  void onWindowBlur(){
+    c.updateWindowFocus(false);
+  }
+
+  @override
   void onWindowMaximize(){
     setState(() {
       isMax=true;

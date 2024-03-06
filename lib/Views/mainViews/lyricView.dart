@@ -1,7 +1,5 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -34,15 +32,10 @@ class _lyricViewState extends State<lyricView> {
     return flag;
   }
 
-  Timer? _debounce;
-
   void scrollLyric(){
-    if (_debounce?.isActive ?? false) {
-      _debounce?.cancel();
-    }
-    _debounce = Timer(const Duration(milliseconds: 5), () {
+    if(c.windowFocus.value && c.showLyric.value){
       controller.scrollToIndex(c.lyricLine.value-1, preferPosition: AutoScrollPosition.middle);
-    });
+    }
   }
 
   @override
@@ -72,6 +65,15 @@ class _lyricViewState extends State<lyricView> {
         }else{
           scrollLyric();
         }
+      }
+      if(c.showLyric.value && c.windowFocus.value){
+        scrollLyric();
+      }
+    });
+
+    ever(c.windowFocus, (callback){
+      if(c.showLyric.value && c.windowFocus.value){
+        scrollLyric();
       }
     });
   }

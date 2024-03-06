@@ -84,7 +84,10 @@ class Controller extends GetxController{
     return (minutes * 60 * 1000) + (seconds * 1000) + milliseconds;
   }
 
+  // 窗口是否聚焦
+  var windowFocus=true.obs;
 
+  void updateWindowFocus(data) => windowFocus.value=data;
   void updateUserInfo(data) => userInfo.value=data;
   void updateNowPage(data) => nowPage.value=data;
   void updateAllPlayList(data) => allPlayList.value=data;
