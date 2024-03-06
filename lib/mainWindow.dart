@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, use_build_context_synchronously, prefer_const_constructors
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -185,7 +186,7 @@ class _main_windowState extends State<main_window> with WindowListener {
           child: SizedBox(
             height: 30,
             width: MediaQuery.of(context).size.width,
-            child: Row(
+            child: Platform.isWindows ? Row(
               children: [
                 Expanded(
                   child: DragToMoveArea(
@@ -205,7 +206,11 @@ class _main_windowState extends State<main_window> with WindowListener {
                   onPressed: () => closeWindow(),
                 ),
               ],
-            )
+            ) : Expanded(
+              child: DragToMoveArea(
+                child: Container()
+              ),
+            ),
           ),
         ),
       ],
