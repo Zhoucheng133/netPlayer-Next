@@ -4,32 +4,28 @@ publish_to: 'none'
 version: 2.0.1
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   audio_service: ^0.18.12
-  bitsdojo_window: ^0.1.5
   crypto: ^3.0.3
-  flash: ^3.0.5+2
+  flash: ^3.1.0
   flutter:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
-  get: ^4.6.5
-  hotkey_manager: ^0.1.7
-  http: ^0.13.6
-  just_audio: ^0.9.36
-  just_audio_windows: ^0.2.0
-  package_info_plus: ^3.1.2
+  get: ^4.6.6
+  hotkey_manager: ^0.2.0
+  http: ^1.2.1
+  package_info_plus: ^4.2.0
   scroll_to_index: ^3.0.1
   shared_preferences: ^2.2.2
-  url_launcher: ^6.1.11
-  window_manager: ^0.3.7
+  url_launcher: ^6.2.5
+  window_manager: ^0.3.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-
+  flutter_lints: ^3.0.0
 
 flutter:
   assets:

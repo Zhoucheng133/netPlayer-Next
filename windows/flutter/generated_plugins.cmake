@@ -3,9 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  bitsdojo_window_windows
-  hotkey_manager
-  just_audio_windows
+  hotkey_manager_windows
   screen_retriever
   url_launcher_windows
   window_manager

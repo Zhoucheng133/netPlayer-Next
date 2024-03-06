@@ -12,14 +12,14 @@ import 'Views/loginView.dart';
 import 'Views/mainView.dart';
 import 'functions/request.dart';
 
-class main_windows extends StatefulWidget {
-  const main_windows({super.key});
+class main_window extends StatefulWidget {
+  const main_window({super.key});
 
   @override
-  State<main_windows> createState() => _main_windowsState();
+  State<main_window> createState() => _main_windowState();
 }
 
-class _main_windowsState extends State<main_windows> with WindowListener {
+class _main_windowState extends State<main_window> with WindowListener {
   final Controller c = Get.put(Controller());
   bool isLogin=false;
 
