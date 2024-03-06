@@ -31,14 +31,6 @@ Future<void> showLicenseDialog(BuildContext context) async {
           ),
           Row(
             children: [
-              Text("bitsdojo_window"),
-              Expanded(child: Container()),
-              Text("MIT"),
-              SizedBox(width: 5,),
-            ],
-          ),
-          Row(
-            children: [
               Text("window_manager"),
               Expanded(child: Container()),
               Text("MIT"),
@@ -103,9 +95,9 @@ Future<void> showLicenseDialog(BuildContext context) async {
           ),
           Row(
             children: [
-              Text("just_audio"),
+              Text("media_kit"),
               Expanded(child: Container()),
-              Text("Apache-2 & MIT"),
+              Text("MIT"),
               SizedBox(width: 5,),
             ],
           ),
