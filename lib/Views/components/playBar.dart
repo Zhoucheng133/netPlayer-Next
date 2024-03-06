@@ -27,7 +27,7 @@ class _playBarState extends State<playBar> {
     }
     operations().pause();
     var progress=c.playInfo["duration"]*1000*val;
-     c.updatePlayProgress(progress.toInt());
+    c.updatePlayProgress(progress.toInt());
     if (_debounce?.isActive ?? false) {
       _debounce?.cancel();
     }
