@@ -21,23 +21,16 @@
 
 ## 在你的设备上配置netPlayer Next
 
-**注意，由于Flutter的macOS和Windows中有一些依赖代码有区分，详细如下**
+本项目使用lutter^3.19开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
+建议直接使用Visual Studio Code，在安装完Flutter扩展和Dart扩展之后就可以Debug/Profile/Release了，我已经在.vscode文件夹中添加了launch类型
 
-- 窗口管理功能，在Widnows上使用的是`window_manager`依赖，在macOS系统上会出现无法聚焦到窗口的问题<sup>*</sup>，因此替换为`bitsdojo_window`，后者在Windows上有概率会出现白屏的情况
-- 音频播放，在Windows上使用的是`just_audio_windows`，在macOS系统上使用的是`just_audio`，前者极大概率会出现加载完成歌曲无法播放的问题，并且很大概率出现回调函数重复重复执行的问题，在本项目中使用特定代码避免了这些问题
-
-<sup>*</sup>该问题已向作者反馈
-
-**不过无论你使用的是什么系统，均可直接使用`Fluter^3.7`直接在你的设备上编译运行**
-
-另注：
-> 如果你有`Flutter`开发经验，并且主力设备是**Windows系统**，允许的话可以帮测试一下`Flutter3.7`使用`audioplayers`或者`mediakit`是否可以在Windows系统上编译运行，我使用虚拟机在macOS系统上使用这两个依赖无法正确运行
+不要使用Flutter3.7或更低版本的Flutter，确保Dart版本至少有3.0.0
 
 ## 更新日志
 
 ### 2.0.2 (2024/3/6)
 - 统一Windows和macOS一些组件
-- 修复Windows系统稳定性的问题
+- 修复运行在Windows系统上稳定性的问题
 - 修复进度条崩溃的问题
 - 提高了程序运行效率
 
