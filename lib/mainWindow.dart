@@ -4,7 +4,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/functions/operations.dart';
 import 'package:net_player_next/paras/paras.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
@@ -206,12 +208,137 @@ class _main_windowState extends State<main_window> with WindowListener {
                   onPressed: () => closeWindow(),
                 ),
               ],
-            ) : Expanded(
-              child: DragToMoveArea(
-                child: Container()
-              ),
+            ) : DragToMoveArea(
+              child: Container()
             ),
           ),
+        ),
+        PlatformMenuBar(
+          menus: [
+            PlatformMenu(
+              label: "netPlayer", 
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "关于 netPlayer",
+                      onSelected: isLogin ? (){
+                        c.updateNowPage({
+                          "name": "关于",
+                          "id": "",
+                        });
+                      } : null
+                    )
+                  ]
+                ),
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "设置...",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.comma,
+                        meta: true,
+                      ),
+                      onSelected: isLogin ? () => c.updateNowPage({
+                        "name": "设置",
+                        "id": "",
+                      }) : null
+                    ),
+                  ]
+                ),
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.hide,
+                    ),
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.quit,
+                    ),
+                  ]
+                )
+              ]
+            ),
+            PlatformMenu(
+              label: "编辑",
+              menus: [
+                PlatformMenuItem(
+                  label: "拷贝",
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyC,
+                    meta: true
+                  ),
+                  onSelected: (){}
+                ),
+                PlatformMenuItem(
+                  label: "粘贴",
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyV,
+                    meta: true
+                  ),
+                  onSelected: (){}
+                ),
+                PlatformMenuItem(
+                  label: "全选",
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyA,
+                    meta: true
+                  ),
+                  onSelected: (){}
+                )
+              ]
+            ),
+            PlatformMenu(
+              label: "操作", 
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "暂停/播放",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.space,
+                      ),
+                      onSelected: (){},
+                    ),
+                    PlatformMenuItem(
+                      label: "上一首",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.arrowLeft,
+                        meta: true,
+                      ),
+                      onSelected: ()=>operations().preSong(),
+                    ),
+                    PlatformMenuItem(
+                      label: "下一首",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.arrowRight,
+                        meta: true,
+                      ),
+                      onSelected: ()=>operations().nextSong(),
+                    )
+                  ]
+                )
+              ]
+            ),
+            PlatformMenu(
+              label: "窗口", 
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.minimizeWindow,
+                    ),
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.toggleFullScreen,
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
         ),
       ],
     );
