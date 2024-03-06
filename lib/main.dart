@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:get/get.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/functions/audio.dart';
 import 'package:net_player_next/mainWindow.dart';
 import 'package:window_manager/window_manager.dart';
@@ -13,6 +14,7 @@ import 'paras/paras.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
+  MediaKit.ensureInitialized();
   await hotKeyManager.unregisterAll();
   final Controller c = Get.put(Controller());
 

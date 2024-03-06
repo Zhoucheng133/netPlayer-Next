@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/functions/operations.dart';
 
 import '../paras/paras.dart';
@@ -12,18 +12,21 @@ import '../paras/paras.dart';
 class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   final Controller c = Get.put(Controller());
-  final player = AudioPlayer();
+  final player = Player();
   
   var playUrl="";
 
   audioHandler(){
 
-    player.positionStream.listen((position) {
+    player.stream.position.listen((position) {
       c.updatePlayProgress(position.inMilliseconds);
       // print(c.nowDuration);
     });
-    player.playerStateStream.listen((state) {
-      if(state.processingState == ProcessingState.completed) {
+    player.stream.completed	.listen((state) {
+      // if(state.processingState == ProcessingState.completed) {
+      //   skipToNext();
+      // }
+      if(state){
         skipToNext();
       }
     });
@@ -61,7 +64,9 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     var url="${c.userInfo["url"]}/rest/stream?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.playInfo["id"]}";
 
     if(playUrl!=url){
-      player.setUrl(url);
+      // player.setUrl(url);
+      final playURL=Media(url);
+      await player.open(playURL);
     }
     player.play();
     playUrl=url;
