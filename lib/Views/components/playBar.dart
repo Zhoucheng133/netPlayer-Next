@@ -217,7 +217,7 @@ class _playBarState extends State<playBar> {
                     ), 
                     child: Obx(() => 
                       Slider(
-                        value: c.playInfo["duration"]==null ? 0.0 : (c.playProgress.value/1000/c.playInfo["duration"]) <= 1 ? (c.playProgress.value/1000/c.playInfo["duration"]) : 1,
+                        value: c.playInfo["duration"]==null ? 0.0 : (c.playProgress.value/1000/c.playInfo["duration"]) < 1 ? (c.playProgress.value/1000/c.playInfo["duration"]) > 0 ? (c.playProgress.value/1000/c.playInfo["duration"]) : 0 : 1,
                         onChanged: (value) => jumpDuration(value)
                       )
                     )
