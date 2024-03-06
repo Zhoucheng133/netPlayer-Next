@@ -7,6 +7,8 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
+  media_kit: ^1.1.10
+  media_kit_libs_audio: ^1.0.4
   audio_service: ^0.18.12
   crypto: ^3.0.3
   flash: ^3.1.0
