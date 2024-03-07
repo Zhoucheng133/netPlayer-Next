@@ -34,6 +34,9 @@ class _lyricViewState extends State<lyricView> {
 
   void scrollLyric(){
     if(c.windowFocus.value && c.showLyric.value){
+      if(c.lyricLine.value==0){
+        return;
+      }
       controller.scrollToIndex(c.lyricLine.value-1, preferPosition: AutoScrollPosition.middle);
     }
   }
