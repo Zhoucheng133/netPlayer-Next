@@ -233,6 +233,9 @@ class _main_windowState extends State<main_window> with WindowListener {
                     PlatformMenuItem(
                       label: "关于 netPlayer",
                       onSelected: isLogin ? (){
+                        if(c.showLyric.value){
+                          c.updateShowLyric(false);
+                        }
                         c.updateNowPage({
                           "name": "关于",
                           "id": "",
@@ -249,10 +252,15 @@ class _main_windowState extends State<main_window> with WindowListener {
                         LogicalKeyboardKey.comma,
                         meta: true,
                       ),
-                      onSelected: isLogin ? () => c.updateNowPage({
-                        "name": "设置",
-                        "id": "",
-                      }) : null
+                      onSelected: isLogin ? (){
+                        if(c.showLyric.value){
+                          c.updateShowLyric(false);
+                        }
+                        c.updateNowPage({
+                          "name": "设置",
+                          "id": "",
+                        });
+                      } : null
                     ),
                   ]
                 ),
