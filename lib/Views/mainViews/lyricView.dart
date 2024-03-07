@@ -33,7 +33,7 @@ class _lyricViewState extends State<lyricView> {
   }
 
   void scrollLyric(){
-    if(c.windowFocus.value && c.showLyric.value){
+    if(c.windowFocus.value && c.showLyric.value && !c.onSlide.value){
       if(c.lyricLine.value==0){
         return;
       }
@@ -76,6 +76,12 @@ class _lyricViewState extends State<lyricView> {
 
     ever(c.windowFocus, (callback){
       if(c.showLyric.value && c.windowFocus.value){
+        scrollLyric();
+      }
+    });
+
+    ever(c.onSlide, (callback){
+      if(!c.onSlide.value){
         scrollLyric();
       }
     });

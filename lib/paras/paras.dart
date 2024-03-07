@@ -84,10 +84,15 @@ class Controller extends GetxController{
     return (minutes * 60 * 1000) + (seconds * 1000) + milliseconds;
   }
 
+  // 是否在滑动进度条
+  var onSlide=false.obs;
+  
+
   // 窗口是否聚焦
   var windowFocus=true.obs;
 
   void updateWindowFocus(data) => windowFocus.value=data;
+  void updateOnSlide(data) => onSlide.value=data;
   void updateUserInfo(data) => userInfo.value=data;
   void updateNowPage(data) => nowPage.value=data;
   void updateAllPlayList(data) => allPlayList.value=data;

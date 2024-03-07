@@ -22,6 +22,7 @@ class _playBarState extends State<playBar> {
   Timer? _debounce;
 
   void jumpDuration(double val){
+    c.updateOnSlide(true);
     if(c.playInfo.isEmpty){
       return;
     }
@@ -31,7 +32,8 @@ class _playBarState extends State<playBar> {
     if (_debounce?.isActive ?? false) {
       _debounce?.cancel();
     }
-    _debounce = Timer(const Duration(milliseconds: 100), () {
+    _debounce = Timer(const Duration(milliseconds: 50), () {
+       c.updateOnSlide(false);
       if(c.playInfo["duration"]==null){
         return;
       }else{
