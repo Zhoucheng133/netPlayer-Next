@@ -4,6 +4,23 @@
 
 <img src="assets/icon.png" width="100px">
 
+![Flutter](https://img.shields.io/badge/Flutter-3.19-blue?logo=Flutter)
+![media_kit](https://img.shields.io/badge/media_kit-1.1.10-yellow)
+![audioservice](https://img.shields.io/badge/audio_service-0.18.12-green)
+![crypto](https://img.shields.io/badge/crypto-3.0.3-lightblue)
+![flash](https://img.shields.io/badge/flash-3.1.0-lightyellow)
+![flutter_launcher_icons](https://img.shields.io/badge/flutter_launcher_icons-0.13.1-purple)
+![get](https://img.shields.io/badge/get-4.6.6-red)
+![hotkey_manager](https://img.shields.io/badge/hotkey_manager-0.2.0-white)
+![http](https://img.shields.io/badge/http-1.2.1-orange)
+![package_info_plus](https://img.shields.io/badge/package_info_plus-4.2.0-pink)
+![scroll_to_index](https://img.shields.io/badge/scroll_to_index-3.0.1-green)
+![shared_preferences](https://img.shields.io/badge/shared_preferences-2.2.2-lightgreen)
+![url_launcher](https://img.shields.io/badge/url_launcher-6.2.5-lightblue)
+![window_manager](https://img.shields.io/badge/window_manager-0.3.8-darkgreen)
+
+![License](https://img.shields.io/badge/License-MIT-dark_green)
+
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
 **注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本**  
