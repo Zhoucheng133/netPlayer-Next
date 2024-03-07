@@ -16,7 +16,7 @@ dependencies:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
   get: ^4.6.6
-  hotkey_manager: ^0.2.0
+  hotkey_manager: ^0.1.8
   http: ^1.2.1
   package_info_plus: ^4.2.0
   scroll_to_index: ^3.0.1

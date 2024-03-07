@@ -5,7 +5,7 @@ PODS:
     - FlutterMacOS
   - FlutterMacOS (1.0.0)
   - HotKey (0.2.0)
-  - hotkey_manager_macos (0.0.1):
+  - hotkey_manager (0.0.1):
     - FlutterMacOS
     - HotKey
   - media_kit_libs_macos_audio (1.0.4):
@@ -34,7 +34,7 @@ DEPENDENCIES:
   - audio_service (from `Flutter/ephemeral/.symlinks/plugins/audio_service/macos`)
   - audio_session (from `Flutter/ephemeral/.symlinks/plugins/audio_session/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
-  - hotkey_manager_macos (from `Flutter/ephemeral/.symlinks/plugins/hotkey_manager_macos/macos`)
+  - hotkey_manager (from `Flutter/ephemeral/.symlinks/plugins/hotkey_manager/macos`)
   - media_kit_libs_macos_audio (from `Flutter/ephemeral/.symlinks/plugins/media_kit_libs_macos_audio/macos`)
   - media_kit_native_event_loop (from `Flutter/ephemeral/.symlinks/plugins/media_kit_native_event_loop/macos`)
   - package_info_plus (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos`)
@@ -56,8 +56,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/audio_session/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
-  hotkey_manager_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/hotkey_manager_macos/macos
+  hotkey_manager:
+    :path: Flutter/ephemeral/.symlinks/plugins/hotkey_manager/macos
   media_kit_libs_macos_audio:
     :path: Flutter/ephemeral/.symlinks/plugins/media_kit_libs_macos_audio/macos
   media_kit_native_event_loop:
@@ -82,7 +82,7 @@ SPEC CHECKSUMS:
   audio_session: dea1f41890dbf1718f04a56f1d6150fd50039b72
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   HotKey: e96d8a2ddbf4591131e2bb3f54e69554d90cdca6
-  hotkey_manager_macos: 1e2edb0c7ae4fe67108af44a9d3445de41404160
+  hotkey_manager: c32bf0bfe8f934b7bc17ab4ad5c4c142960b023c
   media_kit_libs_macos_audio: 3871782a4f3f84c77f04d7666c87800a781c24da
   media_kit_native_event_loop: 7321675377cb9ae8596a29bddf3a3d2b5e8792c5
   package_info_plus: 02d7a575e80f194102bef286361c6c326e4c29ce

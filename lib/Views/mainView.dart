@@ -1,7 +1,7 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:net_player_next/Views/components/playBar.dart';
@@ -31,8 +31,8 @@ class _mainViewState extends State<mainView> {
 
   Future<void> registerHotKey() async {
     HotKey toggle = HotKey(
-      scope: HotKeyScope.inapp, 
-      key: PhysicalKeyboardKey.space,
+      KeyCode.space,
+      scope: HotKeyScope.inapp,
     );
     await hotKeyManager.register(
       toggle,
