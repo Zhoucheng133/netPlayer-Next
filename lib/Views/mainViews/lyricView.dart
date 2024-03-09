@@ -108,7 +108,7 @@ class _lyricViewState extends State<lyricView> {
                       key: ValueKey(index), 
                       controller: controller, 
                       index: index,
-                      child: SelectableText(
+                      child: Text(
                         c.lyric[index]['content'],
                         textAlign: TextAlign.center,
                         style: TextStyle(

@@ -166,7 +166,7 @@ class _playBarState extends State<playBar> {
                             maxWidth: 250.0,
                           ),
                           child: Obx(() => 
-                            SelectableText(
+                            Text(
                               c.playInfo["title"] ?? "",
                               style: TextStyle(
                                 fontSize: 16,
@@ -180,7 +180,7 @@ class _playBarState extends State<playBar> {
                             maxWidth: 200.0,
                           ),
                           child: Obx(() => 
-                            SelectableText(
+                            Text(
                               " - ${c.playInfo["artist"] ?? ""}",
                               style: TextStyle(
                                 fontSize: 14,
