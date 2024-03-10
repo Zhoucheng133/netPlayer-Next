@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_brace_in_string_interps, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/dialogs.dart';
 import 'package:net_player_next/Views/components/settingsItem.dart';
@@ -168,7 +169,7 @@ class _settingsViewState extends State<settingsView> {
                               },
                               child: AnimatedDefaultTextStyle(
                                 style: TextStyle(
-                                  color: hoverUpdate ? Color.fromARGB(255, 0, 82, 141) : c.primaryColor
+                                  color: hoverUpdate ? Color.fromARGB(255, 0, 49, 85) : c.primaryColor
                                 ),
                                 duration: Duration(milliseconds: 200),
                                 child: Text("检查更新"),
@@ -177,7 +178,39 @@ class _settingsViewState extends State<settingsView> {
                           )
                         ],
                       ),
-                    )
+                    ),
+                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 40,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 150,
+                            child: Row(
+                              children: [
+                                Expanded(child: Container()),
+                                Text("歌曲封面缓存")
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          MouseRegion(
+                            onEnter: (event) => setState(() { hoverClear=true; }),
+                            onExit: (event) => setState(() { hoverClear=false; }),
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              child: AnimatedDefaultTextStyle(
+                                style: TextStyle(
+                                  color: hoverClear ? Color.fromARGB(255, 189, 13, 0) : Colors.red,
+                                ),
+                                duration: Duration(milliseconds: 200),
+                                child: Text("清理歌曲封面缓存"),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
