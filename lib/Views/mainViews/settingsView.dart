@@ -50,7 +50,9 @@ class _settingsViewState extends State<settingsView> {
     getVersion();
     controller.text=c.userInfo["url"];
 
-    getCacheSize();
+    if(Platform.isMacOS){
+      getCacheSize();
+    }
   }
 
   void setSavePlay(val){
@@ -293,6 +295,7 @@ class _settingsViewState extends State<settingsView> {
                       ),
                     ),
                     SizedBox(height: 10,),
+                    Platform.isMacOS ?
                     SizedBox(
                       height: 40,
                       child: Row(
@@ -316,7 +319,8 @@ class _settingsViewState extends State<settingsView> {
                           ),
                         ],
                       ),
-                    ),
+                    ) : Container(),
+                    Platform.isMacOS ?
                     SizedBox(
                       child: Row(
                         children: [
@@ -338,7 +342,7 @@ class _settingsViewState extends State<settingsView> {
                           )
                         ],
                       ),
-                    ),
+                    ) : Container()
                   ],
                 ),
               ),
