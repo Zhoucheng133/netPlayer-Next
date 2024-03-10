@@ -147,7 +147,6 @@ class _settingsViewState extends State<settingsView> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
                     SizedBox(
                       child: Row(
                         children: [
