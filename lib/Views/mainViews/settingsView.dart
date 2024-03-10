@@ -58,6 +58,9 @@ class _settingsViewState extends State<settingsView> {
     await launchUrl(Uri.parse(url));
   }
 
+  bool hoverUpdate=false;
+  bool hoverClear=false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -125,6 +128,7 @@ class _settingsViewState extends State<settingsView> {
                         )
                       ],
                     ),
+                    SizedBox(height: 10,),
                     SizedBox(
                       height: 40,
                       child: Row(
@@ -148,18 +152,29 @@ class _settingsViewState extends State<settingsView> {
                       child: Row(
                         children: [
                           SizedBox(width: 160),
-                          TextButton(
-                            onPressed: () async {
-                              var ltversion=await operations().updateChecker();
-                              if(ltversion==""){
-                                showUpdaterErrorDialog(context);
-                              }else if("v${version}"==ltversion){
-                                showUpdaterDialog(false, context);
-                              }else{
-                                showUpdaterDialog(true, context);
-                              }
-                            }, 
-                            child: Text("检查更新")
+                          MouseRegion(
+                            onEnter: (event) => setState(() { hoverUpdate=true; }),
+                            onExit: (event) => setState(() { hoverUpdate=false; }),
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () async {
+                                var ltversion=await operations().updateChecker();
+                                if(ltversion==""){
+                                  showUpdaterErrorDialog(context);
+                                }else if("v${version}"==ltversion){
+                                  showUpdaterDialog(false, context);
+                                }else{
+                                  showUpdaterDialog(true, context);
+                                }
+                              },
+                              child: AnimatedDefaultTextStyle(
+                                style: TextStyle(
+                                  color: hoverUpdate ? Color.fromARGB(255, 0, 82, 141) : c.primaryColor
+                                ),
+                                duration: Duration(milliseconds: 200),
+                                child: Text("检查更新"),
+                              )
+                            ),
                           )
                         ],
                       ),
