@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:get/get.dart';
@@ -76,18 +77,90 @@ class _settingsViewState extends State<settingsView> {
     return size;
   }
 
-  void clearCache(BuildContext context){
+  Future<void> clearCache(BuildContext context) async {
+    final cacheDir = await getTemporaryDirectory();
+    if (cacheDir.existsSync()) {
+      cacheDir.deleteSync(recursive: true);
+      getCacheSize();
 
+      showFlash(
+        duration: const Duration(milliseconds: 1500),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200), 
+        builder: (context, controller) => FlashBar(
+          behavior: FlashBehavior.floating,
+          position: FlashPosition.top,
+          backgroundColor: Colors.green[400],
+          iconColor: Colors.white,
+          margin: EdgeInsets.only(
+            top: 30,
+            left: (MediaQuery.of(context).size.width-280)/2,
+            right: (MediaQuery.of(context).size.width-280)/2
+          ),
+          icon: Icon(
+            Icons.info_outline_rounded,
+          ),
+          controller: controller, 
+          content: Text(
+            "清理成功",
+            style: TextStyle(
+              color: Colors.white
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+        context: context
+      );
+    }else{
+      showFlash(
+        duration: const Duration(milliseconds: 1500),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200), 
+        builder: (context, controller) => FlashBar(
+          behavior: FlashBehavior.floating,
+          position: FlashPosition.top,
+          backgroundColor: Colors.orange,
+          iconColor: Colors.white,
+          margin: EdgeInsets.only(
+            top: 30,
+            left: (MediaQuery.of(context).size.width-280)/2,
+            right: (MediaQuery.of(context).size.width-280)/2
+          ),
+          icon: Icon(
+            Icons.info_outline_rounded,
+          ),
+          controller: controller, 
+          content: Text(
+            "清理失败",
+            style: TextStyle(
+              color: Colors.white
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
+        context: context
+      );
+    }
   }
   
   int cacheSize=0;
 
   Future<void> getCacheSize() async {
-    final Directory tempDir = await getTemporaryDirectory();
-    var size = await getDirectorySize(tempDir);
-    setState(() {
-      cacheSize=size;
-    });
+    try {
+      final Directory tempDir = await getTemporaryDirectory();
+      var size = await getDirectorySize(tempDir);
+      setState(() {
+        cacheSize=size;
+      });
+    } catch (_) {
+      setState(() {
+        cacheSize=0;
+      });
+    }
   }
 
   String sizeConvert(int bytes) {
