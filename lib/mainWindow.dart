@@ -223,6 +223,7 @@ class _main_windowState extends State<main_window> with WindowListener {
             ),
           ),
         ),
+        Platform.isMacOS ? 
         PlatformMenuBar(
           menus: [
             PlatformMenu(
@@ -357,7 +358,7 @@ class _main_windowState extends State<main_window> with WindowListener {
               ]
             )
           ]
-        ),
+        ) : Container()
       ],
     );
   }
