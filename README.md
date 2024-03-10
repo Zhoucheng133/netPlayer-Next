@@ -18,6 +18,7 @@
 ![shared_preferences](https://img.shields.io/badge/shared_preferences-2.2.2-lightgreen)
 ![url_launcher](https://img.shields.io/badge/url_launcher-6.2.5-lightblue)
 ![window_manager](https://img.shields.io/badge/window_manager-0.3.8-darkgreen)
+![path_provider](https://img.shields.io/badge/path_provider-2.1.2-orange)
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
