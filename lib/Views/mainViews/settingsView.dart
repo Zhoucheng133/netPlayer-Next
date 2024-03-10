@@ -1,7 +1,9 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_brace_in_string_interps, use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/Views/components/dialogs.dart';
 import 'package:net_player_next/Views/components/settingsItem.dart';
@@ -46,6 +48,8 @@ class _settingsViewState extends State<settingsView> {
     super.initState();
     getVersion();
     controller.text=c.userInfo["url"];
+
+    getCacheSize();
   }
 
   void setSavePlay(val){
@@ -61,6 +65,42 @@ class _settingsViewState extends State<settingsView> {
 
   bool hoverUpdate=false;
   bool hoverClear=false;
+
+  Future<int> getDirectorySize(Directory path) async {
+    int size = 0;
+    for (var entity in path.listSync(recursive: true)) {
+      if (entity is File) {
+        size += entity.lengthSync();
+      }
+    }
+    return size;
+  }
+
+  void clearCache(BuildContext context){
+
+  }
+  
+  int cacheSize=0;
+
+  Future<void> getCacheSize() async {
+    final Directory tempDir = await getTemporaryDirectory();
+    var size = await getDirectorySize(tempDir);
+    setState(() {
+      cacheSize=size;
+    });
+  }
+
+  String sizeConvert(int bytes) {
+    if (bytes < 1024) {
+      return '$bytes B';
+    } else if (bytes < 1048576) {
+      return '${(bytes / 1024).toStringAsFixed(2)} KB';
+    } else if (bytes < 1073741824) {
+      return '${(bytes / 1048576).toStringAsFixed(2)} MB';
+    } else {
+      return '${(bytes / 1073741824).toStringAsFixed(2)} GB';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -194,11 +234,26 @@ class _settingsViewState extends State<settingsView> {
                             ),
                           ),
                           SizedBox(width: 10,),
+                          SizedBox(
+                            child: Row(
+                              children: [
+                                Text(sizeConvert(cacheSize))
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      child: Row(
+                        children: [
+                          SizedBox(width: 160),
                           MouseRegion(
                             onEnter: (event) => setState(() { hoverClear=true; }),
                             onExit: (event) => setState(() { hoverClear=false; }),
                             cursor: SystemMouseCursors.click,
                             child: GestureDetector(
+                              onTap: () => clearCache(context),
                               child: AnimatedDefaultTextStyle(
                                 style: TextStyle(
                                   color: hoverClear ? Color.fromARGB(255, 189, 13, 0) : Colors.red,
