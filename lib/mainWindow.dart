@@ -148,6 +148,14 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
       isMax=false;
     });
   }
+
+  Future<void> getHideOnClose() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool? hideOnClose=prefs.getBool("hideOnClose");
+    if(hideOnClose==false){
+      c.updateHideOnClose(false);
+    }
+  }
   
   @override
   void initState() {
@@ -157,12 +165,15 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
     initMenuIcon();
     autoLogin();
     autoLoadPlayInfo();
+    getHideOnClose();
     ever(c.userInfo, (callback) => isLoginCheck());
     ever(c.playInfo, (callback) => autoSavePlayInfo());
   }
 
   Future<void> initMenuIcon() async {
-    await trayManager.setIcon("assets/icon.png");
+    await trayManager.setIcon(
+      Platform.isWindows ? "assets/ico.ico" : "assets/icon.png"
+    );
     Menu menu = Menu(
       items: [
         MenuItem(
@@ -198,7 +209,7 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
     if(Platform.isMacOS){
       trayManager.popUpContextMenu();
     }else{
-      windowManager.focus();
+      windowManager.show();
     }
   }
 
