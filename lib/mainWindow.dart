@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:net_player_next/functions/operations.dart';
 import 'package:net_player_next/paras/paras.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tray_manager/tray_manager.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'Views/loginView.dart';
@@ -22,7 +23,7 @@ class main_window extends StatefulWidget {
   State<main_window> createState() => _main_windowState();
 }
 
-class _main_windowState extends State<main_window> with WindowListener {
+class _main_windowState extends State<main_window> with WindowListener, TrayListener {
   final Controller c = Get.put(Controller());
   bool isLogin=false;
 
@@ -152,10 +153,73 @@ class _main_windowState extends State<main_window> with WindowListener {
   void initState() {
     super.initState();
     windowManager.addListener(this);
+    trayManager.addListener(this);
+    initMenuIcon();
     autoLogin();
     autoLoadPlayInfo();
     ever(c.userInfo, (callback) => isLoginCheck());
     ever(c.playInfo, (callback) => autoSavePlayInfo());
+  }
+
+  Future<void> initMenuIcon() async {
+    await trayManager.setIcon("assets/icon.png");
+    Menu menu = Menu(
+      items: [
+        MenuItem(
+          key: "toggle",
+          label: "播放/暂停"
+        ),
+        MenuItem(
+          key: "previous_song",
+          label: "上一首"
+        ),
+        MenuItem(
+          key: "next_song",
+          label: "下一首",
+        ),
+        MenuItem.separator(),
+        MenuItem(
+          key: 'exit_app',
+          label: '退出 netPlayer',
+        ),
+      ],
+    );
+    await trayManager.setContextMenu(menu);
+  }
+
+  @override
+  void dispose() {
+    trayManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  void onTrayIconMouseDown() {
+    if(Platform.isMacOS){
+      trayManager.popUpContextMenu();
+    }else{
+      windowManager.focus();
+    }
+  }
+
+  @override
+  void onTrayIconRightMouseDown() {
+    if(Platform.isWindows){
+      trayManager.popUpContextMenu();
+    }
+  }
+
+  @override
+  void onTrayMenuItemClick(MenuItem menuItem) {
+    if(menuItem.key == 'exit_app') {
+      windowManager.close();
+    }else if(menuItem.key == 'toggle'){
+      operations().toggleSong();
+    }else if(menuItem.key=="next_song"){
+      operations().nextSong();
+    }else if(menuItem.key=="previous_song"){
+      operations().preSong();
+    }
   }
 
   bool isMax=false;
