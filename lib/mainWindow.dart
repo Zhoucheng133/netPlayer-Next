@@ -243,7 +243,15 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
   }
 
   void closeWindow(){
-    windowManager.close();
+    if(Platform.isWindows){
+      if(c.hideOnClose.value==false){
+        windowManager.close();
+      }else{
+        windowManager.hide();
+      }
+    }else{
+      windowManager.close();
+    }
   }
 
   @override
