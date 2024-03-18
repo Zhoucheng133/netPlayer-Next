@@ -105,7 +105,6 @@ class Controller extends GetxController{
   void updateAllSongs(data) => allSongs.value=data;
   void updateLovedSongs(data) => lovedSongs.value=data;
   void updateLyricLine(data) => lyricLine.value=data;
-  void updateHideOnClose(data) => hideOnClose.value=data;
   void updatePlayProgress(data){
     playProgress.value=data;
     if(lyric.isNotEmpty && lyric.length!=1){
@@ -174,5 +173,10 @@ class Controller extends GetxController{
     autoLogin.value=data;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool("autoLogin", data);
+  }
+  Future<void> updateHideOnClose(data) async {
+    hideOnClose.value=data;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("hideOnClose", data);
   }
 }
