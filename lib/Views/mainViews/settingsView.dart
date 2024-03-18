@@ -62,6 +62,10 @@ class _settingsViewState extends State<settingsView> {
     c.updateAutoLogin(val);
   }
 
+  void setHideOnClose(val){
+    c.updateHideOnClose(val);
+  }
+
   Future<void> openURL(String url) async {
     await launchUrl(Uri.parse(url));
   }
@@ -193,6 +197,7 @@ class _settingsViewState extends State<settingsView> {
                   children: [
                     Obx(() => switchItem(value: c.savePlay.value, text: "自动保存播放的歌曲", setValue: setSavePlay)),
                     Obx(() => switchItem(value: c.autoLogin.value, text: "自动登录", setValue: setAutoLogin)),
+                    Obx(() => switchItem(value: c.hideOnClose.value, text: "关闭后隐藏窗口 (Win)", setValue: setHideOnClose, enableSwitch: Platform.isWindows,)),
                     SizedBox(
                       height: 40,
                       child: Row(

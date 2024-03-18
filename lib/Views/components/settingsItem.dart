@@ -8,7 +8,9 @@ class switchItem extends StatefulWidget {
   final String text;
   final ValueChanged setValue;
 
-  const switchItem({super.key, required this.value, required this.text, required this.setValue});
+  final dynamic enableSwitch;
+
+  const switchItem({super.key, required this.value, required this.text, required this.setValue, this.enableSwitch});
 
   @override
   State<switchItem> createState() => _switchItemState();
@@ -44,7 +46,7 @@ class _switchItemState extends State<switchItem> {
               hoverColor: Colors.white,
               thumbColor: MaterialStateProperty.resolveWith(getSwitchColor),
               splashRadius: 0,
-              onChanged: (bool value) { 
+              onChanged: widget.enableSwitch==false ? null : (bool value) { 
                 widget.setValue(value);
               }, 
               value: widget.value,

@@ -87,6 +87,8 @@ class Controller extends GetxController{
   // 是否在滑动进度条
   var onSlide=false.obs;
   
+  // 关闭窗口隐藏
+  var hideOnClose=true.obs;
 
   // 窗口是否聚焦
   var windowFocus=true.obs;
@@ -103,6 +105,7 @@ class Controller extends GetxController{
   void updateAllSongs(data) => allSongs.value=data;
   void updateLovedSongs(data) => lovedSongs.value=data;
   void updateLyricLine(data) => lyricLine.value=data;
+  void updateHideOnClose(data) => hideOnClose.value=data;
   void updatePlayProgress(data){
     playProgress.value=data;
     if(lyric.isNotEmpty && lyric.length!=1){
