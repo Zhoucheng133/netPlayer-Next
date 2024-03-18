@@ -92,6 +92,9 @@ class operations{
   }
 
   void toggleSong(){
+    if(c.playInfo.isEmpty || c.userInfo.isEmpty){
+      return;
+    }
     if(c.isPlay.value){
       c.handler.pause();
     }else{
@@ -104,14 +107,23 @@ class operations{
   }
 
   void pause(){
+    if(c.playInfo.isEmpty || c.userInfo.isEmpty){
+      return;
+    }
     c.handler.pause();
   }
 
   void nextSong(){
+    if(c.playInfo.isEmpty || c.userInfo.isEmpty){
+      return;
+    }
     c.handler.skipToNext();
   }
 
   void preSong(){
+    if(c.playInfo.isEmpty || c.userInfo.isEmpty){
+      return;
+    }
     c.handler.skipToPrevious();
   }
 
