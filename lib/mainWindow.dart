@@ -401,7 +401,11 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
                       shortcut: const SingleActivator(
                         LogicalKeyboardKey.space,
                       ),
-                      onSelected: (){},
+                      onSelected: (){
+                        if(!c.focusTextField.value){
+                          operations().toggleSong();
+                        }
+                      },
                     ),
                     PlatformMenuItem(
                       label: "上一首",
