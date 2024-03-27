@@ -1,5 +1,7 @@
 // ignore_for_file: camel_case_types, file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -30,18 +32,53 @@ class _mainViewState extends State<mainView> {
   final Controller c = Get.put(Controller());
 
   Future<void> registerHotKey() async {
-    HotKey toggle = HotKey(
-      KeyCode.space,
-      scope: HotKeyScope.inapp,
-    );
-    await hotKeyManager.register(
-      toggle,
-      keyDownHandler: (hotKey) {
-        if(!c.focusTextField.value){
-          operations().toggleSong();
+    if(Platform.isWindows){
+      HotKey nextSong = HotKey(
+        KeyCode.arrowRight,
+        scope: HotKeyScope.inapp,
+        modifiers: [KeyModifier.control]
+      );
+      HotKey preSong = HotKey(
+        KeyCode.arrowLeft,
+        scope: HotKeyScope.inapp,
+        modifiers: [KeyModifier.control]
+      );
+      HotKey toggle = HotKey(
+        KeyCode.space,
+        scope: HotKeyScope.inapp,
+      );
+      HotKey showLyric = HotKey(
+        KeyCode.keyL,
+        scope: HotKeyScope.inapp,
+        modifiers: [KeyModifier.control]
+      );
+      await hotKeyManager.register(
+        toggle,
+        keyDownHandler: (hotKey) {
+          if(!c.focusTextField.value){
+            operations().toggleSong();
+          }
+        },
+      );
+      await hotKeyManager.register(
+        nextSong,
+        keyDownHandler: (_){
+          operations().nextSong();
         }
-      },
-    );
+      );
+      await hotKeyManager.register(
+        preSong,
+        keyDownHandler: (_){
+          operations().preSong();
+        }
+      );
+      await hotKeyManager.register(
+        showLyric,
+        keyDownHandler: (hotkey) {
+          c.updateShowLyric(!c.showLyric.value);
+        }
+      );
+    }
   }
 
   @override
