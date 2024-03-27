@@ -418,6 +418,20 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
                         meta: true,
                       ),
                       onSelected: ()=>operations().nextSong(),
+                    ),
+                  ]
+                ),
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "显示/隐藏歌词",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.keyL,
+                        meta: true
+                      ),
+                      onSelected: (){
+                        c.updateShowLyric(!c.showLyric.value);
+                      },
                     )
                   ]
                 )
