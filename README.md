@@ -27,6 +27,13 @@
 **注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本**  
 版本号在标准版netPlayer之后，这个版本的netPlayer版本号从`2.0.0`开始
 
+## 快捷键
+
+- `空格`：播放/暂停
+- `command →`(macOS)或`Ctrl ➡︎`(Windows)：下一首
+- `command ←`(macOS)或`Ctrl ←`(Windows)：上一首
+- `command L`(macOS)或`Ctrl L`(Windows)：显示/隐藏歌词
+
 ## 截图
 <img src="./demo/demo1.png" height="400px"/>
 
@@ -44,7 +51,7 @@
 
 ## 更新日志
 
-### 2.0.6
+### 2.0.6 (2024/3/28)
 - 添加显示/隐藏歌词的快捷键
 - 添加Windows上切换歌曲的快捷键
 - 修复macOS系统上点击菜单无效的问题
