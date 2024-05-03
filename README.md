@@ -49,6 +49,20 @@
 
 不要使用Flutter3.7或更低版本的Flutter，确保Dart版本至少有3.0.0
 
+如果你在**Windows**上Debug或者Release，注意不要在国内的网络环境下操作，可能会等非常长的时间，Mac上没有这个问题
+
+在Windows上的打包：
+```bash
+flutter build windows
+```
+
+在macOS上打包：
+```bash
+flutter build macos
+```
+
+Linux没有测试过，各位可以自行尝试
+
 ## 更新日志
 
 ### 2.0.6 (2024/3/28)
