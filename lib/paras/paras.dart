@@ -95,7 +95,6 @@ class Controller extends GetxController{
   // 窗口是否聚焦
   var windowFocus=true.obs;
 
-  void updateUseGlobalShortcut(data) => useGlobalShortcut.value=data;
   void updateWindowFocus(data) => windowFocus.value=data;
   void updateOnSlide(data) => onSlide.value=data;
   void updateUserInfo(data) => userInfo.value=data;
@@ -181,5 +180,10 @@ class Controller extends GetxController{
     hideOnClose.value=data;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool("hideOnClose", data);
+  }
+  Future<void> updateUseGlobalShortcut(data) async {
+    useGlobalShortcut.value=data;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("globalShortcut", data);
   }
 }

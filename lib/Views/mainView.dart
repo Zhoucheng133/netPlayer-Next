@@ -115,6 +115,8 @@ class _mainViewState extends State<mainView> {
             operations().nextSong();
           }
         );
+      }else{
+        c.updateUseGlobalShortcut(false);
       }
     }
   }
