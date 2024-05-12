@@ -89,6 +89,8 @@ class Controller extends GetxController{
   
   // 关闭窗口隐藏
   var hideOnClose=true.obs;
+  // 在Windows上使用全局快捷键
+  var useGlobalShortcut=true.obs;
 
   // 窗口是否聚焦
   var windowFocus=true.obs;
@@ -178,5 +180,10 @@ class Controller extends GetxController{
     hideOnClose.value=data;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool("hideOnClose", data);
+  }
+  Future<void> updateUseGlobalShortcut(data) async {
+    useGlobalShortcut.value=data;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("globalShortcut", data);
   }
 }

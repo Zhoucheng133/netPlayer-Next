@@ -29,11 +29,18 @@
 
 ## 快捷键
 
+### App内快捷键
 - `空格`：播放/暂停
-- `command →`(macOS)或`Ctrl ➡︎`(Windows)：下一首
+- `command →`(macOS)或`Ctrl →`(Windows)：下一首
 - `command ←`(macOS)或`Ctrl ←`(Windows)：上一首
 - `command L`(macOS)或`Ctrl L`(Windows)：显示/隐藏歌词
 
+### 全局快捷键
+- `F8`<sup>*</sup>(macOS)或`Ctrl Alt 空格`(Windows)：播放/暂停
+- `F7`<sup>*</sup>(macOS)或`Ctrl Alt →`(Windows)：下一首
+- `F9`<sup>*</sup>(macOS)或`Ctrl Alt ←`(Windows)：上一首
+
+<sup>*</sup>系统媒体控制，不需要`Fn`键
 ## 截图
 <img src="./demo/demo1.png" height="400px"/>
 
@@ -64,6 +71,13 @@ flutter build macos
 Linux没有测试过，各位可以自行尝试
 
 ## 更新日志
+
+### 2.0.7 (2024/5/12) 【仅对Windows版本的更新】
+- 添加全局快捷键
+- 添加是否添加全局快捷键的开关
+
+<details>
+<summary>过去的版本</summary>
 
 ### 2.0.6 (2024/3/28)
 - 添加显示/隐藏歌词的快捷键
@@ -116,6 +130,7 @@ Linux没有测试过，各位可以自行尝试
 - 🚫检查更新功能暂时无法使用
 - 🚫Windows版隐藏到状态栏暂时无法使用
 - 🚫歌词功能暂时无法使用
+<details>
 
 ## 一些API
 

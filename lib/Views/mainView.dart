@@ -12,6 +12,7 @@ import 'package:net_player_next/Views/mainViews/lyricView.dart';
 import 'package:net_player_next/Views/mainViews/settingsView.dart';
 import 'package:net_player_next/Views/mainViews/searchview.dart';
 import 'package:net_player_next/functions/operations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../paras/paras.dart';
 import 'components/sideBar.dart';
 import 'mainViews/albumsView.dart';
@@ -52,6 +53,21 @@ class _mainViewState extends State<mainView> {
         scope: HotKeyScope.inapp,
         modifiers: [KeyModifier.control]
       );
+      HotKey nextsongGlobal=HotKey(
+        KeyCode.arrowRight,
+        scope: HotKeyScope.system,
+        modifiers: [KeyModifier.control, KeyModifier.alt],
+      );
+      HotKey presongGlobal=HotKey(
+        KeyCode.arrowLeft,
+        scope: HotKeyScope.system,
+        modifiers: [KeyModifier.control, KeyModifier.alt],
+      );
+      HotKey togglesongGlobal=HotKey(
+        KeyCode.space,
+        scope: HotKeyScope.system,
+        modifiers: [KeyModifier.control, KeyModifier.alt],
+      );
       await hotKeyManager.register(
         toggle,
         keyDownHandler: (hotKey) {
@@ -78,6 +94,30 @@ class _mainViewState extends State<mainView> {
           c.updateShowLyric(!c.showLyric.value);
         }
       );
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      var globalShortcut=prefs.getBool('globalShortcut');
+      if(globalShortcut!=false){
+        await hotKeyManager.register(
+          togglesongGlobal,
+          keyDownHandler: (_){
+            operations().toggleSong();
+          }
+        );
+        await hotKeyManager.register(
+          presongGlobal,
+          keyDownHandler: (_){
+            operations().preSong();
+          }
+        );
+        await hotKeyManager.register(
+          nextsongGlobal,
+          keyDownHandler: (_){
+            operations().nextSong();
+          }
+        );
+      }else{
+        c.updateUseGlobalShortcut(false);
+      }
     }
   }
 

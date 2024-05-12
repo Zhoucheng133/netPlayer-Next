@@ -61,7 +61,26 @@ class _settingsViewState extends State<settingsView> {
   void setAutoLogin(val){
     c.updateAutoLogin(val);
   }
-
+  void setGlobalShortcut(val){
+    c.updateUseGlobalShortcut(val);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('${val ? "开启" : "关闭"}全局快捷键'),
+          content: Text("重启生效"),
+          actions: <Widget>[
+            FilledButton(
+              onPressed: () async {
+                Navigator.pop(context);
+              }, 
+              child: Text("好的")
+            ),
+          ],
+        );
+      },
+    );
+  }
   void setHideOnClose(val){
     c.updateHideOnClose(val);
   }
@@ -198,6 +217,7 @@ class _settingsViewState extends State<settingsView> {
                     Obx(() => switchItem(value: c.savePlay.value, text: "自动保存播放的歌曲", setValue: setSavePlay)),
                     Obx(() => switchItem(value: c.autoLogin.value, text: "自动登录", setValue: setAutoLogin)),
                     Obx(() => switchItem(value: c.hideOnClose.value, text: "关闭后隐藏窗口 (Win)", setValue: setHideOnClose, enableSwitch: Platform.isWindows,)),
+                    Obx(() => switchItem(value: c.useGlobalShortcut.value, text: "使用全局快捷键 (Win)", setValue: setGlobalShortcut, enableSwitch: Platform.isWindows, showTip: true,)),
                     SizedBox(
                       height: 40,
                       child: Row(
