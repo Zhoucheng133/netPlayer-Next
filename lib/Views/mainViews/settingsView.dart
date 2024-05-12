@@ -61,7 +61,9 @@ class _settingsViewState extends State<settingsView> {
   void setAutoLogin(val){
     c.updateAutoLogin(val);
   }
-
+  void setGlobalShortcut(val){
+    c.updateUseGlobalShortcut(val);
+  }
   void setHideOnClose(val){
     c.updateHideOnClose(val);
   }
@@ -198,6 +200,9 @@ class _settingsViewState extends State<settingsView> {
                     Obx(() => switchItem(value: c.savePlay.value, text: "自动保存播放的歌曲", setValue: setSavePlay)),
                     Obx(() => switchItem(value: c.autoLogin.value, text: "自动登录", setValue: setAutoLogin)),
                     Obx(() => switchItem(value: c.hideOnClose.value, text: "关闭后隐藏窗口 (Win)", setValue: setHideOnClose, enableSwitch: Platform.isWindows,)),
+                    Obx(() => switchItem(value: c.useGlobalShortcut.value, text: "使用全局快捷键 (Win)", setValue: setGlobalShortcut, enableSwitch: Platform.isWindows, showTip: {
+                      
+                    },)),
                     SizedBox(
                       height: 40,
                       child: Row(
