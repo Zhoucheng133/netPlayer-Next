@@ -63,6 +63,23 @@ class _settingsViewState extends State<settingsView> {
   }
   void setGlobalShortcut(val){
     c.updateUseGlobalShortcut(val);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('${val ? "开启" : "关闭"}全局快捷键'),
+          content: Text("重启生效"),
+          actions: <Widget>[
+            FilledButton(
+              onPressed: () async {
+                Navigator.pop(context);
+              }, 
+              child: Text("好的")
+            ),
+          ],
+        );
+      },
+    );
   }
   void setHideOnClose(val){
     c.updateHideOnClose(val);
