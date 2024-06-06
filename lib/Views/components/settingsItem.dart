@@ -19,10 +19,6 @@ class switchItem extends StatefulWidget {
 
 class _switchItemState extends State<switchItem> {
 
-  Color getSwitchColor(Set<MaterialState> states){
-    return Colors.white;
-  }
-
   void showTip(){
     showDialog(
       context: context,
@@ -74,7 +70,6 @@ class _switchItemState extends State<switchItem> {
             scale: 0.8,
             child: Switch(
               hoverColor: Colors.white,
-              thumbColor: MaterialStateProperty.resolveWith(getSwitchColor),
               splashRadius: 0,
               onChanged: widget.enableSwitch==false ? null : (bool value) { 
                 widget.setValue(value);
