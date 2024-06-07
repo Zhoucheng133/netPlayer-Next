@@ -3,7 +3,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:net_player_next/View/mainView.dart';
+import 'package:net_player_next/View/mainViews/login.dart';
+import 'package:net_player_next/variables/variables.dart';
 import 'package:window_manager/window_manager.dart';
 
 class MainWindow extends StatefulWidget {
@@ -55,6 +58,8 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
     windowManager.unmaximize();
   }
 
+  final Controller c = Get.put(Controller());
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -71,7 +76,21 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
             ],
           ) : DragToMoveArea(child: Container())
         ),
-        const Expanded(child: mainView(),)
+        Expanded(
+          // child: Obx(()=>
+          //   AnimatedSwitcher(
+          //     duration: const Duration(milliseconds: 200),
+          //     child: c.userInfo['username']==null ? const loginView() : const mainView(),
+          //   ),
+          // ),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            child: Obx(()=>
+              c.userInfo['username']==null ? const loginView() : const mainView(),
+            ),
+            // child: mainView(),
+          ),
+        )
       ],
     );
   }
