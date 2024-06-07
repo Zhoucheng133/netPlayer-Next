@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class NormalInput extends StatefulWidget {
   final TextEditingController controller;
-  const NormalInput({super.key, required this.controller});
+  final VoidCallback loginHandler;
+  const NormalInput({super.key, required this.controller, required this.loginHandler});
 
   @override
   State<NormalInput> createState() => _NormalInputState();
@@ -34,6 +35,9 @@ class _NormalInputState extends State<NormalInput> {
           child: TextField(
             controller: widget.controller,
             autocorrect: false,
+            onEditingComplete: (){
+              widget.loginHandler();
+            },
             enableSuggestions: false,
             style: const TextStyle(
               fontSize: 14
@@ -54,7 +58,8 @@ class _NormalInputState extends State<NormalInput> {
 
 class URLInput extends StatefulWidget {
   final TextEditingController controller;
-  const URLInput({super.key, required this.controller});
+  final VoidCallback loginHandler;
+  const URLInput({super.key, required this.controller, required this.loginHandler});
 
   @override
   State<URLInput> createState() => _URLInputState();
@@ -85,6 +90,9 @@ class _URLInputState extends State<URLInput> {
             controller: widget.controller,
             autocorrect: false,
             enableSuggestions: false,
+            onEditingComplete: (){
+              widget.loginHandler();
+            },
             style: const TextStyle(
               fontSize: 14
             ),
@@ -104,7 +112,8 @@ class _URLInputState extends State<URLInput> {
 
 class PasswordInput extends StatefulWidget {
   final TextEditingController controller;
-  const PasswordInput({super.key, required this.controller});
+  final VoidCallback loginHandler;
+  const PasswordInput({super.key, required this.controller, required this.loginHandler});
 
   @override
   State<PasswordInput> createState() => _PasswordInputState();
@@ -138,6 +147,9 @@ class _PasswordInputState extends State<PasswordInput> {
             style: const TextStyle(
               fontSize: 14
             ),
+            onEditingComplete: (){
+              widget.loginHandler();
+            },
             obscureText: true,
             decoration: InputDecoration(
               border: OutlineInputBorder(
