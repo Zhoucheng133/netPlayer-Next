@@ -21,6 +21,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
   void initState() {
     super.initState();
     windowManager.addListener(this);
+    ever(c.userInfo, (callback)=>setLogin());
   }
 
   @override
@@ -58,7 +59,21 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
     windowManager.unmaximize();
   }
 
+
   final Controller c = Get.put(Controller());
+  var isLogin=false;
+
+  void setLogin(){
+    if(c.userInfo['username']!=null){
+      setState(() {
+        isLogin=true;
+      });
+    }else{
+      setState(() {
+        isLogin=false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,18 +92,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
           ) : DragToMoveArea(child: Container())
         ),
         Expanded(
-          // child: Obx(()=>
-          //   AnimatedSwitcher(
-          //     duration: const Duration(milliseconds: 200),
-          //     child: c.userInfo['username']==null ? const loginView() : const mainView(),
-          //   ),
-          // ),
           child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 200),
-            child: Obx(()=>
-              c.userInfo['username']==null ? const loginView() : const mainView(),
-            ),
-            // child: mainView(),
+            duration: const Duration(milliseconds: 300),
+            child: isLogin ? const mainView() : const loginView(),
           ),
         )
       ],
