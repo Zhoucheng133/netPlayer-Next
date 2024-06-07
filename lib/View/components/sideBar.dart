@@ -11,16 +11,24 @@ class sideBar extends StatefulWidget {
 }
 
 class _sideBarState extends State<sideBar> {
+
+  void addPlayListHandler(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(top: 10),
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
       child: Column(
         children: [
-          sideBarItem(name: '专辑', icon: Icons.album_rounded, index: 2,),
-          sideBarItem(name: '艺人', icon: Icons.mic_rounded, index: 1,),
-          sideBarItem(name: '所有歌曲', icon: Icons.queue_music_rounded, index: 0,),
-          sideBarItem(name: '搜索', icon: Icons.search_rounded, index: 4,)
+          const sideBarItem(name: '专辑', icon: Icons.album_rounded, index: 2,),
+          const sideBarItem(name: '艺人', icon: Icons.mic_rounded, index: 1,),
+          const sideBarItem(name: '所有歌曲', icon: Icons.queue_music_rounded, index: 0,),
+          const sideBarItem(name: '搜索', icon: Icons.search_rounded, index: 4,),
+          playListLabel(addPlayListHandler: () => addPlayListHandler(),),
+          const SizedBox(height: 5,),
+          const Expanded(child: Placeholder())
         ],
       ),
     );
