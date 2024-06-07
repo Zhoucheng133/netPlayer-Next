@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, camel_case_types
 
 import 'package:flutter/material.dart';
-import 'package:net_player_next/View/components/sideBarItem.dart';
+import 'package:net_player_next/View/components/sideBarItems.dart';
 
 class sideBar extends StatefulWidget {
   const sideBar({super.key});
