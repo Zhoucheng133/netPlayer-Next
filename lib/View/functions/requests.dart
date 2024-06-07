@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class Requests{
+class HttpRequests{
   // 请求函数
   Future<Map<String, dynamic>> httpRequest(String url, {int timeoutInSeconds = 5}) async {
     try {
@@ -28,7 +28,7 @@ class Requests{
     }
   }
   // 登录请求
-  void loginRequest(String url, String username, String salt, String token){
-    
+  Future<Map> loginRequest(String url, String username, String salt, String token) async {
+    return await httpRequest("$url/rest/ping.view?v=1.12.0&c=myapp&f=json&u=$username&t=$token&s=$salt");
   }
 }

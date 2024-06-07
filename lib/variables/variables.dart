@@ -17,7 +17,7 @@ class Controller extends GetxController{
     '搜索'      // id: String?
   ];
   // 用户信息
-  var userInfo={
+  RxMap<String, String?> userInfo=<String, String?>{
     'url': null,      // String?
     'username': null, // String?
     'salt': null,     // String?
@@ -28,4 +28,5 @@ class Controller extends GetxController{
   var color2=const Color.fromARGB(255, 238, 241, 255);
   var color3=const Color.fromARGB(255, 233, 236, 255);
   var color4=const Color.fromARGB(255, 179, 189, 252);
+  var color5=const Color.fromARGB(255, 152, 166, 254);
 }
