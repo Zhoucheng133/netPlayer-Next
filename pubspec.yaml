@@ -27,6 +27,8 @@ dependencies:
   window_manager: ^0.3.8
   path_provider: ^2.1.2
   tray_manager: ^0.2.1
+  audioplayers: ^6.0.0
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -37,17 +39,12 @@ flutter:
   assets:
     - assets/
   uses-material-design: true
-  fonts:
-    - family: "Noto"
-      fonts:
-        - asset: assets/fonts/NotoSansSC-Bold.ttf
-        - asset: assets/fonts/NotoSansSC-Regular.ttf
 
 flutter_launcher_icons:
   windows:
     generate: true
     image_path: "assets/icon.png"
-    icon_size: 48 # min:48, max:256, default: 48
+    icon_size: 48
   macos:
     generate: true
     image_path: "assets/icon.png"
