@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:net_player_next/View/components/loginItems.dart';
 import 'package:net_player_next/View/functions/requests.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class loginView extends StatefulWidget {
   const loginView({super.key});
@@ -162,6 +163,8 @@ class _loginViewState extends State<loginView> {
       'salt': salt,
       'token': token.toString(),
     };
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userInfo', jsonEncode(c.userInfo));
   }
 
   @override
