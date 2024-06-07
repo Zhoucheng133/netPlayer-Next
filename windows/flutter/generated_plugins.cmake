@@ -5,7 +5,6 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   audioplayers_windows
   hotkey_manager
-  media_kit_libs_windows_audio
   screen_retriever
   tray_manager
   url_launcher_windows
@@ -13,7 +12,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
-  media_kit_native_event_loop
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)
