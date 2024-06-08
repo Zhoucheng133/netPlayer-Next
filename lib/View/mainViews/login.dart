@@ -174,7 +174,7 @@ class _loginViewState extends State<loginView> {
         width: 400,
         height: 450,
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 253, 253, 253),
+          color: const Color.fromARGB(255, 253, 253, 253),
           borderRadius: BorderRadius.circular(10),
            boxShadow: const [
             BoxShadow(
