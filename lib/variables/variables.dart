@@ -15,6 +15,7 @@ class Controller extends GetxController{
     '专辑',     // id: String?
     '歌单',     // id: String?
     '搜索'      // id: String?
+    '设置'      // id: null
   ];
   // 用户信息
   RxMap<String, String?> userInfo=<String, String?>{
