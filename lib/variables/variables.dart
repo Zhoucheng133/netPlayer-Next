@@ -6,7 +6,7 @@ class Controller extends GetxController{
     // 索引
     'index': 0,
     // id号
-    'id': null,
+    'id': '',
   }.obs;
   // 页面对照
   var pages=[
@@ -30,4 +30,6 @@ class Controller extends GetxController{
   var color3=const Color.fromARGB(255, 233, 236, 255);
   var color4=const Color.fromARGB(255, 179, 189, 252);
   var color5=const Color.fromARGB(255, 152, 166, 254);
+  // 所有的歌单
+  RxList playLists=[].obs;
 }
