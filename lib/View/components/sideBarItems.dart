@@ -332,7 +332,7 @@ class _PlayListItemState extends State<PlayListItem> {
               height: 35,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: c.pageNow['index']==3 ? c.color3 :  onHover ? c.color2 : c.color1,
+                color: c.pageNow['index']==3 && c.pageNow['id']==widget.id ? c.color3 :  onHover ? c.color2 : c.color1,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
