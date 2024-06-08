@@ -125,3 +125,88 @@ class _playListLabelState extends State<playListLabel> {
     );
   }
 }
+
+class AccountPart extends StatefulWidget {
+  const AccountPart({super.key});
+
+  @override
+  State<AccountPart> createState() => _AccountPartState();
+}
+
+class _AccountPartState extends State<AccountPart> {
+
+  final Controller c = Get.put(Controller());
+
+  var hoverSetting=false;
+  var hoverLogout=false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, top: 5, bottom: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              onEnter: (_){
+                setState(() {
+                  hoverSetting=true;
+                });
+              },
+              onExit: (_){
+                setState(() {
+                  hoverSetting=false;
+                });
+              },
+              child: AnimatedContainer(
+                height: 35,
+                duration: const Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: hoverSetting ? c.color2 : c.color1,
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.settings_rounded,
+                    size: 16,
+                  ),
+                ),
+              ),
+            )
+          ),
+          const SizedBox(width: 10,),
+          Expanded(
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              onEnter: (_){
+                setState(() {
+                  hoverLogout=true;
+                });
+              },
+              onExit: (_){
+                setState(() {
+                  hoverLogout=false;
+                });
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                height: 35,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: hoverLogout ? c.color2 : c.color1,
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.logout_rounded,
+                    size: 16,
+                  ),
+                ),
+              ),
+            )
+          )
+        ],
+      ),
+    );
+  }
+}

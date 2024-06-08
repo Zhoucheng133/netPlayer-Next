@@ -28,7 +28,8 @@ class _sideBarState extends State<sideBar> {
           const sideBarItem(name: '搜索', icon: Icons.search_rounded, index: 4,),
           playListLabel(addPlayListHandler: () => addPlayListHandler(),),
           const SizedBox(height: 5,),
-          const Expanded(child: Placeholder())
+          const Expanded(child: Placeholder()),
+          const AccountPart(),
         ],
       ),
     );
