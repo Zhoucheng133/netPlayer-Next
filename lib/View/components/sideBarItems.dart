@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:net_player_next/View/functions/requests.dart';
+import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
 class sideBarItem extends StatefulWidget {
@@ -235,42 +235,15 @@ class PlayListPart extends StatefulWidget {
 
 class _PlayListPartState extends State<PlayListPart> {
 
-  final requests=HttpRequests();
   final Controller c = Get.put(Controller());
-
-  Future<void> getAllPlayLists() async {
-    final rlt=await requests.playListsRequest();
-    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        showDialog(
-          context: context, 
-          builder: (BuildContext context)=>AlertDialog(
-            title: const Text('请求所有歌单失败'),
-            content: const Text('请检查你的网络或者服务器运行状态'),
-            actions: [
-              ElevatedButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                }, 
-                child: const Text('好的')
-              )
-            ],
-          )
-        );
-      });
-      return;
-    }else{
-      // print(rlt['subsonic-response']['playlists']['playlist']);
-      try {
-        c.playLists.value=rlt['subsonic-response']['playlists']['playlist'];
-      } catch (_) {}
-    }
-  }
+  final operations=Operations();
 
   @override
   void initState() {
     super.initState();
-    getAllPlayLists();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      operations.getAllPlayLists(context);
+    });
   }
 
   @override

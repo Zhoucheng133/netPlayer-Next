@@ -1,8 +1,11 @@
-// ignore_for_file: file_names, camel_case_types
+// ignore_for_file: file_names, camel_case_types, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/components/message.dart';
 import 'package:net_player_next/View/components/sideBarItems.dart';
+import 'package:net_player_next/View/functions/operations.dart';
+import 'package:net_player_next/View/functions/requests.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,9 +19,59 @@ class sideBar extends StatefulWidget {
 class _sideBarState extends State<sideBar> {
 
   final Controller c = Get.put(Controller());
+  final requests=HttpRequests();
+  final operations=Operations();
 
-  void addPlayListHandler(){
-    // TODO 添加歌单
+  Future<void> addPlayList(BuildContext context, String name) async {
+    if(name.isEmpty){
+      showMessage(false, '歌单名称不能为空', context);
+    }else{
+      final rlt=await requests.createPlayListRequest(name);
+      Navigator.pop(context);
+      if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+        showMessage(false, '创建歌单失败', context);
+      }else{
+        showMessage(true, '创建歌单成功', context);
+      }
+      operations.getAllPlayLists(context);
+    }
+  }
+
+  Future<void> addPlayListHandler(BuildContext context) async {
+    var newListName=TextEditingController();
+    await showDialog(
+      context: context, 
+      builder: (BuildContext context)=>AlertDialog(
+        title: const Text('新建歌单'),
+        content: TextField(
+          controller: newListName,
+          decoration: InputDecoration(
+            isCollapsed: true,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10)
+          ),
+          onEditingComplete: (){
+            addPlayList(context, newListName.text);
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: const Text('取消')
+          ),
+          ElevatedButton(
+            onPressed: (){
+              addPlayList(context, newListName.text);
+            }, 
+            child: const Text('确定')
+          )
+        ],
+      )
+    );
   }
 
   Future<void> logout() async {
@@ -68,9 +121,7 @@ class _sideBarState extends State<sideBar> {
           const sideBarItem(name: '艺人', icon: Icons.mic_rounded, index: 1,),
           const sideBarItem(name: '所有歌曲', icon: Icons.queue_music_rounded, index: 0,),
           const sideBarItem(name: '搜索', icon: Icons.search_rounded, index: 4,),
-          playListLabel(addPlayListHandler: () => addPlayListHandler(),),
-          const SizedBox(height: 5,),
-          // const Expanded(child: Placeholder()),
+          playListLabel(addPlayListHandler: () => addPlayListHandler(context),),
           const PlayListPart(),
           AccountPart(logoutHandler: () => logoutHandler(),),
         ],

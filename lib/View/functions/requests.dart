@@ -38,4 +38,8 @@ class HttpRequests{
   Future<Map> playListsRequest() async {
     return await httpRequest("${c.userInfo['url']}/rest/getPlaylists?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo['username']}&t=${c.userInfo['token']}&s=${c.userInfo['salt']}");
   }
+  // 新建歌单
+  Future<Map> createPlayListRequest(String name) async {
+    return await httpRequest("${c.userInfo["url"]}/rest/createPlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&name=$name");
+  }
 }
