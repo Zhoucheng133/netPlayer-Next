@@ -1,7 +1,6 @@
 // ignore_for_file: camel_case_types, file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/variables.dart';
 
