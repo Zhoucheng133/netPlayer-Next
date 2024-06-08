@@ -171,10 +171,10 @@ class _loginViewState extends State<loginView> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: 450,
-        height: 350,
+        width: 400,
+        height: 450,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Color.fromARGB(255, 253, 253, 253),
           borderRadius: BorderRadius.circular(10),
            boxShadow: const [
             BoxShadow(
@@ -219,7 +219,7 @@ class _loginViewState extends State<loginView> {
                         URLInput(controller: url, loginHandler: ()=>loginHandler(context),),
                         const SizedBox(height: 20,),
                         // 用户名输入框
-                        NormalInput(controller: username, loginHandler: ()=>loginHandler(context),),
+                        UserNameInput(controller: username, loginHandler: ()=>loginHandler(context),),
                         const SizedBox(height: 20,),
                         // 密码输入框
                         PasswordInput(controller: password, loginHandler: ()=>loginHandler(context),)

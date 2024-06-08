@@ -2,56 +2,94 @@
 
 import 'package:flutter/material.dart';
 
-class NormalInput extends StatefulWidget {
+class UserNameInput extends StatefulWidget {
   final TextEditingController controller;
   final VoidCallback loginHandler;
-  const NormalInput({super.key, required this.controller, required this.loginHandler});
+  const UserNameInput({super.key, required this.controller, required this.loginHandler});
 
   @override
-  State<NormalInput> createState() => _NormalInputState();
+  State<UserNameInput> createState() => _UserNameInputState();
 }
 
-class _NormalInputState extends State<NormalInput> {
+class _UserNameInputState extends State<UserNameInput> {
+
+  var onFocus=FocusNode();
+  bool isFocus=false;
+
+  @override
+  void initState() {
+    super.initState();
+    onFocus.addListener(onFocusChange);
+  }
+
+  void onFocusChange(){
+    if(onFocus.hasFocus){
+      setState(() {
+        isFocus=true;
+      });
+    }else{
+      setState(() {
+        isFocus=false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          width: 60,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              '用户名',
+    return AnimatedContainer(
+      width: 280,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
+            spreadRadius: 1,
+            blurRadius: 5,
+          ),
+        ]
+      ),
+      duration: const Duration(milliseconds: 200),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "用户名",
               style: TextStyle(
-                fontSize: 15,
+                color: Colors.grey,
+                fontSize: 13,
               ),
-            )
-          ),
-        ),
-        const SizedBox(width: 10,),
-        SizedBox(
-          width: 250,
-          child: TextField(
-            controller: widget.controller,
-            autocorrect: false,
-            onEditingComplete: (){
-              widget.loginHandler();
-            },
-            enableSuggestions: false,
-            style: const TextStyle(
-              fontSize: 14
             ),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7),
-              ),
-              isCollapsed: true,
-              contentPadding: const EdgeInsets.only(top: 11, bottom: 10, left: 8, right: 10),
+            Row(
+              children: [
+                const Icon(
+                  Icons.account_circle_rounded,
+                  size: 18,
+                ),
+                const SizedBox(width: 5,),
+                Expanded(
+                  child: TextField(
+                    focusNode: onFocus,                    controller: widget.controller,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
+                    ),
+                    onEditingComplete: () => widget.loginHandler(),
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    style: const TextStyle(
+                      fontSize: 14
+                    ),
+                  )
+                )
+              ],
             ),
-          ),
+          ],
         ),
-      ],
+      )
     );
   }
 }
@@ -66,46 +104,86 @@ class URLInput extends StatefulWidget {
 }
 
 class _URLInputState extends State<URLInput> {
+
+  var onFocus=FocusNode();
+  bool isFocus=false;
+
+  @override
+  void initState() {
+    super.initState();
+    onFocus.addListener(onFocusChange);
+  }
+
+  void onFocusChange(){
+    if(onFocus.hasFocus){
+      setState(() {
+        isFocus=true;
+      });
+    }else{
+      setState(() {
+        isFocus=false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          width: 60,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              'URL地址',
+    return AnimatedContainer(
+      width: 280,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
+            spreadRadius: 1,
+            blurRadius: 5,
+          ),
+        ]
+      ),
+      duration: const Duration(milliseconds: 200),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "服务器的URL地址",
               style: TextStyle(
-                fontSize: 15,
+                color: Colors.grey,
+                fontSize: 13,
               ),
-            )
-          ),
-        ),
-        const SizedBox(width: 10,),
-        SizedBox(
-          width: 250,
-          child: TextField(
-            controller: widget.controller,
-            autocorrect: false,
-            enableSuggestions: false,
-            onEditingComplete: (){
-              widget.loginHandler();
-            },
-            style: const TextStyle(
-              fontSize: 14
             ),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7),
-              ),
-              isCollapsed: true,
-              contentPadding: const EdgeInsets.only(top: 11, bottom: 10, left: 8, right: 10),
+            Row(
+              children: [
+                const Icon(
+                  Icons.public,
+                  size: 18,
+                ),
+                const SizedBox(width: 5,),
+                Expanded(
+                  child: TextField(
+                    focusNode: onFocus,
+                    controller: widget.controller,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'http://',
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
+                    ),
+                    onEditingComplete: () => widget.loginHandler(),
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    style: const TextStyle(
+                      fontSize: 14
+                    ),
+                  )
+                )
+              ],
             ),
-          ),
+          ],
         ),
-      ],
+      )
     );
   }
 }
@@ -120,47 +198,86 @@ class PasswordInput extends StatefulWidget {
 }
 
 class _PasswordInputState extends State<PasswordInput> {
+
+  var onFocus=FocusNode();
+  bool isFocus=false;
+
+  @override
+  void initState() {
+    super.initState();
+    onFocus.addListener(onFocusChange);
+  }
+
+  void onFocusChange(){
+    if(onFocus.hasFocus){
+      setState(() {
+        isFocus=true;
+      });
+    }else{
+      setState(() {
+        isFocus=false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          width: 60,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              '密码',
+    return AnimatedContainer(
+      width: 280,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
+            spreadRadius: 1,
+            blurRadius: 5,
+          ),
+        ]
+      ),
+      duration: const Duration(milliseconds: 200),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "密码",
               style: TextStyle(
-                fontSize: 15,
+                color: Colors.grey,
+                fontSize: 13,
               ),
-            )
-          ),
-        ),
-        const SizedBox(width: 10,),
-        SizedBox(
-          width: 250,
-          child: TextField(
-            controller: widget.controller,
-            autocorrect: false,
-            enableSuggestions: false,
-            style: const TextStyle(
-              fontSize: 14
             ),
-            onEditingComplete: (){
-              widget.loginHandler();
-            },
-            obscureText: true,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7),
-              ),
-              isCollapsed: true,
-              contentPadding: const EdgeInsets.only(top: 11, bottom: 10, left: 8, right: 10),
+            Row(
+              children: [
+                const Icon(
+                  Icons.key_rounded,
+                  size: 18,
+                ),
+                const SizedBox(width: 5,),
+                Expanded(
+                  child: TextField(
+                    focusNode: onFocus,
+                    controller: widget.controller,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
+                    ),
+                    obscureText: true,
+                    onEditingComplete: () => widget.loginHandler(),
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    style: const TextStyle(
+                      fontSize: 14
+                    ),
+                  )
+                )
+              ],
             ),
-          ),
+          ],
         ),
-      ],
+      )
     );
   }
 }
