@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, file_names
+// ignore_for_file: camel_case_types, file_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -275,6 +275,61 @@ class _PlayListItemState extends State<PlayListItem> {
 
   bool onHover=false;
   final Controller c = Get.put(Controller());
+
+  Future<void> showPlaylistMenu(BuildContext context, TapDownDetails details) async {
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+    final Offset position = overlay.localToGlobal(details.globalPosition);
+    var val=await showMenu(
+      context: context, 
+      color: c.color1,
+      // surfaceTintColor: Colors.white,
+      position: RelativeRect.fromLTRB(
+        position.dx,
+        position.dy,
+        position.dx + 50,
+        position.dy + 50,
+      ),
+      items: [
+        const PopupMenuItem(
+          value: "rename",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.edit_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("重命名")
+            ],
+          ),
+        ),
+        const PopupMenuItem(
+          value: "del",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.delete_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("删除")
+            ],
+          ),
+        )
+      ]
+    );
+    if(val=='del'){
+      Operations().delPlayList(context, widget.id);
+    }else{
+
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -287,6 +342,7 @@ class _PlayListItemState extends State<PlayListItem> {
             'id': widget.id,
           };
         },
+        onSecondaryTapDown: (val) => showPlaylistMenu(context, val),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           onEnter: (_){

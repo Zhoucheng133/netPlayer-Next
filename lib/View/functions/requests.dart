@@ -42,4 +42,8 @@ class HttpRequests{
   Future<Map> createPlayListRequest(String name) async {
     return await httpRequest("${c.userInfo["url"]}/rest/createPlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&name=$name");
   }
+  // 删除歌单
+  Future<Map> delPlayListRequest(String id) async {
+    return await httpRequest("${c.userInfo["url"]}/rest/deletePlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id");
+  }
 }
