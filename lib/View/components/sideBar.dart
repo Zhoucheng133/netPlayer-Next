@@ -13,7 +13,11 @@ class sideBar extends StatefulWidget {
 class _sideBarState extends State<sideBar> {
 
   void addPlayListHandler(){
+    // TODO 添加歌单
+  }
 
+  void logoutHandler(){
+    // TODO 注销
   }
 
   @override
@@ -29,7 +33,7 @@ class _sideBarState extends State<sideBar> {
           playListLabel(addPlayListHandler: () => addPlayListHandler(),),
           const SizedBox(height: 5,),
           const Expanded(child: Placeholder()),
-          const AccountPart(),
+          AccountPart(logoutHandler: () => logoutHandler(),),
         ],
       ),
     );

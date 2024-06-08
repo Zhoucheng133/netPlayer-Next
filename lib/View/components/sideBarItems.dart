@@ -127,7 +127,8 @@ class _playListLabelState extends State<playListLabel> {
 }
 
 class AccountPart extends StatefulWidget {
-  const AccountPart({super.key});
+  final VoidCallback logoutHandler;
+  const AccountPart({super.key, required this.logoutHandler});
 
   @override
   State<AccountPart> createState() => _AccountPartState();
@@ -147,29 +148,37 @@ class _AccountPartState extends State<AccountPart> {
       child: Row(
         children: [
           Expanded(
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              onEnter: (_){
-                setState(() {
-                  hoverSetting=true;
-                });
+            child: GestureDetector(
+              onTap: (){
+                c.pageNow.value={
+                  'index': 5,
+                  'id': null,
+                };
               },
-              onExit: (_){
-                setState(() {
-                  hoverSetting=false;
-                });
-              },
-              child: AnimatedContainer(
-                height: 35,
-                duration: const Duration(milliseconds: 200),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: hoverSetting ? c.color2 : c.color1,
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.settings_rounded,
-                    size: 16,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                onEnter: (_){
+                  setState(() {
+                    hoverSetting=true;
+                  });
+                },
+                onExit: (_){
+                  setState(() {
+                    hoverSetting=false;
+                  });
+                },
+                child: AnimatedContainer(
+                  height: 35,
+                  duration: const Duration(milliseconds: 200),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: c.pageNow['index']==5 ? c.color3 : hoverSetting ? c.color2 : c.color1,
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Icons.settings_rounded,
+                      size: 16,
+                    ),
                   ),
                 ),
               ),
@@ -177,29 +186,34 @@ class _AccountPartState extends State<AccountPart> {
           ),
           const SizedBox(width: 10,),
           Expanded(
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              onEnter: (_){
-                setState(() {
-                  hoverLogout=true;
-                });
+            child: GestureDetector(
+              onTap: (){
+                widget.logoutHandler();
               },
-              onExit: (_){
-                setState(() {
-                  hoverLogout=false;
-                });
-              },
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                height: 35,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: hoverLogout ? c.color2 : c.color1,
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.logout_rounded,
-                    size: 16,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                onEnter: (_){
+                  setState(() {
+                    hoverLogout=true;
+                  });
+                },
+                onExit: (_){
+                  setState(() {
+                    hoverLogout=false;
+                  });
+                },
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  height: 35,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: hoverLogout ? c.color2 : c.color1,
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Icons.logout_rounded,
+                      size: 16,
+                    ),
                   ),
                 ),
               ),
