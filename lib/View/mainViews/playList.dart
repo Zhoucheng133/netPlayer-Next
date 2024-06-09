@@ -1,7 +1,9 @@
 // ignore_for_file: camel_case_types, file_names
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
+import 'package:net_player_next/variables/variables.dart';
 
 class playListView extends StatefulWidget {
   const playListView({super.key});
@@ -11,15 +13,33 @@ class playListView extends StatefulWidget {
 }
 
 class _playListViewState extends State<playListView> {
+  final Controller c = Get.put(Controller());
+
+  @override
+  void initState() {
+    super.initState();
+    ever(c.pageId, (newVal)=>pageIdListener(newVal));
+  }
+
+  void pageIdListener(String newId){
+    if(c.pageIndex.value==4){
+      setState(() {
+        name=c.playLists.firstWhere((item)=>item['id']==newId)['name'];
+      });
+    }
+  }
+
+  String name='';
+
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(15),
+    return Padding(
+      padding: const EdgeInsets.all(15),
       child: Row(
         children: [
           Column(
             children: [
-              viewHeader(title: '歌单: ', subTitle: '')
+              viewHeader(title: name, subTitle: '')
             ],
           )
         ],
