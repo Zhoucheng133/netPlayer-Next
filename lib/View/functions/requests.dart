@@ -46,4 +46,8 @@ class HttpRequests{
   Future<Map> delPlayListRequest(String id) async {
     return await httpRequest("${c.userInfo["url"]}/rest/deletePlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id");
   }
+  // 重命名歌单
+  Future<Map> renameList(String id, String name) async {
+    return await httpRequest("${c.userInfo["url"]}/rest/updatePlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&playlistId=$id&name=$name");
+  }
 }

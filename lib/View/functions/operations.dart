@@ -10,6 +10,7 @@ class Operations{
   final requests=HttpRequests();
   final Controller c = Get.put(Controller());
 
+  // 获取所有的歌单
   Future<void> getAllPlayLists(BuildContext context) async {
     final rlt=await requests.playListsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
@@ -36,8 +37,30 @@ class Operations{
     }
   }
 
-  void renamePlayList(BuildContext context, String id){
+  Future<void> addPlayList(BuildContext context, String name) async {
+    if(name.isEmpty){
+      showMessage(false, '歌单名称不能为空', context);
+    }else{
+      final rlt=await requests.createPlayListRequest(name);
+      Navigator.pop(context);
+      if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+        showMessage(false, '创建歌单失败', context);
+      }else{
+        showMessage(true, '创建歌单成功', context);
+      }
+      getAllPlayLists(context);
+    }
+  }
 
+  Future<void> renamePlayList(BuildContext context, String id, String name) async {
+    final rlt=await requests.renameList(id, name);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '重命名歌单失败', context);
+      return;
+    }else{
+      showMessage(true, '重命名歌单成功', context);
+      getAllPlayLists(context);
+    }
   }
 
   Future<void> delPlayList(BuildContext context, String id,) async {

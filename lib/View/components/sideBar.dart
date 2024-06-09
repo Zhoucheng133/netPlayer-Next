@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:net_player_next/View/components/message.dart';
 import 'package:net_player_next/View/components/sideBarItems.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/View/functions/requests.dart';
@@ -22,21 +21,6 @@ class _sideBarState extends State<sideBar> {
   final requests=HttpRequests();
   final operations=Operations();
 
-  Future<void> addPlayList(BuildContext context, String name) async {
-    if(name.isEmpty){
-      showMessage(false, '歌单名称不能为空', context);
-    }else{
-      final rlt=await requests.createPlayListRequest(name);
-      Navigator.pop(context);
-      if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-        showMessage(false, '创建歌单失败', context);
-      }else{
-        showMessage(true, '创建歌单成功', context);
-      }
-      operations.getAllPlayLists(context);
-    }
-  }
-
   Future<void> addPlayListHandler(BuildContext context) async {
     var newListName=TextEditingController();
     await showDialog(
@@ -53,7 +37,7 @@ class _sideBarState extends State<sideBar> {
             contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10)
           ),
           onEditingComplete: (){
-            addPlayList(context, newListName.text);
+            operations.addPlayList(context, newListName.text);
           },
         ),
         actions: [
@@ -65,7 +49,7 @@ class _sideBarState extends State<sideBar> {
           ),
           ElevatedButton(
             onPressed: (){
-              addPlayList(context, newListName.text);
+              operations.addPlayList(context, newListName.text);
             }, 
             child: const Text('确定')
           )

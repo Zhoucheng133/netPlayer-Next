@@ -284,7 +284,6 @@ class _PlayListItemState extends State<PlayListItem> {
     var val=await showMenu(
       context: context, 
       color: c.color1,
-      // surfaceTintColor: Colors.white,
       position: RelativeRect.fromLTRB(
         position.dx,
         position.dy,
@@ -327,9 +326,64 @@ class _PlayListItemState extends State<PlayListItem> {
       ]
     );
     if(val=='del'){
-      Operations().delPlayList(context, widget.id);
+      showDialog(
+        context: context, 
+        builder: (BuildContext context)=>AlertDialog(
+          title: const Text('删除歌单'),
+          content: const Text('确定要删除这个歌单? 这个操作不可撤销!'),
+          actions: [
+            TextButton(
+              onPressed: (){
+                Navigator.pop(context);
+              }, 
+              child: const Text('取消')
+            ),
+            ElevatedButton(
+              onPressed: (){
+                Operations().delPlayList(context, widget.id);
+                Navigator.pop(context);
+              }, 
+              child: const Text('删除')
+            )
+          ],
+        )
+      );
     }else{
-
+      var newName=TextEditingController();
+      showDialog(
+        context: context, 
+        builder: (BuildContext context)=>AlertDialog(
+          title: const Text('重命名歌单'),
+          content: TextField(
+            controller: newName,
+            decoration: InputDecoration(
+              isCollapsed: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10)
+            ),
+            onEditingComplete: (){
+              Operations().renamePlayList(context, widget.id, newName.text);
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              child: const Text('取消')
+            ),
+            ElevatedButton(
+              onPressed: (){
+                Operations().renamePlayList(context, widget.id, newName.text);
+                Navigator.pop(context);
+              }, 
+              child: const Text('继续'),
+            )
+          ],
+        )
+      );
     }
   }
   
