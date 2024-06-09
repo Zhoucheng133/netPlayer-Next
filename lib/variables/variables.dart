@@ -32,6 +32,20 @@ class Controller extends GetxController{
   var color3=const Color.fromARGB(255, 233, 236, 255);
   var color4=const Color.fromARGB(255, 179, 189, 252);
   var color5=const Color.fromARGB(255, 152, 166, 254);
+  var color6=const Color.fromARGB(255, 120, 135, 232);
   // 所有的歌单
   RxList playLists=[].obs;
+  // 现在播放信息
+  RxMap nowPlay={
+    'id': '',
+    'title': '3分30秒のタイムカプセル',
+    'artist': '测试用的艺人',
+    'playFrom': '',
+    'duration': 0,
+    'fromId': '',
+    'index': 0,
+    'list': [],
+  }.obs;
+  // 播放进度
+  RxInt playProgress=0.obs;
 }

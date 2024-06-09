@@ -15,13 +15,190 @@ class _playBarState extends State<playBar> {
 
   final Controller c = Get.put(Controller());
 
+  bool hoverPause=false;
+  bool hoverPre=false;
+  bool hoverSkip=false;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // color: c.color2,
-      decoration: BoxDecoration(
-        color: c.color4,
-        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10))
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, right: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // 封面
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.red
+            ),
+          ),
+          const SizedBox(width: 5,),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 165,
+                child: Obx(() => 
+                  Text(
+                    c.nowPlay['title'],
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
+                  ),
+                ),
+              ),
+              // const SizedBox(height: 5,),
+              SizedBox(
+                width: 165,
+                child: Obx(()=>
+                  Text(
+                    c.nowPlay['artist'],
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                      fontSize: 12,
+                    ),
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
+                  ),
+                ),
+              )
+            ],
+          ),
+          const SizedBox(width: 10,),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        // TODO 上一首
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        onEnter: (_){
+                          setState(() {
+                            hoverPre=true;
+                          });
+                        },
+                        onExit: (_){
+                          setState(() {
+                            hoverPre=false;
+                          });
+                        },
+                        child: TweenAnimationBuilder(
+                          tween: ColorTween(end: hoverPre ? c.color6 : c.color5), 
+                          duration: const Duration(milliseconds: 200),
+                          builder: (_, value, __) => Icon(
+                            Icons.skip_previous_rounded,
+                            color: value,
+                          ),
+                        )
+                      ),
+                    ),
+                    const SizedBox(width: 15,),
+                    GestureDetector(
+                      onTap: (){
+                        // TODO 播放/暂停
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        onEnter: (_){
+                          setState(() {
+                            hoverPause=true;
+                          });
+                        },
+                        onExit: (_){
+                          setState(() {
+                            hoverPause=false;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          height: 34,
+                          width: 34,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(17),
+                            color: hoverPause ? c.color6 : c.color5
+                          ),
+                          duration: const Duration(milliseconds: 200),
+                          child: const Center(
+                            child: Icon(
+                              Icons.pause_rounded,
+                              color: Colors.white,
+                            )
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 15,),
+                    GestureDetector(
+                      onTap: (){
+                        // TODO 下一首
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        onEnter: (_){
+                          setState(() {
+                            hoverSkip=true;
+                          });
+                        },
+                        onExit: (_){
+                          setState(() {
+                            hoverSkip=false;
+                          });
+                        },
+                        child: TweenAnimationBuilder(
+                          tween: ColorTween(end: hoverSkip ? c.color6 : c.color5), 
+                          duration: const Duration(milliseconds: 200),
+                          builder: (_, value, __) => Icon(
+                            Icons.skip_next_rounded,
+                            color: value,
+                          ),
+                        )
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5,),
+                Obx(()=>
+                  SliderTheme(
+                    data: SliderThemeData(
+                      overlayColor: Colors.transparent,
+                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                      trackHeight: 2,
+                      thumbShape: const RoundSliderThumbShape(
+                        enabledThumbRadius: 7,
+                        elevation: 0,
+                        pressedElevation: 0,
+                      ),
+                      thumbColor: c.color5,
+                    ),
+                    child: Slider(
+                      value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"], 
+                      onChanged: (value){
+                        // TODO 跳转时间轴
+                      }
+                    ),
+                  )
+                )
+              ],
+            )
+          ),
+          const SizedBox(width: 10,),
+          const SizedBox(
+            width: 210,
+            // TODO 其他的一些组件
+          )
+        ],
       ),
     );
   }
