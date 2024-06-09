@@ -152,7 +152,7 @@ class _AccountPartState extends State<AccountPart> {
             child: GestureDetector(
               onTap: (){
                 c.pageNow.value={
-                  'index': 5,
+                  'index': 6,
                   'id': '',
                 };
               },
@@ -168,20 +168,22 @@ class _AccountPartState extends State<AccountPart> {
                     hoverSetting=false;
                   });
                 },
-                child: AnimatedContainer(
-                  height: 35,
-                  duration: const Duration(milliseconds: 200),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: c.pageNow['index']==5 ? c.color3 : hoverSetting ? c.color2 : c.color1,
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.settings_rounded,
-                      size: 16,
+                child: Obx(()=>
+                  AnimatedContainer(
+                    height: 35,
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: c.pageNow['index']==6 ? c.color3 : hoverSetting ? c.color2 : c.color1,
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.settings_rounded,
+                        size: 16,
+                      ),
                     ),
                   ),
-                ),
+                )
               ),
             )
           ),
@@ -338,7 +340,7 @@ class _PlayListItemState extends State<PlayListItem> {
       child: GestureDetector(
         onTap: (){
           c.pageNow.value={
-            'index': 3,
+            'index': 4,
             'id': widget.id,
           };
         },
@@ -361,7 +363,7 @@ class _PlayListItemState extends State<PlayListItem> {
               height: 35,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: c.pageNow['index']==3 && c.pageNow['id']==widget.id ? c.color3 :  onHover ? c.color2 : c.color1,
+                color: c.pageNow['index']==4 && c.pageNow['id']==widget.id ? c.color3 :  onHover ? c.color2 : c.color1,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
