@@ -24,6 +24,7 @@ class _viewHeaderState extends State<viewHeader> {
           widget.title,
           style: TextStyle(
             color: c.color5,
+            fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
