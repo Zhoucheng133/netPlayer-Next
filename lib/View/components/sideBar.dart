@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/components/sideBarItems.dart';
 import 'package:net_player_next/View/functions/operations.dart';
-import 'package:net_player_next/View/functions/requests.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +17,6 @@ class sideBar extends StatefulWidget {
 class _sideBarState extends State<sideBar> {
 
   final Controller c = Get.put(Controller());
-  final requests=HttpRequests();
   final operations=Operations();
 
   Future<void> addPlayListHandler(BuildContext context) async {

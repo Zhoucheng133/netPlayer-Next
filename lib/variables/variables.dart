@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class Controller extends GetxController{
   // 当前页面
-  var pageNow={
-    // 索引
-    'index': 0,
-    // id号
-    'id': '',
-  }.obs;
+  // RxMap<String, String> pageNow={
+  //   'index': '0',
+  //   // id号
+  //   'id': '',
+  // }.obs;
+  RxInt pageIndex=0.obs;
+  RxString pageId=''.obs;
   // 页面对照
   var pages=[
     '所有歌曲',   // id: ''
