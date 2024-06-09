@@ -26,23 +26,23 @@ class _mainViewState extends State<mainView> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        const SizedBox(
-          width: 150,
-          child: sideBar(),
-        ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(right: 10, bottom: 10, left: 10, top: 5),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
+          child: Row(
+            children: [
+              const SizedBox(
+                width: 150,
+                child: sideBar(),
               ),
-              child: Column(
-                children: [
-                  Expanded(
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10, left: 10, top: 5),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Obx(()=>
                       IndexedStack(
                         index: c.pageIndex.value,
@@ -56,16 +56,16 @@ class _mainViewState extends State<mainView> {
                           settingsView()
                         ],
                       )
-                    )
+                    ),
                   ),
-                  const SizedBox(
-                    height: 70,
-                    child: playBar(),
-                  )
-                ],
-              ),
-            ),
-          )
+                )
+              )
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 80,
+          child: playBar(),
         )
       ],
     );
