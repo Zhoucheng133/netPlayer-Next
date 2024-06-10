@@ -107,18 +107,19 @@ class Operations{
 
   // 播放歌曲
   void playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index){
-    Map<String, Object> value={
+    Map<String, Object> data={
       'id': id,
-      'title': '3分30秒のタイムカプセル',
-      'artist': '测试用的艺人',
+      'title': title,
+      'artist': artist,
       'playFrom': playFrom,
-      'duration': 0,
-      'fromId': '',
-      'index': 0,
+      'duration': duration,
+      'fromId': listId,
+      'index': index,
       // TODO 需要修改list
       'list': [],
     };
-    c.nowPlay.value=value;
+    c.nowPlay.value=data;
     c.handler.play();
+    c.isPlay.value=true;
   }
 }

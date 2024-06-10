@@ -40,8 +40,8 @@ class Controller extends GetxController{
   // 现在播放信息
   RxMap<String, dynamic> nowPlay={
     'id': '',
-    'title': '3分30秒のタイムカプセル',
-    'artist': '测试用的艺人',
+    'title': '',
+    'artist': '',
     'playFrom': '',
     'duration': 0,
     'fromId': '',

@@ -32,8 +32,20 @@ class _playBarState extends State<playBar> {
             height: 45,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.red
+              color: Colors.white,
             ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Obx(() =>
+                c.nowPlay["id"]=="" ? 
+                Container(
+                  color: c.color1,
+                ) : Image.network(
+                  "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
+                  fit: BoxFit.contain,
+                ),
+              ),
+            )
           ),
           const SizedBox(width: 10,),
           Column(
