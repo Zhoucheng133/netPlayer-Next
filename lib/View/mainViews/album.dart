@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/components/table.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -24,7 +25,8 @@ class _albumViewState extends State<albumView> {
         children: [
           Column(
             children: [
-              viewHeader(title: '专辑', subTitle: '')
+              viewHeader(title: '专辑', subTitle: ''),
+              albumHeader()
             ],
           )
         ],

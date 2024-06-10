@@ -21,7 +21,6 @@ class _allViewState extends State<allView> {
           Column(
             children: [
               viewHeader(title: '所有歌曲', subTitle: ''),
-              SizedBox(height: 10,),
               songHeader(),
             ],
           )

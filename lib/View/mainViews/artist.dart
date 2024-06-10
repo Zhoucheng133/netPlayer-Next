@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:net_player_next/View/components/table.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
 
 class artistView extends StatefulWidget {
@@ -19,7 +20,8 @@ class _artistViewState extends State<artistView> {
         children: [
           Column(
             children: [
-              viewHeader(title: '艺人', subTitle: '')
+              viewHeader(title: '艺人', subTitle: ''),
+              artistHeader(),
             ],
           )
         ],

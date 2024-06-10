@@ -21,7 +21,6 @@ class _lovedViewState extends State<lovedView> {
           Column(
             children: [
               viewHeader(title: '喜欢的歌曲', subTitle: ''),
-              SizedBox(height: 10,),
               songHeader()
             ],
           )

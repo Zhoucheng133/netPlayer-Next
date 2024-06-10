@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/components/table.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -39,7 +40,8 @@ class _playListViewState extends State<playListView> {
         children: [
           Column(
             children: [
-              viewHeader(title: name, subTitle: '')
+              viewHeader(title: name, subTitle: ''),
+              const songHeader(),
             ],
           )
         ],
