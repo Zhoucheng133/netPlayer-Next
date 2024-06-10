@@ -28,14 +28,14 @@ class _playBarState extends State<playBar> {
         children: [
           // 封面
           Container(
-            width: 50,
-            height: 50,
+            width: 45,
+            height: 45,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.red
             ),
           ),
-          const SizedBox(width: 5,),
+          const SizedBox(width: 10,),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,10 +130,15 @@ class _playBarState extends State<playBar> {
                             color: hoverPause ? c.color6 : c.color5
                           ),
                           duration: const Duration(milliseconds: 200),
-                          child: const Center(
-                            child: Icon(
-                              Icons.pause_rounded,
-                              color: Colors.white,
+                          child: Center(
+                            child: Obx(()=>
+                              c.isPlay.value ? const Icon(
+                                Icons.pause_rounded,
+                                color: Colors.white,
+                              ): const Icon(
+                                Icons.play_arrow_rounded,
+                                color: Colors.white,
+                              )
                             )
                           ),
                         ),

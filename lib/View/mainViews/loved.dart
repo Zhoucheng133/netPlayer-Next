@@ -45,7 +45,7 @@ class _lovedViewState extends State<lovedView> {
                   ListView.builder(
                     itemCount: c.lovedSongs.length,
                     // TODO 注意修改参数
-                    itemBuilder: (BuildContext context, int index)=>songItem(index: index, title: c.lovedSongs[index]['title'], duration: c.lovedSongs[index]['duration'], id: c.lovedSongs[index]['id'], isplay: false, artist: c.lovedSongs[index]['artist'],)
+                    itemBuilder: (BuildContext context, int index)=>songItem(index: index, title: c.lovedSongs[index]['title'], duration: c.lovedSongs[index]['duration'], id: c.lovedSongs[index]['id'], isplay: false, artist: c.lovedSongs[index]['artist'], from: 'loved',)
                   )
                 ),
               )

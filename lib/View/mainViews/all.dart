@@ -44,7 +44,7 @@ class _allViewState extends State<allView> {
                   ListView.builder(
                     itemCount: c.allSongs.length,
                     // TODO 注意修改参数
-                    itemBuilder: (BuildContext context, int index)=>songItem(index: index, title: c.allSongs[index]['title'], duration: c.allSongs[index]['duration'], id: c.allSongs[index]['id'], isplay: false, artist: c.allSongs[index]['artist'],)
+                    itemBuilder: (BuildContext context, int index)=>songItem(index: index, title: c.allSongs[index]['title'], duration: c.allSongs[index]['duration'], id: c.allSongs[index]['id'], isplay: false, artist: c.allSongs[index]['artist'], from: 'all',)
                   )
                 ),
               )

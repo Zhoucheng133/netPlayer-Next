@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, camel_case_types
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
 // TODO 务必注意Item的文字大小为13
@@ -210,7 +211,8 @@ class songItem extends StatefulWidget {
   final bool isplay;
   final String artist;
   final dynamic listId;
-  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId});
+  final String from;
+  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from});
 
   @override
   State<songItem> createState() => _songItemState();
@@ -220,6 +222,7 @@ class _songItemState extends State<songItem> {
   
   bool hover=false;
   final Controller c = Get.put(Controller());
+  final operations=Operations();
 
   String convertDuration(int time){
     int min = time ~/ 60;
@@ -322,6 +325,9 @@ class _songItemState extends State<songItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onDoubleTap: (){
+        operations.playSong(context, widget.id, widget.from, widget.listId);
+      },
       onSecondaryTapDown: (val) => showSongMenu(context, val),
       child: MouseRegion(
         onEnter: (_){

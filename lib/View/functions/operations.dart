@@ -104,4 +104,9 @@ class Operations{
       }
     }
   }
+
+  // 播放歌曲
+  void playSong(BuildContext context, String id, String playFrom, String listId){
+    
+  }
 }

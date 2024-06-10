@@ -56,4 +56,6 @@ class Controller extends GetxController{
   RxList allSongs=[].obs;
   // 喜欢的歌曲
   RxList lovedSongs=[].obs;
+  // 是否正在播放
+  RxBool isPlay=false.obs;
 }
