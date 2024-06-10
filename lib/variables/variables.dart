@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class Controller extends GetxController{
@@ -48,4 +50,6 @@ class Controller extends GetxController{
   }.obs;
   // 播放进度
   RxInt playProgress=0.obs;
+  // 播放控制
+  var handler;
 }

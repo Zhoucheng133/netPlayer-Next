@@ -1,6 +1,10 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/View/functions/audio.dart';
 import 'package:net_player_next/mainWindow.dart';
+import 'package:net_player_next/variables/variables.dart';
 import 'package:window_manager/window_manager.dart';
 
 Future<void> main(List<String> args) async {
@@ -13,6 +17,14 @@ Future<void> main(List<String> args) async {
     backgroundColor: Colors.transparent,
     skipTaskbar: false,
     titleBarStyle: TitleBarStyle.hidden,
+  );
+  final Controller c = Get.put(Controller());
+  c.handler=await AudioService.init(
+    builder: () => audioHandler(),
+    config: const AudioServiceConfig(
+      androidNotificationChannelId: 'zhouc.netPlayer.channel.audio',
+      androidNotificationChannelName: 'Music playback',
+    ),
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
