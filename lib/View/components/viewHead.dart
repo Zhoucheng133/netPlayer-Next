@@ -18,17 +18,23 @@ class _viewHeaderState extends State<viewHeader> {
   final Controller c = Get.put(Controller());
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          widget.title,
-          style: TextStyle(
-            color: c.color5,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width - 200,
+      height: 30,
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              widget.title,
+              style: TextStyle(
+                color: c.color5,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
