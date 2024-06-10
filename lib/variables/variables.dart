@@ -52,4 +52,8 @@ class Controller extends GetxController{
   RxInt playProgress=0.obs;
   // 播放控制
   var handler;
+  // 所有歌曲
+  RxList allSongs=[].obs;
+  // 喜欢的歌曲
+  RxList lovedSongs=[].obs;
 }

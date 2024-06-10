@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:net_player_next/View/components/table.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
+import 'package:net_player_next/View/functions/operations.dart';
 
 class allView extends StatefulWidget {
   const allView({super.key});
@@ -12,6 +13,17 @@ class allView extends StatefulWidget {
 }
 
 class _allViewState extends State<allView> {
+
+  final operations=Operations();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      operations.getAllSongs(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Padding(

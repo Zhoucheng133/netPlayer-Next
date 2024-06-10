@@ -14,21 +14,7 @@ class Operations{
   Future<void> getAllPlayLists(BuildContext context) async {
     final rlt=await requests.playListsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      await showDialog(
-        context: context, 
-        builder: (BuildContext context)=>AlertDialog(
-          title: const Text('请求所有歌单失败'),
-          content: const Text('请检查你的网络或者服务器运行状态'),
-          actions: [
-            ElevatedButton(
-              onPressed: (){
-                Navigator.pop(context);
-              }, 
-              child: const Text('好的')
-            )
-          ],
-        )
-      );
+      showMessage(false, '获取歌单失败', context);
       return;
     }else{
       try {
@@ -37,6 +23,7 @@ class Operations{
     }
   }
 
+  // 添加歌单
   Future<void> addPlayList(BuildContext context, String name) async {
     if(name.isEmpty){
       showMessage(false, '歌单名称不能为空', context);
@@ -52,6 +39,7 @@ class Operations{
     }
   }
 
+  // 重命名歌单
   Future<void> renamePlayList(BuildContext context, String id, String name) async {
     final rlt=await requests.renameList(id, name);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
@@ -63,7 +51,8 @@ class Operations{
     }
   }
 
-  Future<void> delPlayList(BuildContext context, String id,) async {
+  // 删除歌单
+  Future<void> delPlayList(BuildContext context, String id) async {
     final rlt=await requests.delPlayListRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
       showMessage(false, '删除歌单失败', context);
@@ -71,6 +60,48 @@ class Operations{
     }else{
       showMessage(true, '删除歌单成功', context);
       getAllPlayLists(context);
+    }
+  }
+
+  // 获取所有歌曲
+  Future<void> getAllSongs(BuildContext context) async {
+    final rlt=await requests.getAllSongsRequest();
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '获取所有歌曲失败', context);
+      return;
+    }else{
+      try {
+        var tmpList=rlt['subsonic-response']['randomSongs']['song'];
+        tmpList.sort((a, b) {
+          DateTime dateTimeA = DateTime.parse(a['created']);
+          DateTime dateTimeB = DateTime.parse(b['created']);
+          return dateTimeB.compareTo(dateTimeA);
+        });
+        c.allSongs.value=tmpList;
+      } catch (_) {
+        showMessage(false, '解析所有歌曲失败', context);
+        return;
+      }
+    }
+  }
+
+  // 获取喜欢的歌曲
+  Future<void> getLovedSongs(BuildContext context) async {
+    final rlt=await requests.getLovedSongsRequest();
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '获取喜欢的歌曲失败', context);
+      return;
+    }else{
+      try {
+        if(rlt['subsonic-response']['starred']['song']==null){
+          return;
+        }else{
+          c.lovedSongs.value=rlt['subsonic-response']['starred']['song'];
+        }
+      } catch (_) {
+        showMessage(false, '解析喜欢的歌曲失败', context);
+        return;
+      }
     }
   }
 }

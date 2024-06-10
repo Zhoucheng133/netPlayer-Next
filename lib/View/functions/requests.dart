@@ -50,4 +50,12 @@ class HttpRequests{
   Future<Map> renameList(String id, String name) async {
     return await httpRequest("${c.userInfo["url"]}/rest/updatePlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&playlistId=$id&name=$name");
   }
+  // 获取所有歌曲
+  Future<Map> getAllSongsRequest() async {
+    return await httpRequest("${c.userInfo["url"]}/rest/getRandomSongs?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&size=500");
+  }
+  // 获取喜欢的歌曲
+  Future<Map> getLovedSongsRequest() async {
+    return await httpRequest("${c.userInfo["url"]}/rest/getStarred?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}");
+  }
 }
