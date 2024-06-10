@@ -209,7 +209,8 @@ class songItem extends StatefulWidget {
   final String id;
   final bool isplay;
   final String artist;
-  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id});
+  final dynamic listId;
+  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId});
 
   @override
   State<songItem> createState() => _songItemState();
@@ -235,10 +236,93 @@ class _songItemState extends State<songItem> {
     }
     return false;
   }
+
+  Future<void> showSongMenu(BuildContext context, TapDownDetails details) async {
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+    final Offset position = overlay.localToGlobal(details.globalPosition);
+    var val=await showMenu(
+      context: context, 
+      color: c.color1,
+      position: RelativeRect.fromLTRB(
+        position.dx,
+        position.dy,
+        position.dx + 50,
+        position.dy + 50,
+      ),
+      items: [
+        const PopupMenuItem(
+          value: "add",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.add_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("添加到歌单...")
+            ],
+          ),
+        ),
+        isLoved() ? const PopupMenuItem(
+          value: "delove",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.favorite_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("取消喜欢")
+            ],
+          ),
+        ) : const PopupMenuItem(
+          value: "love",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.favorite_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("喜欢")
+            ],
+          ),
+        ),
+        PopupMenuItem(
+          value: "del",
+          height: 35,
+          enabled: widget.listId!=null,
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.playlist_remove_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("从歌单中删除")
+            ],
+          ),
+        ),
+      ]
+    );
+    // TODO 根据val操作
+  }
   
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onSecondaryTapDown: (val) => showSongMenu(context, val),
       child: MouseRegion(
         onEnter: (_){
           setState(() {
