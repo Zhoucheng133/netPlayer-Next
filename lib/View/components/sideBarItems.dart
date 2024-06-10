@@ -352,7 +352,7 @@ class _PlayListItemState extends State<PlayListItem> {
           ],
         )
       );
-    }else{
+    }else if(val=='rename'){
       var newName=TextEditingController();
       showDialog(
         context: context, 
