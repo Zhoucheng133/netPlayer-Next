@@ -176,7 +176,7 @@ class _playBarState extends State<playBar> {
                       overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
                       trackHeight: 2,
                       thumbShape: const RoundSliderThumbShape(
-                        enabledThumbRadius: 7,
+                        enabledThumbRadius: 5,
                         elevation: 0,
                         pressedElevation: 0,
                       ),
