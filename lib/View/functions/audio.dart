@@ -21,7 +21,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 暂停
   @override
   Future<void> pause() async {
-    
+    player.pause();
   }
 
   // 停止播放

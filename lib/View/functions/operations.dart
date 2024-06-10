@@ -122,4 +122,14 @@ class Operations{
     c.handler.play();
     c.isPlay.value=true;
   }
+
+  void toggleSong(){
+    if(c.isPlay.value){
+      c.handler.pause();
+      c.isPlay.value=false;
+    }else{
+      c.handler.play();
+      c.isPlay.value=true;
+    }
+  }
 }

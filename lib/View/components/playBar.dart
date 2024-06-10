@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
 class playBar extends StatefulWidget {
@@ -120,7 +121,7 @@ class _playBarState extends State<playBar> {
                     const SizedBox(width: 15,),
                     GestureDetector(
                       onTap: (){
-                        // TODO 播放/暂停
+                        Operations().toggleSong();
                       },
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,
