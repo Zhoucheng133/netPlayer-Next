@@ -14,7 +14,8 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 播放
   @override
   Future<void> play() async {
-    
+    var url="${c.userInfo["url"]}/rest/stream?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}";
+    player.play(UrlSource(url));
   }
 
   // 暂停

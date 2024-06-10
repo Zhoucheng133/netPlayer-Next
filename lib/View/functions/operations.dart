@@ -106,7 +106,19 @@ class Operations{
   }
 
   // 播放歌曲
-  void playSong(BuildContext context, String id, String playFrom, String listId){
-    
+  void playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index){
+    Map<String, Object> value={
+      'id': id,
+      'title': '3分30秒のタイムカプセル',
+      'artist': '测试用的艺人',
+      'playFrom': playFrom,
+      'duration': 0,
+      'fromId': '',
+      'index': 0,
+      // TODO 需要修改list
+      'list': [],
+    };
+    c.nowPlay.value=value;
+    c.handler.play();
   }
 }

@@ -326,7 +326,7 @@ class _songItemState extends State<songItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: (){
-        operations.playSong(context, widget.id, widget.from, widget.listId);
+        operations.playSong(context, widget.id, widget.title, widget.artist, widget.from, widget.duration, widget.listId??'', widget.index);
       },
       onSecondaryTapDown: (val) => showSongMenu(context, val),
       child: MouseRegion(

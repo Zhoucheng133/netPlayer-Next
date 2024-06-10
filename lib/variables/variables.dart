@@ -38,7 +38,7 @@ class Controller extends GetxController{
   // 所有的歌单
   RxList playLists=[].obs;
   // 现在播放信息
-  RxMap nowPlay={
+  RxMap<String, dynamic> nowPlay={
     'id': '',
     'title': '3分30秒のタイムカプセル',
     'artist': '测试用的艺人',
