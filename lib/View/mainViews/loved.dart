@@ -28,6 +28,13 @@ class _lovedViewState extends State<lovedView> {
     });
   }
 
+  bool isPlay(int index){
+    if(index==c.nowPlay['index'] && c.nowPlay['playFrom']=='loved'){
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,7 +52,11 @@ class _lovedViewState extends State<lovedView> {
                   ListView.builder(
                     itemCount: c.lovedSongs.length,
                     // TODO 注意修改参数
-                    itemBuilder: (BuildContext context, int index)=>songItem(index: index, title: c.lovedSongs[index]['title'], duration: c.lovedSongs[index]['duration'], id: c.lovedSongs[index]['id'], isplay: false, artist: c.lovedSongs[index]['artist'], from: 'loved',)
+                    itemBuilder: (BuildContext context, int index){
+                      return Obx(()=>
+                        songItem(index: index, title: c.lovedSongs[index]['title'], duration: c.lovedSongs[index]['duration'], id: c.lovedSongs[index]['id'], isplay: isPlay(index), artist: c.lovedSongs[index]['artist'], from: 'loved',)
+                      );
+                    }
                   )
                 ),
               )
