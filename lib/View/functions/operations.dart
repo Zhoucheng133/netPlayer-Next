@@ -133,6 +133,9 @@ class Operations{
 
   // 播放/暂停
   void toggleSong(){
+    if(c.nowPlay['id']==''){
+      return;
+    }
     if(c.isPlay.value){
       c.handler.pause();
       c.isPlay.value=false;
@@ -144,7 +147,17 @@ class Operations{
 
   // 下一首
   void skipNext(){
-    
+    if(c.nowPlay['id']==''){
+      return;
+    }
+    c.handler.skipToNext();
+  }
+
+  void skipPre(){
+    if(c.nowPlay['id']==''){
+      return;
+    }
+    c.handler.skipToPrevious();
   }
   
 }
