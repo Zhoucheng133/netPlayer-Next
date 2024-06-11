@@ -28,6 +28,7 @@ dependencies:
   google_fonts: ^6.2.1
   media_kit: ^1.1.10
   media_kit_libs_audio: ^1.0.4
+  easy_debounce: ^2.0.3
 
 dev_dependencies:
   flutter_test:
