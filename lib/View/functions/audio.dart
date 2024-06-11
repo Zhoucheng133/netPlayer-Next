@@ -50,7 +50,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 跳转
   @override
   Future<void> seek(Duration position) async {
-    
+    player.seek(position);
   }
 
   int preHandler(int index, int length){

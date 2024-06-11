@@ -1,5 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
+
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/components/message.dart';
@@ -133,16 +136,28 @@ class Operations{
 
   // 播放/暂停
   void toggleSong(){
+    if(c.isPlay.value){
+      pause();
+    }else{
+      play();
+    }
+  }
+
+  void pause(){
     if(c.nowPlay['id']==''){
       return;
     }
-    if(c.isPlay.value){
-      c.handler.pause();
-      c.isPlay.value=false;
-    }else{
-      c.handler.play();
-      c.isPlay.value=true;
+    // print("pause");
+    c.handler.pause();
+    c.isPlay.value=false;
+  }
+
+  void play(){
+    if(c.nowPlay['id']==''){
+      return;
     }
+    c.handler.play();
+    c.isPlay.value=true;
   }
 
   // 下一首
@@ -153,11 +168,36 @@ class Operations{
     c.handler.skipToNext();
   }
 
+  // 上一首
   void skipPre(){
     if(c.nowPlay['id']==''){
       return;
     }
     c.handler.skipToPrevious();
+  }
+
+  // 定位
+  void seek(Duration d){
+    c.handler.seek(d);
+    play();
+  }
+
+
+  // 定位时间轴
+  void seekSong(double val){
+    if(c.nowPlay['id']==''){
+      return;
+    }
+    pause();
+    int progress=(c.nowPlay['duration']*1000*val).toInt();
+    c.playProgress.value=progress;
+    EasyDebounce.debounce(
+      'slider',
+      const Duration(milliseconds: 50),
+      () {
+        seek(Duration(milliseconds: c.playProgress.value));
+      }
+    );
   }
   
 }

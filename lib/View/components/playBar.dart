@@ -221,7 +221,7 @@ class _playBarState extends State<playBar> {
                         child: Slider(
                           value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
                           onChanged: (value){
-                            // TODO 跳转时间轴
+                            Operations().seekSong(value);
                           }
                         ),
                       )
