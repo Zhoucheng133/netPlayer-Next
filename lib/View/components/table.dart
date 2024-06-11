@@ -212,7 +212,8 @@ class songItem extends StatefulWidget {
   final String artist;
   final dynamic listId;
   final String from;
-  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from});
+  final dynamic list;
+  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from, this.list});
 
   @override
   State<songItem> createState() => _songItemState();
@@ -326,7 +327,7 @@ class _songItemState extends State<songItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: (){
-        operations.playSong(context, widget.id, widget.title, widget.artist, widget.from, widget.duration, widget.listId??'', widget.index);
+        operations.playSong(context, widget.id, widget.title, widget.artist, widget.from, widget.duration, widget.listId??'', widget.index, widget.list??[]);
       },
       onSecondaryTapDown: (val) => showSongMenu(context, val),
       child: MouseRegion(

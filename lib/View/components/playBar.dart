@@ -192,16 +192,18 @@ class _playBarState extends State<playBar> {
                     data: SliderThemeData(
                       overlayColor: Colors.transparent,
                       overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                      trackHeight: 2,
+                      trackHeight: 1,
                       thumbShape: const RoundSliderThumbShape(
                         enabledThumbRadius: 5,
                         elevation: 0,
                         pressedElevation: 0,
                       ),
-                      thumbColor: c.color5,
+                      thumbColor: c.color6,
+                      activeTrackColor: c.color4,
+                      inactiveTrackColor: c.color3,
                     ),
                     child: Slider(
-                      value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"], 
+                      value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
                       onChanged: (value){
                         // TODO 跳转时间轴
                       }

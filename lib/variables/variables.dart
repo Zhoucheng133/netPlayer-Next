@@ -3,13 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class Controller extends GetxController{
-  // 当前页面
-  // RxMap<String, String> pageNow={
-  //   'index': '0',
-  //   // id号
-  //   'id': '',
-  // }.obs;
+  // 当前页面索引
   RxInt pageIndex=0.obs;
+  // 当前页面Id
   RxString pageId=''.obs;
   // 页面对照
   var pages=[
@@ -43,12 +39,12 @@ class Controller extends GetxController{
     'title': '',
     'artist': '',
     'playFrom': '',
-    'duration': 0,
+    'duration': 0,  // 注意这里使用的是秒~1000ms
     'fromId': '',
     'index': 0,
     'list': [],
   }.obs;
-  // 播放进度
+  // 播放进度, 注意单位为毫秒~1000ms=1s
   RxInt playProgress=0.obs;
   // 播放控制
   var handler;

@@ -106,7 +106,15 @@ class Operations{
   }
 
   // 播放歌曲
-  void playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index){
+  void playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index, List list){
+    List playList=[];
+    if(playFrom=='all'){
+      playList=c.allSongs;
+    }else if(playFrom=='loved'){
+      playList=c.lovedSongs;
+    }else{
+      playList=list;
+    }
     Map<String, Object> data={
       'id': id,
       'title': title,
@@ -116,13 +124,14 @@ class Operations{
       'fromId': listId,
       'index': index,
       // TODO 需要修改list
-      'list': [],
+      'list': playList,
     };
     c.nowPlay.value=data;
     c.handler.play();
     c.isPlay.value=true;
   }
 
+  // 播放/暂停
   void toggleSong(){
     if(c.isPlay.value){
       c.handler.pause();
@@ -132,4 +141,10 @@ class Operations{
       c.isPlay.value=true;
     }
   }
+
+  // 下一首
+  void skipNext(){
+    
+  }
+  
 }
