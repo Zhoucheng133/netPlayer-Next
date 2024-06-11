@@ -352,7 +352,11 @@ class _songItemState extends State<songItem> {
               SizedBox(
                 width: 50,
                 child: Center(
-                  child: Text(
+                  child: widget.isplay ? Icon(
+                    Icons.play_arrow_rounded,
+                    color: c.color6,
+                    size: 15,
+                  ) : Text(
                     (widget.index+1).toString(),
                     style: const TextStyle(
                       fontSize: 13,
@@ -365,8 +369,10 @@ class _songItemState extends State<songItem> {
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
                     widget.title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
+                      color: widget.isplay ? c.color6: Colors.black,
+                      fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
                     ),
                     overflow: TextOverflow.fade,
                     softWrap: false,
@@ -379,8 +385,10 @@ class _songItemState extends State<songItem> {
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
                     widget.artist,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
+                      color: widget.isplay ? c.color6: Colors.black,
+                      fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
                     ),
                     overflow: TextOverflow.fade,
                     softWrap: false,
@@ -392,8 +400,10 @@ class _songItemState extends State<songItem> {
                 child: Center(
                   child: Text(
                     convertDuration(widget.duration),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
+                      color: widget.isplay ? c.color6: Colors.black,
+                      fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
                     ),
                   )
                 ),
