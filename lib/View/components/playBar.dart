@@ -20,6 +20,13 @@ class _playBarState extends State<playBar> {
   bool hoverPre=false;
   bool hoverSkip=false;
 
+  String convertDuration(int time){
+    int min = time ~/ 60;
+    int sec = time % 60;
+    String formattedSec = sec.toString().padLeft(2, '0');
+    return "$min:$formattedSec";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -52,6 +59,7 @@ class _playBarState extends State<playBar> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             children: [
               SizedBox(
                 width: 165,
@@ -66,7 +74,6 @@ class _playBarState extends State<playBar> {
                   ),
                 ),
               ),
-              // const SizedBox(height: 5,),
               SizedBox(
                 width: 165,
                 child: Obx(()=>
@@ -85,132 +92,176 @@ class _playBarState extends State<playBar> {
           ),
           const SizedBox(width: 10,),
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Stack(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    GestureDetector(
-                      onTap: (){
-                        // TODO 上一首
-                      },
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        onEnter: (_){
-                          setState(() {
-                            hoverPre=true;
-                          });
-                        },
-                        onExit: (_){
-                          setState(() {
-                            hoverPre=false;
-                          });
-                        },
-                        child: TweenAnimationBuilder(
-                          tween: ColorTween(end: hoverPre ? c.color6 : c.color5), 
-                          duration: const Duration(milliseconds: 200),
-                          builder: (_, value, __) => Icon(
-                            Icons.skip_previous_rounded,
-                            color: value,
-                          ),
-                        )
-                      ),
-                    ),
-                    const SizedBox(width: 15,),
-                    GestureDetector(
-                      onTap: (){
-                        Operations().toggleSong();
-                      },
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        onEnter: (_){
-                          setState(() {
-                            hoverPause=true;
-                          });
-                        },
-                        onExit: (_){
-                          setState(() {
-                            hoverPause=false;
-                          });
-                        },
-                        child: AnimatedContainer(
-                          height: 34,
-                          width: 34,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(17),
-                            color: hoverPause ? c.color6 : c.color5
-                          ),
-                          duration: const Duration(milliseconds: 200),
-                          child: Center(
-                            child: Obx(()=>
-                              c.isPlay.value ? const Icon(
-                                Icons.pause_rounded,
-                                color: Colors.white,
-                              ): const Icon(
-                                Icons.play_arrow_rounded,
-                                color: Colors.white,
-                              )
-                            )
+                    const SizedBox(height: 12,),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: (){
+                                  Operations().skipPre();
+                                },
+                                child: MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  onEnter: (_){
+                                    setState(() {
+                                      hoverPre=true;
+                                    });
+                                  },
+                                  onExit: (_){
+                                    setState(() {
+                                      hoverPre=false;
+                                    });
+                                  },
+                                  child: TweenAnimationBuilder(
+                                    tween: ColorTween(end: hoverPre ? c.color6 : c.color5), 
+                                    duration: const Duration(milliseconds: 200),
+                                    builder: (_, value, __) => Icon(
+                                      Icons.skip_previous_rounded,
+                                      color: value,
+                                    ),
+                                  )
+                                ),
+                              ),
+                              const SizedBox(width: 15,),
+                              GestureDetector(
+                                onTap: (){
+                                  Operations().toggleSong();
+                                },
+                                child: MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  onEnter: (_){
+                                    setState(() {
+                                      hoverPause=true;
+                                    });
+                                  },
+                                  onExit: (_){
+                                    setState(() {
+                                      hoverPause=false;
+                                    });
+                                  },
+                                  child: AnimatedContainer(
+                                    height: 34,
+                                    width: 34,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(17),
+                                      color: hoverPause ? c.color6 : c.color5
+                                    ),
+                                    duration: const Duration(milliseconds: 200),
+                                    child: Center(
+                                      child: Obx(()=>
+                                        c.isPlay.value ? const Icon(
+                                          Icons.pause_rounded,
+                                          color: Colors.white,
+                                        ): const Icon(
+                                          Icons.play_arrow_rounded,
+                                          color: Colors.white,
+                                        )
+                                      )
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 15,),
+                              GestureDetector(
+                                onTap: (){
+                                  Operations().skipNext();
+                                },
+                                child: MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  onEnter: (_){
+                                    setState(() {
+                                      hoverSkip=true;
+                                    });
+                                  },
+                                  onExit: (_){
+                                    setState(() {
+                                      hoverSkip=false;
+                                    });
+                                  },
+                                  child: TweenAnimationBuilder(
+                                    tween: ColorTween(end: hoverSkip ? c.color6 : c.color5), 
+                                    duration: const Duration(milliseconds: 200),
+                                    builder: (_, value, __) => Icon(
+                                      Icons.skip_next_rounded,
+                                      color: value,
+                                    ),
+                                  )
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                    const SizedBox(width: 15,),
-                    GestureDetector(
-                      onTap: (){
-                        // TODO 下一首
-                      },
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        onEnter: (_){
-                          setState(() {
-                            hoverSkip=true;
-                          });
-                        },
-                        onExit: (_){
-                          setState(() {
-                            hoverSkip=false;
-                          });
-                        },
-                        child: TweenAnimationBuilder(
-                          tween: ColorTween(end: hoverSkip ? c.color6 : c.color5), 
-                          duration: const Duration(milliseconds: 200),
-                          builder: (_, value, __) => Icon(
-                            Icons.skip_next_rounded,
-                            color: value,
+                    const SizedBox(height: 10,),
+                    Obx(()=>
+                      SliderTheme(
+                        data: SliderThemeData(
+                          overlayColor: Colors.transparent,
+                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                          trackHeight: 1,
+                          thumbShape: const RoundSliderThumbShape(
+                            enabledThumbRadius: 5,
+                            elevation: 0,
+                            pressedElevation: 0,
                           ),
-                        )
-                      ),
-                    ),
+                          thumbColor: c.color6,
+                          activeTrackColor: c.color4,
+                          inactiveTrackColor: c.color3,
+                        ),
+                        child: Slider(
+                          value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
+                          onChanged: (value){
+                            // TODO 跳转时间轴
+                          }
+                        ),
+                      )
+                    )
                   ],
                 ),
-                const SizedBox(height: 5,),
-                Obx(()=>
-                  SliderTheme(
-                    data: SliderThemeData(
-                      overlayColor: Colors.transparent,
-                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                      trackHeight: 1,
-                      thumbShape: const RoundSliderThumbShape(
-                        enabledThumbRadius: 5,
-                        elevation: 0,
-                        pressedElevation: 0,
+                Positioned(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Obx(()=>
+                          Text(
+                            c.nowPlay['duration']==0 ? "" : convertDuration(c.playProgress.value~/1000),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: c.color5
+                            ),
+                          )
+                        ),
                       ),
-                      thumbColor: c.color6,
-                      activeTrackColor: c.color4,
-                      inactiveTrackColor: c.color3,
-                    ),
-                    child: Slider(
-                      value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
-                      onChanged: (value){
-                        // TODO 跳转时间轴
-                      }
-                    ),
+                      Expanded(child: Container()),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Obx(()=>
+                          Text(
+                            c.nowPlay['duration']==0 ? "" : convertDuration(c.nowPlay['duration']),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: c.color5
+                            ),
+                          )
+                        ),
+                      )
+                    ],
                   )
                 )
-              ],
+              ]
             )
           ),
           const SizedBox(width: 10,),
