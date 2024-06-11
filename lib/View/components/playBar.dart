@@ -215,8 +215,8 @@ class _playBarState extends State<playBar> {
                             pressedElevation: 0,
                           ),
                           thumbColor: c.color6,
-                          activeTrackColor: c.color4,
-                          inactiveTrackColor: c.color3,
+                          activeTrackColor: c.color5,
+                          inactiveTrackColor: c.color4,
                         ),
                         child: Slider(
                           value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
