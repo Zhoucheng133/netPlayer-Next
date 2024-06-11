@@ -39,11 +39,11 @@ class _playBarState extends State<playBar> {
             width: 45,
             height: 45,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5),
               color: Colors.white,
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5),
               child: Obx(() =>
                 c.nowPlay["id"]=="" ? 
                 Container(
