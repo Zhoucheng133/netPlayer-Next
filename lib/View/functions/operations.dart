@@ -4,10 +4,14 @@ import 'dart:async';
 
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/components/message.dart';
 import 'package:net_player_next/View/functions/requests.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Operations{
   final requests=HttpRequests();
@@ -143,6 +147,7 @@ class Operations{
     }
   }
 
+  // 暂停
   void pause(){
     if(c.nowPlay['id']==''){
       return;
@@ -152,6 +157,7 @@ class Operations{
     c.isPlay.value=false;
   }
 
+  // 播放
   void play(){
     if(c.nowPlay['id']==''){
       return;
@@ -182,7 +188,6 @@ class Operations{
     play();
   }
 
-
   // 定位时间轴
   void seekSong(double val){
     if(c.nowPlay['id']==''){
@@ -199,5 +204,99 @@ class Operations{
       }
     );
   }
+
+  // 自动登录切换
+  void autoLogin(bool val){
+    c.autoLogin.value=val;
+  }
+
+  // 保存播放信息切换
+  void savePlay(bool val){
+    c.savePlay.value=val;
+  }
+
+  // 关闭窗口后台播放切换
+  void closeOnRun(bool val){
+    c.closeOnRun.value=val;
+  }
   
+  // 启用快捷键切换
+  void useShortcut(bool val){
+    c.enableShortcut.value=val;
+  }
+
+  // 显示关于界面
+  Future<void> showAbout(BuildContext context) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    showDialog(
+      context: context, 
+      builder: (BuildContext context)=>AlertDialog(
+        title: const Text('关于'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/icon.png',
+              width: 100,
+            ),
+            const SizedBox(height: 10,),
+            const Text(
+              'netPlayer',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 3,),
+            Text(
+              'Next v${packageInfo.version}',
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey[400]
+              ),
+            ),
+            const SizedBox(height: 20,),
+            GestureDetector(
+              onTap: (){
+                final url=Uri.parse('https://github.com/Zhoucheng133/netPlayer-Next');
+                launchUrl(url);
+              },
+              child: const MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.github,
+                      size: 15,
+                    ),
+                    SizedBox(width: 5,),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 2),
+                      child: Text(
+                        '本项目地址',
+                        style: TextStyle(
+                          fontSize: 13,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: const Text('好的')
+          )
+        ],
+      ),
+    );
+  }
 }
