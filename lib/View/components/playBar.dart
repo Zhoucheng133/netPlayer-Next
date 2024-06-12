@@ -27,6 +27,15 @@ class _playBarState extends State<playBar> {
     return "$min:$formattedSec";
   }
 
+  bool isLoved(){
+    for (var val in c.lovedSongs) {
+      if(val["id"]==c.nowPlay['id']){
+        return true;
+      }
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -265,9 +274,53 @@ class _playBarState extends State<playBar> {
             )
           ),
           const SizedBox(width: 10,),
-          const SizedBox(
+          SizedBox(
             width: 210,
-            // TODO 其他的一些组件
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      // TODO 添加到喜欢
+                    },
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Obx(()=>
+                        !isLoved() ?
+                        Icon(
+                          Icons.favorite_border_rounded,
+                          size: 18,
+                          color: c.color5,
+                        ) : const Icon(
+                          Icons.favorite_rounded,
+                          size: 18,
+                          color: Colors.red,
+                        )
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20,),
+                  GestureDetector(
+                    onTap: (){
+                      // TODO 显示歌词
+                    },
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Icon(
+                        Icons.lyrics_rounded,
+                        size: 18,
+                        color: c.color5,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20,),
+                  // TODO 其他按钮
+                ],
+              ),
+            ),
           )
         ],
       ),
