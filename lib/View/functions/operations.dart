@@ -175,6 +175,7 @@ class Operations{
       return;
     }
     c.handler.skipToNext();
+    c.isPlay.value=true;
   }
 
   // 上一首
@@ -183,6 +184,7 @@ class Operations{
       return;
     }
     c.handler.skipToPrevious();
+    c.isPlay.value=true;
   }
 
   // 定位
