@@ -25,6 +25,11 @@ class _mainViewState extends State<mainView> {
   final Controller c = Get.put(Controller());
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

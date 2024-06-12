@@ -207,8 +207,10 @@ class Operations{
   }
 
   // 自动登录切换
-  void autoLogin(bool val){
+  Future<void> autoLogin(bool val) async {
     c.autoLogin.value=val;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('autoLogin', val);
   }
 
   // 保存播放信息切换

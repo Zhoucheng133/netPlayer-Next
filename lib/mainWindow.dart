@@ -82,6 +82,17 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
   
   Future<void> initPref() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final autoLogin=prefs.getBool('autoLogin');
+
+    if(autoLogin==false){
+      c.autoLogin.value=false;
+      setState(() {
+        isLoading=false;
+      });
+      return;
+    }
+
+
     final userInfo=prefs.getString('userInfo');
     if(userInfo!=null){
       final userData=jsonDecode(userInfo);

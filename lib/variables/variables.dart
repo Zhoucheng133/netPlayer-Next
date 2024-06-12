@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Controller extends GetxController{
   // 当前页面索引
   RxInt pageIndex=0.obs;
@@ -64,8 +67,10 @@ class Controller extends GetxController{
   // 全局快捷键
   RxBool useShortcut=true.obs;
 
-  // 赋值
-  void updateNowPlay(val){
+  // 播放内容赋值 & 保存播放内容
+  Future<void> updateNowPlay(val) async {
     nowPlay.value=val;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('nowPlay', jsonEncode(val));
   }
 }
