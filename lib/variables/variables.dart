@@ -54,4 +54,13 @@ class Controller extends GetxController{
   RxList lovedSongs=[].obs;
   // 是否正在播放
   RxBool isPlay=false.obs;
+  // # 一些设置属性 #
+  // 保存播放内容
+  RxBool savePlay=true.obs;
+  // 自动登录
+  RxBool autoLogin=true.obs;
+  // 关闭窗口后台运行
+  RxBool closeOnRun=true.obs;
+  // 全局快捷键
+  RxBool enableShortcut=true.obs;
 }
