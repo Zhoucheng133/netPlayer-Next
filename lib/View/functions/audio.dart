@@ -69,7 +69,8 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     tmpList['title']=tmpList['list'][tmpList['index']]['title'];
     tmpList['artist']=tmpList['list'][tmpList['index']]['artist'];
     tmpList['duration']=tmpList['list'][tmpList['index']]['duration'];
-    c.nowPlay.value=tmpList;
+    // c.nowPlay.value=tmpList;
+    c.updateNowPlay(tmpList);
     c.nowPlay.refresh();
     play();
   }
@@ -90,7 +91,8 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     tmpList['title']=tmpList['list'][tmpList['index']]['title'];
     tmpList['artist']=tmpList['list'][tmpList['index']]['artist'];
     tmpList['duration']=tmpList['list'][tmpList['index']]['duration'];
-    c.nowPlay.value=tmpList;
+    // c.nowPlay.value=tmpList;
+    c.updateNowPlay(tmpList);
     c.nowPlay.refresh();
     play();
   }

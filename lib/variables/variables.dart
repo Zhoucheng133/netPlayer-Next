@@ -62,5 +62,10 @@ class Controller extends GetxController{
   // 关闭窗口后台运行
   RxBool closeOnRun=true.obs;
   // 全局快捷键
-  RxBool enableShortcut=true.obs;
+  RxBool useShortcut=true.obs;
+
+  // 赋值
+  void updateNowPlay(val){
+    nowPlay.value=val;
+  }
 }

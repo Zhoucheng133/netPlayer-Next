@@ -4,13 +4,13 @@ import 'dart:async';
 
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/components/message.dart';
 import 'package:net_player_next/View/functions/requests.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Operations{
@@ -133,7 +133,8 @@ class Operations{
       // TODO 需要修改list
       'list': playList,
     };
-    c.nowPlay.value=data;
+    // c.nowPlay.value=data;
+    c.updateNowPlay(data);
     c.handler.play();
     c.isPlay.value=true;
   }
@@ -211,18 +212,24 @@ class Operations{
   }
 
   // 保存播放信息切换
-  void savePlay(bool val){
+  Future<void> savePlay(bool val) async {
     c.savePlay.value=val;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('savePlay', val);
   }
 
   // 关闭窗口后台播放切换
-  void closeOnRun(bool val){
+  Future<void> closeOnRun(bool val) async {
     c.closeOnRun.value=val;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('closeOnRun', val);
   }
   
   // 启用快捷键切换
-  void useShortcut(bool val){
-    c.enableShortcut.value=val;
+  Future<void> useShortcut(bool val) async {
+    c.useShortcut.value=val;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('useShortcut', val);
   }
 
   // 显示关于界面
@@ -299,4 +306,6 @@ class Operations{
       ),
     );
   }
+
+
 }

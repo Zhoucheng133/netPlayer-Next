@@ -150,7 +150,7 @@ class _settingsViewState extends State<settingsView> {
                               child: Switch(
                                 activeTrackColor: c.color6,
                                 splashRadius: 0,
-                                value: c.enableShortcut.value, 
+                                value: c.useShortcut.value, 
                                 onChanged: (value){
                                   Operations().useShortcut(value);
                                 }
