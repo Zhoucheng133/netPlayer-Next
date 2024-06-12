@@ -24,13 +24,25 @@ class _viewHeaderState extends State<viewHeader> {
       child: Row(
         children: [
           Expanded(
-            child: Text(
-              widget.title,
-              style: TextStyle(
-                color: c.color5,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
+            child: Row(
+              children: [
+                Text(
+                  widget.title,
+                  style: TextStyle(
+                    color: c.color5,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(width: 10,),
+                Text(
+                  widget.subTitle,
+                  style: TextStyle(
+                    color: c.color5,
+                    fontSize: 13
+                  ),
+                ),
+              ],
             ),
           ),
         ],

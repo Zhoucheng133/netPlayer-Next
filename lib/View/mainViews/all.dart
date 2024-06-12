@@ -42,7 +42,7 @@ class _allViewState extends State<allView> {
         children: [
           Column(
             children: [
-              const viewHeader(title: '所有歌曲', subTitle: ''),
+              Obx(() => viewHeader(title: '所有歌曲', subTitle: '共有${c.allSongs.length}首'),),
               const songHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

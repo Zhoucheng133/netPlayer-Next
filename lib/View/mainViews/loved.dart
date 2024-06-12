@@ -43,7 +43,7 @@ class _lovedViewState extends State<lovedView> {
         children: [
           Column(
             children: [
-              const viewHeader(title: '喜欢的歌曲', subTitle: ''),
+              Obx(()=>viewHeader(title: '喜欢的歌曲', subTitle: '共有${c.lovedSongs.length}首')),
               const songHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
