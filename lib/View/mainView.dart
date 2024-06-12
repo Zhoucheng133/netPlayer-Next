@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/components/SideBar.dart';
 import 'package:net_player_next/View/components/playBar.dart';
+import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/View/mainViews/album.dart';
 import 'package:net_player_next/View/mainViews/all.dart';
 import 'package:net_player_next/View/mainViews/artist.dart';
@@ -51,6 +52,7 @@ class _mainViewState extends State<mainView> {
     if(useShortcut==false){
       c.useShortcut.value=false;
     }
+    Operations().initHotkey();
   }
 
   @override

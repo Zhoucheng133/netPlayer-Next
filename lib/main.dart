@@ -2,6 +2,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/View/functions/audio.dart';
 import 'package:net_player_next/mainWindow.dart';
@@ -12,6 +13,7 @@ Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   MediaKit.ensureInitialized();
+  await hotKeyManager.unregisterAll();
   WindowOptions windowOptions = const WindowOptions(
     size: Size(900, 650),
     minimumSize: Size(900, 650),

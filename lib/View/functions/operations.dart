@@ -1,12 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/components/message.dart';
+import 'package:net_player_next/View/functions/hotkeys.dart';
 import 'package:net_player_next/View/functions/requests.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -332,4 +334,15 @@ class Operations{
   }
 
 
+  // 注册全局快捷键
+  Future<void> initHotkey() async {
+    await HotkeyHandler().toggleHandler();
+    await HotkeyHandler().skipNextHandler();
+    await HotkeyHandler().skipPreHandler();
+    if(c.useShortcut.value && Platform.isWindows){
+      await HotkeyHandler().globalSkipNext();
+      await HotkeyHandler().globalSkipPre();
+      await HotkeyHandler().globalToggle();
+    }
+  }
 }
