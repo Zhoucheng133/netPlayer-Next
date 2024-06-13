@@ -67,5 +67,7 @@ class HttpRequests{
     return await httpRequest('${c.userInfo["url"]}/rest/star?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id');
   }
   // 取消喜欢某个歌曲
-  
+  Future<Map> deLoveSongRequest(String id) async {
+    return await httpRequest('${c.userInfo["url"]}/rest/unstar?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id');
+  }
 }

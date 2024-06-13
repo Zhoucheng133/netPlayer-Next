@@ -139,8 +139,16 @@ class Operations{
   }
 
   // 取消喜欢
-  void deloveSong(BuildContext context, String id){
-    
+  Future<void> deloveSong(BuildContext context, String id) async {
+    final rlt=await requests.deLoveSongRequest(id);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '取消失败', context);
+      return;
+    }else{
+      showMessage(true, '取消成功', context);
+    }
+    getLovedSongs(context);
+    // TODO 重新加载播放列表(若需要)
   }
 
   // 播放歌曲
