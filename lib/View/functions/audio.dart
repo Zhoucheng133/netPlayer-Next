@@ -11,6 +11,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   final Controller c = Get.put(Controller());
   final player = Player();
   var playURL="";
+  bool skipHandler=false;
 
   audioHandler(){
     player.stream.position.listen((position) {
@@ -27,11 +28,14 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<void> play() async {
     var url="${c.userInfo["url"]}/rest/stream?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}";
-    if(url!=playURL){
+    if(url!=playURL || skipHandler){
       final media=Media(url);
       await player.open(media);
     }
     player.play();
+    if(skipHandler){
+      skipHandler=false;
+    }
     playURL=url;
   }
 
@@ -72,6 +76,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     // c.nowPlay.value=tmpList;
     c.updateNowPlay(tmpList);
     c.nowPlay.refresh();
+    skipHandler=true;
     play();
   }
 
@@ -94,6 +99,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     // c.nowPlay.value=tmpList;
     c.updateNowPlay(tmpList);
     c.nowPlay.refresh();
+    skipHandler=true;
     play();
   }
 }
