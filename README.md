@@ -19,6 +19,10 @@
 ![url_launcher](https://img.shields.io/badge/url_launcher-6.2.5-lightblue)
 ![window_manager](https://img.shields.io/badge/window_manager-0.3.8-darkgreen)
 ![path_provider](https://img.shields.io/badge/path_provider-2.1.2-orange)
+![google_fonts](https://img.shields.io/badge/google_fonts-6.2.1-blue)
+![easy_debounce](https://img.shields.io/badge/easy_debounce-2.0.3-yellow)
+![font_awesome_flutter](https://img.shields.io/badge/font_awesome_flutter-10.7.0-green)
+![flutter_popup](https://img.shields.io/badge/flutter_popup-3.3.0-lightblue)
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
@@ -41,29 +45,33 @@
 - `F9`<sup>*</sup>(macOS)或`Ctrl Alt ←`(Windows)：上一首
 
 <sup>*</sup>系统媒体控制，不需要`Fn`键
+
 ## 截图
-<img src="./demo/demo1.png" height="400px"/>
 
-**点击歌曲封面可以查看歌词**
-
-<img src="./demo/demo2.png" height="400px"/>
-
+施工中
 
 ## 在你的设备上配置netPlayer Next
 
-本项目使用lutter^3.19开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
+本项目使用lutter^3.22开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
 建议直接使用Visual Studio Code，在安装完Flutter扩展和Dart扩展之后就可以Debug/Profile/Release了，我已经在.vscode文件夹中添加了launch类型
 
 不要使用Flutter3.7或更低版本的Flutter，确保Dart版本至少有3.0.0
 
 ## 更新日志
 
-### 2.0.7 (2024/5/12) 【仅对Windows版本的更新】
-- 添加全局快捷键
-- 添加是否添加全局快捷键的开关
+### 3.0.0 (开发中)
+- 重构了整个软件，现在看起来更加美观
+- 大幅提高了运行效率
+- 添加了音量调节功能
+- 添加了歌曲界面艺人显示
+- 修复了歌单为0时添加歌单崩溃的问题
 
 <details>
 <summary>过去的版本</summary>
+
+### 2.0.7 (2024/5/12) 【仅对Windows版本的更新】
+- 添加全局快捷键
+- 添加是否添加全局快捷键的开关
 
 ### 2.0.6 (2024/3/28)
 - 添加显示/隐藏歌词的快捷键
