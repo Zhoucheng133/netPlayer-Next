@@ -278,7 +278,7 @@ class _songItemState extends State<songItem> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.favorite_rounded,
+                Icons.heart_broken_rounded,
                 size: 18,
               ),
               SizedBox(width: 5,),
@@ -320,7 +320,9 @@ class _songItemState extends State<songItem> {
         ),
       ]
     );
-    // TODO 根据val操作
+    // if(val=='add'){
+
+    // }else if(val=='')
   }
   
   @override
