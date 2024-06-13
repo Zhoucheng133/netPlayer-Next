@@ -102,4 +102,8 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     skipHandler=true;
     play();
   }
+
+  Future<void> volumeSet(val) async {
+    await player.setVolume(val.toDouble());
+  }
 }

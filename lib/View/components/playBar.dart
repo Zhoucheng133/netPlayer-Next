@@ -1,6 +1,9 @@
 // ignore_for_file: camel_case_types, file_names
 
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_popup/flutter_popup.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -322,7 +325,66 @@ class _playBarState extends State<playBar> {
                     ),
                   ),
                   const SizedBox(width: 20,),
-                  // TODO 其他按钮
+                  CustomPopup(
+                    content: SizedBox(
+                      width: 120,
+                      height: 20,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: SliderTheme(
+                              data: SliderThemeData(
+                                thumbColor: c.color6,
+                                overlayColor: Colors.transparent,
+                                overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                trackHeight: 2,
+                                thumbShape: const RoundSliderThumbShape(
+                                  enabledThumbRadius: 5,
+                                  elevation: 0,
+                                  pressedElevation: 0,
+                                ),
+                                activeTrackColor: c.color5,
+                                inactiveTrackColor: c.color4,
+                              ),
+                              child: Obx(()=>
+                                Slider(
+                                  value: c.volume.value/100, 
+                                  onChanged: (val){
+                                    c.updateVolume((val*100).toInt());
+                                    c.handler.volumeSet(c.volume.value);
+                                    EasyDebounce.debounce(
+                                      'volume', 
+                                      const Duration(milliseconds: 50), 
+                                      (){
+                                        Operations().saveVolume();
+                                      }
+                                    );
+                                  }
+                                ),
+                              )
+                            ),
+                          ),
+                          const SizedBox(width: 5,),
+                          Obx(()=>
+                            Text(
+                              "${c.volume}%",
+                              style: const TextStyle(
+                                fontSize: 12
+                              ),
+                            )
+                          )
+                        ],
+                      ),
+                    ),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: FaIcon(
+                        FontAwesomeIcons.volumeHigh,
+                        size: 14,
+                        color: c.color5,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

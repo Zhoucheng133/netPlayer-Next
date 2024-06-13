@@ -151,6 +151,7 @@ class Operations{
     // TODO 重新加载播放列表(若需要)
   }
 
+  // 添加某个歌曲到某个歌单
   Future<void> addToList(BuildContext context, String songId, String listId) async {
     final rlt=await requests.addToList(songId, listId);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
@@ -160,6 +161,12 @@ class Operations{
       showMessage(true, '添加成功', context);
     }
     // TODO 重新排序播放列表
+  }
+
+  // 修改音量
+  Future<void> saveVolume() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('volume', c.volume.value);
   }
 
   // 播放歌曲

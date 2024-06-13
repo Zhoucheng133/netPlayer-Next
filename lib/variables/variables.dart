@@ -61,6 +61,8 @@ class Controller extends GetxController{
   RxBool onInput=false.obs;
   // 播放模式, 可选值为: list, random, loop
   RxString playMode='list'.obs;
+  // 音量大小，默认为100%
+  RxInt volume=100.obs;
 
   // # 一些设置属性 #
   // 保存播放内容
@@ -77,5 +79,8 @@ class Controller extends GetxController{
     nowPlay.value=val;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('nowPlay', jsonEncode(val));
+  }
+  void updateVolume(int val) {
+    volume.value=val;
   }
 }
