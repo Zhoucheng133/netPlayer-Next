@@ -50,7 +50,6 @@ class _allViewState extends State<allView> {
                 child: Obx(()=>
                   ListView.builder(
                     itemCount: c.allSongs.length,
-                    // TODO 注意修改参数
                     itemBuilder: (BuildContext context, int index){
                       return Obx(() => songItem(
                           index: index, 

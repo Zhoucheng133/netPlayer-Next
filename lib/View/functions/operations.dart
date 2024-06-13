@@ -132,7 +132,6 @@ class Operations{
       'duration': duration,
       'fromId': listId,
       'index': index,
-      // TODO 需要修改list
       'list': playList,
     };
     // c.nowPlay.value=data;
