@@ -125,6 +125,24 @@ class Operations{
     return [];
   }
 
+  // 喜欢某个歌曲
+  Future<void> loveSong(BuildContext context, String id) async {
+    final rlt=await requests.loveSongRequest(id);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '添加失败', context);
+      return;
+    }else{
+      showMessage(true, '添加成功', context);
+    }
+    getLovedSongs(context);
+    // TODO 重新加载播放列表(若需要)
+  }
+
+  // 取消喜欢
+  void deloveSong(BuildContext context, String id){
+    
+  }
+
   // 播放歌曲
   void playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index, List list){
     List playList=[];

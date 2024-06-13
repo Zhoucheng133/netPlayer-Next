@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types
+// ignore_for_file: file_names, camel_case_types, use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/functions/operations.dart';
@@ -320,9 +320,15 @@ class _songItemState extends State<songItem> {
         ),
       ]
     );
-    // if(val=='add'){
+    if(val=='add'){
+      // TODO 添加到歌单
+    }else if(val=='delove'){
+      Operations().deloveSong(context, widget.id);
+    }else if(val=='love'){
+      Operations().loveSong(context, widget.id);
+    }else if(val=='del'){
 
-    // }else if(val=='')
+    }
   }
   
   @override
