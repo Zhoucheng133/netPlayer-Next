@@ -365,24 +365,32 @@ class _playBarState extends State<playBar> {
                             ),
                           ),
                           const SizedBox(width: 5,),
-                          Obx(()=>
-                            Text(
-                              "${c.volume}%",
-                              style: const TextStyle(
-                                fontSize: 12
-                              ),
-                            )
+                          SizedBox(
+                            width: 35,
+                            child: Obx(()=>
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "${c.volume}%",
+                                  style: const TextStyle(
+                                    fontSize: 12
+                                  ),
+                                ),
+                              )
+                            ),
                           )
                         ],
                       ),
                     ),
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
-                      child: FaIcon(
-                        FontAwesomeIcons.volumeHigh,
-                        size: 14,
-                        color: c.color5,
-                      ),
+                      child: Obx(()=>
+                        FaIcon(
+                          c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
+                          size: 14,
+                          color: c.color5,
+                        ),
+                      )
                     ),
                   )
                 ],
