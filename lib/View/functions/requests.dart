@@ -58,4 +58,8 @@ class HttpRequests{
   Future<Map> getLovedSongsRequest() async {
     return await httpRequest("${c.userInfo["url"]}/rest/getStarred?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}");
   }
+  // 获取指定id的歌单
+  Future<Map> getPlayListRequest(String id) async {
+    return await httpRequest("${c.userInfo["url"]}/rest/getPlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id");
+  }
 }

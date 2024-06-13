@@ -114,6 +114,20 @@ class Operations{
     }
   }
 
+  // 获取指定id歌单
+  Future<List> getPlayList(BuildContext context, String id) async {
+    final rlt=await requests.getPlayListRequest(id);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '获取歌单内容失败', context);
+      return [];
+    }else{
+      try {
+        return rlt["subsonic-response"]["playlist"]['entry'];
+      } catch (_) {}
+    }
+    return [];
+  }
+
   // 播放歌曲
   void playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index, List list){
     List playList=[];

@@ -48,15 +48,15 @@ class _viewHeaderState extends State<viewHeader> {
               ],
             ),
           ),
-          Obx(()=>
-            widget.page=='playList' || widget.page=='all' || widget.page=='loved' ?
-            GestureDetector(
-              onTap: (){
-                if(c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id)){
-                  widget.locate();
-                }
-              },
-              child: MouseRegion(
+          widget.page=='playList' || widget.page=='all' || widget.page=='loved' ?
+          GestureDetector(
+            onTap: (){
+              if(c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id)){
+                widget.locate();
+              }
+            },
+            child: Obx(()=>
+              MouseRegion(
                 cursor: c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? SystemMouseCursors.click : SystemMouseCursors.forbidden,
                 child: Icon(
                   Icons.my_location_rounded,
@@ -64,8 +64,8 @@ class _viewHeaderState extends State<viewHeader> {
                   color: c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? c.color6 : Colors.grey[300],
                 ),
               ),
-            ):Container()
-          )
+            )
+          ):Container()
         ],
       ),
     );
