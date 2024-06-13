@@ -10,7 +10,8 @@ class viewHeader extends StatefulWidget {
   final String subTitle;
   final String page;
   final dynamic id;
-  const viewHeader({super.key, required this.title, required this.subTitle, required this.page, this.id});
+  final dynamic locate;
+  const viewHeader({super.key, required this.title, required this.subTitle, required this.page, this.id, this.locate});
 
   @override
   State<viewHeader> createState() => _viewHeaderState();
@@ -48,11 +49,22 @@ class _viewHeaderState extends State<viewHeader> {
             ),
           ),
           Obx(()=>
-            Icon(
-              Icons.my_location_rounded,
-              size: 17,
-              color: c.nowPlay['playFrom']==widget.page ? c.color6 : Colors.grey[300],
-            )
+            widget.page=='playList' || widget.page=='all' || widget.page=='loved' ?
+            GestureDetector(
+              onTap: (){
+                if(c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id)){
+                  widget.locate();
+                }
+              },
+              child: MouseRegion(
+                cursor: c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? SystemMouseCursors.click : SystemMouseCursors.forbidden,
+                child: Icon(
+                  Icons.my_location_rounded,
+                  size: 17,
+                  color: c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? c.color6 : Colors.grey[300],
+                ),
+              ),
+            ):Container()
           )
         ],
       ),

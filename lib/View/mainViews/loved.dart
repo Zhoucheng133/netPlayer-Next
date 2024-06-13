@@ -7,6 +7,7 @@ import 'package:net_player_next/View/components/table.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 class lovedView extends StatefulWidget {
   const lovedView({super.key});
@@ -19,6 +20,7 @@ class _lovedViewState extends State<lovedView> {
 
   final operations=Operations();
   final Controller c = Get.put(Controller());
+  final controller=AutoScrollController();
 
   @override
   void initState() {
@@ -35,6 +37,10 @@ class _lovedViewState extends State<lovedView> {
     return false;
   }
 
+  void locateSong(){
+    controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,17 +49,23 @@ class _lovedViewState extends State<lovedView> {
         children: [
           Column(
             children: [
-              Obx(()=>viewHeader(title: '喜欢的歌曲', subTitle: '共有${c.lovedSongs.length}首', page: 'loved',)),
+              Obx(()=>viewHeader(title: '喜欢的歌曲', subTitle: '共有${c.lovedSongs.length}首', page: 'loved', locate: ()=>locateSong(),)),
               const songHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
                 child: Obx(()=>
                   ListView.builder(
+                    controller: controller,
                     itemCount: c.lovedSongs.length,
                     itemBuilder: (BuildContext context, int index){
-                      return Obx(()=>
-                        songItem(index: index, title: c.lovedSongs[index]['title'], duration: c.lovedSongs[index]['duration'], id: c.lovedSongs[index]['id'], isplay: isPlay(index), artist: c.lovedSongs[index]['artist'], from: 'loved',)
+                      return AutoScrollTag(
+                        key: ValueKey(index),
+                        controller: controller,
+                        index: index,
+                        child: Obx(()=>
+                          songItem(index: index, title: c.lovedSongs[index]['title'], duration: c.lovedSongs[index]['duration'], id: c.lovedSongs[index]['id'], isplay: isPlay(index), artist: c.lovedSongs[index]['artist'], from: 'loved',)
+                        ),
                       );
                     }
                   )

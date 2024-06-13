@@ -6,6 +6,7 @@ import 'package:net_player_next/View/components/table.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 class allView extends StatefulWidget {
   const allView({super.key});
@@ -18,6 +19,7 @@ class _allViewState extends State<allView> {
 
   final operations=Operations();
   final Controller c = Get.put(Controller());
+  final AutoScrollController controller=AutoScrollController();
 
   @override
   void initState() {
@@ -34,6 +36,10 @@ class _allViewState extends State<allView> {
     return false;
   }
 
+  void locateSong(){
+    controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -42,24 +48,30 @@ class _allViewState extends State<allView> {
         children: [
           Column(
             children: [
-              Obx(() => viewHeader(title: '所有歌曲', subTitle: '共有${c.allSongs.length}首', page: 'all',),),
+              Obx(() => viewHeader(title: '所有歌曲', subTitle: '共有${c.allSongs.length}首', page: 'all', locate: ()=>locateSong(),),),
               const songHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
                 child: Obx(()=>
                   ListView.builder(
+                    controller: controller,
                     itemCount: c.allSongs.length,
                     itemBuilder: (BuildContext context, int index){
-                      return Obx(() => songItem(
-                          index: index, 
-                          title: c.allSongs[index]['title'], 
-                          duration: c.allSongs[index]['duration'], 
-                          id: c.allSongs[index]['id'], 
-                          isplay: isPlay(index), 
-                          artist: c.allSongs[index]['artist'], 
-                          from: 'all',
-                        )
+                      return AutoScrollTag(
+                        key: ValueKey(index),
+                        controller: controller,
+                        index: index,
+                        child: Obx(() => songItem(
+                            index: index, 
+                            title: c.allSongs[index]['title'], 
+                            duration: c.allSongs[index]['duration'], 
+                            id: c.allSongs[index]['id'], 
+                            isplay: isPlay(index), 
+                            artist: c.allSongs[index]['artist'], 
+                            from: 'all',
+                          )
+                        ),
                       );
                     }
                   )
