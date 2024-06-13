@@ -151,6 +151,17 @@ class Operations{
     // TODO 重新加载播放列表(若需要)
   }
 
+  Future<void> addToList(BuildContext context, String songId, String listId) async {
+    final rlt=await requests.addToList(songId, listId);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '添加失败', context);
+      return;
+    }else{
+      showMessage(true, '添加成功', context);
+    }
+    // TODO 重新排序播放列表
+  }
+
   // 播放歌曲
   void playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index, List list){
     List playList=[];

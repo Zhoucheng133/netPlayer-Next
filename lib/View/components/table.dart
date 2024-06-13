@@ -254,10 +254,11 @@ class _songItemState extends State<songItem> {
         position.dy + 50,
       ),
       items: [
-        const PopupMenuItem(
+        PopupMenuItem(
           value: "add",
+          enabled: c.playLists.isNotEmpty,
           height: 35,
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -321,13 +322,82 @@ class _songItemState extends State<songItem> {
       ]
     );
     if(val=='add'){
-      // TODO 添加到歌单
+      String selectItem = c.playLists[0]["id"];
+      await showDialog(
+        context: context, 
+        builder: (BuildContext context)=>AlertDialog(
+          title: const Text('添加到歌单...'),
+          content: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState){
+              return SizedBox(
+                height: 200,
+                width: 300,
+                child: Obx(()=>
+                  ListView.builder(
+                    itemCount: c.playLists.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return SizedBox(
+                        height: 40,
+                        child: Row(
+                          children: [
+                            Obx(()=>
+                              Radio(
+                                value: c.playLists[index]["id"], 
+                                // fillColor: c.color6,
+                                activeColor: c.color6,
+                                groupValue: selectItem, 
+                                onChanged: (val){
+                                  setState(()=>
+                                    selectItem=val
+                                  );
+                                }
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                setState(() {
+                                  selectItem=c.playLists[index]["id"];
+                                });
+                              },
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: Text(
+                                  c.playLists[index]["name"]
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    }
+                  )
+                ),
+              );
+            }
+          ),
+          actions: [
+            TextButton(
+              onPressed: (){
+                Navigator.pop(context);
+              }, 
+              child: const Text('取消')
+            ),
+            ElevatedButton(
+              onPressed: (){
+                Operations().addToList(context, widget.id, selectItem);
+                Navigator.pop(context);
+              }, 
+              child: const Text('添加')
+            )
+          ],
+        )
+      );
     }else if(val=='delove'){
       Operations().deloveSong(context, widget.id);
     }else if(val=='love'){
       Operations().loveSong(context, widget.id);
     }else if(val=='del'){
-
+      // TODO 从歌单中删除
     }
   }
   
