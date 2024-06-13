@@ -283,6 +283,7 @@ class _playBarState extends State<playBar> {
               padding: const EdgeInsets.only(left: 15),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   GestureDetector(
@@ -310,7 +311,7 @@ class _playBarState extends State<playBar> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 20,),
+                  const SizedBox(width: 25,),
                   GestureDetector(
                     onTap: (){
                       // TODO 显示歌词
@@ -324,7 +325,7 @@ class _playBarState extends State<playBar> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 20,),
+                  const SizedBox(width: 25,),
                   CustomPopup(
                     content: SizedBox(
                       width: 120,
@@ -391,6 +392,32 @@ class _playBarState extends State<playBar> {
                           color: c.color5,
                         ),
                       )
+                    ),
+                  ),
+                  const SizedBox(width: 25,),
+                  GestureDetector(
+                    onTap: (){
+                      // TODO 切换播放模式
+                    },
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Obx(()=>
+                        c.playMode.value=='list' ? 
+                        Icon(
+                          Icons.repeat_rounded,
+                          size: 18,
+                          color: c.color5,
+                        ) : c.playMode.value=='single' ?
+                        Icon(
+                          Icons.repeat_one_rounded,
+                          size: 18,
+                          color: c.color5,
+                        ) : Icon(
+                          Icons.shuffle_rounded,
+                          size: 18,
+                          color: c.color5,
+                        )
+                      ),
                     ),
                   )
                 ],
