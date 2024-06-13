@@ -75,7 +75,7 @@ class _playListViewState extends State<playListView> {
                       key: ValueKey(index), 
                       controller: controller, 
                       index: index,
-                      child: Obx(()=>songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId,),)
+                      child: Obx(()=>songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list,),)
                     );
                   }
                 ),
