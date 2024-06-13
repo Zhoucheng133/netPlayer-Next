@@ -284,7 +284,12 @@ class _playBarState extends State<playBar> {
                 children: [
                   GestureDetector(
                     onTap: (){
-                      // TODO 添加到喜欢
+                      if(isLoved()){
+                        Operations().deloveSong(context, c.nowPlay['id']);
+                      }else{
+                        Operations().loveSong(context, c.nowPlay['id']);
+                      }
+                      
                     },
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
