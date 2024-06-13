@@ -20,7 +20,7 @@ class _artistViewState extends State<artistView> {
         children: [
           Column(
             children: [
-              viewHeader(title: '艺人', subTitle: ''),
+              viewHeader(title: '艺人', subTitle: '', page: 'artist',),
               artistHeader(),
             ],
           )

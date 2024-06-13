@@ -19,7 +19,7 @@ class _searchViewState extends State<searchView> {
         children: [
           Column(
             children: [
-              viewHeader(title: '搜索', subTitle: '')
+              viewHeader(title: '搜索', subTitle: '', page: 'search',)
             ],
           )
         ],

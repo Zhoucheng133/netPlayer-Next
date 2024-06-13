@@ -40,7 +40,7 @@ class _playListViewState extends State<playListView> {
         children: [
           Column(
             children: [
-              viewHeader(title: name, subTitle: ''),
+              Obx(()=>viewHeader(title: name, subTitle: '', page: 'playList', id: c.pageId.value),),
               const songHeader(),
             ],
           )

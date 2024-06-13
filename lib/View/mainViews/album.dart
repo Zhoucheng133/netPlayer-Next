@@ -25,7 +25,7 @@ class _albumViewState extends State<albumView> {
         children: [
           Column(
             children: [
-              viewHeader(title: '专辑', subTitle: ''),
+              viewHeader(title: '专辑', subTitle: '', page: 'album',),
               albumHeader()
             ],
           )

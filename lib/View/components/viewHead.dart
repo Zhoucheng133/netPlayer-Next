@@ -8,7 +8,9 @@ class viewHeader extends StatefulWidget {
 
   final String title;
   final String subTitle;
-  const viewHeader({super.key, required this.title, required this.subTitle});
+  final String page;
+  final dynamic id;
+  const viewHeader({super.key, required this.title, required this.subTitle, required this.page, this.id});
 
   @override
   State<viewHeader> createState() => _viewHeaderState();
@@ -45,6 +47,13 @@ class _viewHeaderState extends State<viewHeader> {
               ],
             ),
           ),
+          Obx(()=>
+            Icon(
+              Icons.my_location_rounded,
+              size: 17,
+              color: c.nowPlay['playFrom']==widget.page ? c.color6 : Colors.grey[300],
+            )
+          )
         ],
       ),
     );

@@ -12,13 +12,13 @@ class Controller extends GetxController{
   RxString pageId=''.obs;
   // 页面对照
   var pages=[
-    '所有歌曲',   // id: ''
-    '喜欢的歌曲', // id: '' 
-    '艺人',       // id: String / ''
-    '专辑',       // id: String / ''
-    '歌单',       // id: String / ''
-    '搜索'        // id: String / ''
-    '设置'        // id: ''
+    'all',      // id: ''
+    'loved',    // id: '' 
+    'artist',   // id: String / ''
+    'album',    // id: String / ''
+    'playList', // id: String / ''
+    'search'    // id: String / ''
+    'settings'  // id: ''
   ];
   // 用户信息
   RxMap<String, String?> userInfo=<String, String?>{

@@ -31,7 +31,7 @@ class _settingsViewState extends State<settingsView> {
             children: [
               Column(
                 children: [
-                  const viewHeader(title: '设置', subTitle: ''),
+                  const viewHeader(title: '设置', subTitle: '', page: 'settings',),
                   const SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
