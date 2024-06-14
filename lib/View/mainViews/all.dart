@@ -40,6 +40,10 @@ class _allViewState extends State<allView> {
     controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
   }
 
+  void refresh(){
+    // TODO 刷新所有歌曲
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,7 +52,7 @@ class _allViewState extends State<allView> {
         children: [
           Column(
             children: [
-              Obx(() => viewHeader(title: '所有歌曲', subTitle: '共有${c.allSongs.length}首', page: 'all', locate: ()=>locateSong(),),),
+              Obx(() => viewHeader(title: '所有歌曲', subTitle: '共有${c.allSongs.length}首', page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(),),),
               const songHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

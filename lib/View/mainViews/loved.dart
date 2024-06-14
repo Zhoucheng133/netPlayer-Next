@@ -41,6 +41,10 @@ class _lovedViewState extends State<lovedView> {
     controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
   }
 
+  void refresh(){
+    // TODO 刷新喜欢的歌曲
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,7 +53,7 @@ class _lovedViewState extends State<lovedView> {
         children: [
           Column(
             children: [
-              Obx(()=>viewHeader(title: '喜欢的歌曲', subTitle: '共有${c.lovedSongs.length}首', page: 'loved', locate: ()=>locateSong(),)),
+              Obx(()=>viewHeader(title: '喜欢的歌曲', subTitle: '共有${c.lovedSongs.length}首', page: 'loved', locate: ()=>locateSong(), refresh: ()=>refresh(),)),
               const songHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

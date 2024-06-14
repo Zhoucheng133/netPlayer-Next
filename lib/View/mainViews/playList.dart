@@ -54,6 +54,10 @@ class _playListViewState extends State<playListView> {
     controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
   }
 
+  void refresh(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -62,7 +66,7 @@ class _playListViewState extends State<playListView> {
         children: [
           Column(
             children: [
-              Obx(()=>viewHeader(title: name, subTitle: '共有${list.length}首', page: 'playList', id: c.pageId.value, locate: ()=>locateSong(),),),
+              Obx(()=>viewHeader(title: name, subTitle: '共有${list.length}首', page: 'playList', id: c.pageId.value, locate: ()=>locateSong(), refresh: ()=>refresh(),),),
               const songHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

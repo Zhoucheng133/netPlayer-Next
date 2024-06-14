@@ -11,14 +11,19 @@ class viewHeader extends StatefulWidget {
   final String page;
   final dynamic id;
   final dynamic locate;
-  const viewHeader({super.key, required this.title, required this.subTitle, required this.page, this.id, this.locate});
+  final dynamic refresh;
+  const viewHeader({super.key, required this.title, required this.subTitle, required this.page, this.id, this.locate, this.refresh});
 
   @override
   State<viewHeader> createState() => _viewHeaderState();
 }
 
 class _viewHeaderState extends State<viewHeader> {
+  
   final Controller c = Get.put(Controller());
+  bool hoverLocate=false;
+  bool hoverRefresh=false;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -58,14 +63,57 @@ class _viewHeaderState extends State<viewHeader> {
             child: Obx(()=>
               MouseRegion(
                 cursor: c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? SystemMouseCursors.click : SystemMouseCursors.forbidden,
-                child: Icon(
-                  Icons.my_location_rounded,
-                  size: 17,
-                  color: c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? c.color6 : Colors.grey[300],
+                onEnter: (_){
+                  setState(() {
+                    hoverLocate=true;
+                  });
+                },
+                onExit: (_){
+                  setState(() {
+                    hoverLocate=false;
+                  });
+                },
+                child: TweenAnimationBuilder(
+                  tween: ColorTween(end:  c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? hoverLocate ? c.color6 : c.color5 : Colors.grey[300]), 
+                  duration: const Duration(milliseconds: 200), 
+                  builder: (_, value, __) => Icon(
+                    Icons.my_location_rounded,
+                    size: 17,
+                    color: value,
+                  )
                 ),
               ),
             )
-          ):Container()
+          ):Container(),
+          const SizedBox(width: 10,),
+          widget.page=='playList' || widget.page=='all' || widget.page=='loved' ? 
+          GestureDetector(
+            onTap: (){
+              widget.refresh();
+            },
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              onEnter: (_){
+                setState(() {
+                  hoverRefresh=true;
+                });
+              },
+              onExit: (_){
+                setState(() {
+                  hoverRefresh=false;
+                });
+              },
+              child: TweenAnimationBuilder(
+                tween: ColorTween(end: hoverRefresh ? c.color6 : c.color5), 
+                duration: const Duration(milliseconds: 200), 
+                builder: (_, value, __) => Icon(
+                  Icons.refresh_rounded,
+                  size: 18,
+                  color: value,
+                ),
+              )
+            ),
+          ) : Container()
         ],
       ),
     );
