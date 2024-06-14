@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class playBar extends StatefulWidget {
   const playBar({super.key});
@@ -399,8 +400,10 @@ class _playBarState extends State<playBar> {
                     color: c.color1,
                     tooltip: "",
                     splashRadius: 0,
-                    onSelected: (val){
+                    onSelected: (val) async {
                       c.playMode.value=val;
+                      final SharedPreferences prefs = await SharedPreferences.getInstance();
+                      await prefs.setString('playMode', val);
                     },
                     itemBuilder: (BuildContext context)=>[
                       const PopupMenuItem(

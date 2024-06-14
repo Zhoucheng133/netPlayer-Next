@@ -28,7 +28,7 @@ class _mainViewState extends State<mainView> {
 
   final Controller c = Get.put(Controller());
   
-  // 是否保存->(是)加载播放信息->是否后台播放->是否启用全局快捷键
+  // 是否保存->(是)加载播放信息->是否后台播放->是否启用全局快捷键->是否自定义播放模式
   Future<void> initPrefs() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final savePlay=prefs.getBool('savePlay');
@@ -51,6 +51,14 @@ class _mainViewState extends State<mainView> {
     final useShortcut=prefs.getBool('useShortcut');
     if(useShortcut==false){
       c.useShortcut.value=false;
+    }
+    final playMode=prefs.getString('playMode');
+    if(playMode!=null && playMode!='list'){
+      c.playMode.value=playMode;
+    }
+    final volume=prefs.getInt('volume');
+    if(volume!=null && volume!=100){
+      c.volume.value=volume;
     }
     Operations().initHotkey();
   }
