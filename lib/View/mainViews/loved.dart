@@ -43,29 +43,7 @@ class _lovedViewState extends State<lovedView> {
   }
 
   Future<void> refresh() async {
-    await operations.getLovedSongs(context);
-    if(c.nowPlay['playFrom']=='loved'){
-      int index=c.lovedSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
-      if(index!=-1){
-        c.nowPlay['index']=index;
-        c.nowPlay['list']=c.lovedSongs;
-        c.nowPlay.refresh();
-      }else{
-        c.handler.stop();
-        Map<String, Object> tmp={
-          'id': '',
-          'title': '',
-          'artist': '',
-          'playFrom': '',
-          'duration': 0,
-          'fromId': '',
-          'index': 0,
-          'list': [],
-        };
-        c.nowPlay.value=tmp;
-        c.isPlay.value=false;
-      }
-    }
+    await operations.checkLovedSongPlay(context);
     showMessage(true, '更新成功', context);
   }
 

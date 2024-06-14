@@ -174,7 +174,7 @@ class Operations{
       showMessage(true, '取消成功', context);
     }
     await getLovedSongs(context);
-    refreshFromLoved();  
+    refreshFromLoved();
   }
 
   // 添加某个歌曲到某个歌单
@@ -188,6 +188,99 @@ class Operations{
     }
     c.nowPlay['list']=await getPlayList(context, listId);
     c.nowPlay.refresh();
+  }
+
+  Future<void> checkLovedSongPlay(BuildContext context) async {
+    await getLovedSongs(context);
+    if(c.nowPlay['playFrom']=='loved'){
+      int index=c.lovedSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
+      if(index!=-1){
+        c.nowPlay['index']=index;
+        c.nowPlay['list']=c.lovedSongs;
+        c.nowPlay.refresh();
+      }else{
+        c.handler.stop();
+        Map<String, Object> tmp={
+          'id': '',
+          'title': '',
+          'artist': '',
+          'playFrom': '',
+          'duration': 0,
+          'fromId': '',
+          'index': 0,
+          'list': [],
+        };
+        c.nowPlay.value=tmp;
+        c.isPlay.value=false;
+      }
+    }
+  }
+
+  Future<void> checkAllSongPlay(BuildContext context) async {
+    await getAllSongs(context);
+    if(c.nowPlay['playFrom']=='all'){
+      int index=c.allSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
+      if(index!=-1){
+        c.nowPlay['index']=index;
+        c.nowPlay['list']=c.allSongs;
+        c.nowPlay.refresh();
+      }else{
+        c.handler.stop();
+        Map<String, Object> tmp={
+          'id': '',
+          'title': '',
+          'artist': '',
+          'playFrom': '',
+          'duration': 0,
+          'fromId': '',
+          'index': 0,
+          'list': [],
+        };
+        c.nowPlay.value=tmp;
+        c.isPlay.value=false;
+      }
+    }
+  }
+
+  Future<void> checkPlayListPlay(BuildContext context, String listId) async {
+    var tmpList=await getPlayList(context, listId);
+    if(c.nowPlay['playFrom']=='playList' && c.nowPlay['fromId']==listId){
+      int index=tmpList.indexWhere((item) => item['id']==c.nowPlay['id']);
+      if(index!=-1){
+        c.nowPlay['index']=index;
+        c.nowPlay['list']=tmpList;
+        c.nowPlay.refresh();
+      }else{
+        c.handler.stop();
+        Map<String, Object> tmp={
+          'id': '',
+          'title': '',
+          'artist': '',
+          'playFrom': '',
+          'duration': 0,
+          'fromId': '',
+          'index': 0,
+          'list': [],
+        };
+        c.nowPlay.value=tmp;
+        c.isPlay.value=false;
+      }
+    }
+  }
+
+  // 自动修正nowPlay
+  Future<void> nowPlayCheck(BuildContext context) async {
+    if(c.nowPlay['id']==''){
+      return;
+    }else{
+      if(c.nowPlay['playFrom']=='all'){
+        await checkAllSongPlay(context);
+      }else if(c.nowPlay['playFrom']=='loved'){
+        await checkLovedSongPlay(context);
+      }else if(c.nowPlay['playFrom']=='playList'){
+        await checkPlayListPlay(context, c.nowPlay['fromId']);
+      }
+    }
   }
 
   // 修改音量
@@ -216,7 +309,6 @@ class Operations{
       'index': index,
       'list': playList,
     };
-    // c.nowPlay.value=data;
     c.updateNowPlay(data);
     c.handler.play();
     c.isPlay.value=true;

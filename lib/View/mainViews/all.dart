@@ -42,29 +42,7 @@ class _allViewState extends State<allView> {
   }
 
   Future<void> refresh() async {
-    await operations.getAllSongs(context);
-    if(c.nowPlay['playFrom']=='all'){
-      int index=c.allSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
-      if(index!=-1){
-        c.nowPlay['index']=index;
-        c.nowPlay['list']=c.allSongs;
-        c.nowPlay.refresh();
-      }else{
-        c.handler.stop();
-        Map<String, Object> tmp={
-          'id': '',
-          'title': '',
-          'artist': '',
-          'playFrom': '',
-          'duration': 0,
-          'fromId': '',
-          'index': 0,
-          'list': [],
-        };
-        c.nowPlay.value=tmp;
-        c.isPlay.value=false;
-      }
-    }
+    await operations.checkAllSongPlay(context);
     showMessage(true, '更新成功', context);
   }
 

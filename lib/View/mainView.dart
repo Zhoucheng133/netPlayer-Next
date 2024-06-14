@@ -35,11 +35,13 @@ class _mainViewState extends State<mainView> {
     if(savePlay!=false){
       final nowPlay=prefs.getString('nowPlay');
       if(nowPlay!=null){
-        // TODO 需要检查播放列表中是否存在歌曲
         Map<String, dynamic> decodedMap = jsonDecode(nowPlay);
         Map<String, Object> tmpList=Map<String, Object>.from(decodedMap);
         c.nowPlay.value=tmpList;
         c.nowPlay.refresh();
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Operations().nowPlayCheck(context);
+        });
       }
     }else{
       c.savePlay.value=false;
