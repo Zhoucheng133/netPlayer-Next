@@ -41,6 +41,31 @@ class _playBarState extends State<playBar> {
     return false;
   }
 
+  void showLyric(){
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => const lyricView(),
+        transitionDuration: const Duration(milliseconds: 500),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(0.0, 1.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+      )
+    );
+  }
+
+  bool hoverCover=false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -58,13 +83,50 @@ class _playBarState extends State<playBar> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(5),
-              child: Obx(() =>
-                c.nowPlay["id"]=="" ? 
-                Container(
-                  color: c.color1,
-                ) : Image.network(
-                  "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
-                  fit: BoxFit.contain,
+              child: GestureDetector(
+                onTap: (){
+                  showLyric();
+                },
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  onEnter: (_){
+                    setState(() {
+                      hoverCover=true;
+                    });
+                  },
+                  onExit: (_){
+                    setState(() {
+                      hoverCover=false;
+                    });
+                  },
+                  child: Stack(
+                    children: [
+                      Obx(() =>
+                        c.nowPlay["id"]=="" ? 
+                        Container(
+                          color: c.color1,
+                        ) : Image.network(
+                          "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        width: 45,
+                        height: 45,
+                        decoration: BoxDecoration(
+                          color: hoverCover ? const Color.fromARGB(80, 0, 0, 0) : const Color.fromARGB(0, 0, 0, 0)
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.arrow_upward_rounded,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             )
@@ -316,26 +378,7 @@ class _playBarState extends State<playBar> {
                   const SizedBox(width: 25,),
                   GestureDetector(
                     onTap: (){
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation, secondaryAnimation) => const lyricView(),
-                          transitionDuration: const Duration(milliseconds: 500),
-                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                            const begin = Offset(0.0, 1.0);
-                            const end = Offset.zero;
-                            const curve = Curves.ease;
-
-                            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                            var offsetAnimation = animation.drive(tween);
-
-                            return SlideTransition(
-                              position: offsetAnimation,
-                              child: child,
-                            );
-                          },
-                        )
-                      );
+                      showLyric();
                     },
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
