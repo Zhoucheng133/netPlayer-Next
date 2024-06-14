@@ -117,12 +117,16 @@ class _playBarState extends State<playBar> {
                         decoration: BoxDecoration(
                           color: hoverCover ? const Color.fromARGB(80, 0, 0, 0) : const Color.fromARGB(0, 0, 0, 0)
                         ),
-                        child: const Center(
-                          child: Icon(
-                            Icons.arrow_upward_rounded,
-                            color: Colors.white,
-                            size: 18,
-                          ),
+                        child: Center(
+                          child: TweenAnimationBuilder(
+                            tween: ColorTween(end: hoverCover ? Colors.white : Colors.white.withAlpha(0),), 
+                            duration: const Duration(milliseconds: 200), 
+                            builder: (_, value, __)=>Icon(
+                              Icons.arrow_upward_rounded,
+                              color: value,
+                              size: 18,
+                            ),
+                          )
                         ),
                       )
                     ],
