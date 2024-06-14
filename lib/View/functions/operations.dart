@@ -187,6 +187,7 @@ class Operations{
       showMessage(true, '添加成功', context);
     }
     c.nowPlay['list']=await getPlayList(context, listId);
+    c.nowPlay.refresh();
   }
 
   // 修改音量
