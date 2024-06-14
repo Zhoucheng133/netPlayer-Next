@@ -186,7 +186,7 @@ class Operations{
     }else{
       showMessage(true, '添加成功', context);
     }
-    // TODO 重新排序播放列表
+    c.nowPlay['list']=await getPlayList(context, listId);
   }
 
   // 修改音量
