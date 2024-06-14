@@ -125,6 +125,32 @@ class Operations{
     return [];
   }
 
+  // 重新刷新播放内容
+  void refreshFromLoved(){
+    if(c.nowPlay['playFrom']=='loved'){
+      int index=c.lovedSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
+      if(index!=-1){
+        c.nowPlay['index']=index;
+        c.nowPlay['list']=c.lovedSongs;
+        c.nowPlay.refresh();
+      }else{
+        c.handler.stop();
+        Map<String, Object> tmp={
+          'id': '',
+          'title': '',
+          'artist': '',
+          'playFrom': '',
+          'duration': 0,
+          'fromId': '',
+          'index': 0,
+          'list': [],
+        };
+        c.nowPlay.value=tmp;
+        c.isPlay.value=false;
+      }
+    }
+  }
+
   // 喜欢某个歌曲
   Future<void> loveSong(BuildContext context, String id) async {
     final rlt=await requests.loveSongRequest(id);
@@ -134,8 +160,8 @@ class Operations{
     }else{
       showMessage(true, '添加成功', context);
     }
-    getLovedSongs(context);
-    // TODO 重新加载播放列表(若需要)
+    await getLovedSongs(context);
+    refreshFromLoved();
   }
 
   // 取消喜欢
@@ -147,8 +173,8 @@ class Operations{
     }else{
       showMessage(true, '取消成功', context);
     }
-    getLovedSongs(context);
-    // TODO 重新加载播放列表(若需要)
+    await getLovedSongs(context);
+    refreshFromLoved();  
   }
 
   // 添加某个歌曲到某个歌单

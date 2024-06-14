@@ -50,7 +50,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 停止播放
   @override
   Future<void> stop() async {
-    
+    player.stop();
   }
 
   // 跳转

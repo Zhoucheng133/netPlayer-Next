@@ -1,7 +1,8 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/components/message.dart';
 import 'package:net_player_next/View/components/table.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
 import 'package:net_player_next/View/functions/operations.dart';
@@ -40,8 +41,31 @@ class _allViewState extends State<allView> {
     controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
   }
 
-  void refresh(){
-    // TODO 刷新所有歌曲
+  Future<void> refresh() async {
+    await operations.getAllSongs(context);
+    if(c.nowPlay['playFrom']=='all'){
+      int index=c.allSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
+      if(index!=-1){
+        c.nowPlay['index']=index;
+        c.nowPlay['list']=c.allSongs;
+        c.nowPlay.refresh();
+      }else{
+        c.handler.stop();
+        Map<String, Object> tmp={
+          'id': '',
+          'title': '',
+          'artist': '',
+          'playFrom': '',
+          'duration': 0,
+          'fromId': '',
+          'index': 0,
+          'list': [],
+        };
+        c.nowPlay.value=tmp;
+        c.isPlay.value=false;
+      }
+    }
+    showMessage(true, '更新成功', context);
   }
 
   @override
