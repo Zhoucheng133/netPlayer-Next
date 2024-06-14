@@ -470,7 +470,7 @@ class _playBarState extends State<playBar> {
                               size: 18,
                             ),
                             SizedBox(width: 5,),
-                            Text("单曲循环")
+                            Text("随机播放")
                           ],
                         ),
                       )
