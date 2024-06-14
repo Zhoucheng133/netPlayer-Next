@@ -1,6 +1,8 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, invalid_use_of_protected_member, prefer_const_constructors
 
 
+import 'dart:math';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
 import 'package:media_kit/media_kit.dart';
@@ -81,10 +83,18 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   }
 
   int nextHandler(int index, int length){
-    if(index==length-1){
-      return 0;
+    if(c.playMode.value=='list'){
+      if(index==length-1){
+        return 0;
+      }
+      return index+1;
+    }else if(c.playMode.value=='random'){
+      Random random =Random();
+      return random.nextInt(length-1);
+    }else{
+      return index;
     }
-    return index+1;
+    
   }
 
   // 下一首
@@ -96,7 +106,6 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     tmpList['title']=tmpList['list'][tmpList['index']]['title'];
     tmpList['artist']=tmpList['list'][tmpList['index']]['artist'];
     tmpList['duration']=tmpList['list'][tmpList['index']]['duration'];
-    // c.nowPlay.value=tmpList;
     c.updateNowPlay(tmpList);
     c.nowPlay.refresh();
     skipHandler=true;
