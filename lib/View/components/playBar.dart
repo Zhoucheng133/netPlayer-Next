@@ -395,19 +395,71 @@ class _playBarState extends State<playBar> {
                     ),
                   ),
                   const SizedBox(width: 25,),
-                  GestureDetector(
-                    onTap: (){
-                      // TODO 切换播放模式
+                  PopupMenuButton(
+                    color: c.color1,
+                    tooltip: "",
+                    splashRadius: 0,
+                    onSelected: (val){
+                      c.playMode.value=val;
                     },
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
+                    itemBuilder: (BuildContext context)=>[
+                      const PopupMenuItem(
+                        value: "list",
+                        height: 35,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.repeat_rounded,
+                              size: 18,
+                            ),
+                            SizedBox(width: 5,),
+                            Text("列表播放")
+                          ],
+                        ),
+                      ),
+                      const PopupMenuItem(
+                        value: "repeat",
+                        height: 35,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.repeat_one_rounded,
+                              size: 18,
+                            ),
+                            SizedBox(width: 5,),
+                            Text("单曲循环")
+                          ],
+                        ),
+                      ),
+                      const PopupMenuItem(
+                        value: "random",
+                        height: 35,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.shuffle_rounded,
+                              size: 18,
+                            ),
+                            SizedBox(width: 5,),
+                            Text("单曲循环")
+                          ],
+                        ),
+                      )
+                    ],
+                    child: Container(
+                      color: c.color1,
                       child: Obx(()=>
-                        c.playMode.value=='list' ? 
-                        Icon(
+                        c.playMode.value=='list' ?  Icon(
                           Icons.repeat_rounded,
                           size: 18,
                           color: c.color5,
-                        ) : c.playMode.value=='single' ?
+                        ) : c.playMode.value=='repeat' ?
                         Icon(
                           Icons.repeat_one_rounded,
                           size: 18,
@@ -416,9 +468,9 @@ class _playBarState extends State<playBar> {
                           Icons.shuffle_rounded,
                           size: 18,
                           color: c.color5,
-                        )
+                        ),
                       ),
-                    ),
+                    )
                   )
                 ],
               ),

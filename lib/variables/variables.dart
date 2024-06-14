@@ -59,7 +59,7 @@ class Controller extends GetxController{
   RxBool isPlay=false.obs;
   // 正在输入
   RxBool onInput=false.obs;
-  // 播放模式, 可选值为: list, random, loop
+  // 播放模式, 可选值为: list, random, repeat
   RxString playMode='list'.obs;
   // 音量大小，默认为100%
   RxInt volume=100.obs;
