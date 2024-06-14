@@ -6,6 +6,7 @@ import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/functions/operations.dart';
+import 'package:net_player_next/View/mainViews/lyric.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -315,7 +316,26 @@ class _playBarState extends State<playBar> {
                   const SizedBox(width: 25,),
                   GestureDetector(
                     onTap: (){
-                      // TODO 显示歌词
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation, secondaryAnimation) => const lyricView(),
+                          transitionDuration: const Duration(milliseconds: 500),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            const begin = Offset(0.0, 1.0);
+                            const end = Offset.zero;
+                            const curve = Curves.ease;
+
+                            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                            var offsetAnimation = animation.drive(tween);
+
+                            return SlideTransition(
+                              position: offsetAnimation,
+                              child: child,
+                            );
+                          },
+                        )
+                      );
                     },
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
