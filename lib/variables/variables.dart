@@ -63,6 +63,8 @@ class Controller extends GetxController{
   RxInt volume=100.obs;
   // 随机播放所有歌曲
   RxBool fullRandom=false.obs;
+  // 专辑列表
+  RxList albums=[].obs;
 
   // # 一些设置属性 #
   // 保存播放内容

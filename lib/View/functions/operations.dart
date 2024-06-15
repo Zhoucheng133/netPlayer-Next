@@ -111,6 +111,26 @@ class Operations{
     }
   }
 
+  // 获取所有的专辑
+  Future<void> getAlbums(BuildContext context) async {
+    final rlt=await requests.getAlbumsRequest();
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '获取喜欢的歌曲失败', context);
+      return;
+    }else{
+      try {
+        if(rlt['subsonic-response']['albumList']['album']==null){
+          return;
+        }else{
+          c.albums.value=rlt['subsonic-response']['albumList']['album'];
+        }
+      } catch (_) {
+        showMessage(false, '解析所有专辑失败', context);
+        return;
+      }
+    }
+  }
+
   // 获取指定id歌单
   Future<List> getPlayList(BuildContext context, String id) async {
     final rlt=await requests.getPlayListRequest(id);

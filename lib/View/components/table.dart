@@ -181,11 +181,8 @@ class _albumHeaderState extends State<albumHeader> {
                 ),
               ),
               SizedBox(
-                width: 100,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text('歌曲数')
-                ),
+                width: 70,
+                child: Center(child: Text('歌曲数')),
               )
             ],
           ),
@@ -503,6 +500,110 @@ class _songItemState extends State<songItem> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class albumItem extends StatefulWidget {
+  final int index;
+  final String id;
+  final String title;
+  final String artist;
+  final int songCount;
+  const albumItem({super.key, required this.id, required this.title, required this.artist, required this.songCount, required this.index});
+
+  @override
+  State<albumItem> createState() => _albumItemState();
+}
+
+class _albumItemState extends State<albumItem> {
+  
+  bool hover=false;
+  final Controller c = Get.put(Controller());
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onDoubleTap: (){
+        // TODO 进入专辑详细页
+      },
+      onSecondaryTapDown: (val){
+        // TODO 右键菜单
+      },
+      child: MouseRegion(
+        onEnter: (_){
+          setState(() {
+            hover=true;
+          });
+        },
+        onExit: (_){
+          setState(() {
+            hover=false;
+          });
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          color: hover ? c.color1 : Colors.white,
+          height: 40,
+          width: MediaQuery.of(context).size.width - 200,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 50,
+                child: Center(
+                  child: Text(
+                    (widget.index+1).toString(),
+                    style: const TextStyle(
+                      fontSize: 13,
+                    ),
+                  )
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    widget.title,
+                    style: const TextStyle(
+                      fontSize: 13
+                    ),
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
+                  ),
+                )
+              ),
+              SizedBox(
+                width: 150,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    widget.artist,
+                    style: const TextStyle(
+                      fontSize: 13,
+                    ),
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 70,
+                child: Center(
+                  child: Text(
+                    widget.songCount.toString(),
+                    style: const TextStyle(
+                      fontSize: 13
+                    ),
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
+                  ),
+                ),
+              )
+            ],
+          ),          
         ),
       ),
     );
