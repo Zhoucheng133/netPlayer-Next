@@ -63,6 +63,8 @@ class Controller extends GetxController{
   RxString playMode='list'.obs;
   // 音量大小，默认为100%
   RxInt volume=100.obs;
+  // 随机播放所有歌曲
+  RxBool fullRandom=false.obs;
 
   // # 一些设置属性 #
   // 保存播放内容

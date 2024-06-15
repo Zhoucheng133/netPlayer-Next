@@ -190,6 +190,7 @@ class Operations{
     c.nowPlay.refresh();
   }
 
+  // 喜欢的歌曲播放检查
   Future<void> checkLovedSongPlay(BuildContext context) async {
     await getLovedSongs(context);
     if(c.nowPlay['playFrom']=='loved'){
@@ -216,6 +217,7 @@ class Operations{
     }
   }
 
+  // 所有歌曲播放检查
   Future<void> checkAllSongPlay(BuildContext context) async {
     await getAllSongs(context);
     if(c.nowPlay['playFrom']=='all'){
@@ -242,6 +244,7 @@ class Operations{
     }
   }
 
+  // 歌单播放检查
   Future<void> checkPlayListPlay(BuildContext context, String listId) async {
     var tmpList=await getPlayList(context, listId);
     if(c.nowPlay['playFrom']=='playList' && c.nowPlay['fromId']==listId){
@@ -281,6 +284,12 @@ class Operations{
         await checkPlayListPlay(context, c.nowPlay['fromId']);
       }
     }
+  }
+
+  // 完全随机播放
+  void fullRandomPlay(){
+    // TODO 所有歌曲随机播放
+    c.fullRandom.value=!c.fullRandom.value;
   }
 
   // 修改音量

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
 class viewHeader extends StatefulWidget {
@@ -23,6 +24,7 @@ class _viewHeaderState extends State<viewHeader> {
   final Controller c = Get.put(Controller());
   bool hoverLocate=false;
   bool hoverRefresh=false;
+  bool hoverRandom=false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,36 @@ class _viewHeaderState extends State<viewHeader> {
               ],
             ),
           ),
+          widget.page=='all' ? GestureDetector(
+            onTap: (){
+              Operations().fullRandomPlay();
+            },
+            child: MouseRegion(
+              onEnter: (_){
+                setState(() {
+                  hoverRandom=true;
+                });
+              },
+              onExit: (_){
+                setState(() {
+                  hoverRandom=false;
+                });
+              },
+              cursor: SystemMouseCursors.click,
+              child: Obx(()=>
+                TweenAnimationBuilder(
+                  tween: ColorTween(end: hoverRandom ? c.color6 : c.fullRandom.value ? c.color5 : Colors.grey[400]), 
+                  duration: const Duration(milliseconds: 200), 
+                  builder: (_, value, __)=>Icon(
+                    Icons.shuffle_rounded,
+                    size: 17,
+                    color: value,
+                  )
+                ),
+              )
+            ),
+          ) :   Container(),
+          const SizedBox(width: 30,),
           widget.page=='playList' || widget.page=='all' || widget.page=='loved' ?
           GestureDetector(
             onTap: (){
