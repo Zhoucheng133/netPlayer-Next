@@ -375,6 +375,9 @@ class Operations{
     c.updateNowPlay(data);
     c.handler.play();
     c.isPlay.value=true;
+    if(c.fullRandom.value){
+      c.fullRandom.value=false;
+    }
   }
 
   // 播放/暂停
