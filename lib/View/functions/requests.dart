@@ -71,7 +71,11 @@ class HttpRequests{
     return await httpRequest('${c.userInfo["url"]}/rest/unstar?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id');
   }
   // 将某首歌添加到某个歌单
-  Future<Map> addToList(String songId, String listId) async {
+  Future<Map> addToListRequest(String songId, String listId) async {
     return await httpRequest('${c.userInfo["url"]}/rest/updatePlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&playlistId=$listId&songIdToAdd=$songId');
+  }
+  // 随机获取一首歌
+  Future<Map> getRandomSongRequest() async {
+    return await httpRequest("${c.userInfo["url"]}/rest/getRandomSongs?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&size=1");
   }
 }

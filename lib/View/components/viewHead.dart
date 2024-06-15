@@ -57,7 +57,7 @@ class _viewHeaderState extends State<viewHeader> {
           ),
           widget.page=='all' ? GestureDetector(
             onTap: (){
-              Operations().fullRandomPlay();
+              Operations().fullRandomPlaySwitcher(context);
             },
             child: MouseRegion(
               onEnter: (_){

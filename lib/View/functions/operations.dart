@@ -179,7 +179,7 @@ class Operations{
 
   // 添加某个歌曲到某个歌单
   Future<void> addToList(BuildContext context, String songId, String listId) async {
-    final rlt=await requests.addToList(songId, listId);
+    final rlt=await requests.addToListRequest(songId, listId);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
       showMessage(false, '添加失败', context);
       return;
@@ -286,10 +286,63 @@ class Operations{
     }
   }
 
-  // 完全随机播放
-  void fullRandomPlay(){
-    // TODO 所有歌曲随机播放
+  Future<void> fullRandomPlay() async {
+    final rlt=await requests.getRandomSongRequest();
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      c.handler.stop();
+      Map<String, Object> tmp={
+        'id': '',
+        'title': '',
+        'artist': '',
+        'playFrom': '',
+        'duration': 0,
+        'fromId': '',
+        'index': 0,
+        'list': [],
+      };
+      c.nowPlay.value=tmp;
+      c.isPlay.value=false;
+      return;
+    }else{
+      var tmp=rlt['subsonic-response']['randomSongs']['song'][0];
+      Map<String, Object> rdSong={
+        'id': tmp['id'],
+        'title': tmp['title'],
+        'artist': tmp['artist'],
+        'playFrom': 'fullRandom',
+        'duration': tmp['duration'],
+        'fromId': '',
+        'index': 0,
+        'list': [],
+      };
+      c.nowPlay.value=rdSong;
+      c.handler.play();
+      c.isPlay.value=true;
+    }
+  }
+
+  // 完全随机播放切换
+  Future<void> fullRandomPlaySwitcher(BuildContext context) async {
+    if(c.fullRandom.value==false){
+      fullRandomPlay();
+    }else{
+      c.handler.stop();
+      Map<String, Object> tmp={
+        'id': '',
+        'title': '',
+        'artist': '',
+        'playFrom': '',
+        'duration': 0,
+        'fromId': '',
+        'index': 0,
+        'list': [],
+      };
+      c.nowPlay.value=tmp;
+      c.isPlay.value=false;
+    }
     c.fullRandom.value=!c.fullRandom.value;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('fullRandom', c.fullRandom.value);
   }
 
   // 修改音量

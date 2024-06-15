@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
 class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
@@ -69,6 +70,10 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 上一首
   @override
   Future<void> skipToPrevious() async {
+    if(c.fullRandom.value){
+      Operations().fullRandomPlay();
+      return;
+    }
     var tmpList=c.nowPlay.value;
     tmpList['index']=preHandler(c.nowPlay.value['index'], c.nowPlay.value['list'].length);
     tmpList['id']=tmpList['list'][tmpList['index']]['id'];
@@ -100,6 +105,10 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 下一首
   @override
   Future<void> skipToNext() async {
+    if(c.fullRandom.value){
+      Operations().fullRandomPlay();
+      return;
+    }
     Map<String, dynamic> tmpList=c.nowPlay.value;
     tmpList['index']=nextHandler(c.nowPlay.value['index'], c.nowPlay.value['list'].length);
     tmpList['id']=tmpList['list'][tmpList['index']]['id'];
