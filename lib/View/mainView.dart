@@ -51,7 +51,7 @@ class _mainViewState extends State<mainView> {
       c.closeOnRun.value=false;
     }
     final fullRandomPlay=prefs.getBool('fullRandom');
-    if(fullRandomPlay==true){
+    if(fullRandomPlay==true && savePlay!=false){
       c.fullRandom.value=true;
     }
     final useShortcut=prefs.getBool('useShortcut');
