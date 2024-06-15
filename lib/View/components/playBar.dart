@@ -463,88 +463,90 @@ class _playBarState extends State<playBar> {
                     ),
                   ),
                   const SizedBox(width: 25,),
-                  PopupMenuButton(
-                    color: c.color1,
-                    tooltip: "",
-                    enabled: ! c.fullRandom.value,
-                    splashRadius: 0,
-                    onSelected: (val) async {
-                      c.playMode.value=val;
-                      final SharedPreferences prefs = await SharedPreferences.getInstance();
-                      await prefs.setString('playMode', val);
-                    },
-                    itemBuilder: (BuildContext context)=>[
-                      const PopupMenuItem(
-                        value: "list",
-                        height: 35,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.repeat_rounded,
-                              size: 18,
-                            ),
-                            SizedBox(width: 5,),
-                            Text("列表播放")
-                          ],
+                  Obx(()=>
+                    PopupMenuButton(
+                      color: c.color1,
+                      tooltip: "",
+                      enabled: !c.fullRandom.value,
+                      splashRadius: 0,
+                      onSelected: (val) async {
+                        c.playMode.value=val;
+                        final SharedPreferences prefs = await SharedPreferences.getInstance();
+                        await prefs.setString('playMode', val);
+                      },
+                      itemBuilder: (BuildContext context)=>[
+                        const PopupMenuItem(
+                          value: "list",
+                          height: 35,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.repeat_rounded,
+                                size: 18,
+                              ),
+                              SizedBox(width: 5,),
+                              Text("列表播放")
+                            ],
+                          ),
                         ),
-                      ),
-                      const PopupMenuItem(
-                        value: "repeat",
-                        height: 35,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.repeat_one_rounded,
-                              size: 18,
-                            ),
-                            SizedBox(width: 5,),
-                            Text("单曲循环")
-                          ],
+                        const PopupMenuItem(
+                          value: "repeat",
+                          height: 35,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.repeat_one_rounded,
+                                size: 18,
+                              ),
+                              SizedBox(width: 5,),
+                              Text("单曲循环")
+                            ],
+                          ),
                         ),
-                      ),
-                      const PopupMenuItem(
-                        value: "random",
-                        height: 35,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.shuffle_rounded,
-                              size: 18,
-                            ),
-                            SizedBox(width: 5,),
-                            Text("随机播放")
-                          ],
+                        const PopupMenuItem(
+                          value: "random",
+                          height: 35,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.shuffle_rounded,
+                                size: 18,
+                              ),
+                              SizedBox(width: 5,),
+                              Text("随机播放")
+                            ],
+                          ),
+                        )
+                      ],
+                      child: Container(
+                        color: c.color1,
+                        child: Obx(()=>
+                          c.fullRandom.value ? Icon(
+                            Icons.shuffle,
+                            size: 18,
+                            color: Colors.grey[300],
+                          ) : c.playMode.value=='list' ?  Icon(
+                            Icons.repeat_rounded,
+                            size: 18,
+                            color: c.color5,
+                          ) : c.playMode.value=='repeat' ?
+                          Icon(
+                            Icons.repeat_one_rounded,
+                            size: 18,
+                            color: c.color5,
+                          ) : Icon(
+                            Icons.shuffle_rounded,
+                            size: 18,
+                            color: c.color5,
+                          ),
                         ),
                       )
-                    ],
-                    child: Container(
-                      color: c.color1,
-                      child: Obx(()=>
-                        c.fullRandom.value ? Icon(
-                          Icons.shuffle,
-                          size: 18,
-                          color: Colors.grey[300],
-                        ) : c.playMode.value=='list' ?  Icon(
-                          Icons.repeat_rounded,
-                          size: 18,
-                          color: c.color5,
-                        ) : c.playMode.value=='repeat' ?
-                        Icon(
-                          Icons.repeat_one_rounded,
-                          size: 18,
-                          color: c.color5,
-                        ) : Icon(
-                          Icons.shuffle_rounded,
-                          size: 18,
-                          color: c.color5,
-                        ),
-                      ),
                     )
                   )
                 ],
