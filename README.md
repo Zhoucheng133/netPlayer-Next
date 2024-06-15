@@ -31,6 +31,17 @@
 **注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本**  
 版本号在标准版netPlayer之后，这个版本的netPlayer版本号从`2.0.0`开始
 
+||v1|v2|v3|
+|-|-|-|-|
+|支持Windows版本|Windows7~|Windows10~|Windows10~|
+|支持macOS|✅|✅|✅*|
+|单曲循环|❌|✅|✅|
+|定位歌曲|❌|✅|✅|
+|全局快捷键|仅macOS|✅|✅|
+|直播流播放信息|❌|❌|✅|
+
+\* 由于本人换电脑，macOS没法打包，如果你有需要可以在自己的设备上打包v3版本
+
 ## 快捷键
 
 ### App内快捷键
