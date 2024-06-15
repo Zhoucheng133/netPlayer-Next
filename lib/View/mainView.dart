@@ -38,7 +38,7 @@ class _mainViewState extends State<mainView> {
         Map<String, dynamic> decodedMap = jsonDecode(nowPlay);
         Map<String, Object> tmpList=Map<String, Object>.from(decodedMap);
         c.nowPlay.value=tmpList;
-        c.nowPlay.refresh();
+        // c.nowPlay.refresh();
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Operations().nowPlayCheck(context);
         });
@@ -69,10 +69,16 @@ class _mainViewState extends State<mainView> {
     Operations().initHotkey();
   }
 
+  Future<void> saveNowPlay(Map val) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('nowPlay', jsonEncode(val));
+  }
+
   @override
   void initState() {
     super.initState();
     initPrefs();
+    ever(c.nowPlay, (val)=>saveNowPlay(val));
   }
 
   @override

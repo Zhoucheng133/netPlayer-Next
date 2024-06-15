@@ -196,9 +196,21 @@ class Operations{
     if(c.nowPlay['playFrom']=='loved'){
       int index=c.lovedSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
       if(index!=-1){
-        c.nowPlay['index']=index;
-        c.nowPlay['list']=c.lovedSongs;
-        c.nowPlay.refresh();
+        // c.nowPlay['index']=index;
+        // c.nowPlay['list']=c.lovedSongs;
+        // c.nowPlay.refresh();
+        Map<String, Object> tmp={
+          'id': c.nowPlay['id'],
+          'title': c.nowPlay['title'],
+          'artist': c.nowPlay['artist'],
+          'playFrom': c.nowPlay['playFrom'],
+          'duration': c.nowPlay['duration'],
+          'fromId': c.nowPlay['fromId'],
+          'index': index,
+          'list': c.lovedSongs,
+        };
+        c.nowPlay.value=tmp;
+        // c.nowPlay.refresh();
       }else{
         c.handler.stop();
         Map<String, Object> tmp={
@@ -223,9 +235,21 @@ class Operations{
     if(c.nowPlay['playFrom']=='all'){
       int index=c.allSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
       if(index!=-1){
-        c.nowPlay['index']=index;
-        c.nowPlay['list']=c.allSongs;
-        c.nowPlay.refresh();
+        // c.nowPlay['index']=index;
+        // c.nowPlay['list']=c.allSongs;
+        // c.nowPlay.refresh();
+        Map<String, Object> tmp={
+          'id': c.nowPlay['id'],
+          'title': c.nowPlay['title'],
+          'artist': c.nowPlay['artist'],
+          'playFrom': c.nowPlay['playFrom'],
+          'duration': c.nowPlay['duration'],
+          'fromId': c.nowPlay['fromId'],
+          'index': index,
+          'list': c.allSongs,
+        };
+        c.nowPlay.value=tmp;
+        // c.nowPlay.refresh();
       }else{
         c.handler.stop();
         Map<String, Object> tmp={
@@ -250,9 +274,20 @@ class Operations{
     if(c.nowPlay['playFrom']=='playList' && c.nowPlay['fromId']==listId){
       int index=tmpList.indexWhere((item) => item['id']==c.nowPlay['id']);
       if(index!=-1){
-        c.nowPlay['index']=index;
-        c.nowPlay['list']=tmpList;
-        c.nowPlay.refresh();
+        // c.nowPlay['index']=index;
+        // c.nowPlay['list']=tmpList;
+        Map<String, Object> tmp={
+          'id': c.nowPlay['id'],
+          'title': c.nowPlay['title'],
+          'artist': c.nowPlay['artist'],
+          'playFrom': c.nowPlay['playFrom'],
+          'duration': c.nowPlay['duration'],
+          'fromId': c.nowPlay['fromId'],
+          'index': index,
+          'list': tmpList,
+        };
+        c.nowPlay.value=tmp;
+        // c.nowPlay.refresh();
       }else{
         c.handler.stop();
         Map<String, Object> tmp={
@@ -366,7 +401,7 @@ class Operations{
   }
 
   // 播放歌曲
-  void playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index, List list){
+  Future<void> playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index, List list) async {
     List playList=[];
     if(playFrom=='all'){
       playList=c.allSongs;
@@ -385,11 +420,13 @@ class Operations{
       'index': index,
       'list': playList,
     };
-    c.updateNowPlay(data);
+    c.nowPlay.value=data;
     c.handler.play();
     c.isPlay.value=true;
     if(c.fullRandom.value){
       c.fullRandom.value=false;
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('fullRandom', false);
     }
   }
 
