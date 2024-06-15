@@ -346,6 +346,19 @@ class Operations{
     await prefs.setBool('fullRandom', c.fullRandom.value);
   }
 
+  // 将某个歌曲从歌单中删除
+  Future<bool> delFromList(BuildContext context, String listId, int songId) async {
+    final rlt=await requests.delFromListRequest(listId, songId);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '删除失败', context);
+      return false;
+    }else{
+      showMessage(true, '删除成功', context);
+      checkPlayListPlay(context, listId);
+      return true;
+    }
+  }
+
   // 修改音量
   Future<void> saveVolume() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

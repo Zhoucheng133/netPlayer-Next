@@ -213,7 +213,8 @@ class songItem extends StatefulWidget {
   final dynamic listId;
   final String from;
   final dynamic list;
-  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from, this.list});
+  final dynamic refresh;
+  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from, this.list, this.refresh});
 
   @override
   State<songItem> createState() => _songItemState();
@@ -397,7 +398,9 @@ class _songItemState extends State<songItem> {
     }else if(val=='love'){
       Operations().loveSong(context, widget.id);
     }else if(val=='del'){
-      // TODO 从歌单中删除
+      if(await operations.delFromList(context, widget.listId, widget.index)){
+        widget.refresh();
+      }
     }
   }
   

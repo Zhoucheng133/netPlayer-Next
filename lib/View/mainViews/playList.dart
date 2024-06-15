@@ -55,6 +55,35 @@ class _playListViewState extends State<playListView> {
     controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
   }
 
+  Future<void> silentRefresh() async {
+    var tmpList=await Operations().getPlayList(context, listId);
+    setState(() {
+      list=tmpList;
+    });
+    if(c.nowPlay['playFrom']=='playList' && c.nowPlay['fromId']==listId){
+      int index=list.indexWhere((item) => item['id']==c.nowPlay['id']);
+      if(index!=-1){
+        c.nowPlay['index']=index;
+        c.nowPlay['list']=list;
+        c.nowPlay.refresh();
+      }else{
+        c.handler.stop();
+        Map<String, Object> tmp={
+          'id': '',
+          'title': '',
+          'artist': '',
+          'playFrom': '',
+          'duration': 0,
+          'fromId': '',
+          'index': 0,
+          'list': [],
+        };
+        c.nowPlay.value=tmp;
+        c.isPlay.value=false;
+      }
+    }
+  }
+
   Future<void> refresh() async {
     var tmpList=await Operations().getPlayList(context, listId);
     setState(() {
@@ -106,7 +135,7 @@ class _playListViewState extends State<playListView> {
                       key: ValueKey(index), 
                       controller: controller, 
                       index: index,
-                      child: Obx(()=>songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list,),)
+                      child: Obx(()=>songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list, refresh: ()=>silentRefresh(),),)
                     );
                   }
                 ),

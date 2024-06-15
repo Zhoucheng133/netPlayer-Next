@@ -78,4 +78,8 @@ class HttpRequests{
   Future<Map> getRandomSongRequest() async {
     return await httpRequest("${c.userInfo["url"]}/rest/getRandomSongs?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&size=1");
   }
+  // 从歌单中删除
+  Future<Map> delFromListRequest(String listId, int songIndex) async {
+    return await httpRequest('${c.userInfo["url"]}/rest/updatePlaylist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&playlistId=$listId&songIndexToRemove=$songIndex');
+  }
 }
