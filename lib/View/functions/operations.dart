@@ -286,6 +286,7 @@ class Operations{
     }
   }
 
+  // 所有歌曲随机播放
   Future<void> fullRandomPlay() async {
     final rlt=await requests.getRandomSongRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){

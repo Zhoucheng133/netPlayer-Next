@@ -466,6 +466,7 @@ class _playBarState extends State<playBar> {
                   PopupMenuButton(
                     color: c.color1,
                     tooltip: "",
+                    enabled: ! c.fullRandom.value,
                     splashRadius: 0,
                     onSelected: (val) async {
                       c.playMode.value=val;
@@ -525,7 +526,11 @@ class _playBarState extends State<playBar> {
                     child: Container(
                       color: c.color1,
                       child: Obx(()=>
-                        c.playMode.value=='list' ?  Icon(
+                        c.fullRandom.value ? Icon(
+                          Icons.shuffle,
+                          size: 18,
+                          color: Colors.grey[300],
+                        ) : c.playMode.value=='list' ?  Icon(
                           Icons.repeat_rounded,
                           size: 18,
                           color: c.color5,
