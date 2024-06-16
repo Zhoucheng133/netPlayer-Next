@@ -18,6 +18,7 @@ class albumView extends StatefulWidget {
 class _albumViewState extends State<albumView> {
 
   final Controller c = Get.put(Controller());
+  TextEditingController inputController = TextEditingController();
 
   @override
   void initState() {
@@ -40,7 +41,7 @@ class _albumViewState extends State<albumView> {
         children: [
           Column(
             children: [
-              Obx(() => viewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album', refresh: ()=>refresh(context), ),),
+              Obx(() => viewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album', refresh: ()=>refresh(context), controller: inputController,),),
               const albumHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

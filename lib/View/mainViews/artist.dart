@@ -13,6 +13,8 @@ class artistView extends StatefulWidget {
 
 class _artistViewState extends State<artistView> {
 
+  TextEditingController inputController = TextEditingController();
+
   void refresh(){
     // TODO 刷新艺人列表
   }
@@ -25,7 +27,7 @@ class _artistViewState extends State<artistView> {
         children: [
           Column(
             children: [
-              viewHeader(title: '艺人', subTitle: '', page: 'artist', refresh: ()=>refresh(),),
+              viewHeader(title: '艺人', subTitle: '', page: 'artist', refresh: ()=>refresh(), controller: inputController,),
               const artistHeader(),
             ],
           )

@@ -22,6 +22,7 @@ class _playListViewState extends State<playListView> {
   final AutoScrollController controller=AutoScrollController();
   List list=[];
   String listId='';
+  TextEditingController inputController = TextEditingController();
 
   @override
   void initState() {
@@ -122,7 +123,7 @@ class _playListViewState extends State<playListView> {
         children: [
           Column(
             children: [
-              Obx(()=>viewHeader(title: name, subTitle: '共有${list.length}首', page: 'playList', id: c.pageId.value, locate: ()=>locateSong(), refresh: ()=>refresh(),),),
+              Obx(()=>viewHeader(title: name, subTitle: '共有${list.length}首', page: 'playList', id: c.pageId.value, locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
               const songHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

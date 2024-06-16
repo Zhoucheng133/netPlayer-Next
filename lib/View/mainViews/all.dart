@@ -21,6 +21,7 @@ class _allViewState extends State<allView> {
   final operations=Operations();
   final Controller c = Get.put(Controller());
   final AutoScrollController controller=AutoScrollController();
+  TextEditingController inputController = TextEditingController();
 
   @override
   void initState() {
@@ -54,7 +55,7 @@ class _allViewState extends State<allView> {
         children: [
           Column(
             children: [
-              Obx(() => viewHeader(title: '所有歌曲', subTitle: '共有${c.allSongs.length}首', page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(),),),
+              Obx(() => viewHeader(title: '所有歌曲', subTitle: '共有${c.allSongs.length}首', page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
               const songHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

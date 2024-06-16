@@ -22,6 +22,7 @@ class _lovedViewState extends State<lovedView> {
   final operations=Operations();
   final Controller c = Get.put(Controller());
   final controller=AutoScrollController();
+  TextEditingController inputController = TextEditingController();
 
   @override
   void initState() {
@@ -55,7 +56,7 @@ class _lovedViewState extends State<lovedView> {
         children: [
           Column(
             children: [
-              Obx(()=>viewHeader(title: '喜欢的歌曲', subTitle: '共有${c.lovedSongs.length}首', page: 'loved', locate: ()=>locateSong(), refresh: ()=>refresh(),)),
+              Obx(()=>viewHeader(title: '喜欢的歌曲', subTitle: '共有${c.lovedSongs.length}首', page: 'loved', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,)),
               const songHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
