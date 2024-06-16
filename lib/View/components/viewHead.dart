@@ -13,7 +13,8 @@ class viewHeader extends StatefulWidget {
   final dynamic id;
   final dynamic locate;
   final dynamic refresh;
-  const viewHeader({super.key, required this.title, required this.subTitle, required this.page, this.id, this.locate, this.refresh});
+  final dynamic controller;
+  const viewHeader({super.key, required this.title, required this.subTitle, required this.page, this.id, this.locate, this.refresh, this.controller});
 
   @override
   State<viewHeader> createState() => _viewHeaderState();
@@ -25,6 +26,30 @@ class _viewHeaderState extends State<viewHeader> {
   bool hoverLocate=false;
   bool hoverRefresh=false;
   bool hoverRandom=false;
+  bool hasFocus=false;
+  FocusNode focusOnSearch=FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    focusOnSearch.addListener((){
+      if(focusOnSearch.hasFocus){
+        setState(() {
+          hasFocus=true;
+        });
+      }else{
+        setState(() {
+          hasFocus=false;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    focusOnSearch.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,39 +77,86 @@ class _viewHeaderState extends State<viewHeader> {
                     fontSize: 13
                   ),
                 ),
+                const SizedBox(width: 10,),
+                widget.page=='all' ? GestureDetector(
+                  onTap: (){
+                    Operations().fullRandomPlaySwitcher(context);
+                  },
+                  child: MouseRegion(
+                    onEnter: (_){
+                      setState(() {
+                        hoverRandom=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverRandom=false;
+                      });
+                    },
+                    cursor: SystemMouseCursors.click,
+                    child: Obx(()=>
+                      TweenAnimationBuilder(
+                        tween: ColorTween(end: hoverRandom ? c.color6 : c.fullRandom.value ? c.color5 : Colors.grey[400]), 
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __)=>Icon(
+                          Icons.shuffle_rounded,
+                          size: 17,
+                          color: value,
+                        )
+                      ),
+                    )
+                  ),
+                ) :   Container(),
               ],
             ),
           ),
-          widget.page=='all' ? GestureDetector(
-            onTap: (){
-              Operations().fullRandomPlaySwitcher(context);
-            },
-            child: MouseRegion(
-              onEnter: (_){
-                setState(() {
-                  hoverRandom=true;
-                });
-              },
-              onExit: (_){
-                setState(() {
-                  hoverRandom=false;
-                });
-              },
-              cursor: SystemMouseCursors.click,
-              child: Obx(()=>
-                TweenAnimationBuilder(
-                  tween: ColorTween(end: hoverRandom ? c.color6 : c.fullRandom.value ? c.color5 : Colors.grey[400]), 
-                  duration: const Duration(milliseconds: 200), 
-                  builder: (_, value, __)=>Icon(
-                    Icons.shuffle_rounded,
-                    size: 17,
-                    color: value,
-                  )
-                ),
+          widget.page!='settings' && widget.page!='search' ?
+          AnimatedContainer(
+            width: 180,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: hasFocus ? Border.all(
+                color: c.color5,
+                width: 2
+              ): Border.all(
+                color: c.color3,
+                width: 2
               )
             ),
-          ) :   Container(),
-          const SizedBox(width: 30,),
+            duration: const Duration(milliseconds: 200),
+            child: Row(
+              children: [
+                const SizedBox(width: 10,),
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: TweenAnimationBuilder(
+                    tween: ColorTween(end: hasFocus ? c.color5 : c.color3), 
+                    duration: const Duration(milliseconds: 200),
+                    builder: (_, value, __)=>Icon(
+                      Icons.search_rounded,
+                      size: 18,
+                      color: value,
+                    ),
+                  )
+                ),
+                Expanded(
+                  child: TextField(
+                    controller: widget.controller,
+                    focusNode: focusOnSearch,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
+                    ),
+                    style: const TextStyle(
+                      fontSize: 12
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ) : Container(),
+          const SizedBox(width: 15,),
           widget.page=='playList' || widget.page=='all' || widget.page=='loved' ?
           GestureDetector(
             onTap: (){
