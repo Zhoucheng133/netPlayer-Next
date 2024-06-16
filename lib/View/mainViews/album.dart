@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/components/message.dart';
 import 'package:net_player_next/View/components/table.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
 import 'package:net_player_next/View/functions/operations.dart';
@@ -27,7 +28,8 @@ class _albumViewState extends State<albumView> {
   }
 
   void refresh(BuildContext context){
-
+    Operations().getAlbums(context);
+    showMessage(true, '更新成功', context);
   }
   
   @override
@@ -38,7 +40,7 @@ class _albumViewState extends State<albumView> {
         children: [
           Column(
             children: [
-              Obx(() => viewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album', refresh: ()=>refresh(context),),),
+              Obx(() => viewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album', refresh: ()=>refresh(context), ),),
               const albumHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
