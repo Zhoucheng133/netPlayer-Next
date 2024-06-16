@@ -71,7 +71,8 @@ class _UserNameInputState extends State<UserNameInput> {
                 const SizedBox(width: 5,),
                 Expanded(
                   child: TextField(
-                    focusNode: onFocus,                    controller: widget.controller,
+                    focusNode: onFocus,
+                    controller: widget.controller,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       isCollapsed: true,
