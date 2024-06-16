@@ -190,7 +190,7 @@ class _viewHeaderState extends State<viewHeader> {
             )
           ):Container(),
           const SizedBox(width: 10,),
-          widget.page=='playList' || widget.page=='all' || widget.page=='loved' ? 
+          widget.page!='settings' && widget.page!='search' ? 
           GestureDetector(
             onTap: (){
               widget.refresh();
@@ -208,7 +208,7 @@ class _viewHeaderState extends State<viewHeader> {
                 });
               },
               child: TweenAnimationBuilder(
-                tween: ColorTween(end: hoverRefresh ? c.color6 : c.color5), 
+                tween: ColorTween(end: hoverRefresh ? c.color6 : c.color5),
                 duration: const Duration(milliseconds: 200), 
                 builder: (_, value, __) => Icon(
                   Icons.refresh_rounded,

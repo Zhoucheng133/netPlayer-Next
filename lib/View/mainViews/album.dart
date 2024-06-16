@@ -25,6 +25,10 @@ class _albumViewState extends State<albumView> {
       Operations().getAlbums(context);
     });
   }
+
+  void refresh(BuildContext context){
+
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,7 @@ class _albumViewState extends State<albumView> {
         children: [
           Column(
             children: [
-              Obx(() => viewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album',),),
+              Obx(() => viewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album', refresh: ()=>refresh(context),),),
               const albumHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

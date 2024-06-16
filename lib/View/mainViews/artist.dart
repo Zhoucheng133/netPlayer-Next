@@ -12,16 +12,21 @@ class artistView extends StatefulWidget {
 }
 
 class _artistViewState extends State<artistView> {
+
+  void refresh(){
+    // TODO 刷新艺人列表
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(15),
+    return Padding(
+      padding: const EdgeInsets.all(15),
       child: Row(
         children: [
           Column(
             children: [
-              viewHeader(title: '艺人', subTitle: '', page: 'artist',),
-              artistHeader(),
+              viewHeader(title: '艺人', subTitle: '', page: 'artist', refresh: ()=>refresh(),),
+              const artistHeader(),
             ],
           )
         ],
