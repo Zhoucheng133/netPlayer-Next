@@ -204,7 +204,7 @@ class _settingsViewState extends State<settingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('关闭窗口后台播放')
+                          child: Text('后台播放')
                         )
                       ),
                       const SizedBox(width: 10,),
