@@ -1,5 +1,7 @@
 // ignore_for_file: camel_case_types, use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -195,7 +197,7 @@ class _settingsViewState extends State<settingsView> {
                       )
                     ],
                   ),
-                  Row(
+                  Platform.isWindows ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(
@@ -226,7 +228,7 @@ class _settingsViewState extends State<settingsView> {
                         ),
                       )
                     ],
-                  ),
+                  ) : Container(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
