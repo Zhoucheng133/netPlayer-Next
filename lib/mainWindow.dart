@@ -343,20 +343,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                     ),
                   ]
                 ),
-                PlatformMenuItemGroup(
-                  members: [
-                    PlatformMenuItem(
-                      label: "显示/隐藏歌词",
-                      shortcut: const SingleActivator(
-                        LogicalKeyboardKey.keyL,
-                        meta: true
-                      ),
-                      onSelected: (){
-                        Operations().toggleLyric();
-                      },
-                    )
-                  ]
-                )
               ]
             ),
             const PlatformMenu(
