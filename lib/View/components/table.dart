@@ -6,6 +6,7 @@ import 'package:net_player_next/variables/variables.dart';
 
 // TODO 务必注意Item的文字大小为13
 
+// 歌曲表头
 class songHeader extends StatefulWidget {
   const songHeader({super.key});
 
@@ -82,6 +83,7 @@ class _songHeaderState extends State<songHeader> {
   }
 }
 
+// 艺人表头
 class artistHeader extends StatefulWidget {
   const artistHeader({super.key});
 
@@ -113,13 +115,12 @@ class _artistHeaderState extends State<artistHeader> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('标题'),
+                  child: Text('艺人'),
                 )
               ),
               SizedBox(
                 width: 100,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                child: Center(
                   child: Text('专辑数量')
                 ),
               )
@@ -139,6 +140,7 @@ class _artistHeaderState extends State<artistHeader> {
   }
 }
 
+// 专辑表头
 class albumHeader extends StatefulWidget {
   const albumHeader({super.key});
 
@@ -200,6 +202,7 @@ class _albumHeaderState extends State<albumHeader> {
   }
 }
 
+// 歌曲Item
 class songItem extends StatefulWidget {
   final int index;
   final String title;
@@ -506,6 +509,7 @@ class _songItemState extends State<songItem> {
   }
 }
 
+// 专辑Item
 class albumItem extends StatefulWidget {
   final int index;
   final String id;
@@ -604,6 +608,92 @@ class _albumItemState extends State<albumItem> {
               )
             ],
           ),          
+        ),
+      ),
+    );
+  }
+}
+
+class artistItem extends StatefulWidget {
+  final int index;
+  final String id;
+  final String name;
+  final int albumCount;
+  const artistItem({super.key, required this.id, required this.name, required this.albumCount, required this.index});
+
+  @override
+  State<artistItem> createState() => _artistItemState();
+}
+
+class _artistItemState extends State<artistItem> {
+
+  final Controller c = Get.put(Controller());
+  bool hover=false;
+  
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onDoubleTap: (){
+        // TODO 艺人内容
+      },
+      child: MouseRegion(
+        onEnter: (_){
+          setState(() {
+            hover=true;
+          });
+        },
+        onExit: (_){
+          setState(() {
+            hover=false;
+          });
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          color: hover ? c.color1 : Colors.white,
+          height: 40,
+          width: MediaQuery.of(context).size.width - 200,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 50,
+                child: Center(
+                  child: Text(
+                    (widget.index+1).toString(),
+                    style: const TextStyle(
+                      fontSize: 13,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    widget.name,
+                    style: const TextStyle(
+                      fontSize: 13
+                    ),
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
+                  ),
+                )
+              ),
+              SizedBox(
+                width: 100,
+                child: Center(
+                  child: Text(
+                    widget.albumCount.toString(),
+                    style: const TextStyle(
+                      fontSize: 13
+                    ),
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
+                  ),
+                ),
+              )
+            ]
+          ),
         ),
       ),
     );

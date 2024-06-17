@@ -145,6 +145,26 @@ class Operations{
     return [];
   }
 
+  // 获取所有艺人
+  Future<void> getArtists(BuildContext context) async {
+    final rlt=await requests.getArtistRequest();
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '获取所有艺人失败', context);
+      return;
+    }else{
+      try {
+        var list=[];
+        var tmp=rlt['subsonic-response']["artists"]["index"].map((item) => item['artist']).toList();
+        for(var i=0;i<tmp.length;i++){
+          for(var j=0;j<tmp[i].length;j++){
+            list.add(tmp[i][j]);
+          }
+        }
+        c.artists.value=list;
+      } catch (_) {}
+    }
+  }
+
   // 重新刷新播放内容
   void refreshFromLoved(){
     if(c.nowPlay['playFrom']=='loved'){

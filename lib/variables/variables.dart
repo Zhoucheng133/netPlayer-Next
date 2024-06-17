@@ -65,6 +65,8 @@ class Controller extends GetxController{
   RxBool fullRandom=false.obs;
   // 专辑列表
   RxList albums=[].obs;
+  // 艺人列表
+  RxList artists=[].obs;
 
   // # 一些设置属性 #
   // 保存播放内容

@@ -86,4 +86,8 @@ class HttpRequests{
   Future<Map> getAlbumsRequest() async {
     return await httpRequest("${c.userInfo["url"]}/rest/getAlbumList?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&type=newest&size=500");
   }
+  // 获取所有艺人
+  Future<Map> getArtistRequest() async {
+    return await httpRequest('${c.userInfo["url"]}/rest/getArtists?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}');
+  }
 }
