@@ -19,25 +19,22 @@ class _lyricViewState extends State<lyricView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 200,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 200,
+                          height: 200,
                           child: Hero(
                             tag: 'cover',
                             child: Obx(() =>
@@ -51,46 +48,70 @@ class _lyricViewState extends State<lyricView> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 20,),
+                        Obx(()=>
+                          Text(
+                            c.nowPlay['title'],
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                            ),
+                            softWrap: false,
+                            overflow: TextOverflow.fade,
+                          )
+                        ),
+                        const SizedBox(height: 5,),
+                        Obx(()=>
+                          Text(
+                            c.nowPlay['artist'],
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Colors.grey[400]
+                            ),
+                            softWrap: false,
+                            overflow: TextOverflow.fade,
+                          )
+                        )
+                      ],
+                    )
+                  ),
+                  Expanded(
+                    child: Container()
                   )
-                ),
-                Expanded(
-                  child: Container()
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 50,
-            child: GestureDetector(
-              onTap: (){
-                Operations().toggleLyric(context);
-              },
-              child: MouseRegion(
-                onEnter: (_){
-                  setState(() {
-                    hoverBack=true;
-                  });
-                },
-                onExit: (_){
-                  setState(() {
-                    hoverBack=false;
-                  });
-                },
-                cursor: SystemMouseCursors.click,
-                child: TweenAnimationBuilder(
-                  tween: ColorTween(end: hoverBack ? c.color6 : c.color4), 
-                  duration: const Duration(milliseconds: 200),
-                  builder: (_, value, __)=>Icon(
-                    Icons.arrow_downward_rounded,
-                    color: value,
-                  )
-                ),
+                ],
               ),
             ),
-          )
-        ],
+            SizedBox(
+              height: 50,
+              child: GestureDetector(
+                onTap: (){
+                  Operations().toggleLyric(context);
+                },
+                child: MouseRegion(
+                  onEnter: (_){
+                    setState(() {
+                      hoverBack=true;
+                    });
+                  },
+                  onExit: (_){
+                    setState(() {
+                      hoverBack=false;
+                    });
+                  },
+                  cursor: SystemMouseCursors.click,
+                  child: TweenAnimationBuilder(
+                    tween: ColorTween(end: hoverBack ? c.color6 : c.color4), 
+                    duration: const Duration(milliseconds: 200),
+                    builder: (_, value, __)=>Icon(
+                      Icons.arrow_downward_rounded,
+                      color: value,
+                    )
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
