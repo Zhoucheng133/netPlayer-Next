@@ -23,11 +23,17 @@ class _playListViewState extends State<playListView> {
   List list=[];
   String listId='';
   TextEditingController inputController = TextEditingController();
+  String searchKeyWord='';
 
   @override
   void initState() {
     super.initState();
     ever(c.pageId, (newVal)=>pageIdListener(newVal));
+    inputController.addListener((){
+      setState(() {
+        searchKeyWord=inputController.text;
+      });
+    });
   }
 
   Future<void> pageIdListener(String newId) async {
@@ -136,7 +142,10 @@ class _playListViewState extends State<playListView> {
                       key: ValueKey(index), 
                       controller: controller, 
                       index: index,
-                      child: Obx(()=>songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list, refresh: ()=>silentRefresh(),),)
+                      child: searchKeyWord.isEmpty ? Obx(()=>
+                        songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list, refresh: ()=>silentRefresh(),),
+                      ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list, refresh: ()=>silentRefresh(),) : Container()
                     );
                   }
                 ),
