@@ -19,12 +19,18 @@ class _artistViewState extends State<artistView> {
 
   TextEditingController inputController = TextEditingController();
   final Controller c = Get.put(Controller());
+  String searchKeyWord='';
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Operations().getArtists(context);
+    });
+    inputController.addListener((){
+      setState(() {
+        searchKeyWord=inputController.text;
+      });
     });
   }
 
@@ -49,9 +55,10 @@ class _artistViewState extends State<artistView> {
                 child: Obx(()=>
                   ListView.builder(
                     itemCount: c.artists.length,
-                    itemBuilder:  (BuildContext context, int index)=>Obx(()=>
+                    itemBuilder:  (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
                       artistItem(id: c.artists[index]['id'], name: c.artists[index]['name'], albumCount: c.artists[index]['albumCount'], index: index)
-                    )
+                    ) : c.artists[index]['name'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                    artistItem(id: c.artists[index]['id'], name: c.artists[index]['name'], albumCount: c.artists[index]['albumCount'], index: index) : Container()
                   )
                 ),
               )
