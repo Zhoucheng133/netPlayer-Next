@@ -23,6 +23,10 @@ class _playBarState extends State<playBar> {
   bool hoverPause=false;
   bool hoverPre=false;
   bool hoverSkip=false;
+  bool hoverLove=false;
+  bool hoverLyric=false;
+  bool hoverVolume=false;
+  bool hoverMode=false;
 
   String convertDuration(int time){
     int min = time ~/ 60;
@@ -346,12 +350,26 @@ class _playBarState extends State<playBar> {
                     },
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
+                      onEnter: (_){
+                        setState(() {
+                          hoverLove=true;
+                        });
+                      },
+                      onExit: (_){
+                        setState(() {
+                          hoverLove=false;
+                        });
+                      },
                       child: Obx(()=>
                         !isLoved() ?
-                        Icon(
-                          Icons.favorite_border_rounded,
-                          size: 18,
-                          color: c.color5,
+                        TweenAnimationBuilder(
+                          tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
+                          duration: const Duration(milliseconds: 200), 
+                          builder: (_, value, __)=>Icon(
+                            Icons.favorite_border_outlined,
+                            size: 18,
+                            color: value,
+                          )
                         ) : const Icon(
                           Icons.favorite_rounded,
                           size: 18,
@@ -367,11 +385,25 @@ class _playBarState extends State<playBar> {
                     },
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
-                      child: Icon(
-                        Icons.lyrics_rounded,
-                        size: 18,
-                        color: c.color5,
-                      ),
+                      onEnter: (_){
+                        setState(() {
+                          hoverLyric=true;
+                        });
+                      },
+                      onExit: (_){
+                        setState(() {
+                          hoverLyric=false;
+                        });
+                      },
+                      child: TweenAnimationBuilder(
+                        tween: ColorTween(end: hoverLyric ? c.color6 : c.color5), 
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __)=>Icon(
+                          Icons.lyrics_rounded,
+                          size: 18,
+                          color: value,
+                        )
+                      )
                     ),
                   ),
                   const SizedBox(width: 25,),
@@ -434,13 +466,27 @@ class _playBarState extends State<playBar> {
                     ),
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
-                      child: Obx(()=>
-                        FaIcon(
-                          c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
-                          size: 14,
-                          color: c.color5,
-                        ),
-                      )
+                      onEnter: (_){
+                        setState(() {
+                          hoverVolume=true;
+                        });
+                      },
+                      onExit: (_){
+                        setState(() {
+                          hoverVolume=false;
+                        });
+                      },
+                      child: TweenAnimationBuilder(
+                        tween: ColorTween(end: hoverVolume ? c.color6 : c.color5), 
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __)=>Obx(()=>
+                          FaIcon(
+                            c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
+                            size: 14,
+                            color: value,
+                          )
+                        )
+                      ),
                     ),
                   ),
                   const SizedBox(width: 25,),
@@ -507,24 +553,41 @@ class _playBarState extends State<playBar> {
                       ],
                       child: Container(
                         color: c.color1,
-                        child: Obx(()=>
-                          c.fullRandom.value ? Icon(
-                            Icons.shuffle,
-                            size: 18,
-                            color: Colors.grey[300],
-                          ) : c.playMode.value=='list' ?  Icon(
-                            Icons.repeat_rounded,
-                            size: 18,
-                            color: c.color5,
-                          ) : c.playMode.value=='repeat' ?
-                          Icon(
-                            Icons.repeat_one_rounded,
-                            size: 18,
-                            color: c.color5,
-                          ) : Icon(
-                            Icons.shuffle_rounded,
-                            size: 18,
-                            color: c.color5,
+                        child: MouseRegion(
+                          cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                          onEnter: (_){
+                            setState(() {
+                              hoverMode=true;
+                            });
+                          },
+                          onExit: (_){
+                            setState(() {
+                              hoverMode=false;
+                            });
+                          },
+                          child: TweenAnimationBuilder(
+                            tween: ColorTween(end: hoverMode ? c.color6 : c.color5), 
+                            duration: const Duration(milliseconds: 200), 
+                            builder: (_, value, __)=>Obx(()=>
+                              c.fullRandom.value ? Icon(
+                                Icons.shuffle,
+                                size: 18,
+                                color: Colors.grey[300],
+                              ) : c.playMode.value=='list' ?  Icon(
+                                Icons.repeat_rounded,
+                                size: 18,
+                                color: value,
+                              ) : c.playMode.value=='repeat' ?
+                              Icon(
+                                Icons.repeat_one_rounded,
+                                size: 18,
+                                color: value
+                              ) : Icon(
+                                Icons.shuffle_rounded,
+                                size: 18,
+                                color: value,
+                              ),
+                            ),
                           ),
                         ),
                       )
