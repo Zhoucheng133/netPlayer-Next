@@ -19,12 +19,18 @@ class _albumViewState extends State<albumView> {
 
   final Controller c = Get.put(Controller());
   TextEditingController inputController = TextEditingController();
+  String searchKeyWord='';
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Operations().getAlbums(context);
+    });
+    inputController.addListener((){
+      setState(() {
+        searchKeyWord=inputController.text;
+      });
     });
   }
 
@@ -49,8 +55,11 @@ class _albumViewState extends State<albumView> {
                 child: Obx(()=>
                   ListView.builder(
                     itemCount: c.albums.length,
-                    itemBuilder: (BuildContext context, int index)=>Obx(()=>
+                    itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
                       albumItem(id: c.albums[index]['id'], title: c.albums[index]['title'], artist: c.albums[index]['artist'], songCount: c.albums[index]['songCount'], index: index,)
+                    ) : Obx(()=>
+                      c.albums[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      albumItem(id: c.albums[index]['id'], title: c.albums[index]['title'], artist: c.albums[index]['artist'], songCount: c.albums[index]['songCount'], index: index,) : Container()
                     )
                   )
                 ),
