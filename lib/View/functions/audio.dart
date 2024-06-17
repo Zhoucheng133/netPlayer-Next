@@ -15,6 +15,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   final player = Player();
   var playURL="";
   bool skipHandler=false;
+  MediaItem item=MediaItem(id: "", title: "");
 
   audioHandler(){
     player.stream.position.listen((position) {
@@ -25,6 +26,25 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
         skipToNext();
       }
     });
+  }
+
+  void setMedia(bool isPlay){
+    item=MediaItem(
+      id: c.nowPlay["id"],
+      title: c.nowPlay["title"],
+      artist: c.nowPlay["artist"],
+      artUri: Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"),
+    );
+    mediaItem.add(item);
+
+    playbackState.add(playbackState.value.copyWith(
+      playing: isPlay,
+      controls: [
+        MediaControl.skipToPrevious,
+        isPlay ? MediaControl.pause : MediaControl.play,
+        MediaControl.skipToNext,
+      ],
+    ));
   }
 
   // 播放
@@ -40,12 +60,14 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       skipHandler=false;
     }
     playURL=url;
+    setMedia(true);
   }
 
   // 暂停
   @override
   Future<void> pause() async {
     player.pause();
+    setMedia(false);
   }
 
   // 停止播放
@@ -58,6 +80,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<void> seek(Duration position) async {
     player.seek(position);
+    setMedia(true);
   }
 
   int preHandler(int index, int length){
@@ -86,6 +109,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     c.nowPlay.refresh();
     skipHandler=true;
     play();
+    setMedia(true);
   }
 
   int nextHandler(int index, int length){
@@ -121,6 +145,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     c.nowPlay.refresh();
     skipHandler=true;
     play();
+    setMedia(true);
   }
 
   Future<void> volumeSet(val) async {
