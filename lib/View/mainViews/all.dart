@@ -23,11 +23,18 @@ class _allViewState extends State<allView> {
   final AutoScrollController controller=AutoScrollController();
   TextEditingController inputController = TextEditingController();
 
+  String searchKeyWord='';
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       operations.getAllSongs(context);
+    });
+    inputController.addListener((){
+      setState(() {
+          searchKeyWord=inputController.text;
+        });
     });
   }
 
@@ -69,7 +76,7 @@ class _allViewState extends State<allView> {
                         key: ValueKey(index),
                         controller: controller,
                         index: index,
-                        child: Obx(() => songItem(
+                        child: searchKeyWord.isEmpty ? Obx(() => songItem(
                             index: index, 
                             title: c.allSongs[index]['title'], 
                             duration: c.allSongs[index]['duration'], 
@@ -78,6 +85,17 @@ class _allViewState extends State<allView> {
                             artist: c.allSongs[index]['artist'], 
                             from: 'all',
                           )
+                        ) : Obx(()=>
+                          c.allSongs[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.allSongs[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                          songItem(
+                            index: index, 
+                            title: c.allSongs[index]['title'], 
+                            duration: c.allSongs[index]['duration'], 
+                            id: c.allSongs[index]['id'], 
+                            isplay: isPlay(index), 
+                            artist: c.allSongs[index]['artist'], 
+                            from: 'all',
+                          ) : Container()
                         ),
                       );
                     }
