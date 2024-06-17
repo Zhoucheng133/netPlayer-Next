@@ -79,13 +79,16 @@ class _playBarState extends State<playBar> {
                   },
                   child: Stack(
                     children: [
-                      Obx(() =>
-                        c.nowPlay["id"]=="" ? 
-                        Container(
-                          color: c.color1,
-                        ) : Image.network(
-                          "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
-                          fit: BoxFit.contain,
+                      Hero(
+                        tag: 'cover',
+                        child: Obx(() =>
+                          c.nowPlay["id"]=="" ? 
+                          Container(
+                            color: c.color1,
+                          ) : Image.network(
+                            "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                       AnimatedContainer(
