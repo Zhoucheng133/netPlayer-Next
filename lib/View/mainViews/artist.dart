@@ -57,8 +57,10 @@ class _artistViewState extends State<artistView> {
                     itemCount: c.artists.length,
                     itemBuilder:  (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
                       artistItem(id: c.artists[index]['id'], name: c.artists[index]['name'], albumCount: c.artists[index]['albumCount'], index: index)
-                    ) : c.artists[index]['name'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                    artistItem(id: c.artists[index]['id'], name: c.artists[index]['name'], albumCount: c.artists[index]['albumCount'], index: index) : Container()
+                    ) : Obx(()=>
+                      c.artists[index]['name'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      artistItem(id: c.artists[index]['id'], name: c.artists[index]['name'], albumCount: c.artists[index]['albumCount'], index: index) : Container()
+                    )
                   )
                 ),
               )
