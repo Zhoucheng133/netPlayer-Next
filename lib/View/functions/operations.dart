@@ -434,6 +434,11 @@ class Operations{
     }
   }
 
+  // TODO 显示/隐藏歌词
+  void toggleLyric(){
+    
+  }
+
   // 修改音量
   Future<void> saveVolume() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

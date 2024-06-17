@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/View/functions/requests.dart';
@@ -245,7 +246,138 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
               ),
             ) : isLogin ? const mainView() : const loginView(),
           ),
-        )
+        ),
+        Platform.isMacOS ? 
+        PlatformMenuBar(
+          menus: [
+            PlatformMenu(
+              label: "netPlayer", 
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "设置...",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.comma,
+                        meta: true,
+                      ),
+                      onSelected: isLogin ? (){
+                        if(c.showLyric.value){
+                          Operations().toggleLyric();
+                        }
+                        c.pageIndex.value=6;
+                      } : null
+                    ),
+                  ]
+                ),
+                const PlatformMenuItemGroup(
+                  members: [
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.hide,
+                    ),
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.quit,
+                    ),
+                  ]
+                )
+              ]
+            ),
+            PlatformMenu(
+              label: "编辑",
+              menus: [
+                PlatformMenuItem(
+                  label: "拷贝",
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyC,
+                    meta: true
+                  ),
+                  onSelected: (){}
+                ),
+                PlatformMenuItem(
+                  label: "粘贴",
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyV,
+                    meta: true
+                  ),
+                  onSelected: (){}
+                ),
+                PlatformMenuItem(
+                  label: "全选",
+                  shortcut: const SingleActivator(
+                    LogicalKeyboardKey.keyA,
+                    meta: true
+                  ),
+                  onSelected: (){}
+                )
+              ]
+            ),
+            PlatformMenu(
+              label: "操作", 
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "暂停/播放",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.space,
+                      ),
+                      onSelected: (){},
+                    ),
+                    PlatformMenuItem(
+                      label: "上一首",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.arrowLeft,
+                        meta: true,
+                      ),
+                      onSelected: (){},
+                    ),
+                    PlatformMenuItem(
+                      label: "下一首",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.arrowRight,
+                        meta: true,
+                      ),
+                      onSelected: (){},
+                    ),
+                  ]
+                ),
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "显示/隐藏歌词",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.keyL,
+                        meta: true
+                      ),
+                      onSelected: (){
+                        Operations().toggleLyric();
+                      },
+                    )
+                  ]
+                )
+              ]
+            ),
+            const PlatformMenu(
+              label: "窗口", 
+              menus: [
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.minimizeWindow,
+                    ),
+                    PlatformProvidedMenuItem(
+                      enabled: true,
+                      type: PlatformProvidedMenuItemType.toggleFullScreen,
+                    )
+                  ]
+                )
+              ]
+            )
+          ]
+        ) : Container()
       ],
     );
   }

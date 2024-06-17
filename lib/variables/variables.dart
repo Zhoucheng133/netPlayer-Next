@@ -77,6 +77,8 @@ class Controller extends GetxController{
   RxBool closeOnRun=true.obs;
   // 全局快捷键
   RxBool useShortcut=true.obs;
+  // 显示歌词
+  RxBool showLyric=false.obs;
 
   // 更新音量
   void updateVolume(int val) {
