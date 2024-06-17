@@ -23,12 +23,18 @@ class _lovedViewState extends State<lovedView> {
   final Controller c = Get.put(Controller());
   final controller=AutoScrollController();
   TextEditingController inputController = TextEditingController();
+  String searchKeyWord='';
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       operations.getLovedSongs(context);
+    });
+    inputController.addListener((){
+      setState(() {
+        searchKeyWord=inputController.text;
+      });
     });
   }
 
@@ -70,9 +76,12 @@ class _lovedViewState extends State<lovedView> {
                         key: ValueKey(index),
                         controller: controller,
                         index: index,
-                        child: Obx(()=>
+                        child: searchKeyWord.isEmpty ? Obx(()=>
                           songItem(index: index, title: c.lovedSongs[index]['title'], duration: c.lovedSongs[index]['duration'], id: c.lovedSongs[index]['id'], isplay: isPlay(index), artist: c.lovedSongs[index]['artist'], from: 'loved',)
-                        ),
+                        ) : Obx(()=>
+                          c.lovedSongs[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) ||  c.lovedSongs[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                          songItem(index: index, title: c.lovedSongs[index]['title'], duration: c.lovedSongs[index]['duration'], id: c.lovedSongs[index]['id'], isplay: isPlay(index), artist: c.lovedSongs[index]['artist'], from: 'loved',) : Container()
+                        )
                       );
                     }
                   )
