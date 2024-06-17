@@ -5,11 +5,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/View/functions/requests.dart';
 import 'package:net_player_next/View/mainView.dart';
 import 'package:net_player_next/View/mainViews/login.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tray_manager/tray_manager.dart';
 import 'package:window_manager/window_manager.dart';
 
 class MainWindow extends StatefulWidget {
@@ -19,17 +21,20 @@ class MainWindow extends StatefulWidget {
   State<MainWindow> createState() => _MainWindowState();
 }
 
-class _MainWindowState extends State<MainWindow> with WindowListener {
+class _MainWindowState extends State<MainWindow> with WindowListener, TrayListener  {
   @override
   void initState() {
     super.initState();
     windowManager.addListener(this);
+    trayManager.addListener(this);
+    initMenuIcon();
     ever(c.userInfo, (callback)=>setLogin());
     initPref();
   }
 
   @override
   void dispose() {
+    trayManager.removeListener(this);
     windowManager.removeListener(this);
     super.dispose();
   }
@@ -48,6 +53,63 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
     });
   }
 
+  Future<void> initMenuIcon() async {
+    await trayManager.setIcon(
+      Platform.isWindows ? "assets/ico.ico" : "assets/icon.png"
+    );
+    Menu menu = Menu(
+      items: [
+        MenuItem(
+          key: "toggle",
+          label: "播放/暂停"
+        ),
+        MenuItem(
+          key: "previous_song",
+          label: "上一首"
+        ),
+        MenuItem(
+          key: "next_song",
+          label: "下一首",
+        ),
+        MenuItem.separator(),
+        MenuItem(
+          key: 'exit_app',
+          label: '退出 netPlayer',
+        ),
+      ],
+    );
+    await trayManager.setContextMenu(menu);
+  }
+
+  @override
+  void onTrayIconMouseDown() {
+    if(Platform.isMacOS){
+      trayManager.popUpContextMenu();
+    }else{
+      windowManager.show();
+    }
+  }
+
+  @override
+  void onTrayIconRightMouseDown() {
+    if(Platform.isWindows){
+      trayManager.popUpContextMenu();
+    }
+  }
+
+  @override
+  void onTrayMenuItemClick(MenuItem menuItem) {
+    if(menuItem.key == 'exit_app') {
+      windowManager.close();
+    }else if(menuItem.key == 'toggle'){
+      Operations().toggleSong();
+    }else if(menuItem.key=="next_song"){
+      Operations().skipNext();
+    }else if(menuItem.key=="previous_song"){
+      Operations().skipPre();
+    }
+  }
+
   bool isMax=false;
   
   void minWindow(){
@@ -57,7 +119,15 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
     windowManager.maximize();
   }
   void closeWindow(){
-    windowManager.close();
+    if(Platform.isWindows){
+      if(c.closeOnRun.value==false){
+        windowManager.close();
+      }else{
+        windowManager.hide();
+      }
+    }else{
+      windowManager.close();
+    }
   }
   void unmaxWindow(){
     windowManager.unmaximize();
