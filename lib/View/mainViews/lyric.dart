@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:net_player_next/View/functions/operations.dart';
 
 class lyricView extends StatefulWidget {
   const lyricView({super.key});
@@ -17,7 +18,7 @@ class _lyricViewState extends State<lyricView> {
       child: Center(
         child: IconButton(
           onPressed: (){
-            Navigator.pop(context);
+            Operations().toggleLyric(context);
           }, 
           icon: const Icon(Icons.arrow_left_rounded)
         ),

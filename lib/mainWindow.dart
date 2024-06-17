@@ -263,7 +263,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                       ),
                       onSelected: isLogin ? (){
                         if(c.showLyric.value){
-                          Operations().toggleLyric();
+                          Operations().toggleLyric(context);
                         }
                         c.pageIndex.value=6;
                       } : null
@@ -343,6 +343,20 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                     ),
                   ]
                 ),
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
+                      label: "显示/隐藏歌词",
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.keyL,
+                        meta: true
+                      ),
+                      onSelected: (){
+                        Operations().toggleLyric(context);
+                      },
+                    )
+                  ]
+                )
               ]
             ),
             const PlatformMenu(

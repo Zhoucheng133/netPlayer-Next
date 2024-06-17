@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:net_player_next/View/components/message.dart';
 import 'package:net_player_next/View/functions/hotkeys.dart';
 import 'package:net_player_next/View/functions/requests.dart';
+import 'package:net_player_next/View/mainViews/lyric.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -435,8 +436,33 @@ class Operations{
   }
 
   // TODO 显示/隐藏歌词
-  void toggleLyric(){
-    
+  void toggleLyric(BuildContext context){
+    if(c.showLyric.value){
+      c.showLyric.value=false;
+      Navigator.pop(context);
+    }else{
+      c.showLyric.value=true;
+      Navigator.push(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const lyricView(),
+          transitionDuration: const Duration(milliseconds: 500),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            var offsetAnimation = animation.drive(tween);
+
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+        )
+      );
+    }
   }
 
   // 修改音量
