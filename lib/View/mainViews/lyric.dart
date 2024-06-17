@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:window_manager/window_manager.dart';
 
 class lyricView extends StatefulWidget {
   const lyricView({super.key});
@@ -24,6 +25,10 @@ class _lyricViewState extends State<lyricView> {
         color: Colors.white,
         child: Column(
           children: [
+            SizedBox(
+              height: 30,
+              child: DragToMoveArea(child: Container()),
+            ),
             Expanded(
               child: Row(
                 children: [
