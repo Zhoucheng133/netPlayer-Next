@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/components/message.dart';
 import 'package:net_player_next/View/components/table.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
 import 'package:net_player_next/View/functions/operations.dart';
@@ -27,8 +28,9 @@ class _artistViewState extends State<artistView> {
     });
   }
 
-  void refresh(){
-    // TODO 刷新艺人列表
+  void refresh(BuildContext context){
+    Operations().getArtists(context);
+    showMessage(true, '更新成功', context);
   }
 
   @override
@@ -39,7 +41,7 @@ class _artistViewState extends State<artistView> {
         children: [
           Column(
             children: [
-              viewHeader(title: '艺人', subTitle: '', page: 'artist', refresh: ()=>refresh(), controller: inputController,),
+              viewHeader(title: '艺人', subTitle: '', page: 'artist', refresh: ()=>refresh(context), controller: inputController,),
               const artistHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
