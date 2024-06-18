@@ -119,6 +119,9 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       }
       return index+1;
     }else if(c.playMode.value=='random'){
+      if(length==1){
+        return 0;
+      }
       Random random =Random();
       return random.nextInt(length-1);
     }else{
