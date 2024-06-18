@@ -27,6 +27,7 @@ class _viewHeaderState extends State<viewHeader> {
   bool hoverRefresh=false;
   bool hoverRandom=false;
   bool hasFocus=false;
+  bool hoverBack=false;
   FocusNode focusOnSearch=FocusNode();
 
   @override
@@ -50,6 +51,12 @@ class _viewHeaderState extends State<viewHeader> {
     focusOnSearch.dispose();
     super.dispose();
   }
+  bool hasBackButton(){
+    if(c.pageId.value.isNotEmpty && (c.pageIndex.value==2 || c.pageIndex.value==3)){
+      return true;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,15 +65,55 @@ class _viewHeaderState extends State<viewHeader> {
       height: 30,
       child: Row(
         children: [
+          // c.pageId.value.isNotEmpty ? Icon(Icons.arrow_back_rounded):Container(),
+          hasBackButton()?Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GestureDetector(
+                onTap: (){
+                  c.pageId.value='';
+                },
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  onEnter: (_){
+                    setState(() {
+                      hoverBack=true;
+                    });
+                  },
+                  onExit: (_){
+                    setState(() {
+                      hoverBack=false;
+                    });
+                  },
+                  child: TweenAnimationBuilder(
+                    tween: ColorTween(end: hoverBack ? c.color6 : c.color5), 
+                    duration: const Duration(milliseconds: 200), 
+                    builder: (_, value, __)=>Icon(
+                      Icons.arrow_back_rounded,
+                      color: value,
+                    )
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10,),
+            ],
+          ) : Container(),
           Expanded(
             child: Row(
               children: [
-                Text(
-                  widget.title,
-                  style: TextStyle(
-                    color: c.color5,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width - 550,
+                  ),
+                  child: Text(
+                    widget.title,
+                    style: TextStyle(
+                      color: c.color5,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      overflow: TextOverflow.fade,
+                    ),
+                    softWrap: false,
                   ),
                 ),
                 const SizedBox(width: 10,),

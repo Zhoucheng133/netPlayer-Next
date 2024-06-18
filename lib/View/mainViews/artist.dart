@@ -20,6 +20,8 @@ class _artistViewState extends State<artistView> {
   TextEditingController inputController = TextEditingController();
   final Controller c = Get.put(Controller());
   String searchKeyWord='';
+  String artistName='';
+  List list=[];
 
   @override
   void initState() {
@@ -47,7 +49,10 @@ class _artistViewState extends State<artistView> {
         children: [
           Column(
             children: [
-              viewHeader(title: '艺人', subTitle: '', page: 'artist', refresh: ()=>refresh(context), controller: inputController,),
+              Obx(()=>
+                c.pageId.value=='' ? viewHeader(title: '艺人', subTitle: '', page: 'artist', refresh: ()=>refresh(context), controller: inputController,) : 
+                viewHeader(title: '艺人: $artistName', subTitle: '共有${list.length}个专辑', page: 'artist')
+              ),
               const artistHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

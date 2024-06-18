@@ -90,4 +90,8 @@ class HttpRequests{
   Future<Map> getArtistRequest() async {
     return await httpRequest('${c.userInfo["url"]}/rest/getArtists?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}');
   }
+  // 获取专辑信息
+  Future<Map> getAlbumDataRequest(String id) async {
+    return await httpRequest("${c.userInfo["url"]}/rest/getAlbum?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id");
+  }
 }

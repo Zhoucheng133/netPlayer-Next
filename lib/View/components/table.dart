@@ -531,10 +531,7 @@ class _albumItemState extends State<albumItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: (){
-        // TODO 进入专辑详细页
-      },
-      onSecondaryTapDown: (val){
-        // TODO 右键菜单
+        c.pageId.value=widget.id;
       },
       child: MouseRegion(
         onEnter: (_){

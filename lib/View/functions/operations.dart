@@ -434,8 +434,22 @@ class Operations{
       return true;
     }
   }
+  // 获取某个专辑信息
+  Future<Map> getAlbumData(BuildContext context, String id) async {
+    final rlt=await requests.getAlbumDataRequest(id);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '获取专辑信息失败', context);
+      return {};
+    }else{
+      try {
+        // print(rlt['subsonic-response']['album']);
+        return rlt['subsonic-response']['album'];
+      } catch (_) {}
+      return {};
+    }
+  }
 
-  // TODO 显示/隐藏歌词
+  // 显示/隐藏歌词
   void toggleLyric(BuildContext context){
     if(c.showLyric.value){
       c.showLyric.value=false;
@@ -451,7 +465,6 @@ class Operations{
             const begin = Offset(0.0, 1.0);
             const end = Offset.zero;
             const curve = Curves.ease;
-
             var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
             var offsetAnimation = animation.drive(tween);
 

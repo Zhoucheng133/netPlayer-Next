@@ -20,6 +20,9 @@ class _albumViewState extends State<albumView> {
   final Controller c = Get.put(Controller());
   TextEditingController inputController = TextEditingController();
   String searchKeyWord='';
+  late Worker listener;
+  String albumName='';
+  List list=[];
 
   @override
   void initState() {
@@ -32,8 +35,20 @@ class _albumViewState extends State<albumView> {
         searchKeyWord=inputController.text;
       });
     });
+    listener = ever(c.pageId, (String id) async {
+      if(c.pageIndex.value==3 && c.pageId.value!=''){
+        Map rlt=await Operations().getAlbumData(context, id);
+        if(rlt.isNotEmpty){
+          try {
+            setState(() {
+              albumName=rlt['name'];
+              list=rlt['song'];
+            });
+          } catch (_) {}
+        }
+      }
+    });
   }
-
   void refresh(BuildContext context){
     Operations().getAlbums(context);
     showMessage(true, '更新成功', context);
@@ -47,7 +62,10 @@ class _albumViewState extends State<albumView> {
         children: [
           Column(
             children: [
-              Obx(() => viewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album', refresh: ()=>refresh(context), controller: inputController,),),
+              Obx(() => 
+                c.pageId.value=='' ? viewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album', refresh: ()=>refresh(context), controller: inputController,) :
+                viewHeader(title: '专辑: $albumName', subTitle: '共有${list.length}首', page: 'album')
+              ),
               const albumHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
