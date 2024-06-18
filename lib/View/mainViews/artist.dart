@@ -110,24 +110,20 @@ class _artistViewState extends State<artistView> {
                   child: Obx(()=>
                     ListView.builder(
                       itemCount: list.length,
-                      itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
-                        albumItem(
-                          id: list[index]['id'], 
-                          title: list[index]['title'], 
-                          artist: list[index]['artist'], 
-                          songCount: list[index]['songCount'], 
-                          index: index,
-                        )
-                      ) : Obx(()=>
-                        list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                        albumItem(
-                          id: list[index]['id'], 
-                          title: list[index]['title'], 
-                          artist: list[index]['artist'], 
-                          songCount: list[index]['songCount'], 
-                          index: index,
-                        ) : Container()
-                      )
+                      itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? albumItem(
+                        id: list[index]['id'], 
+                        title: list[index]['title'], 
+                        artist: list[index]['artist'], 
+                        songCount: list[index]['songCount'], 
+                        index: index,
+                      ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      albumItem(
+                        id: list[index]['id'], 
+                        title: list[index]['title'], 
+                        artist: list[index]['artist'], 
+                        songCount: list[index]['songCount'], 
+                        index: index,
+                      ) : Container()
                     )
                   ),
                 )
