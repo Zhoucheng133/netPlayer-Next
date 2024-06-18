@@ -145,7 +145,7 @@ class _playListViewState extends State<playListView> {
                       child: searchKeyWord.isEmpty ? Obx(()=>
                         songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list, refresh: ()=>silentRefresh(),),
                       ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                      songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list, refresh: ()=>silentRefresh(),) : Container()
+                      Obx(()=>songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list, refresh: ()=>silentRefresh(),)) : Container()
                     );
                   }
                 ),

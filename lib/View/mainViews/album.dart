@@ -22,6 +22,7 @@ class _albumViewState extends State<albumView> {
   String searchKeyWord='';
   late Worker listener;
   String albumName='';
+  String id='';
   List list=[];
 
   @override
@@ -43,6 +44,7 @@ class _albumViewState extends State<albumView> {
             setState(() {
               albumName=rlt['name'];
               list=rlt['song'];
+              id=rlt['id'];
             });
           } catch (_) {}
         }
@@ -52,6 +54,12 @@ class _albumViewState extends State<albumView> {
   void refresh(BuildContext context){
     Operations().getAlbums(context);
     showMessage(true, '更新成功', context);
+  }
+  bool isPlay(int index){
+     if(index==c.nowPlay['index'] && c.nowPlay['playFrom']=='album' && c.nowPlay['fromId']==id){
+      return true;
+    }
+    return false;
   }
   
   @override
@@ -66,21 +74,63 @@ class _albumViewState extends State<albumView> {
                 c.pageId.value=='' ? viewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album', refresh: ()=>refresh(context), controller: inputController,) :
                 viewHeader(title: '专辑: $albumName', subTitle: '共有${list.length}首', page: 'album')
               ),
-              const albumHeader(),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 200,
-                height: MediaQuery.of(context).size.height - 222,
-                child: Obx(()=>
-                  ListView.builder(
-                    itemCount: c.albums.length,
-                    itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
-                      albumItem(id: c.albums[index]['id'], title: c.albums[index]['title'], artist: c.albums[index]['artist'], songCount: c.albums[index]['songCount'], index: index,)
-                    ) : Obx(()=>
-                      c.albums[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                      albumItem(id: c.albums[index]['id'], title: c.albums[index]['title'], artist: c.albums[index]['artist'], songCount: c.albums[index]['songCount'], index: index,) : Container()
+              // const albumHeader(),
+              Obx(()=>
+                c.pageId.value=='' ? const albumHeader() : const songHeader()
+              ),
+              Obx(()=>
+                c.pageId.value=='' ?
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 200,
+                  height: MediaQuery.of(context).size.height - 222,
+                  child: Obx(()=>
+                    ListView.builder(
+                      itemCount: c.albums.length,
+                      itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
+                        albumItem(id: c.albums[index]['id'], title: c.albums[index]['title'], artist: c.albums[index]['artist'], songCount: c.albums[index]['songCount'], index: index,)
+                      ) : Obx(()=>
+                        c.albums[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                        albumItem(id: c.albums[index]['id'], title: c.albums[index]['title'], artist: c.albums[index]['artist'], songCount: c.albums[index]['songCount'], index: index,) : Container()
+                      )
                     )
-                  )
-                ),
+                  ),
+                ) : SizedBox(
+                  width: MediaQuery.of(context).size.width - 200,
+                  height: MediaQuery.of(context).size.height - 222,
+                  child: Obx(()=>
+                    ListView.builder(
+                      itemCount: list.length,
+                      itemBuilder: (BuildContext context, int index){
+                        return searchKeyWord.isEmpty ? Obx(()=>
+                          songItem(
+                            index: index, 
+                            title: list[index]['title'], 
+                            duration: list[index]['duration'], 
+                            id: list[index]['id'], 
+                            isplay: isPlay(index), 
+                            artist: list[index]['artist'], 
+                            from: 'album', 
+                            listId: id, 
+                            list: list,
+                          )
+                        ) : list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                        Obx(()=>
+                          songItem(
+                            index: index, 
+                            title: list[index]['title'], 
+                            duration: list[index]['duration'], 
+                            id: list[index]['id'], 
+                            isplay: isPlay(index), 
+                            artist: list[index]['artist'], 
+                            from: 'album', 
+                            listId: id, 
+                            list: list,
+                          )
+                        ): Container();
+                      }
+                    ),
+                  ),
+                )
               )
             ],
           )

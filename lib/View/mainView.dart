@@ -38,7 +38,6 @@ class _mainViewState extends State<mainView> {
         Map<String, dynamic> decodedMap = jsonDecode(nowPlay);
         Map<String, Object> tmpList=Map<String, Object>.from(decodedMap);
         c.nowPlay.value=tmpList;
-        // c.nowPlay.refresh();
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Operations().nowPlayCheck(context);
         });

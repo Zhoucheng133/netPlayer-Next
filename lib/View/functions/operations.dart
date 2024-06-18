@@ -358,6 +358,20 @@ class Operations{
         await checkLovedSongPlay(context);
       }else if(c.nowPlay['playFrom']=='playList'){
         await checkPlayListPlay(context, c.nowPlay['fromId']);
+      }else if(c.nowPlay['playFrom']=='album'){
+        c.handler.stop();
+        Map<String, Object> tmp={
+          'id': '',
+          'title': '',
+          'artist': '',
+          'playFrom': '',
+          'duration': 0,
+          'fromId': '',
+          'index': 0,
+          'list': [],
+        };
+        c.nowPlay.value=tmp;
+        c.isPlay.value=false;
       }
     }
   }
