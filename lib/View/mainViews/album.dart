@@ -36,9 +36,9 @@ class _albumViewState extends State<albumView> {
         searchKeyWord=inputController.text;
       });
     });
-    listener = ever(c.pageId, (String id) async {
+    listener = ever(c.pageId, (String albumId) async {
       if(c.pageIndex.value==3 && c.pageId.value!=''){
-        Map rlt=await Operations().getAlbumData(context, id);
+        Map rlt=await Operations().getAlbumData(context, albumId);
         if(rlt.isNotEmpty){
           try {
             setState(() {
@@ -72,7 +72,7 @@ class _albumViewState extends State<albumView> {
             children: [
               Obx(() => 
                 c.pageId.value=='' ? viewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album', refresh: ()=>refresh(context), controller: inputController,) :
-                viewHeader(title: '专辑: $albumName', subTitle: '共有${list.length}首', page: 'album')
+                viewHeader(title: '专辑: $albumName', subTitle: '共有${list.length}首', page: 'album', refresh: ()=>(){},)
               ),
               // const albumHeader(),
               Obx(()=>
@@ -87,10 +87,22 @@ class _albumViewState extends State<albumView> {
                     ListView.builder(
                       itemCount: c.albums.length,
                       itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
-                        albumItem(id: c.albums[index]['id'], title: c.albums[index]['title'], artist: c.albums[index]['artist'], songCount: c.albums[index]['songCount'], index: index,)
+                        albumItem(
+                          id: c.albums[index]['id'], 
+                          title: c.albums[index]['title'], 
+                          artist: c.albums[index]['artist'], 
+                          songCount: c.albums[index]['songCount'], 
+                          index: index,
+                        )
                       ) : Obx(()=>
                         c.albums[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                        albumItem(id: c.albums[index]['id'], title: c.albums[index]['title'], artist: c.albums[index]['artist'], songCount: c.albums[index]['songCount'], index: index,) : Container()
+                        albumItem(
+                          id: c.albums[index]['id'], 
+                          title: c.albums[index]['title'], 
+                          artist: c.albums[index]['artist'], 
+                          songCount: c.albums[index]['songCount'], 
+                          index: index,
+                        ) : Container()
                       )
                     )
                   ),
