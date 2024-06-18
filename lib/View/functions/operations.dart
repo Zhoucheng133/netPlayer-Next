@@ -448,6 +448,7 @@ class Operations{
       return true;
     }
   }
+
   // 获取某个专辑信息
   Future<Map> getAlbumData(BuildContext context, String id) async {
     final rlt=await requests.getAlbumDataRequest(id);
@@ -458,6 +459,20 @@ class Operations{
       try {
         // print(rlt['subsonic-response']['album']);
         return rlt['subsonic-response']['album'];
+      } catch (_) {}
+      return {};
+    }
+  }
+
+  // 获取某个艺人信息
+  Future<Map> getArtistData(BuildContext context, String id) async {
+    final rlt=await requests.getArtistDataRequest(id);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '获取艺人信息失败', context);
+      return {};
+    }else{
+      try {
+        return rlt['subsonic-response']['artist'];
       } catch (_) {}
       return {};
     }

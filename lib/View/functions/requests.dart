@@ -94,4 +94,8 @@ class HttpRequests{
   Future<Map> getAlbumDataRequest(String id) async {
     return await httpRequest("${c.userInfo["url"]}/rest/getAlbum?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id");
   }
+  // 获取艺人信息
+  Future<Map> getArtistDataRequest(String id) async {
+    return await httpRequest('${c.userInfo["url"]}/rest/getArtist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id');
+  }
 }

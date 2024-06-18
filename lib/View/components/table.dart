@@ -531,7 +531,11 @@ class _albumItemState extends State<albumItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: (){
+        if(c.pageIndex.value!=3){
+          c.pageIndex.value=3;
+        }
         c.pageId.value=widget.id;
+        
       },
       child: MouseRegion(
         onEnter: (_){
@@ -631,7 +635,7 @@ class _artistItemState extends State<artistItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: (){
-        // TODO 艺人内容
+        c.pageId.value=widget.id;
       },
       child: MouseRegion(
         onEnter: (_){
