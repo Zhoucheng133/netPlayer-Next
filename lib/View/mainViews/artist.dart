@@ -50,7 +50,7 @@ class _artistViewState extends State<artistView> {
           Column(
             children: [
               Obx(()=>
-                c.pageId.value=='' ? viewHeader(title: '艺人', subTitle: '', page: 'artist', refresh: ()=>refresh(context), controller: inputController,) : 
+                c.pageId.value=='' ? viewHeader(title: '艺人', subTitle: '共有${c.artists.length}位艺人', page: 'artist', refresh: ()=>refresh(context), controller: inputController,) : 
                 viewHeader(title: '艺人: $artistName', subTitle: '共有${list.length}个专辑', page: 'artist')
               ),
               const artistHeader(),
