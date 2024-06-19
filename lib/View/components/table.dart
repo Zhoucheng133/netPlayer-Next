@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
-// TODO 务必注意Item的文字大小为13
-
 // 歌曲表头
 class songHeader extends StatefulWidget {
   const songHeader({super.key});
