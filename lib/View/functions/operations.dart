@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:easy_debounce/easy_debounce.dart';
@@ -450,11 +451,43 @@ class Operations{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('fullRandom', c.fullRandom.value);
   }
+  
+  // 时间戳转换成毫秒
+  int timeToMilliseconds(timeString) {
+    List<String> parts = timeString.split(':');
+    int minutes = int.parse(parts[0]);
+    List<String> secondsParts = parts[1].split('.');
+    int seconds = int.parse(secondsParts[0]);
+    int milliseconds = int.parse(secondsParts[1]);
+
+    // 将分钟、秒和毫秒转换为总毫秒数
+    return (minutes * 60 * 1000) + (seconds * 1000) + milliseconds;
+  }
 
   // 获取歌词
   Future<void> getLyric() async {
-    // TODO 获取歌词
-    // final rlt=await requests.getLyricRequest(c.nowPlay['title'], c.nowPlay['album'], c.nowPlay['artist'], c.nowPlay['duration']);
+    final rlt=await requests.getLyricRequest(c.nowPlay['title'], c.nowPlay['album'], c.nowPlay['artist'], c.nowPlay['duration'].toString());
+    var response=rlt['syncedLyrics']??"";
+    if(response==''){
+      c.lyric.value=[
+        {
+          'time': 0,
+          'content': '没有找到歌词',
+        }
+      ];
+    }else{
+      List lyricCovert=[];
+      List<String> lines = LineSplitter.split(response).toList();
+      for(String line in lines){
+        int pos1=line.indexOf("[");
+        int pos2=line.indexOf("]");
+        lyricCovert.add({
+          'time': timeToMilliseconds(line.substring(pos1+1, pos2)),
+          'content': line.substring(pos2 + 1).trim(),
+        });
+      }
+      c.lyric.value=lyricCovert;
+    }
   }
 
   // 将某个歌曲从歌单中删除

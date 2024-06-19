@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -17,7 +18,7 @@ class lyricView extends StatefulWidget {
   State<lyricView> createState() => _lyricViewState();
 }
 
-class _lyricViewState extends State<lyricView> with WindowListener {
+class _lyricViewState extends State<lyricView> {
 
   bool hoverBack=false;
   bool hoverTitleBar=false;
@@ -28,7 +29,21 @@ class _lyricViewState extends State<lyricView> with WindowListener {
   bool hoverLyric=false;
   bool hoverVolume=false;
   bool hoverMode=false;
+  AutoScrollController controller=AutoScrollController();
   final Controller c = Get.put(Controller());
+
+  bool playedLyric(index){
+    if(c.lyric.length==1){
+      return true;
+    }
+    bool flag=false;
+    try {
+      flag=c.playProgress.value>=c.lyric[index]['time'] && c.playProgress<c.lyric[index+1]['time'];
+    } catch (e) {
+      flag=false;
+    }
+    return flag;
+  }
 
   String convertDuration(int time){
     int min = time ~/ 60;
@@ -44,6 +59,30 @@ class _lyricViewState extends State<lyricView> with WindowListener {
       }
     }
     return false;
+  }
+
+  void scrollLyric(){
+    if(c.lyricLine.value==0){
+      return;
+    }
+    controller.scrollToIndex(c.lyricLine.value-1, preferPosition: AutoScrollPosition.middle);
+  }
+
+  late Worker lyricLineListener;
+
+  @override
+  void initState() {
+    super.initState();
+    lyricLineListener=ever(c.lyricLine, (val){
+      scrollLyric();
+    });
+    scrollLyric();
+  }
+  
+  @override
+  void dispose() {
+    lyricLineListener.dispose();
+    super.dispose();
   }
 
   @override
@@ -555,8 +594,38 @@ class _lyricViewState extends State<lyricView> with WindowListener {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20, right: 20),
-                      child: Container(
-                        // TODO 歌词内容
+                      child: ScrollConfiguration(
+                        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                        child: Obx(() => 
+                          ListView.builder(
+                            controller: controller,
+                            itemCount: c.lyric.length,
+                            itemBuilder: (BuildContext context, int index) => 
+                            Column(
+                              children: [
+                                index==0 ? SizedBox(height: (MediaQuery.of(context).size.height-100)/2,) : Container(),
+                                Obx(() => 
+                                  AutoScrollTag(
+                                    key: ValueKey(index), 
+                                    controller: controller, 
+                                    index: index,
+                                    child: Text(
+                                      c.lyric[index]['content'],
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        height: 2.3,
+                                        color: playedLyric(index) ? Colors.blue:Colors.grey[350],
+                                        fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
+                                      ),
+                                    ),
+                                  )
+                                ),
+                                index==c.lyric.length-1 ? SizedBox(height: (MediaQuery.of(context).size.height-60-25-130-18)/2,) : Container(),
+                              ],
+                            )
+                          ),
+                        ),
                       ),
                     )
                   )

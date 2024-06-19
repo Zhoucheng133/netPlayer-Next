@@ -19,7 +19,27 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   audioHandler(){
     player.stream.position.listen((position) {
-      c.playProgress.value=position.inMilliseconds;
+      var data=position.inMilliseconds;
+      c.playProgress.value=data;
+      if(c.lyric.isNotEmpty && c.lyric.length!=1){
+        for (var i = 0; i < c.lyric.length; i++) {
+          if(i==c.lyric.length-1){
+            c.lyricLine.value=c.lyric.length;
+            break;
+          }else if(i==0 && data<c.lyric[i]['time']){
+            // updateLyricLine(0);
+            c.lyricLine.value=0;
+            break;
+          }else if(data>=c.lyric[i]['time'] && data<c.lyric[i+1]['time']){
+            // updateLyricLine(i+1);
+            c.lyricLine.value=i+1;
+            break;
+          }
+        }
+      }else if(c.lyric.length==1){
+        // updateLyricLine(0);
+        c.lyricLine.value=0;
+      }
     });
     player.stream.completed.listen((state) {
       if(state){

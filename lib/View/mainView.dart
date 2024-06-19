@@ -72,6 +72,7 @@ class _mainViewState extends State<mainView> {
     // 保存现在播放的内容
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('nowPlay', jsonEncode(val));
+    c.lyricLine.value=0;
     // 如果id不为空，获取歌词
     if(val['id']!=''){
       Operations().getLyric();
