@@ -244,6 +244,16 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                 PlatformMenuItemGroup(
                   members: [
                     PlatformMenuItem(
+                      label: "关于 netPlayer",
+                      onSelected: (){
+                        Operations().showAbout(context);
+                      }
+                    )
+                  ]
+                ),
+                PlatformMenuItemGroup(
+                  members: [
+                    PlatformMenuItem(
                       label: "设置...",
                       shortcut: const SingleActivator(
                         LogicalKeyboardKey.comma,

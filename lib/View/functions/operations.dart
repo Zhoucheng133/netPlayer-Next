@@ -5,13 +5,16 @@ import 'dart:io';
 
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/components/message.dart';
 import 'package:net_player_next/View/functions/hotkeys.dart';
 import 'package:net_player_next/View/functions/requests.dart';
 import 'package:net_player_next/View/mainViews/lyric.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
 class Operations{
@@ -665,5 +668,102 @@ class Operations{
     }else{
       windowManager.close();
     }
+  }
+
+  // 显示关于
+  Future<void> showAbout(BuildContext context) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    showDialog(
+      context: context, 
+      builder: (BuildContext context)=>AlertDialog(
+        title: const Text('关于'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/icon.png',
+              width: 100,
+            ),
+            const SizedBox(height: 10,),
+            const Text(
+              'netPlayer',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 3,),
+            Text(
+              'Next v${packageInfo.version}',
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey[400]
+              ),
+            ),
+            const SizedBox(height: 20,),
+            GestureDetector(
+              onTap: (){
+                final url=Uri.parse('https://github.com/Zhoucheng133/netPlayer-Next');
+                launchUrl(url);
+              },
+              child: const MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.github,
+                      size: 15,
+                    ),
+                    SizedBox(width: 5,),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 2),
+                      child: Text(
+                        '本项目地址',
+                        style: TextStyle(
+                          fontSize: 13,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 10,),
+            GestureDetector(
+              onTap: (){
+                final url=Uri.parse('https://lrclib.net/docs');
+                launchUrl(url);
+              },
+              child: const MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.code_rounded,
+                      size: 15,
+                    ),
+                    SizedBox(width: 5,),
+                    Text('歌词API'),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: const Text('好的')
+          )
+        ],
+      ),
+    );
   }
 }
