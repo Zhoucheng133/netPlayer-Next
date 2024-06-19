@@ -592,41 +592,57 @@ class _lyricViewState extends State<lyricView> {
                     )
                   ),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 50, right: 20, bottom: 30),
-                      child: ScrollConfiguration(
-                        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-                        child: Obx(() => 
-                          ListView.builder(
-                            controller: controller,
-                            itemCount: c.lyric.length,
-                            itemBuilder: (BuildContext context, int index) => 
-                            Column(
-                              children: [
-                                index==0 ? SizedBox(height: (MediaQuery.of(context).size.height-160)/2,) : Container(),
-                                Obx(() => 
-                                  AutoScrollTag(
-                                    key: ValueKey(index), 
-                                    controller: controller, 
-                                    index: index,
-                                    child: Text(
-                                      c.lyric[index]['content'],
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        height: 2.3,
-                                        color: playedLyric(index) ? c.color5:c.color3,
-                                        fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
-                                      ),
+                    child: Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 50, right: 20, bottom: 30),
+                          child: ScrollConfiguration(
+                            behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                            child: Obx(() => 
+                              ListView.builder(
+                                controller: controller,
+                                itemCount: c.lyric.length,
+                                itemBuilder: (BuildContext context, int index) => 
+                                Column(
+                                  children: [
+                                    index==0 ? SizedBox(height: (MediaQuery.of(context).size.height-160)/2,) : Container(),
+                                    Obx(() => 
+                                      AutoScrollTag(
+                                        key: ValueKey(index), 
+                                        controller: controller, 
+                                        index: index,
+                                        child: Text(
+                                          c.lyric[index]['content'],
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            height: 2.3,
+                                            color: playedLyric(index) ? c.color5:c.color3,
+                                            fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
+                                          ),
+                                        ),
+                                      )
                                     ),
-                                  )
-                                ),
-                                index==c.lyric.length-1 ? SizedBox(height: (MediaQuery.of(context).size.height-60-25-130-18)/2,) : Container(),
-                              ],
-                            )
+                                    index==c.lyric.length-1 ? SizedBox(height: (MediaQuery.of(context).size.height-60-25-130-18)/2,) : Container(),
+                                  ],
+                                )
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        Positioned(
+                          right: 20,
+                          bottom: 10,
+                          child: Tooltip(
+                            message: '注意: 歌词内容未必准确\n歌词内容来自lrclib.net',
+                            child: Icon(
+                              Icons.info_rounded,
+                              size: 20,
+                              color: c.color4,
+                            ),
+                          )
+                        )
+                      ],
                     )
                   )
                 ],
