@@ -98,4 +98,8 @@ class HttpRequests{
   Future<Map> getArtistDataRequest(String id) async {
     return await httpRequest('${c.userInfo["url"]}/rest/getArtist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id');
   }
+  // 获取歌词
+  Future<Map> getLyricRequest(String title, String album, String artist, String duration) async {
+    return await httpRequest('https://lrclib.net/api/get?artist_name=$artist&track_name=$title&album_name=$album&duration=$duration');
+  }
 }

@@ -440,6 +440,11 @@ class Operations{
     await prefs.setBool('fullRandom', c.fullRandom.value);
   }
 
+  // 获取歌词
+  void getLyric(){
+    // TODO 获取歌词
+  }
+
   // 将某个歌曲从歌单中删除
   Future<bool> delFromList(BuildContext context, String listId, int songId) async {
     final rlt=await requests.delFromListRequest(listId, songId);

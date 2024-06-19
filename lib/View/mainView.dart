@@ -68,16 +68,21 @@ class _mainViewState extends State<mainView> {
     Operations().initHotkey(context);
   }
 
-  Future<void> saveNowPlay(Map val) async {
+  Future<void> nowplayChange(Map val) async {
+    // 保存现在播放的内容
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('nowPlay', jsonEncode(val));
+    // 如果id不为空，获取歌词
+    if(val['id']!=''){
+      Operations().getLyric();
+    }
   }
 
   @override
   void initState() {
     super.initState();
     initPrefs();
-    ever(c.nowPlay, (val)=>saveNowPlay(val));
+    ever(c.nowPlay, (val)=>nowplayChange(val));
   }
 
   @override

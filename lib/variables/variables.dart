@@ -69,6 +69,10 @@ class Controller extends GetxController{
   RxList artists=[].obs;
   // 窗口最大化
   RxBool maxWindow=false.obs;
+  // 歌词内容
+  RxList lyric=[].obs;
+  // 当前歌词到多少行了
+  RxInt lyricLine=0.obs;
 
   // # 一些设置属性 #
   // 保存播放内容
