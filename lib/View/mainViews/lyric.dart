@@ -17,6 +17,9 @@ class _lyricViewState extends State<lyricView> with WindowListener {
 
   bool hoverBack=false;
   bool hoverTitleBar=false;
+  bool hoverPause=false;
+  bool hoverPre=false;
+  bool hoverSkip=false;
   final Controller c = Get.put(Controller());
 
   @override
@@ -124,7 +127,109 @@ class _lyricViewState extends State<lyricView> with WindowListener {
                             softWrap: false,
                             overflow: TextOverflow.fade,
                           )
-                        )
+                        ),
+                        const SizedBox(height: 30,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                Operations().skipPre();
+                              },
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverPre=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverPre=false;
+                                  });
+                                },
+                                child: TweenAnimationBuilder(
+                                  tween: ColorTween(end: hoverPre ? c.color6 : c.color5), 
+                                  duration: const Duration(milliseconds: 200),
+                                  builder: (_, value, __) => Icon(
+                                    Icons.skip_previous_rounded,
+                                    color: value,
+                                    size: 30,
+                                  ),
+                                )
+                              ),
+                            ),
+                            const SizedBox(width: 15,),
+                            GestureDetector(
+                              onTap: (){
+                                Operations().toggleSong();
+                              },
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverPause=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverPause=false;
+                                  });
+                                },
+                                child: AnimatedContainer(
+                                  height: 46,
+                                  width: 46,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(23),
+                                    color: hoverPause ? c.color6 : c.color5
+                                  ),
+                                  duration: const Duration(milliseconds: 200),
+                                  child: Center(
+                                    child: Obx(()=>
+                                      c.isPlay.value ? const Icon(
+                                        Icons.pause_rounded,
+                                        color: Colors.white,
+                                        size: 35,
+                                      ): const Icon(
+                                        Icons.play_arrow_rounded,
+                                        color: Colors.white,
+                                        size: 35,
+                                      )
+                                    )
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 15,),
+                            GestureDetector(
+                              onTap: (){
+                                Operations().skipNext();
+                              },
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverSkip=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverSkip=false;
+                                  });
+                                },
+                                child: TweenAnimationBuilder(
+                                  tween: ColorTween(end: hoverSkip ? c.color6 : c.color5), 
+                                  duration: const Duration(milliseconds: 200),
+                                  builder: (_, value, __) => Icon(
+                                    Icons.skip_next_rounded,
+                                    color: value,
+                                    size: 30,
+                                  ),
+                                )
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     )
                   ),
