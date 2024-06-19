@@ -1,9 +1,13 @@
 // ignore_for_file: camel_case_types
 
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_popup/flutter_popup.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
 class lyricView extends StatefulWidget {
@@ -20,6 +24,10 @@ class _lyricViewState extends State<lyricView> with WindowListener {
   bool hoverPause=false;
   bool hoverPre=false;
   bool hoverSkip=false;
+  bool hoverLove=false;
+  bool hoverLyric=false;
+  bool hoverVolume=false;
+  bool hoverMode=false;
   final Controller c = Get.put(Controller());
 
   String convertDuration(int time){
@@ -27,6 +35,15 @@ class _lyricViewState extends State<lyricView> with WindowListener {
     int sec = time % 60;
     String formattedSec = sec.toString().padLeft(2, '0');
     return "$min:$formattedSec";
+  }
+
+  bool isLoved(){
+    for (var val in c.lovedSongs) {
+      if(val["id"]==c.nowPlay['id']){
+        return true;
+      }
+    }
+    return false;
   }
 
   @override
@@ -297,7 +314,241 @@ class _lyricViewState extends State<lyricView> with WindowListener {
                               )
                             ],
                           ),
-                        )
+                        ),
+                        const SizedBox(height: 20,),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                if(isLoved()){
+                                  Operations().deloveSong(context, c.nowPlay['id']);
+                                }else{
+                                  Operations().loveSong(context, c.nowPlay['id']);
+                                }
+                                
+                              },
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverLove=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverLove=false;
+                                  });
+                                },
+                                child: Obx(()=>
+                                  !isLoved() ?
+                                  TweenAnimationBuilder(
+                                    tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
+                                    duration: const Duration(milliseconds: 200), 
+                                    builder: (_, value, __)=>Icon(
+                                      Icons.favorite_border_outlined,
+                                      size: 18,
+                                      color: value,
+                                    )
+                                  ) : const Icon(
+                                    Icons.favorite_rounded,
+                                    size: 18,
+                                    color: Colors.red,
+                                  )
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 25,),
+                            CustomPopup(
+                              content: SizedBox(
+                                width: 120,
+                                height: 20,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: SliderTheme(
+                                        data: SliderThemeData(
+                                          thumbColor: c.color6,
+                                          overlayColor: Colors.transparent,
+                                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                          trackHeight: 2,
+                                          thumbShape: const RoundSliderThumbShape(
+                                            enabledThumbRadius: 5,
+                                            elevation: 0,
+                                            pressedElevation: 0,
+                                          ),
+                                          activeTrackColor: c.color5,
+                                          inactiveTrackColor: c.color4,
+                                        ),
+                                        child: Obx(()=>
+                                          Slider(
+                                            value: c.volume.value/100, 
+                                            onChanged: (val){
+                                              c.updateVolume((val*100).toInt());
+                                              c.handler.volumeSet(c.volume.value);
+                                              EasyDebounce.debounce(
+                                                'volume', 
+                                                const Duration(milliseconds: 50), 
+                                                (){
+                                                  Operations().saveVolume();
+                                                }
+                                              );
+                                            }
+                                          ),
+                                        )
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5,),
+                                    SizedBox(
+                                      width: 35,
+                                      child: Obx(()=>
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            "${c.volume}%",
+                                            style: const TextStyle(
+                                              fontSize: 12
+                                            ),
+                                          ),
+                                        )
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverVolume=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverVolume=false;
+                                  });
+                                },
+                                child: TweenAnimationBuilder(
+                                  tween: ColorTween(end: hoverVolume ? c.color6 : c.color5), 
+                                  duration: const Duration(milliseconds: 200), 
+                                  builder: (_, value, __)=>Obx(()=>
+                                    FaIcon(
+                                      c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
+                                      size: 14,
+                                      color: value,
+                                    )
+                                  )
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 25,),
+                            Obx(()=>
+                              PopupMenuButton(
+                                color: c.color1,
+                                tooltip: "",
+                                enabled: !c.fullRandom.value,
+                                splashRadius: 0,
+                                onSelected: (val) async {
+                                  c.playMode.value=val;
+                                  final SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  await prefs.setString('playMode', val);
+                                },
+                                itemBuilder: (BuildContext context)=>[
+                                  const PopupMenuItem(
+                                    value: "list",
+                                    height: 35,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.repeat_rounded,
+                                          size: 18,
+                                        ),
+                                        SizedBox(width: 5,),
+                                        Text("列表播放")
+                                      ],
+                                    ),
+                                  ),
+                                  const PopupMenuItem(
+                                    value: "repeat",
+                                    height: 35,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.repeat_one_rounded,
+                                          size: 18,
+                                        ),
+                                        SizedBox(width: 5,),
+                                        Text("单曲循环")
+                                      ],
+                                    ),
+                                  ),
+                                  const PopupMenuItem(
+                                    value: "random",
+                                    height: 35,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.shuffle_rounded,
+                                          size: 18,
+                                        ),
+                                        SizedBox(width: 5,),
+                                        Text("随机播放")
+                                      ],
+                                    ),
+                                  )
+                                ],
+                                child: Container(
+                                  color: Colors.white,
+                                  child: MouseRegion(
+                                    cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverMode=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverMode=false;
+                                      });
+                                    },
+                                    child: TweenAnimationBuilder(
+                                      tween: ColorTween(end: hoverMode ? c.color6 : c.color5), 
+                                      duration: const Duration(milliseconds: 200), 
+                                      builder: (_, value, __)=>Obx(()=>
+                                        c.fullRandom.value ? Icon(
+                                          Icons.shuffle,
+                                          size: 18,
+                                          color: Colors.grey[300],
+                                        ) : c.playMode.value=='list' ?  Icon(
+                                          Icons.repeat_rounded,
+                                          size: 18,
+                                          color: value,
+                                        ) : c.playMode.value=='repeat' ?
+                                        Icon(
+                                          Icons.repeat_one_rounded,
+                                          size: 18,
+                                          color: value
+                                        ) : Icon(
+                                          Icons.shuffle_rounded,
+                                          size: 18,
+                                          color: value,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              )
+                            )
+                          ],
+                        ),
                       ],
                     )
                   ),
