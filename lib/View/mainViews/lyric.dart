@@ -22,6 +22,13 @@ class _lyricViewState extends State<lyricView> with WindowListener {
   bool hoverSkip=false;
   final Controller c = Get.put(Controller());
 
+  String convertDuration(int time){
+    int min = time ~/ 60;
+    int sec = time % 60;
+    String formattedSec = sec.toString().padLeft(2, '0');
+    return "$min:$formattedSec";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,42 +48,39 @@ class _lyricViewState extends State<lyricView> with WindowListener {
                 });
               },
               child: SizedBox(
-                height: 50,
-                child: Column(
-                  children: [
-                    AnimatedOpacity(
-                      opacity: hoverTitleBar?1:0,
-                      duration: const Duration(milliseconds: 200),
-                      child: Row(
-                        children: [
-                          Expanded(child: DragToMoveArea(child: Container()),),
-                          WindowCaptionButton.minimize(
-                            onPressed: (){
-                              windowManager.minimize();
-                            },
-                          ),
-                          Obx(()=>
-                            c.maxWindow.value ? WindowCaptionButton.unmaximize(
-                              onPressed: (){
-                                windowManager.unmaximize();
-                              }
-                            ) : 
-                            WindowCaptionButton.maximize(
-                              onPressed: (){
-                                windowManager.maximize();
-                              },
-                            ),
-                          ),
-                          WindowCaptionButton.close(
-                            onPressed: (){
-                              Operations().closeWindow();
-                            },
-                          )
-                        ],
+                height: 30,
+                child: AnimatedOpacity(
+                  opacity: hoverTitleBar?1:0,
+                  duration: const Duration(milliseconds: 200),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: DragToMoveArea(child: Container())
                       ),
-                    ),
-                    const SizedBox(height: 18,)
-                  ],
+                      WindowCaptionButton.minimize(
+                        onPressed: (){
+                          windowManager.minimize();
+                        },
+                      ),
+                      Obx(()=>
+                        c.maxWindow.value ? WindowCaptionButton.unmaximize(
+                          onPressed: (){
+                            windowManager.unmaximize();
+                          }
+                        ) : 
+                        WindowCaptionButton.maximize(
+                          onPressed: (){
+                            windowManager.maximize();
+                          },
+                        ),
+                      ),
+                      WindowCaptionButton.close(
+                        onPressed: (){
+                          Operations().closeWindow();
+                        },
+                      )
+                    ],
+                  ),
                 )
               ),
             ),
@@ -230,6 +234,73 @@ class _lyricViewState extends State<lyricView> with WindowListener {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 10,),
+                        Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 50, right: 50),
+                              child: Obx(()=>
+                                SliderTheme(
+                                  data: SliderThemeData(
+                                    overlayColor: Colors.transparent,
+                                    overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                    trackHeight: 1,
+                                    thumbShape: const RoundSliderThumbShape(
+                                      enabledThumbRadius: 5,
+                                      elevation: 0,
+                                      pressedElevation: 0,
+                                    ),
+                                    thumbColor: c.color6,
+                                    activeTrackColor: c.color5,
+                                    inactiveTrackColor: c.color4,
+                                  ),
+                                  child: Slider(
+                                    value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
+                                    onChanged: (value){
+                                      Operations().seekSong(value);
+                                    }
+                                  ),
+                                )
+                              ),
+                            ),
+                            Positioned(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 50, right: 50, top: 5),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  // mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Obx(()=>
+                                        Text(
+                                          c.nowPlay['duration']==0 ? "" : convertDuration(c.playProgress.value~/1000),
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: c.color5
+                                          ),
+                                        )
+                                      ),
+                                    ),
+                                    Expanded(child: Container()),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Obx(()=>
+                                        Text(
+                                          c.nowPlay['duration']==0 ? "" : convertDuration(c.nowPlay['duration']),
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: c.color5
+                                          ),
+                                        )
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            )
+                          ],
+                        )
                       ],
                     )
                   ),
