@@ -13,9 +13,10 @@ class lyricView extends StatefulWidget {
   State<lyricView> createState() => _lyricViewState();
 }
 
-class _lyricViewState extends State<lyricView> {
+class _lyricViewState extends State<lyricView> with WindowListener {
 
   bool hoverBack=false;
+  bool hoverTitleBar=false;
   final Controller c = Get.put(Controller());
 
   @override
@@ -25,9 +26,56 @@ class _lyricViewState extends State<lyricView> {
         color: Colors.white,
         child: Column(
           children: [
-            SizedBox(
-              height: 30,
-              child: DragToMoveArea(child: Container()),
+            MouseRegion(
+              onEnter: (_){
+                setState(() {
+                  hoverTitleBar=true;
+                });
+              },
+              onExit: (_){
+                setState(() {
+                  hoverTitleBar=false;
+                });
+              },
+              child: SizedBox(
+                height: 50,
+                child: Column(
+                  children: [
+                    AnimatedOpacity(
+                      opacity: hoverTitleBar?1:0,
+                      duration: const Duration(milliseconds: 200),
+                      child: Row(
+                        children: [
+                          Expanded(child: DragToMoveArea(child: Container()),),
+                          WindowCaptionButton.minimize(
+                            onPressed: (){
+                              windowManager.minimize();
+                            },
+                          ),
+                          Obx(()=>
+                            c.maxWindow.value ? WindowCaptionButton.unmaximize(
+                              onPressed: (){
+                                windowManager.unmaximize();
+                              }
+                            ) : 
+                            WindowCaptionButton.maximize(
+                              onPressed: (){
+                                windowManager.maximize();
+                              },
+                            ),
+                          ),
+                          WindowCaptionButton.close(
+                            onPressed: (){
+                              Operations().closeWindow();
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 18,)
+                  ],
+                )
+              ),
             ),
             Expanded(
               child: Row(

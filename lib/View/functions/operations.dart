@@ -12,6 +12,7 @@ import 'package:net_player_next/View/functions/requests.dart';
 import 'package:net_player_next/View/mainViews/lyric.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:window_manager/window_manager.dart';
 
 class Operations{
   final requests=HttpRequests();
@@ -650,6 +651,19 @@ class Operations{
       await HotkeyHandler().globalSkipNext();
       await HotkeyHandler().globalSkipPre();
       await HotkeyHandler().globalToggle();
+    }
+  }
+
+  // 关闭窗口
+  void closeWindow(){
+    if(Platform.isWindows){
+      if(c.closeOnRun.value==false){
+        windowManager.close();
+      }else{
+        windowManager.hide();
+      }
+    }else{
+      windowManager.close();
     }
   }
 }

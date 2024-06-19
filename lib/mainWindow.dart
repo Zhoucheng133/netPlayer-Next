@@ -42,16 +42,12 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
 
   @override
   void onWindowMaximize(){
-    setState(() {
-      isMax=true;
-    });
+    c.maxWindow.value=true;
   }
 
   @override
   void onWindowUnmaximize(){
-    setState(() {
-      isMax=false;
-    });
+    c.maxWindow.value=false;
   }
 
   Future<void> initMenuIcon() async {
@@ -111,25 +107,13 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     }
   }
 
-  bool isMax=false;
-  
   void minWindow(){
     windowManager.minimize();
   }
   void maxWindow(){
     windowManager.maximize();
   }
-  void closeWindow(){
-    if(Platform.isWindows){
-      if(c.closeOnRun.value==false){
-        windowManager.close();
-      }else{
-        windowManager.hide();
-      }
-    }else{
-      windowManager.close();
-    }
-  }
+  
   void unmaxWindow(){
     windowManager.unmaximize();
   }
@@ -231,8 +215,12 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
             children: [
               Expanded(child: DragToMoveArea(child: Container())),
               WindowCaptionButton.minimize(onPressed: minWindow,),
-              isMax ? WindowCaptionButton.unmaximize(onPressed: unmaxWindow) : WindowCaptionButton.maximize(onPressed: maxWindow,),
-              WindowCaptionButton.close(onPressed: closeWindow,)
+              Obx(()=>
+                c.maxWindow.value ? WindowCaptionButton.unmaximize(onPressed: unmaxWindow) : WindowCaptionButton.maximize(onPressed: maxWindow,),
+              ),
+              WindowCaptionButton.close(onPressed: (){
+                Operations().closeWindow();
+              },)
             ],
           ) : DragToMoveArea(child: Container())
         ),

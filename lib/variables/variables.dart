@@ -67,6 +67,8 @@ class Controller extends GetxController{
   RxList albums=[].obs;
   // 艺人列表
   RxList artists=[].obs;
+  // 窗口最大化
+  RxBool maxWindow=false.obs;
 
   // # 一些设置属性 #
   // 保存播放内容
