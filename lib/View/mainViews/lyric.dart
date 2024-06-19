@@ -615,7 +615,7 @@ class _lyricViewState extends State<lyricView> {
                                       style: TextStyle(
                                         fontSize: 16,
                                         height: 2.3,
-                                        color: playedLyric(index) ? Colors.blue:Colors.grey[350],
+                                        color: playedLyric(index) ? c.color5:c.color3,
                                         fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
                                       ),
                                     ),
