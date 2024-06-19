@@ -234,12 +234,12 @@ class _lyricViewState extends State<lyricView> with WindowListener {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 10,),
-                        Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 50, right: 50),
-                              child: Obx(()=>
+                        const SizedBox(height: 20,),
+                        SizedBox(
+                          width: 300,
+                          child: Stack(
+                            children: [
+                              Obx(()=>
                                 SliderTheme(
                                   data: SliderThemeData(
                                     overlayColor: Colors.transparent,
@@ -262,16 +262,13 @@ class _lyricViewState extends State<lyricView> with WindowListener {
                                   ),
                                 )
                               ),
-                            ),
-                            Positioned(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 50, right: 50, top: 5),
+                              Positioned(
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   // mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 5),
+                                      padding: const EdgeInsets.only(top: 10),
                                       child: Obx(()=>
                                         Text(
                                           c.nowPlay['duration']==0 ? "" : convertDuration(c.playProgress.value~/1000),
@@ -296,10 +293,10 @@ class _lyricViewState extends State<lyricView> with WindowListener {
                                       ),
                                     )
                                   ],
-                                ),
+                                )
                               )
-                            )
-                          ],
+                            ],
+                          ),
                         )
                       ],
                     )
