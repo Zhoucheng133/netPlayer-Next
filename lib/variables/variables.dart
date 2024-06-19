@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/View/functions/ws.dart';
 class Controller extends GetxController{
   // 当前页面索引
   RxInt pageIndex=0.obs;
@@ -74,6 +75,8 @@ class Controller extends GetxController{
   RxList lyric=[].obs;
   // 当前歌词到多少行了
   RxInt lyricLine=0.obs;
+  // ws服务
+  WsService ws=WsService();
 
   // # 一些设置属性 #
   // 保存播放内容

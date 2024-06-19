@@ -475,6 +475,8 @@ class Operations{
           'content': '没有找到歌词',
         }
       ];
+      var content='没有找到歌词';
+      c.ws.sendMsg(content);
     }else{
       List lyricCovert=[];
       List<String> lines = LineSplitter.split(response).toList();
@@ -487,6 +489,8 @@ class Operations{
         });
       }
       c.lyric.value=lyricCovert;
+      var content='';
+      c.ws.sendMsg(content);
     }
   }
 

@@ -28,6 +28,7 @@ class _mainViewState extends State<mainView> {
 
   final Controller c = Get.put(Controller());
   late Worker listener;
+  late Worker lineListener;
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式
   Future<void> initPrefs() async {
@@ -69,6 +70,17 @@ class _mainViewState extends State<mainView> {
     Operations().initHotkey(context);
   }
 
+  void lyricChange(int val){
+    if(c.lyric.isEmpty){
+      return;
+    }
+    try {
+      var content=c.lyric[c.lyricLine.value-1]['content'];
+      c.ws.sendMsg(content);
+    } catch (_) {}
+    
+  }
+
   Future<void> nowplayChange(Map val) async {
     // 保存现在播放的内容
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -81,6 +93,8 @@ class _mainViewState extends State<mainView> {
         'content': '查找歌词中...',
       }
     ];
+    var content='查找歌词中...';
+    c.ws.sendMsg(content);
     if(val['id']!=''){
       Operations().getLyric();
     }
@@ -91,6 +105,7 @@ class _mainViewState extends State<mainView> {
     super.initState();
     initPrefs();
     listener=ever(c.nowPlay, (val)=>nowplayChange(val));
+    lineListener=ever(c.lyricLine, (val)=>lyricChange(val));
   }
 
   @override
