@@ -75,6 +75,12 @@ class _mainViewState extends State<mainView> {
     await prefs.setString('nowPlay', jsonEncode(val));
     c.lyricLine.value=0;
     // 如果id不为空，获取歌词
+    c.lyric.value=[
+      {
+        'time': 0,
+        'content': '查找歌词中...',
+      }
+    ];
     if(val['id']!=''){
       Operations().getLyric();
     }
