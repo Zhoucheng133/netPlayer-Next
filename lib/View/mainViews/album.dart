@@ -123,7 +123,8 @@ class _albumViewState extends State<albumView> {
                             artist: list[index]['artist'], 
                             from: 'album', 
                             listId: id, 
-                            list: list,
+                            list: list, 
+                            album: list[index]['album'],
                           )
                         ) : list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                         Obx(()=>
@@ -137,6 +138,7 @@ class _albumViewState extends State<albumView> {
                             from: 'album', 
                             listId: id, 
                             list: list,
+                            album: list[index]['album'],
                           )
                         ): Container();
                       }

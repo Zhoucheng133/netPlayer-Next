@@ -187,6 +187,7 @@ class Operations{
           'playFrom': '',
           'duration': 0,
           'fromId': '',
+          'album': '',
           'index': 0,
           'list': [],
         };
@@ -251,6 +252,7 @@ class Operations{
           'playFrom': c.nowPlay['playFrom'],
           'duration': c.nowPlay['duration'],
           'fromId': c.nowPlay['fromId'],
+          'album': c.nowPlay['album'],
           'index': index,
           'list': c.lovedSongs,
         };
@@ -266,6 +268,7 @@ class Operations{
           'duration': 0,
           'fromId': '',
           'index': 0,
+          'album': '',
           'list': [],
         };
         c.nowPlay.value=tmp;
@@ -290,6 +293,7 @@ class Operations{
           'playFrom': c.nowPlay['playFrom'],
           'duration': c.nowPlay['duration'],
           'fromId': c.nowPlay['fromId'],
+          'album': c.nowPlay['album'],
           'index': index,
           'list': c.allSongs,
         };
@@ -306,6 +310,7 @@ class Operations{
           'fromId': '',
           'index': 0,
           'list': [],
+          'album': '',
         };
         c.nowPlay.value=tmp;
         c.isPlay.value=false;
@@ -328,6 +333,7 @@ class Operations{
           'playFrom': c.nowPlay['playFrom'],
           'duration': c.nowPlay['duration'],
           'fromId': c.nowPlay['fromId'],
+          'album': c.nowPlay['album'],
           'index': index,
           'list': tmpList,
         };
@@ -342,6 +348,7 @@ class Operations{
           'playFrom': '',
           'duration': 0,
           'fromId': '',
+          'album': '',
           'index': 0,
           'list': [],
         };
@@ -372,6 +379,7 @@ class Operations{
           'duration': 0,
           'fromId': '',
           'index': 0,
+          'album': '',
           'list': [],
         };
         c.nowPlay.value=tmp;
@@ -393,6 +401,7 @@ class Operations{
         'duration': 0,
         'fromId': '',
         'index': 0,
+        'album': '',
         'list': [],
       };
       c.nowPlay.value=tmp;
@@ -406,6 +415,7 @@ class Operations{
         'artist': tmp['artist'],
         'playFrom': 'fullRandom',
         'duration': tmp['duration'],
+        'album': tmp['album'],
         'fromId': '',
         'index': 0,
         'list': [],
@@ -429,6 +439,7 @@ class Operations{
         'playFrom': '',
         'duration': 0,
         'fromId': '',
+        'album': '',
         'index': 0,
         'list': [],
       };
@@ -441,8 +452,9 @@ class Operations{
   }
 
   // 获取歌词
-  void getLyric(){
+  Future<void> getLyric() async {
     // TODO 获取歌词
+    // final rlt=await requests.getLyricRequest(c.nowPlay['title'], c.nowPlay['album'], c.nowPlay['artist'], c.nowPlay['duration']);
   }
 
   // 将某个歌曲从歌单中删除
@@ -523,7 +535,7 @@ class Operations{
   }
 
   // 播放歌曲
-  Future<void> playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index, List list) async {
+  Future<void> playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index, List list, String album) async {
     List playList=[];
     if(playFrom=='all'){
       playList=c.allSongs;
@@ -539,6 +551,7 @@ class Operations{
       'playFrom': playFrom,
       'duration': duration,
       'fromId': listId,
+      'album': album,
       'index': index,
       'list': playList,
     };

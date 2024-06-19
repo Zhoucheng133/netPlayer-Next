@@ -43,6 +43,7 @@ class Controller extends GetxController{
     'duration': 0,  // 注意这里使用的是秒~1000ms
     'fromId': '',
     'index': 0,
+    'album': '',
     'list': [],
   }.obs;
   // 播放进度, 注意单位为毫秒~1000ms=1s

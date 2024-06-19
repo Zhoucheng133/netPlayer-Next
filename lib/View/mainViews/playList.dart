@@ -82,6 +82,7 @@ class _playListViewState extends State<playListView> {
           'playFrom': '',
           'duration': 0,
           'fromId': '',
+          'album': '',
           'index': 0,
           'list': [],
         };
@@ -111,6 +112,7 @@ class _playListViewState extends State<playListView> {
           'playFrom': '',
           'duration': 0,
           'fromId': '',
+          'album': '',
           'index': 0,
           'list': [],
         };
@@ -143,9 +145,33 @@ class _playListViewState extends State<playListView> {
                       controller: controller, 
                       index: index,
                       child: searchKeyWord.isEmpty ? Obx(()=>
-                        songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list, refresh: ()=>silentRefresh(),),
+                        songItem(
+                          index: index, 
+                          title: list[index]['title'], 
+                          duration: list[index]['duration'], 
+                          id: list[index]['id'], 
+                          isplay: isPlay(index), 
+                          artist: list[index]['artist'], 
+                          from: 'playList', 
+                          listId: listId, 
+                          list: list, 
+                          refresh: ()=>silentRefresh(),
+                          album: list[index]['album'],
+                        ),
                       ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                      Obx(()=>songItem(index: index, title: list[index]['title'], duration: list[index]['duration'], id: list[index]['id'], isplay: isPlay(index), artist: list[index]['artist'], from: 'playList', listId: listId, list: list, refresh: ()=>silentRefresh(),)) : Container()
+                      Obx(()=>songItem(
+                        index: index, 
+                        title: list[index]['title'], 
+                        duration: list[index]['duration'], 
+                        id: list[index]['id'], 
+                        isplay: isPlay(index), 
+                        artist: list[index]['artist'], 
+                        from: 'playList', 
+                        listId: listId, 
+                        list: list, 
+                        refresh: ()=>silentRefresh(),
+                        album: list[index]['album'],
+                      )) : Container()
                     );
                   }
                 ),

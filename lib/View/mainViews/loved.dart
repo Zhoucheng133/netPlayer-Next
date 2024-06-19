@@ -77,10 +77,28 @@ class _lovedViewState extends State<lovedView> {
                         controller: controller,
                         index: index,
                         child: searchKeyWord.isEmpty ? Obx(()=>
-                          songItem(index: index, title: c.lovedSongs[index]['title'], duration: c.lovedSongs[index]['duration'], id: c.lovedSongs[index]['id'], isplay: isPlay(index), artist: c.lovedSongs[index]['artist'], from: 'loved',)
+                          songItem(
+                            index: index, 
+                            title: c.lovedSongs[index]['title'], 
+                            duration: c.lovedSongs[index]['duration'], 
+                            id: c.lovedSongs[index]['id'], 
+                            isplay: isPlay(index),
+                            artist: c.lovedSongs[index]['artist'], 
+                            from: 'loved',
+                            album: c.lovedSongs[index]['album'],
+                          )
                         ) : Obx(()=>
                           c.lovedSongs[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) ||  c.lovedSongs[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                          songItem(index: index, title: c.lovedSongs[index]['title'], duration: c.lovedSongs[index]['duration'], id: c.lovedSongs[index]['id'], isplay: isPlay(index), artist: c.lovedSongs[index]['artist'], from: 'loved',) : Container()
+                          songItem(
+                            index: index, 
+                            title: c.lovedSongs[index]['title'], 
+                            duration: c.lovedSongs[index]['duration'], 
+                            id: c.lovedSongs[index]['id'], 
+                            isplay: isPlay(index), 
+                            artist: c.lovedSongs[index]['artist'], 
+                            from: 'loved',
+                            album: c.lovedSongs[index]['album'],
+                          ) : Container()
                         )
                       );
                     }

@@ -83,7 +83,8 @@ class _allViewState extends State<allView> {
                             id: c.allSongs[index]['id'], 
                             isplay: isPlay(index), 
                             artist: c.allSongs[index]['artist'], 
-                            from: 'all',
+                            from: 'all', 
+                            album: c.allSongs[index]['album'],
                           )
                         ) : Obx(()=>
                           c.allSongs[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.allSongs[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
@@ -95,6 +96,7 @@ class _allViewState extends State<allView> {
                             isplay: isPlay(index), 
                             artist: c.allSongs[index]['artist'], 
                             from: 'all',
+                            album: c.allSongs[index]['album'],
                           ) : Container()
                         ),
                       );
