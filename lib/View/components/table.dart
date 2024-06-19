@@ -515,7 +515,8 @@ class albumItem extends StatefulWidget {
   final String title;
   final String artist;
   final int songCount;
-  const albumItem({super.key, required this.id, required this.title, required this.artist, required this.songCount, required this.index});
+  final VoidCallback clearSearch;
+  const albumItem({super.key, required this.id, required this.title, required this.artist, required this.songCount, required this.index, required this.clearSearch});
 
   @override
   State<albumItem> createState() => _albumItemState();
@@ -534,7 +535,7 @@ class _albumItemState extends State<albumItem> {
           c.pageIndex.value=3;
         }
         c.pageId.value=widget.id;
-        
+        widget.clearSearch();
       },
       child: MouseRegion(
         onEnter: (_){

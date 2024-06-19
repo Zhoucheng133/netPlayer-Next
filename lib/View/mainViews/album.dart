@@ -92,7 +92,8 @@ class _albumViewState extends State<albumView> {
                           title: c.albums[index]['title'], 
                           artist: c.albums[index]['artist'], 
                           songCount: c.albums[index]['songCount'], 
-                          index: index,
+                          index: index, 
+                          clearSearch: () {}
                         )
                       ) : Obx(()=>
                         c.albums[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
@@ -102,6 +103,11 @@ class _albumViewState extends State<albumView> {
                           artist: c.albums[index]['artist'], 
                           songCount: c.albums[index]['songCount'], 
                           index: index,
+                          clearSearch: () {
+                            setState(() {
+                              inputController.text='';
+                            });
+                          },
                         ) : Container()
                       )
                     )

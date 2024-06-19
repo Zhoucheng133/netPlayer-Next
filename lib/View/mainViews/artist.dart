@@ -115,14 +115,19 @@ class _artistViewState extends State<artistView> {
                         title: list[index]['title'], 
                         artist: list[index]['artist'], 
                         songCount: list[index]['songCount'], 
-                        index: index,
+                        index: index, 
+                        clearSearch: () {  },
                       ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                       albumItem(
                         id: list[index]['id'], 
                         title: list[index]['title'], 
                         artist: list[index]['artist'], 
                         songCount: list[index]['songCount'], 
-                        index: index,
+                        index: index, clearSearch: () {
+                          setState(() {
+                            inputController.text='';
+                          });
+                        },
                       ) : Container()
                     )
                   ),
