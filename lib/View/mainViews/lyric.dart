@@ -593,7 +593,7 @@ class _lyricViewState extends State<lyricView> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 20, right: 20),
+                      padding: const EdgeInsets.only(top: 50, right: 20, bottom: 30),
                       child: ScrollConfiguration(
                         behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
                         child: Obx(() => 
@@ -603,7 +603,7 @@ class _lyricViewState extends State<lyricView> {
                             itemBuilder: (BuildContext context, int index) => 
                             Column(
                               children: [
-                                index==0 ? SizedBox(height: (MediaQuery.of(context).size.height-100)/2,) : Container(),
+                                index==0 ? SizedBox(height: (MediaQuery.of(context).size.height-160)/2,) : Container(),
                                 Obx(() => 
                                   AutoScrollTag(
                                     key: ValueKey(index), 
