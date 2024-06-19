@@ -24,17 +24,25 @@ class _playListViewState extends State<playListView> {
   String listId='';
   TextEditingController inputController = TextEditingController();
   String searchKeyWord='';
+  late Worker listener;
 
   @override
   void initState() {
     super.initState();
-    ever(c.pageId, (newVal)=>pageIdListener(newVal));
+    listener=ever(c.pageId, (newVal)=>pageIdListener(newVal));
     inputController.addListener((){
       setState(() {
         searchKeyWord=inputController.text;
       });
     });
   }
+
+  @override
+  void dispose() {
+    listener.dispose();
+    super.dispose();
+  }
+  
 
   Future<void> pageIdListener(String newId) async {
     if(c.pageIndex.value==4){

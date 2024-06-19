@@ -23,13 +23,16 @@ class MainWindow extends StatefulWidget {
 }
 
 class _MainWindowState extends State<MainWindow> with WindowListener, TrayListener  {
+
+  late Worker listener;
+
   @override
   void initState() {
     super.initState();
     windowManager.addListener(this);
     trayManager.addListener(this);
     initMenuIcon();
-    ever(c.userInfo, (callback)=>setLogin());
+    listener=ever(c.userInfo, (callback)=>setLogin());
     initPref();
   }
 
@@ -37,6 +40,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   void dispose() {
     trayManager.removeListener(this);
     windowManager.removeListener(this);
+    listener.dispose();
     super.dispose();
   }
 

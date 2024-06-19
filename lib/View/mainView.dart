@@ -27,6 +27,7 @@ class mainView extends StatefulWidget {
 class _mainViewState extends State<mainView> {
 
   final Controller c = Get.put(Controller());
+  late Worker listener;
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式
   Future<void> initPrefs() async {
@@ -83,7 +84,13 @@ class _mainViewState extends State<mainView> {
   void initState() {
     super.initState();
     initPrefs();
-    ever(c.nowPlay, (val)=>nowplayChange(val));
+    listener=ever(c.nowPlay, (val)=>nowplayChange(val));
+  }
+
+  @override
+  void dispose() {
+    listener.dispose();
+    super.dispose();
   }
 
   @override
