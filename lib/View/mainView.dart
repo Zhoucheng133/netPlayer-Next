@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types
+// ignore_for_file: file_names, camel_case_types, use_build_context_synchronously
 
 import 'dart:convert';
 
@@ -65,7 +65,7 @@ class _mainViewState extends State<mainView> {
     if(volume!=null && volume!=100){
       c.volume.value=volume;
     }
-    Operations().initHotkey();
+    Operations().initHotkey(context);
   }
 
   Future<void> saveNowPlay(Map val) async {

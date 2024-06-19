@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:net_player_next/View/functions/operations.dart';
@@ -90,6 +91,20 @@ class HotkeyHandler{
       skipNextKey,
       keyDownHandler: (hotkey){
         Operations().skipPre();
+      }
+    );
+  }
+
+  Future<void> toggleLyric(BuildContext context) async {
+    HotKey skipNextKey = HotKey(
+      KeyCode.keyL,
+      modifiers: Platform.isMacOS ? [KeyModifier.meta] : [KeyModifier.control],
+      scope: HotKeyScope.inapp,
+    );
+    await hotKeyManager.register(
+      skipNextKey,
+      keyDownHandler: (hotkey){
+        Operations().toggleLyric(context);
       }
     );
   }

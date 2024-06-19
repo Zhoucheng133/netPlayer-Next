@@ -646,10 +646,11 @@ class Operations{
 
 
   // 注册全局快捷键
-  Future<void> initHotkey() async {
+  Future<void> initHotkey(BuildContext context) async {
     await HotkeyHandler().toggleHandler();
     await HotkeyHandler().skipNextHandler();
     await HotkeyHandler().skipPreHandler();
+    await HotkeyHandler().toggleLyric(context);
     if(c.useShortcut.value && Platform.isWindows){
       await HotkeyHandler().globalSkipNext();
       await HotkeyHandler().globalSkipPre();
