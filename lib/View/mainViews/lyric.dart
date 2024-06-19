@@ -29,6 +29,7 @@ class _lyricViewState extends State<lyricView> {
   bool hoverLyric=false;
   bool hoverVolume=false;
   bool hoverMode=false;
+  bool hoverTip=false;
   AutoScrollController controller=AutoScrollController();
   final Controller c = Get.put(Controller());
 
@@ -635,10 +636,26 @@ class _lyricViewState extends State<lyricView> {
                           bottom: 10,
                           child: Tooltip(
                             message: '注意: 歌词内容未必准确\n歌词内容来自lrclib.net',
-                            child: Icon(
-                              Icons.info_rounded,
-                              size: 20,
-                              color: c.color4,
+                            child: MouseRegion(
+                              onEnter: (_){
+                                setState(() {
+                                  hoverTip=true;
+                                });
+                              },
+                              onExit: (_){
+                                setState(() {
+                                  hoverTip=false;
+                                });
+                              },
+                              child: TweenAnimationBuilder(
+                                tween: ColorTween(end: hoverTip ? c.color6 : c.color4), 
+                                duration: const Duration(milliseconds: 200), 
+                                builder: (_, value, __)=>Icon(
+                                  Icons.info_rounded,
+                                  size: 20,
+                                  color: value,
+                                )
+                              ),
                             ),
                           )
                         )
