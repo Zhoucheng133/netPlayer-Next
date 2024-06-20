@@ -24,6 +24,8 @@ class _searchViewState extends State<searchView> {
   List albumList=[];
   List artistList=[];
 
+  String nowSearch='';
+
   void changeType(String val){
     setState(() {
       type=val;
@@ -31,6 +33,9 @@ class _searchViewState extends State<searchView> {
   }
 
   bool isPlay(int index){
+    if(index==c.nowPlay['index'] && c.nowPlay['playFrom']=='search' && c.nowPlay['fromId']==nowSearch){
+      return true;
+    }
     return false;
   }
 
@@ -38,6 +43,9 @@ class _searchViewState extends State<searchView> {
     if(controller.text.isEmpty){
       return;
     }
+    setState(() {
+      nowSearch=controller.text;
+    });
     Map data=await Operations().getSearch(context, controller.text);
     try {
       setState(() {
@@ -70,16 +78,19 @@ class _searchViewState extends State<searchView> {
                 height: MediaQuery.of(context).size.height - 222,
                 child: type=='song' ? ListView.builder(
                   itemCount: songList.length,
-                  itemBuilder: (BuildContext context, int index)=>songItem(
-                    index: index, 
-                    title: songList[index]['title'], 
-                    duration: songList[index]['duration'], 
-                    id: songList[index]['id'], 
-                    isplay: isPlay(index), 
-                    artist: songList[index]['artist'], 
-                    from: 'search', 
-                    album: songList[index]['album'],
-                    list: songList,
+                  itemBuilder: (BuildContext context, int index)=>Obx(()=>
+                    songItem(
+                      index: index, 
+                      title: songList[index]['title'], 
+                      duration: songList[index]['duration'], 
+                      id: songList[index]['id'], 
+                      isplay: isPlay(index), 
+                      artist: songList[index]['artist'], 
+                      from: 'search', 
+                      album: songList[index]['album'],
+                      list: songList,
+                      listId: nowSearch,
+                    )
                   )
                 ) : type=='album' ? ListView.builder(
                   itemCount: albumList.length,
