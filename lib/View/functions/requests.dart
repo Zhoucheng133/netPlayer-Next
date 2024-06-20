@@ -102,4 +102,8 @@ class HttpRequests{
   Future<Map> getLyricRequest(String title, String album, String artist, String duration) async {
     return await httpRequest('https://lrclib.net/api/get?artist_name=$artist&track_name=$title&album_name=$album&duration=$duration');
   }
+  // 搜索
+  Future<Map> searchRequest(String value) async {
+    return await httpRequest('${c.userInfo["url"]}/rest/search2?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&query=$value');
+  }
 }

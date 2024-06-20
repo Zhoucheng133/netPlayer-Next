@@ -635,6 +635,9 @@ class _artistItemState extends State<artistItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: (){
+        if(c.pageIndex.value!=2){
+          c.pageIndex.value=2;
+        }
         c.pageId.value=widget.id;
       },
       child: MouseRegion(

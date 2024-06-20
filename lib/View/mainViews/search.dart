@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/View/components/table.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
+import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
 class searchView extends StatefulWidget {
@@ -19,14 +20,32 @@ class _searchViewState extends State<searchView> {
   final Controller c = Get.put(Controller());
   String type='song';
 
+  List songList=[];
+  List albumList=[];
+  List artistList=[];
+
   void changeType(String val){
     setState(() {
       type=val;
     });
   }
 
-  void search(){
-    print("hello?");
+  bool isPlay(int index){
+    return false;
+  }
+
+  Future<void> search(BuildContext context) async {
+    if(controller.text.isEmpty){
+      return;
+    }
+    Map data=await Operations().getSearch(context, controller.text);
+    try {
+      setState(() {
+        songList=data['songs'];
+        albumList=data['albums'];
+        artistList=data['artists'];
+      });
+    } catch (_) {}
   }
 
   @override
@@ -41,11 +60,47 @@ class _searchViewState extends State<searchView> {
                 controller: controller, 
                 type: type, 
                 changeType: (value) => changeType(value), 
-                search: ()=>search(),
+                search: ()=>search(context),
               ),
               type=='song' ? const songHeader() : 
               type=='album' ? const albumHeader() :
-              const artistHeader()
+              const artistHeader(),
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 200,
+                height: MediaQuery.of(context).size.height - 222,
+                child: type=='song' ? ListView.builder(
+                  itemCount: songList.length,
+                  itemBuilder: (BuildContext context, int index)=>songItem(
+                    index: index, 
+                    title: songList[index]['title'], 
+                    duration: songList[index]['duration'], 
+                    id: songList[index]['id'], 
+                    isplay: isPlay(index), 
+                    artist: songList[index]['artist'], 
+                    from: 'search', 
+                    album: songList[index]['album'],
+                    list: songList,
+                  )
+                ) : type=='album' ? ListView.builder(
+                  itemCount: albumList.length,
+                  itemBuilder: (BuildContext context, int index)=> albumItem(
+                    id: albumList[index]['id'], 
+                    title: albumList[index]['title'], 
+                    artist: albumList[index]['artist'], 
+                    songCount: albumList[index]['songCount'], 
+                    index: index, 
+                    clearSearch: () {}
+                  )
+                ) : ListView.builder(
+                  itemCount: artistList.length,
+                  itemBuilder:  (BuildContext context, int index)=> artistItem(
+                    id: artistList[index]['id'], 
+                    name: artistList[index]['name'], 
+                    albumCount: artistList[index]['albumCount'], 
+                    index: index
+                  )
+                ),
+              )
             ],
           )
         ],

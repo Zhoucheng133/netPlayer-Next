@@ -536,6 +536,24 @@ class Operations{
     }
   }
 
+  // 全局搜索
+  Future<Map> getSearch(BuildContext context, String val) async {
+    final rlt=await requests.searchRequest(val);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, '获取艺人信息失败', context);
+      return {};
+    }else{
+      try {
+        return {
+          "songs": rlt["subsonic-response"]["searchResult2"]["song"]??[],
+          "albums": rlt["subsonic-response"]["searchResult2"]["album"]??[],
+          "artists": rlt["subsonic-response"]["searchResult2"]["artist"]??[]
+        };
+      } catch (_) {}
+      return {};
+    }
+  }
+
   // 显示/隐藏歌词
   void toggleLyric(BuildContext context){
     if(c.showLyric.value){
