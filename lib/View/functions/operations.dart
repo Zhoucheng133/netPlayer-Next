@@ -370,7 +370,7 @@ class Operations{
         await checkLovedSongPlay(context);
       }else if(c.nowPlay['playFrom']=='playList'){
         await checkPlayListPlay(context, c.nowPlay['fromId']);
-      }else if(c.nowPlay['playFrom']=='album'){
+      }else if(c.nowPlay['playFrom']=='album' || c.nowPlay['playFrom']=='search'){
         c.handler.stop();
         Map<String, Object> tmp={
           'id': '',
