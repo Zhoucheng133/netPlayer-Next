@@ -41,6 +41,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     trayManager.removeListener(this);
     windowManager.removeListener(this);
     listener.dispose();
+    c.ws.stop();
     super.dispose();
   }
 
