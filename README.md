@@ -31,7 +31,7 @@
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
 **注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本**  
-版本号在标准版netPlayer之后，这个版本的netPlayer版本号从`2.0.0`开始
+版本号在标准版netPlayer之后，本仓库的netPlayer版本号从`2.0.0`开始
 
 ||v1|v2|v3|
 |-|-|-|-|
@@ -42,7 +42,7 @@
 |全局快捷键|仅macOS|✅|✅|
 |WebSocket服务|❌|❌|✅|
 
-\* 由于本人换电脑，macOS没法打包，如果你有需要可以在自己的设备上打包v3版本
+\* 由于本人换电脑，macOS没法打包，如果你有需要可以在自己的设备上打包v3版本(所以也不清楚macOS版本的运行情况，欢迎给予反馈!)
 
 ## 快捷键
 
