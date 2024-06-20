@@ -270,3 +270,214 @@ class _viewHeaderState extends State<viewHeader> {
     );
   }
 }
+
+class searchHeader extends StatefulWidget {
+  final TextEditingController controller;
+  final String type;
+  final ValueChanged changeType;
+  final VoidCallback search;
+  const searchHeader({super.key, required this.controller, required this.type, required this.changeType, required this.search});
+
+  @override
+  State<searchHeader> createState() => _searchHeaderState();
+}
+
+class _searchHeaderState extends State<searchHeader> {
+
+  final Controller c = Get.put(Controller());
+  bool hasFocus=false;
+  bool hoverSong=false;
+  bool hoverAlbum=false;
+  bool hoverArtist=false;
+  FocusNode focusOnSearch=FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    focusOnSearch.addListener((){
+      if(focusOnSearch.hasFocus){
+        setState(() {
+          hasFocus=true;
+        });
+      }else{
+        setState(() {
+          hasFocus=false;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    focusOnSearch.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width - 200,
+      height: 30,
+      child: Row(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width - 550,
+                  ),
+                  child: Text(
+                    '搜索: ',
+                    style: TextStyle(
+                      color: c.color5,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      overflow: TextOverflow.fade,
+                    ),
+                    softWrap: false,
+                  ),
+                ),
+                const SizedBox(width: 10,),
+                GestureDetector(
+                  onTap: (){
+                    if(widget.type!='song'){
+                      widget.changeType('song');
+                    }
+                  },
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    onEnter: (_){
+                      setState(() {
+                        hoverSong=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverSong=false;
+                      });
+                    },
+                    child: TweenAnimationBuilder(
+                      tween: ColorTween(end: widget.type=='song' ? c.color4 : hoverSong ? c.color6 : c.color3),
+                      duration: const Duration(milliseconds: 200), 
+                      builder: (_, value, __)=>Icon(
+                        Icons.music_note_rounded,
+                        color: value,
+                      )
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10,),
+                GestureDetector(
+                  onTap: (){
+                    if(widget.type!='album'){
+                      widget.changeType('album');
+                    }
+                  },
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    onEnter: (_){
+                      setState(() {
+                        hoverAlbum=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverAlbum=false;
+                      });
+                    },
+                    child: TweenAnimationBuilder(
+                      tween: ColorTween(end: widget.type=='album' ? c.color4 : hoverAlbum ? c.color6 : c.color3),
+                      duration: const Duration(milliseconds: 200), 
+                      builder: (_, value, __)=>Icon(
+                        Icons.album_rounded,
+                        color: value,
+                      )
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10,),
+                GestureDetector(
+                  onTap: (){
+                    if(widget.type!='artist'){
+                      widget.changeType('artist');
+                    }
+                  },
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    onEnter: (_){
+                      setState(() {
+                        hoverArtist=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverArtist=false;
+                      });
+                    },
+                    child: TweenAnimationBuilder(
+                      tween: ColorTween(end: widget.type=='artist' ? c.color4 : hoverArtist ? c.color6 : c.color3),
+                      duration: const Duration(milliseconds: 200), 
+                      builder: (_, value, __)=>Icon(
+                        Icons.mic_rounded,
+                        color: value,
+                      )
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          AnimatedContainer(
+            width: 180,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: hasFocus ? Border.all(
+                color: c.color5,
+                width: 2
+              ): Border.all(
+                color: c.color3,
+                width: 2
+              )
+            ),
+            duration: const Duration(milliseconds: 200),
+            child: Row(
+              children: [
+                const SizedBox(width: 10,),
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: TweenAnimationBuilder(
+                    tween: ColorTween(end: hasFocus ? c.color5 : c.color3), 
+                    duration: const Duration(milliseconds: 200),
+                    builder: (_, value, __)=>Icon(
+                      Icons.search_rounded,
+                      size: 18,
+                      color: value,
+                    ),
+                  )
+                ),
+                Expanded(
+                  child: TextField(
+                    controller: widget.controller,
+                    focusNode: focusOnSearch,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
+                    ),
+                    style: const TextStyle(
+                      fontSize: 12
+                    ),
+                    onEditingComplete: (){
+                      widget.search();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
