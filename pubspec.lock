@@ -613,6 +613,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.2"
+  shelf:
+    dependency: "direct main"
+    description:
+      name: shelf
+      sha256: ad29c505aee705f41a4d8963641f91ac4cee3c8fad5947e033390a7bd8180fa4
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.4.1"
+  shelf_web_socket:
+    dependency: "direct main"
+    description:
+      name: shelf_web_socket
+      sha256: "073c147238594ecd0d193f3456a5fe91c4b0abbcc68bf5cd95b36c4e194ac611"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   shortid:
     dependency: transitive
     description:
@@ -826,6 +842,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.5.1"
+  web_socket:
+    dependency: transitive
+    description:
+      name: web_socket
+      sha256: "24301d8c293ce6fe327ffe6f59d8fd8834735f0ec36e4fd383ec7ff8a64aa078"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.5"
+  web_socket_channel:
+    dependency: transitive
+    description:
+      name: web_socket_channel
+      sha256: a2d56211ee4d35d9b344d9d4ce60f362e4f5d1aafb988302906bd732bc731276
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   win32:
     dependency: transitive
     description:
