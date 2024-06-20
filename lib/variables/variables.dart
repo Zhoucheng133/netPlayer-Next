@@ -3,7 +3,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:net_player_next/View/functions/ws.dart';
 class Controller extends GetxController{
   // 当前页面索引
   RxInt pageIndex=0.obs;
@@ -76,7 +75,7 @@ class Controller extends GetxController{
   // 当前歌词到多少行了
   RxInt lyricLine=0.obs;
   // ws服务
-  WsService ws=WsService();
+  var ws;
 
   // # 一些设置属性 #
   // 保存播放内容
@@ -89,6 +88,8 @@ class Controller extends GetxController{
   RxBool useShortcut=true.obs;
   // 显示歌词
   RxBool showLyric=false.obs;
+  // 启用ws服务
+  RxBool useWs=false.obs;
 
   // 更新音量
   void updateVolume(int val) {

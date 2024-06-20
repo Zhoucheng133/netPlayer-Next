@@ -389,6 +389,72 @@ class Operations{
     }
   }
 
+  // ws服务
+  Future<void> useWs(bool val, BuildContext context) async {
+    if(val==true){
+      await showDialog(
+        context: context, 
+        builder: (BuildContext context)=>AlertDialog(
+          title: const Text('启用ws服务'),
+          content: const SizedBox(
+            width: 300,
+            child: Text('这是一个测试的功能，请务必在阅读Github上的使用说明文档后使用\n端口号为9098\n你需要重新启动netPlayer')
+          ),
+          actions: [
+            TextButton(
+              onPressed: (){
+                Navigator.pop(context);
+              }, 
+              child: const Text(
+                '取消'
+              )
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                final SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('useWs', true);
+                windowManager.close();
+              }, 
+              child: const Text('继续并关闭netPlayer')
+            )
+          ],
+        )
+      );
+    }else{
+      await showDialog(
+        context: context, 
+        builder: (BuildContext context)=>AlertDialog(
+          title: const Text('关闭ws服务'),
+          content: const SizedBox(
+            width: 300,
+            child: Text('你需要重新启动netPlayer')
+          ),
+          actions: [
+            TextButton(
+              onPressed: (){
+                Navigator.pop(context);
+              }, 
+              child: const Text(
+                '取消'
+              )
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                final SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('useWs', false);
+                windowManager.close();
+              }, 
+              child: const Text('继续并关闭netPlayer')
+            )
+          ],
+        )
+      );
+    }
+    
+  }
+
   // 所有歌曲随机播放
   Future<void> fullRandomPlay() async {
     final rlt=await requests.getRandomSongRequest();
@@ -476,7 +542,9 @@ class Operations{
         }
       ];
       var content='没有找到歌词';
-      c.ws.sendMsg(content);
+      if(c.useWs.value){
+        c.ws.sendMsg(content);
+      }
     }else{
       List lyricCovert=[];
       List<String> lines = LineSplitter.split(response).toList();
@@ -490,7 +558,9 @@ class Operations{
       }
       c.lyric.value=lyricCovert;
       var content='';
-      c.ws.sendMsg(content);
+      if(c.useWs.value){
+        c.ws.sendMsg(content);
+      }
     }
   }
 

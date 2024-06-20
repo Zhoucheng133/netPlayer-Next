@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:net_player_next/View/components/SideBar.dart';
 import 'package:net_player_next/View/components/playBar.dart';
 import 'package:net_player_next/View/functions/operations.dart';
+import 'package:net_player_next/View/functions/ws.dart';
 import 'package:net_player_next/View/mainViews/album.dart';
 import 'package:net_player_next/View/mainViews/all.dart';
 import 'package:net_player_next/View/mainViews/artist.dart';
@@ -67,6 +68,11 @@ class _mainViewState extends State<mainView> {
     if(volume!=null && volume!=100){
       c.volume.value=volume;
     }
+    final ws=prefs.getBool('useWs');
+    if(ws==true){
+      c.useWs.value=true;
+      c.ws=WsService();
+    }
     Operations().initHotkey(context);
   }
 
@@ -76,7 +82,9 @@ class _mainViewState extends State<mainView> {
     }
     try {
       var content=c.lyric[c.lyricLine.value-1]['content'];
-      c.ws.sendMsg(content);
+      if(c.useWs.value){
+        c.ws.sendMsg(content);
+      }
     } catch (_) {}
     
   }
@@ -94,7 +102,9 @@ class _mainViewState extends State<mainView> {
       }
     ];
     var content='查找歌词中...';
-    c.ws.sendMsg(content);
+    if(c.useWs.value){
+      c.ws.sendMsg(content);
+    }
     if(val['id']!=''){
       Operations().getLyric();
     }

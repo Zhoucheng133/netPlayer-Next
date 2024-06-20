@@ -172,6 +172,38 @@ class _settingsViewState extends State<settingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
+                          child: Text('启用ws服务')
+                        )
+                      ),
+                      const SizedBox(width: 10,),
+                      SizedBox(
+                        width: 220,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Obx(()=>
+                            Transform.scale(
+                              scale: 0.7,
+                              child: Switch(
+                                activeTrackColor: c.color6,
+                                splashRadius: 0,
+                                value: c.useWs.value, 
+                                onChanged: (value){
+                                  Operations().useWs(value, context);
+                                }
+                              ),
+                            )
+                          )
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 150,
+                        child: Align(
+                          alignment: Alignment.centerRight,
                           child: Text('服务器地址')
                         )
                       ),
