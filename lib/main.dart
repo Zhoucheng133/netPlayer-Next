@@ -21,6 +21,7 @@ Future<void> main(List<String> args) async {
     backgroundColor: Colors.transparent,
     skipTaskbar: false,
     titleBarStyle: TitleBarStyle.hidden,
+    title: 'netPlayer'
   );
   final Controller c = Get.put(Controller());
   c.handler=await AudioService.init(
