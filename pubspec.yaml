@@ -1,14 +1,12 @@
 name: net_player_next
 description: netPlayer Flutter version
 publish_to: 'none'
-version: 2.0.7
+version: 3.0.0
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
-  media_kit: ^1.1.10
-  media_kit_libs_audio: ^1.0.4
   audio_service: ^0.18.12
   crypto: ^3.0.3
   flash: ^3.1.0
@@ -27,6 +25,14 @@ dependencies:
   window_manager: ^0.3.8
   path_provider: ^2.1.2
   tray_manager: ^0.2.1
+  google_fonts: ^6.2.1
+  media_kit: ^1.1.10
+  media_kit_libs_audio: ^1.0.4
+  easy_debounce: ^2.0.3
+  font_awesome_flutter: ^10.7.0
+  flutter_popup: ^3.3.0
+  shelf: ^1.4.1
+  shelf_web_socket: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -37,17 +43,12 @@ flutter:
   assets:
     - assets/
   uses-material-design: true
-  fonts:
-    - family: "Noto"
-      fonts:
-        - asset: assets/fonts/NotoSansSC-Bold.ttf
-        - asset: assets/fonts/NotoSansSC-Regular.ttf
 
 flutter_launcher_icons:
   windows:
     generate: true
     image_path: "assets/icon.png"
-    icon_size: 48 # min:48, max:256, default: 48
+    icon_size: 48
   macos:
     generate: true
     image_path: "assets/icon.png"

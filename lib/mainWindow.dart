@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, use_build_context_synchronously, prefer_const_constructors, file_names
+// ignore_for_file: file_names
 
 import 'dart:convert';
 import 'dart:io';
@@ -6,168 +6,53 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:net_player_next/functions/operations.dart';
-import 'package:net_player_next/paras/paras.dart';
+import 'package:net_player_next/View/functions/operations.dart';
+import 'package:net_player_next/View/functions/requests.dart';
+import 'package:net_player_next/View/mainView.dart';
+import 'package:net_player_next/View/mainViews/login.dart';
+import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tray_manager/tray_manager.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'Views/loginView.dart';
-import 'Views/mainView.dart';
-import 'functions/request.dart';
-
-class main_window extends StatefulWidget {
-  const main_window({super.key});
+class MainWindow extends StatefulWidget {
+  const MainWindow({super.key});
 
   @override
-  State<main_window> createState() => _main_windowState();
+  State<MainWindow> createState() => _MainWindowState();
 }
 
-class _main_windowState extends State<main_window> with WindowListener, TrayListener {
-  final Controller c = Get.put(Controller());
-  bool isLogin=false;
+class _MainWindowState extends State<MainWindow> with WindowListener, TrayListener  {
 
-  Future<void> autoLogin() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  late Worker listener;
 
-    final bool? loginContinue = prefs.getBool('autoLogin');
-    if(loginContinue==false){
-      c.updateAutoLogin(false);
-      setState(() {
-        isLoading=false;
-      });
-      return;
-    }
-
-    final String? userInfo = prefs.getString('userInfo');
-    if(userInfo!=null){
-      Map info=jsonDecode(userInfo);
-      var resp = await autoLoginRequest(info['url'], info['username'], info['salt'], info['token']);
-      if(resp['status']=='ok'){
-        c.updateUserInfo(info);
-        setState(() {
-          isLoading=false;
-        });
-      }else{
-        showDialog(
-          context: context, 
-          builder: (context) => AlertDialog(
-            title: Text("自动的登录失败"),
-            content: Text("你可以尝试重新登录或者重试"),
-            actions: [
-              ElevatedButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                  setState(() {
-                    isLoading=false;
-                  });
-                },
-                child: Text("重新登录")
-              ),
-              FilledButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                  autoLogin();
-                }, 
-                child: Text("重试")
-              )
-            ],
-          )
-        );
-      }
-    }else{
-      setState(() {
-        isLoading=false;
-      });
-    }
-  }
-
-  Future<void> autoSavePlayInfo() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("playInfo", jsonEncode(c.playInfo));
-    prefs.setString("playMode", c.playMode.value);
-    prefs.setBool("fullRandom", c.fullRandomPlay.value);
-  }
-
-  Future<void> autoLoadPlayInfo() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool? savePlay=prefs.getBool("savePlay");
-    if(savePlay==false){
-      c.updateSavePlay(false);
-      return;
-    }
-
-    final String? playInfo=prefs.getString("playInfo");
-    final String? playMode=prefs.getString("playMode");
-    final bool? fullRandom=prefs.getBool("fullRandom");
-    if(playInfo!=null){
-      c.updatePlayInfo(jsonDecode(playInfo));
-    }
-    if(playMode!=null){
-      c.updatePlayMode(playMode);
-    }
-    if(fullRandom!=null){
-      c.updateFullRandomPlay(fullRandom);
-    }
-  }
-
-  bool isLoading=true;
-
-  void isLoginCheck(){
-    if(c.userInfo.isEmpty){
-      setState(() {
-        isLogin=false;
-      });
-    }else{
-      setState(() {
-        isLogin=true;
-      });
-    }
-  }
-
-  @override
-  void onWindowFocus(){
-    c.updateWindowFocus(true);
-  }
-
-  @override
-  void onWindowBlur(){
-    c.updateWindowFocus(false);
-  }
-
-  @override
-  void onWindowMaximize(){
-    setState(() {
-      isMax=true;
-    });
-  }
-
-  @override
-  void onWindowUnmaximize() {
-    setState(() {
-      isMax=false;
-    });
-  }
-
-  Future<void> getHideOnClose() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool? hideOnClose=prefs.getBool("hideOnClose");
-    if(hideOnClose==false){
-      c.updateHideOnClose(false);
-    }
-  }
-  
   @override
   void initState() {
     super.initState();
     windowManager.addListener(this);
     trayManager.addListener(this);
     initMenuIcon();
-    autoLogin();
-    autoLoadPlayInfo();
-    getHideOnClose();
-    ever(c.userInfo, (callback) => isLoginCheck());
-    ever(c.playInfo, (callback) => autoSavePlayInfo());
+    listener=ever(c.userInfo, (callback)=>setLogin());
+    initPref();
+  }
+
+  @override
+  void dispose() {
+    trayManager.removeListener(this);
+    windowManager.removeListener(this);
+    listener.dispose();
+    c.ws.stop();
+    super.dispose();
+  }
+
+  @override
+  void onWindowMaximize(){
+    c.maxWindow.value=true;
+  }
+
+  @override
+  void onWindowUnmaximize(){
+    c.maxWindow.value=false;
   }
 
   Future<void> initMenuIcon() async {
@@ -199,12 +84,6 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
   }
 
   @override
-  void dispose() {
-    trayManager.removeListener(this);
-    super.dispose();
-  }
-
-  @override
   void onTrayIconMouseDown() {
     if(Platform.isMacOS){
       trayManager.popUpContextMenu();
@@ -225,85 +104,140 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
     if(menuItem.key == 'exit_app') {
       windowManager.close();
     }else if(menuItem.key == 'toggle'){
-      operations().toggleSong();
+      Operations().toggleSong();
     }else if(menuItem.key=="next_song"){
-      operations().nextSong();
+      Operations().skipNext();
     }else if(menuItem.key=="previous_song"){
-      operations().preSong();
+      Operations().skipPre();
     }
-  }
-
-  bool isMax=false;
-
-  void resizeWindow(){
-    setState(() {
-      isMax=false;
-    });
-    windowManager.restore();
   }
 
   void minWindow(){
     windowManager.minimize();
   }
-
   void maxWindow(){
-    setState(() {
-      isMax=true;
-    });
     windowManager.maximize();
   }
+  
+  void unmaxWindow(){
+    windowManager.unmaximize();
+  }
 
-  void closeWindow(){
-    if(Platform.isWindows){
-      if(c.hideOnClose.value==false){
-        windowManager.close();
-      }else{
-        windowManager.hide();
-      }
+
+  final Controller c = Get.put(Controller());
+  var isLogin=false;
+  var isLoading=true;
+
+  void setLogin(){
+    if(c.userInfo['username']!=null){
+      setState(() {
+        isLogin=true;
+      });
     }else{
-      windowManager.close();
+      setState(() {
+        isLogin=false;
+      });
     }
+  }
+  
+  Future<void> initPref() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final autoLogin=prefs.getBool('autoLogin');
+
+    if(autoLogin==false){
+      c.autoLogin.value=false;
+      setState(() {
+        isLoading=false;
+      });
+      return;
+    }
+
+
+    final userInfo=prefs.getString('userInfo');
+    if(userInfo!=null){
+      final userData=jsonDecode(userInfo);
+      final requests=HttpRequests();
+      final rlt=await requests.loginRequest(userData['url'], userData['username'], userData['salt'], userData['token']);
+      if(rlt.isEmpty){
+        WidgetsBinding.instance.addPostFrameCallback((_){
+          showDialog(
+            context: context, 
+            builder: (BuildContext context)=>AlertDialog(
+              title: const Text('登录失败'),
+              content: const Text('网络请求失败，请检查你的网络和服务器运行状态'),
+              actions: [
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  }, 
+                  child: const Text('好的')
+                )
+              ],
+            ),
+          );
+        });
+        return;
+      }else if(rlt['status']=='failed'){
+        WidgetsBinding.instance.addPostFrameCallback((_){
+          showDialog(
+            context: context, 
+            builder: (BuildContext context)=>AlertDialog(
+              title: const Text('登录失败'),
+              content: const Text('用户名或者密码错误'),
+              actions: [
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  }, 
+                  child: const Text('好的')
+                )
+              ],
+            ),
+          );
+        });
+        return;
+      }
+      c.userInfo.value={
+        'url': userData['url'],
+        'username': userData['username'],
+        'salt': userData['salt'],
+        'token': userData['token'],
+      };
+    }
+    setState(() {
+      isLoading=false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        Obx(() => 
-          Container(
-            color: c.userInfo.isEmpty ? isLoading ? Color.fromARGB(255, 255, 255, 255) : Color.fromARGB(255, 240, 240, 240) : Color.fromARGB(255, 255, 255, 255),
-            child: isLoading ? Container() : c.userInfo.isEmpty ? loginView() : mainView(),
-          )
+        Container(
+          height: 30,
+          color: Colors.transparent,
+          child: Platform.isWindows ? Row(
+            children: [
+              Expanded(child: DragToMoveArea(child: Container())),
+              WindowCaptionButton.minimize(onPressed: minWindow,),
+              Obx(()=>
+                c.maxWindow.value ? WindowCaptionButton.unmaximize(onPressed: unmaxWindow) : WindowCaptionButton.maximize(onPressed: maxWindow,),
+              ),
+              WindowCaptionButton.close(onPressed: (){
+                Operations().closeWindow();
+              },)
+            ],
+          ) : DragToMoveArea(child: Container())
         ),
-        Positioned(
-          top: 0,
-          left: 0,
-          child: SizedBox(
-            height: 30,
-            width: MediaQuery.of(context).size.width,
-            child: Platform.isWindows ? Row(
-              children: [
-                Expanded(
-                  child: DragToMoveArea(
-                    child: Container()
-                  ),
-                ),
-                WindowCaptionButton.minimize(
-                  onPressed: () => minWindow(),
-                ),
-                !isMax ?
-                WindowCaptionButton.maximize(
-                  onPressed: () => maxWindow(),
-                ) : WindowCaptionButton.unmaximize(
-                  onPressed: () => resizeWindow(),
-                ),
-                WindowCaptionButton.close(
-                  onPressed: () => closeWindow(),
-                ),
-              ],
-            ) : DragToMoveArea(
-              child: Container()
-            ),
+        Expanded(
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: isLoading ? const Center(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Text('加载中...'),
+              ),
+            ) : isLogin ? const mainView() : const loginView(),
           ),
         ),
         Platform.isMacOS ? 
@@ -316,15 +250,9 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
                   members: [
                     PlatformMenuItem(
                       label: "关于 netPlayer",
-                      onSelected: isLogin ? (){
-                        if(c.showLyric.value){
-                          c.updateShowLyric(false);
-                        }
-                        c.updateNowPage({
-                          "name": "关于",
-                          "id": "",
-                        });
-                      } : null
+                      onSelected: (){
+                        Operations().showAbout(context);
+                      }
                     )
                   ]
                 ),
@@ -338,17 +266,14 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
                       ),
                       onSelected: isLogin ? (){
                         if(c.showLyric.value){
-                          c.updateShowLyric(false);
+                          Operations().toggleLyric(context);
                         }
-                        c.updateNowPage({
-                          "name": "设置",
-                          "id": "",
-                        });
+                        c.pageIndex.value=6;
                       } : null
                     ),
                   ]
                 ),
-                PlatformMenuItemGroup(
+                const PlatformMenuItemGroup(
                   members: [
                     PlatformProvidedMenuItem(
                       enabled: true,
@@ -401,11 +326,7 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
                       shortcut: const SingleActivator(
                         LogicalKeyboardKey.space,
                       ),
-                      onSelected: (){
-                        if(!c.focusTextField.value){
-                          operations().toggleSong();
-                        }
-                      },
+                      onSelected: (){},
                     ),
                     PlatformMenuItem(
                       label: "上一首",
@@ -413,7 +334,7 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
                         LogicalKeyboardKey.arrowLeft,
                         meta: true,
                       ),
-                      onSelected: ()=>operations().preSong(),
+                      onSelected: (){},
                     ),
                     PlatformMenuItem(
                       label: "下一首",
@@ -421,7 +342,7 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
                         LogicalKeyboardKey.arrowRight,
                         meta: true,
                       ),
-                      onSelected: ()=>operations().nextSong(),
+                      onSelected: (){},
                     ),
                   ]
                 ),
@@ -434,14 +355,14 @@ class _main_windowState extends State<main_window> with WindowListener, TrayList
                         meta: true
                       ),
                       onSelected: (){
-                        c.updateShowLyric(!c.showLyric.value);
+                        Operations().toggleLyric(context);
                       },
                     )
                   ]
                 )
               ]
             ),
-            PlatformMenu(
+            const PlatformMenu(
               label: "窗口", 
               menus: [
                 PlatformMenuItemGroup(

@@ -19,13 +19,30 @@
 ![url_launcher](https://img.shields.io/badge/url_launcher-6.2.5-lightblue)
 ![window_manager](https://img.shields.io/badge/window_manager-0.3.8-darkgreen)
 ![path_provider](https://img.shields.io/badge/path_provider-2.1.2-orange)
+![google_fonts](https://img.shields.io/badge/google_fonts-6.2.1-blue)
+![easy_debounce](https://img.shields.io/badge/easy_debounce-2.0.3-yellow)
+![font_awesome_flutter](https://img.shields.io/badge/font_awesome_flutter-10.7.0-green)
+![flutter_popup](https://img.shields.io/badge/flutter_popup-3.3.0-lightblue)
+![shelf](https://img.shields.io/badge/shelf-1.4.1-lightyellow)
+![shelf_web_socket](https://img.shields.io/badge/shelf_web_socket-2.0.0-purple)
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
 **注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本**  
-版本号在标准版netPlayer之后，这个版本的netPlayer版本号从`2.0.0`开始
+版本号在标准版netPlayer之后，本仓库的netPlayer版本号从`2.0.0`开始
+
+||v1|v2|v3|
+|-|-|-|-|
+|支持Windows版本|Windows7~|Windows10~|Windows10~|
+|支持macOS|✅|✅|✅*|
+|单曲循环|❌|✅|✅|
+|定位歌曲|❌|✅|✅|
+|全局快捷键|仅macOS|✅|✅|
+|WebSocket服务|❌|❌|✅|
+
+\* 由于本人换电脑，macOS没法打包，如果你有需要可以在自己的设备上打包v3版本(所以也不清楚macOS版本的运行情况，欢迎给予反馈!)
 
 ## 快捷键
 
@@ -41,17 +58,37 @@
 - `F9`<sup>*</sup>(macOS)或`Ctrl Alt ←`(Windows)：上一首
 
 <sup>*</sup>系统媒体控制，不需要`Fn`键
+
 ## 截图
-<img src="./demo/demo1.png" height="400px"/>
 
-**点击歌曲封面可以查看歌词**
+![截图1](demo/demo1.png)
 
-<img src="./demo/demo2.png" height="400px"/>
+![截图2](demo/demo2.png)
 
+## WebSocket服务
+
+**这个功能至少需要v3.0.0**
+
+在**设置**中启用ws服务之后，netPlayer将会作为一个本地的WebSocket服务器，在播放歌曲更新/歌词更新的时候向客户端发送消息，消息的内容格式为
+```
+歌曲标题
+艺人
+歌词
+```
+
+![WebSocket服务](demo/demo3.png)
+
+WebSocket服务器地址为: `localhost:9098`
+
+这个功能可以二次开发，用于直播背景音乐信息显示，详细步骤如下：
+1. 设计一个Web页面用于直播（边框）
+2. 在你觉得合适的地方设计一个背景音乐信息显示，内容为WebSocket服务获取的信息
+
+我也会在之后开发一个样板
 
 ## 在你的设备上配置netPlayer Next
 
-本项目使用lutter^3.19开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
+本项目使用lutter^3.22开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
 建议直接使用Visual Studio Code，在安装完Flutter扩展和Dart扩展之后就可以Debug/Profile/Release了，我已经在.vscode文件夹中添加了launch类型
 
 不要使用Flutter3.7或更低版本的Flutter，确保Dart版本至少有3.0.0
@@ -72,12 +109,23 @@ Linux没有测试过，各位可以自行尝试
 
 ## 更新日志
 
-### 2.0.7 (2024/5/12) 【仅对Windows版本的更新】
-- 添加全局快捷键
-- 添加是否添加全局快捷键的开关
+### 3.0.0 (2024/6/20)
+- 重构了整个软件，现在看起来更加美观
+- 大幅提高了运行效率
+- 添加了音量调节功能
+- 添加了歌曲界面艺人显示
+- 现在搜索不区分大小写了
+- 改进了搜索逻辑
+- 修复软件信息在Windows下的显示问题
+- 修复歌单为0时添加歌单崩溃的问题
+- 修复歌单发生变化时的定位问题
 
 <details>
 <summary>过去的版本</summary>
+
+### 2.0.7 (2024/5/12) 【仅对Windows版本的更新】
+- 添加全局快捷键
+- 添加是否添加全局快捷键的开关
 
 ### 2.0.6 (2024/3/28)
 - 添加显示/隐藏歌词的快捷键
@@ -130,7 +178,7 @@ Linux没有测试过，各位可以自行尝试
 - 🚫检查更新功能暂时无法使用
 - 🚫Windows版隐藏到状态栏暂时无法使用
 - 🚫歌词功能暂时无法使用
-<details>
+</details>
 
 ## 一些API
 
