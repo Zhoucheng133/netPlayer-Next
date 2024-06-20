@@ -23,6 +23,8 @@
 ![easy_debounce](https://img.shields.io/badge/easy_debounce-2.0.3-yellow)
 ![font_awesome_flutter](https://img.shields.io/badge/font_awesome_flutter-10.7.0-green)
 ![flutter_popup](https://img.shields.io/badge/flutter_popup-3.3.0-lightblue)
+![shelf](https://img.shields.io/badge/shelf-1.4.1-lightyellow)
+![shelf_web_socket](https://img.shields.io/badge/shelf_web_socket-2.0.0-purple)
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
@@ -38,7 +40,7 @@
 |单曲循环|❌|✅|✅|
 |定位歌曲|❌|✅|✅|
 |全局快捷键|仅macOS|✅|✅|
-|直播流播放信息|❌|❌|✅|
+|WebSocket服务|❌|❌|✅|
 
 \* 由于本人换电脑，macOS没法打包，如果你有需要可以在自己的设备上打包v3版本
 
@@ -59,7 +61,30 @@
 
 ## 截图
 
-施工中
+![截图1](demo/demo1.png)
+
+![截图2](demo/demo2.png)
+
+## WebSocket服务
+
+**这个功能至少需要v3.0.0**
+
+在**设置**中启用ws服务之后，netPlayer将会作为一个本地的WebSocket服务器，在播放歌曲更新/歌词更新的时候向客户端发送消息，消息的内容格式为
+```
+歌曲标题
+艺人
+歌词
+```
+
+![WebSocket服务](demo/demo3.png)
+
+WebSocket服务器地址为: `localhost:9098`
+
+这个功能可以二次开发，用于直播背景音乐信息显示，详细步骤如下：
+1. 设计一个Web页面用于直播（边框）
+2. 在你觉得合适的地方设计一个背景音乐信息显示，内容为WebSocket服务获取的信息
+
+我也会在之后开发一个样板
 
 ## 在你的设备上配置netPlayer Next
 
@@ -70,13 +95,14 @@
 
 ## 更新日志
 
-### 3.0.0 (开发中)
+### 3.0.0 (2024/6/20)
 - 重构了整个软件，现在看起来更加美观
 - 大幅提高了运行效率
 - 添加了音量调节功能
 - 添加了歌曲界面艺人显示
 - 现在搜索不区分大小写了
 - 改进了搜索逻辑
+- 修复软件信息在Windows下的显示问题
 - 修复歌单为0时添加歌单崩溃的问题
 - 修复歌单发生变化时的定位问题
 
@@ -138,7 +164,7 @@
 - 🚫检查更新功能暂时无法使用
 - 🚫Windows版隐藏到状态栏暂时无法使用
 - 🚫歌词功能暂时无法使用
-<details>
+</details>
 
 ## 一些API
 
