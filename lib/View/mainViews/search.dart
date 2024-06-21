@@ -57,6 +57,20 @@ class _searchViewState extends State<searchView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    controller.addListener((){
+      if(controller.text.isEmpty){
+        setState(() {
+          songList=[];
+          albumList=[];
+          artistList=[];
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
