@@ -237,34 +237,36 @@ class _viewHeaderState extends State<viewHeader> {
             )
           ):Container(),
           const SizedBox(width: 10,),
-          widget.page!='settings' && widget.page!='search' ? 
-          GestureDetector(
-            onTap: (){
-              widget.refresh();
-            },
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              onEnter: (_){
-                setState(() {
-                  hoverRefresh=true;
-                });
+          Obx(()=>
+            !(c.pageId.value.isNotEmpty && (widget.page=='album' || widget.page=='artist')) && widget.page!='settings' && widget.page!='search' ? 
+            GestureDetector(
+              onTap: (){
+                widget.refresh();
               },
-              onExit: (_){
-                setState(() {
-                  hoverRefresh=false;
-                });
-              },
-              child: TweenAnimationBuilder(
-                tween: ColorTween(end: hoverRefresh ? c.color6 : c.color5),
-                duration: const Duration(milliseconds: 200), 
-                builder: (_, value, __) => Icon(
-                  Icons.refresh_rounded,
-                  size: 18,
-                  color: value,
-                ),
-              )
-            ),
-          ) : Container()
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                onEnter: (_){
+                  setState(() {
+                    hoverRefresh=true;
+                  });
+                },
+                onExit: (_){
+                  setState(() {
+                    hoverRefresh=false;
+                  });
+                },
+                child: TweenAnimationBuilder(
+                  tween: ColorTween(end: hoverRefresh ? c.color6 : c.color5),
+                  duration: const Duration(milliseconds: 200), 
+                  builder: (_, value, __) => Icon(
+                    Icons.refresh_rounded,
+                    size: 18,
+                    color: value,
+                  ),
+                )
+              ),
+            ) : Container()
+          )
         ],
       ),
     );
