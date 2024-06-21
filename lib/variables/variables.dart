@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class Controller extends GetxController{
   // 当前软件版本
-  String version='3.0.0';
+  String version='3.0.1';
   // 当前页面索引
   RxInt pageIndex=0.obs;
   // 当前页面Id
