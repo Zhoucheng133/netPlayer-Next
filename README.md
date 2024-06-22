@@ -31,11 +31,14 @@
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
 **注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本**  
-版本号在标准版netPlayer之后，本仓库的netPlayer版本号从`2.0.0`开始
+本仓库发布的netPlayer版本号从`2.0.0`开始
+
+**这个版本的netPlayer不兼容Windows 7系统，如果你要查找支持Windows 7版本的netPlayer，转至[netPlayer](https://github.com/Zhoucheng133/net-player)查找v1版本的netPlayer**
 
 ||v1|v2|v3|
 |-|-|-|-|
 |支持Windows版本|Windows7~|Windows10~|Windows10~|
+|框架|Electron|Flutter|Flutter
 |支持macOS|✅|✅|✅*|
 |单曲循环|❌|✅|✅|
 |定位歌曲|❌|✅|✅|
