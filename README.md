@@ -87,7 +87,7 @@ WebSocket服务器地址为: `localhost:9098`
 1. 设计一个Web页面用于直播（边框）
 2. 在你觉得合适的地方设计一个背景音乐信息显示，内容为WebSocket服务获取的信息
 
-我也会在之后开发一个样板
+你可以[点击这里](https://github.com/Zhoucheng133/Live-BG)查看我开发的一个模板
 
 ## 常见问题
 1. 无法连接到音乐服务器:
@@ -117,7 +117,9 @@ WebSocket服务器地址为: `localhost:9098`
    ```
 
 ## 其它链接
-推荐使用[spotify-downloader](https://github.com/spotDL/spotify-downloader)来下载歌曲，通过这种方式下载的歌曲一般会包含一些信息
+
+- [spotify-downloader](https://github.com/spotDL/spotify-downloader)用于下载歌曲，通过这种方式下载的歌曲一般会包含一些信息
+- [Live-BG](https://github.com/Zhoucheng133/Live-BG)本人开发的用于直播的配合netPlayer显示当前播放歌曲信息和歌词的背景
 
 ## 在你的设备上配置netPlayer Next
 
