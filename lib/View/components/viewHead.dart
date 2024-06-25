@@ -38,10 +38,12 @@ class _viewHeaderState extends State<viewHeader> {
         setState(() {
           hasFocus=true;
         });
+        c.onInput.value=true;
       }else{
         setState(() {
           hasFocus=false;
         });
+        c.onInput.value=false;
       }
     });
   }
@@ -301,10 +303,12 @@ class _searchHeaderState extends State<searchHeader> {
         setState(() {
           hasFocus=true;
         });
+        c.onInput.value=true;
       }else{
         setState(() {
           hasFocus=false;
         });
+        c.onInput.value=false;
       }
     });
   }

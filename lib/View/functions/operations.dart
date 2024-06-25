@@ -691,6 +691,9 @@ class Operations{
 
   // 播放/暂停
   void toggleSong(){
+    if(c.onInput.value){
+      return;
+    }
     if(c.isPlay.value){
       pause();
     }else{
