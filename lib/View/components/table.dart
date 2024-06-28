@@ -304,10 +304,11 @@ class _songItemState extends State<songItem> {
             ],
           ),
         ),
-        const PopupMenuItem(
+        PopupMenuItem(
           value: "album",
           height: 35,
-          child: Row(
+          enabled: widget.albumId.isNotEmpty,
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -320,10 +321,11 @@ class _songItemState extends State<songItem> {
             ],
           ),
         ),
-        const PopupMenuItem(
+        PopupMenuItem(
           value: "artist",
           height: 35,
-          child: Row(
+          enabled: widget.artistId.isNotEmpty,
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -434,6 +436,12 @@ class _songItemState extends State<songItem> {
       if(await operations.delFromList(context, widget.listId, widget.index)){
         widget.refresh();
       }
+    }else if(val=='album'){
+      c.pageIndex.value=3;
+      c.pageId.value=widget.albumId;
+    }else if(val=='artist'){
+      c.pageIndex.value=2;
+      c.pageId.value=widget.artistId;
     }
   }
   
