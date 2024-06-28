@@ -181,8 +181,8 @@ class _playListViewState extends State<playListView> {
                         list: list, 
                         refresh: ()=>silentRefresh(),
                         album: list[index]['album'], 
-                        artistId: list[index]['artistId'], 
-                        albumId: list[index]['albumId'],
+                        artistId: list[index]['artistId']??'', 
+                        albumId: list[index]['albumId']??'',
                       )) : Container()
                     );
                   }
