@@ -58,11 +58,9 @@
 - `command L`(macOS)或`Ctrl L`(Windows)：显示/隐藏歌词
 
 ### 全局快捷键
-- `F8`<sup>*</sup>(macOS)或`Ctrl Alt 空格`(Windows)：播放/暂停
-- `F7`<sup>*</sup>(macOS)或`Ctrl Alt →`(Windows)：下一首
-- `F9`<sup>*</sup>(macOS)或`Ctrl Alt ←`(Windows)：上一首
-
-<sup>*</sup>系统媒体控制，不需要`Fn`键
+- ⏯️(macOS & Windows)或`Ctrl Alt 空格`(Windows)：播放/暂停
+- ⏩(macOS & Windows)或`Ctrl Alt →`(Windows)：下一首
+- ⏪(macOS & Windows)或`Ctrl Alt ←`(Windows)：上一首
 
 ## 截图
 
@@ -146,11 +144,19 @@ Linux没有测试过，各位可以自行尝试
 
 ## 更新日志
 
-### 3.0.2 (2024/6/25)
-- 修复在输入框输入空格触发快捷键的问题
+### 3.1.0 (2024/6/28)
+- 添加从歌曲跳转到艺人和专辑的菜单
+- 添加了Windows的音频控制模块，现在你可以使用Windows上的音频控制了
+
+原有的全局快捷键也可以一样使用
+
+
 
 <details>
 <summary>过去的版本</summary>
+
+### 3.0.2 (2024/6/25)
+- 修复在输入框输入空格触发快捷键的问题
 
 ### 3.0.1 (2024/6/21)
 - 隐藏了一些无效按钮
