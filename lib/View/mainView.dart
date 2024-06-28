@@ -43,8 +43,18 @@ class _mainViewState extends State<mainView> {
         Map<String, dynamic> decodedMap = jsonDecode(nowPlay);
         Map<String, Object> tmpList=Map<String, Object>.from(decodedMap);
         c.nowPlay.value=tmpList;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Operations().nowPlayCheck(context);
+        WidgetsBinding.instance.addPostFrameCallback((_) async {
+          await Operations().nowPlayCheck(context);
+          c.smtc.updateMetadata(
+            MusicMetadata(
+              title: c.nowPlay["title"]??'',
+              album: c.nowPlay["album"]??'',
+              albumArtist: c.nowPlay["artist"]??'',
+              artist: c.nowPlay["artist"]??'',
+              thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"
+            ),
+          );
+          c.smtc.setPlaybackStatus(PlaybackStatus.Paused);
         });
       }
     }else{
