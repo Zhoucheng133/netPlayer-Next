@@ -165,8 +165,8 @@ class _playListViewState extends State<playListView> {
                           list: list, 
                           refresh: ()=>silentRefresh(),
                           album: list[index]['album'], 
-                          artistId: list[index]['artistId'], 
-                          albumId: list[index]['albumId'],
+                          artistId: list[index]['artistId']??'', 
+                          albumId: list[index]['albumId']??'',
                         ),
                       ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                       Obx(()=>songItem(

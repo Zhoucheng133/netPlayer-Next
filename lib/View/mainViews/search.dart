@@ -104,8 +104,8 @@ class _searchViewState extends State<searchView> {
                       album: songList[index]['album'],
                       list: songList,
                       listId: nowSearch, 
-                      artistId: songList[index]['artistId'], 
-                      albumId: songList[index]['albumId'],
+                      artistId: songList[index]['artistId']??'', 
+                      albumId: songList[index]['albumId']??'',
                     )
                   )
                 ) : type=='album' ? ListView.builder(
