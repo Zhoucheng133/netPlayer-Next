@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smtc_windows/smtc_windows.dart';
 class Controller extends GetxController{
   // 当前软件版本
   String version='3.0.2';
@@ -97,4 +98,6 @@ class Controller extends GetxController{
   void updateVolume(int val) {
     volume.value=val;
   }
+  
+  late SMTCWindows smtc;
 }

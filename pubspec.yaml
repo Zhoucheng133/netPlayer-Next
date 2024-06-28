@@ -31,7 +31,9 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   flutter_popup: ^3.3.0
   shelf: ^1.4.1
-  shelf_web_socket: ^2.0.0
+  shelf_web_socket: ^1.0.2
+  flutter_rust_bridge: ^1.72.1
+  smtc_windows: ^0.1.2
 
 dev_dependencies:
   flutter_test:

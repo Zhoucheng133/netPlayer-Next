@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, invalid_use_of_protected_member, prefer_const_constructors
 
 
+import 'dart:io';
 import 'dart:math';
 
 import 'package:audio_service/audio_service.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:smtc_windows/smtc_windows.dart';
 
 class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
 
@@ -49,11 +51,24 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   }
 
   void setMedia(bool isPlay){
+    if(Platform.isWindows){
+      c.smtc.updateMetadata(
+        MusicMetadata(
+          title: c.nowPlay["title"]??'',
+          album: c.nowPlay["album"]??'',
+          albumArtist: c.nowPlay["artist"]??'',
+          artist: c.nowPlay["artist"]??'',
+          thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"
+        ),
+      );
+      c.smtc.setPlaybackStatus(isPlay ? PlaybackStatus.Playing : PlaybackStatus.Paused);
+    }
     item=MediaItem(
       id: c.nowPlay["id"],
       title: c.nowPlay["title"],
       artist: c.nowPlay["artist"],
       artUri: Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"),
+      album: c.nowPlay["album"],
     );
     mediaItem.add(item);
 

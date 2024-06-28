@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, camel_case_types, use_build_context_synchronously
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ import 'package:net_player_next/View/mainViews/search.dart';
 import 'package:net_player_next/View/mainViews/settings.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smtc_windows/smtc_windows.dart';
 
 class mainView extends StatefulWidget {
   const mainView({super.key});
@@ -116,11 +118,70 @@ class _mainViewState extends State<mainView> {
     initPrefs();
     listener=ever(c.nowPlay, (val)=>nowplayChange(val));
     lineListener=ever(c.lyricLine, (val)=>lyricChange(val));
+    initSMTC();
+  }
+
+  void initSMTC(){
+    if(Platform.isWindows){
+      c.smtc = SMTCWindows(
+        metadata: MusicMetadata(
+          title: c.nowPlay["title"]??'',
+          album: c.nowPlay["album"]??'',
+          albumArtist: c.nowPlay["artist"]??'',
+          artist: c.nowPlay["artist"]??'',
+          thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
+        ),
+        config: const SMTCConfig(
+          fastForwardEnabled: false,
+          nextEnabled: true,
+          pauseEnabled: true,
+          playEnabled: true,
+          rewindEnabled: true,
+          prevEnabled: true,
+          stopEnabled: true,
+        ),
+      );
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        try {
+          // Listen to button events and update playback status accordingly
+          c.smtc.buttonPressStream.listen((event) {
+            switch (event) {
+              case PressedButton.play:
+                // Update playback status
+                Operations().play();
+                c.smtc.setPlaybackStatus(PlaybackStatus.Playing);
+                break;
+              case PressedButton.pause:
+                Operations().pause();
+                c.smtc.setPlaybackStatus(PlaybackStatus.Paused);
+                break;
+              case PressedButton.next:
+                // print('Next');
+                Operations().skipNext();
+                break;
+              case PressedButton.previous:
+                // print('Previous');
+                Operations().skipPre();
+                break;
+              case PressedButton.stop:
+                c.smtc.setPlaybackStatus(PlaybackStatus.Stopped);
+                c.smtc.disableSmtc();
+                break;
+              default:
+                break;
+            }
+          });
+        } catch (e) {
+          // print("Error: $e");
+        }
+      });
+    }
   }
 
   @override
   void dispose() {
     listener.dispose();
+    c.smtc.dispose();
     super.dispose();
   }
 

@@ -24,7 +24,9 @@
 ![font_awesome_flutter](https://img.shields.io/badge/font_awesome_flutter-10.7.0-green)
 ![flutter_popup](https://img.shields.io/badge/flutter_popup-3.3.0-lightblue)
 ![shelf](https://img.shields.io/badge/shelf-1.4.1-lightyellow)
-![shelf_web_socket](https://img.shields.io/badge/shelf_web_socket-2.0.0-purple)
+![shelf_web_socket](https://img.shields.io/badge/shelf_web_socket-1.0.2-purple)
+![flutter_rust_bridge](https://img.shields.io/badge/flutter_rust_bridge-1.72.1-red)
+![smtc_windows](https://img.shields.io/badge/smtc_windows-0.1.2-white)
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
