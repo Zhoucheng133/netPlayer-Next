@@ -86,6 +86,8 @@ class _lovedViewState extends State<lovedView> {
                             artist: c.lovedSongs[index]['artist'], 
                             from: 'loved',
                             album: c.lovedSongs[index]['album'],
+                            artistId: c.lovedSongs[index]['artistId'], 
+                            albumId: c.lovedSongs[index]['albumId'],
                           )
                         ) : Obx(()=>
                           c.lovedSongs[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) ||  c.lovedSongs[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
@@ -97,7 +99,9 @@ class _lovedViewState extends State<lovedView> {
                             isplay: isPlay(index), 
                             artist: c.lovedSongs[index]['artist'], 
                             from: 'loved',
-                            album: c.lovedSongs[index]['album'],
+                            album: c.lovedSongs[index]['album'], 
+                            artistId: c.lovedSongs[index]['artistId'], 
+                            albumId: c.lovedSongs[index]['albumId'],
                           ) : Container()
                         )
                       );

@@ -33,8 +33,8 @@ class _allViewState extends State<allView> {
     });
     inputController.addListener((){
       setState(() {
-          searchKeyWord=inputController.text;
-        });
+        searchKeyWord=inputController.text;
+      });
     });
   }
 
@@ -84,7 +84,9 @@ class _allViewState extends State<allView> {
                             isplay: isPlay(index), 
                             artist: c.allSongs[index]['artist'], 
                             from: 'all', 
-                            album: c.allSongs[index]['album'],
+                            album: c.allSongs[index]['album'], 
+                            artistId: c.allSongs[index]['artistId'],
+                            albumId: c.allSongs[index]['albumId'],
                           )
                         ) : Obx(()=>
                           c.allSongs[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.allSongs[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
@@ -96,7 +98,9 @@ class _allViewState extends State<allView> {
                             isplay: isPlay(index), 
                             artist: c.allSongs[index]['artist'], 
                             from: 'all',
-                            album: c.allSongs[index]['album'],
+                            album: c.allSongs[index]['album'], 
+                            artistId: c.allSongs[index]['artistId'],
+                            albumId: c.allSongs[index]['albumId'],
                           ) : Container()
                         ),
                       );

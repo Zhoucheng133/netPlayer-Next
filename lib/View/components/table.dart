@@ -213,7 +213,9 @@ class songItem extends StatefulWidget {
   final String from;
   final dynamic list;
   final dynamic refresh;
-  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from, this.list, this.refresh, required this.album});
+  final String artistId;
+  final String albumId;
+  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from, this.list, this.refresh, required this.album, required this.artistId, required this.albumId});
 
   @override
   State<songItem> createState() => _songItemState();
@@ -299,6 +301,38 @@ class _songItemState extends State<songItem> {
               ),
               SizedBox(width: 5,),
               Text("喜欢")
+            ],
+          ),
+        ),
+        const PopupMenuItem(
+          value: "album",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.album_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("查看专辑")
+            ],
+          ),
+        ),
+        const PopupMenuItem(
+          value: "artist",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.mic_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("查看艺人")
             ],
           ),
         ),
