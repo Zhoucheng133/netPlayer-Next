@@ -177,7 +177,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
           );
         });
         return;
-      }else if(rlt['status']=='failed'){
+      }else if(rlt['subsonic-response']['status']=='failed'){
         WidgetsBinding.instance.addPostFrameCallback((_){
           showDialog(
             context: context, 
@@ -187,6 +187,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
               actions: [
                 ElevatedButton(
                   onPressed: (){
+                    setState(() {
+                      isLoading=false;
+                    });
                     Navigator.pop(context);
                   }, 
                   child: const Text('好的')

@@ -139,7 +139,7 @@ class _loginViewState extends State<loginView> {
         ),
       );
       return;
-    }else if(rlt['status']=='failed'){
+    }else if(rlt['subsonic-response']['status']=='failed'){
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
