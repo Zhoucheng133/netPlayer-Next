@@ -176,6 +176,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
             ),
           );
         });
+        setState(() {
+          isLoading=false;
+        });
         return;
       }else if(rlt['subsonic-response']['status']=='failed'){
         WidgetsBinding.instance.addPostFrameCallback((_){
