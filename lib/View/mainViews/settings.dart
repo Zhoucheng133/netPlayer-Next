@@ -22,8 +22,24 @@ class _settingsViewState extends State<settingsView> {
   final Controller c = Get.put(Controller());
   bool hoverURL=false;
   bool hoverAbout=false;
+  bool hoverWs=false;
 
-  
+  void wsSetting(BuildContext context){
+    showDialog(
+      context: context, 
+      builder: (BuildContext context)=>AlertDialog(
+        title: const Text('WebSocket服务设置'),
+        actions: [
+          ElevatedButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: const Text('完成')
+          )
+        ],
+      )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -178,21 +194,53 @@ class _settingsViewState extends State<settingsView> {
                       const SizedBox(width: 10,),
                       SizedBox(
                         width: 220,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Obx(()=>
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Switch(
-                                activeTrackColor: c.color6,
-                                splashRadius: 0,
-                                value: c.useWs.value, 
-                                onChanged: (value){
-                                  Operations().useWs(value, context);
-                                }
+                        child: Row(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Obx(()=>
+                                Transform.scale(
+                                  scale: 0.7,
+                                  child: Switch(
+                                    activeTrackColor: c.color6,
+                                    splashRadius: 0,
+                                    value: c.useWs.value, 
+                                    onChanged: (value){
+                                      Operations().useWs(value, context);
+                                    }
+                                  ),
+                                )
+                              )
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                wsSetting(context);
+                              },
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverWs=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverWs=false;
+                                  });
+                                },
+                                child: AnimatedDefaultTextStyle(
+                                  style: GoogleFonts.notoSansSc(
+                                    color: hoverWs ? c.color6 : c.color5
+                                  ), 
+                                  duration: const Duration(milliseconds: 200),
+                                  child: const Text('设置')
+                                ),
                               ),
                             )
-                          )
+                          ],
                         ),
                       )
                     ],
