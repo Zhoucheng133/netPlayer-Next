@@ -37,7 +37,7 @@ class WsService {
     _clients.clear();
   }
 
-  Future<void> initService() async {
+  Future<void> initService(int port) async {
     var handler = webSocketHandler((WebSocketChannel webSocket) {
       _clients.add(webSocket);
       webSocket.stream.listen(
@@ -57,11 +57,10 @@ class WsService {
         .addMiddleware(logRequests())
         .addHandler(handler);
 
-    _server = await io.serve(pipeline, '0.0.0.0', 9098);
-    // print('Server running');
+    _server = await io.serve(pipeline, '0.0.0.0', port);
   }
 
-  WsService() {
-    initService();
+  WsService(int port) {
+    initService(port);
   }
 }

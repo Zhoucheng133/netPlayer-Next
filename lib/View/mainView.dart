@@ -83,7 +83,11 @@ class _mainViewState extends State<mainView> {
     final ws=prefs.getBool('useWs');
     if(ws==true){
       c.useWs.value=true;
-      c.ws=WsService();
+      final wsPort=prefs.getInt('wsPort');
+      if(wsPort!=null){
+        c.wsPort.value=wsPort;
+      }
+      c.ws=WsService(wsPort??9098);
     }
     Operations().initHotkey(context);
   }
