@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/View/components/viewHead.dart';
 import 'package:net_player_next/View/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class settingsView extends StatefulWidget {
@@ -25,7 +26,7 @@ class _settingsViewState extends State<settingsView> {
   bool hoverWs=false;
 
   void wsSetting(BuildContext context){
-    var portInput=9098;
+    var portInput=c.wsPort.value;
     var useJSON=true;
     showDialog(
       context: context, 
@@ -141,7 +142,10 @@ class _settingsViewState extends State<settingsView> {
             child:  const Text('取消')
           ),
           ElevatedButton(
-            onPressed: (){
+            onPressed: () async {
+              c.wsPort.value=portInput;
+              final SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setInt('wsPort', portInput);
               Navigator.pop(context);
             }, 
             child: const Text('完成')

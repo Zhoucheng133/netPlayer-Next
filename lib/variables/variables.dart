@@ -98,6 +98,9 @@ class Controller extends GetxController{
   void updateVolume(int val) {
     volume.value=val;
   }
+
+  // ws端口
+  RxInt wsPort=9098.obs;
   
   late SMTCWindows smtc;
 }
