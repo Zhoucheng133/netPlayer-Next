@@ -25,11 +25,121 @@ class _settingsViewState extends State<settingsView> {
   bool hoverWs=false;
 
   void wsSetting(BuildContext context){
+    var portInput=9098;
+    var useJSON=true;
     showDialog(
       context: context, 
       builder: (BuildContext context)=>AlertDialog(
         title: const Text('WebSocket服务设置'),
+        content: StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 80,
+                        height: 30,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text('端口'),
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      SizedBox(
+                        width: 120,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 50,
+                              child: Text(portInput.toString()),
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                setState((){
+                                  portInput-=1;
+                                });
+                              },
+                              child: const MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: Padding(
+                                  padding: EdgeInsets.all(5.0),
+                                  child: Icon(
+                                    Icons.remove_rounded,
+                                    size: 15,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                setState((){
+                                  portInput+=1;
+                                });
+                              },
+                              child: const MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: Padding(
+                                  padding: EdgeInsets.all(5.0),
+                                  child: Icon(
+                                    Icons.add_rounded,
+                                    size: 15,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 80,
+                        height: 30,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text('使用JSON'),
+                        ),
+                      ),
+                      const SizedBox(width: 5,),
+                      SizedBox(
+                        width: 120,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Transform.scale(
+                            scale: 0.7,
+                            child: Switch(
+                              activeTrackColor: c.color6,
+                              splashRadius: 0,
+                              value: useJSON, 
+                              onChanged: (val){
+                                setState(() {
+                                  useJSON=val;
+                                });
+                              }
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            );
+          },
+        ),
         actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child:  const Text('取消')
+          ),
           ElevatedButton(
             onPressed: (){
               Navigator.pop(context);
