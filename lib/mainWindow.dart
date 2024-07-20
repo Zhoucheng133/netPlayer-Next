@@ -25,6 +25,7 @@ class MainWindow extends StatefulWidget {
 class _MainWindowState extends State<MainWindow> with WindowListener, TrayListener  {
 
   late Worker listener;
+  late Worker wsOkListener;
 
   @override
   void initState() {
@@ -33,6 +34,28 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     trayManager.addListener(this);
     initMenuIcon();
     listener=ever(c.userInfo, (callback)=>setLogin());
+    wsOkListener=ever(c.wsOk, (callback){
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if(!c.wsOk.value){
+          showDialog(
+            context: context, 
+            builder: (BuildContext context)=>AlertDialog(
+              title: const Text('启动WebSocket服务失败'),
+              content: const Text('可能默认或者你设定的WebSocket端口被占用\n你需要前往设置中修改ws服务端口'),
+              actions: [
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  }, 
+                  child: const Text('好的')
+                )
+              ],
+            )
+          );
+        }
+      });
+      
+    });
     initPref();
   }
 
@@ -41,6 +64,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     trayManager.removeListener(this);
     windowManager.removeListener(this);
     listener.dispose();
+    wsOkListener.dispose();
     c.ws.stop();
     super.dispose();
   }

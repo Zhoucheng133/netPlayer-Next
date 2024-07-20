@@ -57,7 +57,11 @@ class WsService {
         .addMiddleware(logRequests())
         .addHandler(handler);
 
-    _server = await io.serve(pipeline, '0.0.0.0', port);
+    try {
+      _server = await io.serve(pipeline, '0.0.0.0', port);
+    } catch (_) {
+      c.wsOk.value=false;
+    }
   }
 
   WsService(int port) {

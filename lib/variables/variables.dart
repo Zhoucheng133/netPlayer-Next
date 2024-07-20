@@ -101,6 +101,8 @@ class Controller extends GetxController{
 
   // ws端口
   RxInt wsPort=9098.obs;
+  // ws服务状态
+  RxBool wsOk=true.obs;
   
   late SMTCWindows smtc;
 }
