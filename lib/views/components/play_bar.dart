@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
@@ -9,14 +7,14 @@ import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class playBar extends StatefulWidget {
-  const playBar({super.key});
+class PlayBar extends StatefulWidget {
+  const PlayBar({super.key});
 
   @override
-  State<playBar> createState() => _playBarState();
+  State<PlayBar> createState() => _PlayBarState();
 }
 
-class _playBarState extends State<playBar> {
+class _PlayBarState extends State<PlayBar> {
 
   final Controller c = Get.put(Controller());
 

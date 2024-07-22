@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
 import 'dart:io';
@@ -20,14 +20,14 @@ import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 
-class mainView extends StatefulWidget {
-  const mainView({super.key});
+class MainView extends StatefulWidget {
+  const MainView({super.key});
 
   @override
-  State<mainView> createState() => _mainViewState();
+  State<MainView> createState() => _MainViewState();
 }
 
-class _mainViewState extends State<mainView> {
+class _MainViewState extends State<MainView> {
 
   final Controller c = Get.put(Controller());
   late Worker listener;
@@ -208,7 +208,7 @@ class _mainViewState extends State<mainView> {
             children: [
               const SizedBox(
                 width: 150,
-                child: sideBar(),
+                child: SideBar(),
               ),
               Expanded(
                 child: Padding(
@@ -222,13 +222,13 @@ class _mainViewState extends State<mainView> {
                       IndexedStack(
                         index: c.pageIndex.value,
                         children: const [
-                          allView(),
-                          lovedView(),
-                          artistView(),
-                          albumView(),
-                          playListView(),
-                          searchView(),
-                          settingsView()
+                          AllView(),
+                          LovedView(),
+                          ArtistView(),
+                          AlbumView(),
+                          PlayListView(),
+                          SearchView(),
+                          SettingsView()
                         ],
                       )
                     ),
@@ -240,7 +240,7 @@ class _mainViewState extends State<mainView> {
         ),
         const SizedBox(
           height: 80,
-          child: playBar(),
+          child: PlayBar(),
         )
       ],
     );

@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types
-
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
@@ -11,14 +9,14 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
-class lyricView extends StatefulWidget {
-  const lyricView({super.key});
+class LyricView extends StatefulWidget {
+  const LyricView({super.key});
 
   @override
-  State<lyricView> createState() => _lyricViewState();
+  State<LyricView> createState() => _LyricViewState();
 }
 
-class _lyricViewState extends State<lyricView> {
+class _LyricViewState extends State<LyricView> {
 
   bool hoverBack=false;
   bool hoverTitleBar=false;

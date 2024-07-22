@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, use_build_context_synchronously
+// use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,14 +9,14 @@ import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-class allView extends StatefulWidget {
-  const allView({super.key});
+class AllView extends StatefulWidget {
+  const AllView({super.key});
 
   @override
-  State<allView> createState() => _allViewState();
+  State<AllView> createState() => _AllViewState();
 }
 
-class _allViewState extends State<allView> {
+class _AllViewState extends State<AllView> {
 
   final operations=Operations();
   final Controller c = Get.put(Controller());
@@ -62,8 +62,8 @@ class _allViewState extends State<allView> {
         children: [
           Column(
             children: [
-              Obx(() => viewHeader(title: '所有歌曲', subTitle: '共有${c.allSongs.length}首', page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
-              const songHeader(),
+              Obx(() => ViewHeader(title: '所有歌曲', subTitle: '共有${c.allSongs.length}首', page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
+              const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
@@ -76,7 +76,7 @@ class _allViewState extends State<allView> {
                         key: ValueKey(index),
                         controller: controller,
                         index: index,
-                        child: searchKeyWord.isEmpty ? Obx(() => songItem(
+                        child: searchKeyWord.isEmpty ? Obx(() => SongItem(
                             index: index, 
                             title: c.allSongs[index]['title'], 
                             duration: c.allSongs[index]['duration'], 
@@ -90,7 +90,7 @@ class _allViewState extends State<allView> {
                           )
                         ) : Obx(()=>
                           c.allSongs[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.allSongs[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                          songItem(
+                          SongItem(
                             index: index, 
                             title: c.allSongs[index]['title'], 
                             duration: c.allSongs[index]['duration'], 

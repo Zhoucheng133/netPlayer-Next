@@ -1,5 +1,3 @@
-// ignore_for_file: file_names, camel_case_types, use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/components/sidebar_items.dart';
@@ -7,14 +5,14 @@ import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class sideBar extends StatefulWidget {
-  const sideBar({super.key});
+class SideBar extends StatefulWidget {
+  const SideBar({super.key});
 
   @override
-  State<sideBar> createState() => _sideBarState();
+  State<SideBar> createState() => _SideBarState();
 }
 
-class _sideBarState extends State<sideBar> {
+class _SideBarState extends State<SideBar> {
 
   final Controller c = Get.put(Controller());
   final operations=Operations();
@@ -99,12 +97,12 @@ class _sideBarState extends State<sideBar> {
       padding: const EdgeInsets.only(top: 10),
       child: Column(
         children: [
-          const sideBarItem(name: '专辑', icon: Icons.album_rounded, index: 3,),
-          const sideBarItem(name: '艺人', icon: Icons.mic_rounded, index: 2,),
-          const sideBarItem(name: '喜欢的歌曲', icon: Icons.favorite_rounded, index: 1,),
-          const sideBarItem(name: '所有歌曲', icon: Icons.queue_music_rounded, index: 0,),
-          const sideBarItem(name: '搜索', icon: Icons.search_rounded, index: 5,),
-          playListLabel(addPlayListHandler: () => addPlayListHandler(context),),
+          const SideBarItem(name: '专辑', icon: Icons.album_rounded, index: 3,),
+          const SideBarItem(name: '艺人', icon: Icons.mic_rounded, index: 2,),
+          const SideBarItem(name: '喜欢的歌曲', icon: Icons.favorite_rounded, index: 1,),
+          const SideBarItem(name: '所有歌曲', icon: Icons.queue_music_rounded, index: 0,),
+          const SideBarItem(name: '搜索', icon: Icons.search_rounded, index: 5,),
+          PlayListLabel(addPlayListHandler: () => addPlayListHandler(context),),
           const PlayListPart(),
           AccountPart(logoutHandler: () => logoutHandler(),),
         ],

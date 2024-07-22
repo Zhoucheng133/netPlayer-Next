@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/components/table.dart';
@@ -7,14 +5,14 @@ import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
-class searchView extends StatefulWidget {
-  const searchView({super.key});
+class SearchView extends StatefulWidget {
+  const SearchView({super.key});
 
   @override
-  State<searchView> createState() => _searchViewState();
+  State<SearchView> createState() => _SearchViewState();
 }
 
-class _searchViewState extends State<searchView> {
+class _SearchViewState extends State<SearchView> {
 
   TextEditingController controller=TextEditingController();
   final Controller c = Get.put(Controller());
@@ -78,22 +76,22 @@ class _searchViewState extends State<searchView> {
         children: [
           Column(
             children: [
-              searchHeader(
+              SearchHeader(
                 controller: controller, 
                 type: type, 
                 changeType: (value) => changeType(value), 
                 search: ()=>search(context),
               ),
-              type=='song' ? const songHeader() : 
-              type=='album' ? const albumHeader() :
-              const artistHeader(),
+              type=='song' ? const SongHeader() : 
+              type=='album' ? const AlbumHeader() :
+              const ArtistHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
                 child: type=='song' ? ListView.builder(
                   itemCount: songList.length,
                   itemBuilder: (BuildContext context, int index)=>Obx(()=>
-                    songItem(
+                    SongItem(
                       index: index, 
                       title: songList[index]['title'], 
                       duration: songList[index]['duration'], 
@@ -110,7 +108,7 @@ class _searchViewState extends State<searchView> {
                   )
                 ) : type=='album' ? ListView.builder(
                   itemCount: albumList.length,
-                  itemBuilder: (BuildContext context, int index)=> albumItem(
+                  itemBuilder: (BuildContext context, int index)=> AlbumItem(
                     id: albumList[index]['id'], 
                     title: albumList[index]['title'], 
                     artist: albumList[index]['artist'], 
@@ -120,7 +118,7 @@ class _searchViewState extends State<searchView> {
                   )
                 ) : ListView.builder(
                   itemCount: artistList.length,
-                  itemBuilder:  (BuildContext context, int index)=> artistItem(
+                  itemBuilder:  (BuildContext context, int index)=> ArtistItem(
                     id: artistList[index]['id'], 
                     name: artistList[index]['name'], 
                     albumCount: artistList[index]['albumCount'], 

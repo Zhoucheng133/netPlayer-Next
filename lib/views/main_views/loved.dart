@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, use_build_context_synchronously
+// use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,14 +10,14 @@ import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-class lovedView extends StatefulWidget {
-  const lovedView({super.key});
+class LovedView extends StatefulWidget {
+  const LovedView({super.key});
 
   @override
-  State<lovedView> createState() => _lovedViewState();
+  State<LovedView> createState() => _LovedViewState();
 }
 
-class _lovedViewState extends State<lovedView> {
+class _LovedViewState extends State<LovedView> {
 
   final operations=Operations();
   final Controller c = Get.put(Controller());
@@ -62,8 +62,8 @@ class _lovedViewState extends State<lovedView> {
         children: [
           Column(
             children: [
-              Obx(()=>viewHeader(title: '喜欢的歌曲', subTitle: '共有${c.lovedSongs.length}首', page: 'loved', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,)),
-              const songHeader(),
+              Obx(()=>ViewHeader(title: '喜欢的歌曲', subTitle: '共有${c.lovedSongs.length}首', page: 'loved', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,)),
+              const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
@@ -77,7 +77,7 @@ class _lovedViewState extends State<lovedView> {
                         controller: controller,
                         index: index,
                         child: searchKeyWord.isEmpty ? Obx(()=>
-                          songItem(
+                          SongItem(
                             index: index, 
                             title: c.lovedSongs[index]['title'], 
                             duration: c.lovedSongs[index]['duration'], 
@@ -91,7 +91,7 @@ class _lovedViewState extends State<lovedView> {
                           )
                         ) : Obx(()=>
                           c.lovedSongs[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) ||  c.lovedSongs[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                          songItem(
+                          SongItem(
                             index: index, 
                             title: c.lovedSongs[index]['title'], 
                             duration: c.lovedSongs[index]['duration'], 

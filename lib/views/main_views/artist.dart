@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/components/message.dart';
@@ -8,14 +6,14 @@ import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
-class artistView extends StatefulWidget {
-  const artistView({super.key});
+class ArtistView extends StatefulWidget {
+  const ArtistView({super.key});
 
   @override
-  State<artistView> createState() => _artistViewState();
+  State<ArtistView> createState() => _ArtistViewState();
 }
 
-class _artistViewState extends State<artistView> {
+class _ArtistViewState extends State<ArtistView> {
 
   TextEditingController inputController = TextEditingController();
   final Controller c = Get.put(Controller());
@@ -71,11 +69,11 @@ class _artistViewState extends State<artistView> {
           Column(
             children: [
               Obx(()=>
-                c.pageId.value=='' ? viewHeader(title: '艺人', subTitle: '共有${c.artists.length}位艺人', page: 'artist', refresh: ()=>refresh(context), controller: inputController,) : 
-                viewHeader(title: '艺人: $artistName', subTitle: '共有${list.length}个专辑', page: 'artist')
+                c.pageId.value=='' ? ViewHeader(title: '艺人', subTitle: '共有${c.artists.length}位艺人', page: 'artist', refresh: ()=>refresh(context), controller: inputController,) : 
+                ViewHeader(title: '艺人: $artistName', subTitle: '共有${list.length}个专辑', page: 'artist')
               ),
               Obx(()=>
-                c.pageId.value=='' ? const artistHeader() : const albumHeader(),
+                c.pageId.value=='' ? const ArtistHeader() : const AlbumHeader(),
               ),
               Obx(()=>
                 c.pageId.value=='' ?
@@ -86,7 +84,7 @@ class _artistViewState extends State<artistView> {
                     ListView.builder(
                       itemCount: c.artists.length,
                       itemBuilder:  (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
-                        artistItem(
+                        ArtistItem(
                           id: c.artists[index]['id'], 
                           name: c.artists[index]['name'], 
                           albumCount: c.artists[index]['albumCount'], 
@@ -94,7 +92,7 @@ class _artistViewState extends State<artistView> {
                         )
                       ) : Obx(()=>
                         c.artists[index]['name'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                        artistItem(
+                        ArtistItem(
                           id: c.artists[index]['id'], 
                           name: c.artists[index]['name'], 
                           albumCount: c.artists[index]['albumCount'], 
@@ -110,7 +108,7 @@ class _artistViewState extends State<artistView> {
                   child: Obx(()=>
                     ListView.builder(
                       itemCount: list.length,
-                      itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? albumItem(
+                      itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? AlbumItem(
                         id: list[index]['id'], 
                         title: list[index]['title'], 
                         artist: list[index]['artist'], 
@@ -118,7 +116,7 @@ class _artistViewState extends State<artistView> {
                         index: index, 
                         clearSearch: () {  },
                       ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                      albumItem(
+                      AlbumItem(
                         id: list[index]['id'], 
                         title: list[index]['title'], 
                         artist: list[index]['artist'], 

@@ -1,18 +1,19 @@
-// ignore_for_file: file_names, camel_case_types, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
 // 歌曲表头
-class songHeader extends StatefulWidget {
-  const songHeader({super.key});
+class SongHeader extends StatefulWidget {
+  const SongHeader({super.key});
 
   @override
-  State<songHeader> createState() => _songHeaderState();
+  State<SongHeader> createState() => _SongHeaderState();
 }
 
-class _songHeaderState extends State<songHeader> {
+class _SongHeaderState extends State<SongHeader> {
 
   final Controller c = Get.put(Controller());
   
@@ -82,14 +83,14 @@ class _songHeaderState extends State<songHeader> {
 }
 
 // 艺人表头
-class artistHeader extends StatefulWidget {
-  const artistHeader({super.key});
+class ArtistHeader extends StatefulWidget {
+  const ArtistHeader({super.key});
 
   @override
-  State<artistHeader> createState() => _artistHeaderState();
+  State<ArtistHeader> createState() => _ArtistHeaderState();
 }
 
-class _artistHeaderState extends State<artistHeader> {
+class _ArtistHeaderState extends State<ArtistHeader> {
 
   final Controller c = Get.put(Controller());
 
@@ -139,14 +140,14 @@ class _artistHeaderState extends State<artistHeader> {
 }
 
 // 专辑表头
-class albumHeader extends StatefulWidget {
-  const albumHeader({super.key});
+class AlbumHeader extends StatefulWidget {
+  const AlbumHeader({super.key});
 
   @override
-  State<albumHeader> createState() => _albumHeaderState();
+  State<AlbumHeader> createState() => _AlbumHeaderState();
 }
 
-class _albumHeaderState extends State<albumHeader> {
+class _AlbumHeaderState extends State<AlbumHeader> {
 
   final Controller c = Get.put(Controller());
 
@@ -201,7 +202,7 @@ class _albumHeaderState extends State<albumHeader> {
 }
 
 // 歌曲Item
-class songItem extends StatefulWidget {
+class SongItem extends StatefulWidget {
   final int index;
   final String title;
   final int duration;
@@ -215,13 +216,13 @@ class songItem extends StatefulWidget {
   final dynamic refresh;
   final String artistId;
   final String albumId;
-  const songItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from, this.list, this.refresh, required this.album, required this.artistId, required this.albumId});
+  const SongItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from, this.list, this.refresh, required this.album, required this.artistId, required this.albumId});
 
   @override
-  State<songItem> createState() => _songItemState();
+  State<SongItem> createState() => _SongItemState();
 }
 
-class _songItemState extends State<songItem> {
+class _SongItemState extends State<SongItem> {
   
   bool hover=false;
   final Controller c = Get.put(Controller());
@@ -551,20 +552,20 @@ class _songItemState extends State<songItem> {
 }
 
 // 专辑Item
-class albumItem extends StatefulWidget {
+class AlbumItem extends StatefulWidget {
   final int index;
   final String id;
   final String title;
   final String artist;
   final int songCount;
   final VoidCallback clearSearch;
-  const albumItem({super.key, required this.id, required this.title, required this.artist, required this.songCount, required this.index, required this.clearSearch});
+  const AlbumItem({super.key, required this.id, required this.title, required this.artist, required this.songCount, required this.index, required this.clearSearch});
 
   @override
-  State<albumItem> createState() => _albumItemState();
+  State<AlbumItem> createState() => _AlbumItemState();
 }
 
-class _albumItemState extends State<albumItem> {
+class _AlbumItemState extends State<AlbumItem> {
   
   bool hover=false;
   final Controller c = Get.put(Controller());
@@ -657,18 +658,18 @@ class _albumItemState extends State<albumItem> {
   }
 }
 
-class artistItem extends StatefulWidget {
+class ArtistItem extends StatefulWidget {
   final int index;
   final String id;
   final String name;
   final int albumCount;
-  const artistItem({super.key, required this.id, required this.name, required this.albumCount, required this.index});
+  const ArtistItem({super.key, required this.id, required this.name, required this.albumCount, required this.index});
 
   @override
-  State<artistItem> createState() => _artistItemState();
+  State<ArtistItem> createState() => _ArtistItemState();
 }
 
-class _artistItemState extends State<artistItem> {
+class _ArtistItemState extends State<ArtistItem> {
 
   final Controller c = Get.put(Controller());
   bool hover=false;

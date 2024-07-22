@@ -265,7 +265,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                 padding: EdgeInsets.only(bottom: 30),
                 child: Text('加载中...'),
               ),
-            ) : isLogin ? const mainView() : const loginView(),
+            ) : isLogin ? const MainView() : const LoginView(),
           ),
         ),
         Platform.isMacOS ? 

@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, file_names, use_build_context_synchronously
+// file_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,14 +9,14 @@ import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-class playListView extends StatefulWidget {
-  const playListView({super.key});
+class PlayListView extends StatefulWidget {
+  const PlayListView({super.key});
 
   @override
-  State<playListView> createState() => _playListViewState();
+  State<PlayListView> createState() => _PlayListViewState();
 }
 
-class _playListViewState extends State<playListView> {
+class _PlayListViewState extends State<PlayListView> {
   
   final Controller c = Get.put(Controller());
   final AutoScrollController controller=AutoScrollController();
@@ -139,8 +139,8 @@ class _playListViewState extends State<playListView> {
         children: [
           Column(
             children: [
-              Obx(()=>viewHeader(title: name, subTitle: '共有${list.length}首', page: 'playList', id: c.pageId.value, locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
-              const songHeader(),
+              Obx(()=>ViewHeader(title: name, subTitle: '共有${list.length}首', page: 'playList', id: c.pageId.value, locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
+              const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
@@ -153,7 +153,7 @@ class _playListViewState extends State<playListView> {
                       controller: controller, 
                       index: index,
                       child: searchKeyWord.isEmpty ? Obx(()=>
-                        songItem(
+                        SongItem(
                           index: index, 
                           title: list[index]['title'], 
                           duration: list[index]['duration'], 
@@ -169,7 +169,7 @@ class _playListViewState extends State<playListView> {
                           albumId: list[index]['albumId']??'',
                         ),
                       ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                      Obx(()=>songItem(
+                      Obx(()=>SongItem(
                         index: index, 
                         title: list[index]['title'], 
                         duration: list[index]['duration'], 

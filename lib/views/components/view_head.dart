@@ -1,11 +1,9 @@
-// ignore_for_file: camel_case_types, file_names
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
-class viewHeader extends StatefulWidget {
+class ViewHeader extends StatefulWidget {
 
   final String title;
   final String subTitle;
@@ -14,13 +12,13 @@ class viewHeader extends StatefulWidget {
   final dynamic locate;
   final dynamic refresh;
   final dynamic controller;
-  const viewHeader({super.key, required this.title, required this.subTitle, required this.page, this.id, this.locate, this.refresh, this.controller});
+  const ViewHeader({super.key, required this.title, required this.subTitle, required this.page, this.id, this.locate, this.refresh, this.controller});
 
   @override
-  State<viewHeader> createState() => _viewHeaderState();
+  State<ViewHeader> createState() => _ViewHeaderState();
 }
 
-class _viewHeaderState extends State<viewHeader> {
+class _ViewHeaderState extends State<ViewHeader> {
   
   final Controller c = Get.put(Controller());
   bool hoverLocate=false;
@@ -275,18 +273,18 @@ class _viewHeaderState extends State<viewHeader> {
   }
 }
 
-class searchHeader extends StatefulWidget {
+class SearchHeader extends StatefulWidget {
   final TextEditingController controller;
   final String type;
   final ValueChanged changeType;
   final VoidCallback search;
-  const searchHeader({super.key, required this.controller, required this.type, required this.changeType, required this.search});
+  const SearchHeader({super.key, required this.controller, required this.type, required this.changeType, required this.search});
 
   @override
-  State<searchHeader> createState() => _searchHeaderState();
+  State<SearchHeader> createState() => _SearchHeaderState();
 }
 
-class _searchHeaderState extends State<searchHeader> {
+class _SearchHeaderState extends State<SearchHeader> {
 
   final Controller c = Get.put(Controller());
   bool hasFocus=false;

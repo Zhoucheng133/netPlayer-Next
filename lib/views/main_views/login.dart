@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
 import 'dart:math';
@@ -11,14 +11,14 @@ import 'package:net_player_next/views/functions/requests.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class loginView extends StatefulWidget {
-  const loginView({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<loginView> createState() => _loginViewState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _loginViewState extends State<loginView> {
+class _LoginViewState extends State<LoginView> {
 
   final Controller c = Get.put(Controller());
 

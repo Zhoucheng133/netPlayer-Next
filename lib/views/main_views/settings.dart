@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
 
@@ -11,14 +11,14 @@ import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class settingsView extends StatefulWidget {
-  const settingsView({super.key});
+class SettingsView extends StatefulWidget {
+  const SettingsView({super.key});
 
   @override
-  State<settingsView> createState() => _settingsViewState();
+  State<SettingsView> createState() => _SettingsViewState();
 }
 
-class _settingsViewState extends State<settingsView> {
+class _SettingsViewState extends State<SettingsView> {
   
   final Controller c = Get.put(Controller());
   bool hoverURL=false;
@@ -144,7 +144,7 @@ class _settingsViewState extends State<settingsView> {
             children: [
               Column(
                 children: [
-                  const viewHeader(title: '设置', subTitle: '', page: 'settings',),
+                  const ViewHeader(title: '设置', subTitle: '', page: 'settings',),
                   const SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

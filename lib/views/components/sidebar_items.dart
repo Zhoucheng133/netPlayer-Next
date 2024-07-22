@@ -1,22 +1,22 @@
-// ignore_for_file: camel_case_types, file_names, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
-class sideBarItem extends StatefulWidget {
+class SideBarItem extends StatefulWidget {
   final String name;
   final IconData icon;
   final int index;
 
-  const sideBarItem({super.key, required this.name, required this.icon, required this.index});
+  const SideBarItem({super.key, required this.name, required this.icon, required this.index});
 
   @override
-  State<sideBarItem> createState() => _sideBarItemState();
+  State<SideBarItem> createState() => _SideBarItemState();
 }
 
-class _sideBarItemState extends State<sideBarItem> {
+class _SideBarItemState extends State<SideBarItem> {
 
   final Controller c = Get.put(Controller());
   bool onHover=false;
@@ -75,15 +75,15 @@ class _sideBarItemState extends State<sideBarItem> {
   }
 }
 
-class playListLabel extends StatefulWidget {
+class PlayListLabel extends StatefulWidget {
   final VoidCallback addPlayListHandler;
-  const playListLabel({super.key, required this.addPlayListHandler});
+  const PlayListLabel({super.key, required this.addPlayListHandler});
 
   @override
-  State<playListLabel> createState() => _playListLabelState();
+  State<PlayListLabel> createState() => _PlayListLabelState();
 }
 
-class _playListLabelState extends State<playListLabel> {
+class _PlayListLabelState extends State<PlayListLabel> {
 
   final Controller c = Get.put(Controller());
 
