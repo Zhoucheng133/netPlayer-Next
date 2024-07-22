@@ -1,5 +1,7 @@
 // use_build_context_synchronously
 
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/components/message.dart';
