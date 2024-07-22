@@ -7,7 +7,7 @@ import 'dart:math';
 import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:net_player_next/View/functions/operations.dart';
+import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 

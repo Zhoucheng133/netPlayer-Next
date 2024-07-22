@@ -1,15 +1,13 @@
-// ignore_for_file: file_names
-
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:net_player_next/View/functions/operations.dart';
-import 'package:net_player_next/View/functions/requests.dart';
-import 'package:net_player_next/View/mainView.dart';
-import 'package:net_player_next/View/mainViews/login.dart';
+import 'package:net_player_next/views/functions/operations.dart';
+import 'package:net_player_next/views/functions/requests.dart';
+import 'package:net_player_next/views/main_view.dart';
+import 'package:net_player_next/views/main_views/login.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tray_manager/tray_manager.dart';

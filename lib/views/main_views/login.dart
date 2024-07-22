@@ -6,8 +6,8 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:net_player_next/View/components/loginItems.dart';
-import 'package:net_player_next/View/functions/requests.dart';
+import 'package:net_player_next/views/components/login_items.dart';
+import 'package:net_player_next/views/functions/requests.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

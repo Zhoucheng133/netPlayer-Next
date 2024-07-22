@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:net_player_next/View/functions/audio.dart';
-import 'package:net_player_next/mainWindow.dart';
+import 'package:net_player_next/views/functions/audio.dart';
+import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:window_manager/window_manager.dart';
 

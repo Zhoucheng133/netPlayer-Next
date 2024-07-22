@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:net_player_next/View/components/message.dart';
-import 'package:net_player_next/View/components/table.dart';
-import 'package:net_player_next/View/components/viewHead.dart';
-import 'package:net_player_next/View/functions/operations.dart';
+import 'package:net_player_next/views/components/message.dart';
+import 'package:net_player_next/views/components/table.dart';
+import 'package:net_player_next/views/components/view_head.dart';
+import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 

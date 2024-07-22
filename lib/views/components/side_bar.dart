@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:net_player_next/View/components/sideBarItems.dart';
-import 'package:net_player_next/View/functions/operations.dart';
+import 'package:net_player_next/views/components/sidebar_items.dart';
+import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
