@@ -132,6 +132,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                   },
                   child: Tooltip(
                     message: '随机播放所有歌曲',
+                    waitDuration: const Duration(seconds: 1),
                     child: MouseRegion(
                       onEnter: (_){
                         setState(() {
@@ -216,6 +217,7 @@ class _ViewHeaderState extends State<ViewHeader> {
               }
             },
             child: Tooltip(
+              waitDuration: const Duration(seconds: 1),
               message: '定位歌曲',
               child: Obx(()=>
                 MouseRegion(
@@ -251,6 +253,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                 widget.refresh();
               },
               child: Tooltip(
+                waitDuration: const Duration(seconds: 1),
                 message: '刷新',
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,
@@ -360,6 +363,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                     }
                   },
                   child: Tooltip(
+                    waitDuration: const Duration(seconds: 1),
                     message: '搜索歌曲',
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
@@ -392,6 +396,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                     }
                   },
                   child: Tooltip(
+                    waitDuration: const Duration(seconds: 1),
                     message: '搜索专辑',
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
@@ -424,6 +429,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                     }
                   },
                   child: Tooltip(
+                    waitDuration: const Duration(seconds: 1),
                     message: '搜索艺人',
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
