@@ -106,6 +106,7 @@ class Operations{
     }else{
       try {
         if(rlt['subsonic-response']['starred']['song']==null){
+          c.lovedSongs.value=[];
           return;
         }else{
           c.lovedSongs.value=rlt['subsonic-response']['starred']['song'];
