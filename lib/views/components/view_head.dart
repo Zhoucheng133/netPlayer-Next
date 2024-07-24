@@ -27,6 +27,7 @@ class _ViewHeaderState extends State<ViewHeader> {
   bool hoverRandom=false;
   bool hasFocus=false;
   bool hoverBack=false;
+  bool hoverWarning=false;
   FocusNode focusOnSearch=FocusNode();
 
   @override
@@ -124,6 +125,34 @@ class _ViewHeaderState extends State<ViewHeader> {
                     color: c.color5,
                     fontSize: 13
                   ),
+                ),
+                c.allSongs.length>=500 && widget.page=='all' ? const SizedBox(width: 10,) : Container(),
+                Obx(()=>
+                  c.allSongs.length>=500 && widget.page=='all' ? 
+                  Tooltip(
+                    message: '注意，所有歌曲数量可能大于500首\n完全随机播放不受影响',
+                    child: MouseRegion(
+                      onEnter: (_){
+                        setState(() {
+                          hoverWarning=true;
+                        });
+                      },
+                      onExit: (_){
+                        setState(() {
+                          hoverWarning=false;
+                        });
+                      },
+                      child: TweenAnimationBuilder(
+                        tween: ColorTween(end: hoverWarning ? Colors.orange : Colors.grey[400]), 
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __)=>Icon(
+                          Icons.warning_rounded,
+                          size: 17,
+                          color: value,
+                        )
+                      ),
+                    ),
+                  ) : Container()
                 ),
                 const SizedBox(width: 10,),
                 widget.page=='all' ? GestureDetector(
