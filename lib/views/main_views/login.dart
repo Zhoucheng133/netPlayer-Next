@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/views/components/login_items.dart';
 import 'package:net_player_next/views/functions/requests.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -192,19 +193,19 @@ class _LoginViewState extends State<LoginView> {
               child: Column(
                 children: [
                   const SizedBox(height: 15,),
-                  const Row(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(width: 10,),
-                      Icon(
+                      const SizedBox(width: 10,),
+                      const Icon(
                         // FluentIcons.chevron_right_med,
                         Icons.chevron_right_rounded,
                         size: 20,
                       ),
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 10,),
                       Text(
                         "连接到你的音乐库",
-                        style: TextStyle(
+                        style: GoogleFonts.notoSansSc(
                           fontSize: 20,
                         ),
                       ),

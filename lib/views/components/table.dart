@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -481,7 +482,7 @@ class _SongItemState extends State<SongItem> {
                     size: 15,
                   ) : Text(
                     (widget.index+1).toString(),
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13,
                     ),
                   ),
@@ -492,7 +493,7 @@ class _SongItemState extends State<SongItem> {
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
                     widget.title,
-                    style: TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13,
                       color: widget.isplay ? c.color6: Colors.black,
                       fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
@@ -508,7 +509,7 @@ class _SongItemState extends State<SongItem> {
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
                     widget.artist,
-                    style: TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13,
                       color: widget.isplay ? c.color6: Colors.black,
                       fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
@@ -523,7 +524,7 @@ class _SongItemState extends State<SongItem> {
                 child: Center(
                   child: Text(
                     convertDuration(widget.duration),
-                    style: TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13,
                       color: widget.isplay ? c.color6: Colors.black,
                       fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
@@ -604,7 +605,7 @@ class _AlbumItemState extends State<AlbumItem> {
                 child: Center(
                   child: Text(
                     (widget.index+1).toString(),
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13,
                     ),
                   )
@@ -615,7 +616,7 @@ class _AlbumItemState extends State<AlbumItem> {
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
                     widget.title,
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13
                     ),
                     overflow: TextOverflow.fade,
@@ -629,7 +630,7 @@ class _AlbumItemState extends State<AlbumItem> {
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
                     widget.artist,
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13,
                     ),
                     overflow: TextOverflow.fade,
@@ -642,7 +643,7 @@ class _AlbumItemState extends State<AlbumItem> {
                 child: Center(
                   child: Text(
                     widget.songCount.toString(),
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13
                     ),
                     overflow: TextOverflow.fade,
@@ -707,7 +708,7 @@ class _ArtistItemState extends State<ArtistItem> {
                 child: Center(
                   child: Text(
                     (widget.index+1).toString(),
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13,
                     ),
                   ),
@@ -718,7 +719,7 @@ class _ArtistItemState extends State<ArtistItem> {
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
                     widget.name,
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13
                     ),
                     overflow: TextOverflow.fade,
@@ -731,7 +732,7 @@ class _ArtistItemState extends State<ArtistItem> {
                 child: Center(
                   child: Text(
                     widget.albumCount.toString(),
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 13
                     ),
                     overflow: TextOverflow.fade,

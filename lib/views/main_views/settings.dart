@@ -379,14 +379,14 @@ class _SettingsViewState extends State<SettingsView> {
                                 },
                                 child: Obx(()=>
                                   AnimatedDefaultTextStyle(
-                                    style: TextStyle(
+                                    style: GoogleFonts.notoSansSc(
                                       color: hoverURL ? c.color6 : Colors.black,
-                                      overflow: TextOverflow.fade,
                                     ), 
                                     duration: const Duration(milliseconds: 200),
                                     child: Text(
                                       c.userInfo['url']??'',
                                       softWrap: false,
+                                      overflow: TextOverflow.fade,
                                     )
                                   )
                                 ),

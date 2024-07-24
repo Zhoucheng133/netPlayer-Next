@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -169,7 +170,7 @@ class _LyricViewState extends State<LyricView> {
                           Obx(()=>
                             Text(
                               c.nowPlay['title'],
-                              style: const TextStyle(
+                              style: GoogleFonts.notoSansSc(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
                               ),
@@ -181,7 +182,7 @@ class _LyricViewState extends State<LyricView> {
                           Obx(()=>
                             Text(
                               c.nowPlay['artist'],
-                              style: TextStyle(
+                              style: GoogleFonts.notoSansSc(
                                 fontSize: 13,
                                 color: Colors.grey[400]
                               ),
@@ -329,7 +330,7 @@ class _LyricViewState extends State<LyricView> {
                                         child: Obx(()=>
                                           Text(
                                             c.nowPlay['duration']==0 ? "" : convertDuration(c.playProgress.value~/1000),
-                                            style: TextStyle(
+                                            style: GoogleFonts.notoSansSc(
                                               fontSize: 12,
                                               color: c.color5
                                             ),
@@ -342,7 +343,7 @@ class _LyricViewState extends State<LyricView> {
                                         child: Obx(()=>
                                           Text(
                                             c.nowPlay['duration']==0 ? "" : convertDuration(c.nowPlay['duration']),
-                                            style: TextStyle(
+                                            style: GoogleFonts.notoSansSc(
                                               fontSize: 12,
                                               color: c.color5
                                             ),
@@ -448,7 +449,7 @@ class _LyricViewState extends State<LyricView> {
                                             alignment: Alignment.centerLeft,
                                             child: Text(
                                               "${c.volume}%",
-                                              style: const TextStyle(
+                                              style: GoogleFonts.notoSansSc(
                                                 fontSize: 12
                                               ),
                                             ),
@@ -616,7 +617,7 @@ class _LyricViewState extends State<LyricView> {
                                         child: Text(
                                           c.lyric[index]['content'],
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: GoogleFonts.notoSansSc(
                                             fontSize: 16,
                                             height: 2.3,
                                             color: playedLyric(index) ? c.color5:c.color3,

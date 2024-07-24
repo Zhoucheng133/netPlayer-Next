@@ -8,6 +8,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/hotkeys.dart';
 import 'package:net_player_next/views/functions/requests.dart';
@@ -831,9 +832,9 @@ class Operations{
               width: 100,
             ),
             const SizedBox(height: 10,),
-            const Text(
+            Text(
               'netPlayer',
-              style: TextStyle(
+              style: GoogleFonts.notoSansSc(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
@@ -841,7 +842,7 @@ class Operations{
             const SizedBox(height: 3,),
             Text(
               'Next v${c.version}',
-              style: TextStyle(
+              style: GoogleFonts.notoSansSc(
                 fontSize: 13,
                 color: Colors.grey[400]
               ),
@@ -852,22 +853,22 @@ class Operations{
                 final url=Uri.parse('https://github.com/Zhoucheng133/netPlayer-Next');
                 launchUrl(url);
               },
-              child: const MouseRegion(
+              child: MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    FaIcon(
+                    const FaIcon(
                       FontAwesomeIcons.github,
                       size: 15,
                     ),
-                    SizedBox(width: 5,),
+                    const SizedBox(width: 5,),
                     Padding(
-                      padding: EdgeInsets.only(bottom: 2),
+                      padding: const EdgeInsets.only(bottom: 2),
                       child: Text(
                         '本项目地址',
-                        style: TextStyle(
+                        style: GoogleFonts.notoSansSc(
                           fontSize: 13,
                         ),
                       ),

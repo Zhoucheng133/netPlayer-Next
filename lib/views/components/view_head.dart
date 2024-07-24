@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -107,19 +108,19 @@ class _ViewHeaderState extends State<ViewHeader> {
                   ),
                   child: Text(
                     widget.title,
-                    style: TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       color: c.color5,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      overflow: TextOverflow.fade,
                     ),
+                    overflow: TextOverflow.fade,
                     softWrap: false,
                   ),
                 ),
                 const SizedBox(width: 10,),
                 Text(
                   widget.subTitle,
-                  style: TextStyle(
+                  style: GoogleFonts.notoSansSc(
                     color: c.color5,
                     fontSize: 13
                   ),
@@ -195,7 +196,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                       isCollapsed: true,
                       contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
                     ),
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 12
                     ),
                   ),
@@ -333,12 +334,12 @@ class _SearchHeaderState extends State<SearchHeader> {
                   ),
                   child: Text(
                     '搜索: ',
-                    style: TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       color: c.color5,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      overflow: TextOverflow.fade,
                     ),
+                    overflow: TextOverflow.fade,
                     softWrap: false,
                   ),
                 ),
@@ -469,7 +470,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                       isCollapsed: true,
                       contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
                     ),
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 12
                     ),
                     onEditingComplete: (){

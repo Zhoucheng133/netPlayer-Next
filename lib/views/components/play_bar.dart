@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -129,7 +130,7 @@ class _PlayBarState extends State<PlayBar> {
                 child: Obx(() => 
                   Text(
                     c.nowPlay['title'],
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontWeight: FontWeight.bold,
                     ),
                     overflow: TextOverflow.fade,
@@ -142,7 +143,7 @@ class _PlayBarState extends State<PlayBar> {
                 child: Obx(()=>
                   Text(
                     c.nowPlay['artist'],
-                    style: TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       color: Colors.grey[500],
                       fontSize: 12,
                     ),
@@ -301,7 +302,7 @@ class _PlayBarState extends State<PlayBar> {
                         child: Obx(()=>
                           Text(
                             c.nowPlay['duration']==0 ? "" : convertDuration(c.playProgress.value~/1000),
-                            style: TextStyle(
+                            style: GoogleFonts.notoSansSc(
                               fontSize: 12,
                               color: c.color5
                             ),
@@ -314,7 +315,7 @@ class _PlayBarState extends State<PlayBar> {
                         child: Obx(()=>
                           Text(
                             c.nowPlay['duration']==0 ? "" : convertDuration(c.nowPlay['duration']),
-                            style: TextStyle(
+                            style: GoogleFonts.notoSansSc(
                               fontSize: 12,
                               color: c.color5
                             ),
@@ -452,7 +453,7 @@ class _PlayBarState extends State<PlayBar> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "${c.volume}%",
-                                  style: const TextStyle(
+                                  style: GoogleFonts.notoSansSc(
                                     fontSize: 12
                                   ),
                                 ),

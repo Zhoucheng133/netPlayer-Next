@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserNameInput extends StatefulWidget {
   final TextEditingController controller;
@@ -53,9 +54,9 @@ class _UserNameInputState extends State<UserNameInput> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "用户名",
-              style: TextStyle(
+              style: GoogleFonts.notoSansSc(
                 color: Colors.grey,
                 fontSize: 13,
               ),
@@ -79,7 +80,7 @@ class _UserNameInputState extends State<UserNameInput> {
                     onEditingComplete: () => widget.loginHandler(),
                     autocorrect: false,
                     enableSuggestions: false,
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 14
                     ),
                   )
@@ -146,9 +147,9 @@ class _URLInputState extends State<URLInput> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "服务器的URL地址",
-              style: TextStyle(
+              style: GoogleFonts.notoSansSc(
                 color: Colors.grey,
                 fontSize: 13,
               ),
@@ -173,7 +174,7 @@ class _URLInputState extends State<URLInput> {
                     onEditingComplete: () => widget.loginHandler(),
                     autocorrect: false,
                     enableSuggestions: false,
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 14
                     ),
                   )
@@ -240,9 +241,9 @@ class _PasswordInputState extends State<PasswordInput> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "密码",
-              style: TextStyle(
+              style: GoogleFonts.notoSansSc(
                 color: Colors.grey,
                 fontSize: 13,
               ),
@@ -267,7 +268,7 @@ class _PasswordInputState extends State<PasswordInput> {
                     onEditingComplete: () => widget.loginHandler(),
                     autocorrect: false,
                     enableSuggestions: false,
-                    style: const TextStyle(
+                    style: GoogleFonts.notoSansSc(
                       fontSize: 14
                     ),
                   )
