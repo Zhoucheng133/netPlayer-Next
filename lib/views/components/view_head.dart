@@ -130,29 +130,32 @@ class _ViewHeaderState extends State<ViewHeader> {
                   onTap: (){
                     Operations().fullRandomPlaySwitcher(context);
                   },
-                  child: MouseRegion(
-                    onEnter: (_){
-                      setState(() {
-                        hoverRandom=true;
-                      });
-                    },
-                    onExit: (_){
-                      setState(() {
-                        hoverRandom=false;
-                      });
-                    },
-                    cursor: SystemMouseCursors.click,
-                    child: Obx(()=>
-                      TweenAnimationBuilder(
-                        tween: ColorTween(end: hoverRandom ? c.color6 : c.fullRandom.value ? c.color5 : Colors.grey[400]), 
-                        duration: const Duration(milliseconds: 200), 
-                        builder: (_, value, __)=>Icon(
-                          Icons.shuffle_rounded,
-                          size: 17,
-                          color: value,
-                        )
-                      ),
-                    )
+                  child: Tooltip(
+                    message: '随机播放所有歌曲',
+                    child: MouseRegion(
+                      onEnter: (_){
+                        setState(() {
+                          hoverRandom=true;
+                        });
+                      },
+                      onExit: (_){
+                        setState(() {
+                          hoverRandom=false;
+                        });
+                      },
+                      cursor: SystemMouseCursors.click,
+                      child: Obx(()=>
+                        TweenAnimationBuilder(
+                          tween: ColorTween(end: hoverRandom ? c.color6 : c.fullRandom.value ? c.color5 : Colors.grey[400]), 
+                          duration: const Duration(milliseconds: 200), 
+                          builder: (_, value, __)=>Icon(
+                            Icons.shuffle_rounded,
+                            size: 17,
+                            color: value,
+                          )
+                        ),
+                      )
+                    ),
                   ),
                 ) :   Container(),
               ],
@@ -212,27 +215,30 @@ class _ViewHeaderState extends State<ViewHeader> {
                 widget.locate();
               }
             },
-            child: Obx(()=>
-              MouseRegion(
-                cursor: c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? SystemMouseCursors.click : SystemMouseCursors.forbidden,
-                onEnter: (_){
-                  setState(() {
-                    hoverLocate=true;
-                  });
-                },
-                onExit: (_){
-                  setState(() {
-                    hoverLocate=false;
-                  });
-                },
-                child: TweenAnimationBuilder(
-                  tween: ColorTween(end:  c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? hoverLocate ? c.color6 : c.color5 : Colors.grey[300]), 
-                  duration: const Duration(milliseconds: 200), 
-                  builder: (_, value, __) => Icon(
-                    Icons.my_location_rounded,
-                    size: 17,
-                    color: value,
-                  )
+            child: Tooltip(
+              message: '定位歌曲',
+              child: Obx(()=>
+                MouseRegion(
+                  cursor: c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? SystemMouseCursors.click : SystemMouseCursors.forbidden,
+                  onEnter: (_){
+                    setState(() {
+                      hoverLocate=true;
+                    });
+                  },
+                  onExit: (_){
+                    setState(() {
+                      hoverLocate=false;
+                    });
+                  },
+                  child: TweenAnimationBuilder(
+                    tween: ColorTween(end:  c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? hoverLocate ? c.color6 : c.color5 : Colors.grey[300]), 
+                    duration: const Duration(milliseconds: 200), 
+                    builder: (_, value, __) => Icon(
+                      Icons.my_location_rounded,
+                      size: 17,
+                      color: value,
+                    )
+                  ),
                 ),
               ),
             )
@@ -244,27 +250,30 @@ class _ViewHeaderState extends State<ViewHeader> {
               onTap: (){
                 widget.refresh();
               },
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                onEnter: (_){
-                  setState(() {
-                    hoverRefresh=true;
-                  });
-                },
-                onExit: (_){
-                  setState(() {
-                    hoverRefresh=false;
-                  });
-                },
-                child: TweenAnimationBuilder(
-                  tween: ColorTween(end: hoverRefresh ? c.color6 : c.color5),
-                  duration: const Duration(milliseconds: 200), 
-                  builder: (_, value, __) => Icon(
-                    Icons.refresh_rounded,
-                    size: 18,
-                    color: value,
-                  ),
-                )
+              child: Tooltip(
+                message: '刷新',
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  onEnter: (_){
+                    setState(() {
+                      hoverRefresh=true;
+                    });
+                  },
+                  onExit: (_){
+                    setState(() {
+                      hoverRefresh=false;
+                    });
+                  },
+                  child: TweenAnimationBuilder(
+                    tween: ColorTween(end: hoverRefresh ? c.color6 : c.color5),
+                    duration: const Duration(milliseconds: 200), 
+                    builder: (_, value, __) => Icon(
+                      Icons.refresh_rounded,
+                      size: 18,
+                      color: value,
+                    ),
+                  )
+                ),
               ),
             ) : Container()
           )
@@ -350,25 +359,28 @@ class _SearchHeaderState extends State<SearchHeader> {
                       widget.changeType('song');
                     }
                   },
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    onEnter: (_){
-                      setState(() {
-                        hoverSong=true;
-                      });
-                    },
-                    onExit: (_){
-                      setState(() {
-                        hoverSong=false;
-                      });
-                    },
-                    child: TweenAnimationBuilder(
-                      tween: ColorTween(end: widget.type=='song' ? c.color4 : hoverSong ? c.color6 : c.color3),
-                      duration: const Duration(milliseconds: 200), 
-                      builder: (_, value, __)=>Icon(
-                        Icons.music_note_rounded,
-                        color: value,
-                      )
+                  child: Tooltip(
+                    message: '搜索歌曲',
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      onEnter: (_){
+                        setState(() {
+                          hoverSong=true;
+                        });
+                      },
+                      onExit: (_){
+                        setState(() {
+                          hoverSong=false;
+                        });
+                      },
+                      child: TweenAnimationBuilder(
+                        tween: ColorTween(end: widget.type=='song' ? c.color4 : hoverSong ? c.color6 : c.color3),
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __)=>Icon(
+                          Icons.music_note_rounded,
+                          color: value,
+                        )
+                      ),
                     ),
                   ),
                 ),
@@ -379,25 +391,28 @@ class _SearchHeaderState extends State<SearchHeader> {
                       widget.changeType('album');
                     }
                   },
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    onEnter: (_){
-                      setState(() {
-                        hoverAlbum=true;
-                      });
-                    },
-                    onExit: (_){
-                      setState(() {
-                        hoverAlbum=false;
-                      });
-                    },
-                    child: TweenAnimationBuilder(
-                      tween: ColorTween(end: widget.type=='album' ? c.color4 : hoverAlbum ? c.color6 : c.color3),
-                      duration: const Duration(milliseconds: 200), 
-                      builder: (_, value, __)=>Icon(
-                        Icons.album_rounded,
-                        color: value,
-                      )
+                  child: Tooltip(
+                    message: '搜索专辑',
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      onEnter: (_){
+                        setState(() {
+                          hoverAlbum=true;
+                        });
+                      },
+                      onExit: (_){
+                        setState(() {
+                          hoverAlbum=false;
+                        });
+                      },
+                      child: TweenAnimationBuilder(
+                        tween: ColorTween(end: widget.type=='album' ? c.color4 : hoverAlbum ? c.color6 : c.color3),
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __)=>Icon(
+                          Icons.album_rounded,
+                          color: value,
+                        )
+                      ),
                     ),
                   ),
                 ),
@@ -408,25 +423,28 @@ class _SearchHeaderState extends State<SearchHeader> {
                       widget.changeType('artist');
                     }
                   },
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    onEnter: (_){
-                      setState(() {
-                        hoverArtist=true;
-                      });
-                    },
-                    onExit: (_){
-                      setState(() {
-                        hoverArtist=false;
-                      });
-                    },
-                    child: TweenAnimationBuilder(
-                      tween: ColorTween(end: widget.type=='artist' ? c.color4 : hoverArtist ? c.color6 : c.color3),
-                      duration: const Duration(milliseconds: 200), 
-                      builder: (_, value, __)=>Icon(
-                        Icons.mic_rounded,
-                        color: value,
-                      )
+                  child: Tooltip(
+                    message: '搜索艺人',
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      onEnter: (_){
+                        setState(() {
+                          hoverArtist=true;
+                        });
+                      },
+                      onExit: (_){
+                        setState(() {
+                          hoverArtist=false;
+                        });
+                      },
+                      child: TweenAnimationBuilder(
+                        tween: ColorTween(end: widget.type=='artist' ? c.color4 : hoverArtist ? c.color6 : c.color3),
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __)=>Icon(
+                          Icons.mic_rounded,
+                          color: value,
+                        )
+                      ),
                     ),
                   ),
                 ),
