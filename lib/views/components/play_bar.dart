@@ -68,52 +68,55 @@ class _PlayBarState extends State<PlayBar> {
                 onTap: (){
                   Operations().toggleLyric(context);
                 },
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  onEnter: (_){
-                    setState(() {
-                      hoverCover=true;
-                    });
-                  },
-                  onExit: (_){
-                    setState(() {
-                      hoverCover=false;
-                    });
-                  },
-                  child: Stack(
-                    children: [
-                      Hero(
-                        tag: 'cover',
-                        child: Obx(() =>
-                          c.nowPlay["id"]=="" ? 
-                          Container(
-                            color: c.color1,
-                          ) : Image.network(
-                            "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
-                            fit: BoxFit.contain,
+                child: Tooltip(
+                  message: '显示歌词',
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    onEnter: (_){
+                      setState(() {
+                        hoverCover=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverCover=false;
+                      });
+                    },
+                    child: Stack(
+                      children: [
+                        Hero(
+                          tag: 'cover',
+                          child: Obx(() =>
+                            c.nowPlay["id"]=="" ? 
+                            Container(
+                              color: c.color1,
+                            ) : Image.network(
+                              "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         ),
-                      ),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        width: 45,
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: hoverCover ? const Color.fromARGB(80, 0, 0, 0) : const Color.fromARGB(0, 0, 0, 0)
-                        ),
-                        child: Center(
-                          child: TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverCover ? Colors.white : Colors.white.withAlpha(0),), 
-                            duration: const Duration(milliseconds: 200), 
-                            builder: (_, value, __)=>Icon(
-                              Icons.arrow_upward_rounded,
-                              color: value,
-                              size: 18,
-                            ),
-                          )
-                        ),
-                      )
-                    ],
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          width: 45,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: hoverCover ? const Color.fromARGB(80, 0, 0, 0) : const Color.fromARGB(0, 0, 0, 0)
+                          ),
+                          child: Center(
+                            child: TweenAnimationBuilder(
+                              tween: ColorTween(end: hoverCover ? Colors.white : Colors.white.withAlpha(0),), 
+                              duration: const Duration(milliseconds: 200), 
+                              builder: (_, value, __)=>Icon(
+                                Icons.arrow_upward_rounded,
+                                color: value,
+                                size: 18,
+                              ),
+                            )
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -173,26 +176,29 @@ class _PlayBarState extends State<PlayBar> {
                                 onTap: (){
                                   Operations().skipPre();
                                 },
-                                child: MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  onEnter: (_){
-                                    setState(() {
-                                      hoverPre=true;
-                                    });
-                                  },
-                                  onExit: (_){
-                                    setState(() {
-                                      hoverPre=false;
-                                    });
-                                  },
-                                  child: TweenAnimationBuilder(
-                                    tween: ColorTween(end: hoverPre ? c.color6 : c.color5), 
-                                    duration: const Duration(milliseconds: 200),
-                                    builder: (_, value, __) => Icon(
-                                      Icons.skip_previous_rounded,
-                                      color: value,
-                                    ),
-                                  )
+                                child: Tooltip(
+                                  message: '上一首',
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverPre=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverPre=false;
+                                      });
+                                    },
+                                    child: TweenAnimationBuilder(
+                                      tween: ColorTween(end: hoverPre ? c.color6 : c.color5), 
+                                      duration: const Duration(milliseconds: 200),
+                                      builder: (_, value, __) => Icon(
+                                        Icons.skip_previous_rounded,
+                                        color: value,
+                                      ),
+                                    )
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: 15,),
@@ -200,36 +206,39 @@ class _PlayBarState extends State<PlayBar> {
                                 onTap: (){
                                   Operations().toggleSong();
                                 },
-                                child: MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  onEnter: (_){
-                                    setState(() {
-                                      hoverPause=true;
-                                    });
-                                  },
-                                  onExit: (_){
-                                    setState(() {
-                                      hoverPause=false;
-                                    });
-                                  },
-                                  child: AnimatedContainer(
-                                    height: 34,
-                                    width: 34,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(17),
-                                      color: hoverPause ? c.color6 : c.color5
-                                    ),
-                                    duration: const Duration(milliseconds: 200),
-                                    child: Center(
-                                      child: Obx(()=>
-                                        c.isPlay.value ? const Icon(
-                                          Icons.pause_rounded,
-                                          color: Colors.white,
-                                        ): const Icon(
-                                          Icons.play_arrow_rounded,
-                                          color: Colors.white,
+                                child: Tooltip(
+                                  message: '播放/暂停',
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverPause=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverPause=false;
+                                      });
+                                    },
+                                    child: AnimatedContainer(
+                                      height: 34,
+                                      width: 34,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(17),
+                                        color: hoverPause ? c.color6 : c.color5
+                                      ),
+                                      duration: const Duration(milliseconds: 200),
+                                      child: Center(
+                                        child: Obx(()=>
+                                          c.isPlay.value ? const Icon(
+                                            Icons.pause_rounded,
+                                            color: Colors.white,
+                                          ): const Icon(
+                                            Icons.play_arrow_rounded,
+                                            color: Colors.white,
+                                          )
                                         )
-                                      )
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -239,26 +248,29 @@ class _PlayBarState extends State<PlayBar> {
                                 onTap: (){
                                   Operations().skipNext();
                                 },
-                                child: MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  onEnter: (_){
-                                    setState(() {
-                                      hoverSkip=true;
-                                    });
-                                  },
-                                  onExit: (_){
-                                    setState(() {
-                                      hoverSkip=false;
-                                    });
-                                  },
-                                  child: TweenAnimationBuilder(
-                                    tween: ColorTween(end: hoverSkip ? c.color6 : c.color5), 
-                                    duration: const Duration(milliseconds: 200),
-                                    builder: (_, value, __) => Icon(
-                                      Icons.skip_next_rounded,
-                                      color: value,
-                                    ),
-                                  )
+                                child: Tooltip(
+                                  message: '下一首',
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverSkip=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverSkip=false;
+                                      });
+                                    },
+                                    child: TweenAnimationBuilder(
+                                      tween: ColorTween(end: hoverSkip ? c.color6 : c.color5), 
+                                      duration: const Duration(milliseconds: 200),
+                                      builder: (_, value, __) => Icon(
+                                        Icons.skip_next_rounded,
+                                        color: value,
+                                      ),
+                                    )
+                                  ),
                                 ),
                               ),
                             ],
@@ -361,18 +373,28 @@ class _PlayBarState extends State<PlayBar> {
                       },
                       child: Obx(()=>
                         !isLoved() ?
-                        TweenAnimationBuilder(
-                          tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
-                          duration: const Duration(milliseconds: 200), 
-                          builder: (_, value, __)=>Icon(
-                            Icons.favorite_border_outlined,
-                            size: 18,
-                            color: value,
-                          )
-                        ) : const Icon(
-                          Icons.favorite_rounded,
-                          size: 18,
-                          color: Colors.red,
+                        Tooltip(
+                          message: '添加到喜欢',
+                          child: TweenAnimationBuilder(
+                            tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
+                            duration: const Duration(milliseconds: 200), 
+                            builder: (_, value, __)=>Icon(
+                              Icons.favorite_border_outlined,
+                              size: 18,
+                              color: value,
+                            )
+                          ),
+                        ) : Tooltip(
+                          message: '取消喜欢',
+                          child: TweenAnimationBuilder(
+                            tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red), 
+                            duration: const Duration(milliseconds: 200),
+                            builder: (_, value, __)=>Icon(
+                              Icons.favorite_rounded,
+                              size: 18,
+                              color: value,
+                            )
+                          ),
                         )
                       ),
                     ),
@@ -394,14 +416,17 @@ class _PlayBarState extends State<PlayBar> {
                           hoverLyric=false;
                         });
                       },
-                      child: TweenAnimationBuilder(
-                        tween: ColorTween(end: hoverLyric ? c.color6 : c.color5), 
-                        duration: const Duration(milliseconds: 200), 
-                        builder: (_, value, __)=>Icon(
-                          Icons.lyrics_rounded,
-                          size: 18,
-                          color: value,
-                        )
+                      child: Tooltip(
+                        message: '显示歌词',
+                        child: TweenAnimationBuilder(
+                          tween: ColorTween(end: hoverLyric ? c.color6 : c.color5), 
+                          duration: const Duration(milliseconds: 200), 
+                          builder: (_, value, __)=>Icon(
+                            Icons.lyrics_rounded,
+                            size: 18,
+                            color: value,
+                          )
+                        ),
                       )
                     ),
                   ),
@@ -463,28 +488,31 @@ class _PlayBarState extends State<PlayBar> {
                         ],
                       ),
                     ),
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      onEnter: (_){
-                        setState(() {
-                          hoverVolume=true;
-                        });
-                      },
-                      onExit: (_){
-                        setState(() {
-                          hoverVolume=false;
-                        });
-                      },
-                      child: TweenAnimationBuilder(
-                        tween: ColorTween(end: hoverVolume ? c.color6 : c.color5), 
-                        duration: const Duration(milliseconds: 200), 
-                        builder: (_, value, __)=>Obx(()=>
-                          FaIcon(
-                            c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
-                            size: 14,
-                            color: value,
+                    child: Tooltip(
+                      message: '调整音量',
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        onEnter: (_){
+                          setState(() {
+                            hoverVolume=true;
+                          });
+                        },
+                        onExit: (_){
+                          setState(() {
+                            hoverVolume=false;
+                          });
+                        },
+                        child: TweenAnimationBuilder(
+                          tween: ColorTween(end: hoverVolume ? c.color6 : c.color5), 
+                          duration: const Duration(milliseconds: 200), 
+                          builder: (_, value, __)=>Obx(()=>
+                            FaIcon(
+                              c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
+                              size: 14,
+                              color: value,
+                            )
                           )
-                        )
+                        ),
                       ),
                     ),
                   ),
@@ -552,39 +580,42 @@ class _PlayBarState extends State<PlayBar> {
                       ],
                       child: Container(
                         color: c.color1,
-                        child: MouseRegion(
-                          cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
-                          onEnter: (_){
-                            setState(() {
-                              hoverMode=true;
-                            });
-                          },
-                          onExit: (_){
-                            setState(() {
-                              hoverMode=false;
-                            });
-                          },
-                          child: TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverMode ? c.color6 : c.color5), 
-                            duration: const Duration(milliseconds: 200), 
-                            builder: (_, value, __)=>Obx(()=>
-                              c.fullRandom.value ? Icon(
-                                Icons.shuffle,
-                                size: 18,
-                                color: Colors.grey[300],
-                              ) : c.playMode.value=='list' ?  Icon(
-                                Icons.repeat_rounded,
-                                size: 18,
-                                color: value,
-                              ) : c.playMode.value=='repeat' ?
-                              Icon(
-                                Icons.repeat_one_rounded,
-                                size: 18,
-                                color: value
-                              ) : Icon(
-                                Icons.shuffle_rounded,
-                                size: 18,
-                                color: value,
+                        child: Tooltip(
+                          message: '播放顺序',
+                          child: MouseRegion(
+                            cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                            onEnter: (_){
+                              setState(() {
+                                hoverMode=true;
+                              });
+                            },
+                            onExit: (_){
+                              setState(() {
+                                hoverMode=false;
+                              });
+                            },
+                            child: TweenAnimationBuilder(
+                              tween: ColorTween(end: hoverMode ? c.color6 : c.color5), 
+                              duration: const Duration(milliseconds: 200), 
+                              builder: (_, value, __)=>Obx(()=>
+                                c.fullRandom.value ? Icon(
+                                  Icons.shuffle,
+                                  size: 18,
+                                  color: Colors.grey[300],
+                                ) : c.playMode.value=='list' ?  Icon(
+                                  Icons.repeat_rounded,
+                                  size: 18,
+                                  color: value,
+                                ) : c.playMode.value=='repeat' ?
+                                Icon(
+                                  Icons.repeat_one_rounded,
+                                  size: 18,
+                                  color: value
+                                ) : Icon(
+                                  Icons.shuffle_rounded,
+                                  size: 18,
+                                  color: value,
+                                ),
                               ),
                             ),
                           ),
