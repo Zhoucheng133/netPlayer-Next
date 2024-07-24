@@ -198,27 +198,31 @@ class _LyricViewState extends State<LyricView> {
                                 onTap: (){
                                   Operations().skipPre();
                                 },
-                                child: MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  onEnter: (_){
-                                    setState(() {
-                                      hoverPre=true;
-                                    });
-                                  },
-                                  onExit: (_){
-                                    setState(() {
-                                      hoverPre=false;
-                                    });
-                                  },
-                                  child: TweenAnimationBuilder(
-                                    tween: ColorTween(end: hoverPre ? c.color6 : c.color5), 
-                                    duration: const Duration(milliseconds: 200),
-                                    builder: (_, value, __) => Icon(
-                                      Icons.skip_previous_rounded,
-                                      color: value,
-                                      size: 30,
-                                    ),
-                                  )
+                                child: Tooltip(
+                                  waitDuration: const Duration(seconds: 1),
+                                  message: '上一首',
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverPre=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverPre=false;
+                                      });
+                                    },
+                                    child: TweenAnimationBuilder(
+                                      tween: ColorTween(end: hoverPre ? c.color6 : c.color5), 
+                                      duration: const Duration(milliseconds: 200),
+                                      builder: (_, value, __) => Icon(
+                                        Icons.skip_previous_rounded,
+                                        color: value,
+                                        size: 30,
+                                      ),
+                                    )
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: 15,),
@@ -226,38 +230,42 @@ class _LyricViewState extends State<LyricView> {
                                 onTap: (){
                                   Operations().toggleSong();
                                 },
-                                child: MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  onEnter: (_){
-                                    setState(() {
-                                      hoverPause=true;
-                                    });
-                                  },
-                                  onExit: (_){
-                                    setState(() {
-                                      hoverPause=false;
-                                    });
-                                  },
-                                  child: AnimatedContainer(
-                                    height: 46,
-                                    width: 46,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(23),
-                                      color: hoverPause ? c.color6 : c.color5
-                                    ),
-                                    duration: const Duration(milliseconds: 200),
-                                    child: Center(
-                                      child: Obx(()=>
-                                        c.isPlay.value ? const Icon(
-                                          Icons.pause_rounded,
-                                          color: Colors.white,
-                                          size: 35,
-                                        ): const Icon(
-                                          Icons.play_arrow_rounded,
-                                          color: Colors.white,
-                                          size: 35,
+                                child: Tooltip(
+                                  waitDuration: const Duration(seconds: 1),
+                                  message: '播放/暂停',
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverPause=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverPause=false;
+                                      });
+                                    },
+                                    child: AnimatedContainer(
+                                      height: 46,
+                                      width: 46,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(23),
+                                        color: hoverPause ? c.color6 : c.color5
+                                      ),
+                                      duration: const Duration(milliseconds: 200),
+                                      child: Center(
+                                        child: Obx(()=>
+                                          c.isPlay.value ? const Icon(
+                                            Icons.pause_rounded,
+                                            color: Colors.white,
+                                            size: 35,
+                                          ): const Icon(
+                                            Icons.play_arrow_rounded,
+                                            color: Colors.white,
+                                            size: 35,
+                                          )
                                         )
-                                      )
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -267,27 +275,31 @@ class _LyricViewState extends State<LyricView> {
                                 onTap: (){
                                   Operations().skipNext();
                                 },
-                                child: MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  onEnter: (_){
-                                    setState(() {
-                                      hoverSkip=true;
-                                    });
-                                  },
-                                  onExit: (_){
-                                    setState(() {
-                                      hoverSkip=false;
-                                    });
-                                  },
-                                  child: TweenAnimationBuilder(
-                                    tween: ColorTween(end: hoverSkip ? c.color6 : c.color5), 
-                                    duration: const Duration(milliseconds: 200),
-                                    builder: (_, value, __) => Icon(
-                                      Icons.skip_next_rounded,
-                                      color: value,
-                                      size: 30,
-                                    ),
-                                  )
+                                child: Tooltip(
+                                  waitDuration: const Duration(seconds: 1),
+                                  message: '下一首',
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverSkip=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverSkip=false;
+                                      });
+                                    },
+                                    child: TweenAnimationBuilder(
+                                      tween: ColorTween(end: hoverSkip ? c.color6 : c.color5), 
+                                      duration: const Duration(milliseconds: 200),
+                                      builder: (_, value, __) => Icon(
+                                        Icons.skip_next_rounded,
+                                        color: value,
+                                        size: 30,
+                                      ),
+                                    )
+                                  ),
                                 ),
                               ),
                             ],
@@ -385,18 +397,30 @@ class _LyricViewState extends State<LyricView> {
                                   },
                                   child: Obx(()=>
                                     !isLoved() ?
-                                    TweenAnimationBuilder(
-                                      tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
-                                      duration: const Duration(milliseconds: 200), 
-                                      builder: (_, value, __)=>Icon(
-                                        Icons.favorite_border_outlined,
-                                        size: 18,
-                                        color: value,
-                                      )
-                                    ) : const Icon(
-                                      Icons.favorite_rounded,
-                                      size: 18,
-                                      color: Colors.red,
+                                    Tooltip(
+                                      message: '添加到喜欢',
+                                      waitDuration: const Duration(seconds: 1),
+                                      child: TweenAnimationBuilder(
+                                        tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
+                                        duration: const Duration(milliseconds: 200), 
+                                        builder: (_, value, __)=>Icon(
+                                          Icons.favorite_border_outlined,
+                                          size: 18,
+                                          color: value,
+                                        )
+                                      ),
+                                    ) : Tooltip(
+                                      message: '取消喜欢',
+                                      waitDuration: const Duration(seconds: 1),
+                                      child: TweenAnimationBuilder(
+                                        tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red), 
+                                        duration: const Duration(milliseconds: 200),
+                                        builder: (_, value, __)=>Icon(
+                                          Icons.favorite_rounded,
+                                          size: 18,
+                                          color: value,
+                                        )
+                                      ),
                                     )
                                   ),
                                 ),
@@ -459,28 +483,33 @@ class _LyricViewState extends State<LyricView> {
                                     ],
                                   ),
                                 ),
-                                child: MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  onEnter: (_){
-                                    setState(() {
-                                      hoverVolume=true;
-                                    });
-                                  },
-                                  onExit: (_){
-                                    setState(() {
-                                      hoverVolume=false;
-                                    });
-                                  },
-                                  child: TweenAnimationBuilder(
-                                    tween: ColorTween(end: hoverVolume ? c.color6 : c.color5), 
-                                    duration: const Duration(milliseconds: 200), 
-                                    builder: (_, value, __)=>Obx(()=>
-                                      FaIcon(
-                                        c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
-                                        size: 14,
-                                        color: value,
+                                child: Tooltip(
+                                  waitDuration: const Duration(seconds: 1),
+                                  message: '调整音量',
+
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverVolume=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverVolume=false;
+                                      });
+                                    },
+                                    child: TweenAnimationBuilder(
+                                      tween: ColorTween(end: hoverVolume ? c.color6 : c.color5), 
+                                      duration: const Duration(milliseconds: 200), 
+                                      builder: (_, value, __)=>Obx(()=>
+                                        FaIcon(
+                                          c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
+                                          size: 14,
+                                          color: value,
+                                        )
                                       )
-                                    )
+                                    ),
                                   ),
                                 ),
                               ),
@@ -548,39 +577,43 @@ class _LyricViewState extends State<LyricView> {
                                   ],
                                   child: Container(
                                     color: Colors.white,
-                                    child: MouseRegion(
-                                      cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
-                                      onEnter: (_){
-                                        setState(() {
-                                          hoverMode=true;
-                                        });
-                                      },
-                                      onExit: (_){
-                                        setState(() {
-                                          hoverMode=false;
-                                        });
-                                      },
-                                      child: TweenAnimationBuilder(
-                                        tween: ColorTween(end: hoverMode ? c.color6 : c.color5), 
-                                        duration: const Duration(milliseconds: 200), 
-                                        builder: (_, value, __)=>Obx(()=>
-                                          c.fullRandom.value ? Icon(
-                                            Icons.shuffle,
-                                            size: 18,
-                                            color: Colors.grey[300],
-                                          ) : c.playMode.value=='list' ?  Icon(
-                                            Icons.repeat_rounded,
-                                            size: 18,
-                                            color: value,
-                                          ) : c.playMode.value=='repeat' ?
-                                          Icon(
-                                            Icons.repeat_one_rounded,
-                                            size: 18,
-                                            color: value
-                                          ) : Icon(
-                                            Icons.shuffle_rounded,
-                                            size: 18,
-                                            color: value,
+                                    child: Tooltip(
+                                      waitDuration: const Duration(seconds: 1),
+                                      message: '播放顺序',
+                                      child: MouseRegion(
+                                        cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                                        onEnter: (_){
+                                          setState(() {
+                                            hoverMode=true;
+                                          });
+                                        },
+                                        onExit: (_){
+                                          setState(() {
+                                            hoverMode=false;
+                                          });
+                                        },
+                                        child: TweenAnimationBuilder(
+                                          tween: ColorTween(end: hoverMode ? c.color6 : c.color5), 
+                                          duration: const Duration(milliseconds: 200), 
+                                          builder: (_, value, __)=>Obx(()=>
+                                            c.fullRandom.value ? Icon(
+                                              Icons.shuffle,
+                                              size: 18,
+                                              color: Colors.grey[300],
+                                            ) : c.playMode.value=='list' ?  Icon(
+                                              Icons.repeat_rounded,
+                                              size: 18,
+                                              color: value,
+                                            ) : c.playMode.value=='repeat' ?
+                                            Icon(
+                                              Icons.repeat_one_rounded,
+                                              size: 18,
+                                              color: value
+                                            ) : Icon(
+                                              Icons.shuffle_rounded,
+                                              size: 18,
+                                              color: value,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -673,25 +706,29 @@ class _LyricViewState extends State<LyricView> {
                 onTap: (){
                   Operations().toggleLyric(context);
                 },
-                child: MouseRegion(
-                  onEnter: (_){
-                    setState(() {
-                      hoverBack=true;
-                    });
-                  },
-                  onExit: (_){
-                    setState(() {
-                      hoverBack=false;
-                    });
-                  },
-                  cursor: SystemMouseCursors.click,
-                  child: TweenAnimationBuilder(
-                    tween: ColorTween(end: hoverBack ? c.color6 : c.color4), 
-                    duration: const Duration(milliseconds: 200),
-                    builder: (_, value, __)=>Icon(
-                      Icons.arrow_downward_rounded,
-                      color: value,
-                    )
+                child: Tooltip(
+                  message: '隐藏歌词',
+                  waitDuration: const Duration(seconds: 1),
+                  child: MouseRegion(
+                    onEnter: (_){
+                      setState(() {
+                        hoverBack=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverBack=false;
+                      });
+                    },
+                    cursor: SystemMouseCursors.click,
+                    child: TweenAnimationBuilder(
+                      tween: ColorTween(end: hoverBack ? c.color6 : c.color4), 
+                      duration: const Duration(milliseconds: 200),
+                      builder: (_, value, __)=>Icon(
+                        Icons.arrow_downward_rounded,
+                        color: value,
+                      )
+                    ),
                   ),
                 ),
               ),

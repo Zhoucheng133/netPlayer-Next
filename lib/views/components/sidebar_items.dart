@@ -101,11 +101,15 @@ class _PlayListLabelState extends State<PlayListLabel> {
                 onTap: (){
                   widget.addPlayListHandler();
                 },
-                child: const MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Icon(
-                    Icons.add_rounded,
-                    size: 16,
+                child: const Tooltip(
+                  message: '添加歌单',
+                  waitDuration: Duration(seconds: 1),
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Icon(
+                      Icons.add_rounded,
+                      size: 16,
+                    ),
                   ),
                 ),
               )
@@ -160,34 +164,38 @@ class _AccountPartState extends State<AccountPart> {
                 c.pageIndex.value=6;
                 c.pageId.value='';
               },
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                onEnter: (_){
-                  setState(() {
-                    hoverSetting=true;
-                  });
-                },
-                onExit: (_){
-                  setState(() {
-                    hoverSetting=false;
-                  });
-                },
-                child: Obx(()=>
-                  AnimatedContainer(
-                    height: 35,
-                    duration: const Duration(milliseconds: 200),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: c.pageIndex.value==6 ? c.color3 : hoverSetting ? c.color2 : c.color1,
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.settings_rounded,
-                        size: 16,
+              child: Tooltip(
+                message: '设置',
+                waitDuration: const Duration(seconds: 1),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  onEnter: (_){
+                    setState(() {
+                      hoverSetting=true;
+                    });
+                  },
+                  onExit: (_){
+                    setState(() {
+                      hoverSetting=false;
+                    });
+                  },
+                  child: Obx(()=>
+                    AnimatedContainer(
+                      height: 35,
+                      duration: const Duration(milliseconds: 200),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: c.pageIndex.value==6 ? c.color3 : hoverSetting ? c.color2 : c.color1,
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.settings_rounded,
+                          size: 16,
+                        ),
                       ),
                     ),
-                  ),
-                )
+                  )
+                ),
               ),
             )
           ),
@@ -197,29 +205,33 @@ class _AccountPartState extends State<AccountPart> {
               onTap: (){
                 widget.logoutHandler();
               },
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                onEnter: (_){
-                  setState(() {
-                    hoverLogout=true;
-                  });
-                },
-                onExit: (_){
-                  setState(() {
-                    hoverLogout=false;
-                  });
-                },
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: 35,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: hoverLogout ? c.color2 : c.color1,
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.logout_rounded,
-                      size: 16,
+              child: Tooltip(
+                message: '注销',
+                waitDuration: const Duration(seconds: 1),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  onEnter: (_){
+                    setState(() {
+                      hoverLogout=true;
+                    });
+                  },
+                  onExit: (_){
+                    setState(() {
+                      hoverLogout=false;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    height: 35,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: hoverLogout ? c.color2 : c.color1,
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.logout_rounded,
+                        size: 16,
+                      ),
                     ),
                   ),
                 ),
