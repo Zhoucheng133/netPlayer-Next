@@ -70,6 +70,7 @@ class _PlayBarState extends State<PlayBar> {
                 },
                 child: Tooltip(
                   message: '显示歌词',
+                  waitDuration: const Duration(seconds: 1),
                   child: MouseRegion(
                     cursor: SystemMouseCursors.click,
                     onEnter: (_){
@@ -177,6 +178,7 @@ class _PlayBarState extends State<PlayBar> {
                                   Operations().skipPre();
                                 },
                                 child: Tooltip(
+                                  waitDuration: const Duration(seconds: 1),
                                   message: '上一首',
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
@@ -207,6 +209,7 @@ class _PlayBarState extends State<PlayBar> {
                                   Operations().toggleSong();
                                 },
                                 child: Tooltip(
+                                  waitDuration: const Duration(seconds: 1),
                                   message: '播放/暂停',
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
@@ -249,6 +252,7 @@ class _PlayBarState extends State<PlayBar> {
                                   Operations().skipNext();
                                 },
                                 child: Tooltip(
+                                  waitDuration: const Duration(seconds: 1),
                                   message: '下一首',
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
@@ -375,6 +379,7 @@ class _PlayBarState extends State<PlayBar> {
                         !isLoved() ?
                         Tooltip(
                           message: '添加到喜欢',
+                          waitDuration: const Duration(seconds: 1),
                           child: TweenAnimationBuilder(
                             tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
                             duration: const Duration(milliseconds: 200), 
@@ -386,6 +391,7 @@ class _PlayBarState extends State<PlayBar> {
                           ),
                         ) : Tooltip(
                           message: '取消喜欢',
+                          waitDuration: const Duration(seconds: 1),
                           child: TweenAnimationBuilder(
                             tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red), 
                             duration: const Duration(milliseconds: 200),
@@ -418,6 +424,7 @@ class _PlayBarState extends State<PlayBar> {
                       },
                       child: Tooltip(
                         message: '显示歌词',
+                        waitDuration: const Duration(seconds: 1),
                         child: TweenAnimationBuilder(
                           tween: ColorTween(end: hoverLyric ? c.color6 : c.color5), 
                           duration: const Duration(milliseconds: 200), 
@@ -489,6 +496,7 @@ class _PlayBarState extends State<PlayBar> {
                       ),
                     ),
                     child: Tooltip(
+                      waitDuration: const Duration(seconds: 1),
                       message: '调整音量',
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,
@@ -581,6 +589,7 @@ class _PlayBarState extends State<PlayBar> {
                       child: Container(
                         color: c.color1,
                         child: Tooltip(
+                          waitDuration: const Duration(seconds: 1),
                           message: '播放顺序',
                           child: MouseRegion(
                             cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
