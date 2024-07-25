@@ -52,8 +52,8 @@ class MainApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate
       ],
       supportedLocales: const [
-        Locale('en', 'US'), // 美国英语
-        Locale('zh', 'CN'), // 中文简体
+        Locale('zh', 'CN'),
+        Locale('en', 'US'),
       ],
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
