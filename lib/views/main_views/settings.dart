@@ -5,9 +5,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:net_player_next/views/functions/requests.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,6 +26,20 @@ class _SettingsViewState extends State<SettingsView> {
   bool hoverURL=false;
   bool hoverAbout=false;
   bool hoverWs=false;
+  bool refreshing=false;
+
+  Future<void> refreshLibrary(BuildContext context) async {
+    await HttpRequests().refreshLibrary();
+    showMessage(true, '刷新成功', context);
+    await Operations().getAllSongs(context);
+    await Operations().getAlbums(context);
+    await Operations().getArtists(context);
+    await Operations().getLovedSongs(context);
+    Operations().nowPlayCheck(context);
+    setState(() {
+      refreshing=false;
+    });
+  }
 
   void wsSetting(BuildContext context){
     var portInput=c.wsPort.value;
@@ -407,33 +423,53 @@ class _SettingsViewState extends State<SettingsView> {
               width: MediaQuery.of(context).size.width - 200,
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: GestureDetector(
-                  onTap: (){
-                    Operations().showAbout(context);
-                  },
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    onEnter: (_){
-                      setState(() {
-                        hoverAbout=true;
-                      });
-                    },
-                    onExit: (_){
-                      setState(() {
-                        hoverAbout=false;
-                      });
-                    },
-                    child: AnimatedDefaultTextStyle(
-                      style: GoogleFonts.notoSansSc(
-                        color: hoverAbout ? c.color6 : Colors.black,
-                      ),
-                      duration: const Duration(milliseconds: 200),
-                      child: const Text(
-                        '关于 netPlayer',
-                        softWrap: false,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextButton(
+                      onPressed: refreshing ? null : (){
+                        setState(() {
+                          refreshing=true;
+                        });
+                        refreshLibrary(context);
+                      }, 
+                      child: Text(
+                        '刷新音乐库',
+                        style: GoogleFonts.notoSansSc(
+                          color: c.color6
+                        ),
+                      )
+                    ),
+                    const SizedBox(height: 10,),
+                    GestureDetector(
+                      onTap: (){
+                        Operations().showAbout(context);
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        onEnter: (_){
+                          setState(() {
+                            hoverAbout=true;
+                          });
+                        },
+                        onExit: (_){
+                          setState(() {
+                            hoverAbout=false;
+                          });
+                        },
+                        child: AnimatedDefaultTextStyle(
+                          style: GoogleFonts.notoSansSc(
+                            color: hoverAbout ? c.color6 : Colors.black,
+                          ),
+                          duration: const Duration(milliseconds: 200),
+                          child: const Text(
+                            '关于 netPlayer',
+                            softWrap: false,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             )

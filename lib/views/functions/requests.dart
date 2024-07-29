@@ -106,4 +106,8 @@ class HttpRequests{
   Future<Map> searchRequest(String value) async {
     return await httpRequest('${c.userInfo["url"]}/rest/search2?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&query=$value');
   }
+  // 刷新音乐库
+  Future<Map> refreshLibrary() async {
+    return await httpRequest('${c.userInfo["url"]}/rest/startScan?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}');
+  }
 }
