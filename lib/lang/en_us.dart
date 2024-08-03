@@ -52,7 +52,7 @@ const Map<String, String> enUS = {
   'addToList': 'Add to list...',
   'showArtist': 'Show artist',
   'showAlbum': 'Show album',
-  'removeFromList': "remove from list",
+  'removeFromList': "Remove from list",
 
   'album': 'Album',
   'searchSong': 'Search songs',
