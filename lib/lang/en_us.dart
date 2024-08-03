@@ -84,6 +84,9 @@ const Map<String, String> enUS = {
   'urlInvalid': 'URL is invalid',
   'usernameEmpty': 'Username cannot empty',
   'passwordEmpt': 'Password cannot empty',
+  'serverURL': 'Server URL',
+  'username': 'Username',
+  'password': 'Password',
 
   'loading': 'Loading...',
 

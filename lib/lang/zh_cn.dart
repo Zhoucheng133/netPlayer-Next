@@ -84,6 +84,9 @@ const Map<String, String> zhCN = {
   'urlInvalid': 'URL地址不合法',
   'usernameEmpty': '用户名不能为空',
   'passwordEmpt': '密码不能为空',
+  'serverURL': '服务器的URL地址',
+  'username': '用户名',
+  'password': '密码',
 
   'loading': '加载中...',
 

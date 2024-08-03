@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UserNameInput extends StatefulWidget {
@@ -55,7 +56,7 @@ class _UserNameInputState extends State<UserNameInput> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "用户名",
+              "username".tr,
               style: GoogleFonts.notoSansSc(
                 color: Colors.grey,
                 fontSize: 13,
@@ -148,7 +149,7 @@ class _URLInputState extends State<URLInput> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "服务器的URL地址",
+              "serverURL".tr,
               style: GoogleFonts.notoSansSc(
                 color: Colors.grey,
                 fontSize: 13,
@@ -167,7 +168,7 @@ class _URLInputState extends State<URLInput> {
                     controller: widget.controller,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'http://',
+                      hintText: 'http(s)://',
                       isCollapsed: true,
                       contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
                     ),
@@ -242,7 +243,7 @@ class _PasswordInputState extends State<PasswordInput> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "密码",
+              "password".tr,
               style: GoogleFonts.notoSansSc(
                 color: Colors.grey,
                 fontSize: 13,
