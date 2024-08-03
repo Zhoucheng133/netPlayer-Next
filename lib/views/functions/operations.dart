@@ -947,7 +947,7 @@ class Operations{
           ),
         ),
         actions: [
-          TextButton(
+          ElevatedButton(
             onPressed: () async {
               final SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.setString('lang', langSelected);
