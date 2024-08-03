@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -908,6 +909,52 @@ class Operations{
               Navigator.pop(context);
             }, 
             child: Text('ok'.tr)
+          )
+        ],
+      ),
+    );
+  }
+
+  void selectLanguage(BuildContext context){
+    String langSelected=c.lang.value;
+    showDialog(
+      context: context, 
+      builder: (context)=>AlertDialog(
+        title: Text('selectLang'.tr),
+        content: StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState)=> DropdownButton2(
+            value: langSelected,
+            items: const [
+              DropdownMenuItem(
+                value: 'en_US',
+                child: Text('English')
+              ),
+              DropdownMenuItem(
+                value: 'zh_CN',
+                child: Text('简体中文')
+              )
+            ], 
+            onChanged: (val){
+              if(val!=null){
+                var parts = val.split('_');
+                var locale=Locale(parts[0], parts[1]);
+                Get.updateLocale(locale);
+                setState((){
+                  langSelected=val;
+                });
+              }
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              final SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setString('lang', langSelected);
+              c.lang.value=langSelected;
+              Navigator.pop(context);
+            }, 
+            child: Text('finish'.tr)
           )
         ],
       ),

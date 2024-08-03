@@ -27,6 +27,7 @@ class _SettingsViewState extends State<SettingsView> {
   bool hoverAbout=false;
   bool hoverWs=false;
   bool refreshing=false;
+  bool hoverLang=false;
 
   Future<void> refreshLibrary(BuildContext context) async {
     await HttpRequests().refreshLibrary();
@@ -411,6 +412,61 @@ class _SettingsViewState extends State<SettingsView> {
                           ),
                         ),
                       )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text('lang'.tr)
+                        )
+                      ),
+                      const SizedBox(width: 10,),
+                      SizedBox(
+                        width: 220,
+                        height: 40,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              children: [
+                                Text('selfLang'.tr),
+                                const SizedBox(width: 20,),
+                                GestureDetector(
+                                  onTap: (){
+                                    Operations().selectLanguage(context);
+                                  },
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverLang=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverLang=false;
+                                      });
+                                    },
+                                    child: AnimatedDefaultTextStyle(
+                                      style: GoogleFonts.notoSansSc(
+                                        color: hoverLang ? c.color6 : c.color5
+                                      ), 
+                                      duration: const Duration(milliseconds: 200),
+                                      child: Text('change'.tr)
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ),
+                        ),
+                      ),
+                      
                     ],
                   ),
                 ],

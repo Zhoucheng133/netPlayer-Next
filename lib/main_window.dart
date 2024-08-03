@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -172,51 +171,12 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     final lang=prefs.getString('lang');
     if(lang!=null){
       var parts = lang.split('_');
+      c.lang.value=lang;
       var locale=Locale(parts[0], parts[1]);
       Get.updateLocale(locale);
     }else{
-      String langSelected='en_US';
       if(context.mounted){
-        showDialog(
-          context: context, 
-          builder: (context)=>AlertDialog(
-            title: Text('selectLang'.tr),
-            content: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState)=> DropdownButton2(
-                value: langSelected,
-                items: const [
-                  DropdownMenuItem(
-                    value: 'en_US',
-                    child: Text('English')
-                  ),
-                  DropdownMenuItem(
-                    value: 'zh_CN',
-                    child: Text('简体中文')
-                  )
-                ], 
-                onChanged: (val){
-                  if(val!=null){
-                    var parts = val.split('_');
-                    var locale=Locale(parts[0], parts[1]);
-                    Get.updateLocale(locale);
-                    setState((){
-                      langSelected=val;
-                    });
-                  }
-                },
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                  prefs.setString('lang', langSelected);
-                }, 
-                child: Text('finish'.tr)
-              )
-            ],
-          ),
-        );
+        Operations().selectLanguage(context);
       }
     }
 

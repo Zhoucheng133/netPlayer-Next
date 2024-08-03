@@ -131,5 +131,9 @@ const Map<String, String> zhCN = {
 
   'add': '添加',
 
-  'selectLang': '选择语言'
+  'selectLang': '选择语言',
+  'change': '修改',
+
+  'lang': '语言',
+  'selfLang': '简体中文'
 };
