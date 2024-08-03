@@ -104,4 +104,7 @@ class Controller extends GetxController{
   RxBool wsOk=true.obs;
   
   late SMTCWindows smtc;
+
+  // 语言
+  RxString lang='en_US'.obs;
 }

@@ -100,7 +100,6 @@ const Map<String, String> enUS = {
 
   'connectLibrary': 'Connect to your music',
 
-  // TODO 需要翻译的内容
   'getPlaylistsFail': 'Get playlists failed',
   'getPlaylistFail': 'Get playlist failed',
   'playlistNameEmpty': 'Playlist\'s name cannot empty',
@@ -130,5 +129,7 @@ const Map<String, String> enUS = {
   'searchFail': 'Search failed',
   'about': 'About',
 
-  'add': 'Add'
+  'add': 'Add',
+
+  'selectLang': 'Select language'
 };

@@ -44,9 +44,9 @@ Future<void> main(List<String> args) async {
 class MainTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
-        'en_US': enUS,
-        'zh_CN': zhCN,
-      };
+    'en_US': enUS,
+    'zh_CN': zhCN,
+  };
 }
 
 

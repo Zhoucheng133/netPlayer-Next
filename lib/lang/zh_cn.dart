@@ -99,7 +99,6 @@ const Map<String, String> zhCN = {
   'updateOk': '更新成功',
 
   'connectLibrary': '连接到你的音乐库',
-
   
   'getPlaylistFail': '获取歌单失败',
   'playlistNameEmpty': '歌单名称不能为空',
@@ -130,5 +129,7 @@ const Map<String, String> zhCN = {
   'searchFail': '搜索失败',
   'about': '关于',
 
-  'add': '添加'
+  'add': '添加',
+
+  'selectLang': '选择语言'
 };
