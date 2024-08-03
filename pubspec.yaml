@@ -34,6 +34,7 @@ dependencies:
   shelf_web_socket: ^1.0.2
   flutter_rust_bridge: ^1.72.1
   smtc_windows: ^0.1.2
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:
