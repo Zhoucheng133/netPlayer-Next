@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/views/functions/requests.dart';
 import 'package:net_player_next/views/main_view.dart';
@@ -278,11 +279,15 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
             child: isLoading ? Center(
+              key: const Key('1'),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 30),
-                child: Text('loading'.tr),
+                child: LoadingAnimationWidget.beat(
+                  color: c.color6, 
+                  size: 30
+                ),
               ),
-            ) : isLogin ? const MainView() : const LoginView(),
+            ) : isLogin ? const MainView(key: Key('2'),) : const LoginView(key: Key('3'),),
           ),
         ),
         Platform.isMacOS ? 

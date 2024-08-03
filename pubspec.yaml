@@ -35,6 +35,7 @@ dependencies:
   flutter_rust_bridge: ^1.72.1
   smtc_windows: ^0.1.2
   dropdown_button2: ^2.3.9
+  loading_animation_widget: ^1.2.1
 
 dev_dependencies:
   flutter_test:
