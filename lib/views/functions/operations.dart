@@ -26,7 +26,7 @@ class Operations{
   Future<void> getAllPlayLists(BuildContext context) async {
     final rlt=await requests.playListsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getPlaylistFail'.tr, context);
+      showMessage(false, 'getPlaylistsFail'.tr, context);
       return;
     }else{
       try {
@@ -142,7 +142,7 @@ class Operations{
   Future<List> getPlayList(BuildContext context, String id) async {
     final rlt=await requests.getPlayListRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getPlayListFail'.tr, context);
+      showMessage(false, 'getPlaylistFail'.tr, context);
       return [];
     }else{
       try {
@@ -447,7 +447,7 @@ class Operations{
                 await prefs.setBool('useWs', false);
                 windowManager.close();
               }, 
-              child: const Text('继续并关闭netPlayer')
+              child: Text('continueCloseApp'.tr)
             )
           ],
         )
