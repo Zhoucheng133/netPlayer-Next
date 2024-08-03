@@ -22,7 +22,7 @@ class _SideBarState extends State<SideBar> {
     await showDialog(
       context: context, 
       builder: (BuildContext context)=>AlertDialog(
-        title: const Text('新建歌单'),
+        title: Text('addPlayList'.tr),
         content: TextField(
           controller: newListName,
           decoration: InputDecoration(
@@ -41,13 +41,13 @@ class _SideBarState extends State<SideBar> {
             onPressed: (){
               Navigator.pop(context);
             }, 
-            child: const Text('取消')
+            child: Text('cancel'.tr)
           ),
           ElevatedButton(
             onPressed: (){
               operations.addPlayList(context, newListName.text);
             }, 
-            child: const Text('确定')
+            child: Text('finish'.tr)
           )
         ],
       )
@@ -69,14 +69,14 @@ class _SideBarState extends State<SideBar> {
     await showDialog(
       context: context, 
       builder: (BuildContext context)=>AlertDialog(
-        title: const Text('注销当前账户?'),
-        content: const Text('注销后会回到登录页面'),
+        title: Text('logoutTitle'.tr),
+        content: Text('logoutContent'.tr),
         actions: [
           TextButton(
             onPressed: (){
               Navigator.pop(context);
             }, 
-            child: const Text('取消')
+            child: Text('cancel'.tr)
           ),
           ElevatedButton(
             onPressed: (){
@@ -84,7 +84,7 @@ class _SideBarState extends State<SideBar> {
               // final SharedPreferences prefs = await SharedPreferences.getInstance();
               Navigator.pop(context);
             }, 
-            child: const Text('继续')
+            child: Text('logout'.tr)
           )
         ],
       )

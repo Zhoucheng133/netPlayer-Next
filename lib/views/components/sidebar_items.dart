@@ -97,7 +97,6 @@ class _PlayListLabelState extends State<PlayListLabel> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // const Text('歌单'),
               Text('playLists'.tr, style: GoogleFonts.notoSansSc(
                 fontSize: 13,
               ),),
@@ -311,35 +310,35 @@ class _PlayListItemState extends State<PlayListItem> {
         position.dy + 50,
       ),
       items: [
-        const PopupMenuItem(
+        PopupMenuItem(
           value: "rename",
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.edit_rounded,
                 size: 18,
               ),
-              SizedBox(width: 5,),
-              Text("重命名")
+              const SizedBox(width: 5,),
+              Text("rename".tr)
             ],
           ),
         ),
-        const PopupMenuItem(
+        PopupMenuItem(
           value: "del",
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.delete_rounded,
                 size: 18,
               ),
-              SizedBox(width: 5,),
-              Text("删除")
+              const SizedBox(width: 5,),
+              Text("delete".tr)
             ],
           ),
         )
@@ -349,21 +348,21 @@ class _PlayListItemState extends State<PlayListItem> {
       showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('删除歌单'),
-          content: const Text('确定要删除这个歌单? 这个操作不可撤销!'),
+          title: Text('deletePlayList'.tr),
+          content: Text('deletePlayListContent'.tr),
           actions: [
             TextButton(
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              child: const Text('取消')
+              child: Text('cancel'.tr)
             ),
             ElevatedButton(
               onPressed: (){
                 Operations().delPlayList(context, widget.id);
                 Navigator.pop(context);
               }, 
-              child: const Text('删除')
+              child: Text('delete'.tr)
             )
           ],
         )
@@ -373,7 +372,7 @@ class _PlayListItemState extends State<PlayListItem> {
       showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('重命名歌单'),
+          title: Text('rename'.tr),
           content: TextField(
             controller: newName,
             decoration: InputDecoration(
@@ -392,14 +391,14 @@ class _PlayListItemState extends State<PlayListItem> {
               onPressed: (){
                 Navigator.pop(context);
               },
-              child: const Text('取消')
+              child: Text('cancel'.tr)
             ),
             ElevatedButton(
               onPressed: (){
                 Operations().renamePlayList(context, widget.id, newName.text);
                 Navigator.pop(context);
               }, 
-              child: const Text('继续'),
+              child: Text('finish'.tr),
             )
           ],
         )

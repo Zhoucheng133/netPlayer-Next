@@ -96,4 +96,36 @@ const Map<String, String> enUS = {
   'updateOk': 'Update success',
 
   'connectLibrary': 'Connect to your music',
+
+  // TODO 需要翻译的内容
+  'getPlaylistFail': 'Get playlists failed',
+  'playlistNameEmpty': 'Playlist\'s name cannot empty',
+  'createPlaylistFail': 'Create playlist failed',
+  'createPlaylistSuccess': 'Create playlist successed',
+  'renameFail': 'Rename playlist failed',
+  'renameSuccess': 'Rename playlist successed',
+  'delFail': 'Delete failed',
+  'delSuccess': 'Delete successed',
+  'getAllSongFail': 'Get all songs failed',
+  'anayliseAllSongFail': 'Anaylise all songs failed',
+  'getLovedSongFail': 'Get loved songs failed',
+  'analiseLovedSongFail': 'Anaylise loved songs failed',
+  'getAllAlbumFail': 'Get all albums failed',
+  'analiseAllAlbumFail': '解析所有专辑失败',
+  'getPlayListFail': '获取歌单内容失败',
+  'getAllArtistFail': '获取所有艺人失败',
+  'addFail': '添加失败',
+  'addSuccess': '添加成功',
+  'deloveFail': '取消失败',
+  'deloveSuccess': '取消成功',
+  'enableWsContent': '这是一个测试的功能，请务必在阅读Github上的使用说明文档后使用\n端口号为9098\n你需要重新启动netPlayer',
+  'continueCloseApp': '继续并关闭netPlayer',
+  'closeWs': '关闭ws服务',
+  'closeWsContent': '你需要重新启动netPlayer',
+  'getAlbumInfoFail': '获取专辑信息失败',
+  'getArtistInfoFail': '获取艺人信息失败',
+  'searchFail': '搜索失败',
+  'about': '关于',
+
+  'add': '添加'
 };

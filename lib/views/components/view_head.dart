@@ -393,7 +393,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                   },
                   child: Tooltip(
                     waitDuration: const Duration(seconds: 1),
-                    message: '搜索歌曲',
+                    message: 'searchSong'.tr,
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
                       onEnter: (_){
@@ -426,7 +426,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                   },
                   child: Tooltip(
                     waitDuration: const Duration(seconds: 1),
-                    message: '搜索专辑',
+                    message: 'searchAlbum'.tr,
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
                       onEnter: (_){
@@ -459,7 +459,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                   },
                   child: Tooltip(
                     waitDuration: const Duration(seconds: 1),
-                    message: '搜索艺人',
+                    message: 'searchArtist'.tr,
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
                       onEnter: (_){

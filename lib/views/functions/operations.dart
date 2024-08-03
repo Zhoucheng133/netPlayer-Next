@@ -26,7 +26,7 @@ class Operations{
   Future<void> getAllPlayLists(BuildContext context) async {
     final rlt=await requests.playListsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '获取歌单失败', context);
+      showMessage(false, 'getPlaylistFail'.tr, context);
       return;
     }else{
       try {
@@ -38,14 +38,14 @@ class Operations{
   // 添加歌单
   Future<void> addPlayList(BuildContext context, String name) async {
     if(name.isEmpty){
-      showMessage(false, '歌单名称不能为空', context);
+      showMessage(false, 'playlistNameEmpty'.tr, context);
     }else{
       final rlt=await requests.createPlayListRequest(name);
       Navigator.pop(context);
       if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-        showMessage(false, '创建歌单失败', context);
+        showMessage(false, 'createPlaylistFail'.tr, context);
       }else{
-        showMessage(true, '创建歌单成功', context);
+        showMessage(true, 'createPlaylistSuccess'.tr, context);
       }
       getAllPlayLists(context);
     }
@@ -55,10 +55,10 @@ class Operations{
   Future<void> renamePlayList(BuildContext context, String id, String name) async {
     final rlt=await requests.renameList(id, name);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '重命名歌单失败', context);
+      showMessage(false, 'renameFail'.tr, context);
       return;
     }else{
-      showMessage(true, '重命名歌单成功', context);
+      showMessage(true, 'renameSuccess'.tr, context);
       getAllPlayLists(context);
     }
   }
@@ -67,10 +67,10 @@ class Operations{
   Future<void> delPlayList(BuildContext context, String id) async {
     final rlt=await requests.delPlayListRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '删除歌单失败', context);
+      showMessage(false, 'delFail'.tr, context);
       return;
     }else{
-      showMessage(true, '删除歌单成功', context);
+      showMessage(true, 'delSuccess'.tr, context);
       getAllPlayLists(context);
     }
   }
@@ -79,7 +79,7 @@ class Operations{
   Future<void> getAllSongs(BuildContext context) async {
     final rlt=await requests.getAllSongsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '获取所有歌曲失败', context);
+      showMessage(false, 'getAllSongFail'.tr, context);
       return;
     }else{
       try {
@@ -91,7 +91,7 @@ class Operations{
         });
         c.allSongs.value=tmpList;
       } catch (_) {
-        showMessage(false, '解析所有歌曲失败', context);
+        showMessage(false, 'anayliseAllSongFail'.tr, context);
         return;
       }
     }
@@ -101,7 +101,7 @@ class Operations{
   Future<void> getLovedSongs(BuildContext context) async {
     final rlt=await requests.getLovedSongsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '获取喜欢的歌曲失败', context);
+      showMessage(false, 'getLovedSongFail'.tr, context);
       return;
     }else{
       try {
@@ -112,7 +112,7 @@ class Operations{
           c.lovedSongs.value=rlt['subsonic-response']['starred']['song'];
         }
       } catch (_) {
-        showMessage(false, '解析喜欢的歌曲失败', context);
+        showMessage(false, 'analiseLovedSongFail'.tr, context);
         return;
       }
     }
@@ -122,7 +122,7 @@ class Operations{
   Future<void> getAlbums(BuildContext context) async {
     final rlt=await requests.getAlbumsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '获取喜欢的歌曲失败', context);
+      showMessage(false, 'getAllAlbumFail'.tr, context);
       return;
     }else{
       try {
@@ -132,7 +132,7 @@ class Operations{
           c.albums.value=rlt['subsonic-response']['albumList']['album'];
         }
       } catch (_) {
-        showMessage(false, '解析所有专辑失败', context);
+        showMessage(false, 'analiseAllAlbumFail'.tr, context);
         return;
       }
     }
@@ -142,7 +142,7 @@ class Operations{
   Future<List> getPlayList(BuildContext context, String id) async {
     final rlt=await requests.getPlayListRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '获取歌单内容失败', context);
+      showMessage(false, 'getPlayListFail'.tr, context);
       return [];
     }else{
       try {
@@ -156,7 +156,7 @@ class Operations{
   Future<void> getArtists(BuildContext context) async {
     final rlt=await requests.getArtistRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '获取所有艺人失败', context);
+      showMessage(false, 'getAllArtistFail'.tr, context);
       return;
     }else{
       try {
@@ -203,10 +203,10 @@ class Operations{
   Future<void> loveSong(BuildContext context, String id) async {
     final rlt=await requests.loveSongRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '添加失败', context);
+      showMessage(false, 'addFail'.tr, context);
       return;
     }else{
-      showMessage(true, '添加成功', context);
+      showMessage(true, 'addSuccess'.tr, context);
     }
     await getLovedSongs(context);
     refreshFromLoved();
@@ -216,10 +216,10 @@ class Operations{
   Future<void> deloveSong(BuildContext context, String id) async {
     final rlt=await requests.deLoveSongRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '取消失败', context);
+      showMessage(false, 'deloveFail'.tr, context);
       return;
     }else{
-      showMessage(true, '取消成功', context);
+      showMessage(true, 'deloveSuccess'.tr, context);
     }
     await getLovedSongs(context);
     refreshFromLoved();
@@ -229,10 +229,10 @@ class Operations{
   Future<void> addToList(BuildContext context, String songId, String listId) async {
     final rlt=await requests.addToListRequest(songId, listId);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '添加失败', context);
+      showMessage(false, 'addFail'.tr, context);
       return;
     }else{
-      showMessage(true, '添加成功', context);
+      showMessage(true, 'addSuccess'.tr, context);
     }
     c.nowPlay['list']=await getPlayList(context, listId);
     c.nowPlay.refresh();
@@ -396,18 +396,18 @@ class Operations{
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('启用ws服务'),
-          content: const SizedBox(
+          title: Text('enableWs'.tr),
+          content: SizedBox(
             width: 300,
-            child: Text('这是一个测试的功能，请务必在阅读Github上的使用说明文档后使用\n端口号为9098\n你需要重新启动netPlayer')
+            child: Text('enableWsContent'.tr)
           ),
           actions: [
             TextButton(
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              child: const Text(
-                '取消'
+              child: Text(
+                'cancel'.tr
               )
             ),
             ElevatedButton(
@@ -417,7 +417,7 @@ class Operations{
                 await prefs.setBool('useWs', true);
                 windowManager.close();
               }, 
-              child: const Text('继续并关闭netPlayer')
+              child: Text('continueCloseApp'.tr)
             )
           ],
         )
@@ -426,18 +426,18 @@ class Operations{
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('关闭ws服务'),
-          content: const SizedBox(
+          title: Text('closeWs'.tr),
+          content: SizedBox(
             width: 300,
-            child: Text('你需要重新启动netPlayer')
+            child: Text('closeWsContent'.tr)
           ),
           actions: [
             TextButton(
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              child: const Text(
-                '取消'
+              child: Text(
+                'cancel'.tr
               )
             ),
             ElevatedButton(
@@ -539,10 +539,10 @@ class Operations{
       c.lyric.value=[
         {
           'time': 0,
-          'content': '没有找到歌词',
+          'content': 'noLyric'.tr,
         }
       ];
-      var content='没有找到歌词';
+      var content='noLyric'.tr;
       if(c.useWs.value){
         c.ws.sendMsg(content);
       }
@@ -569,10 +569,10 @@ class Operations{
   Future<bool> delFromList(BuildContext context, String listId, int songId) async {
     final rlt=await requests.delFromListRequest(listId, songId);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '删除失败', context);
+      showMessage(false, 'delFail'.tr, context);
       return false;
     }else{
-      showMessage(true, '删除成功', context);
+      showMessage(true, 'delSuccess'.tr, context);
       checkPlayListPlay(context, listId);
       return true;
     }
@@ -582,7 +582,7 @@ class Operations{
   Future<Map> getAlbumData(BuildContext context, String id) async {
     final rlt=await requests.getAlbumDataRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '获取专辑信息失败', context);
+      showMessage(false, 'getAlbumInfoFail'.tr, context);
       return {};
     }else{
       try {
@@ -597,7 +597,7 @@ class Operations{
   Future<Map> getArtistData(BuildContext context, String id) async {
     final rlt=await requests.getArtistDataRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '获取艺人信息失败', context);
+      showMessage(false, 'getArtistInfoFail'.tr, context);
       return {};
     }else{
       try {
@@ -611,7 +611,7 @@ class Operations{
   Future<Map> getSearch(BuildContext context, String val) async {
     final rlt=await requests.searchRequest(val);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, '获取艺人信息失败', context);
+      showMessage(false, 'searchFail'.tr, context);
       return {};
     }else{
       try {
@@ -823,7 +823,7 @@ class Operations{
     showDialog(
       context: context, 
       builder: (BuildContext context)=>AlertDialog(
-        title: const Text('关于'),
+        title: Text('about'.tr),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -868,7 +868,7 @@ class Operations{
                     Padding(
                       padding: const EdgeInsets.only(bottom: 2),
                       child: Text(
-                        '本项目地址',
+                        'projectURL'.tr,
                         style: GoogleFonts.notoSansSc(
                           fontSize: 13,
                         ),
@@ -884,18 +884,18 @@ class Operations{
                 final url=Uri.parse('https://lrclib.net/docs');
                 launchUrl(url);
               },
-              child: const MouseRegion(
+              child: MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.code_rounded,
                       size: 15,
                     ),
-                    SizedBox(width: 5,),
-                    Text('歌词API'),
+                    const SizedBox(width: 5,),
+                    Text('lyricAPI'.tr),
                   ],
                 ),
               ),
@@ -907,7 +907,7 @@ class Operations{
             onPressed: (){
               Navigator.pop(context);
             }, 
-            child: const Text('好的')
+            child: Text('ok'.tr)
           )
         ],
       ),

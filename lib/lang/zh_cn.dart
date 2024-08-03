@@ -95,5 +95,37 @@ const Map<String, String> zhCN = {
 
   'updateOk': '更新成功',
 
-  'connectLibrary': '连接到你的音乐库'
+  'connectLibrary': '连接到你的音乐库',
+
+  
+  'getPlaylistFail': '获取歌单失败',
+  'playlistNameEmpty': '歌单名称不能为空',
+  'createPlaylistFail': '创建歌单失败',
+  'createPlaylistSuccess': '创建歌单成功',
+  'renameFail': '重命名歌单失败',
+  'renameSuccess': '重命名歌单成功',
+  'delFail': '删除失败',
+  'delSuccess': '删除成功',
+  'getAllSongFail': '获取所有歌曲失败',
+  'anayliseAllSongFail': '解析所有歌曲失败',
+  'getLovedSongFail': '获取喜欢的歌曲失败',
+  'analiseLovedSongFail': '解析喜欢的歌曲失败',
+  'getAllAlbumFail': '获取所有专辑失败',
+  'analiseAllAlbumFail': '解析所有专辑失败',
+  'getPlayListFail': '获取歌单内容失败',
+  'getAllArtistFail': '获取所有艺人失败',
+  'addFail': '添加失败',
+  'addSuccess': '添加成功',
+  'deloveFail': '取消失败',
+  'deloveSuccess': '取消成功',
+  'enableWsContent': '这是一个测试的功能，请务必在阅读Github上的使用说明文档后使用\n端口号为9098\n你需要重新启动netPlayer',
+  'continueCloseApp': '继续并关闭netPlayer',
+  'closeWs': '关闭ws服务',
+  'closeWsContent': '你需要重新启动netPlayer',
+  'getAlbumInfoFail': '获取专辑信息失败',
+  'getArtistInfoFail': '获取艺人信息失败',
+  'searchFail': '搜索失败',
+  'about': '关于',
+
+  'add': '添加'
 };

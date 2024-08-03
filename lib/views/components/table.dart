@@ -364,7 +364,7 @@ class _SongItemState extends State<SongItem> {
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('添加到歌单...'),
+          title: Text('addToList'.tr),
           content: StatefulBuilder(
             builder: (BuildContext context, StateSetter setState){
               return SizedBox(
@@ -418,14 +418,14 @@ class _SongItemState extends State<SongItem> {
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              child: const Text('取消')
+              child: Text('cancel'.tr)
             ),
             ElevatedButton(
               onPressed: (){
                 Operations().addToList(context, widget.id, selectItem);
                 Navigator.pop(context);
               }, 
-              child: const Text('添加')
+              child: Text('add'.tr)
             )
           ],
         )
