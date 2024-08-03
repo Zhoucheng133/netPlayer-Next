@@ -53,7 +53,7 @@ class _AllViewState extends State<AllView> {
 
   Future<void> refresh() async {
     await operations.checkAllSongPlay(context);
-    showMessage(true, '更新成功', context);
+    showMessage(true, 'updateOk'.tr, context);
   }
 
   @override
@@ -64,7 +64,7 @@ class _AllViewState extends State<AllView> {
         children: [
           Column(
             children: [
-              Obx(() => ViewHeader(title: '所有歌曲', subTitle: '共有${c.allSongs.length}首', page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
+              Obx(() => ViewHeader(title: 'allSongs'.tr, subTitle: 'total'.tr+c.allSongs.length.toString()+'songTotal'.tr, page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
               const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

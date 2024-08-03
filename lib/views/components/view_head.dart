@@ -130,7 +130,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                 Obx(()=>
                   c.allSongs.length>=500 && widget.page=='all' ? 
                   Tooltip(
-                    message: '注意，所有歌曲数量可能大于500首\n完全随机播放不受影响',
+                    message: 'overCountTip'.tr,
                     child: MouseRegion(
                       onEnter: (_){
                         setState(() {
@@ -160,7 +160,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                     Operations().fullRandomPlaySwitcher(context);
                   },
                   child: Tooltip(
-                    message: '随机播放所有歌曲',
+                    message: 'shuffleAllSongs'.tr,
                     waitDuration: const Duration(seconds: 1),
                     child: MouseRegion(
                       onEnter: (_){
@@ -247,7 +247,7 @@ class _ViewHeaderState extends State<ViewHeader> {
             },
             child: Tooltip(
               waitDuration: const Duration(seconds: 1),
-              message: '定位歌曲',
+              message: 'locate'.tr,
               child: Obx(()=>
                 MouseRegion(
                   cursor: c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? SystemMouseCursors.click : SystemMouseCursors.forbidden,
@@ -283,7 +283,7 @@ class _ViewHeaderState extends State<ViewHeader> {
               },
               child: Tooltip(
                 waitDuration: const Duration(seconds: 1),
-                message: '刷新',
+                message: 'refresh'.tr,
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,
                   onEnter: (_){
@@ -374,7 +374,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                     maxWidth: MediaQuery.of(context).size.width - 550,
                   ),
                   child: Text(
-                    '搜索: ',
+                    '${'search'.tr}:',
                     style: GoogleFonts.notoSansSc(
                       color: c.color5,
                       fontWeight: FontWeight.bold,

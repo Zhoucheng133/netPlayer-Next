@@ -38,14 +38,14 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
           showDialog(
             context: context, 
             builder: (BuildContext context)=>AlertDialog(
-              title: const Text('启动WebSocket服务失败'),
-              content: const Text('可能默认或者你设定的WebSocket端口被占用\n你需要前往设置中修改ws服务端口'),
+              title: Text('wsFailedTitle'.tr),
+              content: Text('wsFailedContent'.tr),
               actions: [
                 ElevatedButton(
                   onPressed: (){
                     Navigator.pop(context);
                   }, 
-                  child: const Text('好的')
+                  child: Text('ok'.tr)
                 )
               ],
             )
@@ -85,20 +85,20 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
       items: [
         MenuItem(
           key: "toggle",
-          label: "播放/暂停"
+          label: "play/pause".tr
         ),
         MenuItem(
           key: "previous_song",
-          label: "上一首"
+          label: "skipPre".tr
         ),
         MenuItem(
           key: "next_song",
-          label: "下一首",
+          label: "skipNext".tr,
         ),
         MenuItem.separator(),
         MenuItem(
           key: 'exit_app',
-          label: '退出 netPlayer',
+          label: 'exit'.tr,
         ),
       ],
     );
@@ -185,14 +185,14 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
           showDialog(
             context: context, 
             builder: (BuildContext context)=>AlertDialog(
-              title: const Text('登录失败'),
-              content: const Text('网络请求失败，请检查你的网络和服务器运行状态'),
+              title: Text('loginFail'.tr),
+              content: Text('loginConnectFail'.tr),
               actions: [
                 ElevatedButton(
                   onPressed: (){
                     Navigator.pop(context);
                   }, 
-                  child: const Text('好的')
+                  child: Text('ok'.tr)
                 )
               ],
             ),
@@ -207,8 +207,8 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
           showDialog(
             context: context, 
             builder: (BuildContext context)=>AlertDialog(
-              title: const Text('登录失败'),
-              content: const Text('用户名或者密码错误'),
+              title: Text('loginFail'.tr),
+              content: Text('passwordErr'.tr),
               actions: [
                 ElevatedButton(
                   onPressed: (){
@@ -217,7 +217,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                     });
                     Navigator.pop(context);
                   }, 
-                  child: const Text('好的')
+                  child: Text('ok'.tr)
                 )
               ],
             ),
@@ -260,10 +260,10 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
         Expanded(
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
-            child: isLoading ? const Center(
+            child: isLoading ? Center(
               child: Padding(
-                padding: EdgeInsets.only(bottom: 30),
-                child: Text('加载中...'),
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Text('loading'.tr),
               ),
             ) : isLogin ? const MainView() : const LoginView(),
           ),

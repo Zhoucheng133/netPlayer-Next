@@ -200,7 +200,7 @@ class _LyricViewState extends State<LyricView> {
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
-                                  message: '上一首',
+                                  message: 'skipPre'.tr,
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
                                     onEnter: (_){
@@ -232,7 +232,7 @@ class _LyricViewState extends State<LyricView> {
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
-                                  message: '播放/暂停',
+                                  message: 'play/pause'.tr,
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
                                     onEnter: (_){
@@ -277,7 +277,7 @@ class _LyricViewState extends State<LyricView> {
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
-                                  message: '下一首',
+                                  message: 'skipNext'.tr,
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
                                     onEnter: (_){
@@ -398,7 +398,7 @@ class _LyricViewState extends State<LyricView> {
                                   child: Obx(()=>
                                     !isLoved() ?
                                     Tooltip(
-                                      message: '添加到喜欢',
+                                      message: 'love'.tr,
                                       waitDuration: const Duration(seconds: 1),
                                       child: TweenAnimationBuilder(
                                         tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
@@ -410,7 +410,7 @@ class _LyricViewState extends State<LyricView> {
                                         )
                                       ),
                                     ) : Tooltip(
-                                      message: '取消喜欢',
+                                      message: 'delove'.tr,
                                       waitDuration: const Duration(seconds: 1),
                                       child: TweenAnimationBuilder(
                                         tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red), 
@@ -485,8 +485,7 @@ class _LyricViewState extends State<LyricView> {
                                 ),
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
-                                  message: '调整音量',
-
+                                  message: 'adjustVolume'.tr,
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
                                     onEnter: (_){
@@ -526,51 +525,51 @@ class _LyricViewState extends State<LyricView> {
                                     await prefs.setString('playMode', val);
                                   },
                                   itemBuilder: (BuildContext context)=>[
-                                    const PopupMenuItem(
+                                    PopupMenuItem(
                                       value: "list",
                                       height: 35,
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.repeat_rounded,
                                             size: 18,
                                           ),
-                                          SizedBox(width: 5,),
-                                          Text("列表播放")
+                                          const SizedBox(width: 5,),
+                                          Text("loop".tr)
                                         ],
                                       ),
                                     ),
-                                    const PopupMenuItem(
+                                    PopupMenuItem(
                                       value: "repeat",
                                       height: 35,
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.repeat_one_rounded,
                                             size: 18,
                                           ),
-                                          SizedBox(width: 5,),
-                                          Text("单曲循环")
+                                          const SizedBox(width: 5,),
+                                          Text("single".tr)
                                         ],
                                       ),
                                     ),
-                                    const PopupMenuItem(
+                                    PopupMenuItem(
                                       value: "random",
                                       height: 35,
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.shuffle_rounded,
                                             size: 18,
                                           ),
-                                          SizedBox(width: 5,),
-                                          Text("随机播放")
+                                          const SizedBox(width: 5,),
+                                          Text("shuffle".tr)
                                         ],
                                       ),
                                     )
@@ -579,7 +578,7 @@ class _LyricViewState extends State<LyricView> {
                                     color: Colors.white,
                                     child: Tooltip(
                                       waitDuration: const Duration(seconds: 1),
-                                      message: '播放顺序',
+                                      message: 'playMode'.tr,
                                       child: MouseRegion(
                                         cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
                                         onEnter: (_){
@@ -670,7 +669,7 @@ class _LyricViewState extends State<LyricView> {
                           right: 20,
                           bottom: 10,
                           child: Tooltip(
-                            message: '注意: 歌词内容未必准确\n歌词内容来自lrclib.net',
+                            message: 'lyricTip'.tr,
                             child: MouseRegion(
                               onEnter: (_){
                                 setState(() {
@@ -707,7 +706,7 @@ class _LyricViewState extends State<LyricView> {
                   Operations().toggleLyric(context);
                 },
                 child: Tooltip(
-                  message: '隐藏歌词',
+                  message: 'hideLyric'.tr,
                   waitDuration: const Duration(seconds: 1),
                   child: MouseRegion(
                     onEnter: (_){

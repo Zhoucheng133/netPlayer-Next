@@ -30,7 +30,7 @@ class _SettingsViewState extends State<SettingsView> {
 
   Future<void> refreshLibrary(BuildContext context) async {
     await HttpRequests().refreshLibrary();
-    showMessage(true, '刷新成功', context);
+    showMessage(true, 'refreshSuccess'.tr, context);
     await Operations().getAllSongs(context);
     await Operations().getAlbums(context);
     await Operations().getArtists(context);
@@ -46,7 +46,7 @@ class _SettingsViewState extends State<SettingsView> {
     showDialog(
       context: context, 
       builder: (BuildContext context)=>AlertDialog(
-        title: const Text('WebSocket服务设置'),
+        title: Text('wsSettings'.tr),
         content: StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return Column(
@@ -54,12 +54,12 @@ class _SettingsViewState extends State<SettingsView> {
               children: [
                 Row(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       width: 80,
                       height: 30,
                       child: Align(
                         alignment: Alignment.centerRight,
-                        child: Text('端口'),
+                        child: Text('port'.tr),
                       ),
                     ),
                     const SizedBox(width: 15),
@@ -119,7 +119,7 @@ class _SettingsViewState extends State<SettingsView> {
             onPressed: (){
               Navigator.pop(context);
             }, 
-            child:  const Text('取消')
+            child:  Text('cancel'.tr)
           ),
           ElevatedButton(
             onPressed: () async {
@@ -130,20 +130,20 @@ class _SettingsViewState extends State<SettingsView> {
               showDialog(
                 context: context, 
                 builder: (BuildContext context)=>AlertDialog(
-                  title: const Text('应用WebSocket设置'),
-                  content: const Text('重启netPlayer来应用设置'),
+                  title: Text('applyWS'.tr),
+                  content: Text('restartNetp'.tr),
                   actions: [
                     ElevatedButton(
                       onPressed: (){
                         Navigator.pop(context);
                       }, 
-                      child: const Text('好的')
+                      child: Text('ok'.tr)
                     )
                   ],
                 )
               );
             }, 
-            child: const Text('完成')
+            child: Text('finish'.tr)
           )
         ],
       )
@@ -160,16 +160,16 @@ class _SettingsViewState extends State<SettingsView> {
             children: [
               Column(
                 children: [
-                  const ViewHeader(title: '设置', subTitle: '', page: 'settings',),
+                  ViewHeader(title: 'settings'.tr, subTitle: '', page: 'settings',),
                   const SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('保存播放的歌曲')
+                          child: Text('savePlayed'.tr)
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -197,11 +197,11 @@ class _SettingsViewState extends State<SettingsView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('自动登录')
+                          child: Text('autoLogin'.tr)
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -229,11 +229,11 @@ class _SettingsViewState extends State<SettingsView> {
                   Platform.isWindows ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('后台播放')
+                          child: Text('playBackground'.tr)
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -261,11 +261,11 @@ class _SettingsViewState extends State<SettingsView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('启用全局快捷键')
+                          child: Text('enableShortcuts'.tr)
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -293,11 +293,11 @@ class _SettingsViewState extends State<SettingsView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('启用ws服务')
+                          child: Text('enableWs'.tr)
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -345,7 +345,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     color: hoverWs ? c.color6 : c.color5
                                   ), 
                                   duration: const Duration(milliseconds: 200),
-                                  child: const Text('设置')
+                                  child: Text('settings'.tr)
                                 ),
                               ),
                             )
@@ -357,11 +357,11 @@ class _SettingsViewState extends State<SettingsView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('服务器地址')
+                          child: Text('serviceUrl'.tr)
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -434,7 +434,7 @@ class _SettingsViewState extends State<SettingsView> {
                         refreshLibrary(context);
                       }, 
                       child: Text(
-                        '刷新音乐库',
+                        'refreshLibrary'.tr,
                         style: GoogleFonts.notoSansSc(
                           color: c.color6
                         ),
@@ -462,8 +462,8 @@ class _SettingsViewState extends State<SettingsView> {
                             color: hoverAbout ? c.color6 : Colors.black,
                           ),
                           duration: const Duration(milliseconds: 200),
-                          child: const Text(
-                            '关于 netPlayer',
+                          child: Text(
+                            'aboutNetp'.tr,
                             softWrap: false,
                           ),
                         ),

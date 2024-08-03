@@ -30,6 +30,7 @@ const Map<String, String> zhCN = {
   'shuffleAllSongs': '随机播放所有歌曲',
   'logoutTitle': '注销当前账户?',
   'logoutContent': '注销后会回到登录页面',
+  
   'savePlayed': '保存播放的歌曲',
   'autoLogin': '自动登录',
   'playBackground': '后台播放',
@@ -45,5 +46,54 @@ const Map<String, String> zhCN = {
   'ok': '好的',
   'finish': '完成',
   'lyricTip': '注意: 歌词内容未必准确\n歌词内容来自lrclib.net',
-  'overCountTip': '注意，所有歌曲数量可能大于500首\n完全随机播放不受影响'
+  'overCountTip': '注意，所有歌曲数量可能大于500首\n完全随机播放不受影响',
+  'hideLyric': '隐藏歌词',
+
+  'addToList': '添加到歌单...',
+  'showArtist': '显示艺人',
+  'showAlbum': '显示专辑',
+  'removeFromList': "从歌单中移除",
+
+  'album': '专辑',
+  'searchSong': '搜索歌曲',
+  'searchAlbum': '搜索专辑',
+  'searchArtist': '搜索艺人',
+
+  'total': '共有',
+  'albumTotal': '个专辑',
+  'artistTotal': '位艺人',
+  'songTotal': '首歌曲',
+
+  'noLyric': '没有找到歌词',
+  'searchingLyric': '查找歌词中...',
+
+  'wsFailedTitle': '启动WebSocket服务失败',
+  'wsFailedContent': '可能默认或者你设定的WebSocket端口被占用\n你需要前往设置中修改ws服务端口',
+
+  'rename': '重命名',
+  'deletePlayList': '删除歌单',
+  'deletePlayListContent': '确定要删除这个歌单吗?',
+  'delete': '删除',
+
+  'exit': '退出 netPlayer',
+
+  'loginFail': '登录失败',
+  'loginConnectFail': '网络请求失败，请检查你的网络和服务器运行状态',
+  'passwordErr': '用户名或者密码错误',
+  'urlEmpty': 'URL地址不能为空',
+  'urlInvalid': 'URL地址不合法',
+  'usernameEmpty': '用户名不能为空',
+  'passwordEmpt': '密码不能为空',
+
+  'loading': '加载中...',
+
+  'refreshSuccess': '刷新成功',
+
+  'port': '端口',
+  'applyWS': '应用WebSocket设置',
+  'restartNetp': '重启netPlayer来应用设置',
+
+  'updateOk': '更新成功',
+
+  'connectLibrary': '连接到你的音乐库'
 };

@@ -1,7 +1,7 @@
 const Map<String, String> enUS = {
   'albums': 'Albums',
   'artists': 'Artists',
-  'lovedSongs': 'Loved songs',
+  'lovedSongs': 'Loved',
   'allSongs': 'All',
   'search': 'Search',
   'playLists': 'Playlists',
@@ -30,10 +30,11 @@ const Map<String, String> enUS = {
   'shuffleAllSongs': 'Shuffle all the songs',
   'logoutTitle': 'Logout?',
   'logoutContent': 'Back to login view after logout',
+
   'savePlayed': 'Save played songs',
   'autoLogin': 'Auto login',
   'playBackground': 'Background playback',
-  'enableShortcuts': 'Enable system shortcut',
+  'enableShortcuts': 'Enable shortcuts',
   'enableWs': 'Enable ws service',
   'serviceUrl': 'Service URL',
   'refreshLibrary': 'Refresh library',
@@ -45,5 +46,54 @@ const Map<String, String> enUS = {
   'ok': 'OK',
   'finish': 'OK',
   'lyricTip': 'Notice: Lyrics may not corret\nLyrics from lrclib.net',
-  'overCountTip': 'Notice: Songs count may over 500\nFull shuffle is not affected'
+  'overCountTip': 'Notice: Songs count may over 500\nFull shuffle is not affected',
+  'hideLyric': 'Hide lyrics',
+
+  'addToList': 'Add to list...',
+  'showArtist': 'Show artist',
+  'showAlbum': 'Show album',
+  'removeFromList': "remove from list",
+
+  'album': 'Album',
+  'searchSong': 'Search songs',
+  'searchAlbum': 'Search albums',
+  'searchArtist': 'Search artists',
+
+  'total': 'Total: ',
+  'albumTotal': 'album(s)',
+  'artistTotal': 'artist(s)',
+  'songTotal': 'song(s)',
+
+  'noLyric': 'No lyrics found',
+  'searchingLyric': 'Searching for lyrics...',
+
+  'wsFailedTitle': 'Enable WebSocket service failed',
+  'wsFailedContent': 'Maybe default port or the port you set is occupied\nYou need to change ws service port on settings',
+
+  'rename': 'Rename',
+  'deletePlayList': 'Delete playlist',
+  'deletePlayListContent': 'Are you confirm to delete this playlist?',
+  'delete': 'Delete',
+
+  'exit': 'Exit',
+
+  'loginFail': 'Login failed',
+  'loginConnectFail': 'Request failed. Please check your network and service',
+  'passwordErr': 'Username or password not correct',
+  'urlEmpty': 'URL cannot empty',
+  'urlInvalid': 'URL is invalid',
+  'usernameEmpty': 'Username cannot empty',
+  'passwordEmpt': 'Password cannot empty',
+
+  'loading': 'Loading...',
+
+  'refreshSuccess': 'Refresh successed',
+
+  'port': 'port',
+  'applyWS': 'Apply WebSocket settings',
+  'restartNetp': 'Restart netPlayer to apply',
+
+  'updateOk': 'Update success',
+
+  'connectLibrary': 'Connect to your music',
 };

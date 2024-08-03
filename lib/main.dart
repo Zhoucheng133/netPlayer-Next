@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:net_player_next/lang/en_us.dart';
+import 'package:net_player_next/lang/zh_cn.dart';
 import 'package:net_player_next/views/functions/audio.dart';
 import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -39,18 +41,30 @@ Future<void> main(List<String> args) async {
   runApp(const MainApp());
 }
 
+class MainTranslations extends Translations {
+  @override
+  Map<String, Map<String, String>> get keys => {
+        'en_US': enUS,
+        'zh_CN': zhCN,
+      };
+}
+
+
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      translations: MainTranslations(),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
+      locale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('zh', 'CN'),
       supportedLocales: const [
         Locale('zh', 'CN'),
         Locale('en', 'US'),

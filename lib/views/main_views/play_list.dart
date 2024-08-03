@@ -128,7 +128,7 @@ class _PlayListViewState extends State<PlayListView> {
         c.isPlay.value=false;
       }
     }
-    showMessage(true, '更新成功', context);
+    showMessage(true, 'updateOk'.tr, context);
   }
 
   @override
@@ -139,7 +139,7 @@ class _PlayListViewState extends State<PlayListView> {
         children: [
           Column(
             children: [
-              Obx(()=>ViewHeader(title: name, subTitle: '共有${list.length}首', page: 'playList', id: c.pageId.value, locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
+              Obx(()=>ViewHeader(title: name, subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: 'playList', id: c.pageId.value, locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
               const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

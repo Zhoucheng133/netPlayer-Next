@@ -69,8 +69,8 @@ class _AlbumViewState extends State<AlbumView> {
           Column(
             children: [
               Obx(() => 
-                c.pageId.value=='' ? ViewHeader(title: '专辑', subTitle: '共有${c.albums.length}个专辑', page: 'album', refresh: ()=>refresh(context), controller: inputController,) :
-                ViewHeader(title: '专辑: $albumName', subTitle: '共有${list.length}首', page: 'album', refresh: ()=>(){},)
+                c.pageId.value=='' ? ViewHeader(title: 'albums'.tr, subTitle: 'total'.tr+c.albums.length.toString()+'albumTotal'.tr, page: 'album', refresh: ()=>refresh(context), controller: inputController,) :
+                ViewHeader(title: '${"album".tr}: $albumName', subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: 'album', refresh: ()=>(){},)
               ),
               // const albumHeader(),
               Obx(()=>

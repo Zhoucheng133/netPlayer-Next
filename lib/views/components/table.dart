@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,27 +26,27 @@ class _SongHeaderState extends State<SongHeader> {
         SizedBox(
           height: 35,
           width: MediaQuery.of(context).size.width - 200,
-          child: const Row(
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 width: 50,
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('序号'),
+                  child: Text('no.'.tr),
                 )
               ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('标题'),
+                  child: Text('songTitle'.tr),
                 )
               ),
               SizedBox(
                 width: 150,
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('艺人'),
+                  child: Text('artist'.tr),
                 ),
               ),
               SizedBox(
@@ -103,25 +103,25 @@ class _ArtistHeaderState extends State<ArtistHeader> {
         SizedBox(
           height: 35,
           width: MediaQuery.of(context).size.width - 200,
-          child: const Row(
+          child: Row(
             children: [
               SizedBox(
                 width: 50,
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('序号'),
+                  child: Text('no.'.tr),
                 )
               ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('艺人'),
+                  child: Text('artist'.tr),
                 )
               ),
               SizedBox(
                 width: 100,
                 child: Center(
-                  child: Text('专辑数量')
+                  child: Text('albumCount'.tr)
                 ),
               )
             ],
@@ -160,31 +160,31 @@ class _AlbumHeaderState extends State<AlbumHeader> {
         SizedBox(
           height: 35,
           width: MediaQuery.of(context).size.width - 200,
-          child: const Row(
+          child: Row(
             children: [
               SizedBox(
                 width: 50,
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('序号'),
+                  child: Text('no.'.tr),
                 )
               ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('专辑名称'),
+                  child: Text('albumTitle'.tr),
                 )
               ),
               SizedBox(
                 width: 150,
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('艺人')
+                  child: Text('artist'.tr)
                 ),
               ),
               SizedBox(
                 width: 70,
-                child: Center(child: Text('歌曲数')),
+                child: Center(child: Text('songCount'.tr)),
               )
             ],
           ),
@@ -262,7 +262,7 @@ class _SongItemState extends State<SongItem> {
           value: "add",
           enabled: c.playLists.isNotEmpty,
           height: 35,
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -271,11 +271,11 @@ class _SongItemState extends State<SongItem> {
                 size: 18,
               ),
               SizedBox(width: 5,),
-              Text("添加到歌单...")
+              Text("addToList".tr)
             ],
           ),
         ),
-        isLoved() ? const PopupMenuItem(
+        isLoved() ? PopupMenuItem(
           value: "delove",
           height: 35,
           child: Row(
@@ -287,10 +287,10 @@ class _SongItemState extends State<SongItem> {
                 size: 18,
               ),
               SizedBox(width: 5,),
-              Text("取消喜欢")
+              Text("delove".tr)
             ],
           ),
-        ) : const PopupMenuItem(
+        ) : PopupMenuItem(
           value: "love",
           height: 35,
           child: Row(
@@ -302,7 +302,7 @@ class _SongItemState extends State<SongItem> {
                 size: 18,
               ),
               SizedBox(width: 5,),
-              Text("喜欢")
+              Text("love".tr)
             ],
           ),
         ),
@@ -310,7 +310,7 @@ class _SongItemState extends State<SongItem> {
           value: "album",
           height: 35,
           enabled: widget.albumId.isNotEmpty,
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -319,7 +319,7 @@ class _SongItemState extends State<SongItem> {
                 size: 18,
               ),
               SizedBox(width: 5,),
-              Text("查看专辑")
+              Text("showAlbum".tr)
             ],
           ),
         ),
@@ -327,7 +327,7 @@ class _SongItemState extends State<SongItem> {
           value: "artist",
           height: 35,
           enabled: widget.artistId.isNotEmpty,
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -336,7 +336,7 @@ class _SongItemState extends State<SongItem> {
                 size: 18,
               ),
               SizedBox(width: 5,),
-              Text("查看艺人")
+              Text("showArtist".tr)
             ],
           ),
         ),
@@ -344,7 +344,7 @@ class _SongItemState extends State<SongItem> {
           value: "del",
           height: 35,
           enabled: widget.listId!=null,
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -353,7 +353,7 @@ class _SongItemState extends State<SongItem> {
                 size: 18,
               ),
               SizedBox(width: 5,),
-              Text("从歌单中删除")
+              Text("removeFromList".tr)
             ],
           ),
         ),

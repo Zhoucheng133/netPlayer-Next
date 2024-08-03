@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -96,15 +97,18 @@ class _PlayListLabelState extends State<PlayListLabel> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('歌单'),
+              // const Text('歌单'),
+              Text('playLists'.tr, style: GoogleFonts.notoSansSc(
+                fontSize: 13,
+              ),),
               GestureDetector(
                 onTap: (){
                   widget.addPlayListHandler();
                 },
-                child: const Tooltip(
-                  message: '添加歌单',
-                  waitDuration: Duration(seconds: 1),
-                  child: MouseRegion(
+                child: Tooltip(
+                  message: 'addPlayList'.tr,
+                  waitDuration: const Duration(seconds: 1),
+                  child: const MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: Icon(
                       Icons.add_rounded,
@@ -165,7 +169,7 @@ class _AccountPartState extends State<AccountPart> {
                 c.pageId.value='';
               },
               child: Tooltip(
-                message: '设置',
+                message: 'settings'.tr,
                 waitDuration: const Duration(seconds: 1),
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,
@@ -206,7 +210,7 @@ class _AccountPartState extends State<AccountPart> {
                 widget.logoutHandler();
               },
               child: Tooltip(
-                message: '注销',
+                message: 'logout'.tr,
                 waitDuration: const Duration(seconds: 1),
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,

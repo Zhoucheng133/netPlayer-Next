@@ -69,7 +69,7 @@ class _PlayBarState extends State<PlayBar> {
                   Operations().toggleLyric(context);
                 },
                 child: Tooltip(
-                  message: '显示歌词',
+                  message: 'showLyric'.tr,
                   waitDuration: const Duration(seconds: 1),
                   child: MouseRegion(
                     cursor: SystemMouseCursors.click,
@@ -179,7 +179,7 @@ class _PlayBarState extends State<PlayBar> {
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
-                                  message: '上一首',
+                                  message: 'skipPre'.tr,
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
                                     onEnter: (_){
@@ -210,7 +210,7 @@ class _PlayBarState extends State<PlayBar> {
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
-                                  message: '播放/暂停',
+                                  message: 'play/pause'.tr,
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
                                     onEnter: (_){
@@ -253,7 +253,7 @@ class _PlayBarState extends State<PlayBar> {
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
-                                  message: '下一首',
+                                  message: 'skipNext'.tr,
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
                                     onEnter: (_){
@@ -378,7 +378,7 @@ class _PlayBarState extends State<PlayBar> {
                       child: Obx(()=>
                         !isLoved() ?
                         Tooltip(
-                          message: '添加到喜欢',
+                          message: 'love'.tr,
                           waitDuration: const Duration(seconds: 1),
                           child: TweenAnimationBuilder(
                             tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
@@ -390,7 +390,7 @@ class _PlayBarState extends State<PlayBar> {
                             )
                           ),
                         ) : Tooltip(
-                          message: '取消喜欢',
+                          message: 'delove'.tr,
                           waitDuration: const Duration(seconds: 1),
                           child: TweenAnimationBuilder(
                             tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red), 
@@ -423,7 +423,7 @@ class _PlayBarState extends State<PlayBar> {
                         });
                       },
                       child: Tooltip(
-                        message: '显示歌词',
+                        message: 'showLyric'.tr,
                         waitDuration: const Duration(seconds: 1),
                         child: TweenAnimationBuilder(
                           tween: ColorTween(end: hoverLyric ? c.color6 : c.color5), 
@@ -497,7 +497,7 @@ class _PlayBarState extends State<PlayBar> {
                     ),
                     child: Tooltip(
                       waitDuration: const Duration(seconds: 1),
-                      message: '调整音量',
+                      message: 'adjustVolume'.tr,
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,
                         onEnter: (_){
@@ -537,51 +537,51 @@ class _PlayBarState extends State<PlayBar> {
                         await prefs.setString('playMode', val);
                       },
                       itemBuilder: (BuildContext context)=>[
-                        const PopupMenuItem(
+                        PopupMenuItem(
                           value: "list",
                           height: 35,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.repeat_rounded,
                                 size: 18,
                               ),
-                              SizedBox(width: 5,),
-                              Text("列表播放")
+                              const SizedBox(width: 5,),
+                              Text("loop".tr)
                             ],
                           ),
                         ),
-                        const PopupMenuItem(
+                        PopupMenuItem(
                           value: "repeat",
                           height: 35,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.repeat_one_rounded,
                                 size: 18,
                               ),
-                              SizedBox(width: 5,),
-                              Text("单曲循环")
+                              const SizedBox(width: 5,),
+                              Text("single".tr)
                             ],
                           ),
                         ),
-                        const PopupMenuItem(
+                        PopupMenuItem(
                           value: "random",
                           height: 35,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.shuffle_rounded,
                                 size: 18,
                               ),
-                              SizedBox(width: 5,),
-                              Text("随机播放")
+                              const SizedBox(width: 5,),
+                              Text("shuffle".tr)
                             ],
                           ),
                         )
@@ -590,7 +590,7 @@ class _PlayBarState extends State<PlayBar> {
                         color: c.color1,
                         child: Tooltip(
                           waitDuration: const Duration(seconds: 1),
-                          message: '播放顺序',
+                          message: 'playMode'.tr,
                           child: MouseRegion(
                             cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
                             onEnter: (_){

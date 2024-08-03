@@ -114,10 +114,10 @@ class _MainViewState extends State<MainView> {
     c.lyric.value=[
       {
         'time': 0,
-        'content': '查找歌词中...',
+        'content': 'searchingLyric'.tr,
       }
     ];
-    var content='查找歌词中...';
+    var content='searchingLyric'.tr;
     if(c.useWs.value){
       c.ws.sendMsg(content);
     }

@@ -51,14 +51,14 @@ class _LoginViewState extends State<LoginView> {
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('登录失败'),
-          content: const Text('URL地址不能为空'),
+          title: Text('loginFail'.tr),
+          content: Text('urlEmpty'.tr),
           actions: [
             ElevatedButton(
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              child: const Text('好的')
+              child: Text('ok'.tr)
             )
           ],
         ),
@@ -69,14 +69,14 @@ class _LoginViewState extends State<LoginView> {
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('登录失败'),
-          content: const Text('URL地址不合法'),
+          title: Text('loginFail'.tr),
+          content: Text('urlInvalid'.tr),
           actions: [
             ElevatedButton(
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              child: const Text('好的')
+              child: Text('ok'.tr)
             )
           ],
         ),
@@ -87,14 +87,14 @@ class _LoginViewState extends State<LoginView> {
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('登录失败'),
-          content: const Text('用户名不能为空'),
+          title: Text('loginFail'.tr),
+          content: Text('usernameEmpty'.tr),
           actions: [
             ElevatedButton(
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              child: const Text('好的')
+              child: Text('ok'.tr)
             )
           ],
         ),
@@ -105,14 +105,14 @@ class _LoginViewState extends State<LoginView> {
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('登录失败'),
-          content: const Text('密码不能为空'),
+          title: Text('loginFail'.tr),
+          content: Text('passwordEmpt'.tr),
           actions: [
             ElevatedButton(
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              child: const Text('好的')
+              child: Text('ok'.tr)
             )
           ],
         ),
@@ -127,14 +127,14 @@ class _LoginViewState extends State<LoginView> {
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('登录失败'),
-          content: const Text('网络请求失败，请检查你的网络和服务器运行状态'),
+          title: Text('loginFail'.tr),
+          content: Text('loginConnectFail'.tr),
           actions: [
             ElevatedButton(
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              child: const Text('好的')
+              child: Text('ok'.tr)
             )
           ],
         ),
@@ -144,14 +144,14 @@ class _LoginViewState extends State<LoginView> {
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
-          title: const Text('登录失败'),
-          content: const Text('用户名或者密码错误'),
+          title: Text('loginFail'.tr),
+          content: Text('passwordErr'.tr),
           actions: [
             ElevatedButton(
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              child: const Text('好的')
+              child: Text('ok'.tr)
             )
           ],
         ),
@@ -204,7 +204,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       const SizedBox(width: 10,),
                       Text(
-                        "连接到你的音乐库",
+                        "connectLibrary".tr,
                         style: GoogleFonts.notoSansSc(
                           fontSize: 20,
                         ),

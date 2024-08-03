@@ -53,7 +53,7 @@ class _LovedViewState extends State<LovedView> {
 
   Future<void> refresh() async {
     await operations.checkLovedSongPlay(context);
-    showMessage(true, '更新成功', context);
+    showMessage(true, 'updateOk'.tr, context);
   }
 
   @override
@@ -64,7 +64,7 @@ class _LovedViewState extends State<LovedView> {
         children: [
           Column(
             children: [
-              Obx(()=>ViewHeader(title: '喜欢的歌曲', subTitle: '共有${c.lovedSongs.length}首', page: 'loved', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,)),
+              Obx(()=>ViewHeader(title: 'lovedSongs'.tr, subTitle: 'total'.tr+c.lovedSongs.length.toString()+'songTotal'.tr, page: 'loved', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,)),
               const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

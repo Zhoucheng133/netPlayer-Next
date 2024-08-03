@@ -97,11 +97,11 @@ class _SideBarState extends State<SideBar> {
       padding: const EdgeInsets.only(top: 10),
       child: Column(
         children: [
-          const SideBarItem(name: '专辑', icon: Icons.album_rounded, index: 3,),
-          const SideBarItem(name: '艺人', icon: Icons.mic_rounded, index: 2,),
-          const SideBarItem(name: '喜欢的歌曲', icon: Icons.favorite_rounded, index: 1,),
-          const SideBarItem(name: '所有歌曲', icon: Icons.queue_music_rounded, index: 0,),
-          const SideBarItem(name: '搜索', icon: Icons.search_rounded, index: 5,),
+          SideBarItem(name: 'albums'.tr, icon: Icons.album_rounded, index: 3,),
+          SideBarItem(name: 'artists'.tr, icon: Icons.mic_rounded, index: 2,),
+          SideBarItem(name: 'lovedSongs'.tr, icon: Icons.favorite_rounded, index: 1,),
+          SideBarItem(name: 'allSongs'.tr, icon: Icons.queue_music_rounded, index: 0,),
+          SideBarItem(name: 'search'.tr, icon: Icons.search_rounded, index: 5,),
           PlayListLabel(addPlayListHandler: () => addPlayListHandler(context),),
           const PlayListPart(),
           AccountPart(logoutHandler: () => logoutHandler(),),
