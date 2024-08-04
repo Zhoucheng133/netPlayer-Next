@@ -123,7 +123,9 @@ WebSocket服务器默认地址为: `localhost:9098`
    4. 所属专辑(唱片集)
    音乐文件是否附带专辑封面不会影响程序运行
    【第二种】老版本的netPlayer Next和新版本冲突
-   解决办法为删除这个目录: C:\Users\<你的用户名>\AppData\Roaming\zhouc\net_player_next
+   解决办法为删除这两个目录:
+   C:\Users\<你的用户名>\AppData\Roaming\zhouc\net_player_next
+   C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer
    ```
 4. 没有找到歌词:
    ```
@@ -139,7 +141,7 @@ WebSocket服务器默认地址为: `localhost:9098`
 
 ## 在你的设备上配置netPlayer Next
 
-本项目使用lutter^3.22开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
+本项目使用Flutter^3.22开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
 建议直接使用Visual Studio Code，在安装完Flutter扩展和Dart扩展之后就可以Debug/Profile/Release了，我已经在.vscode文件夹中添加了launch类型
 
 不要使用Flutter3.7或更低版本的Flutter，确保Dart版本至少有3.0.0
