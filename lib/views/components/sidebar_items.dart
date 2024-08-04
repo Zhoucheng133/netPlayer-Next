@@ -384,6 +384,7 @@ class _PlayListItemState extends State<PlayListItem> {
             ),
             onEditingComplete: (){
               Operations().renamePlayList(context, widget.id, newName.text);
+              Navigator.pop(context);
             },
           ),
           actions: [
