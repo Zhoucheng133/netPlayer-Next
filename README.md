@@ -50,8 +50,11 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 |定位歌曲|❌|✅|✅|
 |全局快捷键|仅macOS|✅|✅|
 |WebSocket服务|❌|❌|✅|
+|多语言支持|❌|❌|✅**|
 
 \* 由于本人换电脑，macOS没法打包，如果你有需要可以在自己的设备上打包v3版本(所以也不清楚macOS版本的运行情况，欢迎给予反馈!)
+
+\*\* 从 **v3.2.0** 版本开始支持多语言，你[**点击这里**](#多语言支持)查看详细的语言支持
 
 ## 快捷键
 

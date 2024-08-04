@@ -34,7 +34,28 @@
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
+**★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
+
+**Notice: This is [netPlayer](https://github.com/Zhoucheng133/net-player) Flutter version**  
+This version of netPlayer starts from `v2.0.0`
+
+**This version of netPlayer does NOT support Windows 7.**
+
+||v1|v2|v3|
+|-|-|-|-|
+|Supported Windows versions|Windows7~|Windows10~|Windows10~|
+|Framwork|Electron|Flutter|Flutter
+|Support macOS|✅|✅|✅*|
+|Single play|❌|✅|✅|
+|Locate song played|❌|✅|✅|
+|Global Shortcuts|macOS only|✅|✅|
+|Websocket|❌|❌|✅|
+|Multi language support|❌|❌|✅**|
+
+
 \* Since I switched to Windows PC, I can't build macOS version. If you need it, you can build it on your own Mac (Also I don't know whether it runs ok on Mac. You can give me some feedbacks).
+
+\*\* From **v3.2.0**, You can see the detail of multi language support at [**Language support**](#language-support). Other version support Simplified Chinese only.
 
 ## Shortcuts
 
