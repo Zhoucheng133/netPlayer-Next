@@ -132,7 +132,7 @@ const Map<String, String> enUS = {
   'add': 'Add',
 
   'selectLang': 'Select language',
-  'change': 'change',
+  'change': 'Change',
 
   'lang': 'Language',
   'selfLang': 'English'
