@@ -932,6 +932,10 @@ class Operations{
               DropdownMenuItem(
                 value: 'zh_CN',
                 child: Text('简体中文')
+              ),
+              DropdownMenuItem(
+                value: 'zh_TW',
+                child: Text('繁體中文')
               )
             ], 
             onChanged: (val){

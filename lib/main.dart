@@ -7,6 +7,7 @@ import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/lang/en_us.dart';
 import 'package:net_player_next/lang/zh_cn.dart';
+import 'package:net_player_next/lang/zh_tw.dart';
 import 'package:net_player_next/views/functions/audio.dart';
 import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -46,6 +47,7 @@ class MainTranslations extends Translations {
   Map<String, Map<String, String>> get keys => {
     'en_US': enUS,
     'zh_CN': zhCN,
+    'zh_TW': zhTW,
   };
 }
 
@@ -64,10 +66,10 @@ class MainApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate
       ],
       locale: const Locale('en', 'US'),
-      fallbackLocale: const Locale('zh', 'CN'),
       supportedLocales: const [
-        Locale('zh', 'CN'),
         Locale('en', 'US'),
+        Locale('zh', 'CN'),
+        Locale('zh', 'TW'),
       ],
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
