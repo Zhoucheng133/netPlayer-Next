@@ -1,8 +1,8 @@
-# netPlayer Next版本
+# netPlayer Next
 
-## 简介
+## Intro
 
-<img src="assets/icon.png" width="100px">
+<img src="../assets/icon.png" width="100px">
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.19-blue?logo=Flutter)
 ![media_kit](https://img.shields.io/badge/media_kit-1.1.10-yellow)
@@ -32,141 +32,126 @@
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
-Also available  in English. Click [HERE](/documents/en.md) to see document of English version
+你可以[点击这里](../README.md)查看中文文档
 
-**★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
+\* Since I switched to Windows PC, I can't build macOS version. If you need it, you can build it on your own Mac (Also I don't know whether it runs ok on Mac. You can give me some feedbacks).
 
-**注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本**  
-本仓库发布的netPlayer版本号从`2.0.0`开始
+## Shortcuts
 
-**这个版本的netPlayer不兼容Windows 7系统，如果你要查找支持Windows 7版本的netPlayer，转至[netPlayer](https://github.com/Zhoucheng133/net-player)查找v1版本的netPlayer**
+### Shortcuts in app
+- `Space`：Play/Pause
+- `command →`(macOS) or `Ctrl →`(Windows)：Next song
+- `command ←`(macOS) or `Ctrl ←`(Windows)：Previous song
+- `command L`(macOS) or `Ctrl L`(Windows)：Show/Hide lyrics
 
-||v1|v2|v3|
-|-|-|-|-|
-|支持Windows版本|Windows7~|Windows10~|Windows10~|
-|框架|Electron|Flutter|Flutter
-|支持macOS|✅|✅|✅*|
-|单曲循环|❌|✅|✅|
-|定位歌曲|❌|✅|✅|
-|全局快捷键|仅macOS|✅|✅|
-|WebSocket服务|❌|❌|✅|
+### Global shortcuts
+- ⏯️(macOS & Windows) or `Ctrl Alt Space`(Windows)：Play/Pause
+- ⏩(macOS & Windows) or `Ctrl Alt →`(Windows)：Next song
+- ⏪(macOS & Windows) or `Ctrl Alt ←`(Windows)：Previous song
 
-\* 由于本人换电脑，macOS没法打包，如果你有需要可以在自己的设备上打包v3版本(所以也不清楚macOS版本的运行情况，欢迎给予反馈!)
+## Screenshot
 
-## 快捷键
+![Screenshot 1](../demo/demo4.png)
 
-### App内快捷键
-- `空格`：播放/暂停
-- `command →`(macOS)或`Ctrl →`(Windows)：下一首
-- `command ←`(macOS)或`Ctrl ←`(Windows)：上一首
-- `command L`(macOS)或`Ctrl L`(Windows)：显示/隐藏歌词
+![Screenshot 2](../demo/demo2.png)
 
-### 全局快捷键
-- ⏯️(macOS & Windows)或`Ctrl Alt 空格`(Windows)：播放/暂停
-- ⏩(macOS & Windows)或`Ctrl Alt →`(Windows)：下一首
-- ⏪(macOS & Windows)或`Ctrl Alt ←`(Windows)：上一首
+## Language support
 
-## 截图
+- Simplified Chinese
+- Traditional Chinese (Translated by ChatGPT)
+- English (Translated by myself)
 
-![截图1](demo/demo1.png)
+You can add your language with pull&request. Here is the language directory: `lib/lang`
 
-![截图2](demo/demo2.png)
+If some translate is not accurate, you can add a issue.
 
-## 多语言支持
+## WebSocket Service
 
-- 简体中文
-- 繁体中文 (由ChatGPT翻译)
-- 英语
+**This function needs v3.0.0 or later**
 
-你可以通过pull&request添加你所需要的语言。语言目录位于`lib/lang`
+If you open ws service on **settings**, netPlayer will be a WebSocket server, and it will send messages when lyric update or play song update. The message will be like:
 
-如果有一些翻译不那么准确，你可以添加一个Issue
-
-## WebSocket服务
-
-**这个功能至少需要v3.0.0**
-
-在**设置**中启用ws服务之后，netPlayer将会作为一个本地的WebSocket服务器，在播放歌曲更新/歌词更新的时候向客户端发送消息，消息的内容格式为
 ```json
 {
-  "title": <标题>,
-  "artist": <艺人>,
-  "lyric": <歌词>
+  "title": <song title>,
+  "artist": <artist>,
+  "lyric": <lyric>
 }
 ```
 
-WebSocket服务器默认地址为: `localhost:9098`
+Default port of WebSocket server is: `localhost:9098`.
 
-这个功能可以二次开发，用于直播背景音乐信息显示，详细步骤如下：
-1. 设计一个Web页面用于直播（边框）
-2. 在你觉得合适的地方设计一个背景音乐信息显示，内容为WebSocket服务获取的信息
+This function can be used for live streaming to display bgm information. You can develop your own live streaming background as follows:
+1. Design a web background for your stream.
+2. Find a place to display bgm information, and get it through WebSocket service.
 
-## 常见问题
-1. 无法连接到音乐服务器:
+## Commnon problems
+1. Cannot connect to server:
    ```
-   你需要先检查你的客户端设备是否可以直接打开音乐库网页，很大概率是服务器防火墙或者设置问题
-   另外务必检查地址，http和https
+   You need to check whether your cilent device can access to your server. It probably that firewall of your server system blocked your access. And be sure your URL is avaliable (Be aware http and https).
    ```
-2. 所有歌曲显示不全: 
+2. Not all songs displayed: 
    ```
-   Subsonic音乐库的API并不支持查看所有的歌曲，因此至多只能显示500首歌曲
-   但是你可以通过完全随机播放来随机播放所有的歌曲，不受歌曲数量显示，v2版本在左边栏，v3版本在所有歌曲页标题右侧
+   Subsonic API does not support to display all the songs. The limit of songs to get is 500.
+   But you can shuffle all the songs through "Shuffle all the songs", which is not affect by songs displayed. You can see this button right of the "All" page title.
    ```
-3. 打开页面灰色方块或者崩溃不显示内容:
+3. See gray block or crashed
    ```
-   有两种
-   【第一种】可能因为Subsonic(Navidrome)需要通过你的音乐文件来获取音乐信息
-   因此如果你的音乐文件不包含下面的信息(之一)，可能会导致本软件无法正常使用
-   1. 歌曲的标题
-   2. 歌曲的艺术家(艺人)
-   3. 歌曲长度
-   4. 所属专辑(唱片集)
-   音乐文件是否附带专辑封面不会影响程序运行
-   【第二种】老版本的netPlayer Next和新版本冲突
-   解决办法为删除这个目录: C:\Users\<你的用户名>\AppData\Roaming\zhouc\net_player_next
+   Two possibilies: 
+   【1】Subsonic (Navidrome) need to get Music information through Music file.
+   So if your Music file does not contain information(s) below, netPlayer can't use:
+   1. Song title
+   2. Song artist
+   3. Song duraion
+   4. Album
+   Tip: Music file without cover doesn't affect netPlayer
+   【2】Old version of netPlayer affect
+   Delete these directory: 
+   C:\Users\<your username>\AppData\Roaming\zhouc\net_player_next
+   C:\Users\<your username>\AppData\Roaming\zhouc\netPlayer
    ```
-4. 没有找到歌词:
+4. No lyrics found:
    ```
-   歌词API见文末，没有找到歌词就是字面意思
-   歌词的内容取决于歌曲标题、所属专辑、艺人和歌曲长度
+   You can see lyrics API at the end of this page. It just what it says.
+   Lyrics depends on the song's title, album, artist and duration.
    ```
    
 
-## 其它链接
+## Other link
 
-- [spotify-downloader](https://github.com/spotDL/spotify-downloader)用于下载歌曲，通过这种方式下载的歌曲一般会包含一些信息
-- [Live-BG](https://github.com/Zhoucheng133/Live-BG)本人开发的用于直播的配合netPlayer显示当前播放歌曲信息和歌词的背景
+- [spotify-downloader](https://github.com/spotDL/spotify-downloader) For download songs. It contains songs' informations.
+- [Live-BG](https://github.com/Zhoucheng133/Live-BG) Used for live streaming to display bgm information developed by myself.
 
-## 在你的设备上配置netPlayer Next
+## Config netPlayer Next on your own device
 
-本项目使用lutter^3.22开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
-建议直接使用Visual Studio Code，在安装完Flutter扩展和Dart扩展之后就可以Debug/Profile/Release了，我已经在.vscode文件夹中添加了launch类型
+This project is developed with Flutter^3.22. You can debug with it directly.
+Recommand using Visual Studio Code. After installing Flutter and Dart extension on Visual Studio Code, you can debug/profile/relese on your device.
 
-不要使用Flutter3.7或更低版本的Flutter，确保Dart版本至少有3.0.0
+Do NOT use Flutter^3.7 or lower version of Flutter. Make sure your Flutter version is higher than 3.0.0
 
-如果你在**Windows**上Debug或者Release，注意不要在国内的网络环境下操作，可能会等非常长的时间，Mac上没有这个问题
+If you Debug or Release on **Windows**, make sure not do it in Chinese mainland network environment.
 
-在Windows上的打包：
+Build on Windows：
 ```bash
 flutter build windows
 ```
 
-在macOS上打包：
+Build on Mac: 
 ```bash
 flutter build macos
 ```
 
-Linux没有测试过，各位可以自行尝试
+I have not tried it on Linux. You can try it by yourself.
 
-## 更新日志
+## Update log
 
 ### 3.2.0 (2024/8/4)
-- 添加多语言支持
-- 修复一些提示的错误文本
-- 改进一些动画
+- Add support for multi language
+- Fix some wrong tips
+- Improve some animations
 
 <details>
-<summary>过去的版本</summary>
+<summary>Previous version (Not translated)</summary>
 
 ### 3.1.5 (2024/7/30)
 - 解决Windows下图标模糊的问题
@@ -271,7 +256,7 @@ Linux没有测试过，各位可以自行尝试
 - 🚫歌词功能暂时无法使用
 </details>
 
-## 一些API
+## Some API
 
 [Subsonic API](http://www.subsonic.org/pages/api.jsp)
 
