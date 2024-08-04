@@ -704,6 +704,15 @@ class Operations{
     }
   }
 
+  // 停止播放
+  void stop(){
+    if(c.nowPlay['id']==''){
+      return;
+    }
+    c.handler.stop();
+    c.isPlay.value=false;
+  }
+
   // 暂停
   void pause(){
     if(c.nowPlay['id']==''){

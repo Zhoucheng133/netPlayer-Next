@@ -57,12 +57,26 @@ class _SideBarState extends State<SideBar> {
   Future<void> logout() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('userInfo');
+    Operations().stop();
+    Map<String, Object> tmp={
+      'id': '',
+      'title': '',
+      'artist': '',
+      'playFrom': '',
+      'duration': 0,
+      'fromId': '',
+      'album': '',
+      'index': 0,
+      'list': [],
+    };
+    c.nowPlay.value=tmp;
     c.userInfo.value={
       'url': null,
       'username': null,
       'salt': null,
       'token': null,
     };
+    c.ws.stop();
   }
 
   Future<void> logoutHandler() async {
