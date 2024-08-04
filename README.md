@@ -1,5 +1,7 @@
 # netPlayer Next版本
 
+Also available  in English. Click [HERE](/documents/en.md) to see document of English version
+
 ## 简介
 
 <img src="assets/icon.png" width="100px">
@@ -31,8 +33,6 @@
 ![loading_animation_widget](https://img.shields.io/badge/loading_animation_widget-1.2.1-pink)
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
-
-Also available  in English. Click [HERE](/documents/en.md) to see document of English version
 
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 

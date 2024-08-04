@@ -1,5 +1,7 @@
 # netPlayer Next
 
+你可以[点击这里](../README.md)查看中文文档
+
 ## Intro
 
 <img src="../assets/icon.png" width="100px">
@@ -31,8 +33,6 @@
 ![loading_animation_widget](https://img.shields.io/badge/loading_animation_widget-1.2.1-pink)
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
-
-你可以[点击这里](../README.md)查看中文文档
 
 \* Since I switched to Windows PC, I can't build macOS version. If you need it, you can build it on your own Mac (Also I don't know whether it runs ok on Mac. You can give me some feedbacks).
 
