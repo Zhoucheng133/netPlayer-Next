@@ -166,13 +166,17 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
+### 3.2.1 (2024/8/6)
+- Fix a bug of a dialog
+- Fix a bug of logout
+
+<details>
+<summary>Previous version (Not fully translated yet)</summary>
+
 ### 3.2.0 (2024/8/4)
 - Add support for multi language
 - Fix some wrong tips
 - Improve some animations
-
-<details>
-<summary>Previous version (Not translated)</summary>
 
 ### 3.1.5 (2024/7/30)
 - 解决Windows下图标模糊的问题
