@@ -45,7 +45,7 @@ const Map<String, String> enUS = {
   'cancel': 'Cancel',
   'ok': 'OK',
   'finish': 'OK',
-  'lyricTip': 'Notice: Lyrics may not corret\nLyrics from lrclib.net',
+  'lyricTip': 'Notice: Lyrics may not accurate\nLyrics from lrclib.net',
   'overCountTip': 'Notice: Songs count may over 500\nFull shuffle is not affected',
   'hideLyric': 'Hide lyrics',
 
@@ -60,9 +60,9 @@ const Map<String, String> enUS = {
   'searchArtist': 'Search artists',
 
   'total': 'Total: ',
-  'albumTotal': 'album(s)',
-  'artistTotal': 'artist(s)',
-  'songTotal': 'song(s)',
+  'albumTotal': ' album(s)',
+  'artistTotal': ' artist(s)',
+  'songTotal': ' song(s)',
 
   'noLyric': 'No lyrics found',
   'searchingLyric': 'Searching for lyrics...',
