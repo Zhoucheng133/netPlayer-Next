@@ -98,7 +98,7 @@ const Map<String, String> enUS = {
 
   'updateOk': 'Update success',
 
-  'connectLibrary': 'Connect to your music',
+  'connectLibrary': 'Connect to your music server',
 
   'getPlaylistsFail': 'Get playlists failed',
   'getPlaylistFail': 'Get playlist failed',
