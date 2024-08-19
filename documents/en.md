@@ -166,12 +166,15 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.2.1 (2024/8/6)
-- Fix a bug of a dialog
-- Fix a bug of logout
+### 3.2.1
+- Improve some English translate
 
 <details>
 <summary>Previous version (Not fully translated yet)</summary>
+
+### 3.2.1 (2024/8/6)
+- Fix a bug of a dialog
+- Fix a bug of logout
 
 ### 3.2.0 (2024/8/4)
 - Add support for multi language
