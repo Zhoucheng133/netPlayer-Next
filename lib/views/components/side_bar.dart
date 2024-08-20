@@ -27,6 +27,7 @@ class _SideBarState extends State<SideBar> {
           controller: newListName,
           decoration: InputDecoration(
             isCollapsed: true,
+            hintText: "newListPlaceholder".tr,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             ),
