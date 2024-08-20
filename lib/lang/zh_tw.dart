@@ -135,5 +135,7 @@ const Map<String, String> zhTW = {
   'change': '修改',
 
   'lang': '語言',
-  'selfLang': '繁體中文'
+  'selfLang': '繁體中文',
+
+  'newListPlaceholder': '輸入歌單名稱'
 };

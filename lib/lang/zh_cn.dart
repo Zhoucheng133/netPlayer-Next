@@ -135,5 +135,7 @@ const Map<String, String> zhCN = {
   'change': '修改',
 
   'lang': '语言',
-  'selfLang': '简体中文'
+  'selfLang': '简体中文',
+
+  'newListPlaceholder': '输入歌单名称'
 };

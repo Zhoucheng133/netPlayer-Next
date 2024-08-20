@@ -135,5 +135,7 @@ const Map<String, String> enUS = {
   'change': 'Change',
 
   'lang': 'Language',
-  'selfLang': 'English'
+  'selfLang': 'English',
+
+  'newListPlaceholder': 'Input the name'
 };
