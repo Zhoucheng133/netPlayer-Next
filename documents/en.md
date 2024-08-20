@@ -167,6 +167,7 @@ I have not tried it on Linux. You can try it by yourself.
 ## Update log
 
 ### 3.2.1
+- Fix missing translations
 - Improve some English translate
 
 <details>
