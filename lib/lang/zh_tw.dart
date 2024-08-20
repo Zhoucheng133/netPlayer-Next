@@ -100,7 +100,8 @@ const Map<String, String> zhTW = {
 
   'connectLibrary': '連接到你的音樂庫',
   
-  'getPlaylistFail': '獲取歌單失敗',
+  'getPlaylistsFail': '獲取歌單清單失敗',
+  'getPlayListFail': '獲取歌單內容失敗',
   'playlistNameEmpty': '歌單名稱不能為空',
   'createPlaylistFail': '創建歌單失敗',
   'createPlaylistSuccess': '創建歌單成功',
@@ -114,7 +115,6 @@ const Map<String, String> zhTW = {
   'analiseLovedSongFail': '解析喜歡的歌曲失敗',
   'getAllAlbumFail': '獲取所有專輯失敗',
   'analiseAllAlbumFail': '解析所有專輯失敗',
-  'getPlayListFail': '獲取歌單內容失敗',
   'getAllArtistFail': '獲取所有藝人失敗',
   'addFail': '添加失敗',
   'addSuccess': '添加成功',

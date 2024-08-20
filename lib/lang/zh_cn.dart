@@ -100,6 +100,7 @@ const Map<String, String> zhCN = {
 
   'connectLibrary': '连接到你的音乐库',
   
+  'getPlaylistsFail': '获取歌单列表失败',
   'getPlaylistFail': '获取歌单失败',
   'playlistNameEmpty': '歌单名称不能为空',
   'createPlaylistFail': '创建歌单失败',
@@ -114,7 +115,6 @@ const Map<String, String> zhCN = {
   'analiseLovedSongFail': '解析喜欢的歌曲失败',
   'getAllAlbumFail': '获取所有专辑失败',
   'analiseAllAlbumFail': '解析所有专辑失败',
-  'getPlayListFail': '获取歌单内容失败',
   'getAllArtistFail': '获取所有艺人失败',
   'addFail': '添加失败',
   'addSuccess': '添加成功',
