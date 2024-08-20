@@ -137,5 +137,5 @@ const Map<String, String> enUS = {
   'lang': 'Language',
   'selfLang': 'English',
 
-  'newListPlaceholder': 'Input the name'
+  'newListPlaceholder': 'Input the playlist name'
 };
