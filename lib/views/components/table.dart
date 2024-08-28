@@ -422,7 +422,7 @@ class _SongItemState extends State<SongItem> {
             ),
             ElevatedButton(
               onPressed: (){
-                Operations().addToList(context, widget.id, selectItem);
+                operations.addToList(context, widget.id, selectItem);
                 Navigator.pop(context);
               }, 
               child: Text('add'.tr)
@@ -431,9 +431,9 @@ class _SongItemState extends State<SongItem> {
         )
       );
     }else if(val=='delove'){
-      Operations().deloveSong(context, widget.id);
+      operations.deloveSong(context, widget.id);
     }else if(val=='love'){
-      Operations().loveSong(context, widget.id);
+      operations.loveSong(context, widget.id);
     }else if(val=='del'){
       if(await operations.delFromList(context, widget.listId, widget.index)){
         widget.refresh();

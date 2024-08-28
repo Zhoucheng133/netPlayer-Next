@@ -19,6 +19,7 @@ class PlayListView extends StatefulWidget {
 class _PlayListViewState extends State<PlayListView> {
   
   final Controller c = Get.put(Controller());
+  final operations=Operations();
   final AutoScrollController controller=AutoScrollController();
   List list=[];
   String listId='';
@@ -50,7 +51,7 @@ class _PlayListViewState extends State<PlayListView> {
         name=c.playLists.firstWhere((item)=>item['id']==newId)['name'];
         listId=newId;
       });
-      var temp=await Operations().getPlayList(context, newId);
+      var temp=await operations.getPlayList(context, newId);
       setState(() {
         list=temp;
       });
@@ -71,7 +72,7 @@ class _PlayListViewState extends State<PlayListView> {
   }
 
   Future<void> silentRefresh() async {
-    var tmpList=await Operations().getPlayList(context, listId);
+    var tmpList=await operations.getPlayList(context, listId);
     setState(() {
       list=tmpList;
     });
@@ -101,7 +102,7 @@ class _PlayListViewState extends State<PlayListView> {
   }
 
   Future<void> refresh() async {
-    var tmpList=await Operations().getPlayList(context, listId);
+    var tmpList=await operations.getPlayList(context, listId);
     setState(() {
       list=tmpList;
     });

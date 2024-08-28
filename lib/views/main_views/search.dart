@@ -15,6 +15,7 @@ class SearchView extends StatefulWidget {
 class _SearchViewState extends State<SearchView> {
 
   TextEditingController controller=TextEditingController();
+  final operations=Operations();
   final Controller c = Get.put(Controller());
   String type='song';
 
@@ -44,7 +45,7 @@ class _SearchViewState extends State<SearchView> {
     setState(() {
       nowSearch=controller.text;
     });
-    Map data=await Operations().getSearch(context, controller.text);
+    Map data=await operations.getSearch(context, controller.text);
     try {
       setState(() {
         songList=data['songs'];

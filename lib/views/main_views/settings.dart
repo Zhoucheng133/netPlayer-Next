@@ -28,15 +28,16 @@ class _SettingsViewState extends State<SettingsView> {
   bool hoverWs=false;
   bool refreshing=false;
   bool hoverLang=false;
+  final operations=Operations();
 
   Future<void> refreshLibrary(BuildContext context) async {
     await HttpRequests().refreshLibrary();
     showMessage(true, 'refreshSuccess'.tr, context);
-    await Operations().getAllSongs(context);
-    await Operations().getAlbums(context);
-    await Operations().getArtists(context);
-    await Operations().getLovedSongs(context);
-    Operations().nowPlayCheck(context);
+    await operations.getAllSongs(context);
+    await operations.getAlbums(context);
+    await operations.getArtists(context);
+    await operations.getLovedSongs(context);
+    operations.nowPlayCheck(context);
     setState(() {
       refreshing=false;
     });
@@ -186,7 +187,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 splashRadius: 0,
                                 value: c.savePlay.value, 
                                 onChanged: (value){
-                                  Operations().savePlay(value);
+                                  operations.savePlay(value);
                                 }
                               ),
                             )
@@ -218,7 +219,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 splashRadius: 0,
                                 value: c.autoLogin.value, 
                                 onChanged: (value){
-                                  Operations().autoLogin(value);
+                                  operations.autoLogin(value);
                                 }
                               ),
                             )
@@ -250,7 +251,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 splashRadius: 0,
                                 value: c.closeOnRun.value, 
                                 onChanged: (value){
-                                  Operations().closeOnRun(value);
+                                  operations.closeOnRun(value);
                                 }
                               ),
                             )
@@ -282,7 +283,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 splashRadius: 0,
                                 value: c.useShortcut.value, 
                                 onChanged: (value){
-                                  Operations().useShortcut(value);
+                                  operations.useShortcut(value);
                                 }
                               ),
                             )
@@ -316,7 +317,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     splashRadius: 0,
                                     value: c.useWs.value, 
                                     onChanged: (value){
-                                      Operations().useWs(value, context);
+                                      operations.useWs(value, context);
                                     }
                                   ),
                                 )
@@ -438,7 +439,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 const SizedBox(width: 20,),
                                 GestureDetector(
                                   onTap: (){
-                                    Operations().selectLanguage(context);
+                                    operations.selectLanguage(context);
                                   },
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,
@@ -499,7 +500,7 @@ class _SettingsViewState extends State<SettingsView> {
                     const SizedBox(height: 10,),
                     GestureDetector(
                       onTap: (){
-                        Operations().showAbout(context);
+                        operations.showAbout(context);
                       },
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,

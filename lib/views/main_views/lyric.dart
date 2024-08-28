@@ -31,6 +31,7 @@ class _LyricViewState extends State<LyricView> {
   bool hoverTip=false;
   AutoScrollController controller=AutoScrollController();
   final Controller c = Get.put(Controller());
+  final operations=Operations();
 
   bool playedLyric(index){
     if(c.lyric.length==1){
@@ -132,7 +133,7 @@ class _LyricViewState extends State<LyricView> {
                       ),
                       WindowCaptionButton.close(
                         onPressed: (){
-                          Operations().closeWindow();
+                          operations.closeWindow();
                         },
                       )
                     ],
@@ -196,7 +197,7 @@ class _LyricViewState extends State<LyricView> {
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Operations().skipPre();
+                                  operations.skipPre();
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
@@ -228,7 +229,7 @@ class _LyricViewState extends State<LyricView> {
                               const SizedBox(width: 15,),
                               GestureDetector(
                                 onTap: (){
-                                  Operations().toggleSong();
+                                  operations.toggleSong();
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
@@ -273,7 +274,7 @@ class _LyricViewState extends State<LyricView> {
                               const SizedBox(width: 15,),
                               GestureDetector(
                                 onTap: (){
-                                  Operations().skipNext();
+                                  operations.skipNext();
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
@@ -327,7 +328,7 @@ class _LyricViewState extends State<LyricView> {
                                     child: Slider(
                                       value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
                                       onChanged: (value){
-                                        Operations().seekSong(value);
+                                        operations.seekSong(value);
                                       }
                                     ),
                                   )
@@ -377,9 +378,9 @@ class _LyricViewState extends State<LyricView> {
                               GestureDetector(
                                 onTap: (){
                                   if(isLoved()){
-                                    Operations().deloveSong(context, c.nowPlay['id']);
+                                    operations.deloveSong(context, c.nowPlay['id']);
                                   }else{
-                                    Operations().loveSong(context, c.nowPlay['id']);
+                                    operations.loveSong(context, c.nowPlay['id']);
                                   }
                                   
                                 },
@@ -457,7 +458,7 @@ class _LyricViewState extends State<LyricView> {
                                                   'volume', 
                                                   const Duration(milliseconds: 50), 
                                                   (){
-                                                    Operations().saveVolume();
+                                                    operations.saveVolume();
                                                   }
                                                 );
                                               }
@@ -703,7 +704,7 @@ class _LyricViewState extends State<LyricView> {
               height: 50,
               child: GestureDetector(
                 onTap: (){
-                  Operations().toggleLyric(context);
+                  operations.toggleLyric(context);
                 },
                 child: Tooltip(
                   message: 'hideLyric'.tr,

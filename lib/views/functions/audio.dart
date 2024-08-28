@@ -18,6 +18,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   var playURL="";
   bool skipHandler=false;
   MediaItem item=MediaItem(id: "", title: "");
+  final operations=Operations();
 
   audioHandler(){
     player.stream.position.listen((position) {
@@ -129,7 +130,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<void> skipToPrevious() async {
     if(c.fullRandom.value){
-      Operations().fullRandomPlay();
+      operations.fullRandomPlay();
       return;
     }
     var tmpList=c.nowPlay.value;
@@ -170,7 +171,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<void> skipToNext() async {
     if(c.fullRandom.value){
-      Operations().fullRandomPlay();
+      operations.fullRandomPlay();
       return;
     }
     Map<String, dynamic> tmpList=c.nowPlay.value;

@@ -25,6 +25,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
 
   late Worker listener;
   late Worker wsOkListener;
+  Operations operations=Operations();
 
   @override
   void initState() {
@@ -130,11 +131,11 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     if(menuItem.key == 'exit_app') {
       windowManager.close();
     }else if(menuItem.key == 'toggle'){
-      Operations().toggleSong();
+      operations.toggleSong();
     }else if(menuItem.key=="next_song"){
-      Operations().skipNext();
+      operations.skipNext();
     }else if(menuItem.key=="previous_song"){
-      Operations().skipPre();
+      operations.skipPre();
     }
   }
 
@@ -177,7 +178,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
       Get.updateLocale(locale);
     }else{
       if(context.mounted){
-        Operations().selectLanguage(context);
+        operations.selectLanguage(context);
       }
     }
 
@@ -270,7 +271,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                 c.maxWindow.value ? WindowCaptionButton.unmaximize(onPressed: unmaxWindow) : WindowCaptionButton.maximize(onPressed: maxWindow,),
               ),
               WindowCaptionButton.close(onPressed: (){
-                Operations().closeWindow();
+                operations.closeWindow();
               },)
             ],
           ) : DragToMoveArea(child: Container())
@@ -301,7 +302,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                     PlatformMenuItem(
                       label: "关于 netPlayer",
                       onSelected: (){
-                        Operations().showAbout(context);
+                        operations.showAbout(context);
                       }
                     )
                   ]
@@ -316,7 +317,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                       ),
                       onSelected: isLogin ? (){
                         if(c.showLyric.value){
-                          Operations().toggleLyric(context);
+                          operations.toggleLyric(context);
                         }
                         c.pageIndex.value=6;
                       } : null
@@ -405,7 +406,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                         meta: true
                       ),
                       onSelected: (){
-                        Operations().toggleLyric(context);
+                        operations.toggleLyric(context);
                       },
                     )
                   ]

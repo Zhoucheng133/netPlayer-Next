@@ -58,7 +58,7 @@ class _SideBarState extends State<SideBar> {
   Future<void> logout() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('userInfo');
-    Operations().stop();
+    operations.stop();
     Map<String, Object> tmp={
       'id': '',
       'title': '',

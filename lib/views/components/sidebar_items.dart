@@ -296,6 +296,7 @@ class _PlayListItemState extends State<PlayListItem> {
 
   bool onHover=false;
   final Controller c = Get.put(Controller());
+  Operations operations=Operations();
 
   Future<void> showPlaylistMenu(BuildContext context, TapDownDetails details) async {
     final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
@@ -359,7 +360,7 @@ class _PlayListItemState extends State<PlayListItem> {
             ),
             ElevatedButton(
               onPressed: (){
-                Operations().delPlayList(context, widget.id);
+                operations.delPlayList(context, widget.id);
                 Navigator.pop(context);
               }, 
               child: Text('delete'.tr)
@@ -383,7 +384,7 @@ class _PlayListItemState extends State<PlayListItem> {
               contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10)
             ),
             onEditingComplete: (){
-              Operations().renamePlayList(context, widget.id, newName.text);
+              operations.renamePlayList(context, widget.id, newName.text);
               Navigator.pop(context);
             },
           ),
@@ -396,7 +397,7 @@ class _PlayListItemState extends State<PlayListItem> {
             ),
             ElevatedButton(
               onPressed: (){
-                Operations().renamePlayList(context, widget.id, newName.text);
+                operations.renamePlayList(context, widget.id, newName.text);
                 Navigator.pop(context);
               }, 
               child: Text('finish'.tr),

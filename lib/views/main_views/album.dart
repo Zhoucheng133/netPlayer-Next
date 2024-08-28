@@ -22,12 +22,13 @@ class _AlbumViewState extends State<AlbumView> {
   String albumName='';
   String id='';
   List list=[];
+  final operations=Operations();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Operations().getAlbums(context);
+      operations.getAlbums(context);
     });
     inputController.addListener((){
       setState(() {
@@ -36,7 +37,7 @@ class _AlbumViewState extends State<AlbumView> {
     });
     listener = ever(c.pageId, (String albumId) async {
       if(c.pageIndex.value==3 && c.pageId.value!=''){
-        Map rlt=await Operations().getAlbumData(context, albumId);
+        Map rlt=await operations.getAlbumData(context, albumId);
         if(rlt.isNotEmpty){
           try {
             setState(() {
@@ -50,7 +51,7 @@ class _AlbumViewState extends State<AlbumView> {
     });
   }
   void refresh(BuildContext context){
-    Operations().getAlbums(context);
+    operations.getAlbums(context);
     showMessage(true, '更新成功', context);
   }
   bool isPlay(int index){

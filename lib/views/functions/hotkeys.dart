@@ -9,6 +9,7 @@ import 'package:net_player_next/variables/variables.dart';
 class HotkeyHandler{
 
   final Controller c = Get.put(Controller());
+  final operations=Operations();
 
   Future<void> globalToggle() async {
     HotKey gToggleKey = HotKey(
@@ -19,7 +20,7 @@ class HotkeyHandler{
     await hotKeyManager.register(
       gToggleKey,
       keyDownHandler: (hotkey){
-        Operations().toggleSong();
+        operations.toggleSong();
       }
     );
   }
@@ -33,7 +34,7 @@ class HotkeyHandler{
     await hotKeyManager.register(
       gSkipNextKey,
       keyDownHandler: (hotkey){
-        Operations().skipPre();
+        operations.skipPre();
       }
     );
   }
@@ -47,7 +48,7 @@ class HotkeyHandler{
     await hotKeyManager.register(
       gSkipNextKey,
       keyDownHandler: (hotkey){
-        Operations().skipNext();
+        operations.skipNext();
       }
     );
   }
@@ -61,7 +62,7 @@ class HotkeyHandler{
       toggleKey,
       keyDownHandler: (hotkey){
         if(!c.onInput.value){
-          Operations().toggleSong();
+          operations.toggleSong();
         }
       }
     );
@@ -76,7 +77,7 @@ class HotkeyHandler{
     await hotKeyManager.register(
       skipNextKey,
       keyDownHandler: (hotkey){
-        Operations().skipNext();
+        operations.skipNext();
       }
     );
   }
@@ -90,7 +91,7 @@ class HotkeyHandler{
     await hotKeyManager.register(
       skipNextKey,
       keyDownHandler: (hotkey){
-        Operations().skipPre();
+        operations.skipPre();
       }
     );
   }
@@ -104,7 +105,7 @@ class HotkeyHandler{
     await hotKeyManager.register(
       skipNextKey,
       keyDownHandler: (hotkey){
-        Operations().toggleLyric(context);
+        operations.toggleLyric(context);
       }
     );
   }

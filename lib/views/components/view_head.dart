@@ -29,6 +29,7 @@ class _ViewHeaderState extends State<ViewHeader> {
   bool hoverBack=false;
   bool hoverWarning=false;
   FocusNode focusOnSearch=FocusNode();
+  final operations=Operations();
 
   @override
   void initState() {
@@ -157,7 +158,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                 const SizedBox(width: 10,),
                 widget.page=='all' ? GestureDetector(
                   onTap: (){
-                    Operations().fullRandomPlaySwitcher(context);
+                    operations.fullRandomPlaySwitcher(context);
                   },
                   child: Tooltip(
                     message: 'shuffleAllSongs'.tr,

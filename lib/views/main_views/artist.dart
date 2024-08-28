@@ -21,12 +21,13 @@ class _ArtistViewState extends State<ArtistView> {
   String artistName='';
   List list=[];
   late Worker listener;
+  final operations=Operations();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Operations().getArtists(context);
+      operations.getArtists(context);
     });
     inputController.addListener((){
       setState(() {
@@ -35,7 +36,7 @@ class _ArtistViewState extends State<ArtistView> {
     });
     listener = ever(c.pageId, (String id) async {
       if(c.pageIndex.value==2 && c.pageId.value!=''){
-        Map rlt=await Operations().getArtistData(context, id);
+        Map rlt=await operations.getArtistData(context, id);
         if(rlt.isNotEmpty){
           try {
             setState(() {
@@ -56,7 +57,7 @@ class _ArtistViewState extends State<ArtistView> {
   }
 
   void refresh(BuildContext context){
-    Operations().getArtists(context);
+    operations.getArtists(context);
     showMessage(true, 'updateOk'.tr, context);
   }
 

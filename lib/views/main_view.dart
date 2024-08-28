@@ -32,6 +32,7 @@ class _MainViewState extends State<MainView> {
   final Controller c = Get.put(Controller());
   late Worker listener;
   late Worker lineListener;
+  Operations operations=Operations();
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式
   Future<void> initPrefs() async {
@@ -44,7 +45,7 @@ class _MainViewState extends State<MainView> {
         Map<String, Object> tmpList=Map<String, Object>.from(decodedMap);
         c.nowPlay.value=tmpList;
         WidgetsBinding.instance.addPostFrameCallback((_) async {
-          await Operations().nowPlayCheck(context);
+          await operations.nowPlayCheck(context);
           c.smtc.updateMetadata(
             MusicMetadata(
               title: c.nowPlay["title"]??'',
@@ -89,7 +90,7 @@ class _MainViewState extends State<MainView> {
       }
       c.ws=WsService(wsPort??9098);
     }
-    Operations().initHotkey(context);
+    operations.initHotkey(context);
   }
 
   void lyricChange(int val){
@@ -122,7 +123,7 @@ class _MainViewState extends State<MainView> {
       c.ws.sendMsg(content);
     }
     if(val['id']!=''){
-      Operations().getLyric();
+      operations.getLyric();
     }
   }
 
@@ -162,20 +163,20 @@ class _MainViewState extends State<MainView> {
             switch (event) {
               case PressedButton.play:
                 // Update playback status
-                Operations().play();
+                operations.play();
                 c.smtc.setPlaybackStatus(PlaybackStatus.Playing);
                 break;
               case PressedButton.pause:
-                Operations().pause();
+                operations.pause();
                 c.smtc.setPlaybackStatus(PlaybackStatus.Paused);
                 break;
               case PressedButton.next:
                 // print('Next');
-                Operations().skipNext();
+                operations.skipNext();
                 break;
               case PressedButton.previous:
                 // print('Previous');
-                Operations().skipPre();
+                operations.skipPre();
                 break;
               case PressedButton.stop:
                 c.smtc.setPlaybackStatus(PlaybackStatus.Stopped);

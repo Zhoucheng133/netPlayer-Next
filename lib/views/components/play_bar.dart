@@ -18,6 +18,7 @@ class PlayBar extends StatefulWidget {
 class _PlayBarState extends State<PlayBar> {
 
   final Controller c = Get.put(Controller());
+  Operations operations=Operations();
 
   bool hoverPause=false;
   bool hoverPre=false;
@@ -66,7 +67,7 @@ class _PlayBarState extends State<PlayBar> {
               borderRadius: BorderRadius.circular(5),
               child: GestureDetector(
                 onTap: (){
-                  Operations().toggleLyric(context);
+                  operations.toggleLyric(context);
                 },
                 child: Tooltip(
                   message: 'showLyric'.tr,
@@ -175,7 +176,7 @@ class _PlayBarState extends State<PlayBar> {
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Operations().skipPre();
+                                  operations.skipPre();
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
@@ -206,7 +207,7 @@ class _PlayBarState extends State<PlayBar> {
                               const SizedBox(width: 15,),
                               GestureDetector(
                                 onTap: (){
-                                  Operations().toggleSong();
+                                  operations.toggleSong();
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
@@ -249,7 +250,7 @@ class _PlayBarState extends State<PlayBar> {
                               const SizedBox(width: 15,),
                               GestureDetector(
                                 onTap: (){
-                                  Operations().skipNext();
+                                  operations.skipNext();
                                 },
                                 child: Tooltip(
                                   waitDuration: const Duration(seconds: 1),
@@ -301,7 +302,7 @@ class _PlayBarState extends State<PlayBar> {
                         child: Slider(
                           value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
                           onChanged: (value){
-                            Operations().seekSong(value);
+                            operations.seekSong(value);
                           }
                         ),
                       )
@@ -357,9 +358,9 @@ class _PlayBarState extends State<PlayBar> {
                   GestureDetector(
                     onTap: (){
                       if(isLoved()){
-                        Operations().deloveSong(context, c.nowPlay['id']);
+                        operations.deloveSong(context, c.nowPlay['id']);
                       }else{
-                        Operations().loveSong(context, c.nowPlay['id']);
+                        operations.loveSong(context, c.nowPlay['id']);
                       }
                       
                     },
@@ -408,7 +409,7 @@ class _PlayBarState extends State<PlayBar> {
                   const SizedBox(width: 25,),
                   GestureDetector(
                     onTap: (){
-                      Operations().toggleLyric(context);
+                      operations.toggleLyric(context);
                     },
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
@@ -469,7 +470,7 @@ class _PlayBarState extends State<PlayBar> {
                                       'volume', 
                                       const Duration(milliseconds: 50), 
                                       (){
-                                        Operations().saveVolume();
+                                        operations.saveVolume();
                                       }
                                     );
                                   }
