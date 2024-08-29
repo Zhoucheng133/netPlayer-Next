@@ -552,6 +552,15 @@ class Operations{
       for(String line in lines){
         int pos1=line.indexOf("[");
         int pos2=line.indexOf("]");
+        if(pos1==-1 || pos2==-1){
+          c.lyric.value=[
+            {
+              'time': 0,
+              'content': 'noLyric'.tr,
+            }
+          ];
+          return;
+        }
         lyricCovert.add({
           'time': timeToMilliseconds(line.substring(pos1+1, pos2)),
           'content': line.substring(pos2 + 1).trim(),
