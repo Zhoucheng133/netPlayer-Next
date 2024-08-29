@@ -165,14 +165,17 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
+### 3.2.3
+- Add lyric from netease music
+
+<details>
+<summary>Previous version (Not fully translated yet)</summary>
+
 ### 3.2.2 (2024/8/29)
 - Fix missing translations
 - Fix a bug of progress slider
 - Improve some English translate
 - Improve performance
-
-<details>
-<summary>Previous version (Not fully translated yet)</summary>
 
 ### 3.2.1 (2024/8/6)
 - Fix a bug of a dialog
