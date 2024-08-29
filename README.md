@@ -22,7 +22,6 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 ![window_manager](https://img.shields.io/badge/window_manager-0.3.8-darkgreen)
 ![path_provider](https://img.shields.io/badge/path_provider-2.1.2-orange)
 ![google_fonts](https://img.shields.io/badge/google_fonts-6.2.1-blue)
-![easy_debounce](https://img.shields.io/badge/easy_debounce-2.0.3-yellow)
 ![font_awesome_flutter](https://img.shields.io/badge/font_awesome_flutter-10.7.0-green)
 ![flutter_popup](https://img.shields.io/badge/flutter_popup-3.3.0-lightblue)
 ![shelf](https://img.shields.io/badge/shelf-1.4.1-lightyellow)
@@ -164,12 +163,19 @@ flutter build macos
 Linux没有测试过，各位可以自行尝试
 
 ## 更新日志
+
+### 3.2.2 (2024/8/29)
+- 修复翻译缺失
+- 修复进度条闪烁的问题
+- 提高了一些性能
+- 改进一些英文翻译
+
 <details>
 <summary>过去的版本</summary>
 
-### 3.2.1
-- 修复翻译缺失
-- 改进一些英文翻译
+### 3.2.1 (2024/8/6)
+- 修复一个弹窗问题
+- 修复注销出错的问题
 
 ### 3.2.0 (2024/8/4)
 - 添加多语言支持

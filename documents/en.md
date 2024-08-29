@@ -22,7 +22,6 @@
 ![window_manager](https://img.shields.io/badge/window_manager-0.3.8-darkgreen)
 ![path_provider](https://img.shields.io/badge/path_provider-2.1.2-orange)
 ![google_fonts](https://img.shields.io/badge/google_fonts-6.2.1-blue)
-![easy_debounce](https://img.shields.io/badge/easy_debounce-2.0.3-yellow)
 ![font_awesome_flutter](https://img.shields.io/badge/font_awesome_flutter-10.7.0-green)
 ![flutter_popup](https://img.shields.io/badge/flutter_popup-3.3.0-lightblue)
 ![shelf](https://img.shields.io/badge/shelf-1.4.1-lightyellow)
@@ -166,9 +165,11 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.2.1
+### 3.2.2 (2024/8/29)
 - Fix missing translations
+- Fix a bug of progress slider
 - Improve some English translate
+- Improve performance
 
 <details>
 <summary>Previous version (Not fully translated yet)</summary>
