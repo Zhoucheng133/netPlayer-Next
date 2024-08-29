@@ -2,11 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 class Controller extends GetxController{
   // 当前软件版本
-  String version='3.2.2';
+  String version='3.2.3';
   // 当前页面索引
   RxInt pageIndex=0.obs;
   // 当前页面Id
