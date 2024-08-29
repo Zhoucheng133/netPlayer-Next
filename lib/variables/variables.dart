@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 class Controller extends GetxController{
   // 当前软件版本
@@ -78,6 +79,7 @@ class Controller extends GetxController{
   RxInt lyricLine=0.obs;
   // ws服务
   var ws;
+  RxBool onslide=false.obs;
 
   // # 一些设置属性 #
   // 保存播放内容

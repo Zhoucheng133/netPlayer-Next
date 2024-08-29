@@ -1,4 +1,3 @@
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -302,8 +301,11 @@ class _PlayBarState extends State<PlayBar> {
                         child: Slider(
                           value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
                           onChanged: (value){
+                            operations.seekChange(value);
+                          },
+                          onChangeEnd: (value){
                             operations.seekSong(value);
-                          }
+                          },
                         ),
                       )
                     )
@@ -466,14 +468,10 @@ class _PlayBarState extends State<PlayBar> {
                                   onChanged: (val){
                                     c.updateVolume((val*100).toInt());
                                     c.handler.volumeSet(c.volume.value);
-                                    EasyDebounce.debounce(
-                                      'volume', 
-                                      const Duration(milliseconds: 50), 
-                                      (){
-                                        operations.saveVolume();
-                                      }
-                                    );
-                                  }
+                                  },
+                                  onChangeEnd: (_){
+                                    operations.saveVolume();
+                                  },
                                 ),
                               )
                             ),

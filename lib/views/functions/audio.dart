@@ -20,10 +20,13 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   MediaItem item=MediaItem(id: "", title: "");
   final operations=Operations();
 
+
   audioHandler(){
     player.stream.position.listen((position) {
       var data=position.inMilliseconds;
-      c.playProgress.value=data;
+      if(!c.onslide.value){
+        c.playProgress.value=data;
+      }
       if(c.lyric.isNotEmpty && c.lyric.length!=1){
         for (var i = 0; i < c.lyric.length; i++) {
           if(i==c.lyric.length-1){
@@ -115,8 +118,11 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 跳转
   @override
   Future<void> seek(Duration position) async {
-    player.seek(position);
+    c.onslide.value=true;
+    await player.pause();
+    await player.seek(position);
     setMedia(true);
+    c.onslide.value=false;
   }
 
   int preHandler(int index, int length){

@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -751,26 +750,32 @@ class Operations{
   }
 
   // 定位
-  void seek(Duration d){
-    c.handler.seek(d);
-    play();
+  Future<void> seek(Duration d) async {
+    await c.handler.seek(d);
+    // play();
+    Future.microtask((){
+      play();
+    });
+  }
+
+  void seekChange(double val){
+    pause();
+    if(c.nowPlay['id']==''){
+      return;
+    }
+    int progress=(c.nowPlay['duration']*1000*val).toInt();
+    c.playProgress.value=progress;
   }
 
   // 定位时间轴
-  void seekSong(double val){
+  Future<void> seekSong(double val) async {
     if(c.nowPlay['id']==''){
       return;
     }
     pause();
     int progress=(c.nowPlay['duration']*1000*val).toInt();
     c.playProgress.value=progress;
-    EasyDebounce.debounce(
-      'slider',
-      const Duration(milliseconds: 50),
-      () {
-        seek(Duration(milliseconds: c.playProgress.value));
-      }
-    );
+    await seek(Duration(milliseconds: c.playProgress.value));
   }
 
   // 自动登录切换

@@ -27,7 +27,6 @@ dependencies:
   google_fonts: ^6.2.1
   media_kit: ^1.1.10
   media_kit_libs_audio: ^1.0.4
-  easy_debounce: ^2.0.3
   font_awesome_flutter: ^10.7.0
   flutter_popup: ^3.3.0
   shelf: ^1.4.1
