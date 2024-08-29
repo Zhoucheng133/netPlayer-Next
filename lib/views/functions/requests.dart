@@ -98,10 +98,6 @@ class HttpRequests{
   Future<Map> getArtistDataRequest(String id) async {
     return await httpRequest('${c.userInfo["url"]}/rest/getArtist?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id');
   }
-  // 获取歌词
-  Future<Map> getLyricRequest(String title, String album, String artist, String duration) async {
-    return await httpRequest('https://lrclib.net/api/get?artist_name=$artist&track_name=$title&album_name=$album&duration=$duration');
-  }
   // 搜索
   Future<Map> searchRequest(String value) async {
     return await httpRequest('${c.userInfo["url"]}/rest/search2?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&query=$value');
@@ -109,5 +105,36 @@ class HttpRequests{
   // 刷新音乐库
   Future<Map> refreshLibrary() async {
     return await httpRequest('${c.userInfo["url"]}/rest/startScan?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}');
+  }
+  // 从lrclib获取歌词
+  Future<Map> lrclib(String title, String album, String artist, String duration) async {
+    return await httpRequest('https://lrclib.net/api/get?artist_name=$artist&track_name=$title&album_name=$album&duration=$duration');
+  }
+  // 从网易云获取歌词
+  Future<String?>  netease(String title, String artist) async {
+    String id="";
+    try {
+      final keyword="$title $artist";
+      final searchAPI="https://music.163.com/api/search/get/web?csrf_token=hlpretag=&hlposttag=&s=$keyword&type=1&offset=0&total=true&limit=1";
+      final response=await http.get(Uri.parse(searchAPI));
+      id=json.decode(utf8.decode(response.bodyBytes))['result']['songs'][0]['id'].toString();
+    } catch (_) {
+      return null;
+    }
+    if(id.isEmpty){
+      return null;
+    }
+    String lyric="";
+    try {
+      final lyricAPI="https://music.163.com/api/song/media?id=$id";
+      final response=await http.get(Uri.parse(lyricAPI));
+      lyric=json.decode(utf8.decode(response.bodyBytes))["lyric"];
+    } catch (_) {
+      return null;
+    }
+    if(lyric.isNotEmpty){
+      return lyric;
+    }
+    return null;
   }
 }
