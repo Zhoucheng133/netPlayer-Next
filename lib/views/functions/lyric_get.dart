@@ -70,6 +70,7 @@ class LyricGet{
     if(lyricPainText==null){
       return false;
     }
+    print(lyricPainText);
     List lyricCovert=[];
     List<String> lines = LineSplitter.split(lyricPainText).toList();
     for(String line in lines){
@@ -91,6 +92,7 @@ class LyricGet{
         'content': content,
       });
     }
+    lyricCovert.sort((a, b)=>a['time'].compareTo(b['time']));
     c.lyric.value=lyricCovert;
     var content='';
     if(c.useWs.value){
