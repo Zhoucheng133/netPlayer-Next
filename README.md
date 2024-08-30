@@ -293,3 +293,5 @@ Linux没有测试过，各位可以自行尝试
 [Subsonic API](http://www.subsonic.org/pages/api.jsp)
 
 [lrclib API](https://lrclib.net/docs)
+
+网易云音乐
