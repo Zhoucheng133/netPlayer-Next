@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -451,7 +452,18 @@ class _PlayListItemState extends State<PlayListItem> {
                       size: 16,
                     ),
                     const SizedBox(width: 5,),
-                    Text(widget.name)
+                    Expanded(
+                      child: AutoSizeText(
+                        widget.name,
+                        style: GoogleFonts.notoSansSc(
+                          fontSize: 14
+                        ),
+                        maxLines: 1,
+                        minFontSize: 12,
+                        maxFontSize: 14,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    )
                   ],
                 ),
               ),
