@@ -30,6 +30,7 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 ![smtc_windows](https://img.shields.io/badge/smtc_windows-0.1.2-white)
 ![dropdown_button2](https://img.shields.io/badge/dropdown_button2-2.3.9-orange)
 ![loading_animation_widget](https://img.shields.io/badge/loading_animation_widget-1.2.1-pink)
+![auto_size_text](https://img.shields.io/badge/auto_size_text-3.0.0-green)
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
@@ -166,6 +167,7 @@ Linux没有测试过，各位可以自行尝试
 
 ### 3.2.3
 - 添加从网易云音乐获取歌词
+- 修复歌单名称过长的显示问题
 
 <details>
 <summary>过去的版本</summary>
