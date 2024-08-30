@@ -165,9 +165,10 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.2.3
+### 3.2.3 (2024/8/30)
 - Add lyric from netease music
-
+- Fix display issue of playlist' name
+- Fix may crash when getting lyric
 <details>
 <summary>Previous version (Not fully translated yet)</summary>
 
