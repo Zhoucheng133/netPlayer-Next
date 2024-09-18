@@ -167,6 +167,7 @@ Linux没有测试过，各位可以自行尝试
 
 ### 3.2.4
 - 添加重命名hint
+- 添加自动识别语言
 
 <details>
 <summary>过去的版本</summary>
