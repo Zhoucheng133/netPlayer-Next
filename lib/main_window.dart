@@ -169,7 +169,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   
   Future<void> initPref(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
     final lang=prefs.getString('lang');
     if(lang!=null){
       var parts = lang.split('_');
@@ -178,7 +177,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
       Get.updateLocale(locale);
     }else{
       if(context.mounted){
-        operations.selectLanguage(context);
+        Locale locale = Localizations.localeOf(context);
+        Get.updateLocale(locale);
+        c.lang.value="${locale.languageCode}_${locale.countryCode}";
       }
     }
 

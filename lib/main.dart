@@ -65,7 +65,6 @@ class MainApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      locale: const Locale('en', 'US'),
       supportedLocales: const [
         Locale('en', 'US'),
         Locale('zh', 'CN'),
