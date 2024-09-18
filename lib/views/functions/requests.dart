@@ -137,4 +137,8 @@ class HttpRequests{
     }
     return null;
   }
+  // 获取某个歌曲信息
+  Future<Map> getSong(String id) async {
+    return await httpRequest('${c.userInfo["url"]}/rest/getSong?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id');
+  }
 }

@@ -167,28 +167,44 @@ class _LyricViewState extends State<LyricView> {
                             ),
                           ),
                           const SizedBox(height: 20,),
-                          Obx(()=>
-                            Text(
-                              c.nowPlay['title'],
-                              style: GoogleFonts.notoSansSc(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24,
+                          GestureDetector(
+                            onTap: (){
+                              operations.toAlbum(context);
+                            },
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: Obx(()=>
+                                Text(
+                                  c.nowPlay['title'],
+                                  style: GoogleFonts.notoSansSc(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                  ),
+                                  softWrap: false,
+                                  overflow: TextOverflow.fade,
+                                )
                               ),
-                              softWrap: false,
-                              overflow: TextOverflow.fade,
-                            )
+                            ),
                           ),
                           const SizedBox(height: 5,),
-                          Obx(()=>
-                            Text(
-                              c.nowPlay['artist'],
-                              style: GoogleFonts.notoSansSc(
-                                fontSize: 13,
-                                color: Colors.grey[400]
+                          GestureDetector(
+                            onTap: (){
+                              operations.toArtist(context);
+                            },
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: Obx(()=>
+                                Text(
+                                  c.nowPlay['artist'],
+                                  style: GoogleFonts.notoSansSc(
+                                    fontSize: 13,
+                                    color: Colors.grey[400]
+                                  ),
+                                  softWrap: false,
+                                  overflow: TextOverflow.fade,
+                                )
                               ),
-                              softWrap: false,
-                              overflow: TextOverflow.fade,
-                            )
+                            ),
                           ),
                           const SizedBox(height: 30,),
                           Row(

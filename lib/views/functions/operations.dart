@@ -939,4 +939,54 @@ class Operations{
       ),
     );
   }
+
+  Future<Map> getSongInfo(String id) async {
+    final rlt=await requests.getSong(id);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      return {};
+    }else{
+      try {
+        return rlt['subsonic-response']['song'];
+      } catch (_) {}
+    }
+    return {};
+  }
+
+  Future<void> toArtist(BuildContext context) async {
+    if(c.nowPlay['id']==""){
+      return;
+    }
+    toggleLyric(context);
+    c.pageIndex.value=2;
+    final data=await getSongInfo(c.nowPlay['id']);
+    if(data.isEmpty){
+      return;
+    }
+    String artistId="";
+    try {
+      artistId=data['artistId'];
+    } catch (_) {
+      return;
+    }
+    c.pageId.value=artistId;
+  }
+
+  Future<void> toAlbum(BuildContext context) async {
+    if(c.nowPlay['id']==""){
+      return;
+    }
+    toggleLyric(context);
+    c.pageIndex.value=3;
+    final data=await getSongInfo(c.nowPlay['id']);
+    if(data.isEmpty){
+      return;
+    }
+    String albumId="";
+    try {
+      albumId=data['albumId'];
+    } catch (_) {
+      return;
+    }
+    c.pageId.value=albumId;
+  }
 }
