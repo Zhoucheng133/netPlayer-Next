@@ -378,6 +378,7 @@ class _PlayListItemState extends State<PlayListItem> {
           content: TextField(
             controller: newName,
             decoration: InputDecoration(
+              hintText: widget.name,
               isCollapsed: true,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
