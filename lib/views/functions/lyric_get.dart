@@ -70,7 +70,7 @@ class LyricGet{
     if(lyricPainText==null){
       return false;
     }
-    print(lyricPainText);
+    // print(lyricPainText);
     List lyricCovert=[];
     List<String> lines = LineSplitter.split(lyricPainText).toList();
     for(String line in lines){
