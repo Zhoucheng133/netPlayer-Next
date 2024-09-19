@@ -181,8 +181,18 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     }else{
       if(context.mounted){
         Locale locale = Localizations.localeOf(context);
-        Get.updateLocale(locale);
-        c.lang.value="${locale.languageCode}_${locale.countryCode}";
+        String countryCode = locale.countryCode ?? '';
+        switch (countryCode) {
+          case 'US':
+          case 'CN':
+          case 'TW':
+            Get.updateLocale(locale);
+            c.lang.value="${locale.languageCode}_${locale.countryCode}";
+            break;
+          default:
+            Get.updateLocale(const Locale('en', 'US'));
+            c.lang.value="en_US";
+        }
       }
     }
 
