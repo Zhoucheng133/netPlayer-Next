@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:net_player_next/views/functions/operations.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_web_socket/shelf_web_socket.dart';
@@ -15,6 +16,7 @@ class WsService {
   HttpServer? _server;
   final List<WebSocketChannel> _clients = [];
   final Controller c = Get.put(Controller());
+  Operations operations=Operations();
 
   void sendMsg(String content) {
     for (var client in _clients) {
@@ -42,7 +44,15 @@ class WsService {
       _clients.add(webSocket);
       webSocket.stream.listen(
         (message) {
-          // 接受消息
+          if(message=='pause'){
+            operations.pause();
+          }else if(message=='play'){
+            operations.play();
+          }else if(message=='skip'){
+            operations.skipNext();
+          }else if(message=='forw'){
+            operations.skipPre();
+          }
         },
         onDone: () {
           _clients.remove(webSocket);
