@@ -95,16 +95,12 @@ class _MainViewState extends State<MainView> {
   }
 
   void lyricChange(){
-    if(c.lyric.isEmpty){
-      return;
-    }
     try {
       var content=c.lyric[c.lyricLine.value-1]['content'];
       if(c.useWs.value){
         c.ws.sendMsg(content);
       }
     } catch (_) {}
-    
   }
 
   Future<void> nowplayChange(Map val) async {
