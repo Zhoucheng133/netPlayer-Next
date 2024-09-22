@@ -134,7 +134,7 @@ class _MainViewState extends State<MainView> {
     initPrefs();
     listener=ever(c.nowPlay, (val)=>nowplayChange(val));
     lineListener=ever(c.lyricLine, (val)=>lyricChange());
-    statusListener=ever(c.nowPlay, (val)=>lyricChange());
+    statusListener=ever(c.isPlay, (val)=>lyricChange());
     initSMTC();
   }
 
