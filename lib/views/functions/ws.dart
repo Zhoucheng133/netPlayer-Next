@@ -28,6 +28,7 @@ class WsService {
           'cover': "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
           'fullLyric': c.lyric,
           'line': c.lyricLine.value,
+          'isPlay': c.isPlay.value,
         })
       );
     }

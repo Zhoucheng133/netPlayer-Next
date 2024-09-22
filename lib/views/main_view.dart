@@ -32,6 +32,7 @@ class _MainViewState extends State<MainView> {
   final Controller c = Get.put(Controller());
   late Worker listener;
   late Worker lineListener;
+  late Worker statusListener;
   Operations operations=Operations();
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式
@@ -93,7 +94,7 @@ class _MainViewState extends State<MainView> {
     operations.initHotkey(context);
   }
 
-  void lyricChange(int val){
+  void lyricChange(){
     if(c.lyric.isEmpty){
       return;
     }
@@ -132,7 +133,8 @@ class _MainViewState extends State<MainView> {
     super.initState();
     initPrefs();
     listener=ever(c.nowPlay, (val)=>nowplayChange(val));
-    lineListener=ever(c.lyricLine, (val)=>lyricChange(val));
+    lineListener=ever(c.lyricLine, (val)=>lyricChange());
+    statusListener=ever(c.nowPlay, (val)=>lyricChange());
     initSMTC();
   }
 
@@ -196,6 +198,8 @@ class _MainViewState extends State<MainView> {
   @override
   void dispose() {
     listener.dispose();
+    statusListener.dispose();
+    lineListener.dispose();
     c.smtc.dispose();
     super.dispose();
   }
