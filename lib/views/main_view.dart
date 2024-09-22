@@ -124,13 +124,27 @@ class _MainViewState extends State<MainView> {
     }
   }
 
+  void statusChange(){
+    try {
+      var content=c.lyric[c.lyricLine.value-1]['content'];
+      if(c.useWs.value){
+        c.ws.sendMsg(content);
+      }
+    } catch (e) {
+      if(c.lyric.length==1){
+        var content=c.lyric[0]['content'];
+        c.ws.sendMsg(content);
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     initPrefs();
     listener=ever(c.nowPlay, (val)=>nowplayChange(val));
     lineListener=ever(c.lyricLine, (val)=>lyricChange());
-    statusListener=ever(c.isPlay, (val)=>lyricChange());
+    statusListener=ever(c.isPlay, (val)=>statusChange());
     initSMTC();
   }
 
