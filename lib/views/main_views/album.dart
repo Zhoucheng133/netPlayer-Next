@@ -50,6 +50,13 @@ class _AlbumViewState extends State<AlbumView> {
       }
     });
   }
+
+  @override
+  void dispose() {
+    listener.dispose();
+    super.dispose();
+  }
+
   void refresh(BuildContext context){
     operations.getAlbums(context);
     showMessage(true, '更新成功', context);
