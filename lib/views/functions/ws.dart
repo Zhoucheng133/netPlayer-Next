@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/operations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_web_socket/shelf_web_socket.dart';
@@ -43,27 +44,54 @@ class WsService {
     _clients.clear();
   }
 
-  void commandHandler(Map msg){
-    if(msg.isEmpty){
+  Future<void> commandHandler(Map msg) async {
+    if (msg.isEmpty) {
       return;
-    }else if(msg['command']=='pause'){
-      operations.pause();
-    }else if(msg['command']=='play'){
-      operations.play();
-    }else if(msg['command']=='skip'){
-      operations.skipNext();
-    }else if(msg['command']=='forw'){
-      operations.skipPre();
-    }else if(msg['command']=='get'){
-      try {
-        var content=c.lyric[c.lyricLine.value-1]['content'];
-        c.ws.sendMsg(content);
-      } catch (e) {
-        if(c.lyric.length==1){
-          var content=c.lyric[0]['content'];
-          sendMsg(content);
+    }
+
+    switch (msg['command']) {
+      case 'pause':
+        operations.pause();
+        break;
+      case 'play':
+        operations.play();
+        break;
+      case 'skip':
+        operations.skipNext();
+        break;
+      case 'forw':
+        operations.skipPre();
+        break;
+      case 'get':
+        try {
+          var content = c.lyric[c.lyricLine.value - 1]['content'];
+          c.ws.sendMsg(content);
+        } catch (e) {
+          if (c.lyric.length == 1) {
+            var content = c.lyric[0]['content'];
+            sendMsg(content);
+          }
         }
-      }
+        break;
+      case 'mode':
+        if(msg['data']=='list' || msg['data']=='repeat' || msg['data']=='random'){
+          if(c.fullRandom.value){
+            return;
+          }else{
+            c.playMode.value=msg['data'];
+            final SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.setString('playMode', msg['data']);
+          }
+        }
+      case 'seek':
+        if(msg['data']!=null && msg['data'] is int){
+          if(Duration(milliseconds: msg['data'])>Duration(seconds: c.nowPlay['duration'])){
+            return;
+          }
+          operations.seek(Duration(milliseconds: msg['data']));
+        }
+      default:
+        break;
     }
   }
 
