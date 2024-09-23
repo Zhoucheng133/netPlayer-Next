@@ -30,6 +30,7 @@ class WsService {
           'fullLyric': c.lyric,
           'line': c.lyricLine.value,
           'isPlay': c.isPlay.value,
+          'mode': c.playMode.value,
         })
       );
     }
