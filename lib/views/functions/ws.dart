@@ -43,20 +43,39 @@ class WsService {
     _clients.clear();
   }
 
+  void commandHandler(Map msg){
+    if(msg.isEmpty){
+      return;
+    }else if(msg['command']=='pause'){
+      operations.pause();
+    }else if(msg['command']=='play'){
+      operations.play();
+    }else if(msg['command']=='skip'){
+      operations.skipNext();
+    }else if(msg['command']=='forw'){
+      operations.skipPre();
+    }else if(msg['command']=='get'){
+      try {
+        var content=c.lyric[c.lyricLine.value-1]['content'];
+        c.ws.sendMsg(content);
+      } catch (e) {
+        if(c.lyric.length==1){
+          var content=c.lyric[0]['content'];
+          sendMsg(content);
+        }
+      }
+    }
+  }
+
   Future<void> initService(int port) async {
     var handler = webSocketHandler((WebSocketChannel webSocket) {
       _clients.add(webSocket);
       webSocket.stream.listen(
         (message) {
-          if(message=='pause'){
-            operations.pause();
-          }else if(message=='play'){
-            operations.play();
-          }else if(message=='skip'){
-            operations.skipNext();
-          }else if(message=='forw'){
-            operations.skipPre();
-          }
+          try {
+            commandHandler(json.decode(message));
+          } catch (_) {}
+
         },
         onDone: () {
           _clients.remove(webSocket);
