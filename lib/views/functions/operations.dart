@@ -1020,7 +1020,9 @@ class Operations{
         }
 
         Process.run(command, [c.wsPort.value.toString(), c.lang.value]);
-      } catch (_) {}
+      } catch (_) {
+        return;
+      }
       c.useLyricKit.value=true;
     }else{
       c.ws.closeKit();

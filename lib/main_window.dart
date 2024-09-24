@@ -28,6 +28,12 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   Operations operations=Operations();
 
   @override
+  void onWindowClose() {
+    c.ws.closeKit();
+    super.onWindowClose();
+  }
+
+  @override
   void initState() {
     super.initState();
     windowManager.addListener(this);
