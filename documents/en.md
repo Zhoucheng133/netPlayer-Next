@@ -56,6 +56,20 @@ This version of netPlayer starts from `v2.0.0`
 
 \*\* From **v3.2.0**, You can see the detail of multi language support at [**Language support**](#language-support). Other version support Simplified Chinese only.
 
+## Contents
+
+- [Intro](#intro)
+- [Shortcuts](#shortcuts)
+- [Screenshot](#screenshot)
+- [Language support](#language-support)
+- [WebSocket service](#websocket-service)
+- [FAQ](#faq)
+- [Other links](#other-links)
+- [Config netPlayer Next on your own device](#config-netplayer-next-on-your-own-device)
+- [Update log](#update-log)
+- [Some APIs](#some-apis)
+
+
 ## Shortcuts
 
 ### Shortcuts in app
@@ -85,7 +99,7 @@ You can add your language with pull&request. Here is the language directory: `li
 
 If some translate is not accurate, you can add a issue.
 
-## WebSocket Service
+## WebSocket service
 
 **This function needs v3.0.0 or later**
 
@@ -105,39 +119,32 @@ This function can be used for live streaming to display bgm information. You can
 1. Design a web background for your stream.
 2. Find a place to display bgm information, and get it through WebSocket service.
 
-## Commnon problems
-1. Cannot connect to server:
-   ```
-   You need to check whether your cilent device can access to your server. It probably that firewall of your server system blocked your access. And be sure your URL is avaliable (Be aware http and https).
-   ```
-2. Not all songs displayed: 
-   ```
-   Subsonic API does not support to display all the songs. The limit of songs to get is 500.
-   But you can shuffle all the songs through "Shuffle all the songs", which is not affect by songs displayed. You can see this button right of the "All" page title.
-   ```
-3. See gray block or crashed
-   ```
-   Two possibilies: 
-   【1】Subsonic (Navidrome) need to get Music information through Music file.
-   So if your Music file does not contain information(s) below, netPlayer can't use:
-   1. Song title
-   2. Song artist
-   3. Song duraion
-   4. Album
-   Tip: Music file without cover doesn't affect netPlayer
-   【2】Old version of netPlayer affect
-   Delete these directory: 
-   C:\Users\<your username>\AppData\Roaming\zhouc\net_player_next
-   C:\Users\<your username>\AppData\Roaming\zhouc\netPlayer
-   ```
-4. No lyrics found:
-   ```
-   You can see lyrics API at the end of this page. It just what it says.
-   Lyrics depends on the song's title, album, artist and duration.
-   ```
+## FAQ
+
+### Cannot connect to server
+>You need to check whether your cilent device can access to your server. It probably that firewall of your server system blocked your access. Make sure your URL is avaliable (Be aware http and https).
+### Not all songs displayed
+>Subsonic API does not support to display all the songs. The limit of songs to get is 500.  
+But you can shuffle all the songs through "Shuffle all the songs", which is not affect by songs displayed. You can see this button right of the "All" page title.
+### See gray block or crashed
+>Two possibilies:  
+【1】Subsonic (Navidrome) need to get Music information through Music file.  
+So if your Music file does not contain information(s) below, netPlayer can't use:  
+1.Song title  
+2.Song artist  
+3.Song duraion  
+4.Album  
+Tip: Music file without cover doesn't affect netPlayer  
+【2】Old version of netPlayer affect  
+Delete these directory:   
+C:\Users\<your username>\AppData\Roaming\zhouc\net_player_next  
+C:\Users\<your username>\AppData\Roaming\zhouc\netPlayer  
+### No lyrics found:
+>You can see lyrics API at the end of this page. It just what it says.  
+Lyrics depends on the song's title, album, artist and duration.
    
 
-## Other link
+## Other links
 
 - [spotify-downloader](https://github.com/spotDL/spotify-downloader) For download songs. It contains songs' informations.
 - [Live-BG](https://github.com/Zhoucheng133/Live-BG) Used for live streaming to display bgm information developed by myself.
@@ -297,7 +304,7 @@ I have not tried it on Linux. You can try it by yourself.
 - 🚫歌词功能暂时无法使用
 </details>
 
-## Some API
+## Some APIs
 
 [Subsonic API](http://www.subsonic.org/pages/api.jsp)
 
