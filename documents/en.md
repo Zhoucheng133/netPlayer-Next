@@ -172,7 +172,7 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.2.5
+### 3.3.0
 - Add media control with ws service
 - Add lyric kit
 - Fix status error when stop play
