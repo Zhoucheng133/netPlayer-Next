@@ -137,5 +137,8 @@ const Map<String, String> zhTW = {
   'lang': '語言',
   'selfLang': '繁體中文',
 
-  'newListPlaceholder': '輸入歌單名稱'
+  'newListPlaceholder': '輸入歌單名稱',
+  'enableKit': '啟用歌詞元件',
+  'kitFailed': '啟動歌詞元件失敗',
+  'kitFailedContent': "缺少歌詞組件的文件，請重新下載安裝netPlayer",
 };

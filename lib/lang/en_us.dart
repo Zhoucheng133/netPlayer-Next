@@ -137,5 +137,8 @@ const Map<String, String> enUS = {
   'lang': 'Language',
   'selfLang': 'English',
 
-  'newListPlaceholder': 'Input the playlist name'
+  'newListPlaceholder': 'Input the playlist name',
+  'enableKit': 'Enable lyric kit',
+  'kitFailed': 'Launch lyric kit failed',
+  'kitFailedContent': 'Lyric kit files is missing. Please reinstall netPlayer'
 };
