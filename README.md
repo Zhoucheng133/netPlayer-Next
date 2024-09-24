@@ -31,6 +31,7 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 ![dropdown_button2](https://img.shields.io/badge/dropdown_button2-2.3.9-orange)
 ![loading_animation_widget](https://img.shields.io/badge/loading_animation_widget-1.2.1-pink)
 ![auto_size_text](https://img.shields.io/badge/auto_size_text-3.0.0-green)
+![path](https://img.shields.io/badge/path-1.9.0-lightblue)
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
