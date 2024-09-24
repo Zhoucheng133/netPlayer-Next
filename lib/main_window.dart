@@ -190,8 +190,8 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
             c.lang.value="${locale.languageCode}_${locale.countryCode}";
             break;
           default:
-            Get.updateLocale(const Locale('en', 'US'));
-            c.lang.value="en_US";
+            Get.updateLocale(const Locale('zh', 'CN'));
+            c.lang.value="zh_CN";
         }
       }
     }

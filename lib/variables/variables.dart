@@ -107,5 +107,5 @@ class Controller extends GetxController{
   late SMTCWindows smtc;
 
   // 语言
-  RxString lang='en_US'.obs;
+  RxString lang='zh_CN'.obs;
 }
