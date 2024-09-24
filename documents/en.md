@@ -174,6 +174,7 @@ I have not tried it on Linux. You can try it by yourself.
 
 ### 3.2.5
 - Add media control with ws service
+- Add lyric kit
 - Fix status error when stop play
 - Fix some undestroyed listener
 
