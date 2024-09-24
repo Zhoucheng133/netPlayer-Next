@@ -18,6 +18,7 @@ import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:path/path.dart' as p;
 
 class Operations{
   final requests=HttpRequests();
@@ -988,5 +989,42 @@ class Operations{
       return;
     }
     c.pageId.value=albumId;
+  }
+
+  // 启用歌词组件
+  void useKit(bool val, BuildContext context) {
+    // c.useLyricKit.value=val;
+    if(val==true){
+      try {
+        var appPath=Platform.resolvedExecutable;
+        appPath=p.dirname(appPath);
+        String command=p.join(appPath, 'lyric', 'netplayer_miniplay.exe');
+        File file = File(command);
+        if (!file.existsSync()) {
+          showDialog(
+            context: context, 
+            builder: (context)=>AlertDialog(
+              title: Text('kitFailed'.tr),
+              content: Text('kitFailedContent'.tr),
+              actions: [
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  }, 
+                  child: Text('ok'.tr)
+                )
+              ],
+            )
+          );
+          return;
+        }
+
+        Process.run(command, [c.wsPort.value.toString(), c.lang.value]);
+      } catch (_) {}
+      c.useLyricKit.value=true;
+    }else{
+      c.ws.closeKit();
+      c.useLyricKit.value=false;
+    }
   }
 }

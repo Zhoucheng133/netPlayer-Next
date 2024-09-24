@@ -108,4 +108,6 @@ class Controller extends GetxController{
 
   // 语言
   RxString lang='zh_CN'.obs;
+  //启用歌词组件
+  RxBool useLyricKit=false.obs;
 }

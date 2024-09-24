@@ -356,6 +356,38 @@ class _SettingsViewState extends State<SettingsView> {
                       )
                     ],
                   ),
+                  Platform.isWindows ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text('enableKit'.tr)
+                        )
+                      ),
+                      const SizedBox(width: 10,),
+                      SizedBox(
+                        width: 220,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Obx(()=>
+                            Transform.scale(
+                              scale: 0.7,
+                              child: Switch(
+                                activeTrackColor: c.color6,
+                                splashRadius: 0,
+                                value: c.useLyricKit.value, 
+                                onChanged: c.useWs.value ? (value){
+                                  operations.useKit(value, context);
+                                }: null
+                              ),
+                            )
+                          )
+                        ),
+                      )
+                    ],
+                  ):Container(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

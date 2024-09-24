@@ -36,6 +36,16 @@ class WsService {
     }
   }
 
+  void closeKit(){
+    for (var client in _clients) {
+      client.sink.add(
+        jsonEncode({
+          'command': 'close',
+        })
+      );
+    }
+  }
+
   Future<void> stop() async {
     await _server?.close(force: true);
     _server = null;
@@ -71,6 +81,8 @@ class WsService {
           if (c.lyric.length == 1) {
             var content = c.lyric[0]['content'];
             sendMsg(content);
+          }else{
+            sendMsg("");
           }
         }
         break;
@@ -91,6 +103,8 @@ class WsService {
           }
           operations.seek(Duration(milliseconds: msg['data']));
         }
+      case 'miniClose':
+        c.useLyricKit.value=false;
       default:
         break;
     }
