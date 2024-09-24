@@ -172,14 +172,19 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
+### 3.2.5
+- Add media control with ws service
+- Fix status error when stop play
+- Fix some undestroyed listener
+
+<details>
+<summary>Previous version (Not fully translated yet)</summary>
+
 ### 3.2.4 (2024/9/19)
 - Add hint text on renaming playlist
 - Add auto detect system language
 - Add getting artist/album on lyric page
 - Fix an issue when close ws service
-
-<details>
-<summary>Previous version (Not fully translated yet)</summary>
 
 ### 3.2.3 (2024/8/30)
 - Add lyric from netease music
