@@ -40,6 +40,8 @@ This version of netPlayer starts from `v2.0.0`
 
 **This version of netPlayer does NOT support Windows 7.**
 
+Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
+
 ||v1|v2|v3|
 |-|-|-|-|
 |Supported Windows versions|Windows7~|Windows10~|Windows10~|
@@ -108,8 +110,13 @@ If you open ws service on **settings**, netPlayer will be a WebSocket server, an
 ```json
 {
   "title": <song title>,
-  "artist": <artist>,
-  "lyric": <lyric>
+  "artist": <song artist>,
+  "lyric": <lyric now>,
+  "cover": <cover image link>,
+  "fullLyric": <full lyric>,
+  "line": <line of lyric now>,
+  "isPlay": <now playing or not>,
+  "mode": <play mode>,
 }
 ```
 
@@ -148,7 +155,8 @@ Lyrics depends on the song's title, album, artist and duration.
 
 - [spotify-downloader](https://github.com/spotDL/spotify-downloader) For download songs. It contains songs' informations.
 - [Live-BG](https://github.com/Zhoucheng133/Live-BG) Used for live streaming to display bgm information developed by myself.
-
+- [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)Lyric kit
+  
 ## Config netPlayer Next on your own device
 
 This project is developed with Flutter^3.22. You can debug with it directly.
@@ -172,7 +180,7 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.3.0
+### 3.3.0 (2024/9/28)
 - Add media control with ws service
 - Add lyric kit
 - Fix status error when stop play

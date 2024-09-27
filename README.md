@@ -42,6 +42,8 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 **这个版本的netPlayer不兼容Windows 7系统，如果你要查找支持Windows 7版本的netPlayer，转至[netPlayer](https://github.com/Zhoucheng133/net-player)查找v1版本的netPlayer**
 
+桌面歌词系统[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)
+
 ||v1|v2|v3|
 |-|-|-|-|
 |支持Windows版本|Windows7~|Windows10~|Windows10~|
@@ -108,7 +110,12 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 {
   "title": <标题>,
   "artist": <艺人>,
-  "lyric": <歌词>
+  "lyric": <当前歌词>,
+  "cover": <专辑封面链接>,
+  "fullLyric": <完整歌词>,
+  "line": <当前歌词进行到多少行>,
+  "isPlay": <是否正在播放>,
+  "mode": <播放模式>,
 }
 ```
 
@@ -146,7 +153,8 @@ C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer
 ## 其它链接
 
 - [spotify-downloader](https://github.com/spotDL/spotify-downloader)用于下载歌曲，通过这种方式下载的歌曲一般会包含一些信息
-- [Live-BG](https://github.com/Zhoucheng133/Live-BG)本人开发的用于直播的配合netPlayer显示当前播放歌曲信息和歌词的背景
+- [Live-BG](https://github.com/Zhoucheng133/Live-BG)用于直播的配合netPlayer显示当前播放歌曲信息和歌词的背景
+- [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)桌面歌词系统
 
 ## 在你的设备上配置netPlayer Next
 
