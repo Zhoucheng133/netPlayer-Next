@@ -159,12 +159,18 @@ Lyrics depends on the song's title, album, artist and duration.
   
 ## Config netPlayer Next on your own device
 
+### netPlayer Next only
+
 This project is developed with Flutter^3.22. You can debug with it directly.
 Recommand using Visual Studio Code. After installing Flutter and Dart extension on Visual Studio Code, you can debug/profile/relese on your device.
 
 Do NOT use Flutter^3.7 or lower version of Flutter. Make sure your Flutter version is higher than 3.0.0
 
 If you Debug or Release on **Windows**, make sure not do it in Chinese mainland network environment.
+
+### With lyric kit
+
+Use the same way to pacakge [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit), and move it to `<netPlayer program path>/lyric`
 
 Build on Windows：
 ```bash

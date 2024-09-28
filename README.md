@@ -158,6 +158,8 @@ C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer
 
 ## 在你的设备上配置netPlayer Next
 
+### netPlayer Next本体
+
 本项目使用Flutter^3.22开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
 建议直接使用Visual Studio Code，在安装完Flutter扩展和Dart扩展之后就可以Debug/Profile/Release了，我已经在.vscode文件夹中添加了launch类型
 
@@ -174,6 +176,10 @@ flutter build windows
 ```bash
 flutter build macos
 ```
+
+### 歌词组件
+
+你需要前往[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)页面中以同样的方法打包，放置到`<程序路径>/lyric`下即可
 
 Linux没有测试过，各位可以自行尝试
 
