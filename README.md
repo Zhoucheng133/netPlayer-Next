@@ -75,9 +75,9 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 - [WebSocket服务](#websocket服务)
 - [常见问题](#常见问题)
 - [其它链接](#其它链接)
-- [在你的设备上配置netplayer-next](#在你的设备上配置netplayer-next)
+- [在你的设备上配置netPlayer Next](#在你的设备上配置netplayer-next)
 - [更新日志](#更新日志)
-- [一些api](#一些api)
+- [一些API](#一些api)
 
 ## 快捷键
 
