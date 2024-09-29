@@ -50,7 +50,7 @@ Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 |Support macOS|✅|✅|✅*|
 |Single play|❌|✅|✅|
 |Locate song played|❌|✅|✅|
-|Global Shortcuts|macOS only|✅|✅|
+|Global shortcuts|macOS only|✅|✅|
 |Websocket|❌|❌|✅|
 |Multi language support|❌|❌|✅**|
 
@@ -58,6 +58,12 @@ Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 \* Since I switched to Windows PC, I can't build macOS version. If you need it, you can build it on your own Mac (Also I don't know whether it runs ok on Mac. You can give me some feedbacks).
 
 \*\* From **v3.2.0**, You can see the detail of multi language support at [**Language support**](#language-support). Other version support Simplified Chinese only.
+
+> [!NOTE]
+> Subsonic API does NOT support get 500 songs. All songs you can see is get random 500 songs and sort by time.
+
+> [!TIP]
+> You can use full random play button next to song number on all songs page, which is not affected by restrictions of Subsonic API
 
 ## Contents
 
