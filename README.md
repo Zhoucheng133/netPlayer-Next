@@ -38,7 +38,7 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
 > [!NOTE]
-> 这是netPlayer的Flutter版本，本仓库发布的netPlayer版本从2.0.0
+> 这是netPlayer的Flutter版本，本仓库发布的netPlayer版本从2.0.0开始
 
 >[!WARNING]
 > 这个版本的netPlayer不兼容Windows 7系统，如果你要查找支持Windows 7版本的netPlayer，转至[netPlayer](https://github.com/Zhoucheng133/net-player)查找v1版本的netPlayer
