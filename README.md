@@ -37,10 +37,11 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
-**注意，这是[netPlayer](https://github.com/Zhoucheng133/net-player)的Flutter版本**  
-本仓库发布的netPlayer版本号从`2.0.0`开始
+> [!NOTE]
+> 这是netPlayer的Flutter版本，本仓库发布的netPlayer版本从2.0.0
 
-**这个版本的netPlayer不兼容Windows 7系统，如果你要查找支持Windows 7版本的netPlayer，转至[netPlayer](https://github.com/Zhoucheng133/net-player)查找v1版本的netPlayer**
+>[!WARNING]
+> 这个版本的netPlayer不兼容Windows 7系统，如果你要查找支持Windows 7版本的netPlayer，转至[netPlayer](https://github.com/Zhoucheng133/net-player)查找v1版本的netPlayer
 
 桌面歌词系统[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 
@@ -53,11 +54,12 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 |定位歌曲|❌|✅|✅|
 |全局快捷键|仅macOS|✅|✅|
 |WebSocket服务|❌|❌|✅|
-|多语言支持|❌|❌|✅**|
+|多语言支持|❌|❌|✅|
 
 \* 由于本人换电脑，macOS没法打包，如果你有需要可以在自己的设备上打包v3版本(所以也不清楚macOS版本的运行情况，欢迎给予反馈!)
 
-\*\* 从 **v3.2.0** 版本开始支持多语言，你[**点击这里**](#多语言支持)查看详细的语言支持
+> [!NOTE]
+> 多语言从**v3.2.0** 版本开始支持多语言，你[**点击这里**](#多语言支持)查看详细的语言支持
 
 ## 目录
 
@@ -102,10 +104,11 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 如果有一些翻译不那么准确，你可以添加一个Issue
 
 ## WebSocket服务
+>[!NOTE]
+> 这个功能至少需要**v3.0.0**版本
 
-**这个功能至少需要v3.0.0**
+### 发送的消息
 
-在**设置**中启用ws服务之后，netPlayer将会作为一个本地的WebSocket服务器，在播放歌曲更新/歌词更新的时候向客户端发送消息，消息的内容格式为
 ```json
 {
   "title": <标题>,
@@ -116,6 +119,17 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
   "line": <当前歌词进行到多少行>,
   "isPlay": <是否正在播放>,
   "mode": <播放模式>,
+}
+```
+
+### 接收的消息
+
+详细的见`lib/views/functions/ws.dart`内容
+
+```json
+{
+  "command": <操作>
+  "data": <数据>
 }
 ```
 
@@ -163,7 +177,8 @@ C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer
 本项目使用Flutter^3.22开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
 建议直接使用Visual Studio Code，在安装完Flutter扩展和Dart扩展之后就可以Debug/Profile/Release了，我已经在.vscode文件夹中添加了launch类型
 
-不要使用Flutter3.7或更低版本的Flutter，确保Dart版本至少有3.0.0
+> [!WARNING]
+> 不要使用Flutter3.7或更低版本的Flutter，确保Dart版本至少有3.0.0
 
 如果你在**Windows**上Debug或者Release，注意不要在国内的网络环境下操作，可能会等非常长的时间，Mac上没有这个问题
 

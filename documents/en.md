@@ -35,10 +35,11 @@
 
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
-**Notice: This is [netPlayer](https://github.com/Zhoucheng133/net-player) Flutter version**  
-This version of netPlayer starts from `v2.0.0`
+> [!NOTE]
+> Notice: This is netPlayer Flutter version starts from v2.0.0
 
-**This version of netPlayer does NOT support Windows 7.**
+> [!WARNING]
+> This version of netPlayer does NOT support Windows 7. If you need netPlayer on Windows7, you should find [v1 netPlayer](https://github.com/Zhoucheng133/net-player)
 
 Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 
@@ -102,10 +103,12 @@ You can add your language with pull&request. Here is the language directory: `li
 If some translate is not accurate, you can add a issue.
 
 ## WebSocket service
-
-**This function needs v3.0.0 or later**
+> [!NOTE]
+> This function needs v3.0.0 or later
 
 If you open ws service on **settings**, netPlayer will be a WebSocket server, and it will send messages when lyric update or play song update. The message will be like:
+
+### Send message
 
 ```json
 {
@@ -117,6 +120,17 @@ If you open ws service on **settings**, netPlayer will be a WebSocket server, an
   "line": <line of lyric now>,
   "isPlay": <now playing or not>,
   "mode": <play mode>,
+}
+```
+
+### Receive message
+
+More details see `lib/views/functions/ws.dart`
+
+```json
+{
+  "command": <command>
+  "data": <data attached>
 }
 ```
 
@@ -164,7 +178,8 @@ Lyrics depends on the song's title, album, artist and duration.
 This project is developed with Flutter^3.22. You can debug with it directly.
 Recommand using Visual Studio Code. After installing Flutter and Dart extension on Visual Studio Code, you can debug/profile/relese on your device.
 
-Do NOT use Flutter^3.7 or lower version of Flutter. Make sure your Flutter version is higher than 3.0.0
+> [!WARNING]
+> Do NOT use Flutter^3.7 or lower version of Flutter. Make sure your Flutter version is higher than 3.0.0
 
 If you Debug or Release on **Windows**, make sure not do it in Chinese mainland network environment.
 
