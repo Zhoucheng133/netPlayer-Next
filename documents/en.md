@@ -154,15 +154,7 @@ This function can be used for live streaming to display bgm information. You can
 >Subsonic API does not support to display all the songs. The limit of songs to get is 500.  
 But you can shuffle all the songs through "Shuffle all the songs", which is not affect by songs displayed. You can see this button right of the "All" page title.
 ### See gray block or crashed
->Two possibilies:  
-【1】Subsonic (Navidrome) need to get Music information through Music file.  
-So if your Music file does not contain information(s) below, netPlayer can't use:  
-1.Song title  
-2.Song artist  
-3.Song duraion  
-4.Album  
-Tip: Music file without cover doesn't affect netPlayer  
-【2】Old version of netPlayer affect  
+>Maybe old version of netPlayer affect  
 Delete these directory:   
 C:\Users\<your username>\AppData\Roaming\zhouc\net_player_next  
 C:\Users\<your username>\AppData\Roaming\zhouc\netPlayer  
