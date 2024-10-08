@@ -6,33 +6,6 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 <img src="assets/icon.png" width="100px">
 
-![Flutter](https://img.shields.io/badge/Flutter-3.19-blue?logo=Flutter)
-![media_kit](https://img.shields.io/badge/media_kit-1.1.10-yellow)
-![audioservice](https://img.shields.io/badge/audio_service-0.18.12-green)
-![crypto](https://img.shields.io/badge/crypto-3.0.3-lightblue)
-![flash](https://img.shields.io/badge/flash-3.1.0-lightyellow)
-![flutter_launcher_icons](https://img.shields.io/badge/flutter_launcher_icons-0.13.1-purple)
-![get](https://img.shields.io/badge/get-4.6.6-red)
-![hotkey_manager](https://img.shields.io/badge/hotkey_manager-0.2.0-white)
-![http](https://img.shields.io/badge/http-1.2.1-orange)
-![package_info_plus](https://img.shields.io/badge/package_info_plus-4.2.0-pink)
-![scroll_to_index](https://img.shields.io/badge/scroll_to_index-3.0.1-green)
-![shared_preferences](https://img.shields.io/badge/shared_preferences-2.2.2-lightgreen)
-![url_launcher](https://img.shields.io/badge/url_launcher-6.2.5-lightblue)
-![window_manager](https://img.shields.io/badge/window_manager-0.3.8-darkgreen)
-![path_provider](https://img.shields.io/badge/path_provider-2.1.2-orange)
-![google_fonts](https://img.shields.io/badge/google_fonts-6.2.1-blue)
-![font_awesome_flutter](https://img.shields.io/badge/font_awesome_flutter-10.7.0-green)
-![flutter_popup](https://img.shields.io/badge/flutter_popup-3.3.0-lightblue)
-![shelf](https://img.shields.io/badge/shelf-1.4.1-lightyellow)
-![shelf_web_socket](https://img.shields.io/badge/shelf_web_socket-1.0.2-purple)
-![flutter_rust_bridge](https://img.shields.io/badge/flutter_rust_bridge-1.72.1-red)
-![smtc_windows](https://img.shields.io/badge/smtc_windows-0.1.2-white)
-![dropdown_button2](https://img.shields.io/badge/dropdown_button2-2.3.9-orange)
-![loading_animation_widget](https://img.shields.io/badge/loading_animation_widget-1.2.1-pink)
-![auto_size_text](https://img.shields.io/badge/auto_size_text-3.0.0-green)
-![path](https://img.shields.io/badge/path-1.9.0-lightblue)
-
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
@@ -43,7 +16,7 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 >[!WARNING]
 > 这个版本的netPlayer不兼容Windows 7系统，如果你要查找支持Windows 7版本的netPlayer，转至[netPlayer](https://github.com/Zhoucheng133/net-player)查找v1版本的netPlayer
 
-桌面歌词系统[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)
+桌面歌词组件[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 
 ||v1|v2|v3|
 |-|-|-|-|
@@ -94,9 +67,20 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 ## 截图
 
+### 主界面
+
 ![截图1](demo/demo1.png)
 
 ![截图2](demo/demo2.png)
+
+### 桌面歌词组件
+
+> [!NOTE]
+> 歌词组件的代码[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)，你可以在Release页中下载没有这个功能的版本，桌面歌词的开关在`设置-启用歌词组件`，**打开这个功能需要启用ws服务**
+
+<img src="demo/lyric1.png" width="400px">
+<img src="demo/lyric2.png" width="400px">
+<img src="demo/lyric3.png" width="400px">
 
 ## 多语言支持
 
@@ -189,17 +173,15 @@ flutter build windows
 flutter build macos
 ```
 
-### 歌词组件
+### 桌面歌词组件
 
 你需要前往[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)页面中以同样的方法打包，放置到`<程序路径>/lyric`下即可
-
-Linux没有测试过，各位可以自行尝试
 
 ## 更新日志
 
 ### 3.3.0 (2024/9/28)
 - 添加ws服务控制播放的功能
-- 添加歌词组件
+- 添加桌面歌词组件
 - 修复停止播放时候播放状态错误的问题
 - 修复一些没有销毁的监听器
 

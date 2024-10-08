@@ -6,31 +6,6 @@
 
 <img src="../assets/icon.png" width="100px">
 
-![Flutter](https://img.shields.io/badge/Flutter-3.19-blue?logo=Flutter)
-![media_kit](https://img.shields.io/badge/media_kit-1.1.10-yellow)
-![audioservice](https://img.shields.io/badge/audio_service-0.18.12-green)
-![crypto](https://img.shields.io/badge/crypto-3.0.3-lightblue)
-![flash](https://img.shields.io/badge/flash-3.1.0-lightyellow)
-![flutter_launcher_icons](https://img.shields.io/badge/flutter_launcher_icons-0.13.1-purple)
-![get](https://img.shields.io/badge/get-4.6.6-red)
-![hotkey_manager](https://img.shields.io/badge/hotkey_manager-0.2.0-white)
-![http](https://img.shields.io/badge/http-1.2.1-orange)
-![package_info_plus](https://img.shields.io/badge/package_info_plus-4.2.0-pink)
-![scroll_to_index](https://img.shields.io/badge/scroll_to_index-3.0.1-green)
-![shared_preferences](https://img.shields.io/badge/shared_preferences-2.2.2-lightgreen)
-![url_launcher](https://img.shields.io/badge/url_launcher-6.2.5-lightblue)
-![window_manager](https://img.shields.io/badge/window_manager-0.3.8-darkgreen)
-![path_provider](https://img.shields.io/badge/path_provider-2.1.2-orange)
-![google_fonts](https://img.shields.io/badge/google_fonts-6.2.1-blue)
-![font_awesome_flutter](https://img.shields.io/badge/font_awesome_flutter-10.7.0-green)
-![flutter_popup](https://img.shields.io/badge/flutter_popup-3.3.0-lightblue)
-![shelf](https://img.shields.io/badge/shelf-1.4.1-lightyellow)
-![shelf_web_socket](https://img.shields.io/badge/shelf_web_socket-1.0.2-purple)
-![flutter_rust_bridge](https://img.shields.io/badge/flutter_rust_bridge-1.72.1-red)
-![smtc_windows](https://img.shields.io/badge/smtc_windows-0.1.2-white)
-![dropdown_button2](https://img.shields.io/badge/dropdown_button2-2.3.9-orange)
-![loading_animation_widget](https://img.shields.io/badge/loading_animation_widget-1.2.1-pink)
-
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
@@ -41,7 +16,7 @@
 > [!WARNING]
 > This version of netPlayer does NOT support Windows 7. If you need netPlayer on Windows7, you should find [v1 netPlayer](https://github.com/Zhoucheng133/net-player)
 
-Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
+Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 
 ||v1|v2|v3|
 |-|-|-|-|
@@ -94,9 +69,18 @@ Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 
 ## Screenshot
 
-![Screenshot 1](../demo/demo4.png)
+![Screenshot 1](../demo/demo3.png)
 
 ![Screenshot 2](../demo/demo2.png)
+
+### Desktop lyric kit
+
+> [!NOTE]
+> Desktop lyric kit's code [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit). You can download netPlayer without this feature on Relase page. You can enable it on `Settings - Enable lyric kit`. You need to enable ws service before using it.
+
+<img src="../demo/lyric1.png" width="400px">
+<img src="../demo/lyric2.png" width="400px">
+<img src="../demo/lyric3.png" width="400px">
 
 ## Language support
 
@@ -167,7 +151,7 @@ Lyrics depends on the song's title, album, artist and duration.
 
 - [spotify-downloader](https://github.com/spotDL/spotify-downloader) For download songs. It contains songs' informations.
 - [Live-BG](https://github.com/Zhoucheng133/Live-BG) Used for live streaming to display bgm information developed by myself.
-- [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)Lyric kit
+- [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)Desktop lyric kit
   
 ## Config netPlayer Next on your own device
 
@@ -181,7 +165,7 @@ Recommand using Visual Studio Code. After installing Flutter and Dart extension 
 
 If you Debug or Release on **Windows**, make sure not do it in Chinese mainland network environment.
 
-### With lyric kit
+### With desktop lyric kit
 
 Use the same way to pacakge [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit), and move it to `<netPlayer program path>/lyric`
 
@@ -201,7 +185,7 @@ I have not tried it on Linux. You can try it by yourself.
 
 ### 3.3.0 (2024/9/28)
 - Add media control with ws service
-- Add lyric kit
+- Add desktop lyric kit
 - Fix status error when stop play
 - Fix some undestroyed listener
 
