@@ -43,7 +43,7 @@ Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 ## Contents
 
 - [Intro](#intro)
-- [Shortcuts](#shortcuts)
+- [Usage](#usage)
 - [Screenshot](#screenshot)
 - [Language support](#language-support)
 - [WebSocket service](#websocket-service)
@@ -54,15 +54,20 @@ Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 - [Some APIs](#some-apis)
 
 
-## Shortcuts
+## Usage
+This is a Subsonic (Navidrome) API based desktop App. You can [click here](https://www.navidrome.org/docs/installation/) to see how to create a music server with Navidrome (Recommend).
 
-### Shortcuts in app
+Make sure your device running netPlayer can connect to your music server.
+
+### Shortcuts
+
+#### Shortcuts in app
 - `Space`：Play/Pause
 - `command →`(macOS) or `Ctrl →`(Windows)：Next song
 - `command ←`(macOS) or `Ctrl ←`(Windows)：Previous song
 - `command L`(macOS) or `Ctrl L`(Windows)：Show/Hide lyrics
 
-### Global shortcuts
+#### Global shortcuts
 - ⏯️(macOS & Windows) or `Ctrl Alt Space`(Windows)：Play/Pause
 - ⏩(macOS & Windows) or `Ctrl Alt →`(Windows)：Next song
 - ⏪(macOS & Windows) or `Ctrl Alt ←`(Windows)：Previous song

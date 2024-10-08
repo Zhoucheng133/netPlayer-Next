@@ -42,7 +42,7 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 ## 目录
 
 - [简介](#简介)
-- [快捷键](#快捷键)
+- [使用](#使用)
 - [截图](#截图)
 - [多语言支持](#多语言支持)
 - [WebSocket服务](#websocket服务)
@@ -52,15 +52,21 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 - [更新日志](#更新日志)
 - [一些API](#一些api)
 
-## 快捷键
+## 使用
 
-### App内快捷键
+这是一个基于Subsonic (Navidrome) API的一个桌面端App，你可以[**点击这里**](https://www.navidrome.org/docs/installation/)查看如果使用Navidrome (推荐) 搭建一个音乐服务器。
+
+在使用前务必确保运行netPlayer的设备可以通过网络连接到你的音乐服务器
+
+### 快捷键
+
+#### App内快捷键
 - `空格`：播放/暂停
 - `command →`(macOS)或`Ctrl →`(Windows)：下一首
 - `command ←`(macOS)或`Ctrl ←`(Windows)：上一首
 - `command L`(macOS)或`Ctrl L`(Windows)：显示/隐藏歌词
 
-### 全局快捷键
+#### 全局快捷键
 - ⏯️(macOS & Windows)或`Ctrl Alt 空格`(Windows)：播放/暂停
 - ⏩(macOS & Windows)或`Ctrl Alt →`(Windows)：下一首
 - ⏪(macOS & Windows)或`Ctrl Alt ←`(Windows)：上一首
@@ -94,7 +100,7 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 ## WebSocket服务
 >[!NOTE]
-> 这个功能至少需要**v3.0.0**版本
+> 这个功能至少需要**v3.0.0**版本，下面的接口适用的版本为**v3.3.0**或更新的版本，如果你想要查看过去版本的接口，你可以查找以往版本Tag的README文档
 
 ### 发送的消息
 
