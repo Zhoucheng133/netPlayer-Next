@@ -28,6 +28,7 @@ class _LyricViewState extends State<LyricView> {
   bool hoverVolume=false;
   bool hoverMode=false;
   bool hoverTip=false;
+  bool hoverFont=false;
   AutoScrollController controller=AutoScrollController();
   final Controller c = Get.put(Controller());
   final operations=Operations();
@@ -683,29 +684,56 @@ class _LyricViewState extends State<LyricView> {
                         Positioned(
                           right: 20,
                           bottom: 10,
-                          child: Tooltip(
-                            message: 'lyricTip'.tr,
-                            child: MouseRegion(
-                              onEnter: (_){
-                                setState(() {
-                                  hoverTip=true;
-                                });
-                              },
-                              onExit: (_){
-                                setState(() {
-                                  hoverTip=false;
-                                });
-                              },
-                              child: TweenAnimationBuilder(
-                                tween: ColorTween(end: hoverTip ? c.color6 : c.color4), 
-                                duration: const Duration(milliseconds: 200), 
-                                builder: (_, value, __)=>Icon(
-                                  Icons.info_rounded,
-                                  size: 20,
-                                  color: value,
-                                )
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              MouseRegion(
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverFont=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverFont=false;
+                                  });
+                                },
+                                child: TweenAnimationBuilder(
+                                  tween: ColorTween(end: hoverFont ? c.color6 : c.color4), 
+                                  duration: const Duration(milliseconds: 200),
+                                  builder: (_, value, __)=>Icon(
+                                    Icons.text_fields_rounded,
+                                    size: 20,
+                                    color: value,
+                                  )
+                                ),
                               ),
-                            ),
+                              const SizedBox(width: 15,),
+                              Tooltip(
+                                message: 'lyricTip'.tr,
+                                child: MouseRegion(
+                                  onEnter: (_){
+                                    setState(() {
+                                      hoverTip=true;
+                                    });
+                                  },
+                                  onExit: (_){
+                                    setState(() {
+                                      hoverTip=false;
+                                    });
+                                  },
+                                  child: TweenAnimationBuilder(
+                                    tween: ColorTween(end: hoverTip ? c.color6 : c.color4), 
+                                    duration: const Duration(milliseconds: 200), 
+                                    builder: (_, value, __)=>Icon(
+                                      Icons.info_rounded,
+                                      size: 20,
+                                      color: value,
+                                    )
+                                  ),
+                                ),
+                              ),
+                            ],
                           )
                         )
                       ],
