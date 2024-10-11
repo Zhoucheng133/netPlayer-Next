@@ -13,6 +13,9 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 > [!NOTE]
 > 这是netPlayer的Flutter版本，本仓库发布的netPlayer版本从2.0.0开始
 
+> [!NOTE]
+> 如果你发现无法打开netPlayer，那么你可以尝试打开Windows的`开发人员模式`
+
 >[!WARNING]
 > 这个版本的netPlayer不兼容Windows 7系统，如果你要查找支持Windows 7版本的netPlayer，转至[netPlayer](https://github.com/Zhoucheng133/net-player)查找v1版本的netPlayer
 
