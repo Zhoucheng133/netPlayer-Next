@@ -666,7 +666,7 @@ class _LyricViewState extends State<LyricView> {
                                           c.lyric[index]['content'],
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.notoSansSc(
-                                            fontSize: 16,
+                                            fontSize: c.lyricText.value.toDouble(),
                                             height: 2.3,
                                             color: playedLyric(index) ? c.color5:c.color3,
                                             fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
@@ -687,25 +687,58 @@ class _LyricViewState extends State<LyricView> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              MouseRegion(
-                                onEnter: (_){
-                                  setState(() {
-                                    hoverFont=true;
-                                  });
-                                },
-                                onExit: (_){
-                                  setState(() {
-                                    hoverFont=false;
-                                  });
-                                },
-                                child: TweenAnimationBuilder(
-                                  tween: ColorTween(end: hoverFont ? c.color6 : c.color4), 
-                                  duration: const Duration(milliseconds: 200),
-                                  builder: (_, value, __)=>Icon(
-                                    Icons.text_fields_rounded,
-                                    size: 20,
-                                    color: value,
-                                  )
+                              CustomPopup(
+                                content: SizedBox(
+                                  height: 20,
+                                  width: 100,
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: (){
+                                          c.lyricText.value-=1;
+                                        },
+                                        child: const MouseRegion(
+                                          cursor: SystemMouseCursors.click,
+                                          child: Icon(Icons.remove_rounded)
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Center(child: Obx(()=>Text(c.lyricText.value.toString()))),
+                                      ),
+                                      GestureDetector(
+                                        onTap: (){
+                                          c.lyricText.value+=1;
+                                        },
+                                        child: const MouseRegion(
+                                          cursor: SystemMouseCursors.click,
+                                          child: Icon(Icons.add_rounded)
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                child: MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  onEnter: (_){
+                                    setState(() {
+                                      hoverFont=true;
+                                    });
+                                  },
+                                  onExit: (_){
+                                    setState(() {
+                                      hoverFont=false;
+                                    });
+                                  },
+                                  child: TweenAnimationBuilder(
+                                    tween: ColorTween(end: hoverFont ? c.color6 : c.color4), 
+                                    duration: const Duration(milliseconds: 200),
+                                    builder: (_, value, __)=>Icon(
+                                      Icons.text_fields_rounded,
+                                      size: 20,
+                                      color: value,
+                                    )
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: 15,),

@@ -98,6 +98,8 @@ class Controller extends GetxController{
   void updateVolume(int val) {
     volume.value=val;
   }
+  // 歌词字号
+  RxInt lyricText=16.obs;
 
   // ws端口
   RxInt wsPort=9098.obs;
