@@ -188,14 +188,17 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
+### 3.3.1 (2024/10/12)
+- Add resize lyric font feature
+
+<details>
+<summary>Previous version (Not fully translated yet)</summary>
+
 ### 3.3.0 (2024/9/28)
 - Add media control with ws service
 - Add desktop lyric kit
 - Fix status error when stop play
 - Fix some undestroyed listener
-
-<details>
-<summary>Previous version (Not fully translated yet)</summary>
 
 ### 3.2.4 (2024/9/19)
 - Add hint text on renaming playlist
