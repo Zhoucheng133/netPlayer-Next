@@ -185,11 +185,14 @@ flutter build macos
 
 ## 更新日志
 
-### 3.3.1 (2024/10/12)
-- 添加调整歌词字号的功能
+### 3.3.2
+- 修复重启后音量显示与实际音量不符的问题 ([#3](https://github.com/Zhoucheng133/netPlayer-Next/issues/3))
 
 <details>
 <summary>过去的版本</summary>
+
+### 3.3.1 (2024/10/12)
+- 添加调整歌词字号的功能
 
 ### 3.3.0 (2024/9/28)
 - 添加ws服务控制播放的功能
