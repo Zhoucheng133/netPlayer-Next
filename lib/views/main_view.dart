@@ -81,6 +81,7 @@ class _MainViewState extends State<MainView> {
     final volume=prefs.getInt('volume');
     if(volume!=null && volume!=100){
       c.volume.value=volume;
+      c.handler.volumeSet(c.volume.value);
     }
     final ws=prefs.getBool('useWs');
     if(ws==true){
