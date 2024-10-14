@@ -185,7 +185,7 @@ flutter build macos
 
 ## 更新日志
 
-### 3.3.2
+### 3.3.2 (2024/10/13)
 - 修复重启后音量显示与实际音量不符的问题 ([#3](https://github.com/Zhoucheng133/netPlayer-Next/issues/3))
 
 <details>

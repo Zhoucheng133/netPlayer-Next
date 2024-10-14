@@ -188,7 +188,7 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.3.2
+### 3.3.2 (2024/10/13)
 - Fix saved volume not apply after restart ([#3](https://github.com/Zhoucheng133/netPlayer-Next/issues/3))
 
 <details>
