@@ -77,7 +77,7 @@ class LyricGet{
       int pos1=line.indexOf("[");
       int pos2=line.indexOf("]");
       if(pos1==-1 || pos2==-1){
-        return false;
+        continue;
       }
       late int time;
       late String content;
@@ -91,6 +91,9 @@ class LyricGet{
         'time': time,
         'content': content,
       });
+    }
+    if(lyricCovert.isEmpty){
+      return false;
     }
     lyricCovert.sort((a, b)=>a['time'].compareTo(b['time']));
     c.lyric.value=lyricCovert;
