@@ -188,11 +188,14 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.3.2 (2024/10/13)
-- Fix saved volume not apply after restart ([#3](https://github.com/Zhoucheng133/netPlayer-Next/issues/3))
+### 3.3.3 (2024/11/5)
+- Improve lyrics matching
 
 <details>
 <summary>Previous version (Not fully translated yet)</summary>
+
+### 3.3.2 (2024/10/13)
+- Fix saved volume not apply after restart ([#3](https://github.com/Zhoucheng133/netPlayer-Next/issues/3))
 
 ### 3.3.1 (2024/10/12)
 - Add resize lyric font feature
