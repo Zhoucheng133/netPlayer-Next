@@ -855,28 +855,6 @@ class Operations{
                 ),
               ),
             ),
-            const SizedBox(height: 10,),
-            GestureDetector(
-              onTap: (){
-                final url=Uri.parse('https://lrclib.net/docs');
-                launchUrl(url);
-              },
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.code_rounded,
-                      size: 15,
-                    ),
-                    const SizedBox(width: 5,),
-                    Text('lyricAPI'.tr),
-                  ],
-                ),
-              ),
-            )
           ],
         ),
         actions: [
