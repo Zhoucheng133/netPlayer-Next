@@ -185,11 +185,14 @@ flutter build macos
 
 ## 更新日志
 
-### 3.3.3 (2024/11/5)
+### 3.3.4 (2024/11/14)
 - 改进歌词匹配逻辑
 
 <details>
 <summary>过去的版本</summary>
+
+### 3.3.3 (2024/11/5)
+- 改进歌词匹配逻辑
 
 ### 3.3.2 (2024/10/13)
 - 修复重启后音量显示与实际音量不符的问题 ([#3](https://github.com/Zhoucheng133/netPlayer-Next/issues/3))
