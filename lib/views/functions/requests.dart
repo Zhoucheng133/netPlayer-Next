@@ -117,12 +117,9 @@ class HttpRequests{
       final keyword="$title $artist";
       final searchAPI="https://music.163.com/api/search/get/web?csrf_token=hlpretag=&hlposttag=&s=$keyword&type=1&offset=0&total=true&limit=1";
       final response=await http.get(Uri.parse(searchAPI));
-      // print(searchAPI);
       
       final firstRlt=json.decode(utf8.decode(response.bodyBytes))['result']['songs'][0];
-      // print("${firstRlt['name']} $title");
-      // print("ARTIST: ${firstRlt['artists']['name']}");
-      if(!(firstRlt['name'].contains(title))){
+      if(!(firstRlt['name'].contains(title) || title.contains(firstRlt['name']))){
         return null;
       }
       id=json.decode(utf8.decode(response.bodyBytes))['result']['songs'][0]['id'].toString();
