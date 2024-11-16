@@ -83,7 +83,10 @@ class LyricGet{
       late String content;
       try {
         time=timeToMilliseconds(line.substring(pos1+1, pos2));
-        content=line.substring(pos2 + 1).trim();
+        content = (pos2 + 1 < line.length) ? line.substring(pos2 + 1).trim() : "";
+        if(content=='' && lyricCovert.last['content']==''){
+          continue;
+        }
       } catch (_) {
         continue;
       }
