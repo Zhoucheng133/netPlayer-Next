@@ -166,7 +166,7 @@ This project is developed with Flutter^3.22. You can debug with it directly.
 Recommand using Visual Studio Code. After installing Flutter and Dart extension on Visual Studio Code, you can debug/profile/relese on your device.
 
 > [!WARNING]
-> Do NOT use Flutter^3.7 or lower version of Flutter. Make sure your Flutter version is higher than 3.0.0
+> Do NOT use Flutter^3.7 or lower version of Flutter. Make sure your Dart version is higher than 3.0.0
 
 If you Debug or Release on **Windows**, make sure not do it in Chinese mainland network environment.
 
@@ -188,11 +188,15 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.3.3 (2024/11/14)
-- Improve lyrics matching
+### 3.3.4 (2024/11/16)
+- Fix the issue with the lyric highlighting
+- Fix the issue where the last line of the lyrics is missing
 
 <details>
 <summary>Previous version (Not fully translated yet)</summary>
+
+### 3.3.3 (2024/11/14)
+- Improve lyrics matching
 
 ### 3.3.3 (2024/11/5)
 - Improve lyrics matching
