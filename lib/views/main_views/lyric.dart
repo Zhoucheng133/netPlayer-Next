@@ -40,8 +40,12 @@ class _LyricViewState extends State<LyricView> {
     bool flag=false;
     try {
       flag=c.playProgress.value>=c.lyric[index]['time'] && c.playProgress<c.lyric[index+1]['time'];
-    } catch (e) {
-      flag=false;
+    } catch (_) {
+      if(c.lyric.length==index+1 && c.playProgress.value>=c.lyric[index]['time']){
+        flag=true;
+      }else{
+        flag=false;
+      }
     }
     return flag;
   }
