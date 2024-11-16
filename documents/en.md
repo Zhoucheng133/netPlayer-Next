@@ -189,6 +189,7 @@ I have not tried it on Linux. You can try it by yourself.
 ## Update log
 
 ### 3.3.4 (2024/11/16)
+- Add license page
 - Fix the issue with the lyric highlighting
 - Fix the issue where the last line of the lyrics is missing
 
