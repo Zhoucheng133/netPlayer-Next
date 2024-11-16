@@ -141,4 +141,6 @@ const Map<String, String> zhTW = {
   'enableKit': '啟用歌詞元件',
   'kitFailed': '啟動歌詞元件失敗',
   'kitFailedContent': "缺少歌詞組件的文件，請重新下載安裝netPlayer",
+
+  'license': '許可證'
 };

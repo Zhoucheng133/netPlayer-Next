@@ -855,6 +855,33 @@ class Operations{
                 ),
               ),
             ),
+            const SizedBox(height: 10),
+            GestureDetector(
+              onTap: ()=>showLicensePage(context: context),
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const FaIcon(
+                      FontAwesomeIcons.certificate,
+                      size: 15,
+                    ),
+                    const SizedBox(width: 5,),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 2),
+                      child: Text(
+                        'license'.tr,
+                        style: GoogleFonts.notoSansSc(
+                          fontSize: 13,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
         actions: [
