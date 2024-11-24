@@ -162,7 +162,7 @@ Lyrics depends on the song's title, album, artist and duration.
 
 ### netPlayer Next only
 
-This project is developed with Flutter^3.22. You can debug with it directly.
+This project is developed with Flutter 3.24. You can debug with it directly.
 Recommand using Visual Studio Code. After installing Flutter and Dart extension on Visual Studio Code, you can debug/profile/relese on your device.
 
 > [!WARNING]
