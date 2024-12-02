@@ -106,19 +106,21 @@ class _MainViewState extends State<MainView> {
   }
 
   Future<void> nowplayChange(Map val) async {
-    // 保存现在播放的内容
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('nowPlay', jsonEncode(val));
-    c.lyricLine.value=0;
-    // 如果id不为空，获取歌词
 
     if(preId!=null && c.nowPlay['id']==preId){
+      // 实际播放内容没有任何变化
       return;
     }
 
     if(c.nowPlay['id']!=null && c.nowPlay['id'].isNotEmpty){
       preId=c.nowPlay['id'];
     }
+
+    // 保存现在播放的内容
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('nowPlay', jsonEncode(val));
+    c.lyricLine.value=0;
+    // 如果id不为空，获取歌词
     
     c.lyric.value=[
       {
