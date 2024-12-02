@@ -22,6 +22,7 @@ class LyricGet{
   }
 
   Future<void> getLyric() async {
+    // print("get!");
     if(!(await netease())){
       if(!(await lrclib())){
         c.lyric.value=[
