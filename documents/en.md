@@ -190,6 +190,7 @@ I have not tried it on Linux. You can try it by yourself.
 
 ### 3.3.6 (2024/12/2)
 - Fix duplicate request for lyric
+- Update desktop lyric kit (Detail:  [v0.1.1](https://github.com/Zhoucheng133/netPlayer-mini-kit/releases/tag/v0.1.1))
 
 <details>
 <summary>Previous version (Not fully translated yet)</summary>
