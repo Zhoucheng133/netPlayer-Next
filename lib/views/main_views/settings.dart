@@ -356,8 +356,7 @@ class _SettingsViewState extends State<SettingsView> {
                       )
                     ],
                   ),
-                  // TODO 桌面歌词组件开始的位置
-                  Platform.isWindows ? Row(
+                  Platform.isWindows && c.useDesktopLyric ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
@@ -389,7 +388,6 @@ class _SettingsViewState extends State<SettingsView> {
                       )
                     ],
                   ):Container(),
-                  // TODO 桌面歌词组件结束位置
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

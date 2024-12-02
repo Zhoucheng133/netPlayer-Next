@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 class Controller extends GetxController{
+  // 是否使用桌面歌词, 仅Windows
+  bool useDesktopLyric=true;
   // 当前软件版本
   String version='3.3.5';
   // 当前页面索引

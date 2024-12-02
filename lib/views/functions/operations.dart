@@ -997,7 +997,6 @@ class Operations{
   }
 
   // 启用歌词组件
-  // TODO 桌面歌词组件开始的位置
   void useKit(bool val, BuildContext context) {
     // c.useLyricKit.value=val;
     if(val==true){
@@ -1035,5 +1034,4 @@ class Operations{
       c.useLyricKit.value=false;
     }
   }
-  // TODO 桌面歌词组件结束的位置
 }
