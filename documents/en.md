@@ -188,15 +188,18 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.3.4 (2024/11/16)
-- Add license page
-- Fix the issue with the lyric highlighting
-- Fix the issue where the last line of the lyrics is missing
+### 3.3.6 (2024/12/2)
+- Fix duplicate request for lyric
 
 <details>
 <summary>Previous version (Not fully translated yet)</summary>
 
-### 3.3.3 (2024/11/14)
+### 3.3.5 (2024/11/16)
+- Add license page
+- Fix the issue with the lyric highlighting
+- Fix the issue where the last line of the lyrics is missing
+
+### 3.3.4 (2024/11/14)
 - Improve lyrics matching
 
 ### 3.3.3 (2024/11/5)
