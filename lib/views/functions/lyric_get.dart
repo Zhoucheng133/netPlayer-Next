@@ -8,7 +8,6 @@ class LyricGet{
 
   HttpRequests requests=HttpRequests();
   final Controller c = Get.put(Controller());
-  String? preId;
 
   // 时间戳转换成毫秒
   int timeToMilliseconds(timeString) {
@@ -23,17 +22,6 @@ class LyricGet{
   }
 
   Future<void> getLyric() async {
-
-    if(preId!=null && c.nowPlay['id']==preId){
-      return;
-    }
-
-    if(c.nowPlay['id']!=null && c.nowPlay['id'].isNotEmpty){
-      preId=c.nowPlay['id'];
-    }
-
-    print("get!");
-
     if(!(await netease())){
       if(!(await lrclib())){
         c.lyric.value=[
@@ -82,7 +70,6 @@ class LyricGet{
     if(lyricPainText==null){
       return false;
     }
-    // print(lyricPainText);
     List lyricCovert=[];
     List<String> lines = LineSplitter.split(lyricPainText).toList();
     for(String line in lines){

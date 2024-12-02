@@ -23,6 +23,7 @@ import 'package:path/path.dart' as p;
 class Operations{
   final requests=HttpRequests();
   final Controller c = Get.put(Controller());
+  final lyricGet = LyricGet();
 
   // 获取所有的歌单
   Future<void> getAllPlayLists(BuildContext context) async {
@@ -524,7 +525,7 @@ class Operations{
 
   // 获取歌词
   Future<void> getLyric() async {
-    LyricGet().getLyric();
+    await lyricGet.getLyric();
   }
 
   // 将某个歌曲从歌单中删除

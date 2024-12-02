@@ -34,6 +34,7 @@ class _MainViewState extends State<MainView> {
   late Worker lineListener;
   late Worker statusListener;
   Operations operations=Operations();
+  String? preId;
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式
   Future<void> initPrefs() async {
@@ -110,6 +111,15 @@ class _MainViewState extends State<MainView> {
     await prefs.setString('nowPlay', jsonEncode(val));
     c.lyricLine.value=0;
     // 如果id不为空，获取歌词
+
+    if(preId!=null && c.nowPlay['id']==preId){
+      return;
+    }
+
+    if(c.nowPlay['id']!=null && c.nowPlay['id'].isNotEmpty){
+      preId=c.nowPlay['id'];
+    }
+    
     c.lyric.value=[
       {
         'time': 0,
@@ -121,7 +131,7 @@ class _MainViewState extends State<MainView> {
       c.ws.sendMsg(content);
     }
     if(val['id']!=''){
-      operations.getLyric();
+      await operations.getLyric();
     }
   }
 
