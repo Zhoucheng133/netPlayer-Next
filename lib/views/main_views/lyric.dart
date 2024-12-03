@@ -3,6 +3,7 @@ import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -29,7 +30,7 @@ class _LyricViewState extends State<LyricView> {
   bool hoverMode=false;
   bool hoverTip=false;
   bool hoverFont=false;
-  AutoScrollController controller=AutoScrollController();
+  final LyricController lyricController=Get.put(LyricController());
   final Controller c = Get.put(Controller());
   final operations=Operations();
 
@@ -66,22 +67,15 @@ class _LyricViewState extends State<LyricView> {
     return false;
   }
 
-  void scrollLyric(){
-    if(c.lyricLine.value==0){
-      return;
-    }
-    controller.scrollToIndex(c.lyricLine.value-1, preferPosition: AutoScrollPosition.middle);
-  }
-
   late Worker lyricLineListener;
 
   @override
   void initState() {
     super.initState();
     lyricLineListener=ever(c.lyricLine, (val){
-      scrollLyric();
+      lyricController.scrollLyric();
     });
-    scrollLyric();
+    lyricController.scrollLyric();
   }
   
   @override
@@ -655,7 +649,7 @@ class _LyricViewState extends State<LyricView> {
                             behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
                             child: Obx(() => 
                               ListView.builder(
-                                controller: controller,
+                                controller: lyricController.controller.value,
                                 itemCount: c.lyric.length,
                                 itemBuilder: (BuildContext context, int index) => 
                                 Column(
@@ -664,7 +658,7 @@ class _LyricViewState extends State<LyricView> {
                                     Obx(() => 
                                       AutoScrollTag(
                                         key: ValueKey(index), 
-                                        controller: controller, 
+                                        controller: lyricController.controller.value, 
                                         index: index,
                                         child: Text(
                                           c.lyric[index]['content'],

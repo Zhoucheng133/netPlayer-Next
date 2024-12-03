@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/views/functions/requests.dart';
 import 'package:net_player_next/views/main_view.dart';
@@ -31,6 +32,16 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   void onWindowClose() {
     c.ws.closeKit();
     super.onWindowClose();
+  }
+
+  @override
+  void onWindowResized(){
+    if(c.showLyric.value){
+      try {
+        LyricController lyricController=Get.find();
+        lyricController.scrollLyric();
+      } catch (_) {}
+    }
   }
 
   @override
@@ -84,11 +95,27 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   @override
   void onWindowMaximize(){
     c.maxWindow.value=true;
+    if(c.showLyric.value){
+      try {
+        Future.delayed(const Duration(milliseconds: 300), (){
+          LyricController lyricController=Get.find();
+          lyricController.scrollLyric();
+        });
+      } catch (_) {}
+    }
   }
 
   @override
   void onWindowUnmaximize(){
     c.maxWindow.value=false;
+    if(c.showLyric.value){
+      try {
+        Future.delayed(const Duration(milliseconds: 300), (){
+          LyricController lyricController=Get.find();
+          lyricController.scrollLyric();
+        });
+      } catch (_) {}
+    }
   }
 
   Future<void> initMenuIcon() async {
