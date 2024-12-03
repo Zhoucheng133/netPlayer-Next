@@ -185,12 +185,15 @@ flutter build macos
 
 ## 更新日志
 
-### 3.3.6 (2024/12/2)
-- 修复歌词重复请求的问题
-- 更新了桌面歌词组件(更新内容: [v0.1.1](https://github.com/Zhoucheng133/netPlayer-mini-kit/releases/tag/v0.1.1))
+### 3.3.7
+- 添加窗口缩放自动滚动歌词的功能
 
 <details>
 <summary>过去的版本</summary>
+
+### 3.3.6 (2024/12/2)
+- 修复歌词重复请求的问题
+- 更新了桌面歌词组件(更新内容: [v0.1.1](https://github.com/Zhoucheng133/netPlayer-mini-kit/releases/tag/v0.1.1))
 
 ### 3.3.5 (2024/11/16)
 - 添加许可证页
