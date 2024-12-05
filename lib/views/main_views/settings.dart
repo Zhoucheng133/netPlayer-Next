@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/views/components/message.dart';
@@ -45,6 +46,8 @@ class _SettingsViewState extends State<SettingsView> {
 
   void wsSetting(BuildContext context){
     var portInput=c.wsPort.value;
+    var portController=TextEditingController();
+    portController.text=portInput.toString();
     showDialog(
       context: context, 
       builder: (BuildContext context)=>AlertDialog(
@@ -55,61 +58,34 @@ class _SettingsViewState extends State<SettingsView> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: 80,
-                      height: 30,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text('port'.tr),
-                      ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text('port'.tr),
                     ),
                     const SizedBox(width: 15),
-                    SizedBox(
-                      width: 120,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 50,
-                            child: Text(portInput.toString()),
+                    Expanded(
+                      child: TextField(
+                        controller: portController,
+                        decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: c.color3, width: 2.0), // 未选中时的边框
                           ),
-                          GestureDetector(
-                            onTap: (){
-                              setState((){
-                                portInput-=1;
-                              });
-                            },
-                            child: const MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              child: Padding(
-                                padding: EdgeInsets.all(5.0),
-                                child: Icon(
-                                  Icons.remove_rounded,
-                                  size: 15,
-                                ),
-                              ),
-                            ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: c.color6, width: 2.0), // 选中时的边框
                           ),
-                          GestureDetector(
-                            onTap: (){
-                              setState((){
-                                portInput+=1;
-                              });
-                            },
-                            child: const MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              child: Padding(
-                                padding: EdgeInsets.all(5.0),
-                                child: Icon(
-                                  Icons.add_rounded,
-                                  size: 15,
-                                ),
-                              ),
-                            ),
-                          )
+                          isCollapsed: true,
+                          contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+                        ),
+                        autocorrect: false,
+                        enableSuggestions: false,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
                         ],
                       )
-                    )
+                    ),
                   ],
                 )
               ],
@@ -125,9 +101,15 @@ class _SettingsViewState extends State<SettingsView> {
           ),
           ElevatedButton(
             onPressed: () async {
-              c.wsPort.value=portInput;
+              // c.wsPort.value=portInput;
+              // final SharedPreferences prefs = await SharedPreferences.getInstance();
+              // prefs.setInt('wsPort', portInput);
+              if(portController.text.isEmpty){
+                return;
+              }
+              c.wsPort.value=int.parse(portController.text);
               final SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs.setInt('wsPort', portInput);
+              prefs.setInt('wsPort', int.parse(portController.text));
               Navigator.pop(context);
               showDialog(
                 context: context, 
