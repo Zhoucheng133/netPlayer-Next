@@ -188,12 +188,16 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.3.6 (2024/12/2)
-- Fix duplicate request for lyric
-- Update desktop lyric kit (Detail:  [v0.1.1](https://github.com/Zhoucheng133/netPlayer-mini-kit/releases/tag/v0.1.1))
+### 3.3.7
+- Add auto scrolling when resize window
+- Improve input field of ws service port
 
 <details>
 <summary>Previous version (Not fully translated yet)</summary>
+
+### 3.3.6 (2024/12/2)
+- Fix duplicate request for lyric
+- Update desktop lyric kit (Detail:  [v0.1.1](https://github.com/Zhoucheng133/netPlayer-mini-kit/releases/tag/v0.1.1))
 
 ### 3.3.5 (2024/11/16)
 - Add license page

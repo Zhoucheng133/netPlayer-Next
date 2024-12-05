@@ -187,6 +187,7 @@ flutter build macos
 
 ### 3.3.7
 - 添加窗口缩放自动滚动歌词的功能
+- 改进ws服务端口输入框
 
 <details>
 <summary>过去的版本</summary>
