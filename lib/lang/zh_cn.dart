@@ -33,7 +33,7 @@ const Map<String, String> zhCN = {
   
   'savePlayed': '保存播放的歌曲',
   'autoLogin': '自动登录',
-  'playBackground': '后台播放',
+  'playBackground': '关闭窗口继续播放',
   'enableShortcuts': '启用全局快捷键',
   'enableWs': '启用ws服务',
   'serviceUrl': '服务器地址',

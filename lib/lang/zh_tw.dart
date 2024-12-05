@@ -33,7 +33,7 @@ const Map<String, String> zhTW = {
   
   'savePlayed': '保存播放的歌曲',
   'autoLogin': '自動登錄',
-  'playBackground': '後台播放',
+  'playBackground': '關閉視窗繼續播放',
   'enableShortcuts': '啟用全局快捷鍵',
   'enableWs': '啟用ws服務',
   'serviceUrl': '服務器地址',

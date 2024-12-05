@@ -33,7 +33,7 @@ const Map<String, String> enUS = {
 
   'savePlayed': 'Save played songs',
   'autoLogin': 'Auto login',
-  'playBackground': 'Background playback',
+  'playBackground': 'Playing when close',
   'enableShortcuts': 'Global shortcuts',
   'enableWs': 'Enable ws service',
   'serviceUrl': 'Service URL',
