@@ -54,7 +54,7 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 ## 使用
 
-这是一个基于Subsonic (Navidrome) API的一个桌面端App，你可以[**点击这里**](https://www.navidrome.org/docs/installation/)查看如果使用Navidrome (推荐) 搭建一个音乐服务器。
+这是一个基于Subsonic (Navidrome) API的一个桌面端App，你可以[**点击这里**](https://www.navidrome.org/docs/installation/)查看如何使用Navidrome (推荐) 搭建一个音乐服务器。
 
 在使用前务必确保运行netPlayer的设备可以通过网络连接到你的音乐服务器
 
