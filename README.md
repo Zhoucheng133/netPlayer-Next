@@ -185,11 +185,11 @@ flutter build macos
 
 ## 更新日志
 
-<details>
-<summary>过去的版本</summary>
-
 ### 3.3.8 (2024/12/20)
 - 修复调整进度条歌词没有滚动的问题
+
+<details>
+<summary>过去的版本</summary>
 
 ### 3.3.7 (2024/12/5)
 - 添加窗口缩放自动滚动歌词的功能
