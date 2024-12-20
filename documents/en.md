@@ -188,13 +188,16 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
+### 3.3.8 (2024/12/20)
+- Fix lyric not scroll when seeking
+
+<details>
+<summary>Previous version (Not fully translated yet)</summary>
+
 ### 3.3.7 (2024/12/5)
 - Add auto scrolling when resize window
 - Improve input field of ws service port
 - Imporve a translation
-
-<details>
-<summary>Previous version (Not fully translated yet)</summary>
 
 ### 3.3.6 (2024/12/2)
 - Fix duplicate request for lyric
