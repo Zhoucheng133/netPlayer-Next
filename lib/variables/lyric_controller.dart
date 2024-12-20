@@ -9,9 +9,14 @@ class LyricController extends GetxController {
 
   void scrollLyric(){
     if(c.lyricLine.value==0){
+      scrollToTop();
       return;
     }
     controller.value.scrollToIndex(c.lyricLine.value-1, preferPosition: AutoScrollPosition.middle);
+  }
+
+  void scrollToTop(){
+    controller.value.scrollToIndex(0, preferPosition: AutoScrollPosition.middle);
   }
 
 }

@@ -399,7 +399,6 @@ class _LyricViewState extends State<LyricView> {
                                   }else{
                                     operations.loveSong(context, c.nowPlay['id']);
                                   }
-                                  
                                 },
                                 child: MouseRegion(
                                   cursor: SystemMouseCursors.click,
