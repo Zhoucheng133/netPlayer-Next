@@ -72,10 +72,12 @@ class _LyricViewState extends State<LyricView> {
   @override
   void initState() {
     super.initState();
-    lyricLineListener=ever(c.lyricLine, (val){
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      lyricLineListener=ever(c.lyricLine, (val){
+        lyricController.scrollLyric();
+      });
       lyricController.scrollLyric();
     });
-    lyricController.scrollLyric();
   }
   
   @override
