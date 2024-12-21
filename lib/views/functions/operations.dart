@@ -1038,7 +1038,7 @@ class Operations{
   }
 
   Future<Uint8List?> fetchCover() async {
-    print("fetch!");
+    // print("fetch!");
     if(c.nowPlay["id"]=="" || c.userInfo["url"]==null){
       return null;
     }
