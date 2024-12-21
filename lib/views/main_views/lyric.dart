@@ -157,11 +157,11 @@ class _LyricViewState extends State<LyricView> {
                             child: Hero(
                               tag: 'cover',
                               child: Obx(() =>
-                                c.nowPlay["id"]=="" ? 
-                                Container(
-                                  color: c.color1,
-                                ) : Image.network(
-                                  "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
+                                c.coverFuture.value==null ? Image.asset(
+                                  "assets/blank.jpg",
+                                  fit: BoxFit.contain,
+                                ) : Image.memory(
+                                  c.coverFuture.value!,
                                   fit: BoxFit.contain,
                                 ),
                               ),

@@ -3,7 +3,8 @@
 import 'dart:async';
 // import 'dart:convert';
 import 'dart:io';
-
+import 'dart:typed_data';
+import 'package:http/http.dart' as http;
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -1033,6 +1034,24 @@ class Operations{
     }else{
       c.ws.closeKit();
       c.useLyricKit.value=false;
+    }
+  }
+
+  Future<Uint8List?> fetchCover() async {
+    print("fetch!");
+    if(c.nowPlay["id"]=="" || c.userInfo["url"]==null){
+      return null;
+    }
+    try {
+      // 获取文件流
+      var response = await http.get(Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"));
+      if (response.statusCode == 200) {
+        return response.bodyBytes;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
     }
   }
 }
