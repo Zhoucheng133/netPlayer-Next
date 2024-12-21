@@ -187,6 +187,7 @@ flutter build macos
 
 ### 3.3.9
 - 修复获取封面图片崩溃的问题
+- 修复一个逻辑错误
 
 <details>
 <summary>过去的版本</summary>
