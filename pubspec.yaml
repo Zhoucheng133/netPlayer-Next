@@ -37,6 +37,7 @@ dependencies:
   loading_animation_widget: ^1.2.1
   auto_size_text: ^3.0.0
   path: ^1.9.0
+  image: ^4.3.0
 
 dev_dependencies:
   flutter_test:
