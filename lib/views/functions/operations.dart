@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image/image.dart' show decodeImage;
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/hotkeys.dart';
 import 'package:net_player_next/views/functions/lyric_get.dart';
@@ -20,6 +21,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:path/path.dart' as p;
+
 
 class Operations{
   final requests=HttpRequests();
@@ -1044,12 +1046,14 @@ class Operations{
     }
     try {
       // 获取文件流
-      var response = await http.get(Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"));
+      var response = await http.get(Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}")).timeout(const Duration(seconds: 2));
       if (response.statusCode == 200) {
-        return response.bodyBytes;
+        return decodeImage(response.bodyBytes)==null ? null:response.bodyBytes;
       } else {
         return null;
       }
+    } on TimeoutException {
+      return null;
     } catch (e) {
       return null;
     }
