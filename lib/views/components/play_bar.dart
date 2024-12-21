@@ -65,22 +65,28 @@ class _PlayBarState extends State<PlayBar> {
                 borderRadius: BorderRadius.circular(5),
                 child: GestureDetector(
                   onTap: (){
-                    operations.toggleLyric(context);
+                    if(c.nowPlay['id']!=""){
+                      operations.toggleLyric(context);
+                    }
                   },
                   child: Tooltip(
                     message: 'showLyric'.tr,
                     waitDuration: const Duration(seconds: 1),
                     child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
+                      cursor: c.nowPlay['id']=="" ? SystemMouseCursors.basic : SystemMouseCursors.click,
                       onEnter: (_){
-                        setState(() {
-                          hoverCover=true;
-                        });
+                        if(c.nowPlay['id']!=""){
+                          setState(() {
+                            hoverCover=true;
+                          });
+                        }
                       },
                       onExit: (_){
-                        setState(() {
-                          hoverCover=false;
-                        });
+                        if(c.nowPlay['id']!=""){
+                          setState(() {
+                            hoverCover=false;
+                          });
+                        }
                       },
                       child: Stack(
                         children: [
