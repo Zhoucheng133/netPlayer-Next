@@ -105,6 +105,10 @@ class _MainViewState extends State<MainView> {
     } catch (_) {}
   }
 
+  Future<void> updateCover() async {
+    c.coverFuture.value=await operations.fetchCover();
+  }
+
   Future<void> nowplayChange(Map val) async {
 
     if(preId!=null && c.nowPlay['id']==preId){
@@ -116,12 +120,13 @@ class _MainViewState extends State<MainView> {
       preId=c.nowPlay['id'];
     }
 
+    updateCover();
+
     // 保存现在播放的内容
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('nowPlay', jsonEncode(val));
     c.lyricLine.value=0;
     // 如果id不为空，获取歌词
-    
     c.lyric.value=[
       {
         'time': 0,

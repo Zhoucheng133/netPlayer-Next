@@ -3,12 +3,14 @@
 import 'dart:async';
 // import 'dart:convert';
 import 'dart:io';
-
+import 'dart:typed_data';
+import 'package:http/http.dart' as http;
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image/image.dart' show decodeImage;
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/hotkeys.dart';
 import 'package:net_player_next/views/functions/lyric_get.dart';
@@ -19,6 +21,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:path/path.dart' as p;
+
 
 class Operations{
   final requests=HttpRequests();
@@ -1033,6 +1036,26 @@ class Operations{
     }else{
       c.ws.closeKit();
       c.useLyricKit.value=false;
+    }
+  }
+
+  Future<Uint8List?> fetchCover() async {
+    // print("fetch!");
+    if(c.nowPlay["id"]=="" || c.userInfo["url"]==null){
+      return null;
+    }
+    try {
+      // 获取文件流
+      var response = await http.get(Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}")).timeout(const Duration(seconds: 2));
+      if (response.statusCode == 200) {
+        return decodeImage(response.bodyBytes)==null ? null:response.bodyBytes;
+      } else {
+        return null;
+      }
+    } on TimeoutException {
+      return null;
+    } catch (e) {
+      return null;
     }
   }
 }
