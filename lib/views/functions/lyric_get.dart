@@ -23,17 +23,19 @@ class LyricGet{
 
   Future<void> getLyric() async {
     // print("get!");
-    if(!(await netease())){
-      if(!(await lrclib())){
-        c.lyric.value=[
-          {
-            'time': 0,
-            'content': 'noLyric'.tr,
+    if(!(await subsonic())) {
+      if(!(await netease())){
+        if(!(await lrclib())){
+          c.lyric.value=[
+            {
+              'time': 0,
+              'content': 'noLyric'.tr,
+            }
+          ];
+          var content='noLyric'.tr;
+          if(c.useWs.value){
+            c.ws.sendMsg(content);
           }
-        ];
-        var content='noLyric'.tr;
-        if(c.useWs.value){
-          c.ws.sendMsg(content);
         }
       }
     }
@@ -57,6 +59,34 @@ class LyricGet{
         'time': timeToMilliseconds(line.substring(pos1+1, pos2)),
         'content': line.substring(pos2 + 1).trim(),
       });
+    }
+    c.lyric.value=lyricCovert;
+    var content='';
+    if(c.useWs.value){
+      c.ws.sendMsg(content);
+    }
+    return true;
+  }
+
+  Future<bool> subsonic() async {
+    final rlt=await requests.subsonic(c.nowPlay['id']);
+    var response=rlt['subsonic-response']['lyricsList']['structuredLyrics'][0]['line'] ?? [];
+    if(response == []) {
+      return false;
+    }
+    List lyricCovert=[];
+    // 遍历每一行歌词
+    for (var line in response) {
+      int time = line['start']; // 时间戳
+      String content = line['value'].trim(); // 歌词内容
+
+      // 检查歌词内容是否为空
+      if (content.isNotEmpty) {
+        lyricCovert.add({
+          'time': time, // 歌词出现的时间（毫秒）
+          'content': content, // 歌词文本
+        });
+      }
     }
     c.lyric.value=lyricCovert;
     var content='';
