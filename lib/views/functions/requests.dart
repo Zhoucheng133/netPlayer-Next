@@ -110,6 +110,10 @@ class HttpRequests{
   Future<Map> lrclib(String title, String album, String artist, String duration) async {
     return await httpRequest('https://lrclib.net/api/get?artist_name=$artist&track_name=$title&album_name=$album&duration=$duration');
   }
+  // 從subsonicAPI獲取歌詞
+  Future<Map> subsonic(String id) async {
+    return await httpRequest('${c.userInfo["url"]}/rest/getLyricsBySongId?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=$id');
+  }
   // 从网易云获取歌词
   Future<String?>  netease(String title, String artist) async {
     String id="";

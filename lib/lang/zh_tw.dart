@@ -45,7 +45,7 @@ const Map<String, String> zhTW = {
   'cancel': '取消',
   'ok': '好的',
   'finish': '完成',
-  'lyricTip': '注意: 歌詞內容未必準確\n歌詞內容來自網易雲音樂或lrclib.net',
+  'lyricTip': '注意: 歌詞內容未必準確\n歌詞內容來自Subsonic API、網易雲音樂或lrclib.net',
   'overCountTip': '注意，所有歌曲數量可能大於500首\n完全隨機播放不受影響',
   'hideLyric': '隱藏歌詞',
 
