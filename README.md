@@ -185,9 +185,11 @@ flutter build macos
 
 ## 更新日志
 
-### 3.3.9
+### 3.4.0
+- 这个版本开始适配macOS系统
 - 修复获取封面图片崩溃的问题
 - 修复一个逻辑错误
+- 提高了一些性能
 
 <details>
 <summary>过去的版本</summary>
