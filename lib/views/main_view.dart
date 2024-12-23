@@ -48,16 +48,18 @@ class _MainViewState extends State<MainView> {
         c.nowPlay.value=tmpList;
         WidgetsBinding.instance.addPostFrameCallback((_) async {
           await operations.nowPlayCheck(context);
-          c.smtc.updateMetadata(
-            MusicMetadata(
-              title: c.nowPlay["title"]??'',
-              album: c.nowPlay["album"]??'',
-              albumArtist: c.nowPlay["artist"]??'',
-              artist: c.nowPlay["artist"]??'',
-              thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"
-            ),
-          );
-          c.smtc.setPlaybackStatus(PlaybackStatus.Paused);
+          if(Platform.isWindows){
+            c.smtc.updateMetadata(
+              MusicMetadata(
+                title: c.nowPlay["title"]??'',
+                album: c.nowPlay["album"]??'',
+                albumArtist: c.nowPlay["artist"]??'',
+                artist: c.nowPlay["artist"]??'',
+                thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"
+              ),
+            );
+            c.smtc.setPlaybackStatus(PlaybackStatus.Paused);
+          }
         });
       }
     }else{
