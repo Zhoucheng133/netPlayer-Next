@@ -772,17 +772,18 @@ class Operations{
     await prefs.setBool('useShortcut', val);
   }
 
+  final HotkeyHandler hotkeyHandler=HotkeyHandler();
 
   // 注册全局快捷键
   Future<void> initHotkey(BuildContext context) async {
-    await HotkeyHandler().toggleHandler();
-    await HotkeyHandler().skipNextHandler();
-    await HotkeyHandler().skipPreHandler();
-    await HotkeyHandler().toggleLyric(context);
+    await hotkeyHandler.toggleHandler();
+    await hotkeyHandler.skipNextHandler();
+    await hotkeyHandler.skipPreHandler();
+    await hotkeyHandler.toggleLyric(context);
     if(c.useShortcut.value && Platform.isWindows){
-      await HotkeyHandler().globalSkipNext();
-      await HotkeyHandler().globalSkipPre();
-      await HotkeyHandler().globalToggle();
+      await hotkeyHandler.globalSkipNext();
+      await hotkeyHandler.globalSkipPre();
+      await hotkeyHandler.globalToggle();
     }
   }
 
