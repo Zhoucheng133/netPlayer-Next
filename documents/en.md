@@ -22,15 +22,13 @@ Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 |-|-|-|-|
 |Supported Windows versions|Windows7~|Windows10~|Windows10~|
 |Framwork|Electron|Flutter|Flutter
-|Support macOS|✅|✅|✅*|
+|Support macOS|✅|✅|✅|
 |Single play|❌|✅|✅|
 |Locate song played|❌|✅|✅|
 |Global shortcuts|macOS only|✅|✅|
 |Websocket|❌|❌|✅|
 |Multi language support|❌|❌|✅**|
 
-
-\* Since I switched to Windows PC, I can't build macOS version. If you need it, you can build it on your own Mac (Also I don't know whether it runs ok on Mac. You can give me some feedbacks).
 
 \*\* From **v3.2.0**, You can see the detail of multi language support at [**Language support**](#language-support). Other version support Simplified Chinese only.
 
@@ -188,11 +186,17 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.3.8 (2024/12/20)
-- Fix lyric not scroll when seeking
+### 3.4.0 (2024/12/24)
+- Avaliable for macOS
+- Fix crash when get cover image
+- Fix a bug
+- Improve preformance
 
 <details>
 <summary>Previous version (Not fully translated yet)</summary>
+
+### 3.3.8 (2024/12/20)
+- Fix lyric not scroll when seeking
 
 ### 3.3.7 (2024/12/5)
 - Add auto scrolling when resize window
