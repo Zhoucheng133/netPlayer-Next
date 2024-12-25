@@ -131,7 +131,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     await player.seek(position);
     setMedia(true);
     c.onslide.value=false;
-    player.play();
+    play();
   }
 
   int preHandler(int index, int length){

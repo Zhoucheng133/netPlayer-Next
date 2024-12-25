@@ -718,9 +718,9 @@ class Operations{
   Future<void> seek(Duration d) async {
     await c.handler.seek(d);
     // play();
-    Future.microtask((){
-      play();
-    });
+    // Future.microtask((){
+    //   play();
+    // });
   }
 
   void seekChange(double val){
