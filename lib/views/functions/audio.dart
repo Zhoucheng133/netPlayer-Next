@@ -71,16 +71,23 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       artist: c.nowPlay["artist"],
       artUri: Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"),
       album: c.nowPlay["album"],
+      duration: Duration(seconds: c.nowPlay["duration"]),
     );
     mediaItem.add(item);
 
-    playbackState.add(playbackState.value.copyWith(
+    playbackState.add(PlaybackState(
       playing: isPlay,
       controls: [
         MediaControl.skipToPrevious,
         isPlay ? MediaControl.pause : MediaControl.play,
         MediaControl.skipToNext,
       ],
+      updatePosition: Duration(milliseconds: c.playProgress.value),
+      systemActions: const {
+        MediaAction.seek,
+        MediaAction.seekForward,
+        MediaAction.seekBackward,
+      },
     ));
   }
 
@@ -124,6 +131,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     await player.seek(position);
     setMedia(true);
     c.onslide.value=false;
+    player.play();
   }
 
   int preHandler(int index, int length){
