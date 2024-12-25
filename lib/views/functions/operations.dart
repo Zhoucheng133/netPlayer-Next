@@ -900,6 +900,7 @@ class Operations{
     );
   }
 
+  // 修改语言
   void selectLanguage(BuildContext context){
     String langSelected=c.lang.value;
     showDialog(
@@ -942,6 +943,21 @@ class Operations{
               prefs.setString('lang', langSelected);
               c.lang.value=langSelected;
               Navigator.pop(context);
+              showDialog(
+                context: context, 
+                builder: (context)=>AlertDialog(
+                  title: Text('restartTitle'.tr),
+                  content: Text('restartToApply'.tr),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: (){
+                        Navigator.pop(context);
+                      }, 
+                      child: Text("ok".tr)
+                    )
+                  ],
+                )
+              );
             }, 
             child: Text('finish'.tr)
           )

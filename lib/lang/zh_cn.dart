@@ -142,5 +142,8 @@ const Map<String, String> zhCN = {
   'kitFailed': '启动歌词组件失败',
   'kitFailedContent': "缺少歌词组件的文件，请重新下载安装netPlayer",
 
-  'license': '许可证'
+  'license': '许可证',
+
+  'restartTitle': '重启以完全应用修改',
+  'restartToApply': '一些组件需要重启来实现语言的修改'
 };
