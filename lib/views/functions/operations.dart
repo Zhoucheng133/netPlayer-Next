@@ -683,9 +683,8 @@ class Operations{
     if(c.nowPlay['id']==''){
       return;
     }
-    // print("pause");
     c.handler.pause();
-    c.isPlay.value=false;
+    // c.isPlay.value=false;
   }
 
   // 播放
@@ -694,7 +693,7 @@ class Operations{
       return;
     }
     c.handler.play();
-    c.isPlay.value=true;
+    // c.isPlay.value=true;
   }
 
   // 下一首

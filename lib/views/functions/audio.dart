@@ -93,6 +93,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       await player.open(media);
     }
     player.play();
+    c.isPlay.value=true;
     if(skipHandler){
       skipHandler=false;
     }
@@ -105,6 +106,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   Future<void> pause() async {
     player.pause();
     setMedia(false);
+    c.isPlay.value=false;
   }
 
   // 停止播放
