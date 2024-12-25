@@ -187,6 +187,7 @@ flutter build macos
 - 修复macOS系统下控制播放时界面没有更新的问题
 - 修复macOS系统下无法使用快捷键显示歌词的问题
 - 添加修改语言的提示
+- 添加macOS系统菜单的翻译
 
 <details>
 <summary>过去的版本</summary>
