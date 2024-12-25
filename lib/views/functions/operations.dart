@@ -775,14 +775,16 @@ class Operations{
 
   // 注册全局快捷键
   Future<void> initHotkey(BuildContext context) async {
-    await HotkeyHandler().toggleHandler();
-    await HotkeyHandler().skipNextHandler();
-    await HotkeyHandler().skipPreHandler();
-    await HotkeyHandler().toggleLyric(context);
-    if(c.useShortcut.value && Platform.isWindows){
-      await HotkeyHandler().globalSkipNext();
-      await HotkeyHandler().globalSkipPre();
-      await HotkeyHandler().globalToggle();
+    if(Platform.isWindows){
+      await HotkeyHandler().toggleHandler();
+      await HotkeyHandler().skipNextHandler();
+      await HotkeyHandler().skipPreHandler();
+      await HotkeyHandler().toggleLyric(context);
+      if(c.useShortcut.value){
+        await HotkeyHandler().globalSkipNext();
+        await HotkeyHandler().globalSkipPre();
+        await HotkeyHandler().globalToggle();
+      }
     }
   }
 

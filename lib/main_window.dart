@@ -394,7 +394,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                     LogicalKeyboardKey.keyC,
                     meta: true
                   ),
-                  onSelected: (){}
                 ),
                 PlatformMenuItem(
                   label: "Paste".tr,
@@ -402,7 +401,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                     LogicalKeyboardKey.keyV,
                     meta: true
                   ),
-                  onSelected: (){}
                 ),
                 PlatformMenuItem(
                   label: "Select All".tr,
@@ -410,7 +408,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                     LogicalKeyboardKey.keyA,
                     meta: true
                   ),
-                  onSelected: (){}
                 )
               ]
             ),
@@ -424,7 +421,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                       shortcut: const SingleActivator(
                         LogicalKeyboardKey.space,
                       ),
-                      onSelected: (){},
+                      onSelected: (){
+                        operations.toggleSong();
+                      },
                     ),
                     PlatformMenuItem(
                       label: "Skip Forward".tr,
@@ -432,7 +431,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                         LogicalKeyboardKey.arrowLeft,
                         meta: true,
                       ),
-                      onSelected: (){},
+                      onSelected: (){
+                        operations.skipPre();
+                      },
                     ),
                     PlatformMenuItem(
                       label: "Skip Next".tr,
@@ -440,7 +441,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                         LogicalKeyboardKey.arrowRight,
                         meta: true,
                       ),
-                      onSelected: (){},
+                      onSelected: (){
+                        operations.skipNext();
+                      },
                     ),
                   ]
                 ),
@@ -452,7 +455,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                         LogicalKeyboardKey.keyL,
                         meta: true
                       ),
-                      onSelected: (){},
+                      onSelected: (){
+                        operations.toggleLyric(context);
+                      },
                     )
                   ]
                 )
