@@ -145,5 +145,27 @@ const Map<String, String> zhTW = {
   'license': '許可證',
 
   'restartTitle': '重新啟動以完全應用修改',
-  'restartToApply': '有些元件需要重啟來實現語言的修改'
+  'restartToApply': '有些元件需要重啟來實現語言的修改',
+  
+  // macOS menu
+  'About netPlayer': '關於 netPlayer',
+  'Settings...': '設定...',
+  'Hide netPlayer': '隱藏 netPlayer',
+  'Quit netPlayer': '退出 netPlayer',
+
+  'Edit': '編輯',
+  'Copy': '拷贝',
+  'Paste': '貼上',
+  'Select All': '全選',
+  
+  'Control': '控制',
+  'Play/Pause': '播放/暫停',
+  'Skip Next': "下一首",
+  'Skip Forward': '上一首',
+  'Show/Hide Lyric': '顯示/隱藏歌詞',
+
+  'Window': '視窗',
+  'Minimize': '最小化',
+  'Fill': '進入全螢幕'
+
 };

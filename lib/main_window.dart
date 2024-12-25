@@ -347,7 +347,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                 PlatformMenuItemGroup(
                   members: [
                     PlatformMenuItem(
-                      label: "关于 netPlayer",
+                      label: "About netPlayer".tr,
                       onSelected: (){
                         operations.showAbout(context);
                       }
@@ -357,7 +357,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                 PlatformMenuItemGroup(
                   members: [
                     PlatformMenuItem(
-                      label: "设置...",
+                      label: "Settings...".tr,
                       shortcut: const SingleActivator(
                         LogicalKeyboardKey.comma,
                         meta: true,
@@ -386,10 +386,10 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
               ]
             ),
             PlatformMenu(
-              label: "编辑",
+              label: "Edit".tr,
               menus: [
                 PlatformMenuItem(
-                  label: "拷贝",
+                  label: "Copy".tr,
                   shortcut: const SingleActivator(
                     LogicalKeyboardKey.keyC,
                     meta: true
@@ -397,7 +397,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                   onSelected: (){}
                 ),
                 PlatformMenuItem(
-                  label: "粘贴",
+                  label: "Paste".tr,
                   shortcut: const SingleActivator(
                     LogicalKeyboardKey.keyV,
                     meta: true
@@ -405,7 +405,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                   onSelected: (){}
                 ),
                 PlatformMenuItem(
-                  label: "全选",
+                  label: "Select All".tr,
                   shortcut: const SingleActivator(
                     LogicalKeyboardKey.keyA,
                     meta: true
@@ -415,19 +415,19 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
               ]
             ),
             PlatformMenu(
-              label: "操作", 
+              label: "Control".tr, 
               menus: [
                 PlatformMenuItemGroup(
                   members: [
                     PlatformMenuItem(
-                      label: "暂停/播放",
+                      label: "Play/Pause".tr,
                       shortcut: const SingleActivator(
                         LogicalKeyboardKey.space,
                       ),
                       onSelected: (){},
                     ),
                     PlatformMenuItem(
-                      label: "上一首",
+                      label: "Skip Forward".tr,
                       shortcut: const SingleActivator(
                         LogicalKeyboardKey.arrowLeft,
                         meta: true,
@@ -435,7 +435,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                       onSelected: (){},
                     ),
                     PlatformMenuItem(
-                      label: "下一首",
+                      label: "Skip Next".tr,
                       shortcut: const SingleActivator(
                         LogicalKeyboardKey.arrowRight,
                         meta: true,
@@ -447,7 +447,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                 PlatformMenuItemGroup(
                   members: [
                     PlatformMenuItem(
-                      label: "显示/隐藏歌词",
+                      label: "Show/Hide Lyric".tr,
                       shortcut: const SingleActivator(
                         LogicalKeyboardKey.keyL,
                         meta: true
@@ -458,10 +458,10 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                 )
               ]
             ),
-            const PlatformMenu(
-              label: "窗口", 
+            PlatformMenu(
+              label: "Window".tr, 
               menus: [
-                PlatformMenuItemGroup(
+                const PlatformMenuItemGroup(
                   members: [
                     PlatformProvidedMenuItem(
                       enabled: true,

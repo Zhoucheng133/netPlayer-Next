@@ -145,5 +145,27 @@ const Map<String, String> enUS = {
   'license': 'License',
 
   'restartTitle': 'Restart to fully apply',
-  'restartToApply': 'Some components need to restart to apply'
+  'restartToApply': 'Some components need to restart to apply',
+
+  // macOS menu
+  'About netPlayer': 'About netPlayer',
+  'Settings...': 'Settings...',
+  'Hide netPlayer': 'Hide netPlayer',
+  'Quit netPlayer': 'Quit netPlayer',
+
+  'Edit': 'Edit',
+  'Copy': 'Copy',
+  'Paste': 'Paste',
+  'Select All': 'Select All',
+  
+  'Control': 'Control',
+  'Play/Pause': 'Play/Pause',
+  'Skip Next': "Skip Next",
+  'Skip Forward': 'Skip Forward',
+  'Show/Hide Lyric': 'Show/Hide Lyric',
+
+  'Window': 'Window',
+  'Minimize': 'Minimize',
+  'Fill': 'Fill'
+
 };

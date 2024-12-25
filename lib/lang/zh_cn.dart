@@ -145,5 +145,27 @@ const Map<String, String> zhCN = {
   'license': '许可证',
 
   'restartTitle': '重启以完全应用修改',
-  'restartToApply': '一些组件需要重启来实现语言的修改'
+  'restartToApply': '一些组件需要重启来实现语言的修改',
+
+  // macOS menu
+  'About netPlayer': '关于 netPlayer',
+  'Settings...': '设置...',
+  'Hide netPlayer': '隐藏 netPlayer',
+  'Quit netPlayer': '退出 netPlayer',
+
+  'Edit': '编辑',
+  'Copy': '拷贝',
+  'Paste': '粘贴',
+  'Select All': '全选',
+  
+  'Control': '控制',
+  'Play/Pause': '播放/暂停',
+  'Skip Next': "下一首",
+  'Skip Forward': '上一首',
+  'Show/Hide Lyric': '显示/隐藏歌词',
+
+  'Window': '窗口',
+  'Minimize': '最小化',
+  'Fill': '进入全屏幕'
+
 };
