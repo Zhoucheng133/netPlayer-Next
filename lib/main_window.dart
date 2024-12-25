@@ -452,9 +452,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                         LogicalKeyboardKey.keyL,
                         meta: true
                       ),
-                      onSelected: (){
-                        operations.toggleLyric(context);
-                      },
+                      onSelected: (){},
                     )
                   ]
                 )
