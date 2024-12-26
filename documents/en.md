@@ -189,7 +189,7 @@ I have not tried it on Linux. You can try it by yourself.
 ### 3.4.1 (2024/12/26)
 - Add change language dialog
 - Added translation for the macOS system menu
-- Fix system control not work on interface on macOS
+- Fix system control not work on macOS
 - Fix toggle lyric shortcut not work on macOS
 - Fix some menu items not work on macOS
 - Fix progress seek not work using control center on macOS
