@@ -186,14 +186,22 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
+### 3.4.1 (2024/12/26)
+- Add change language dialog
+- Added translation for the macOS system menu
+- Fix system control not work on interface on macOS
+- Fix toggle lyric shortcut not work on macOS
+- Fix some menu items not work on macOS
+- Fix progress seek not work using control center on macOS
+
+<details>
+<summary>Previous version (Not fully translated yet)</summary>
+
 ### 3.4.0 (2024/12/24)
 - Avaliable for macOS
 - Fix crash when get cover image
 - Fix a bug
 - Improve preformance
-
-<details>
-<summary>Previous version (Not fully translated yet)</summary>
 
 ### 3.3.8 (2024/12/20)
 - Fix lyric not scroll when seeking
