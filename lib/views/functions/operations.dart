@@ -1076,4 +1076,36 @@ class Operations{
       return null;
     }
   }
+
+  String sizeConvert(int bytes) {
+    if (bytes < 1024) {
+      return '$bytes B';
+    } else if (bytes < 1048576) {
+      return '${(bytes / 1024).toStringAsFixed(2)} KB';
+    } else if (bytes < 1073741824) {
+      return '${(bytes / 1048576).toStringAsFixed(2)} MB';
+    } else {
+      return '${(bytes / 1073741824).toStringAsFixed(2)} GB';
+    }
+  }
+
+  Future<int> getDirectorySize(Directory path) async {
+    int size = 0;
+    for (var entity in path.listSync(recursive: true)) {
+      if (entity is File) {
+        size += entity.lengthSync();
+      }
+    }
+    return size;
+  }
+  
+  void clearCache(BuildContext context){
+    showDialog(
+      context: context, 
+      builder: (context)=>AlertDialog(
+        title: Text('clearCache'.tr),
+      )
+    );
+  }
+
 }

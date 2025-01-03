@@ -11,6 +11,7 @@ import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/requests.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -29,7 +30,29 @@ class _SettingsViewState extends State<SettingsView> {
   bool hoverWs=false;
   bool refreshing=false;
   bool hoverLang=false;
+  bool hoverClear=false;
   final operations=Operations();
+  int cacheSize=0;
+
+  @override
+  void initState(){
+    super.initState();
+    getCacheSize();
+  }
+
+  Future<void> getCacheSize() async {
+    try {
+      final Directory tempDir = await getTemporaryDirectory();
+      var size = await operations.getDirectorySize(tempDir);
+      setState(() {
+        cacheSize=size;
+      });
+    } catch (_) {
+      setState(() {
+        cacheSize=0;
+      });
+    }
+  }
 
   Future<void> refreshLibrary(BuildContext context) async {
     await HttpRequests().refreshLibrary();
@@ -481,9 +504,62 @@ class _SettingsViewState extends State<SettingsView> {
                           ),
                         ),
                       ),
-                      
                     ],
                   ),
+                  Platform.isMacOS ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text('cache'.tr)
+                        )
+                      ),
+                      const SizedBox(width: 10,),
+                      SizedBox(
+                        width: 220,
+                        height: 40,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              children: [
+                                Text(operations.sizeConvert(cacheSize)),
+                                const SizedBox(width: 20,),
+                                GestureDetector(
+                                  onTap: (){
+                                    operations.clearCache(context);
+                                  },
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverClear=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverClear=false;
+                                      });
+                                    },
+                                    child: AnimatedDefaultTextStyle(
+                                      style: GoogleFonts.notoSansSc(
+                                        color: hoverClear ? c.color6 : c.color5
+                                      ), 
+                                      duration: const Duration(milliseconds: 200),
+                                      child: Text('clearCache'.tr)
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ),
+                        ),
+                      ),
+                    ],
+                  ) : Container(),
                 ],
               )
             ],

@@ -147,6 +147,9 @@ const Map<String, String> enUS = {
   'restartTitle': 'Restart to fully apply',
   'restartToApply': 'Some components need to restart to apply',
 
+  'cache': 'Cache',
+  'clearCache': 'Clear the cache',
+
   // macOS menu
   'About netPlayer': 'About netPlayer',
   'Settings...': 'Settings...',

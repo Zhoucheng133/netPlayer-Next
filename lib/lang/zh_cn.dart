@@ -147,6 +147,9 @@ const Map<String, String> zhCN = {
   'restartTitle': '重启以完全应用修改',
   'restartToApply': '一些组件需要重启来实现语言的修改',
 
+  'cache': '缓存',
+  'clearCache': '清理缓存',
+
   // macOS menu
   'About netPlayer': '关于 netPlayer',
   'Settings...': '设置...',

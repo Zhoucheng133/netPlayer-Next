@@ -146,6 +146,9 @@ const Map<String, String> zhTW = {
 
   'restartTitle': '重新啟動以完全應用修改',
   'restartToApply': '有些元件需要重啟來實現語言的修改',
+
+  'cache': '快取',
+  'clearCache': '清理快取',
   
   // macOS menu
   'About netPlayer': '關於 netPlayer',
