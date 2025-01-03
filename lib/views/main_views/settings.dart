@@ -106,10 +106,12 @@ class _SettingsViewState extends State<SettingsView> {
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: c.color3, width: 2.0), // 未选中时的边框
+                            borderSide: BorderSide(color: c.color3, width: 2.0),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: c.color6, width: 2.0), // 选中时的边框
+                            borderSide: BorderSide(color: c.color6, width: 2.0),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           isCollapsed: true,
                           contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
