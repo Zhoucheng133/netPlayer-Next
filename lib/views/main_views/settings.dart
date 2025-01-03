@@ -31,6 +31,8 @@ class _SettingsViewState extends State<SettingsView> {
   bool refreshing=false;
   bool hoverLang=false;
   bool hoverClear=false;
+  bool hoverReloadCache=false;
+
   final operations=Operations();
   int cacheSize=0;
 
@@ -541,7 +543,33 @@ class _SettingsViewState extends State<SettingsView> {
                             child: Row(
                               children: [
                                 Text(operations.sizeConvert(cacheSize)),
-                                const SizedBox(width: 20,),
+                                const SizedBox(width: 5,),
+                                TweenAnimationBuilder(
+                                  tween: ColorTween(end: hoverReloadCache ? c.color6 : c.color5),
+                                  duration: const Duration(milliseconds: 200), 
+                                  builder: (_, value, __) => GestureDetector(
+                                    onTap: ()=>getCacheSize(),
+                                    child: MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      onEnter: (_){
+                                        setState(() {
+                                          hoverReloadCache=true;
+                                        });
+                                      },
+                                      onExit: (_){
+                                        setState(() {
+                                          hoverReloadCache=false;
+                                        });
+                                      },
+                                      child: Icon(
+                                        Icons.refresh_rounded,
+                                        color: value,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  )
+                                ),
+                                const SizedBox(width: 10,),
                                 GestureDetector(
                                   onTap: () async {
                                     if(await operations.clearCache(context)){
@@ -565,7 +593,7 @@ class _SettingsViewState extends State<SettingsView> {
                                         color: hoverClear ? c.color6 : c.color5
                                       ), 
                                       duration: const Duration(milliseconds: 200),
-                                      child: Text('clearCache'.tr)
+                                      child: Text('clear'.tr)
                                     ),
                                   ),
                                 )
