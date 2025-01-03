@@ -186,6 +186,7 @@ flutter build macos
 ### 3.4.2
 - 添加macOS清理缓存的功能
 - 添加播放模式的Tooltip
+- 改进一些输入框
 
 <details>
 <summary>过去的版本</summary>
