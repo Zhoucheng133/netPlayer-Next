@@ -9,7 +9,7 @@ class Controller extends GetxController{
   // 是否使用桌面歌词, 仅Windows
   bool useDesktopLyric=true;
   // 当前软件版本
-  String version='3.4.1';
+  String version='3.4.2';
   // 当前页面索引
   RxInt pageIndex=0.obs;
   // 当前页面Id
