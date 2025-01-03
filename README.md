@@ -183,6 +183,12 @@ flutter build macos
 
 ## 更新日志
 
+### 3.4.2
+- 添加macOS清理缓存的功能
+
+<details>
+<summary>过去的版本</summary>
+
 ### 3.4.1 (2024/12/26)
 - 添加修改语言的提示
 - 添加macOS系统菜单的翻译
@@ -190,9 +196,6 @@ flutter build macos
 - 修复macOS系统下无法使用快捷键显示歌词的问题
 - 修复macOS系统下部分菜单无法点击的问题
 - 修复macOS系统下无法使用控制中心控制进度的问题
-
-<details>
-<summary>过去的版本</summary>
 
 ### 3.4.0 (2024/12/24)
 - 这个版本开始适配macOS系统
