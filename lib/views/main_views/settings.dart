@@ -37,7 +37,9 @@ class _SettingsViewState extends State<SettingsView> {
   @override
   void initState(){
     super.initState();
-    getCacheSize();
+    if(Platform.isMacOS){
+      getCacheSize();
+    }
   }
 
   Future<void> getCacheSize() async {
