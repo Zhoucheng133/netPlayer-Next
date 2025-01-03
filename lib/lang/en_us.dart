@@ -149,6 +149,8 @@ const Map<String, String> enUS = {
 
   'cache': 'Cache',
   'clearCache': 'Clear the cache',
+  'cacheContent': 'This will not affect your use',
+  'clear': 'Clear',
 
   // macOS menu
   'About netPlayer': 'About netPlayer',

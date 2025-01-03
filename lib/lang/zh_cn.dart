@@ -149,6 +149,8 @@ const Map<String, String> zhCN = {
 
   'cache': '缓存',
   'clearCache': '清理缓存',
+  'cacheContent': '这不会影响你的使用',
+  'clear': '清理',
 
   // macOS menu
   'About netPlayer': '关于 netPlayer',

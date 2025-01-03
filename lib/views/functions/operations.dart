@@ -1099,13 +1099,31 @@ class Operations{
     return size;
   }
   
-  void clearCache(BuildContext context){
-    showDialog(
+  Future<bool> clearCache(BuildContext context) async {
+    bool flag=false;
+    await showDialog(
       context: context, 
       builder: (context)=>AlertDialog(
         title: Text('clearCache'.tr),
+        content: Text('cacheContent'.tr),
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: Text('cancel'.tr)
+          ),
+          ElevatedButton(
+            onPressed: () {
+              flag=true;
+              Navigator.pop(context);
+            }, 
+            child: Text('clear'.tr)
+          )
+        ],
       )
     );
+    return flag;
   }
 
 }

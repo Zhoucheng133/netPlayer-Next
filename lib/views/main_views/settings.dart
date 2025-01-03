@@ -69,6 +69,16 @@ class _SettingsViewState extends State<SettingsView> {
     });
   }
 
+  Future<void> clearController() async {
+    final cacheDir = await getTemporaryDirectory();
+    if (cacheDir.existsSync()) {
+      try {
+        cacheDir.deleteSync(recursive: true);
+      } catch (_) {}
+    }
+    getCacheSize();
+  }
+
   void wsSetting(BuildContext context){
     var portInput=c.wsPort.value;
     var portController=TextEditingController();
@@ -531,8 +541,10 @@ class _SettingsViewState extends State<SettingsView> {
                                 Text(operations.sizeConvert(cacheSize)),
                                 const SizedBox(width: 20,),
                                 GestureDetector(
-                                  onTap: (){
-                                    operations.clearCache(context);
+                                  onTap: () async {
+                                    if(await operations.clearCache(context)){
+                                      clearController();
+                                    }
                                   },
                                   child: MouseRegion(
                                     cursor: SystemMouseCursors.click,

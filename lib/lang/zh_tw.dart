@@ -149,6 +149,8 @@ const Map<String, String> zhTW = {
 
   'cache': '快取',
   'clearCache': '清理快取',
+  'cacheContent': '這不會影響你的使用',
+  'clear': '清理',
   
   // macOS menu
   'About netPlayer': '關於 netPlayer',
