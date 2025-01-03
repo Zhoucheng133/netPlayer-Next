@@ -570,7 +570,7 @@ class _PlayBarState extends State<PlayBar> {
                         color: c.color1,
                         child: Tooltip(
                           waitDuration: const Duration(seconds: 1),
-                          message: 'playMode'.tr,
+                          message: c.fullRandom.value ? 'nowFullShuffle'.tr : 'playMode'.tr,
                           child: MouseRegion(
                             cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
                             onEnter: (_){

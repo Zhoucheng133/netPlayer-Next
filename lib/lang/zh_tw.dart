@@ -151,6 +151,8 @@ const Map<String, String> zhTW = {
   'clearCache': '清理快取',
   'cacheContent': '這不會影響你的使用',
   'clear': '清理',
+
+  'nowFullShuffle': '播放模式（不可用）\n現在處於完全隨機播放模式',
   
   // macOS menu
   'About netPlayer': '關於 netPlayer',

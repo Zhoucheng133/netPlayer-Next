@@ -152,6 +152,8 @@ const Map<String, String> enUS = {
   'cacheContent': 'This will not affect your use',
   'clear': 'Clear',
 
+  'nowFullShuffle': 'Play mode (Unavailable)\nIn full random play mode now',
+
   // macOS menu
   'About netPlayer': 'About netPlayer',
   'Settings...': 'Settings...',

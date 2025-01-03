@@ -152,6 +152,8 @@ const Map<String, String> zhCN = {
   'cacheContent': '这不会影响你的使用',
   'clear': '清理',
 
+  'nowFullShuffle': '播放模式（不可用）\n现在处于完全随机播放模式',
+
   // macOS menu
   'About netPlayer': '关于 netPlayer',
   'Settings...': '设置...',

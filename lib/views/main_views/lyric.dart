@@ -593,7 +593,7 @@ class _LyricViewState extends State<LyricView> {
                                     color: Colors.white,
                                     child: Tooltip(
                                       waitDuration: const Duration(seconds: 1),
-                                      message: 'playMode'.tr,
+                                      message: c.fullRandom.value ? 'nowFullShuffle'.tr : 'playMode'.tr,
                                       child: MouseRegion(
                                         cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
                                         onEnter: (_){
