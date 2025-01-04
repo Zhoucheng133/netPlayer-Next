@@ -187,6 +187,7 @@ flutter build macos
 - 添加macOS清理缓存的功能
 - 添加播放模式的Tooltip
 - 改进一些输入框
+- 修复macOS上出现Windows组件的问题
 
 <details>
 <summary>过去的版本</summary>
