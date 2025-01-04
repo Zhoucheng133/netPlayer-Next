@@ -190,6 +190,7 @@ I have not tried it on Linux. You can try it by yourself.
 - Add clear cache on macOS
 - Add tooltip of play mode button
 - Imporve some textfield
+- Fix Windows components show on macOS
 
 <details>
 <summary>Previous version (Not fully translated yet)</summary>
