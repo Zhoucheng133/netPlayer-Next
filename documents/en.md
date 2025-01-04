@@ -186,7 +186,7 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
-### 3.4.2
+### 3.4.2 (2025/1/4)
 - Add clear cache on macOS
 - Add tooltip of play mode button
 - Imporve some textfield
