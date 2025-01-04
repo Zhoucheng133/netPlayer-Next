@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -106,7 +108,7 @@ class _LyricViewState extends State<LyricView> {
               },
               child: SizedBox(
                 height: 30,
-                child: AnimatedOpacity(
+                child: Platform.isWindows ? AnimatedOpacity(
                   opacity: hoverTitleBar?1:0,
                   duration: const Duration(milliseconds: 200),
                   child: Row(
@@ -138,7 +140,7 @@ class _LyricViewState extends State<LyricView> {
                       )
                     ],
                   ),
-                )
+                ) : Container()
               ),
             ),
             Expanded(
