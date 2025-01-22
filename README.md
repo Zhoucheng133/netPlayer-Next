@@ -8,6 +8,11 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
+
+这是一个基于Subsonic (Navidrome) API的一个桌面端App，你可以[**点击这里**](https://www.navidrome.org/docs/installation/)查看如何使用Navidrome (推荐) 搭建一个音乐服务器。
+
+在使用前务必确保运行netPlayer的设备可以通过网络连接到你的音乐服务器
+
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
 > [!NOTE]
@@ -51,10 +56,6 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 - [一些API](#一些api)
 
 ## 使用
-
-这是一个基于Subsonic (Navidrome) API的一个桌面端App，你可以[**点击这里**](https://www.navidrome.org/docs/installation/)查看如何使用Navidrome (推荐) 搭建一个音乐服务器。
-
-在使用前务必确保运行netPlayer的设备可以通过网络连接到你的音乐服务器
 
 ### 快捷键
 

@@ -8,6 +8,11 @@
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
+This is a Subsonic (Navidrome) API based desktop App. You can [click here](https://www.navidrome.org/docs/installation/) to see how to create a music server with Navidrome (Recommend).
+
+Make sure your device running netPlayer can connect to your music server.
+
+
 **★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
 > [!NOTE]
@@ -53,9 +58,6 @@ Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 
 
 ## Usage
-This is a Subsonic (Navidrome) API based desktop App. You can [click here](https://www.navidrome.org/docs/installation/) to see how to create a music server with Navidrome (Recommend).
-
-Make sure your device running netPlayer can connect to your music server.
 
 ### Shortcuts
 
