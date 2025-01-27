@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // 歌曲表头
 class SongHeader extends StatefulWidget {
@@ -360,7 +361,6 @@ class _SongItemState extends State<SongItem> {
         PopupMenuItem(
           value: "download",
           height: 35,
-          enabled: widget.listId!=null,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -462,7 +462,8 @@ class _SongItemState extends State<SongItem> {
       c.pageIndex.value=2;
       c.pageId.value=widget.artistId;
     }else if(val=='download'){
-      
+      final Uri url = Uri.parse('${c.userInfo['url']}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay['id']}');
+      await launchUrl(url);
     }
   }
   
