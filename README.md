@@ -178,20 +178,31 @@ flutter build windows
 flutter build macos
 ```
 
+## 关于PR
+> [!NOTE]
+> 如果你有需要PR，请将目标函数选择dev分支而不是主分支
+
+本项目中不乏很多屎山代码（是的，虽然基本上我是唯一的开发者），但是如果不能确保不影响正常的功能请保持现状
+
+我尝试修改了一部分，但是有一些部分对整个项目影响过大然后崩溃了;w;
+
 ### 桌面歌词组件
 
 你需要前往[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)页面中以同样的方法打包，放置到`<程序路径>/lyric`下即可
 
 ## 更新日志
 
+### 3.4.3
+- 添加下载的功能
+
+<details>
+<summary>过去的版本</summary>
+
 ### 3.4.2 (2025/1/4)
 - 添加macOS清理缓存的功能
 - 添加播放模式的Tooltip
 - 改进一些输入框
 - 修复macOS上出现Windows组件的问题
-
-<details>
-<summary>过去的版本</summary>
 
 ### 3.4.1 (2024/12/26)
 - 添加修改语言的提示
