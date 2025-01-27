@@ -357,6 +357,23 @@ class _SongItemState extends State<SongItem> {
             ],
           ),
         ),
+        PopupMenuItem(
+          value: "download",
+          height: 35,
+          enabled: widget.listId!=null,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.download_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("download".tr)
+            ],
+          ),
+        ),
       ]
     );
     if(val=='add'){
@@ -444,6 +461,8 @@ class _SongItemState extends State<SongItem> {
     }else if(val=='artist'){
       c.pageIndex.value=2;
       c.pageId.value=widget.artistId;
+    }else if(val=='download'){
+      
     }
   }
   
