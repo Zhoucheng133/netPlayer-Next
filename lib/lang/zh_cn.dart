@@ -53,6 +53,7 @@ const Map<String, String> zhCN = {
   'showArtist': '显示艺人',
   'showAlbum': '显示专辑',
   'removeFromList': "从歌单中移除",
+  'download': "下载",
 
   'album': '专辑',
   'searchSong': '搜索歌曲',

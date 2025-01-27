@@ -53,6 +53,7 @@ const Map<String, String> zhTW = {
   'showArtist': '顯示藝人',
   'showAlbum': '顯示專輯',
   'removeFromList': '從歌單中移除',
+  'download': '下載',
 
   'album': '專輯',
   'searchSong': '搜索歌曲',
