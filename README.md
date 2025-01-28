@@ -194,6 +194,7 @@ flutter build macos
 
 ### 3.4.3
 - 添加下载的功能
+- 改进右键菜单颜色
 
 <details>
 <summary>过去的版本</summary>
