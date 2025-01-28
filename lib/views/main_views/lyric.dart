@@ -532,7 +532,8 @@ class _LyricViewState extends State<LyricView> {
                               const SizedBox(width: 25,),
                               Obx(()=>
                                 PopupMenuButton(
-                                  color: c.color1,
+                                  // color: c.color1,
+                                  color: Colors.white,
                                   tooltip: "",
                                   enabled: !c.fullRandom.value,
                                   splashRadius: 0,

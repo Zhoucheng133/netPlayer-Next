@@ -507,7 +507,8 @@ class _PlayBarState extends State<PlayBar> {
                     ),
                     const SizedBox(width: 25,),
                     PopupMenuButton(
-                      color: c.color1,
+                      // color: c.color1,
+                      color: Colors.white,
                       tooltip: "",
                       enabled: !c.fullRandom.value,
                       splashRadius: 0,
