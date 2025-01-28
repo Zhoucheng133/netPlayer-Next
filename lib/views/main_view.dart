@@ -151,7 +151,7 @@ class _MainViewState extends State<MainView> {
         c.ws.sendMsg(content);
       }
     } catch (e) {
-      if(c.lyric.length==1){
+      if(c.lyric.length==1 && c.useWs.value){
         var content=c.lyric[0]['content'];
         c.ws.sendMsg(content);
       }
