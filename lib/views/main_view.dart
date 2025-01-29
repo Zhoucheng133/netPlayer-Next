@@ -150,12 +150,7 @@ class _MainViewState extends State<MainView> {
       if(c.useWs.value){
         c.ws.sendMsg(content);
       }
-    } catch (e) {
-      if(c.lyric.length==1 && c.useWs.value){
-        var content=c.lyric[0]['content'];
-        c.ws.sendMsg(content);
-      }
-    }
+    } catch (_) {}
   }
 
   @override
