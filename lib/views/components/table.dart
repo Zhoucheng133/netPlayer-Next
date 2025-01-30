@@ -463,7 +463,7 @@ class _SongItemState extends State<SongItem> {
       c.pageIndex.value=2;
       c.pageId.value=widget.artistId;
     }else if(val=='download'){
-      final Uri url = Uri.parse('${c.userInfo['url']}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay['id']}');
+      final Uri url = Uri.parse('${c.userInfo['url']}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${widget.id}');
       await launchUrl(url);
     }
   }
