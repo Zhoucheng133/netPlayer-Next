@@ -375,6 +375,22 @@ class _SongItemState extends State<SongItem> {
             ],
           ),
         ),
+        PopupMenuItem(
+          value: "info",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.info_rounded,
+                size: 18,
+              ),
+              SizedBox(width: 5,),
+              Text("songInfo".tr)
+            ],
+          ),
+        )
       ]
     );
     if(val=='add'){
@@ -465,6 +481,15 @@ class _SongItemState extends State<SongItem> {
     }else if(val=='download'){
       final Uri url = Uri.parse('${c.userInfo['url']}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${widget.id}');
       await launchUrl(url);
+    }else if(val=="info"){
+      operations.songInfo(context, {
+        "title": widget.title,
+        "duration": convertDuration(widget.duration),
+        "id": widget.id,
+        "artist": widget.artist,
+        "listId": widget.listId,
+        "album": widget.album,
+      });
     }
   }
   

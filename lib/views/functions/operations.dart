@@ -1126,4 +1126,149 @@ class Operations{
     return flag;
   }
 
+  void songInfo(BuildContext context, Map data){
+    showDialog(
+      context: context, 
+      builder: (context)=>AlertDialog(
+        title: Text('songInfo'.tr,),
+        content: SizedBox(
+          width: 300,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text(
+                      'songTitle'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      data['title'],
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  )
+                ],
+              ),
+              const SizedBox(height: 5,),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text(
+                      'duration'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      data['duration'],
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  )
+                ],
+              ),
+              const SizedBox(height: 5,),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text(
+                      'artist'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      data['artist'],
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  )
+                ],
+              ),
+              const SizedBox(height: 5,),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text(
+                      'album'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      data['album'],
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  )
+                ],
+              ),
+              const SizedBox(height: 5,),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text(
+                      'songId'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      data['id'],
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text(
+                      'playlistId'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      data['listId']??"N/A",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: Text('ok'.tr)
+          )
+        ],
+      )
+    );
+  }
+
 }

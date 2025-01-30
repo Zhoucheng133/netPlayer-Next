@@ -55,6 +55,9 @@ const Map<String, String> zhTW = {
   'removeFromList': '從歌單中移除',
   'download': '下載',
   'songInfo': "歌曲訊息",
+  'duration': "歌曲長度",
+  'songId': "歌曲id",
+  'playlistId': '歌單id',
 
   'album': '專輯',
   'searchSong': '搜索歌曲',

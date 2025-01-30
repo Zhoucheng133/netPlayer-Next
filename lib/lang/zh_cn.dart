@@ -55,6 +55,9 @@ const Map<String, String> zhCN = {
   'removeFromList': "从歌单中移除",
   'download': "下载",
   'songInfo': "歌曲信息",
+  'duration': "歌曲长度",
+  'songId': "歌曲id",
+  'playlistId': '歌单id',
 
   'album': '专辑',
   'searchSong': '搜索歌曲',
