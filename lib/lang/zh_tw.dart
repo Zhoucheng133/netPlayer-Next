@@ -54,6 +54,7 @@ const Map<String, String> zhTW = {
   'showAlbum': '顯示專輯',
   'removeFromList': '從歌單中移除',
   'download': '下載',
+  'songInfo': "歌曲訊息",
 
   'album': '專輯',
   'searchSong': '搜索歌曲',

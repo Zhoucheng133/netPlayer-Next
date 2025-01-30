@@ -54,6 +54,7 @@ const Map<String, String> enUS = {
   'showAlbum': 'Show album',
   'removeFromList': "Remove from list",
   'download': "Download",
+  'songInfo': "Song info",
 
   'album': 'Album',
   'searchSong': 'Search songs',
