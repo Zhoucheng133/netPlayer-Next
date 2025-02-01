@@ -89,6 +89,64 @@ class _LyricViewState extends State<LyricView> {
     super.dispose();
   }
 
+  void showArtistOp(BuildContext context){
+    showDialog(
+      context: context, 
+      builder: (context)=>AlertDialog(
+        contentPadding: const EdgeInsets.all(15),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                )
+              ),
+              title: Text(
+                'copyArtist'.tr,
+                style: const TextStyle(
+                  fontSize: 14
+                ),
+              ),
+              leading: const Icon(
+                Icons.copy_rounded,
+                size: 20,
+              ),
+              onTap: (){
+                Navigator.pop(context);
+                FlutterClipboard.copy(c.nowPlay['artist']);
+              },
+            ),
+            ListTile(
+              title: Text(
+                'showArtist'.tr,
+                style: const TextStyle(
+                  fontSize: 14
+                ),
+              ),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                )
+              ),
+              leading: const Icon(
+                Icons.mic_rounded,
+                size: 20,
+              ),
+              onTap: (){
+                Navigator.pop(context);
+                operations.toArtist(context);
+              },
+            ),
+          ],
+        ),
+      )
+    );
+  }
+
   void showTitleOp(BuildContext context){
     showDialog(
       context: context, 
@@ -251,7 +309,7 @@ class _LyricViewState extends State<LyricView> {
                           const SizedBox(height: 5,),
                           GestureDetector(
                             onTap: (){
-                              operations.toArtist(context);
+                              showArtistOp(context);
                             },
                             child: MouseRegion(
                               cursor: SystemMouseCursors.click,
