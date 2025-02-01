@@ -158,6 +158,9 @@ const Map<String, String> zhTW = {
   'clear': '清理',
 
   'nowFullShuffle': '播放模式（不可用）\n現在處於完全隨機播放模式',
+
+  'copyTitle': '複製標題',
+  'copyArtist': '複製藝人',
   
   // macOS menu
   'About netPlayer': '關於 netPlayer',

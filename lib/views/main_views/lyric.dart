@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -88,6 +89,64 @@ class _LyricViewState extends State<LyricView> {
     super.dispose();
   }
 
+  void showTitleOp(BuildContext context){
+    showDialog(
+      context: context, 
+      builder: (context)=>AlertDialog(
+        contentPadding: const EdgeInsets.all(15),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                )
+              ),
+              title: Text(
+                'copyTitle'.tr,
+                style: const TextStyle(
+                  fontSize: 14
+                ),
+              ),
+              leading: const Icon(
+                Icons.copy_rounded,
+                size: 20,
+              ),
+              onTap: (){
+                Navigator.pop(context);
+                FlutterClipboard.copy(c.nowPlay['title']);
+              },
+            ),
+            ListTile(
+              title: Text(
+                'showAlbum'.tr,
+                style: const TextStyle(
+                  fontSize: 14
+                ),
+              ),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                )
+              ),
+              leading: const Icon(
+                Icons.album_rounded,
+                size: 20,
+              ),
+              onTap: (){
+                Navigator.pop(context);
+                operations.toAlbum(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,7 +231,7 @@ class _LyricViewState extends State<LyricView> {
                           const SizedBox(height: 20,),
                           GestureDetector(
                             onTap: (){
-                              operations.toAlbum(context);
+                              showTitleOp(context);
                             },
                             child: MouseRegion(
                               cursor: SystemMouseCursors.click,

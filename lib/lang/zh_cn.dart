@@ -159,6 +159,9 @@ const Map<String, String> zhCN = {
 
   'nowFullShuffle': '播放模式（不可用）\n现在处于完全随机播放模式',
 
+  'copyTitle': '复制标题',
+  'copyArtist': '复制艺人',
+
   // macOS menu
   'About netPlayer': '关于 netPlayer',
   'Settings...': '设置...',

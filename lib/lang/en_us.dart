@@ -159,6 +159,9 @@ const Map<String, String> enUS = {
 
   'nowFullShuffle': 'Play mode (Unavailable)\nIn full random play mode now',
 
+  'copyTitle': 'Copy title',
+  'copyArtist': 'Copy artist',
+
   // macOS menu
   'About netPlayer': 'About netPlayer',
   'Settings...': 'Settings...',
