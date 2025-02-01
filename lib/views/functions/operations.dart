@@ -4,6 +4,7 @@ import 'dart:async';
 // import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:clipboard/clipboard.dart';
 import 'package:http/http.dart' as http;
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -1148,9 +1149,21 @@ class Operations{
                     ),
                   ),
                   Expanded(
-                    child: Text(
-                      data['title'],
-                      overflow: TextOverflow.ellipsis,
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: (){
+                          FlutterClipboard.copy(data['title']).then((_){
+                            if(context.mounted){
+                              showMessage(true, 'copied'.tr, context);
+                            }
+                          });
+                        },
+                        child: Text(
+                          data['title'],
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     )
                   )
                 ],
@@ -1188,9 +1201,21 @@ class Operations{
                     ),
                   ),
                   Expanded(
-                    child: Text(
-                      data['artist'],
-                      overflow: TextOverflow.ellipsis,
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: (){
+                          FlutterClipboard.copy(data['artist']).then((_){
+                            if(context.mounted){
+                              showMessage(true, 'copied'.tr, context);
+                            }
+                          });
+                        },
+                        child: Text(
+                          data['artist'],
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     )
                   )
                 ],
