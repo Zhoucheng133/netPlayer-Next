@@ -161,6 +161,7 @@ const Map<String, String> zhCN = {
 
   'copyTitle': '复制标题',
   'copyArtist': '复制艺人',
+  'copied': '复制成功',
 
   // macOS menu
   'About netPlayer': '关于 netPlayer',

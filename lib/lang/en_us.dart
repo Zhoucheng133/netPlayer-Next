@@ -161,6 +161,7 @@ const Map<String, String> enUS = {
 
   'copyTitle': 'Copy title',
   'copyArtist': 'Copy artist',
+  'copied': 'Copied',
 
   // macOS menu
   'About netPlayer': 'About netPlayer',

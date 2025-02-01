@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/lyric_controller.dart';
+import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -116,7 +117,11 @@ class _LyricViewState extends State<LyricView> {
               ),
               onTap: (){
                 Navigator.pop(context);
-                FlutterClipboard.copy(c.nowPlay['artist']);
+                FlutterClipboard.copy(c.nowPlay['artist']).then((_){
+                  if(context.mounted){
+                    showMessage(true, 'copied'.tr, context);
+                  }
+                });
               },
             ),
             ListTile(
@@ -174,7 +179,11 @@ class _LyricViewState extends State<LyricView> {
               ),
               onTap: (){
                 Navigator.pop(context);
-                FlutterClipboard.copy(c.nowPlay['title']);
+                FlutterClipboard.copy(c.nowPlay['title']).then((_){
+                  if(context.mounted){
+                    showMessage(true, 'copied'.tr, context);
+                  }
+                });
               },
             ),
             ListTile(
