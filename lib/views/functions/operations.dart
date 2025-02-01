@@ -1233,9 +1233,21 @@ class Operations{
                     ),
                   ),
                   Expanded(
-                    child: Text(
-                      data['album'],
-                      overflow: TextOverflow.ellipsis,
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: (){
+                          FlutterClipboard.copy(data['album']).then((_){
+                            if(context.mounted){
+                              showMessage(true, 'copied'.tr, context);
+                            }
+                          });
+                        },
+                        child: Text(
+                          data['album'],
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     )
                   )
                 ],
@@ -1253,10 +1265,22 @@ class Operations{
                     ),
                   ),
                   Expanded(
-                    child: Text(
-                      data['id'],
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: (){
+                          FlutterClipboard.copy(data['id']).then((_){
+                            if(context.mounted){
+                              showMessage(true, 'copied'.tr, context);
+                            }
+                          });
+                        },
+                        child: Text(
+                          data['id'],
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     )
                   )
                 ],
@@ -1273,10 +1297,24 @@ class Operations{
                     ),
                   ),
                   Expanded(
-                    child: Text(
-                      data['listId']??"N/A",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    child: MouseRegion(
+                      cursor: data['listId']!=null && data['listId'].length!=0 ? SystemMouseCursors.click : SystemMouseCursors.basic,
+                      child: GestureDetector(
+                        onTap: (){
+                          if(data['listId']!=null && data['listId'].length!=0){
+                            FlutterClipboard.copy(data['listId']).then((_){
+                              if(context.mounted){
+                                showMessage(true, 'copied'.tr, context);
+                              }
+                            });
+                          }
+                        },
+                        child: Text(
+                          data['listId']??"N/A",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     )
                   )
                 ],
