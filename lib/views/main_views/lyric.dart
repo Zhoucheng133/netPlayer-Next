@@ -94,17 +94,14 @@ class _LyricViewState extends State<LyricView> {
     showDialog(
       context: context, 
       builder: (context)=>AlertDialog(
-        contentPadding: const EdgeInsets.all(15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10)
+        ),
+        contentPadding: const EdgeInsets.all(0),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                )
-              ),
               title: Text(
                 'copyArtist'.tr,
                 style: const TextStyle(
@@ -131,12 +128,6 @@ class _LyricViewState extends State<LyricView> {
                   fontSize: 14
                 ),
               ),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                )
-              ),
               leading: const Icon(
                 Icons.mic_rounded,
                 size: 20,
@@ -156,17 +147,14 @@ class _LyricViewState extends State<LyricView> {
     showDialog(
       context: context, 
       builder: (context)=>AlertDialog(
-        contentPadding: const EdgeInsets.all(15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10)
+        ),
+        contentPadding: const EdgeInsets.all(0),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                )
-              ),
               title: Text(
                 'copyTitle'.tr,
                 style: const TextStyle(
@@ -192,12 +180,6 @@ class _LyricViewState extends State<LyricView> {
                 style: const TextStyle(
                   fontSize: 14
                 ),
-              ),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                )
               ),
               leading: const Icon(
                 Icons.album_rounded,
