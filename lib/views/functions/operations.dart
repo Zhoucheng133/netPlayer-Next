@@ -1139,6 +1139,15 @@ class Operations{
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${data['id']}",
+                  height: 100,
+                  width: 100,
+                ),
+              ),
+              const SizedBox(height: 10,),
               Row(
                 children: [
                   SizedBox(
