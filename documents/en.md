@@ -188,15 +188,20 @@ I have not tried it on Linux. You can try it by yourself.
 
 ## Update log
 
+### 3.4.4 (2025/2/23)
+- Add album cover image on songs' info
+- Make lyric selectable
+- Imporve some dialogs
+
+<details>
+<summary>Previous version (Not fully translated yet)</summary>
+
 ### 3.4.3 (2025/2/2)
 - Add menu to download songs
 - Add show song info
 - Add copy song info
 - Improve menu color
 - Fix crash caused by WebSocket service
-
-<details>
-<summary>Previous version (Not fully translated yet)</summary>
 
 ### 3.4.2 (2025/1/4)
 - Add clear cache on macOS
