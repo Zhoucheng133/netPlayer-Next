@@ -197,15 +197,15 @@ flutter build macos
 - 修改歌词为可选文本
 - 改进一些对话框样式
 
+<details>
+<summary>过去的版本</summary>
+
 ### 3.4.3 (2025/2/2)
 - 添加下载的功能
 - 添加显示歌曲信息
 - 添加复制歌曲信息
 - 改进右键菜单颜色
 - 修复WebSocket服务可能崩溃的问题
-
-<details>
-<summary>过去的版本</summary>
 
 ### 3.4.2 (2025/1/4)
 - 添加macOS清理缓存的功能
