@@ -18,7 +18,6 @@ import 'package:net_player_next/views/functions/lyric_get.dart';
 import 'package:net_player_next/views/functions/requests.dart';
 import 'package:net_player_next/views/main_views/lyric.dart';
 import 'package:net_player_next/variables/variables.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
@@ -805,7 +804,6 @@ class Operations{
 
   // 显示关于
   Future<void> showAbout(BuildContext context) async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
     showDialog(
       context: context, 
       builder: (BuildContext context)=>AlertDialog(
@@ -828,7 +826,7 @@ class Operations{
             ),
             const SizedBox(height: 3,),
             Text(
-              'Next v${packageInfo.version}',
+              'Next v${c.version}',
               style: GoogleFonts.notoSansSc(
                 fontSize: 13,
                 color: Colors.grey[400]
