@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 
 class Controller extends GetxController{
-  String version="3.4.4";
   // 是否使用桌面歌词, 仅Windows
   bool useDesktopLyric=true;
   // 当前页面索引
