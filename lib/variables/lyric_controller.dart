@@ -5,7 +5,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 class LyricController extends GetxController {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   var controller=AutoScrollController().obs;
 
   void scrollLyric(){

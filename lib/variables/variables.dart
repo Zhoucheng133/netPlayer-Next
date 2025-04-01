@@ -31,7 +31,7 @@ class Controller extends GetxController{
     'token': null,    // String?
   }.obs;
   // 一些颜色样本，从浅色=>深色
-  var color1=const Color.fromRGBO(248, 249, 255, 1);
+  var color1=const Color.fromARGB(255, 248, 249, 255);
   var color2=const Color.fromARGB(255, 238, 241, 255);
   var color3=const Color.fromARGB(255, 233, 236, 255);
   var color4=const Color.fromARGB(255, 179, 189, 252);

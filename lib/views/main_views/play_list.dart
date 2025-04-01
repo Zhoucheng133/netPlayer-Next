@@ -18,7 +18,7 @@ class PlayListView extends StatefulWidget {
 
 class _PlayListViewState extends State<PlayListView> {
   
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   final operations=Operations();
   final AutoScrollController controller=AutoScrollController();
   List list=[];

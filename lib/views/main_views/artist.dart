@@ -16,7 +16,7 @@ class ArtistView extends StatefulWidget {
 class _ArtistViewState extends State<ArtistView> {
 
   TextEditingController inputController = TextEditingController();
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   String searchKeyWord='';
   String artistName='';
   List list=[];

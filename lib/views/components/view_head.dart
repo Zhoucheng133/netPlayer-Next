@@ -21,7 +21,7 @@ class ViewHeader extends StatefulWidget {
 
 class _ViewHeaderState extends State<ViewHeader> {
   
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   bool hoverLocate=false;
   bool hoverRefresh=false;
   bool hoverRandom=false;
@@ -329,7 +329,7 @@ class SearchHeader extends StatefulWidget {
 
 class _SearchHeaderState extends State<SearchHeader> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   bool hasFocus=false;
   bool hoverSong=false;
   bool hoverAlbum=false;

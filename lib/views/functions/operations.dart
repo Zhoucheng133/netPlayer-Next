@@ -27,7 +27,7 @@ import 'package:path/path.dart' as p;
 
 class Operations{
   final requests=HttpRequests();
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   final lyricGet = LyricGet();
 
   // 获取所有的歌单

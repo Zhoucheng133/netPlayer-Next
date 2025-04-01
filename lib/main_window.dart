@@ -187,7 +187,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   }
 
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   var isLogin=false;
   var isLoading=true;
 

@@ -22,7 +22,7 @@ class LovedView extends StatefulWidget {
 class _LovedViewState extends State<LovedView> {
 
   final operations=Operations();
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   final controller=AutoScrollController();
   TextEditingController inputController = TextEditingController();
   String searchKeyWord='';

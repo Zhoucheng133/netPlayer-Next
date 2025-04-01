@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:net_player_next/variables/variables.dart';
 
 class HttpRequests{
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   // 请求函数
   Future<Map<String, dynamic>> httpRequest(String url, {int timeoutInSeconds = 5}) async {
     try {

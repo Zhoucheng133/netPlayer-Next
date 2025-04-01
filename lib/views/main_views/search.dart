@@ -16,7 +16,7 @@ class _SearchViewState extends State<SearchView> {
 
   TextEditingController controller=TextEditingController();
   final operations=Operations();
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   String type='song';
 
   List songList=[];

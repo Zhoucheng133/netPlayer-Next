@@ -16,7 +16,7 @@ class PlayBar extends StatefulWidget {
 
 class _PlayBarState extends State<PlayBar> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   Operations operations=Operations();
 
   bool hoverPause=false;
@@ -507,7 +507,6 @@ class _PlayBarState extends State<PlayBar> {
                     ),
                     const SizedBox(width: 25,),
                     PopupMenuButton(
-                      // color: c.color1,
                       color: Colors.white,
                       tooltip: "",
                       enabled: !c.fullRandom.value,

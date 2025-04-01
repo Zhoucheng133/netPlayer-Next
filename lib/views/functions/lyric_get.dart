@@ -7,7 +7,7 @@ import 'package:net_player_next/views/functions/requests.dart';
 class LyricGet{
 
   HttpRequests requests=HttpRequests();
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
 
   // 时间戳转换成毫秒
   int timeToMilliseconds(timeString) {

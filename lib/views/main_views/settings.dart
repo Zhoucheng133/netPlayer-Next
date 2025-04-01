@@ -24,7 +24,7 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsViewState extends State<SettingsView> {
   
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   bool hoverURL=false;
   bool hoverAbout=false;
   bool hoverWs=false;

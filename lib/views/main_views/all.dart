@@ -21,7 +21,7 @@ class AllView extends StatefulWidget {
 class _AllViewState extends State<AllView> {
 
   final operations=Operations();
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   final AutoScrollController controller=AutoScrollController();
   TextEditingController inputController = TextEditingController();
 

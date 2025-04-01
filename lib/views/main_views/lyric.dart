@@ -35,7 +35,7 @@ class _LyricViewState extends State<LyricView> {
   bool hoverTip=false;
   bool hoverFont=false;
   final LyricController lyricController=Get.put(LyricController());
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   final operations=Operations();
 
   bool playedLyric(index){
@@ -640,7 +640,6 @@ class _LyricViewState extends State<LyricView> {
                               const SizedBox(width: 25,),
                               Obx(()=>
                                 PopupMenuButton(
-                                  // color: c.color1,
                                   color: Colors.white,
                                   tooltip: "",
                                   enabled: !c.fullRandom.value,

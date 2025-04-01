@@ -15,7 +15,7 @@ class SideBar extends StatefulWidget {
 
 class _SideBarState extends State<SideBar> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   final operations=Operations();
 
   Future<void> addPlayListHandler(BuildContext context) async {

@@ -13,7 +13,7 @@ import 'package:smtc_windows/smtc_windows.dart';
 
 class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   final player = Player();
   var playURL="";
   bool skipHandler=false;

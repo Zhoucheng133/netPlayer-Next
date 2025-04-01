@@ -20,7 +20,7 @@ class SideBarItem extends StatefulWidget {
 
 class _SideBarItemState extends State<SideBarItem> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   bool onHover=false;
 
   @override
@@ -87,7 +87,7 @@ class PlayListLabel extends StatefulWidget {
 
 class _PlayListLabelState extends State<PlayListLabel> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +147,7 @@ class AccountPart extends StatefulWidget {
 
 class _AccountPartState extends State<AccountPart> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
 
   var hoverSetting=false;
   var hoverLogout=false;
@@ -257,7 +257,7 @@ class PlayListPart extends StatefulWidget {
 
 class _PlayListPartState extends State<PlayListPart> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   final operations=Operations();
 
   @override
@@ -296,7 +296,7 @@ class PlayListItem extends StatefulWidget {
 class _PlayListItemState extends State<PlayListItem> {
 
   bool onHover=false;
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   Operations operations=Operations();
 
   Future<void> showPlaylistMenu(BuildContext context, TapDownDetails details) async {

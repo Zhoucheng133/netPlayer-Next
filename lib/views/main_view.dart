@@ -29,7 +29,7 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   late Worker listener;
   late Worker lineListener;
   late Worker statusListener;

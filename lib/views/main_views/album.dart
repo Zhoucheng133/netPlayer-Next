@@ -15,7 +15,7 @@ class AlbumView extends StatefulWidget {
 
 class _AlbumViewState extends State<AlbumView> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   TextEditingController inputController = TextEditingController();
   String searchKeyWord='';
   late Worker listener;

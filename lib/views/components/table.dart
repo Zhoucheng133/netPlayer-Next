@@ -17,7 +17,7 @@ class SongHeader extends StatefulWidget {
 
 class _SongHeaderState extends State<SongHeader> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class ArtistHeader extends StatefulWidget {
 
 class _ArtistHeaderState extends State<ArtistHeader> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +151,7 @@ class AlbumHeader extends StatefulWidget {
 
 class _AlbumHeaderState extends State<AlbumHeader> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +227,7 @@ class SongItem extends StatefulWidget {
 class _SongItemState extends State<SongItem> {
   
   bool hover=false;
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   final operations=Operations();
 
   String convertDuration(int time){
@@ -415,7 +415,6 @@ class _SongItemState extends State<SongItem> {
                             Obx(()=>
                               Radio(
                                 value: c.playLists[index]["id"], 
-                                // fillColor: c.color6,
                                 activeColor: c.color6,
                                 groupValue: selectItem, 
                                 onChanged: (val){
@@ -615,7 +614,7 @@ class AlbumItem extends StatefulWidget {
 class _AlbumItemState extends State<AlbumItem> {
   
   bool hover=false;
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -718,7 +717,7 @@ class ArtistItem extends StatefulWidget {
 
 class _ArtistItemState extends State<ArtistItem> {
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   bool hover=false;
   
   @override

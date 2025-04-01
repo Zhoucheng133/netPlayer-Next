@@ -8,7 +8,7 @@ import 'package:net_player_next/variables/variables.dart';
 
 class HotkeyHandler{
 
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   final operations=Operations();
 
   Future<void> globalToggle() async {

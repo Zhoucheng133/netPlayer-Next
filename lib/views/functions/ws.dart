@@ -16,7 +16,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 class WsService {
   HttpServer? _server;
   final List<WebSocketChannel> _clients = [];
-  final Controller c = Get.put(Controller());
+  final Controller c = Get.find();
   Operations operations=Operations();
 
   void sendMsg(String content) {
