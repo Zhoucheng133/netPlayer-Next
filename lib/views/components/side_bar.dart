@@ -39,7 +39,7 @@ class _SideBarState extends State<SideBar> {
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: colorController.color6(), width: 2.0),
+              borderSide: BorderSide(color: colorController.color5(), width: 2.0),
               borderRadius: BorderRadius.circular(10),
             ),
             contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10)

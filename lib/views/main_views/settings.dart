@@ -115,7 +115,7 @@ class _SettingsViewState extends State<SettingsView> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: colorController.color6(), width: 2.0),
+                              borderSide: BorderSide(color: colorController.color5(), width: 2.0),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             isCollapsed: true,
