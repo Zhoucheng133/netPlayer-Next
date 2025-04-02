@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 
@@ -30,13 +28,6 @@ class Controller extends GetxController{
     'salt': null,     // String?
     'token': null,    // String?
   }.obs;
-  // 一些颜色样本，从浅色=>深色
-  var color1=const Color.fromARGB(255, 248, 249, 255);
-  var color2=const Color.fromARGB(255, 238, 241, 255);
-  var color3=const Color.fromARGB(255, 233, 236, 255);
-  var color4=const Color.fromARGB(255, 179, 189, 252);
-  var color5=const Color.fromARGB(255, 152, 166, 254);
-  var color6=const Color.fromARGB(255, 120, 135, 232);
   // 所有的歌单
   RxList playLists=[].obs;
   // 现在播放信息
