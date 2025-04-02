@@ -163,6 +163,9 @@ const Map<String, String> enUS = {
   'copyArtist': 'Copy artist',
   'copied': 'Copied',
 
+  'theme': 'Theme color',
+  'darkMode': 'Dark mode',
+
   // macOS menu
   'About netPlayer': 'About netPlayer',
   'Settings...': 'Settings...',

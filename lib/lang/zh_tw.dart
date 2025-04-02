@@ -162,6 +162,9 @@ const Map<String, String> zhTW = {
   'copyTitle': '複製標題',
   'copyArtist': '複製藝人',
   'copied': '複製成功',
+
+  'theme': '主題色',
+  'darkMode': '深色模式',
   
   // macOS menu
   'About netPlayer': '關於 netPlayer',

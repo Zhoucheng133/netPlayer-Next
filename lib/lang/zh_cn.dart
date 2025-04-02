@@ -163,6 +163,9 @@ const Map<String, String> zhCN = {
   'copyArtist': '复制艺人',
   'copied': '复制成功',
 
+  'theme': '主题色',
+  'darkMode': '深色模式',
+
   // macOS menu
   'About netPlayer': '关于 netPlayer',
   'Settings...': '设置...',
