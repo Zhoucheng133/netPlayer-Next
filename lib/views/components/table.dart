@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,6 +19,7 @@ class SongHeader extends StatefulWidget {
 class _SongHeaderState extends State<SongHeader> {
 
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
   
   @override
   Widget build(BuildContext context) {
@@ -71,12 +73,14 @@ class _SongHeaderState extends State<SongHeader> {
             ],
           ),
         ),
-        Container(
-          height: 2,
-          width: MediaQuery.of(context).size.width - 200,
-          decoration: BoxDecoration(
-            color: c.color4,
-            borderRadius: BorderRadius.circular(2)
+        Obx(()=>
+          Container(
+            height: 2,
+            width: MediaQuery.of(context).size.width - 200,
+            decoration: BoxDecoration(
+              color: colorController.color4(),
+              borderRadius: BorderRadius.circular(2)
+            ),
           ),
         )
       ],
@@ -95,6 +99,7 @@ class ArtistHeader extends StatefulWidget {
 class _ArtistHeaderState extends State<ArtistHeader> {
 
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -128,12 +133,14 @@ class _ArtistHeaderState extends State<ArtistHeader> {
             ],
           ),
         ),
-        Container(
-          height: 2,
-          width: MediaQuery.of(context).size.width - 200,
-          decoration: BoxDecoration(
-            color: c.color4,
-            borderRadius: BorderRadius.circular(2)
+        Obx(()=>
+          Container(
+            height: 2,
+            width: MediaQuery.of(context).size.width - 200,
+            decoration: BoxDecoration(
+              color: colorController.color4(),
+              borderRadius: BorderRadius.circular(2)
+            ),
           ),
         )
       ],
@@ -152,6 +159,7 @@ class AlbumHeader extends StatefulWidget {
 class _AlbumHeaderState extends State<AlbumHeader> {
 
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -190,12 +198,14 @@ class _AlbumHeaderState extends State<AlbumHeader> {
             ],
           ),
         ),
-        Container(
-          height: 2,
-          width: MediaQuery.of(context).size.width - 200,
-          decoration: BoxDecoration(
-            color: c.color4,
-            borderRadius: BorderRadius.circular(2)
+        Obx(()=>
+          Container(
+            height: 2,
+            width: MediaQuery.of(context).size.width - 200,
+            decoration: BoxDecoration(
+              color: colorController.color4(),
+              borderRadius: BorderRadius.circular(2)
+            ),
           ),
         )
       ],
@@ -228,6 +238,7 @@ class _SongItemState extends State<SongItem> {
   
   bool hover=false;
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
   final operations=Operations();
 
   String convertDuration(int time){
@@ -251,7 +262,6 @@ class _SongItemState extends State<SongItem> {
     final Offset position = overlay.localToGlobal(details.globalPosition);
     var val=await showMenu(
       context: context, 
-      // color: c.color1,
       color: Colors.white,
       position: RelativeRect.fromLTRB(
         position.dx,
@@ -415,7 +425,7 @@ class _SongItemState extends State<SongItem> {
                             Obx(()=>
                               Radio(
                                 value: c.playLists[index]["id"], 
-                                activeColor: c.color6,
+                                activeColor: colorController.color6(),
                                 groupValue: selectItem, 
                                 onChanged: (val){
                                   setState(()=>
@@ -510,86 +520,86 @@ class _SongItemState extends State<SongItem> {
             hover=false;
           });
         },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          color: hover ?  c.color1: Colors.white,
-          height: 40,
-          width: MediaQuery.of(context).size.width - 200,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 50,
-                child: Center(
-                  child: widget.isplay ? Icon(
-                    Icons.play_arrow_rounded,
-                    color: c.color6,
-                    size: 15,
-                  ) : Text(
-                    (widget.index+1).toString(),
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13,
+        child: Obx(()=>
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            color: hover ?  colorController.color1(): colorController.white.value,
+            height: 40,
+            width: MediaQuery.of(context).size.width - 200,
+            child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 50,
+                    child: Center(
+                      child: widget.isplay ? Icon(
+                        Icons.play_arrow_rounded,
+                        color: colorController.color6(),
+                        size: 15,
+                      ) : Text(
+                        (widget.index+1).toString(),
+                        style: GoogleFonts.notoSansSc(
+                          fontSize: 13,
+                        ),
+                      ),
+                    )
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        widget.title,
+                        style: GoogleFonts.notoSansSc(
+                          fontSize: 13,
+                          color: widget.isplay ? colorController.color6(): colorController.black.value,
+                          fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
+                        ),
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                      ),
+                    )
+                  ),
+                  SizedBox(
+                    width: 150,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        widget.artist,
+                        style: GoogleFonts.notoSansSc(
+                          fontSize: 13,
+                          color: widget.isplay ? colorController.color6(): colorController.black.value,
+                          fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
+                        ),
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                      ),
                     ),
                   ),
-                )
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    widget.title,
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13,
-                      color: widget.isplay ? c.color6: Colors.black,
-                      fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
+                  SizedBox(
+                    width: 70,
+                    child: Center(
+                      child: Text(
+                        convertDuration(widget.duration),
+                        style: GoogleFonts.notoSansSc(
+                          fontSize: 13,
+                          color: widget.isplay ? colorController.color6(): colorController.black.value,
+                          fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
+                        ),
+                      )
                     ),
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
                   ),
-                )
-              ),
-              SizedBox(
-                width: 150,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    widget.artist,
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13,
-                      color: widget.isplay ? c.color6: Colors.black,
-                      fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
+                  SizedBox(
+                    width: 50,
+                    child: Center(
+                      child: isLoved() ? const Icon(
+                        Icons.favorite_rounded,
+                        color: Colors.red,
+                        size: 16,
+                      ) : Container(),
                     ),
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
                   ),
-                ),
+                ],
               ),
-              SizedBox(
-                width: 70,
-                child: Center(
-                  child: Text(
-                    convertDuration(widget.duration),
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13,
-                      color: widget.isplay ? c.color6: Colors.black,
-                      fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
-                    ),
-                  )
-                ),
-              ),
-              SizedBox(
-                width: 50,
-                child: Center(
-                  child: Obx(()=>
-                    isLoved() ? const Icon(
-                      Icons.favorite_rounded,
-                      color: Colors.red,
-                      size: 16,
-                    ) : Container(),
-                  )
-                ),
-              ),
-            ],
           ),
         ),
       ),
@@ -615,6 +625,7 @@ class _AlbumItemState extends State<AlbumItem> {
   
   bool hover=false;
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -637,67 +648,69 @@ class _AlbumItemState extends State<AlbumItem> {
             hover=false;
           });
         },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          color: hover ? c.color1 : Colors.white,
-          height: 40,
-          width: MediaQuery.of(context).size.width - 200,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 50,
-                child: Center(
-                  child: Text(
-                    (widget.index+1).toString(),
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13,
+        child: Obx(()=>
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            color: hover ? colorController.color1() : colorController.white.value,
+            height: 40,
+            width: MediaQuery.of(context).size.width - 200,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 50,
+                  child: Center(
+                    child: Text(
+                      (widget.index+1).toString(),
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 13,
+                      ),
+                    )
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      widget.title,
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 13
+                      ),
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
                     ),
                   )
                 ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    widget.title,
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13
+                SizedBox(
+                  width: 150,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      widget.artist,
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 13,
+                      ),
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
                     ),
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
+                  ),
+                ),
+                SizedBox(
+                  width: 70,
+                  child: Center(
+                    child: Text(
+                      widget.songCount.toString(),
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 13
+                      ),
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
+                    ),
                   ),
                 )
-              ),
-              SizedBox(
-                width: 150,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    widget.artist,
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13,
-                    ),
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 70,
-                child: Center(
-                  child: Text(
-                    widget.songCount.toString(),
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13
-                    ),
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
-                  ),
-                ),
-              )
-            ],
-          ),          
+              ],
+            ),          
+          ),
         ),
       ),
     );
@@ -718,6 +731,7 @@ class ArtistItem extends StatefulWidget {
 class _ArtistItemState extends State<ArtistItem> {
 
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
   bool hover=false;
   
   @override
@@ -740,52 +754,54 @@ class _ArtistItemState extends State<ArtistItem> {
             hover=false;
           });
         },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          color: hover ? c.color1 : Colors.white,
-          height: 40,
-          width: MediaQuery.of(context).size.width - 200,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 50,
-                child: Center(
-                  child: Text(
-                    (widget.index+1).toString(),
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13,
+        child: Obx(()=>
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            color: hover ? colorController.color1() : colorController.white.value,
+            height: 40,
+            width: MediaQuery.of(context).size.width - 200,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 50,
+                  child: Center(
+                    child: Text(
+                      (widget.index+1).toString(),
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 13,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    widget.name,
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      widget.name,
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 13
+                      ),
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
                     ),
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
+                  )
+                ),
+                SizedBox(
+                  width: 100,
+                  child: Center(
+                    child: Text(
+                      widget.albumCount.toString(),
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 13
+                      ),
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
+                    ),
                   ),
                 )
-              ),
-              SizedBox(
-                width: 100,
-                child: Center(
-                  child: Text(
-                    widget.albumCount.toString(),
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 13
-                    ),
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
-                  ),
-                ),
-              )
-            ]
+              ]
+            ),
           ),
         ),
       ),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
@@ -25,6 +26,7 @@ class SettingsView extends StatefulWidget {
 class _SettingsViewState extends State<SettingsView> {
   
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
   bool hoverURL=false;
   bool hoverAbout=false;
   bool hoverWs=false;
@@ -103,26 +105,28 @@ class _SettingsViewState extends State<SettingsView> {
                     ),
                     const SizedBox(width: 15),
                     Expanded(
-                      child: TextField(
-                        controller: portController,
-                        decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: c.color3, width: 2.0),
-                            borderRadius: BorderRadius.circular(10),
+                      child: Obx(()=>
+                        TextField(
+                          controller: portController,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: colorController.color3(), width: 2.0),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: colorController.color6(), width: 2.0),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            isCollapsed: true,
+                            contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: c.color6, width: 2.0),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          isCollapsed: true,
-                          contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+                          autocorrect: false,
+                          enableSuggestions: false,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
                         ),
-                        autocorrect: false,
-                        enableSuggestions: false,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
                       )
                     ),
                   ],
@@ -204,7 +208,7 @@ class _SettingsViewState extends State<SettingsView> {
                             Transform.scale(
                               scale: 0.7,
                               child: Switch(
-                                activeTrackColor: c.color6,
+                                activeTrackColor: colorController.color6(),
                                 splashRadius: 0,
                                 value: c.savePlay.value, 
                                 onChanged: (value){
@@ -236,7 +240,7 @@ class _SettingsViewState extends State<SettingsView> {
                             Transform.scale(
                               scale: 0.7,
                               child: Switch(
-                                activeTrackColor: c.color6,
+                                activeTrackColor: colorController.color6(),
                                 splashRadius: 0,
                                 value: c.autoLogin.value, 
                                 onChanged: (value){
@@ -268,7 +272,7 @@ class _SettingsViewState extends State<SettingsView> {
                             Transform.scale(
                               scale: 0.7,
                               child: Switch(
-                                activeTrackColor: c.color6,
+                                activeTrackColor: colorController.color6(),
                                 splashRadius: 0,
                                 value: c.closeOnRun.value, 
                                 onChanged: (value){
@@ -300,7 +304,7 @@ class _SettingsViewState extends State<SettingsView> {
                             Transform.scale(
                               scale: 0.7,
                               child: Switch(
-                                activeTrackColor: c.color6,
+                                activeTrackColor: colorController.color6(),
                                 splashRadius: 0,
                                 value: c.useShortcut.value, 
                                 onChanged: (value){
@@ -334,7 +338,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 Transform.scale(
                                   scale: 0.7,
                                   child: Switch(
-                                    activeTrackColor: c.color6,
+                                    activeTrackColor: colorController.color6(),
                                     splashRadius: 0,
                                     value: c.useWs.value, 
                                     onChanged: (value){
@@ -363,12 +367,14 @@ class _SettingsViewState extends State<SettingsView> {
                                     hoverWs=false;
                                   });
                                 },
-                                child: AnimatedDefaultTextStyle(
-                                  style: GoogleFonts.notoSansSc(
-                                    color: hoverWs ? c.color6 : c.color5
-                                  ), 
-                                  duration: const Duration(milliseconds: 200),
-                                  child: Text('settings'.tr)
+                                child: Obx(()=>
+                                  AnimatedDefaultTextStyle(
+                                    style: GoogleFonts.notoSansSc(
+                                      color: hoverWs ? colorController.color6() : colorController.color5()
+                                    ), 
+                                    duration: const Duration(milliseconds: 200),
+                                    child: Text('settings'.tr)
+                                  ),
                                 ),
                               ),
                             )
@@ -396,7 +402,7 @@ class _SettingsViewState extends State<SettingsView> {
                             Transform.scale(
                               scale: 0.7,
                               child: Switch(
-                                activeTrackColor: c.color6,
+                                activeTrackColor: colorController.color6(),
                                 splashRadius: 0,
                                 value: c.useLyricKit.value, 
                                 onChanged: c.useWs.value ? (value){
@@ -451,7 +457,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 child: Obx(()=>
                                   AnimatedDefaultTextStyle(
                                     style: GoogleFonts.notoSansSc(
-                                      color: hoverURL ? c.color6 : Colors.black,
+                                      color: hoverURL ? colorController.color6() : Colors.black,
                                     ), 
                                     duration: const Duration(milliseconds: 200),
                                     child: Text(
@@ -506,12 +512,14 @@ class _SettingsViewState extends State<SettingsView> {
                                         hoverLang=false;
                                       });
                                     },
-                                    child: AnimatedDefaultTextStyle(
-                                      style: GoogleFonts.notoSansSc(
-                                        color: hoverLang ? c.color6 : c.color5
-                                      ), 
-                                      duration: const Duration(milliseconds: 200),
-                                      child: Text('change'.tr)
+                                    child: Obx(()=>
+                                      AnimatedDefaultTextStyle(
+                                        style: GoogleFonts.notoSansSc(
+                                          color: hoverLang ? colorController.color6() : colorController.color5()
+                                        ), 
+                                        duration: const Duration(milliseconds: 200),
+                                        child: Text('change'.tr)
+                                      ),
                                     ),
                                   ),
                                 )
@@ -544,30 +552,32 @@ class _SettingsViewState extends State<SettingsView> {
                               children: [
                                 Text(operations.sizeConvert(cacheSize)),
                                 const SizedBox(width: 5,),
-                                TweenAnimationBuilder(
-                                  tween: ColorTween(end: hoverReloadCache ? c.color6 : c.color5),
-                                  duration: const Duration(milliseconds: 200), 
-                                  builder: (_, value, __) => GestureDetector(
-                                    onTap: ()=>getCacheSize(),
-                                    child: MouseRegion(
-                                      cursor: SystemMouseCursors.click,
-                                      onEnter: (_){
-                                        setState(() {
-                                          hoverReloadCache=true;
-                                        });
-                                      },
-                                      onExit: (_){
-                                        setState(() {
-                                          hoverReloadCache=false;
-                                        });
-                                      },
-                                      child: Icon(
-                                        Icons.refresh_rounded,
-                                        color: value,
-                                        size: 20,
+                                Obx(()=>
+                                  TweenAnimationBuilder(
+                                    tween: ColorTween(end: hoverReloadCache ? colorController.color6() : colorController.color5()),
+                                    duration: const Duration(milliseconds: 200), 
+                                    builder: (_, value, __) => GestureDetector(
+                                      onTap: ()=>getCacheSize(),
+                                      child: MouseRegion(
+                                        cursor: SystemMouseCursors.click,
+                                        onEnter: (_){
+                                          setState(() {
+                                            hoverReloadCache=true;
+                                          });
+                                        },
+                                        onExit: (_){
+                                          setState(() {
+                                            hoverReloadCache=false;
+                                          });
+                                        },
+                                        child: Icon(
+                                          Icons.refresh_rounded,
+                                          color: value,
+                                          size: 20,
+                                        ),
                                       ),
-                                    ),
-                                  )
+                                    )
+                                  ),
                                 ),
                                 const SizedBox(width: 10,),
                                 GestureDetector(
@@ -588,12 +598,14 @@ class _SettingsViewState extends State<SettingsView> {
                                         hoverClear=false;
                                       });
                                     },
-                                    child: AnimatedDefaultTextStyle(
-                                      style: GoogleFonts.notoSansSc(
-                                        color: hoverClear ? c.color6 : c.color5
-                                      ), 
-                                      duration: const Duration(milliseconds: 200),
-                                      child: Text('clear'.tr)
+                                    child: Obx(()=>
+                                      AnimatedDefaultTextStyle(
+                                        style: GoogleFonts.notoSansSc(
+                                          color: hoverClear ? colorController.color6() : colorController.color5()
+                                        ), 
+                                        duration: const Duration(milliseconds: 200),
+                                        child: Text('clear'.tr)
+                                      ),
                                     ),
                                   ),
                                 )
@@ -624,10 +636,12 @@ class _SettingsViewState extends State<SettingsView> {
                         });
                         refreshLibrary(context);
                       }, 
-                      child: Text(
-                        'refreshLibrary'.tr,
-                        style: GoogleFonts.notoSansSc(
-                          color: c.color6
+                      child: Obx(()=>
+                        Text(
+                          'refreshLibrary'.tr,
+                          style: GoogleFonts.notoSansSc(
+                            color: colorController.color6()
+                          ),
                         ),
                       )
                     ),
@@ -648,14 +662,16 @@ class _SettingsViewState extends State<SettingsView> {
                             hoverAbout=false;
                           });
                         },
-                        child: AnimatedDefaultTextStyle(
-                          style: GoogleFonts.notoSansSc(
-                            color: hoverAbout ? c.color6 : Colors.black,
-                          ),
-                          duration: const Duration(milliseconds: 200),
-                          child: Text(
-                            'aboutNetp'.tr,
-                            softWrap: false,
+                        child: Obx(()=>
+                          AnimatedDefaultTextStyle(
+                            style: GoogleFonts.notoSansSc(
+                              color: hoverAbout ? colorController.color6() : colorController.black.value,
+                            ),
+                            duration: const Duration(milliseconds: 200),
+                            child: Text(
+                              'aboutNetp'.tr,
+                              softWrap: false,
+                            ),
                           ),
                         ),
                       ),

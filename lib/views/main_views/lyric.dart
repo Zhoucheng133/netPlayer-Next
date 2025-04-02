@@ -6,6 +6,7 @@ import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/operations.dart';
@@ -36,6 +37,7 @@ class _LyricViewState extends State<LyricView> {
   bool hoverFont=false;
   final LyricController lyricController=Get.put(LyricController());
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
   final operations=Operations();
 
   bool playedLyric(index){
@@ -340,13 +342,15 @@ class _LyricViewState extends State<LyricView> {
                                         hoverPre=false;
                                       });
                                     },
-                                    child: TweenAnimationBuilder(
-                                      tween: ColorTween(end: hoverPre ? c.color6 : c.color5), 
-                                      duration: const Duration(milliseconds: 200),
-                                      builder: (_, value, __) => Icon(
-                                        Icons.skip_previous_rounded,
-                                        color: value,
-                                        size: 30,
+                                    child: Obx(()=>
+                                      TweenAnimationBuilder(
+                                        tween: ColorTween(end: hoverPre ? colorController.color6() : colorController.color5()), 
+                                        duration: const Duration(milliseconds: 200),
+                                        builder: (_, value, __) => Icon(
+                                          Icons.skip_previous_rounded,
+                                          color: value,
+                                          size: 30,
+                                        ),
                                       ),
                                     )
                                   ),
@@ -372,26 +376,28 @@ class _LyricViewState extends State<LyricView> {
                                         hoverPause=false;
                                       });
                                     },
-                                    child: AnimatedContainer(
-                                      height: 46,
-                                      width: 46,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(23),
-                                        color: hoverPause ? c.color6 : c.color5
-                                      ),
-                                      duration: const Duration(milliseconds: 200),
-                                      child: Center(
-                                        child: Obx(()=>
-                                          c.isPlay.value ? const Icon(
-                                            Icons.pause_rounded,
-                                            color: Colors.white,
-                                            size: 35,
-                                          ): const Icon(
-                                            Icons.play_arrow_rounded,
-                                            color: Colors.white,
-                                            size: 35,
+                                    child: Obx(()=>
+                                      AnimatedContainer(
+                                        height: 46,
+                                        width: 46,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(23),
+                                          color: hoverPause ? colorController.color6() : colorController.color5()
+                                        ),
+                                        duration: const Duration(milliseconds: 200),
+                                        child: Center(
+                                          child: Obx(()=>
+                                            c.isPlay.value ? const Icon(
+                                              Icons.pause_rounded,
+                                              color: Colors.white,
+                                              size: 35,
+                                            ): const Icon(
+                                              Icons.play_arrow_rounded,
+                                              color: Colors.white,
+                                              size: 35,
+                                            )
                                           )
-                                        )
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -417,13 +423,15 @@ class _LyricViewState extends State<LyricView> {
                                         hoverSkip=false;
                                       });
                                     },
-                                    child: TweenAnimationBuilder(
-                                      tween: ColorTween(end: hoverSkip ? c.color6 : c.color5), 
-                                      duration: const Duration(milliseconds: 200),
-                                      builder: (_, value, __) => Icon(
-                                        Icons.skip_next_rounded,
-                                        color: value,
-                                        size: 30,
+                                    child: Obx(()=>
+                                      TweenAnimationBuilder(
+                                        tween: ColorTween(end: hoverSkip ? colorController.color6() : colorController.color5()), 
+                                        duration: const Duration(milliseconds: 200),
+                                        builder: (_, value, __) => Icon(
+                                          Icons.skip_next_rounded,
+                                          color: value,
+                                          size: 30,
+                                        ),
                                       ),
                                     )
                                   ),
@@ -447,9 +455,9 @@ class _LyricViewState extends State<LyricView> {
                                         elevation: 0,
                                         pressedElevation: 0,
                                       ),
-                                      thumbColor: c.color6,
-                                      activeTrackColor: c.color5,
-                                      inactiveTrackColor: c.color3,
+                                      thumbColor: colorController.color6(),
+                                      activeTrackColor: colorController.color5(),
+                                      inactiveTrackColor: colorController.color3(),
                                     ),
                                     child: Slider(
                                       value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
@@ -474,7 +482,7 @@ class _LyricViewState extends State<LyricView> {
                                             c.nowPlay['duration']==0 ? "" : convertDuration(c.playProgress.value~/1000),
                                             style: GoogleFonts.notoSansSc(
                                               fontSize: 12,
-                                              color: c.color5
+                                              color: colorController.color5()
                                             ),
                                           )
                                         ),
@@ -487,7 +495,7 @@ class _LyricViewState extends State<LyricView> {
                                             c.nowPlay['duration']==0 ? "" : convertDuration(c.nowPlay['duration']),
                                             style: GoogleFonts.notoSansSc(
                                               fontSize: 12,
-                                              color: c.color5
+                                              color: colorController.color5()
                                             ),
                                           )
                                         ),
@@ -530,7 +538,7 @@ class _LyricViewState extends State<LyricView> {
                                       message: 'love'.tr,
                                       waitDuration: const Duration(seconds: 1),
                                       child: TweenAnimationBuilder(
-                                        tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
+                                        tween: ColorTween(end: hoverLove ? colorController.color6() : colorController.color5()), 
                                         duration: const Duration(milliseconds: 200), 
                                         builder: (_, value, __)=>Icon(
                                           Icons.favorite_border_outlined,
@@ -559,25 +567,25 @@ class _LyricViewState extends State<LyricView> {
                                 content: SizedBox(
                                   width: 120,
                                   height: 20,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: SliderTheme(
-                                          data: SliderThemeData(
-                                            thumbColor: c.color6,
-                                            overlayColor: Colors.transparent,
-                                            overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                                            trackHeight: 2,
-                                            thumbShape: const RoundSliderThumbShape(
-                                              enabledThumbRadius: 5,
-                                              elevation: 0,
-                                              pressedElevation: 0,
+                                  child: Obx(()=>
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: SliderTheme(
+                                            data: SliderThemeData(
+                                              thumbColor: colorController.color6(),
+                                              overlayColor: Colors.transparent,
+                                              overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                              trackHeight: 2,
+                                              thumbShape: const RoundSliderThumbShape(
+                                                enabledThumbRadius: 5,
+                                                elevation: 0,
+                                                pressedElevation: 0,
+                                              ),
+                                              activeTrackColor: colorController.color5(),
+                                              inactiveTrackColor: colorController.color4(),
                                             ),
-                                            activeTrackColor: c.color5,
-                                            inactiveTrackColor: c.color4,
-                                          ),
-                                          child: Obx(()=>
-                                            Slider(
+                                            child: Slider(
                                               value: c.volume.value/100, 
                                               onChanged: (val){
                                                 c.updateVolume((val*100).toInt());
@@ -587,14 +595,12 @@ class _LyricViewState extends State<LyricView> {
                                                 operations.saveVolume();
                                               },
                                             ),
-                                          )
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 5,),
-                                      SizedBox(
-                                        width: 35,
-                                        child: Obx(()=>
-                                          Align(
+                                        const SizedBox(width: 5,),
+                                        SizedBox(
+                                          width: 35,
+                                          child: Align(
                                             alignment: Alignment.centerLeft,
                                             child: Text(
                                               "${c.volume}%",
@@ -602,10 +608,10 @@ class _LyricViewState extends State<LyricView> {
                                                 fontSize: 12
                                               ),
                                             ),
-                                          )
-                                        ),
-                                      )
-                                    ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 child: Tooltip(
@@ -623,16 +629,16 @@ class _LyricViewState extends State<LyricView> {
                                         hoverVolume=false;
                                       });
                                     },
-                                    child: TweenAnimationBuilder(
-                                      tween: ColorTween(end: hoverVolume ? c.color6 : c.color5), 
-                                      duration: const Duration(milliseconds: 200), 
-                                      builder: (_, value, __)=>Obx(()=>
-                                        FaIcon(
+                                    child: Obx(()=>
+                                      TweenAnimationBuilder(
+                                        tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()), 
+                                        duration: const Duration(milliseconds: 200), 
+                                        builder: (_, value, __)=>FaIcon(
                                           c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
                                           size: 14,
                                           color: value,
                                         )
-                                      )
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -716,11 +722,11 @@ class _LyricViewState extends State<LyricView> {
                                             hoverMode=false;
                                           });
                                         },
-                                        child: TweenAnimationBuilder(
-                                          tween: ColorTween(end: hoverMode ? c.color6 : c.color5), 
-                                          duration: const Duration(milliseconds: 200), 
-                                          builder: (_, value, __)=>Obx(()=>
-                                            c.fullRandom.value ? Icon(
+                                        child: Obx(()=>
+                                          TweenAnimationBuilder(
+                                            tween: ColorTween(end: hoverMode ? colorController.color6() : colorController.color5()), 
+                                            duration: const Duration(milliseconds: 200), 
+                                            builder: (_, value, __)=>c.fullRandom.value ? Icon(
                                               Icons.shuffle,
                                               size: 18,
                                               color: Colors.grey[300],
@@ -777,7 +783,7 @@ class _LyricViewState extends State<LyricView> {
                                           style: GoogleFonts.notoSansSc(
                                             fontSize: c.lyricText.value.toDouble(),
                                             height: 2.3,
-                                            color: playedLyric(index) ? c.color5:c.color3,
+                                            color: playedLyric(index) ? colorController.color5() : colorController.color3(),
                                             fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
                                           ),
                                         ),
@@ -839,15 +845,17 @@ class _LyricViewState extends State<LyricView> {
                                       hoverFont=false;
                                     });
                                   },
-                                  child: TweenAnimationBuilder(
-                                    tween: ColorTween(end: hoverFont ? c.color6 : c.color4), 
-                                    duration: const Duration(milliseconds: 200),
-                                    builder: (_, value, __)=>Icon(
-                                      Icons.text_fields_rounded,
-                                      size: 20,
-                                      color: value,
-                                    )
-                                  ),
+                                  child: Obx(()=>
+                                    TweenAnimationBuilder(
+                                      tween: ColorTween(end: hoverFont ? colorController.color6() : colorController.color4()), 
+                                      duration: const Duration(milliseconds: 200),
+                                      builder: (_, value, __)=>Icon(
+                                        Icons.text_fields_rounded,
+                                        size: 20,
+                                        color: value,
+                                      )
+                                    ),
+                                  )
                                 ),
                               ),
                               const SizedBox(width: 15,),
@@ -864,14 +872,16 @@ class _LyricViewState extends State<LyricView> {
                                       hoverTip=false;
                                     });
                                   },
-                                  child: TweenAnimationBuilder(
-                                    tween: ColorTween(end: hoverTip ? c.color6 : c.color4), 
-                                    duration: const Duration(milliseconds: 200), 
-                                    builder: (_, value, __)=>Icon(
-                                      Icons.info_rounded,
-                                      size: 20,
-                                      color: value,
-                                    )
+                                  child: Obx(()=>
+                                    TweenAnimationBuilder(
+                                      tween: ColorTween(end: hoverTip ? colorController.color6() : colorController.color4()), 
+                                      duration: const Duration(milliseconds: 200), 
+                                      builder: (_, value, __)=>Icon(
+                                        Icons.info_rounded,
+                                        size: 20,
+                                        color: value,
+                                      )
+                                    ),
                                   ),
                                 ),
                               ),
@@ -905,14 +915,16 @@ class _LyricViewState extends State<LyricView> {
                       });
                     },
                     cursor: SystemMouseCursors.click,
-                    child: TweenAnimationBuilder(
-                      tween: ColorTween(end: hoverBack ? c.color6 : c.color4), 
-                      duration: const Duration(milliseconds: 200),
-                      builder: (_, value, __)=>Icon(
-                        Icons.arrow_downward_rounded,
-                        color: value,
-                      )
-                    ),
+                    child: Obx(()=>
+                      TweenAnimationBuilder(
+                        tween: ColorTween(end: hoverBack ? colorController.color6() : colorController.color4()), 
+                        duration: const Duration(milliseconds: 200),
+                        builder: (_, value, __)=>Icon(
+                          Icons.arrow_downward_rounded,
+                          color: value,
+                        )
+                      ),
+                    )
                   ),
                 ),
               ),

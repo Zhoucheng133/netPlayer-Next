@@ -3,6 +3,7 @@ import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,6 +19,7 @@ class _PlayBarState extends State<PlayBar> {
 
   final Controller c = Get.find();
   Operations operations=Operations();
+  final ColorController colorController=Get.find();
 
   bool hoverPause=false;
   bool hoverPre=false;
@@ -192,7 +194,7 @@ class _PlayBarState extends State<PlayBar> {
                                         });
                                       },
                                       child: TweenAnimationBuilder(
-                                        tween: ColorTween(end: hoverPre ? c.color6 : c.color5), 
+                                        tween: ColorTween(end: hoverPre ? colorController.color6() : colorController.color5()), 
                                         duration: const Duration(milliseconds: 200),
                                         builder: (_, value, __) => Icon(
                                           Icons.skip_previous_rounded,
@@ -227,7 +229,7 @@ class _PlayBarState extends State<PlayBar> {
                                         width: 34,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(17),
-                                          color: hoverPause ? c.color6 : c.color5
+                                          color: hoverPause ? colorController.color6() : colorController.color5()
                                         ),
                                         duration: const Duration(milliseconds: 200),
                                         child: Center(
@@ -264,7 +266,7 @@ class _PlayBarState extends State<PlayBar> {
                                         });
                                       },
                                       child: TweenAnimationBuilder(
-                                        tween: ColorTween(end: hoverSkip ? c.color6 : c.color5), 
+                                        tween: ColorTween(end: hoverSkip ? colorController.color6() : colorController.color5()), 
                                         duration: const Duration(milliseconds: 200),
                                         builder: (_, value, __) => Icon(
                                           Icons.skip_next_rounded,
@@ -290,9 +292,9 @@ class _PlayBarState extends State<PlayBar> {
                             elevation: 0,
                             pressedElevation: 0,
                           ),
-                          thumbColor: c.color6,
-                          activeTrackColor: c.color5,
-                          inactiveTrackColor: c.color4,
+                          thumbColor: colorController.color6(),
+                          activeTrackColor: colorController.color5(),
+                          inactiveTrackColor: colorController.color4(),
                         ),
                         child: Slider(
                           value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
@@ -317,7 +319,7 @@ class _PlayBarState extends State<PlayBar> {
                             c.nowPlay['duration']==0 ? "" : convertDuration(c.playProgress.value~/1000),
                             style: GoogleFonts.notoSansSc(
                               fontSize: 12,
-                              color: c.color5
+                              color: colorController.color5()
                             ),
                           )
                         ),
@@ -328,7 +330,7 @@ class _PlayBarState extends State<PlayBar> {
                             c.nowPlay['duration']==0 ? "" : convertDuration(c.nowPlay['duration']),
                             style: GoogleFonts.notoSansSc(
                               fontSize: 12,
-                              color: c.color5
+                              color: colorController.color5()
                             ),
                           ),
                         )
@@ -373,7 +375,7 @@ class _PlayBarState extends State<PlayBar> {
                           message: 'love'.tr,
                           waitDuration: const Duration(seconds: 1),
                           child: TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverLove ? c.color6 : c.color5), 
+                            tween: ColorTween(end: hoverLove ? colorController.color6() : colorController.color5()), 
                             duration: const Duration(milliseconds: 200), 
                             builder: (_, value, __)=>Icon(
                               Icons.favorite_border_outlined,
@@ -417,7 +419,7 @@ class _PlayBarState extends State<PlayBar> {
                           message: 'showLyric'.tr,
                           waitDuration: const Duration(seconds: 1),
                           child: TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverLyric ? c.color6 : c.color5), 
+                            tween: ColorTween(end: hoverLyric ? colorController.color6() : colorController.color5()), 
                             duration: const Duration(milliseconds: 200), 
                             builder: (_, value, __)=>Icon(
                               Icons.lyrics_rounded,
@@ -438,7 +440,7 @@ class _PlayBarState extends State<PlayBar> {
                             Expanded(
                               child: SliderTheme(
                                 data: SliderThemeData(
-                                  thumbColor: c.color6,
+                                  thumbColor: colorController.color6(),
                                   overlayColor: Colors.transparent,
                                   overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
                                   trackHeight: 2,
@@ -447,8 +449,8 @@ class _PlayBarState extends State<PlayBar> {
                                     elevation: 0,
                                     pressedElevation: 0,
                                   ),
-                                  activeTrackColor: c.color5,
-                                  inactiveTrackColor: c.color4,
+                                  activeTrackColor: colorController.color5(),
+                                  inactiveTrackColor: colorController.color4(),
                                 ),
                                 child: Slider(
                                   value: c.volume.value/100, 
@@ -494,7 +496,7 @@ class _PlayBarState extends State<PlayBar> {
                             });
                           },
                           child: TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverVolume ? c.color6 : c.color5), 
+                            tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()), 
                             duration: const Duration(milliseconds: 200), 
                             builder: (_, value, __) => FaIcon(
                               c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
@@ -567,7 +569,7 @@ class _PlayBarState extends State<PlayBar> {
                         )
                       ],
                       child: Container(
-                        color: c.color1,
+                        color: colorController.color1(),
                         child: Tooltip(
                           waitDuration: const Duration(seconds: 1),
                           message: c.fullRandom.value ? 'nowFullShuffle'.tr : 'playMode'.tr,
@@ -584,7 +586,7 @@ class _PlayBarState extends State<PlayBar> {
                               });
                             },
                             child: TweenAnimationBuilder(
-                              tween: ColorTween(end: hoverMode ? c.color6 : c.color5), 
+                              tween: ColorTween(end: hoverMode ? colorController.color6() : colorController.color5()), 
                               duration: const Duration(milliseconds: 200), 
                               builder: (_, value, __)=>c.fullRandom.value ? Icon(
                                 Icons.shuffle,

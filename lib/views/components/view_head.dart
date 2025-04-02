@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -22,6 +23,8 @@ class ViewHeader extends StatefulWidget {
 class _ViewHeaderState extends State<ViewHeader> {
   
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
+
   bool hoverLocate=false;
   bool hoverRefresh=false;
   bool hoverRandom=false;
@@ -68,8 +71,7 @@ class _ViewHeaderState extends State<ViewHeader> {
       height: 30,
       child: Row(
         children: [
-          // c.pageId.value.isNotEmpty ? Icon(Icons.arrow_back_rounded):Container(),
-          hasBackButton()?Row(
+          hasBackButton() ? Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               GestureDetector(
@@ -88,154 +90,160 @@ class _ViewHeaderState extends State<ViewHeader> {
                       hoverBack=false;
                     });
                   },
-                  child: TweenAnimationBuilder(
-                    tween: ColorTween(end: hoverBack ? c.color6 : c.color5), 
-                    duration: const Duration(milliseconds: 200), 
-                    builder: (_, value, __)=>Icon(
-                      Icons.arrow_back_rounded,
-                      color: value,
-                    )
-                  ),
+                  child: Obx(()=>
+                    TweenAnimationBuilder(
+                      tween: ColorTween(end: hoverBack ? colorController.color6() : colorController.color5()), 
+                      duration: const Duration(milliseconds: 200), 
+                      builder: (_, value, __)=>Icon(
+                        Icons.arrow_back_rounded,
+                        color: value,
+                      )
+                    ),
+                  )
                 ),
               ),
               const SizedBox(width: 10,),
             ],
           ) : Container(),
           Expanded(
-            child: Row(
-              children: [
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width - 550,
-                  ),
-                  child: Text(
-                    widget.title,
-                    style: GoogleFonts.notoSansSc(
-                      color: c.color5,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+            child: Obx(()=>
+              Row(
+                children: [
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width - 550,
                     ),
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
-                  ),
-                ),
-                const SizedBox(width: 10,),
-                Text(
-                  widget.subTitle,
-                  style: GoogleFonts.notoSansSc(
-                    color: c.color5,
-                    fontSize: 13
-                  ),
-                ),
-                c.allSongs.length>=500 && widget.page=='all' ? const SizedBox(width: 10,) : Container(),
-                Obx(()=>
-                  c.allSongs.length>=500 && widget.page=='all' ? 
-                  Tooltip(
-                    message: 'overCountTip'.tr,
-                    child: MouseRegion(
-                      onEnter: (_){
-                        setState(() {
-                          hoverWarning=true;
-                        });
-                      },
-                      onExit: (_){
-                        setState(() {
-                          hoverWarning=false;
-                        });
-                      },
-                      child: TweenAnimationBuilder(
-                        tween: ColorTween(end: hoverWarning ? Colors.orange : Colors.grey[400]), 
-                        duration: const Duration(milliseconds: 200), 
-                        builder: (_, value, __)=>Icon(
-                          Icons.warning_rounded,
-                          size: 17,
-                          color: value,
-                        )
+                    child: Text(
+                      widget.title,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.color5(),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
                     ),
-                  ) : Container()
-                ),
-                const SizedBox(width: 10,),
-                widget.page=='all' ? GestureDetector(
-                  onTap: (){
-                    operations.fullRandomPlaySwitcher(context);
-                  },
-                  child: Tooltip(
-                    message: 'shuffleAllSongs'.tr,
-                    waitDuration: const Duration(seconds: 1),
-                    child: MouseRegion(
-                      onEnter: (_){
-                        setState(() {
-                          hoverRandom=true;
-                        });
-                      },
-                      onExit: (_){
-                        setState(() {
-                          hoverRandom=false;
-                        });
-                      },
-                      cursor: SystemMouseCursors.click,
-                      child: Obx(()=>
-                        TweenAnimationBuilder(
-                          tween: ColorTween(end: hoverRandom ? c.color6 : c.fullRandom.value ? c.color5 : Colors.grey[400]), 
+                  ),
+                  const SizedBox(width: 10,),
+                  Text(
+                    widget.subTitle,
+                    style: GoogleFonts.notoSansSc(
+                      color: colorController.color5(),
+                      fontSize: 13
+                    ),
+                  ),
+                  c.allSongs.length>=500 && widget.page=='all' ? const SizedBox(width: 10,) : Container(),
+                  Obx(()=>
+                    c.allSongs.length>=500 && widget.page=='all' ? 
+                    Tooltip(
+                      message: 'overCountTip'.tr,
+                      child: MouseRegion(
+                        onEnter: (_){
+                          setState(() {
+                            hoverWarning=true;
+                          });
+                        },
+                        onExit: (_){
+                          setState(() {
+                            hoverWarning=false;
+                          });
+                        },
+                        child: TweenAnimationBuilder(
+                          tween: ColorTween(end: hoverWarning ? Colors.orange : Colors.grey[400]), 
                           duration: const Duration(milliseconds: 200), 
                           builder: (_, value, __)=>Icon(
-                            Icons.shuffle_rounded,
+                            Icons.warning_rounded,
                             size: 17,
                             color: value,
                           )
                         ),
-                      )
-                    ),
+                      ),
+                    ) : Container()
                   ),
-                ) :   Container(),
-              ],
+                  const SizedBox(width: 10,),
+                  widget.page=='all' ? GestureDetector(
+                    onTap: (){
+                      operations.fullRandomPlaySwitcher(context);
+                    },
+                    child: Tooltip(
+                      message: 'shuffleAllSongs'.tr,
+                      waitDuration: const Duration(seconds: 1),
+                      child: MouseRegion(
+                        onEnter: (_){
+                          setState(() {
+                            hoverRandom=true;
+                          });
+                        },
+                        onExit: (_){
+                          setState(() {
+                            hoverRandom=false;
+                          });
+                        },
+                        cursor: SystemMouseCursors.click,
+                        child: Obx(()=>
+                          TweenAnimationBuilder(
+                            tween: ColorTween(end: hoverRandom ? colorController.color6() : c.fullRandom.value ? colorController.color5() : Colors.grey[400]), 
+                            duration: const Duration(milliseconds: 200), 
+                            builder: (_, value, __)=>Icon(
+                              Icons.shuffle_rounded,
+                              size: 17,
+                              color: value,
+                            )
+                          ),
+                        )
+                      ),
+                    ),
+                  ) :   Container(),
+                ],
+              ),
             ),
           ),
           widget.page!='settings' && widget.page!='search' ?
-          AnimatedContainer(
-            width: 180,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              border: hasFocus ? Border.all(
-                color: c.color5,
-                width: 2
-              ): Border.all(
-                color: c.color3,
-                width: 2
-              )
-            ),
-            duration: const Duration(milliseconds: 200),
-            child: Row(
-              children: [
-                const SizedBox(width: 10,),
-                Padding(
-                  padding: const EdgeInsets.only(top: 2),
-                  child: TweenAnimationBuilder(
-                    tween: ColorTween(end: hasFocus ? c.color5 : c.color3), 
-                    duration: const Duration(milliseconds: 200),
-                    builder: (_, value, __)=>Icon(
-                      Icons.search_rounded,
-                      size: 18,
-                      color: value,
-                    ),
-                  )
-                ),
-                Expanded(
-                  child: TextField(
-                    controller: widget.controller,
-                    focusNode: focusOnSearch,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      isCollapsed: true,
-                      contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
-                    ),
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 12
+          Obx(()=>
+            AnimatedContainer(
+              width: 180,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: hasFocus ? Border.all(
+                  color: colorController.color5(),
+                  width: 2
+                ): Border.all(
+                  color: colorController.color3(),
+                  width: 2
+                )
+              ),
+              duration: const Duration(milliseconds: 200),
+              child: Row(
+                children: [
+                  const SizedBox(width: 10,),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: TweenAnimationBuilder(
+                      tween: ColorTween(end: hasFocus ? colorController.color5() : colorController.color3()), 
+                      duration: const Duration(milliseconds: 200),
+                      builder: (_, value, __)=>Icon(
+                        Icons.search_rounded,
+                        size: 18,
+                        color: value,
+                      ),
+                    )
+                  ),
+                  Expanded(
+                    child: TextField(
+                      controller: widget.controller,
+                      focusNode: focusOnSearch,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        isCollapsed: true,
+                        contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
+                      ),
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 12
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ) : Container(),
           const SizedBox(width: 15,),
@@ -263,7 +271,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                     });
                   },
                   child: TweenAnimationBuilder(
-                    tween: ColorTween(end:  c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? hoverLocate ? c.color6 : c.color5 : Colors.grey[300]), 
+                    tween: ColorTween(end:  c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? hoverLocate ? colorController.color6() : colorController.color5() : Colors.grey[300]), 
                     duration: const Duration(milliseconds: 200), 
                     builder: (_, value, __) => Icon(
                       Icons.my_location_rounded,
@@ -298,7 +306,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                     });
                   },
                   child: TweenAnimationBuilder(
-                    tween: ColorTween(end: hoverRefresh ? c.color6 : c.color5),
+                    tween: ColorTween(end: hoverRefresh ? colorController.color6() : colorController.color5()),
                     duration: const Duration(milliseconds: 200), 
                     builder: (_, value, __) => Icon(
                       Icons.refresh_rounded,
@@ -330,6 +338,8 @@ class SearchHeader extends StatefulWidget {
 class _SearchHeaderState extends State<SearchHeader> {
 
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
+
   bool hasFocus=false;
   bool hoverSong=false;
   bool hoverAlbum=false;
@@ -374,15 +384,17 @@ class _SearchHeaderState extends State<SearchHeader> {
                   constraints: BoxConstraints(
                     maxWidth: MediaQuery.of(context).size.width - 550,
                   ),
-                  child: Text(
-                    '${'search'.tr}:',
-                    style: GoogleFonts.notoSansSc(
-                      color: c.color5,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                  child: Obx(()=>
+                    Text(
+                      '${'search'.tr}:',
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.color5(),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
                     ),
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
                   ),
                 ),
                 const SizedBox(width: 10,),
@@ -407,14 +419,16 @@ class _SearchHeaderState extends State<SearchHeader> {
                           hoverSong=false;
                         });
                       },
-                      child: TweenAnimationBuilder(
-                        tween: ColorTween(end: widget.type=='song' ? c.color4 : hoverSong ? c.color6 : c.color3),
-                        duration: const Duration(milliseconds: 200), 
-                        builder: (_, value, __)=>Icon(
-                          Icons.music_note_rounded,
-                          color: value,
-                        )
-                      ),
+                      child: Obx(()=>
+                        TweenAnimationBuilder(
+                          tween: ColorTween(end: widget.type=='song' ? colorController.color5() : hoverSong ? colorController.color6() : colorController.color3()),
+                          duration: const Duration(milliseconds: 200), 
+                          builder: (_, value, __)=>Icon(
+                            Icons.music_note_rounded,
+                            color: value,
+                          )
+                        ),
+                      )
                     ),
                   ),
                 ),
@@ -440,14 +454,16 @@ class _SearchHeaderState extends State<SearchHeader> {
                           hoverAlbum=false;
                         });
                       },
-                      child: TweenAnimationBuilder(
-                        tween: ColorTween(end: widget.type=='album' ? c.color4 : hoverAlbum ? c.color6 : c.color3),
-                        duration: const Duration(milliseconds: 200), 
-                        builder: (_, value, __)=>Icon(
-                          Icons.album_rounded,
-                          color: value,
-                        )
-                      ),
+                      child: Obx(()=>
+                        TweenAnimationBuilder(
+                          tween: ColorTween(end: widget.type=='album' ? colorController.color5() : hoverAlbum ? colorController.color6() : colorController.color3()),
+                          duration: const Duration(milliseconds: 200), 
+                          builder: (_, value, __)=>Icon(
+                            Icons.album_rounded,
+                            color: value,
+                          )
+                        ),
+                      )
                     ),
                   ),
                 ),
@@ -473,66 +489,70 @@ class _SearchHeaderState extends State<SearchHeader> {
                           hoverArtist=false;
                         });
                       },
-                      child: TweenAnimationBuilder(
-                        tween: ColorTween(end: widget.type=='artist' ? c.color4 : hoverArtist ? c.color6 : c.color3),
-                        duration: const Duration(milliseconds: 200), 
-                        builder: (_, value, __)=>Icon(
-                          Icons.mic_rounded,
-                          color: value,
-                        )
-                      ),
+                      child: Obx(()=>
+                        TweenAnimationBuilder(
+                          tween: ColorTween(end: widget.type=='artist' ? colorController.color5() : hoverArtist ? colorController.color6() : colorController.color3()),
+                          duration: const Duration(milliseconds: 200), 
+                          builder: (_, value, __)=>Icon(
+                            Icons.mic_rounded,
+                            color: value,
+                          )
+                        ),
+                      )
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          AnimatedContainer(
-            width: 180,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              border: hasFocus ? Border.all(
-                color: c.color5,
-                width: 2
-              ): Border.all(
-                color: c.color3,
-                width: 2
-              )
-            ),
-            duration: const Duration(milliseconds: 200),
-            child: Row(
-              children: [
-                const SizedBox(width: 10,),
-                Padding(
-                  padding: const EdgeInsets.only(top: 2),
-                  child: TweenAnimationBuilder(
-                    tween: ColorTween(end: hasFocus ? c.color5 : c.color3), 
-                    duration: const Duration(milliseconds: 200),
-                    builder: (_, value, __)=>Icon(
-                      Icons.search_rounded,
-                      size: 18,
-                      color: value,
-                    ),
-                  )
-                ),
-                Expanded(
-                  child: TextField(
-                    controller: widget.controller,
-                    focusNode: focusOnSearch,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      isCollapsed: true,
-                      contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
-                    ),
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 12
-                    ),
-                    onEditingComplete: (){
-                      widget.search();
-                    },
+          Obx(()=>
+            AnimatedContainer(
+              width: 180,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: hasFocus ? Border.all(
+                  color: colorController.color5(),
+                  width: 2
+                ): Border.all(
+                  color: colorController.color3(),
+                  width: 2
+                )
+              ),
+              duration: const Duration(milliseconds: 200),
+              child: Row(
+                children: [
+                  const SizedBox(width: 10,),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: TweenAnimationBuilder(
+                      tween: ColorTween(end: hasFocus ? colorController.color5() : colorController.color3()), 
+                      duration: const Duration(milliseconds: 200),
+                      builder: (_, value, __)=>Icon(
+                        Icons.search_rounded,
+                        size: 18,
+                        color: value,
+                      ),
+                    )
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: TextField(
+                      controller: widget.controller,
+                      focusNode: focusOnSearch,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        isCollapsed: true,
+                        contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
+                      ),
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 12
+                      ),
+                      onEditingComplete: (){
+                        widget.search();
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           )
         ],

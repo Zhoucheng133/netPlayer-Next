@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/views/functions/requests.dart';
@@ -27,6 +28,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   late Worker listener;
   late Worker wsOkListener;
   Operations operations=Operations();
+  final ColorController colorController=Get.find();
 
   @override
   void onWindowClose() {
@@ -305,184 +307,189 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 30,
-          color: Colors.transparent,
-          child: Platform.isWindows ? Row(
-            children: [
-              Expanded(child: DragToMoveArea(child: Container())),
-              WindowCaptionButton.minimize(onPressed: minWindow,),
-              Obx(()=>
-                c.maxWindow.value ? WindowCaptionButton.unmaximize(onPressed: unmaxWindow) : WindowCaptionButton.maximize(onPressed: maxWindow,),
+    return Obx(
+      ()=> Container(
+        color: colorController.color1(),
+        child: Column(
+          children: [
+            Container(
+              height: 30,
+              color: Colors.transparent,
+              child: Platform.isWindows ? Row(
+                children: [
+                  Expanded(child: DragToMoveArea(child: Container())),
+                  WindowCaptionButton.minimize(onPressed: minWindow,),
+                  Obx(()=>
+                    c.maxWindow.value ? WindowCaptionButton.unmaximize(onPressed: unmaxWindow) : WindowCaptionButton.maximize(onPressed: maxWindow,),
+                  ),
+                  WindowCaptionButton.close(onPressed: (){
+                    operations.closeWindow();
+                  },)
+                ],
+              ) : DragToMoveArea(child: Container())
+            ),
+            Expanded(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: isLoading ? Center(
+                  key: const Key('1'),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: LoadingAnimationWidget.beat(
+                      color: colorController.color6(), 
+                      size: 30
+                    ),
+                  ),
+                ) : isLogin ? const MainView(key: Key('2'),) : const LoginView(key: Key('3'),),
               ),
-              WindowCaptionButton.close(onPressed: (){
-                operations.closeWindow();
-              },)
-            ],
-          ) : DragToMoveArea(child: Container())
-        ),
-        Expanded(
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            child: isLoading ? Center(
-              key: const Key('1'),
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 30),
-                child: LoadingAnimationWidget.beat(
-                  color: c.color6, 
-                  size: 30
-                ),
-              ),
-            ) : isLogin ? const MainView(key: Key('2'),) : const LoginView(key: Key('3'),),
-          ),
-        ),
-        Platform.isMacOS ? 
-        PlatformMenuBar(
-          menus: [
-            PlatformMenu(
-              label: "netPlayer", 
+            ),
+            Platform.isMacOS ? 
+            PlatformMenuBar(
               menus: [
-                PlatformMenuItemGroup(
-                  members: [
-                    PlatformMenuItem(
-                      label: "About netPlayer".tr,
-                      onSelected: (){
-                        operations.showAbout(context);
-                      }
+                PlatformMenu(
+                  label: "netPlayer", 
+                  menus: [
+                    PlatformMenuItemGroup(
+                      members: [
+                        PlatformMenuItem(
+                          label: "About netPlayer".tr,
+                          onSelected: (){
+                            operations.showAbout(context);
+                          }
+                        )
+                      ]
+                    ),
+                    PlatformMenuItemGroup(
+                      members: [
+                        PlatformMenuItem(
+                          label: "Settings...".tr,
+                          shortcut: const SingleActivator(
+                            LogicalKeyboardKey.comma,
+                            meta: true,
+                          ),
+                          onSelected: isLogin ? (){
+                            if(c.showLyric.value){
+                              operations.toggleLyric(context);
+                            }
+                            c.pageIndex.value=6;
+                          } : null
+                        ),
+                      ]
+                    ),
+                    const PlatformMenuItemGroup(
+                      members: [
+                        PlatformProvidedMenuItem(
+                          enabled: true,
+                          type: PlatformProvidedMenuItemType.hide,
+                        ),
+                        PlatformProvidedMenuItem(
+                          enabled: true,
+                          type: PlatformProvidedMenuItemType.quit,
+                        ),
+                      ]
                     )
                   ]
                 ),
-                PlatformMenuItemGroup(
-                  members: [
+                PlatformMenu(
+                  label: "Edit".tr,
+                  menus: [
                     PlatformMenuItem(
-                      label: "Settings...".tr,
+                      label: "Copy".tr,
                       shortcut: const SingleActivator(
-                        LogicalKeyboardKey.comma,
-                        meta: true,
-                      ),
-                      onSelected: isLogin ? (){
-                        if(c.showLyric.value){
-                          operations.toggleLyric(context);
-                        }
-                        c.pageIndex.value=6;
-                      } : null
-                    ),
-                  ]
-                ),
-                const PlatformMenuItemGroup(
-                  members: [
-                    PlatformProvidedMenuItem(
-                      enabled: true,
-                      type: PlatformProvidedMenuItemType.hide,
-                    ),
-                    PlatformProvidedMenuItem(
-                      enabled: true,
-                      type: PlatformProvidedMenuItemType.quit,
-                    ),
-                  ]
-                )
-              ]
-            ),
-            PlatformMenu(
-              label: "Edit".tr,
-              menus: [
-                PlatformMenuItem(
-                  label: "Copy".tr,
-                  shortcut: const SingleActivator(
-                    LogicalKeyboardKey.keyC,
-                    meta: true
-                  ),
-                ),
-                PlatformMenuItem(
-                  label: "Paste".tr,
-                  shortcut: const SingleActivator(
-                    LogicalKeyboardKey.keyV,
-                    meta: true
-                  ),
-                ),
-                PlatformMenuItem(
-                  label: "Select All".tr,
-                  shortcut: const SingleActivator(
-                    LogicalKeyboardKey.keyA,
-                    meta: true
-                  ),
-                )
-              ]
-            ),
-            PlatformMenu(
-              label: "Control".tr, 
-              menus: [
-                PlatformMenuItemGroup(
-                  members: [
-                    PlatformMenuItem(
-                      label: "Play/Pause".tr,
-                      shortcut: const SingleActivator(
-                        LogicalKeyboardKey.space,
-                      ),
-                      onSelected: (){
-                        operations.toggleSong();
-                      },
-                    ),
-                    PlatformMenuItem(
-                      label: "Skip Forward".tr,
-                      shortcut: const SingleActivator(
-                        LogicalKeyboardKey.arrowLeft,
-                        meta: true,
-                      ),
-                      onSelected: (){
-                        operations.skipPre();
-                      },
-                    ),
-                    PlatformMenuItem(
-                      label: "Skip Next".tr,
-                      shortcut: const SingleActivator(
-                        LogicalKeyboardKey.arrowRight,
-                        meta: true,
-                      ),
-                      onSelected: (){
-                        operations.skipNext();
-                      },
-                    ),
-                  ]
-                ),
-                PlatformMenuItemGroup(
-                  members: [
-                    PlatformMenuItem(
-                      label: "Show/Hide Lyric".tr,
-                      shortcut: const SingleActivator(
-                        LogicalKeyboardKey.keyL,
+                        LogicalKeyboardKey.keyC,
                         meta: true
                       ),
-                      onSelected: (){
-                        operations.toggleLyric(context);
-                      },
-                    )
-                  ]
-                )
-              ]
-            ),
-            PlatformMenu(
-              label: "Window".tr, 
-              menus: [
-                const PlatformMenuItemGroup(
-                  members: [
-                    PlatformProvidedMenuItem(
-                      enabled: true,
-                      type: PlatformProvidedMenuItemType.minimizeWindow,
                     ),
-                    PlatformProvidedMenuItem(
-                      enabled: true,
-                      type: PlatformProvidedMenuItemType.toggleFullScreen,
+                    PlatformMenuItem(
+                      label: "Paste".tr,
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.keyV,
+                        meta: true
+                      ),
+                    ),
+                    PlatformMenuItem(
+                      label: "Select All".tr,
+                      shortcut: const SingleActivator(
+                        LogicalKeyboardKey.keyA,
+                        meta: true
+                      ),
+                    )
+                  ]
+                ),
+                PlatformMenu(
+                  label: "Control".tr, 
+                  menus: [
+                    PlatformMenuItemGroup(
+                      members: [
+                        PlatformMenuItem(
+                          label: "Play/Pause".tr,
+                          shortcut: const SingleActivator(
+                            LogicalKeyboardKey.space,
+                          ),
+                          onSelected: (){
+                            operations.toggleSong();
+                          },
+                        ),
+                        PlatformMenuItem(
+                          label: "Skip Forward".tr,
+                          shortcut: const SingleActivator(
+                            LogicalKeyboardKey.arrowLeft,
+                            meta: true,
+                          ),
+                          onSelected: (){
+                            operations.skipPre();
+                          },
+                        ),
+                        PlatformMenuItem(
+                          label: "Skip Next".tr,
+                          shortcut: const SingleActivator(
+                            LogicalKeyboardKey.arrowRight,
+                            meta: true,
+                          ),
+                          onSelected: (){
+                            operations.skipNext();
+                          },
+                        ),
+                      ]
+                    ),
+                    PlatformMenuItemGroup(
+                      members: [
+                        PlatformMenuItem(
+                          label: "Show/Hide Lyric".tr,
+                          shortcut: const SingleActivator(
+                            LogicalKeyboardKey.keyL,
+                            meta: true
+                          ),
+                          onSelected: (){
+                            operations.toggleLyric(context);
+                          },
+                        )
+                      ]
+                    )
+                  ]
+                ),
+                PlatformMenu(
+                  label: "Window".tr, 
+                  menus: [
+                    const PlatformMenuItemGroup(
+                      members: [
+                        PlatformProvidedMenuItem(
+                          enabled: true,
+                          type: PlatformProvidedMenuItemType.minimizeWindow,
+                        ),
+                        PlatformProvidedMenuItem(
+                          enabled: true,
+                          type: PlatformProvidedMenuItemType.toggleFullScreen,
+                        )
+                      ]
                     )
                   ]
                 )
               ]
-            )
-          ]
-        ) : Container()
-      ],
+            ) : Container()
+          ],
+        ),
+      ),
     );
   }
 }

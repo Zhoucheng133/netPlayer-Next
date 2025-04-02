@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/components/sidebar_items.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -16,6 +17,7 @@ class SideBar extends StatefulWidget {
 class _SideBarState extends State<SideBar> {
 
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
   final operations=Operations();
 
   Future<void> addPlayListHandler(BuildContext context) async {
@@ -33,11 +35,11 @@ class _SideBarState extends State<SideBar> {
               color: Colors.grey[400],
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: c.color3, width: 2.0),
+              borderSide: BorderSide(color: colorController.color3(), width: 2.0),
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: c.color6, width: 2.0),
+              borderSide: BorderSide(color: colorController.color6(), width: 2.0),
               borderRadius: BorderRadius.circular(10),
             ),
             contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10)

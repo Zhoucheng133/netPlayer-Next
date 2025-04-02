@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -21,6 +22,7 @@ class SideBarItem extends StatefulWidget {
 class _SideBarItemState extends State<SideBarItem> {
 
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
   bool onHover=false;
 
   @override
@@ -29,10 +31,6 @@ class _SideBarItemState extends State<SideBarItem> {
       padding: const EdgeInsets.only(left: 10, top: 5),
       child: GestureDetector(
         onTap: (){
-          // c.pageNow.value={
-          //   'index': widget.index.toString(),
-          //   'id': '',
-          // };
           c.pageIndex.value=widget.index;
           c.pageId.value='';
         },
@@ -54,7 +52,7 @@ class _SideBarItemState extends State<SideBarItem> {
               height: 35,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: c.pageIndex.value==widget.index ? c.color3 :  onHover ? c.color2 : c.color1,
+                color: c.pageIndex.value==widget.index ? colorController.color3() :  onHover ? colorController.color2() : colorController.color1(),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
@@ -88,6 +86,7 @@ class PlayListLabel extends StatefulWidget {
 class _PlayListLabelState extends State<PlayListLabel> {
 
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -123,14 +122,15 @@ class _PlayListLabelState extends State<PlayListLabel> {
         const SizedBox(height: 5,),
         Padding(
           padding: const EdgeInsets.only(left: 10),
-          child: Container(
-            height: 2,
-            // color: c.color3,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2),
-              color: c.color3
+          child: Obx(()=>
+            Container(
+              height: 2,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2),
+                color: colorController.color3()
+              ),
             ),
-          ),
+          )
         )
       ],
     );
@@ -148,6 +148,7 @@ class AccountPart extends StatefulWidget {
 class _AccountPartState extends State<AccountPart> {
 
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
 
   var hoverSetting=false;
   var hoverLogout=false;
@@ -189,7 +190,7 @@ class _AccountPartState extends State<AccountPart> {
                       duration: const Duration(milliseconds: 200),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: c.pageIndex.value==6 ? c.color3 : hoverSetting ? c.color2 : c.color1,
+                        color: c.pageIndex.value==6 ? colorController.color3() : hoverSetting ? colorController.color2() : colorController.color1(),
                       ),
                       child: const Center(
                         child: Icon(
@@ -224,17 +225,19 @@ class _AccountPartState extends State<AccountPart> {
                       hoverLogout=false;
                     });
                   },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    height: 35,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: hoverLogout ? c.color2 : c.color1,
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.logout_rounded,
-                        size: 16,
+                  child: Obx(()=>
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      height: 35,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: hoverLogout ? colorController.color2() : colorController.color1(),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.logout_rounded,
+                          size: 16,
+                        ),
                       ),
                     ),
                   ),
@@ -298,13 +301,13 @@ class _PlayListItemState extends State<PlayListItem> {
   bool onHover=false;
   final Controller c = Get.find();
   Operations operations=Operations();
+  final ColorController colorController=Get.find();
 
   Future<void> showPlaylistMenu(BuildContext context, TapDownDetails details) async {
     final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
     final Offset position = overlay.localToGlobal(details.globalPosition);
     var val=await showMenu(
       context: context, 
-      // color: c.color1,
       color: Colors.white,
       position: RelativeRect.fromLTRB(
         position.dx,
@@ -443,7 +446,7 @@ class _PlayListItemState extends State<PlayListItem> {
               height: 35,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: c.pageIndex.value==4 && c.pageId.value==widget.id ? c.color3 :  onHover ? c.color2 : c.color1,
+                color: c.pageIndex.value==4 && c.pageId.value==widget.id ? colorController.color3() :  onHover ? colorController.color2() : colorController.color1(),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),

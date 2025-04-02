@@ -7,6 +7,7 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/components/login_items.dart';
 import 'package:net_player_next/views/functions/requests.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -22,6 +23,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
 
   final Controller c = Get.find();
+  final ColorController colorController=Get.find();
 
   TextEditingController username=TextEditingController();
   TextEditingController url=TextEditingController();
@@ -250,23 +252,25 @@ class _LoginViewState extends State<LoginView> {
                     });
                   },
                   cursor: isLoading ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
-                  child: AnimatedContainer(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: mouseInButton ? c.color3 : c.color2,
-                      borderRadius: const BorderRadius.only(
-                        bottomRight: Radius.circular(10)
-                      )
-                    ),
-                    duration: const Duration(milliseconds: 200),
-                    child: Center(
-                      child: Icon(
-                        Icons.arrow_forward_rounded,
-                        color: c.color5,
+                  child: Obx(()=>
+                    AnimatedContainer(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: mouseInButton ? colorController.color3() : colorController.color2(),
+                        borderRadius: const BorderRadius.only(
+                          bottomRight: Radius.circular(10)
+                        )
+                      ),
+                      duration: const Duration(milliseconds: 200),
+                      child: Center(
+                        child: Icon(
+                          Icons.arrow_forward_rounded,
+                          color: colorController.color5(),
+                        ),
                       ),
                     ),
-                  ),
+                  )
                 ),
               )
             )

@@ -8,9 +8,11 @@ import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/lang/en_us.dart';
 import 'package:net_player_next/lang/zh_cn.dart';
 import 'package:net_player_next/lang/zh_tw.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/functions/audio.dart';
 import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
 Future<void> main(List<String> args) async {
@@ -28,6 +30,11 @@ Future<void> main(List<String> args) async {
     title: 'netPlayer'
   );
   final Controller c = Get.put(Controller());
+  // final ColorController colorController=Get.put(ColorController(null, null));
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  final themeColor=prefs.getInt("theme");
+  final darkMode=prefs.getBool("darkMode");
+  Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode));
   c.handler=await AudioService.init(
     builder: () => audioHandler(),
     config: const AudioServiceConfig(
@@ -52,8 +59,16 @@ class MainTranslations extends Translations {
 }
 
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+
+  final ColorController colorController=Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +86,7 @@ class MainApp extends StatelessWidget {
         Locale('zh', 'TW'),
       ],
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: colorController.color6()),
         useMaterial3: true,
         textTheme: GoogleFonts.notoSansScTextTheme(),
         splashColor: Colors.transparent,
