@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -144,9 +145,6 @@ class _SettingsViewState extends State<SettingsView> {
           ),
           ElevatedButton(
             onPressed: () async {
-              // c.wsPort.value=portInput;
-              // final SharedPreferences prefs = await SharedPreferences.getInstance();
-              // prefs.setInt('wsPort', portInput);
               if(portController.text.isEmpty){
                 return;
               }
@@ -414,7 +412,43 @@ class _SettingsViewState extends State<SettingsView> {
                         ),
                       )
                     ],
-                  ):Container(),
+                  ) : Container(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text('theme'.tr)
+                        )
+                      ),
+                      const SizedBox(width: 10,),
+                      SizedBox(
+                        width: 220,
+                        height: 40,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: GestureDetector(
+                              onTap: (){
+                                // TODO 修改主题色
+                              },
+                              child: Obx(()=>
+                                ColorIndicator(
+                                  width: 25,
+                                  height: 25,
+                                  borderRadius: 7,
+                                  color: colorController.baseColor.value,
+                                )
+                              ),
+                            )
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
