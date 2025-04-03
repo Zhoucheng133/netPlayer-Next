@@ -1,6 +1,7 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ColorController extends GetxController {
 
@@ -15,6 +16,7 @@ class ColorController extends GetxController {
   }
 
   void colorPickerPanel(BuildContext context){
+    Color tmpColor=baseColor.value;
     showDialog(
       context: context, 
       builder: (context)=>AlertDialog(
@@ -32,13 +34,16 @@ class ColorController extends GetxController {
         actions: [
           TextButton(
             onPressed: (){
+              baseColor.value=tmpColor;
               Navigator.pop(context);
             }, 
             child: Text('cancel'.tr)
           ),
           ElevatedButton(
-            onPressed: (){
+            onPressed: () async {
               Navigator.pop(context);
+              final prefs=await SharedPreferences.getInstance();
+              prefs.setInt('theme', baseColor.value.value);
             }, 
             child: Text('ok'.tr)
           )
