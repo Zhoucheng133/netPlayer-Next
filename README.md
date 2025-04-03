@@ -21,26 +21,7 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 >[!WARNING]
 > 这个版本的netPlayer不兼容Windows 7系统，如果你要查找支持Windows 7版本的netPlayer，转至[netPlayer](https://github.com/Zhoucheng133/net-player)查找v1版本的netPlayer
 
-桌面歌词组件[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)
-
-||v1|v2|v3|
-|-|-|-|-|
-|支持Windows版本|Windows7~|Windows10~|Windows10~|
-|框架|Electron|Flutter|Flutter
-|支持macOS|✅|✅|✅|
-|单曲循环|❌|✅|✅|
-|定位歌曲|❌|✅|✅|
-|全局快捷键|仅macOS|✅|✅|
-|WebSocket服务|❌|❌|✅|
-|多语言支持|❌|❌|✅**|
-
 \** 多语言从**v3.2.0** 版本开始支持多语言，你[**点击这里**](#多语言支持)查看详细的语言支持
-
-> [!NOTE]
-> 受限于Subsonic API，“所有歌曲”和“专辑”只能显示500首/张（随机的500首歌曲排序展示）
-
-> [!TIP]
-> 在所有歌曲页面歌曲数量的右侧有完全随机播放按钮，这个功能不受歌曲数量限制
 
 ## 目录
 
@@ -56,6 +37,12 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 - [一些API](#一些api)
 
 ## 使用
+
+> [!NOTE]
+> 受限于Subsonic API，“所有歌曲”和“专辑”只能显示500首/张（随机的500首歌曲排序展示）
+
+> [!TIP]
+> 在所有歌曲页面歌曲数量的右侧有完全随机播放按钮，这个功能不受歌曲数量限制
 
 ### 快捷键
 
@@ -74,9 +61,12 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 ### 主界面
 
-![截图1](demo/demo1.png)
+> [!TIP]
+> 现已支持自定义主题色&深色模式
 
-![截图2](demo/demo2.png)
+<img src="demo/demo1.png" width="600px">
+
+<img src="demo/demo2.png" width="600px">
 
 ### 桌面歌词组件
 
