@@ -165,6 +165,9 @@ const Map<String, String> zhTW = {
 
   'theme': '主題色',
   'darkMode': '深色模式',
+
+  'wheel': '色輪',
+  'primary': '主色',
   
   // macOS menu
   'About netPlayer': '關於 netPlayer',

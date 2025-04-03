@@ -166,6 +166,9 @@ const Map<String, String> zhCN = {
   'theme': '主题色',
   'darkMode': '深色模式',
 
+  'wheel': '色轮',
+  'primary': '主色',
+
   // macOS menu
   'About netPlayer': '关于 netPlayer',
   'Settings...': '设置...',

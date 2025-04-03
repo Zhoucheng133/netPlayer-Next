@@ -166,6 +166,9 @@ const Map<String, String> enUS = {
   'theme': 'Theme color',
   'darkMode': 'Dark mode',
 
+  'wheel': 'Wheel',
+  'primary': 'Primary',
+
   // macOS menu
   'About netPlayer': 'About netPlayer',
   'Settings...': 'Settings...',

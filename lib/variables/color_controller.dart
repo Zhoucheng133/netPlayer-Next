@@ -25,6 +25,19 @@ class ColorController extends GetxController {
           width: 400,
           height: 400,
           child: ColorPicker(
+            pickerTypeLabels: {
+              ColorPickerType.wheel: 'wheel'.tr,
+              ColorPickerType.primary: 'primary'.tr
+            },
+            pickersEnabled: const {
+              ColorPickerType.both: false,
+              ColorPickerType.primary: true,
+              ColorPickerType.accent: false,
+              ColorPickerType.bw: false,
+              ColorPickerType.custom: false,
+              ColorPickerType.customSecondary: false,
+              ColorPickerType.wheel: true,
+            },
             color: baseColor.value,
             onColorChanged: (Color color){
               baseColor.value=color;
