@@ -85,11 +85,17 @@ class _MainAppState extends State<MainApp> {
           Locale('zh', 'CN'),
           Locale('zh', 'TW'),
         ],
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: colorController.baseColor.value),
-          useMaterial3: true,
+        theme: colorController.darkMode.value ? ThemeData.dark().copyWith(
+          primaryColor: colorController.baseColor.value,
+          colorScheme: const ColorScheme.dark().copyWith(primary: colorController.baseColor.value),
+          textTheme: GoogleFonts.notoSansScTextTheme().apply(
+            bodyColor: Colors.white,
+            displayColor: Colors.white, 
+          ),
+        ) : ThemeData(
+          primaryColor: colorController.baseColor.value,
+          colorScheme: const ColorScheme.light().copyWith(primary: colorController.baseColor.value),
           textTheme: GoogleFonts.notoSansScTextTheme(),
-          splashColor: Colors.transparent,
         ),
         home: const Scaffold(
           body: MainWindow(),

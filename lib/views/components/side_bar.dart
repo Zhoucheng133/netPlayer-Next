@@ -88,7 +88,9 @@ class _SideBarState extends State<SideBar> {
       'salt': null,
       'token': null,
     };
-    c.ws.stop();
+    try {
+      c.ws.stop();
+    } catch (_) {}
   }
 
   Future<void> logoutHandler() async {
@@ -107,7 +109,6 @@ class _SideBarState extends State<SideBar> {
           ElevatedButton(
             onPressed: (){
               logout();
-              // final SharedPreferences prefs = await SharedPreferences.getInstance();
               Navigator.pop(context);
             }, 
             child: Text('logout'.tr)

@@ -316,7 +316,7 @@ class _PlayListItemState extends State<PlayListItem> {
     final Offset position = overlay.localToGlobal(details.globalPosition);
     var val=await showMenu(
       context: context, 
-      color: colorController.darkMode.value ? colorController.color2() : Colors.white,
+      color: colorController.darkMode.value ? colorController.color3() : Colors.white,
       position: RelativeRect.fromLTRB(
         position.dx,
         position.dy,
@@ -400,14 +400,19 @@ class _PlayListItemState extends State<PlayListItem> {
         builder: (BuildContext context)=>AlertDialog(
           title: Text('rename'.tr),
           content: TextField(
-            controller: newName,
             decoration: InputDecoration(
               hintText: widget.name,
-              isCollapsed: true,
-              border: OutlineInputBorder(
+              border: const OutlineInputBorder(),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: colorController.color3(), width: 2.0),
                 borderRadius: BorderRadius.circular(10),
               ),
-              contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10)
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: colorController.color5(), width: 2.0),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              isCollapsed: true,
+              contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
             ),
             onEditingComplete: (){
               operations.renamePlayList(context, widget.id, newName.text);

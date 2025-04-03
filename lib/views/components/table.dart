@@ -320,7 +320,7 @@ class _SongItemState extends State<SongItem> {
     final Offset position = overlay.localToGlobal(details.globalPosition);
     var val=await showMenu(
       context: context, 
-      color: Colors.white,
+      color: colorController.darkMode.value ? colorController.color3() : Colors.white,
       position: RelativeRect.fromLTRB(
         position.dx,
         position.dy,
@@ -339,9 +339,15 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.add_rounded,
                 size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               SizedBox(width: 5,),
-              Text("addToList".tr)
+              Text(
+                "addToList".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
             ],
           ),
         ),
@@ -355,9 +361,15 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.heart_broken_rounded,
                 size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               SizedBox(width: 5,),
-              Text("delove".tr)
+              Text(
+                "delove".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
             ],
           ),
         ) : PopupMenuItem(
@@ -370,9 +382,15 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.favorite_rounded,
                 size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               SizedBox(width: 5,),
-              Text("love".tr)
+              Text(
+                "love".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
             ],
           ),
         ),
@@ -387,9 +405,15 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.album_rounded,
                 size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               SizedBox(width: 5,),
-              Text("showAlbum".tr)
+              Text(
+                "showAlbum".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
             ],
           ),
         ),
@@ -404,9 +428,15 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.mic_rounded,
                 size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               SizedBox(width: 5,),
-              Text("showArtist".tr)
+              Text(
+                "showArtist".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
             ],
           ),
         ),
@@ -421,9 +451,15 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.playlist_remove_rounded,
                 size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               SizedBox(width: 5,),
-              Text("removeFromList".tr)
+              Text(
+                "removeFromList".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
             ],
           ),
         ),
@@ -437,9 +473,15 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.download_rounded,
                 size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               SizedBox(width: 5,),
-              Text("download".tr)
+              Text(
+                "download".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
             ],
           ),
         ),
@@ -453,9 +495,15 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.info_rounded,
                 size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               SizedBox(width: 5,),
-              Text("songInfo".tr)
+              Text(
+                "songInfo".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
             ],
           ),
         )

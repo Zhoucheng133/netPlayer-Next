@@ -173,108 +173,110 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        width: 400,
-        height: 450,
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 253, 253, 253),
-          borderRadius: BorderRadius.circular(10),
-           boxShadow: const [
-            BoxShadow(
-              color: Color.fromARGB(150, 200, 200, 200),
-              offset: Offset(0, 0),
-              blurRadius: 10.0,
-              spreadRadius: 1.0,
-            ),
-          ],
-        ),
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 15,),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(width: 10,),
-                      const Icon(
-                        // FluentIcons.chevron_right_med,
-                        Icons.chevron_right_rounded,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 10,),
-                      Text(
-                        "connectLibrary".tr,
-                        style: GoogleFonts.notoSansSc(
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                    child: Column(
+      child: Obx(()=>
+        Container(
+          width: 400,
+          height: 450,
+          decoration: BoxDecoration(
+            color: colorController.darkMode.value ? colorController.color2() : const Color.fromARGB(255, 253, 253, 253),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: colorController.darkMode.value ? [] : const [
+              BoxShadow(
+                color: Color.fromARGB(150, 200, 200, 200),
+                offset: Offset(0, 0),
+                blurRadius: 10.0,
+                spreadRadius: 1.0,
+              ),
+            ],
+          ),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 15,),
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // URL地址输入框
-                        URLInput(controller: url, loginHandler: ()=>loginHandler(context),),
-                        const SizedBox(height: 20,),
-                        // 用户名输入框
-                        UserNameInput(controller: username, loginHandler: ()=>loginHandler(context),),
-                        const SizedBox(height: 20,),
-                        // 密码输入框
-                        PasswordInput(controller: password, loginHandler: ()=>loginHandler(context),)
+                        const SizedBox(width: 10,),
+                        const Icon(
+                          // FluentIcons.chevron_right_med,
+                          Icons.chevron_right_rounded,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 10,),
+                        Text(
+                          "connectLibrary".tr,
+                          style: GoogleFonts.notoSansSc(
+                            fontSize: 20,
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 40,)
-                ],
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: GestureDetector(
-                onTap: (){
-                  loginHandler(context);
-                },
-                child: MouseRegion(
-                  onEnter: (event){
-                    setState(() {
-                      mouseInButton=true;
-                    });
-                  },
-                  onExit: (event){
-                    setState(() {
-                      mouseInButton=false;
-                    });
-                  },
-                  cursor: isLoading ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
-                  child: Obx(()=>
-                    AnimatedContainer(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: mouseInButton ? colorController.color3() : colorController.color2(),
-                        borderRadius: const BorderRadius.only(
-                          bottomRight: Radius.circular(10)
-                        )
-                      ),
-                      duration: const Duration(milliseconds: 200),
-                      child: Center(
-                        child: Icon(
-                          Icons.arrow_forward_rounded,
-                          color: colorController.color5(),
-                        ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // URL地址输入框
+                          URLInput(controller: url, loginHandler: ()=>loginHandler(context),),
+                          const SizedBox(height: 20,),
+                          // 用户名输入框
+                          UserNameInput(controller: username, loginHandler: ()=>loginHandler(context),),
+                          const SizedBox(height: 20,),
+                          // 密码输入框
+                          PasswordInput(controller: password, loginHandler: ()=>loginHandler(context),)
+                        ],
                       ),
                     ),
-                  )
+                    const SizedBox(height: 40,)
+                  ],
                 ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: GestureDetector(
+                  onTap: (){
+                    loginHandler(context);
+                  },
+                  child: MouseRegion(
+                    onEnter: (event){
+                      setState(() {
+                        mouseInButton=true;
+                      });
+                    },
+                    onExit: (event){
+                      setState(() {
+                        mouseInButton=false;
+                      });
+                    },
+                    cursor: isLoading ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                    child: Obx(()=>
+                      AnimatedContainer(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: mouseInButton ? colorController.color3() : colorController.color2(),
+                          borderRadius: const BorderRadius.only(
+                            bottomRight: Radius.circular(10)
+                          )
+                        ),
+                        duration: const Duration(milliseconds: 200),
+                        child: Center(
+                          child: Icon(
+                            Icons.arrow_forward_rounded,
+                            color: colorController.color5(),
+                          ),
+                        ),
+                      ),
+                    )
+                  ),
+                )
               )
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 
 class UserNameInput extends StatefulWidget {
   final TextEditingController controller;
@@ -14,6 +15,7 @@ class UserNameInput extends StatefulWidget {
 class _UserNameInputState extends State<UserNameInput> {
 
   var onFocus=FocusNode();
+  final ColorController colorController=Get.find();
   bool isFocus=false;
 
   @override
@@ -36,61 +38,63 @@ class _UserNameInputState extends State<UserNameInput> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      width: 280,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
-            spreadRadius: 1,
-            blurRadius: 5,
-          ),
-        ]
-      ),
-      duration: const Duration(milliseconds: 200),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "username".tr,
-              style: GoogleFonts.notoSansSc(
-                color: Colors.grey,
-                fontSize: 13,
-              ),
+    return Obx(()=>
+      AnimatedContainer(
+        width: 280,
+        decoration: BoxDecoration(
+          color: colorController.darkMode.value ? Colors.black : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
+              spreadRadius: 1,
+              blurRadius: 5,
             ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.account_circle_rounded,
-                  size: 18,
-                ),
-                const SizedBox(width: 5,),
-                Expanded(
-                  child: TextField(
-                    focusNode: onFocus,
-                    controller: widget.controller,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      isCollapsed: true,
-                      contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
-                    ),
-                    onEditingComplete: () => widget.loginHandler(),
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 14
-                    ),
-                  )
-                )
-              ],
-            ),
-          ],
+          ]
         ),
-      )
+        duration: const Duration(milliseconds: 200),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "username".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: Colors.grey,
+                  fontSize: 13,
+                ),
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.account_circle_rounded,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 5,),
+                  Expanded(
+                    child: TextField(
+                      focusNode: onFocus,
+                      controller: widget.controller,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        isCollapsed: true,
+                        contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
+                      ),
+                      onEditingComplete: () => widget.loginHandler(),
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 14
+                      ),
+                    )
+                  )
+                ],
+              ),
+            ],
+          ),
+        )
+      ),
     );
   }
 }
@@ -108,6 +112,7 @@ class _URLInputState extends State<URLInput> {
 
   var onFocus=FocusNode();
   bool isFocus=false;
+  final ColorController colorController=Get.find();
 
   @override
   void initState() {
@@ -129,62 +134,64 @@ class _URLInputState extends State<URLInput> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      width: 280,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
-            spreadRadius: 1,
-            blurRadius: 5,
-          ),
-        ]
-      ),
-      duration: const Duration(milliseconds: 200),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "serverURL".tr,
-              style: GoogleFonts.notoSansSc(
-                color: Colors.grey,
-                fontSize: 13,
-              ),
+    return Obx(()=>
+      AnimatedContainer(
+        width: 280,
+        decoration: BoxDecoration(
+          color: colorController.darkMode.value ? Colors.black : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
+              spreadRadius: 1,
+              blurRadius: 5,
             ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.public,
-                  size: 18,
-                ),
-                const SizedBox(width: 5,),
-                Expanded(
-                  child: TextField(
-                    focusNode: onFocus,
-                    controller: widget.controller,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'http(s)://',
-                      isCollapsed: true,
-                      contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
-                    ),
-                    onEditingComplete: () => widget.loginHandler(),
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 14
-                    ),
-                  )
-                )
-              ],
-            ),
-          ],
+          ]
         ),
-      )
+        duration: const Duration(milliseconds: 200),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "serverURL".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: Colors.grey,
+                  fontSize: 13,
+                ),
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.public,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 5,),
+                  Expanded(
+                    child: TextField(
+                      focusNode: onFocus,
+                      controller: widget.controller,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'http(s)://',
+                        isCollapsed: true,
+                        contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
+                      ),
+                      onEditingComplete: () => widget.loginHandler(),
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 14
+                      ),
+                    )
+                  )
+                ],
+              ),
+            ],
+          ),
+        )
+      ),
     );
   }
 }
@@ -202,6 +209,7 @@ class _PasswordInputState extends State<PasswordInput> {
 
   var onFocus=FocusNode();
   bool isFocus=false;
+  final ColorController colorController=Get.find();
 
   @override
   void initState() {
@@ -223,62 +231,64 @@ class _PasswordInputState extends State<PasswordInput> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      width: 280,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
-            spreadRadius: 1,
-            blurRadius: 5,
-          ),
-        ]
-      ),
-      duration: const Duration(milliseconds: 200),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "password".tr,
-              style: GoogleFonts.notoSansSc(
-                color: Colors.grey,
-                fontSize: 13,
-              ),
+    return Obx(()=>
+      AnimatedContainer(
+        width: 280,
+        decoration: BoxDecoration(
+          color: colorController.darkMode.value ? Colors.black : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
+              spreadRadius: 1,
+              blurRadius: 5,
             ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.key_rounded,
-                  size: 18,
-                ),
-                const SizedBox(width: 5,),
-                Expanded(
-                  child: TextField(
-                    focusNode: onFocus,
-                    controller: widget.controller,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      isCollapsed: true,
-                      contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
-                    ),
-                    obscureText: true,
-                    onEditingComplete: () => widget.loginHandler(),
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    style: GoogleFonts.notoSansSc(
-                      fontSize: 14
-                    ),
-                  )
-                )
-              ],
-            ),
-          ],
+          ]
         ),
-      )
+        duration: const Duration(milliseconds: 200),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "password".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: Colors.grey,
+                  fontSize: 13,
+                ),
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.key_rounded,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 5,),
+                  Expanded(
+                    child: TextField(
+                      focusNode: onFocus,
+                      controller: widget.controller,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        isCollapsed: true,
+                        contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
+                      ),
+                      obscureText: true,
+                      onEditingComplete: () => widget.loginHandler(),
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 14
+                      ),
+                    )
+                  )
+                ],
+              ),
+            ],
+          ),
+        )
+      ),
     );
   }
 }
