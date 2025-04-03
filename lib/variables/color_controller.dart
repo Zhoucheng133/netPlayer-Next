@@ -12,8 +12,7 @@ class ColorController extends GetxController {
 
   ColorController(Color? basec, bool? dark){
     baseColor.value=basec??const Color.fromARGB(255, 33, 150, 243);
-    // TODO 这里需要修改
-    // darkMode.value=dark??false;
+    darkMode.value=dark??false;
   }
 
   void colorPickerPanel(BuildContext context){
