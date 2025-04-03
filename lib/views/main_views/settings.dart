@@ -35,6 +35,7 @@ class _SettingsViewState extends State<SettingsView> {
   bool hoverLang=false;
   bool hoverClear=false;
   bool hoverReloadCache=false;
+  bool hoverTheme=false;
 
   final operations=Operations();
   int cacheSize=0;
@@ -431,18 +432,44 @@ class _SettingsViewState extends State<SettingsView> {
                           padding: const EdgeInsets.only(left: 10),
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: GestureDetector(
-                              onTap: (){
-                                // TODO 修改主题色
-                              },
-                              child: Obx(()=>
-                                ColorIndicator(
-                                  width: 25,
-                                  height: 25,
-                                  borderRadius: 7,
-                                  color: colorController.baseColor.value,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Obx(()=>
+                                  ColorIndicator(
+                                    width: 25,
+                                    height: 25,
+                                    borderRadius: 7,
+                                    color: colorController.baseColor.value,
+                                  )
+                                ),
+                                const SizedBox(width: 20,),
+                                GestureDetector(
+                                  onTap: ()=>colorController.colorPickerPanel(context),
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    onEnter: (_){
+                                      setState(() {
+                                        hoverTheme=true;
+                                      });
+                                    },
+                                    onExit: (_){
+                                      setState(() {
+                                        hoverTheme=false;
+                                      });
+                                    },
+                                    child: Obx(()=>
+                                      AnimatedDefaultTextStyle(
+                                        style: GoogleFonts.notoSansSc(
+                                          color: hoverTheme ? colorController.color6() : colorController.color5()
+                                        ), 
+                                        duration: const Duration(milliseconds: 200),
+                                        child: Text('change'.tr)
+                                      ),
+                                    ),
+                                  ),
                                 )
-                              ),
+                              ],
                             )
                           ),
                         ),

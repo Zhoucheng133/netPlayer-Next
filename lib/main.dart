@@ -72,28 +72,30 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      translations: MainTranslations(),
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('zh', 'CN'),
-        Locale('zh', 'TW'),
-      ],
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: colorController.color6()),
-        useMaterial3: true,
-        textTheme: GoogleFonts.notoSansScTextTheme(),
-        splashColor: Colors.transparent,
-      ),
-      home: const Scaffold(
-        body: MainWindow(),
-      ),
+    return Obx(()=>
+      GetMaterialApp(
+        translations: MainTranslations(),
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate
+        ],
+        supportedLocales: const [
+          Locale('en', 'US'),
+          Locale('zh', 'CN'),
+          Locale('zh', 'TW'),
+        ],
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: colorController.baseColor.value),
+          useMaterial3: true,
+          textTheme: GoogleFonts.notoSansScTextTheme(),
+          splashColor: Colors.transparent,
+        ),
+        home: const Scaffold(
+          body: MainWindow(),
+        ),
+      )
     );
   }
 }

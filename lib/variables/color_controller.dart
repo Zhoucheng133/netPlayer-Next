@@ -1,18 +1,50 @@
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ColorController extends GetxController {
 
-  // final testColor=const Color.fromARGB(255, 120, 135, 232);
-
-  Rx<Color> baseColor = Colors.blue.obs;
+  Rx<Color> baseColor = const Color.fromARGB(255, 33, 150, 243).obs;
   Rx<Color> white=Colors.white.obs;
   Rx<Color> black=Colors.black.obs;
   RxBool darkMode = false.obs;
 
   ColorController(Color? basec, bool? dark){
-    baseColor.value=basec??Colors.blue;
+    baseColor.value=basec??const Color.fromARGB(255, 33, 150, 243);
     darkMode.value=dark??false;
+  }
+
+  void colorPickerPanel(BuildContext context){
+    showDialog(
+      context: context, 
+      builder: (context)=>AlertDialog(
+        title: Text('theme'.tr),
+        content: SizedBox(
+          width: 400,
+          height: 400,
+          child: ColorPicker(
+            color: baseColor.value,
+            onColorChanged: (Color color){
+              baseColor.value=color;
+            }
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: Text('cancel'.tr)
+          ),
+          ElevatedButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: Text('ok'.tr)
+          )
+        ],
+      )
+    );
   }
 
   Color color1(){
