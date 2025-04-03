@@ -180,641 +180,630 @@ class _SettingsViewState extends State<SettingsView> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: Stack(
+      child: Column(
         children: [
-          Row(
-            children: [
-              Column(
-                children: [
-                  ViewHeader(title: 'settings'.tr, subTitle: '', page: 'settings',),
-                  const SizedBox(height: 10,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                          Text(
-                            'savePlayed'.tr,
-                            style: GoogleFonts.notoSansSc(
-                              color: colorController.darkMode.value ? Colors.white : Colors.black
-                            ),
-                          )
-                        )
-                        )
-                      ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Obx(()=>
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Switch(
-                                activeTrackColor: colorController.color6(),
-                                splashRadius: 0,
-                                value: c.savePlay.value, 
-                                onChanged: (value){
-                                  operations.savePlay(value);
-                                }
-                              ),
-                            )
-                          )
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                            Text(
-                              'autoLogin'.tr,
-                              style: GoogleFonts.notoSansSc(
-                                color: colorController.darkMode.value ? Colors.white : Colors.black
-                              ),
-                            )
-                          )
-                        )
-                      ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Obx(()=>
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Switch(
-                                activeTrackColor: colorController.color6(),
-                                splashRadius: 0,
-                                value: c.autoLogin.value, 
-                                onChanged: (value){
-                                  operations.autoLogin(value);
-                                }
-                              ),
-                            )
-                          )
-                        ),
-                      )
-                    ],
-                  ),
-                  Platform.isWindows ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                            Text(
-                              'playBackground'.tr,
-                              style: GoogleFonts.notoSansSc(
-                                color: colorController.darkMode.value ? Colors.white : Colors.black
-                              ),
-                            )
-                          )
-                        )
-                      ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Obx(()=>
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Switch(
-                                activeTrackColor: colorController.color6(),
-                                splashRadius: 0,
-                                value: c.closeOnRun.value, 
-                                onChanged: (value){
-                                  operations.closeOnRun(value);
-                                }
-                              ),
-                            )
-                          )
-                        ),
-                      )
-                    ],
-                  ) : Container(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                            Text(
-                              'enableShortcuts'.tr,
-                              style: GoogleFonts.notoSansSc(
-                                color: colorController.darkMode.value ? Colors.white : Colors.black
-                              ),
-                            )
-                          )
-                        )
-                      ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Obx(()=>
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Switch(
-                                activeTrackColor: colorController.color6(),
-                                splashRadius: 0,
-                                value: c.useShortcut.value, 
-                                onChanged: (value){
-                                  operations.useShortcut(value);
-                                }
-                              ),
-                            )
-                          )
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                            Text(
-                              'enableWs'.tr,
-                              style: GoogleFonts.notoSansSc(
-                                color: colorController.darkMode.value ? Colors.white : Colors.black
-                              ),
-                            )
-                          )
-                        )
-                      ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        child: Row(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Obx(()=>
-                                Transform.scale(
-                                  scale: 0.7,
-                                  child: Switch(
-                                    activeTrackColor: colorController.color6(),
-                                    splashRadius: 0,
-                                    value: c.useWs.value, 
-                                    onChanged: (value){
-                                      operations.useWs(value, context);
-                                    }
-                                  ),
-                                )
-                              )
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            GestureDetector(
-                              onTap: (){
-                                wsSetting(context);
-                              },
-                              child: MouseRegion(
-                                cursor: SystemMouseCursors.click,
-                                onEnter: (_){
-                                  setState(() {
-                                    hoverWs=true;
-                                  });
-                                },
-                                onExit: (_){
-                                  setState(() {
-                                    hoverWs=false;
-                                  });
-                                },
-                                child: Obx(()=>
-                                  AnimatedDefaultTextStyle(
-                                    style: GoogleFonts.notoSansSc(
-                                      color: hoverWs ? colorController.color6() : colorController.color5()
-                                    ), 
-                                    duration: const Duration(milliseconds: 200),
-                                    child: Text('settings'.tr)
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Platform.isWindows && c.useDesktopLyric ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                            Text(
-                              'enableKit'.tr,
-                              style: GoogleFonts.notoSansSc(
-                                color: colorController.darkMode.value ? Colors.white : Colors.black
-                              ),
-                            )
+          ViewHeader(title: 'settings'.tr, subTitle: '', page: 'settings',),
+          const SizedBox(height: 10,),
+          Expanded(
+            child: ListView(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                        Text(
+                          'savePlayed'.tr,
+                          style: GoogleFonts.notoSansSc(
+                            color: colorController.darkMode.value ? Colors.white : Colors.black
                           ),
                         )
-                      ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Obx(()=>
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Switch(
-                                activeTrackColor: colorController.color6(),
-                                splashRadius: 0,
-                                value: c.useLyricKit.value, 
-                                onChanged: c.useWs.value ? (value){
-                                  operations.useKit(value, context);
-                                }: null
-                              ),
-                            )
-                          )
-                        ),
                       )
-                    ],
-                  ) : Container(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                            Text(
-                              'darkMode'.tr,
-                              style: GoogleFonts.notoSansSc(
-                                color: colorController.darkMode.value ? Colors.white : Colors.black
-                              ),
-                            )
-                          ),
-                        )
-                      ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        height: 40,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Obx(()=>
+                      )
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Obx(()=>
                           Transform.scale(
                             scale: 0.7,
                             child: Switch(
                               activeTrackColor: colorController.color6(),
                               splashRadius: 0,
-                              value: colorController.darkMode.value, 
-                              onChanged: (val) async {
-                                colorController.darkMode.value=val;
-                                final prefs=await SharedPreferences.getInstance();
-                                prefs.setBool('darkMode', val);
+                              value: c.savePlay.value, 
+                              onChanged: (value){
+                                operations.savePlay(value);
                               }
                             ),
                           )
                         )
-                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                          Text(
+                            'autoLogin'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
+                        )
                       )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                            Text(
-                              'theme'.tr,
-                              style: GoogleFonts.notoSansSc(
-                                color: colorController.darkMode.value ? Colors.white : Colors.black
-                              ),
-                            )
-                          ),
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Obx(()=>
+                          Transform.scale(
+                            scale: 0.7,
+                            child: Switch(
+                              activeTrackColor: colorController.color6(),
+                              splashRadius: 0,
+                              value: c.autoLogin.value, 
+                              onChanged: (value){
+                                operations.autoLogin(value);
+                              }
+                            ),
+                          )
                         )
                       ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        height: 40,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Align(
+                    )
+                  ],
+                ),
+                Platform.isWindows ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                          Text(
+                            'playBackground'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
+                        )
+                      )
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Obx(()=>
+                          Transform.scale(
+                            scale: 0.7,
+                            child: Switch(
+                              activeTrackColor: colorController.color6(),
+                              splashRadius: 0,
+                              value: c.closeOnRun.value, 
+                              onChanged: (value){
+                                operations.closeOnRun(value);
+                              }
+                            ),
+                          )
+                        )
+                      ),
+                    )
+                  ],
+                ) : Container(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                          Text(
+                            'enableShortcuts'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
+                        )
+                      )
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Obx(()=>
+                          Transform.scale(
+                            scale: 0.7,
+                            child: Switch(
+                              activeTrackColor: colorController.color6(),
+                              splashRadius: 0,
+                              value: c.useShortcut.value, 
+                              onChanged: (value){
+                                operations.useShortcut(value);
+                              }
+                            ),
+                          )
+                        )
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                          Text(
+                            'enableWs'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
+                        )
+                      )
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      child: Row(
+                        children: [
+                          Align(
                             alignment: Alignment.centerLeft,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Obx(()=>
-                                  ColorIndicator(
-                                    width: 25,
-                                    height: 25,
-                                    borderRadius: 7,
-                                    color: colorController.baseColor.value,
-                                  )
+                            child: Obx(()=>
+                              Transform.scale(
+                                scale: 0.7,
+                                child: Switch(
+                                  activeTrackColor: colorController.color6(),
+                                  splashRadius: 0,
+                                  value: c.useWs.value, 
+                                  onChanged: (value){
+                                    operations.useWs(value, context);
+                                  }
                                 ),
-                                const SizedBox(width: 20,),
-                                GestureDetector(
-                                  onTap: ()=>colorController.colorPickerPanel(context),
-                                  child: MouseRegion(
-                                    cursor: SystemMouseCursors.click,
-                                    onEnter: (_){
-                                      setState(() {
-                                        hoverTheme=true;
-                                      });
-                                    },
-                                    onExit: (_){
-                                      setState(() {
-                                        hoverTheme=false;
-                                      });
-                                    },
-                                    child: Obx(()=>
-                                      AnimatedDefaultTextStyle(
-                                        style: GoogleFonts.notoSansSc(
-                                          color: hoverTheme ? colorController.color6() : colorController.color5()
-                                        ), 
-                                        duration: const Duration(milliseconds: 200),
-                                        child: Text('change'.tr)
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
+                              )
                             )
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                            Text(
-                              'serviceUrl'.tr,
-                              style: GoogleFonts.notoSansSc(
-                                color: colorController.darkMode.value ? Colors.white : Colors.black
-                              ),
-                            )
+                          const SizedBox(
+                            width: 10,
                           ),
-                        )
-                      ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        height: 40,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: GestureDetector(
-                              onTap: () async {
-                                try {
-                                  final url=Uri.parse(c.userInfo['url']!);
-                                  await launchUrl(url);
-                                } catch (_) {
-                                  return;
-                                }
+                          GestureDetector(
+                            onTap: (){
+                              wsSetting(context);
+                            },
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              onEnter: (_){
+                                setState(() {
+                                  hoverWs=true;
+                                });
                               },
-                              child: MouseRegion(
-                                cursor: SystemMouseCursors.click,
-                                onEnter: (_){
-                                  setState(() {
-                                    hoverURL=true;
-                                  });
-                                },
-                                onExit: (_){
-                                  setState(() {
-                                    hoverURL=false;
-                                  });
-                                },
-                                child: Obx(()=>
-                                  AnimatedDefaultTextStyle(
-                                    style: GoogleFonts.notoSansSc(
-                                      color: hoverURL ? colorController.color6() : colorController.darkMode.value ? Colors.white : Colors.black,
-                                    ), 
-                                    duration: const Duration(milliseconds: 200),
-                                    child: Text(
-                                      c.userInfo['url']??'',
-                                      softWrap: false,
-                                      overflow: TextOverflow.fade,
-                                    )
-                                  )
+                              onExit: (_){
+                                setState(() {
+                                  hoverWs=false;
+                                });
+                              },
+                              child: Obx(()=>
+                                AnimatedDefaultTextStyle(
+                                  style: GoogleFonts.notoSansSc(
+                                    color: hoverWs ? colorController.color6() : colorController.color5()
+                                  ), 
+                                  duration: const Duration(milliseconds: 200),
+                                  child: Text('settings'.tr)
                                 ),
                               ),
-                            )
-                          ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Platform.isWindows && c.useDesktopLyric ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                          Text(
+                            'enableKit'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
                         ),
                       )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                            Text(
-                              'lang'.tr,
-                              style: GoogleFonts.notoSansSc(
-                                color: colorController.darkMode.value ? Colors.white : Colors.black
-                              ),
-                            )
-                          ),
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Obx(()=>
+                          Transform.scale(
+                            scale: 0.7,
+                            child: Switch(
+                              activeTrackColor: colorController.color6(),
+                              splashRadius: 0,
+                              value: c.useLyricKit.value, 
+                              onChanged: c.useWs.value ? (value){
+                                operations.useKit(value, context);
+                              }: null
+                            ),
+                          )
                         )
                       ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        height: 40,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              children: [
-                                Obx(()=>
-                                  Text(
-                                    'selfLang'.tr,
-                                    style: GoogleFonts.notoSansSc(
-                                      color: colorController.darkMode.value ? Colors.white : Colors.black
+                    )
+                  ],
+                ) : Container(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                          Text(
+                            'darkMode'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
+                        ),
+                      )
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      height: 40,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Obx(()=>
+                        Transform.scale(
+                          scale: 0.7,
+                          child: Switch(
+                            activeTrackColor: colorController.color6(),
+                            splashRadius: 0,
+                            value: colorController.darkMode.value, 
+                            onChanged: (val) async {
+                              colorController.darkMode.value=val;
+                              final prefs=await SharedPreferences.getInstance();
+                              prefs.setBool('darkMode', val);
+                            }
+                          ),
+                        )
+                      )
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                          Text(
+                            'theme'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
+                        ),
+                      )
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      height: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Obx(()=>
+                                ColorIndicator(
+                                  width: 25,
+                                  height: 25,
+                                  borderRadius: 7,
+                                  color: colorController.baseColor.value,
+                                )
+                              ),
+                              const SizedBox(width: 20,),
+                              GestureDetector(
+                                onTap: ()=>colorController.colorPickerPanel(context),
+                                child: MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  onEnter: (_){
+                                    setState(() {
+                                      hoverTheme=true;
+                                    });
+                                  },
+                                  onExit: (_){
+                                    setState(() {
+                                      hoverTheme=false;
+                                    });
+                                  },
+                                  child: Obx(()=>
+                                    AnimatedDefaultTextStyle(
+                                      style: GoogleFonts.notoSansSc(
+                                        color: hoverTheme ? colorController.color6() : colorController.color5()
+                                      ), 
+                                      duration: const Duration(milliseconds: 200),
+                                      child: Text('change'.tr)
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                          Text(
+                            'serviceUrl'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
+                        ),
+                      )
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      height: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: GestureDetector(
+                            onTap: () async {
+                              try {
+                                final url=Uri.parse(c.userInfo['url']!);
+                                await launchUrl(url);
+                              } catch (_) {
+                                return;
+                              }
+                            },
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              onEnter: (_){
+                                setState(() {
+                                  hoverURL=true;
+                                });
+                              },
+                              onExit: (_){
+                                setState(() {
+                                  hoverURL=false;
+                                });
+                              },
+                              child: Obx(()=>
+                                AnimatedDefaultTextStyle(
+                                  style: GoogleFonts.notoSansSc(
+                                    color: hoverURL ? colorController.color6() : colorController.darkMode.value ? Colors.white : Colors.black,
+                                  ), 
+                                  duration: const Duration(milliseconds: 200),
+                                  child: Text(
+                                    c.userInfo['url']??'',
+                                    softWrap: false,
+                                    overflow: TextOverflow.fade,
+                                  )
+                                )
+                              ),
+                            ),
+                          )
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                          Text(
+                            'lang'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
+                        ),
+                      )
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      height: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              Obx(()=>
+                                Text(
+                                  'selfLang'.tr,
+                                  style: GoogleFonts.notoSansSc(
+                                    color: colorController.darkMode.value ? Colors.white : Colors.black
+                                  ),
+                                )
+                              ),
+                              const SizedBox(width: 20,),
+                              GestureDetector(
+                                onTap: (){
+                                  operations.selectLanguage(context);
+                                },
+                                child: MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  onEnter: (_){
+                                    setState(() {
+                                      hoverLang=true;
+                                    });
+                                  },
+                                  onExit: (_){
+                                    setState(() {
+                                      hoverLang=false;
+                                    });
+                                  },
+                                  child: Obx(()=>
+                                    AnimatedDefaultTextStyle(
+                                      style: GoogleFonts.notoSansSc(
+                                        color: hoverLang ? colorController.color6() : colorController.color5()
+                                      ), 
+                                      duration: const Duration(milliseconds: 200),
+                                      child: Text('change'.tr)
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Platform.isMacOS ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Obx(()=>
+                          Text(
+                            'cache'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
+                        ),
+                      )
+                    ),
+                    const SizedBox(width: 10,),
+                    SizedBox(
+                      width: 220,
+                      height: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              Obx(()=>
+                                Text(
+                                  operations.sizeConvert(cacheSize),
+                                  style: GoogleFonts.notoSansSc(
+                                    color: colorController.darkMode.value ? Colors.white : Colors.black
+                                  ),
+                                )
+                              ),
+                              const SizedBox(width: 5,),
+                              Obx(()=>
+                                TweenAnimationBuilder(
+                                  tween: ColorTween(end: hoverReloadCache ? colorController.color6() : colorController.color5()),
+                                  duration: const Duration(milliseconds: 200), 
+                                  builder: (_, value, __) => GestureDetector(
+                                    onTap: ()=>getCacheSize(),
+                                    child: MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      onEnter: (_){
+                                        setState(() {
+                                          hoverReloadCache=true;
+                                        });
+                                      },
+                                      onExit: (_){
+                                        setState(() {
+                                          hoverReloadCache=false;
+                                        });
+                                      },
+                                      child: Icon(
+                                        Icons.refresh_rounded,
+                                        color: value,
+                                        size: 20,
+                                      ),
                                     ),
                                   )
                                 ),
-                                const SizedBox(width: 20,),
-                                GestureDetector(
-                                  onTap: (){
-                                    operations.selectLanguage(context);
-                                  },
-                                  child: MouseRegion(
-                                    cursor: SystemMouseCursors.click,
-                                    onEnter: (_){
-                                      setState(() {
-                                        hoverLang=true;
-                                      });
-                                    },
-                                    onExit: (_){
-                                      setState(() {
-                                        hoverLang=false;
-                                      });
-                                    },
-                                    child: Obx(()=>
-                                      AnimatedDefaultTextStyle(
-                                        style: GoogleFonts.notoSansSc(
-                                          color: hoverLang ? colorController.color6() : colorController.color5()
-                                        ), 
-                                        duration: const Duration(milliseconds: 200),
-                                        child: Text('change'.tr)
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Platform.isMacOS ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Obx(()=>
-                            Text(
-                              'cache'.tr,
-                              style: GoogleFonts.notoSansSc(
-                                color: colorController.darkMode.value ? Colors.white : Colors.black
                               ),
-                            )
-                          ),
-                        )
-                      ),
-                      const SizedBox(width: 10,),
-                      SizedBox(
-                        width: 220,
-                        height: 40,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              children: [
-                                Obx(()=>
-                                  Text(
-                                    operations.sizeConvert(cacheSize),
-                                    style: GoogleFonts.notoSansSc(
-                                      color: colorController.darkMode.value ? Colors.white : Colors.black
-                                    ),
-                                  )
-                                ),
-                                const SizedBox(width: 5,),
-                                Obx(()=>
-                                  TweenAnimationBuilder(
-                                    tween: ColorTween(end: hoverReloadCache ? colorController.color6() : colorController.color5()),
-                                    duration: const Duration(milliseconds: 200), 
-                                    builder: (_, value, __) => GestureDetector(
-                                      onTap: ()=>getCacheSize(),
-                                      child: MouseRegion(
-                                        cursor: SystemMouseCursors.click,
-                                        onEnter: (_){
-                                          setState(() {
-                                            hoverReloadCache=true;
-                                          });
-                                        },
-                                        onExit: (_){
-                                          setState(() {
-                                            hoverReloadCache=false;
-                                          });
-                                        },
-                                        child: Icon(
-                                          Icons.refresh_rounded,
-                                          color: value,
-                                          size: 20,
-                                        ),
-                                      ),
-                                    )
-                                  ),
-                                ),
-                                const SizedBox(width: 10,),
-                                GestureDetector(
-                                  onTap: () async {
-                                    if(await operations.clearCache(context)){
-                                      clearController();
-                                    }
+                              const SizedBox(width: 10,),
+                              GestureDetector(
+                                onTap: () async {
+                                  if(await operations.clearCache(context)){
+                                    clearController();
+                                  }
+                                },
+                                child: MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  onEnter: (_){
+                                    setState(() {
+                                      hoverClear=true;
+                                    });
                                   },
-                                  child: MouseRegion(
-                                    cursor: SystemMouseCursors.click,
-                                    onEnter: (_){
-                                      setState(() {
-                                        hoverClear=true;
-                                      });
-                                    },
-                                    onExit: (_){
-                                      setState(() {
-                                        hoverClear=false;
-                                      });
-                                    },
-                                    child: Obx(()=>
-                                      AnimatedDefaultTextStyle(
-                                        style: GoogleFonts.notoSansSc(
-                                          color: hoverClear ? colorController.color6() : colorController.color5()
-                                        ), 
-                                        duration: const Duration(milliseconds: 200),
-                                        child: Text('clear'.tr)
-                                      ),
+                                  onExit: (_){
+                                    setState(() {
+                                      hoverClear=false;
+                                    });
+                                  },
+                                  child: Obx(()=>
+                                    AnimatedDefaultTextStyle(
+                                      style: GoogleFonts.notoSansSc(
+                                        color: hoverClear ? colorController.color6() : colorController.color5()
+                                      ), 
+                                      duration: const Duration(milliseconds: 200),
+                                      child: Text('clear'.tr)
                                     ),
                                   ),
-                                )
-                              ],
-                            )
-                          ),
+                                ),
+                              )
+                            ],
+                          )
                         ),
                       ),
-                    ],
-                  ) : Container(),
-                ],
-              )
-            ],
-          ),
-          Positioned(
-            bottom: 30,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width - 200,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                    ),
+                  ],
+                ) : Container(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
                       onPressed: refreshing ? null : (){
@@ -832,7 +821,12 @@ class _SettingsViewState extends State<SettingsView> {
                         ),
                       )
                     ),
-                    const SizedBox(height: 10,),
+                  ],
+                ),
+                const SizedBox(height: 10,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     GestureDetector(
                       onTap: (){
                         operations.showAbout(context);
@@ -864,10 +858,10 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                     ),
                   ],
-                ),
-              ),
-            )
-          )
+                )
+              ],
+            ),
+          ),
         ],
       )
     );
