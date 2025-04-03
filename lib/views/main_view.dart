@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/components/side_bar.dart';
 import 'package:net_player_next/views/components/play_bar.dart';
 import 'package:net_player_next/views/functions/operations.dart';
@@ -229,6 +230,8 @@ class _MainViewState extends State<MainView> {
     super.dispose();
   }
 
+  final ColorController colorController=Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -243,24 +246,26 @@ class _MainViewState extends State<MainView> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10, left: 10, top: 5),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Obx(()=>
-                      IndexedStack(
-                        index: c.pageIndex.value,
-                        children: const [
-                          AllView(),
-                          LovedView(),
-                          ArtistView(),
-                          AlbumView(),
-                          PlayListView(),
-                          SearchView(),
-                          SettingsView()
-                        ],
-                      )
+                  child: Obx(()=>
+                    Container(
+                      decoration: BoxDecoration(
+                        color: colorController.darkMode.value ? colorController.color2() : Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Obx(()=>
+                        IndexedStack(
+                          index: c.pageIndex.value,
+                          children: const [
+                            AllView(),
+                            LovedView(),
+                            ArtistView(),
+                            AlbumView(),
+                            PlayListView(),
+                            SearchView(),
+                            SettingsView()
+                          ],
+                        )
+                      ),
                     ),
                   ),
                 )

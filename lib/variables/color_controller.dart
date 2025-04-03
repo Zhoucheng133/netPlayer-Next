@@ -8,11 +8,12 @@ class ColorController extends GetxController {
   Rx<Color> baseColor = const Color.fromARGB(255, 33, 150, 243).obs;
   Rx<Color> white=Colors.white.obs;
   Rx<Color> black=Colors.black.obs;
-  RxBool darkMode = false.obs;
+  RxBool darkMode = true.obs;
 
   ColorController(Color? basec, bool? dark){
     baseColor.value=basec??const Color.fromARGB(255, 33, 150, 243);
-    darkMode.value=dark??false;
+    // TODO 这里需要修改
+    // darkMode.value=dark??false;
   }
 
   void colorPickerPanel(BuildContext context){
@@ -66,16 +67,28 @@ class ColorController extends GetxController {
   }
 
   Color color1(){
+    if(darkMode.value){
+      return const Color.fromARGB(255, 50, 50, 50);
+    }
+
     HSLColor baseHSL = HSLColor.fromColor(baseColor.value);
     return baseHSL.withLightness(0.986).toColor();
   }
 
   Color color2(){
+    if(darkMode.value){
+      return const Color.fromARGB(255, 60, 60, 60);
+    }
+
     HSLColor baseHSL = HSLColor.fromColor(baseColor.value);
     return baseHSL.withLightness(0.958).toColor();
   }
 
   Color color3(){
+    if(darkMode.value){
+      return const Color.fromARGB(255, 80, 80, 80);
+    }
+
     HSLColor baseHSL = HSLColor.fromColor(baseColor.value);
     return baseHSL.withLightness(0.935).toColor();
   }

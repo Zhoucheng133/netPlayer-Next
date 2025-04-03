@@ -36,20 +36,35 @@ class _SongHeaderState extends State<SongHeader> {
                 width: 50,
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('no.'.tr),
+                  child: Text(
+                    'no.'.tr,
+                    style: GoogleFonts.notoSansSc(
+                      color: colorController.darkMode.value ? Colors.white : Colors.black,
+                    ),
+                  ),
                 )
               ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('songTitle'.tr),
+                  child: Text(
+                    'songTitle'.tr,
+                    style: GoogleFonts.notoSansSc(
+                      color: colorController.darkMode.value ? Colors.white : Colors.black,
+                    ),
+                  ),
                 )
               ),
               SizedBox(
                 width: 150,
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text('artist'.tr),
+                  child: Text(
+                    'artist'.tr,
+                    style: GoogleFonts.notoSansSc(
+                      color: colorController.darkMode.value ? Colors.white : Colors.black,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -58,6 +73,7 @@ class _SongHeaderState extends State<SongHeader> {
                   child: Icon(
                     Icons.timer_outlined,
                     size: 18,
+                    color: colorController.darkMode.value ? Colors.white : Colors.black,
                   ),
                 ),
               ),
@@ -67,6 +83,7 @@ class _SongHeaderState extends State<SongHeader> {
                   child: Icon(
                     Icons.favorite_border_rounded,
                     size: 18,
+                    color: colorController.darkMode.value ? Colors.white : Colors.black,
                   ),
                 ),
               ),
@@ -109,28 +126,45 @@ class _ArtistHeaderState extends State<ArtistHeader> {
         SizedBox(
           height: 35,
           width: MediaQuery.of(context).size.width - 200,
-          child: Row(
-            children: [
-              SizedBox(
-                width: 50,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text('no.'.tr),
-                )
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text('artist'.tr),
-                )
-              ),
-              SizedBox(
-                width: 100,
-                child: Center(
-                  child: Text('albumCount'.tr)
+          child: Obx(()=>
+            Row(
+              children: [
+                SizedBox(
+                  width: 50,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      'no.'.tr,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  )
                 ),
-              )
-            ],
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      'artist'.tr,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  )
+                ),
+                SizedBox(
+                  width: 100,
+                  child: Center(
+                    child: Text(
+                      'albumCount'.tr,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    )
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         Obx(()=>
@@ -169,33 +203,57 @@ class _AlbumHeaderState extends State<AlbumHeader> {
         SizedBox(
           height: 35,
           width: MediaQuery.of(context).size.width - 200,
-          child: Row(
-            children: [
-              SizedBox(
-                width: 50,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text('no.'.tr),
-                )
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text('albumTitle'.tr),
-                )
-              ),
-              SizedBox(
-                width: 150,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text('artist'.tr)
+          child: Obx(()=>
+            Row(
+              children: [
+                SizedBox(
+                  width: 50,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      'no.'.tr,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  )
                 ),
-              ),
-              SizedBox(
-                width: 70,
-                child: Center(child: Text('songCount'.tr)),
-              )
-            ],
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      'albumTitle'.tr,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  )
+                ),
+                SizedBox(
+                  width: 150,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      'artist'.tr,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    )
+                  ),
+                ),
+                SizedBox(
+                  width: 70,
+                  child: Center(
+                    child: Text(
+                      'songCount'.tr,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    )
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         Obx(()=>
@@ -523,7 +581,7 @@ class _SongItemState extends State<SongItem> {
         child: Obx(()=>
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            color: hover ?  colorController.color1(): colorController.white.value,
+            color: hover ?  colorController.color1(): colorController.darkMode.value ? colorController.color2() : Colors.white,
             height: 40,
             width: MediaQuery.of(context).size.width - 200,
             child: Row(
@@ -540,6 +598,7 @@ class _SongItemState extends State<SongItem> {
                         (widget.index+1).toString(),
                         style: GoogleFonts.notoSansSc(
                           fontSize: 13,
+                          color: colorController.darkMode.value ? Colors.white : Colors.black,
                         ),
                       ),
                     )
@@ -551,8 +610,8 @@ class _SongItemState extends State<SongItem> {
                         widget.title,
                         style: GoogleFonts.notoSansSc(
                           fontSize: 13,
-                          color: widget.isplay ? colorController.color6(): colorController.black.value,
-                          fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
+                          color: widget.isplay ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,
+                          fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal,
                         ),
                         overflow: TextOverflow.fade,
                         softWrap: false,
@@ -567,7 +626,7 @@ class _SongItemState extends State<SongItem> {
                         widget.artist,
                         style: GoogleFonts.notoSansSc(
                           fontSize: 13,
-                          color: widget.isplay ? colorController.color6(): colorController.black.value,
+                          color: widget.isplay ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,
                           fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
                         ),
                         overflow: TextOverflow.fade,
@@ -582,7 +641,7 @@ class _SongItemState extends State<SongItem> {
                         convertDuration(widget.duration),
                         style: GoogleFonts.notoSansSc(
                           fontSize: 13,
-                          color: widget.isplay ? colorController.color6(): colorController.black.value,
+                          color: widget.isplay ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,
                           fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
                         ),
                       )
@@ -651,7 +710,7 @@ class _AlbumItemState extends State<AlbumItem> {
         child: Obx(()=>
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            color: hover ? colorController.color1() : colorController.white.value,
+            color: hover ? colorController.color1() : colorController.darkMode.value ? colorController.color2() : Colors.white,
             height: 40,
             width: MediaQuery.of(context).size.width - 200,
             child: Row(
@@ -664,6 +723,7 @@ class _AlbumItemState extends State<AlbumItem> {
                       (widget.index+1).toString(),
                       style: GoogleFonts.notoSansSc(
                         fontSize: 13,
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     )
                   ),
@@ -674,7 +734,8 @@ class _AlbumItemState extends State<AlbumItem> {
                     child: Text(
                       widget.title,
                       style: GoogleFonts.notoSansSc(
-                        fontSize: 13
+                        fontSize: 13,
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                       overflow: TextOverflow.fade,
                       softWrap: false,
@@ -689,6 +750,7 @@ class _AlbumItemState extends State<AlbumItem> {
                       widget.artist,
                       style: GoogleFonts.notoSansSc(
                         fontSize: 13,
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                       overflow: TextOverflow.fade,
                       softWrap: false,
@@ -701,7 +763,8 @@ class _AlbumItemState extends State<AlbumItem> {
                     child: Text(
                       widget.songCount.toString(),
                       style: GoogleFonts.notoSansSc(
-                        fontSize: 13
+                        fontSize: 13,
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                       overflow: TextOverflow.fade,
                       softWrap: false,
@@ -709,7 +772,7 @@ class _AlbumItemState extends State<AlbumItem> {
                   ),
                 )
               ],
-            ),          
+            ),
           ),
         ),
       ),
@@ -757,7 +820,7 @@ class _ArtistItemState extends State<ArtistItem> {
         child: Obx(()=>
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            color: hover ? colorController.color1() : colorController.white.value,
+            color: hover ? colorController.color1() : colorController.darkMode.value ? colorController.color2() : Colors.white,
             height: 40,
             width: MediaQuery.of(context).size.width - 200,
             child: Row(
@@ -770,6 +833,7 @@ class _ArtistItemState extends State<ArtistItem> {
                       (widget.index+1).toString(),
                       style: GoogleFonts.notoSansSc(
                         fontSize: 13,
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     ),
                   ),
@@ -780,7 +844,8 @@ class _ArtistItemState extends State<ArtistItem> {
                     child: Text(
                       widget.name,
                       style: GoogleFonts.notoSansSc(
-                        fontSize: 13
+                        fontSize: 13,
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                       overflow: TextOverflow.fade,
                       softWrap: false,
@@ -793,7 +858,8 @@ class _ArtistItemState extends State<ArtistItem> {
                     child: Text(
                       widget.albumCount.toString(),
                       style: GoogleFonts.notoSansSc(
-                        fontSize: 13
+                        fontSize: 13,
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                       overflow: TextOverflow.fade,
                       softWrap: false,

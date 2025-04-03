@@ -61,9 +61,15 @@ class _SideBarItemState extends State<SideBarItem> {
                     Icon(
                       widget.icon,
                       size: 16,
+                      color: colorController.darkMode.value ? Colors.white : Colors.black,
                     ),
                     const SizedBox(width: 5,),
-                    Text(widget.name)
+                    Text(
+                      widget.name,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -94,29 +100,33 @@ class _PlayListLabelState extends State<PlayListLabel> {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 10, left: 20, right: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('playLists'.tr, style: GoogleFonts.notoSansSc(
-                fontSize: 13,
-              ),),
-              GestureDetector(
-                onTap: (){
-                  widget.addPlayListHandler();
-                },
-                child: Tooltip(
-                  message: 'addPlayList'.tr,
-                  waitDuration: const Duration(seconds: 1),
-                  child: const MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: Icon(
-                      Icons.add_rounded,
-                      size: 16,
+          child: Obx(()=>
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('playLists'.tr, style: GoogleFonts.notoSansSc(
+                  fontSize: 13,
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),),
+                GestureDetector(
+                  onTap: (){
+                    widget.addPlayListHandler();
+                  },
+                  child: Tooltip(
+                    message: 'addPlayList'.tr,
+                    waitDuration: const Duration(seconds: 1),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Icon(
+                        Icons.add_rounded,
+                        size: 16,
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 5,),
@@ -162,10 +172,6 @@ class _AccountPartState extends State<AccountPart> {
           Expanded(
             child: GestureDetector(
               onTap: (){
-                // c.pageNow.value={
-                //   'index': '6',
-                //   'id': '',
-                // };
                 c.pageIndex.value=6;
                 c.pageId.value='';
               },
@@ -192,10 +198,11 @@ class _AccountPartState extends State<AccountPart> {
                         borderRadius: BorderRadius.circular(10),
                         color: c.pageIndex.value==6 ? colorController.color3() : hoverSetting ? colorController.color2() : colorController.color1(),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Icon(
                           Icons.settings_rounded,
                           size: 16,
+                          color: colorController.darkMode.value ? Colors.white : Colors.black,
                         ),
                       ),
                     ),
@@ -233,10 +240,11 @@ class _AccountPartState extends State<AccountPart> {
                         borderRadius: BorderRadius.circular(10),
                         color: hoverLogout ? colorController.color2() : colorController.color1(),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Icon(
                           Icons.logout_rounded,
                           size: 16,
+                          color: colorController.darkMode.value ? Colors.white : Colors.black,
                         ),
                       ),
                     ),
@@ -308,7 +316,7 @@ class _PlayListItemState extends State<PlayListItem> {
     final Offset position = overlay.localToGlobal(details.globalPosition);
     var val=await showMenu(
       context: context, 
-      color: Colors.white,
+      color: colorController.darkMode.value ? colorController.color2() : Colors.white,
       position: RelativeRect.fromLTRB(
         position.dx,
         position.dy,
@@ -323,12 +331,18 @@ class _PlayListItemState extends State<PlayListItem> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.edit_rounded,
                 size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               const SizedBox(width: 5,),
-              Text("rename".tr)
+              Text(
+                "rename".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
             ],
           ),
         ),
@@ -339,12 +353,18 @@ class _PlayListItemState extends State<PlayListItem> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.delete_rounded,
                 size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               const SizedBox(width: 5,),
-              Text("delete".tr)
+              Text(
+                "delete".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
             ],
           ),
         )
@@ -420,10 +440,6 @@ class _PlayListItemState extends State<PlayListItem> {
       padding: const EdgeInsets.only(top: 5),
       child: GestureDetector(
         onTap: (){
-          // c.pageNow.value={
-          //   'index': '4',
-          //   'id': widget.id,
-          // };
           c.pageIndex.value=4;
           c.pageId.value=widget.id;
         },
@@ -452,16 +468,18 @@ class _PlayListItemState extends State<PlayListItem> {
                 padding: const EdgeInsets.only(left: 10),
                 child: Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.playlist_play_rounded,
                       size: 16,
+                      color: colorController.darkMode.value ? Colors.white : Colors.black,
                     ),
                     const SizedBox(width: 5,),
                     Expanded(
                       child: AutoSizeText(
                         widget.name,
                         style: GoogleFonts.notoSansSc(
-                          fontSize: 14
+                          fontSize: 14,
+                          color: colorController.darkMode.value ? Colors.white : Colors.black,
                         ),
                         maxLines: 1,
                         minFontSize: 12,

@@ -195,7 +195,14 @@ class _SettingsViewState extends State<SettingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('savePlayed'.tr)
+                          child: Obx(()=>
+                          Text(
+                            'savePlayed'.tr,
+                            style: GoogleFonts.notoSansSc(
+                              color: colorController.darkMode.value ? Colors.white : Colors.black
+                            ),
+                          )
+                        )
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -227,7 +234,14 @@ class _SettingsViewState extends State<SettingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('autoLogin'.tr)
+                          child: Obx(()=>
+                            Text(
+                              'autoLogin'.tr,
+                              style: GoogleFonts.notoSansSc(
+                                color: colorController.darkMode.value ? Colors.white : Colors.black
+                              ),
+                            )
+                          )
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -259,7 +273,14 @@ class _SettingsViewState extends State<SettingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('playBackground'.tr)
+                          child: Obx(()=>
+                            Text(
+                              'playBackground'.tr,
+                              style: GoogleFonts.notoSansSc(
+                                color: colorController.darkMode.value ? Colors.white : Colors.black
+                              ),
+                            )
+                          )
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -291,7 +312,14 @@ class _SettingsViewState extends State<SettingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('enableShortcuts'.tr)
+                          child: Obx(()=>
+                            Text(
+                              'enableShortcuts'.tr,
+                              style: GoogleFonts.notoSansSc(
+                                color: colorController.darkMode.value ? Colors.white : Colors.black
+                              ),
+                            )
+                          )
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -323,7 +351,14 @@ class _SettingsViewState extends State<SettingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('enableWs'.tr)
+                          child: Obx(()=>
+                            Text(
+                              'enableWs'.tr,
+                              style: GoogleFonts.notoSansSc(
+                                color: colorController.darkMode.value ? Colors.white : Colors.black
+                              ),
+                            )
+                          )
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -389,7 +424,14 @@ class _SettingsViewState extends State<SettingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('enableKit'.tr)
+                          child: Obx(()=>
+                            Text(
+                              'enableKit'.tr,
+                              style: GoogleFonts.notoSansSc(
+                                color: colorController.darkMode.value ? Colors.white : Colors.black
+                              ),
+                            )
+                          ),
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -421,7 +463,56 @@ class _SettingsViewState extends State<SettingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('theme'.tr)
+                          child: Obx(()=>
+                            Text(
+                              'darkMode'.tr,
+                              style: GoogleFonts.notoSansSc(
+                                color: colorController.darkMode.value ? Colors.white : Colors.black
+                              ),
+                            )
+                          ),
+                        )
+                      ),
+                      const SizedBox(width: 10,),
+                      SizedBox(
+                        width: 220,
+                        height: 40,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Obx(()=>
+                          Transform.scale(
+                            scale: 0.7,
+                            child: Switch(
+                              activeTrackColor: colorController.color6(),
+                              splashRadius: 0,
+                              value: colorController.darkMode.value, 
+                              onChanged: (val) async {
+                                colorController.darkMode.value=val;
+                                final prefs=await SharedPreferences.getInstance();
+                                prefs.setBool('darkMode', val);
+                              }
+                            ),
+                          )
+                        )
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Obx(()=>
+                            Text(
+                              'theme'.tr,
+                              style: GoogleFonts.notoSansSc(
+                                color: colorController.darkMode.value ? Colors.white : Colors.black
+                              ),
+                            )
+                          ),
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -483,7 +574,14 @@ class _SettingsViewState extends State<SettingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('serviceUrl'.tr)
+                          child: Obx(()=>
+                            Text(
+                              'serviceUrl'.tr,
+                              style: GoogleFonts.notoSansSc(
+                                color: colorController.darkMode.value ? Colors.white : Colors.black
+                              ),
+                            )
+                          ),
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -518,7 +616,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 child: Obx(()=>
                                   AnimatedDefaultTextStyle(
                                     style: GoogleFonts.notoSansSc(
-                                      color: hoverURL ? colorController.color6() : Colors.black,
+                                      color: hoverURL ? colorController.color6() : colorController.darkMode.value ? Colors.white : Colors.black,
                                     ), 
                                     duration: const Duration(milliseconds: 200),
                                     child: Text(
@@ -542,7 +640,14 @@ class _SettingsViewState extends State<SettingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('lang'.tr)
+                          child: Obx(()=>
+                            Text(
+                              'lang'.tr,
+                              style: GoogleFonts.notoSansSc(
+                                color: colorController.darkMode.value ? Colors.white : Colors.black
+                              ),
+                            )
+                          ),
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -555,7 +660,14 @@ class _SettingsViewState extends State<SettingsView> {
                             alignment: Alignment.centerLeft,
                             child: Row(
                               children: [
-                                Text('selfLang'.tr),
+                                Obx(()=>
+                                  Text(
+                                    'selfLang'.tr,
+                                    style: GoogleFonts.notoSansSc(
+                                      color: colorController.darkMode.value ? Colors.white : Colors.black
+                                    ),
+                                  )
+                                ),
                                 const SizedBox(width: 20,),
                                 GestureDetector(
                                   onTap: (){
@@ -598,7 +710,14 @@ class _SettingsViewState extends State<SettingsView> {
                         width: 150,
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: Text('cache'.tr)
+                          child: Obx(()=>
+                            Text(
+                              'cache'.tr,
+                              style: GoogleFonts.notoSansSc(
+                                color: colorController.darkMode.value ? Colors.white : Colors.black
+                              ),
+                            )
+                          ),
                         )
                       ),
                       const SizedBox(width: 10,),
@@ -611,7 +730,14 @@ class _SettingsViewState extends State<SettingsView> {
                             alignment: Alignment.centerLeft,
                             child: Row(
                               children: [
-                                Text(operations.sizeConvert(cacheSize)),
+                                Obx(()=>
+                                  Text(
+                                    operations.sizeConvert(cacheSize),
+                                    style: GoogleFonts.notoSansSc(
+                                      color: colorController.darkMode.value ? Colors.white : Colors.black
+                                    ),
+                                  )
+                                ),
                                 const SizedBox(width: 5,),
                                 Obx(()=>
                                   TweenAnimationBuilder(
@@ -726,7 +852,7 @@ class _SettingsViewState extends State<SettingsView> {
                         child: Obx(()=>
                           AnimatedDefaultTextStyle(
                             style: GoogleFonts.notoSansSc(
-                              color: hoverAbout ? colorController.color6() : colorController.black.value,
+                              color: hoverAbout ? colorController.color6() : colorController.darkMode.value ? Colors.white : colorController.black.value,
                             ),
                             duration: const Duration(milliseconds: 200),
                             child: Text(

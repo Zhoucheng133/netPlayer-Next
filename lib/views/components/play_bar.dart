@@ -140,6 +140,7 @@ class _PlayBarState extends State<PlayBar> {
                     c.nowPlay['title'],
                     style: GoogleFonts.notoSansSc(
                       fontWeight: FontWeight.bold,
+                      color: colorController.darkMode.value ? Colors.white : Colors.black,
                     ),
                     overflow: TextOverflow.fade,
                     softWrap: false,

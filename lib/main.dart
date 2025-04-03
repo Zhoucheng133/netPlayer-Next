@@ -30,7 +30,6 @@ Future<void> main(List<String> args) async {
     title: 'netPlayer'
   );
   final Controller c = Get.put(Controller());
-  // final ColorController colorController=Get.put(ColorController(null, null));
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final themeColor=prefs.getInt("theme");
   final darkMode=prefs.getBool("darkMode");
