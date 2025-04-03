@@ -565,81 +565,85 @@ class _LyricViewState extends State<LyricView> {
                                   ),
                                 ),
                                 const SizedBox(width: 25,),
-                                CustomPopup(
-                                  content: SizedBox(
-                                    width: 120,
-                                    height: 20,
-                                    child: Obx(()=>
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: SliderTheme(
-                                              data: SliderThemeData(
-                                                thumbColor: colorController.color6(),
-                                                overlayColor: Colors.transparent,
-                                                overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                                                trackHeight: 2,
-                                                thumbShape: const RoundSliderThumbShape(
-                                                  enabledThumbRadius: 5,
-                                                  elevation: 0,
-                                                  pressedElevation: 0,
+                                Obx(()=>
+                                  CustomPopup(
+                                    arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                                    backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                                    content: SizedBox(
+                                      width: 120,
+                                      height: 20,
+                                      child: Obx(()=>
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: SliderTheme(
+                                                data: SliderThemeData(
+                                                  thumbColor: colorController.color6(),
+                                                  overlayColor: Colors.transparent,
+                                                  overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                                  trackHeight: 2,
+                                                  thumbShape: const RoundSliderThumbShape(
+                                                    enabledThumbRadius: 5,
+                                                    elevation: 0,
+                                                    pressedElevation: 0,
+                                                  ),
+                                                  activeTrackColor: colorController.color5(),
+                                                  inactiveTrackColor: colorController.color4(),
                                                 ),
-                                                activeTrackColor: colorController.color5(),
-                                                inactiveTrackColor: colorController.color4(),
-                                              ),
-                                              child: Slider(
-                                                value: c.volume.value/100, 
-                                                onChanged: (val){
-                                                  c.updateVolume((val*100).toInt());
-                                                  c.handler.volumeSet(c.volume.value);
-                                                },
-                                                onChangeEnd: (_){
-                                                  operations.saveVolume();
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(width: 5,),
-                                          SizedBox(
-                                            width: 35,
-                                            child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                "${c.volume}%",
-                                                style: GoogleFonts.notoSansSc(
-                                                  fontSize: 12
+                                                child: Slider(
+                                                  value: c.volume.value/100, 
+                                                  onChanged: (val){
+                                                    c.updateVolume((val*100).toInt());
+                                                    c.handler.volumeSet(c.volume.value);
+                                                  },
+                                                  onChangeEnd: (_){
+                                                    operations.saveVolume();
+                                                  },
                                                 ),
                                               ),
                                             ),
-                                          )
-                                        ],
+                                            const SizedBox(width: 5,),
+                                            SizedBox(
+                                              width: 35,
+                                              child: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                  "${c.volume}%",
+                                                  style: GoogleFonts.notoSansSc(
+                                                    fontSize: 12
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  child: Tooltip(
-                                    waitDuration: const Duration(seconds: 1),
-                                    message: 'adjustVolume'.tr,
-                                    child: MouseRegion(
-                                      cursor: SystemMouseCursors.click,
-                                      onEnter: (_){
-                                        setState(() {
-                                          hoverVolume=true;
-                                        });
-                                      },
-                                      onExit: (_){
-                                        setState(() {
-                                          hoverVolume=false;
-                                        });
-                                      },
-                                      child: Obx(()=>
-                                        TweenAnimationBuilder(
-                                          tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()), 
-                                          duration: const Duration(milliseconds: 200), 
-                                          builder: (_, value, __)=>FaIcon(
-                                            c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
-                                            size: 14,
-                                            color: value,
-                                          )
+                                    child: Tooltip(
+                                      waitDuration: const Duration(seconds: 1),
+                                      message: 'adjustVolume'.tr,
+                                      child: MouseRegion(
+                                        cursor: SystemMouseCursors.click,
+                                        onEnter: (_){
+                                          setState(() {
+                                            hoverVolume=true;
+                                          });
+                                        },
+                                        onExit: (_){
+                                          setState(() {
+                                            hoverVolume=false;
+                                          });
+                                        },
+                                        child: Obx(()=>
+                                          TweenAnimationBuilder(
+                                            tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()), 
+                                            duration: const Duration(milliseconds: 200), 
+                                            builder: (_, value, __)=>FaIcon(
+                                              c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
+                                              size: 14,
+                                              color: value,
+                                            )
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -804,60 +808,64 @@ class _LyricViewState extends State<LyricView> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                CustomPopup(
-                                  content: SizedBox(
-                                    height: 20,
-                                    width: 100,
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        GestureDetector(
-                                          onTap: (){
-                                            c.lyricText.value-=1;
-                                          },
-                                          child: const MouseRegion(
-                                            cursor: SystemMouseCursors.click,
-                                            child: Icon(Icons.remove_rounded)
+                                Obx(()=>
+                                  CustomPopup(
+                                    arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                                    backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                                    content: SizedBox(
+                                      height: 20,
+                                      width: 100,
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: (){
+                                              c.lyricText.value-=1;
+                                            },
+                                            child: const MouseRegion(
+                                              cursor: SystemMouseCursors.click,
+                                              child: Icon(Icons.remove_rounded)
+                                            ),
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: Center(child: Obx(()=>Text(c.lyricText.value.toString()))),
-                                        ),
-                                        GestureDetector(
-                                          onTap: (){
-                                            c.lyricText.value+=1;
-                                          },
-                                          child: const MouseRegion(
-                                            cursor: SystemMouseCursors.click,
-                                            child: Icon(Icons.add_rounded)
+                                          Expanded(
+                                            child: Center(child: Obx(()=>Text(c.lyricText.value.toString()))),
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  child: MouseRegion(
-                                    cursor: SystemMouseCursors.click,
-                                    onEnter: (_){
-                                      setState(() {
-                                        hoverFont=true;
-                                      });
-                                    },
-                                    onExit: (_){
-                                      setState(() {
-                                        hoverFont=false;
-                                      });
-                                    },
-                                    child: Obx(()=>
-                                      TweenAnimationBuilder(
-                                        tween: ColorTween(end: hoverFont ? colorController.color6() : colorController.color4()), 
-                                        duration: const Duration(milliseconds: 200),
-                                        builder: (_, value, __)=>Icon(
-                                          Icons.text_fields_rounded,
-                                          size: 20,
-                                          color: value,
-                                        )
+                                          GestureDetector(
+                                            onTap: (){
+                                              c.lyricText.value+=1;
+                                            },
+                                            child: const MouseRegion(
+                                              cursor: SystemMouseCursors.click,
+                                              child: Icon(Icons.add_rounded)
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    )
+                                    ),
+                                    child: MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      onEnter: (_){
+                                        setState(() {
+                                          hoverFont=true;
+                                        });
+                                      },
+                                      onExit: (_){
+                                        setState(() {
+                                          hoverFont=false;
+                                        });
+                                      },
+                                      child: Obx(()=>
+                                        TweenAnimationBuilder(
+                                          tween: ColorTween(end: hoverFont ? colorController.color6() : colorController.color4()), 
+                                          duration: const Duration(milliseconds: 200),
+                                          builder: (_, value, __)=>Icon(
+                                            Icons.text_fields_rounded,
+                                            size: 20,
+                                            color: value,
+                                          )
+                                        ),
+                                      )
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 15,),

@@ -432,78 +432,82 @@ class _PlayBarState extends State<PlayBar> {
                       ),
                     ),
                     const SizedBox(width: 25,),
-                    CustomPopup(
-                      content: SizedBox(
-                        width: 120,
-                        height: 20,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: SliderTheme(
-                                data: SliderThemeData(
-                                  thumbColor: colorController.color6(),
-                                  overlayColor: Colors.transparent,
-                                  overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                                  trackHeight: 2,
-                                  thumbShape: const RoundSliderThumbShape(
-                                    enabledThumbRadius: 5,
-                                    elevation: 0,
-                                    pressedElevation: 0,
+                    Obx(()=>
+                      CustomPopup(
+                        arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                        backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                        content: SizedBox(
+                          width: 120,
+                          height: 20,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: SliderTheme(
+                                  data: SliderThemeData(
+                                    thumbColor: colorController.color6(),
+                                    overlayColor: Colors.transparent,
+                                    overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                    trackHeight: 2,
+                                    thumbShape: const RoundSliderThumbShape(
+                                      enabledThumbRadius: 5,
+                                      elevation: 0,
+                                      pressedElevation: 0,
+                                    ),
+                                    activeTrackColor: colorController.color5(),
+                                    inactiveTrackColor: colorController.color4(),
                                   ),
-                                  activeTrackColor: colorController.color5(),
-                                  inactiveTrackColor: colorController.color4(),
-                                ),
-                                child: Slider(
-                                  value: c.volume.value/100, 
-                                  onChanged: (val){
-                                    c.updateVolume((val*100).toInt());
-                                    c.handler.volumeSet(c.volume.value);
-                                  },
-                                  onChangeEnd: (_){
-                                    operations.saveVolume();
-                                  },
+                                  child: Slider(
+                                    value: c.volume.value/100, 
+                                    onChanged: (val){
+                                      c.updateVolume((val*100).toInt());
+                                      c.handler.volumeSet(c.volume.value);
+                                    },
+                                    onChangeEnd: (_){
+                                      operations.saveVolume();
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 5,),
-                            SizedBox(
-                              width: 35,
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "${c.volume}%",
-                                  style: GoogleFonts.notoSansSc(
-                                    fontSize: 12
+                              const SizedBox(width: 5,),
+                              SizedBox(
+                                width: 35,
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "${c.volume}%",
+                                    style: GoogleFonts.notoSansSc(
+                                      fontSize: 12
+                                    ),
                                   ),
-                                ),
+                                )
                               )
-                            )
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      child: Tooltip(
-                        waitDuration: const Duration(seconds: 1),
-                        message: 'adjustVolume'.tr,
-                        child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          onEnter: (_){
-                            setState(() {
-                              hoverVolume=true;
-                            });
-                          },
-                          onExit: (_){
-                            setState(() {
-                              hoverVolume=false;
-                            });
-                          },
-                          child: TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()), 
-                            duration: const Duration(milliseconds: 200), 
-                            builder: (_, value, __) => FaIcon(
-                              c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
-                              size: 14,
-                              color: value,
-                            )
+                        child: Tooltip(
+                          waitDuration: const Duration(seconds: 1),
+                          message: 'adjustVolume'.tr,
+                          child: MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            onEnter: (_){
+                              setState(() {
+                                hoverVolume=true;
+                              });
+                            },
+                            onExit: (_){
+                              setState(() {
+                                hoverVolume=false;
+                              });
+                            },
+                            child: TweenAnimationBuilder(
+                              tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()), 
+                              duration: const Duration(milliseconds: 200), 
+                              builder: (_, value, __) => FaIcon(
+                                c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
+                                size: 14,
+                                color: value,
+                              )
+                            ),
                           ),
                         ),
                       ),

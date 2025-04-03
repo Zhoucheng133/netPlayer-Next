@@ -29,65 +29,67 @@ class _SongHeaderState extends State<SongHeader> {
         SizedBox(
           height: 35,
           width: MediaQuery.of(context).size.width - 200,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 50,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
-                    'no.'.tr,
-                    style: GoogleFonts.notoSansSc(
-                      color: colorController.darkMode.value ? Colors.white : Colors.black,
+          child: Obx(()=>
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 50,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      'no.'.tr,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  )
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      'songTitle'.tr,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  )
+                ),
+                SizedBox(
+                  width: 150,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      'artist'.tr,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
                     ),
                   ),
-                )
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
-                    'songTitle'.tr,
-                    style: GoogleFonts.notoSansSc(
-                      color: colorController.darkMode.value ? Colors.white : Colors.black,
-                    ),
-                  ),
-                )
-              ),
-              SizedBox(
-                width: 150,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
-                    'artist'.tr,
-                    style: GoogleFonts.notoSansSc(
+                ),
+                SizedBox(
+                  width: 70,
+                  child: Center(
+                    child: Icon(
+                      Icons.timer_outlined,
+                      size: 18,
                       color: colorController.darkMode.value ? Colors.white : Colors.black,
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 70,
-                child: Center(
-                  child: Icon(
-                    Icons.timer_outlined,
-                    size: 18,
-                    color: colorController.darkMode.value ? Colors.white : Colors.black,
+                SizedBox(
+                  width: 50,
+                  child: Center(
+                    child: Icon(
+                      Icons.favorite_border_rounded,
+                      size: 18,
+                      color: colorController.darkMode.value ? Colors.white : Colors.black,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 50,
-                child: Center(
-                  child: Icon(
-                    Icons.favorite_border_rounded,
-                    size: 18,
-                    color: colorController.darkMode.value ? Colors.white : Colors.black,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         Obx(()=>

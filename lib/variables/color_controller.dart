@@ -71,7 +71,7 @@ class ColorController extends GetxController {
     }
 
     HSLColor baseHSL = HSLColor.fromColor(baseColor.value);
-    return baseHSL.withLightness(0.986).toColor();
+    return baseHSL.withLightness(0.98).toColor();
   }
 
   Color color2(){
