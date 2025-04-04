@@ -35,10 +35,12 @@ class _SettingItemState extends State<SettingItem> {
                 width: 170,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5),
-                  child: Text(
-                    widget.label,
-                    style: GoogleFonts.notoSansSc(
-                      color: colorController.darkMode.value ? Colors.white : Colors.black
+                  child: Obx(()=>
+                    Text(
+                      widget.label,
+                      style: GoogleFonts.notoSansSc(
+                        color: colorController.darkMode.value ? Colors.white : Colors.black
+                      ),
                     ),
                   ),
                 ),
