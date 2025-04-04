@@ -4,6 +4,12 @@ import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 
+enum LyricFrom{
+  netease,
+  lrclib,
+  none,
+}
+
 class Controller extends GetxController{
   // 是否使用桌面歌词, 仅Windows
   bool useDesktopLyric=true;
@@ -74,6 +80,9 @@ class Controller extends GetxController{
   var ws;
   RxBool onslide=false.obs;
 
+  // 歌词来源
+  Rx<LyricFrom> lyricFrom=LyricFrom.none.obs;
+
   // # 一些设置属性 #
   // 保存播放内容
   RxBool savePlay=true.obs;
@@ -107,5 +116,6 @@ class Controller extends GetxController{
   //启用歌词组件
   RxBool useLyricKit=false.obs;
 
+  // 封面图片
   var coverFuture = Rx<Uint8List?>(null);
 }

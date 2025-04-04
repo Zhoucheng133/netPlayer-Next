@@ -22,9 +22,9 @@ class LyricGet{
   }
 
   Future<void> getLyric() async {
-    // print("get!");
     if(!(await netease())){
       if(!(await lrclib())){
+        c.lyricFrom.value=LyricFrom.none;
         c.lyric.value=[
           {
             'time': 0,
@@ -59,6 +59,7 @@ class LyricGet{
       });
     }
     c.lyric.value=lyricCovert;
+    c.lyricFrom.value=LyricFrom.lrclib;
     var content='';
     if(c.useWs.value){
       c.ws.sendMsg(content);
@@ -100,6 +101,7 @@ class LyricGet{
     }
     lyricCovert.sort((a, b)=>a['time'].compareTo(b['time']));
     c.lyric.value=lyricCovert;
+    c.lyricFrom.value=LyricFrom.netease;
     var content='';
     if(c.useWs.value){
       c.ws.sendMsg(content);

@@ -130,6 +130,7 @@ class _MainViewState extends State<MainView> {
     await prefs.setString('nowPlay', jsonEncode(val));
     c.lyricLine.value=0;
     // 如果id不为空，获取歌词
+    c.lyricFrom.value=LyricFrom.none;
     c.lyric.value=[
       {
         'time': 0,

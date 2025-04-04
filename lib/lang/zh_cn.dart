@@ -45,7 +45,10 @@ const Map<String, String> zhCN = {
   'cancel': '取消',
   'ok': '好的',
   'finish': '完成',
-  'lyricTip': '注意: 歌词内容未必准确\n歌词内容来自网易云音乐或lrclib.net',
+  'lyricTip': '注意: 歌词内容未必准确',
+  'lyricNetease': '歌词内容来自网易云音乐',
+  'lyricLrclib': '歌词内容来自lrclib.net',
+
   'overCountTip': '注意，所有歌曲数量可能大于500首\n完全随机播放不受影响',
   'hideLyric': '隐藏歌词',
 

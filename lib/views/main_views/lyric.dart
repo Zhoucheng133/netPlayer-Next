@@ -869,28 +869,31 @@ class _LyricViewState extends State<LyricView> {
                                   ),
                                 ),
                                 const SizedBox(width: 15,),
-                                Tooltip(
-                                  message: 'lyricTip'.tr,
-                                  child: MouseRegion(
-                                    onEnter: (_){
-                                      setState(() {
-                                        hoverTip=true;
-                                      });
-                                    },
-                                    onExit: (_){
-                                      setState(() {
-                                        hoverTip=false;
-                                      });
-                                    },
-                                    child: Obx(()=>
-                                      TweenAnimationBuilder(
-                                        tween: ColorTween(end: hoverTip ? colorController.color6() : colorController.color4()), 
-                                        duration: const Duration(milliseconds: 200), 
-                                        builder: (_, value, __)=>Icon(
-                                          Icons.info_rounded,
-                                          size: 20,
-                                          color: value,
-                                        )
+                                Obx(()=>
+                                  Tooltip(
+                                    preferBelow: false,
+                                    message: "${'lyricTip'.tr}${c.lyricFrom.value==LyricFrom.netease ? '\n${'lyricNetease'.tr}' : c.lyricFrom.value==LyricFrom.lrclib ? '\n${'lyricLrclib'.tr}' : ''}",
+                                    child: MouseRegion(
+                                      onEnter: (_){
+                                        setState(() {
+                                          hoverTip=true;
+                                        });
+                                      },
+                                      onExit: (_){
+                                        setState(() {
+                                          hoverTip=false;
+                                        });
+                                      },
+                                      child: Obx(()=>
+                                        TweenAnimationBuilder(
+                                          tween: ColorTween(end: hoverTip ? colorController.color6() : colorController.color4()), 
+                                          duration: const Duration(milliseconds: 200), 
+                                          builder: (_, value, __)=>Icon(
+                                            Icons.info_rounded,
+                                            size: 20,
+                                            color: value,
+                                          )
+                                        ),
                                       ),
                                     ),
                                   ),
