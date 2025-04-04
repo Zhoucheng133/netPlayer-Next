@@ -317,7 +317,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                 ),
               ),
             ) : Container()
-          )
+          ),
         ],
       ),
     );
