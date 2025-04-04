@@ -169,6 +169,8 @@ const Map<String, String> zhTW = {
   'wheel': '色輪',
   'primary': '主色',
 
+  'followSystem': '跟隨系統',
+  'enableDark': '啟用深色模式',
   'auto': '自動',
   'on': '開啟',
   'off': '關閉',

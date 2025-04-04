@@ -169,6 +169,8 @@ const Map<String, String> enUS = {
   'wheel': 'Wheel',
   'primary': 'Primary',
 
+  'followSystem': 'Follow the system',
+  'enableDark': 'Enable dark mode',
   'auto': 'Auto',
   'on': 'On',
   'off': 'Off',

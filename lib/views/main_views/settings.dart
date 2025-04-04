@@ -518,20 +518,6 @@ class _SettingsViewState extends State<SettingsView> {
                               )
                               ],
                             )
-                            // TODO 迁移代码到Dialog
-                            // Transform.scale(
-                            //   scale: 0.7,
-                            //   child: Switch(
-                            //     activeTrackColor: colorController.color6(),
-                            //     splashRadius: 0,
-                            //     value: colorController.darkMode.value, 
-                            //     onChanged: (val) async {
-                            //       colorController.darkMode.value=val;
-                            //       final prefs=await SharedPreferences.getInstance();
-                            //       prefs.setBool('darkMode', val);
-                            //     }
-                            //   ),
-                            // )
                           )
                         ),
                       ),

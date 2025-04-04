@@ -24,7 +24,95 @@ class ColorController extends GetxController {
   }
 
   void darkModePanel(BuildContext context){
-    
+
+    bool tmpDarkMode=darkMode.value;
+    bool tmpAutoDark=autoDark.value;
+
+    showDialog(
+      context: context, 
+      builder: (context)=>AlertDialog(
+        title: Text('darkMode'.tr),
+        content: SizedBox(
+          width: 200,
+          child: Obx(()=>
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Text('followSystem'.tr)
+                    ),
+                    const SizedBox(width: 10,),
+                    Expanded(child: Container(height: 10,)),
+                    Transform.scale(
+                      scale: 0.7,
+                      child: Switch(
+                        activeTrackColor: color6(),
+                        splashRadius: 0,
+                        value: autoDark.value, 
+                        onChanged: (val) async {
+                          autoDark.value=val;
+                          if(val){
+                            final Brightness brightness = MediaQuery.of(context).platformBrightness;
+                            if(brightness == Brightness.dark){
+                              darkMode.value=true;
+                            }else{
+                              darkMode.value=false;
+                            }
+                          }
+                        }
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: Text('enableDark'.tr)
+                    ),
+                    const SizedBox(width: 10,),
+                    Expanded(child: Container(height: 10,)),
+                    Transform.scale(
+                      scale: 0.7,
+                      child: Switch(
+                        activeTrackColor: color6(),
+                        splashRadius: 0,
+                        value: darkMode.value, 
+                        onChanged: autoDark.value ? null : (val) async {
+                          darkMode.value=val;
+                        }
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            )
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+              darkMode.value=tmpDarkMode;
+              autoDark.value=tmpAutoDark;
+            }, 
+            child: Text('cancel'.tr)
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              final prefs=await SharedPreferences.getInstance();
+              prefs.setBool('darkMode', darkMode.value);
+              prefs.setBool('autoDark', autoDark.value);
+            }, 
+            child: Text('ok'.tr)
+          )
+        ],
+      )
+    );
   }
 
   void colorPickerPanel(BuildContext context){

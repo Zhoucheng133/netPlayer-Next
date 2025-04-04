@@ -169,6 +169,8 @@ const Map<String, String> zhCN = {
   'wheel': '色轮',
   'primary': '主色',
 
+  'followSystem': '跟随系统',
+  'enableDark': '启用深色模式',
   'auto': '自动',
   'on': '开启',
   'off': '关闭',
