@@ -169,6 +169,10 @@ const Map<String, String> enUS = {
   'wheel': 'Wheel',
   'primary': 'Primary',
 
+  'auto': 'Auto',
+  'on': 'On',
+  'off': 'Off',
+
   // macOS menu
   'About netPlayer': 'About netPlayer',
   'Settings...': 'Settings...',

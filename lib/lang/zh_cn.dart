@@ -169,6 +169,10 @@ const Map<String, String> zhCN = {
   'wheel': '色轮',
   'primary': '主色',
 
+  'auto': '自动',
+  'on': '开启',
+  'off': '关闭',
+
   // macOS menu
   'About netPlayer': '关于 netPlayer',
   'Settings...': '设置...',

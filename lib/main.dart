@@ -33,7 +33,8 @@ Future<void> main(List<String> args) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final themeColor=prefs.getInt("theme");
   final darkMode=prefs.getBool("darkMode");
-  Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode));
+  final autoDark=prefs.getBool("autoDark");
+  Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode, autoDark));
   c.handler=await AudioService.init(
     builder: () => audioHandler(),
     config: const AudioServiceConfig(
@@ -71,6 +72,9 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
+    final Brightness brightness = MediaQuery.of(context).platformBrightness;
+    colorController.autoDarkMode(brightness == Brightness.dark);
+
     return Obx(()=>
       GetMaterialApp(
         translations: MainTranslations(),

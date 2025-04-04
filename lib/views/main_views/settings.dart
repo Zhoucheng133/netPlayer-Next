@@ -36,6 +36,7 @@ class _SettingsViewState extends State<SettingsView> {
   bool hoverClear=false;
   bool hoverReloadCache=false;
   bool hoverTheme=false;
+  bool hoverDark=false;
 
   final operations=Operations();
   int cacheSize=0;
@@ -476,23 +477,63 @@ class _SettingsViewState extends State<SettingsView> {
                     SizedBox(
                       width: 220,
                       height: 40,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Obx(()=>
-                        Transform.scale(
-                          scale: 0.7,
-                          child: Switch(
-                            activeTrackColor: colorController.color6(),
-                            splashRadius: 0,
-                            value: colorController.darkMode.value, 
-                            onChanged: (val) async {
-                              colorController.darkMode.value=val;
-                              final prefs=await SharedPreferences.getInstance();
-                              prefs.setBool('darkMode', val);
-                            }
-                          ),
-                        )
-                      )
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Obx(()=>
+                            Row(
+                              children: [
+                                Text(
+                                  colorController.autoDark.value ? "auto".tr : colorController.darkMode.value ? "on".tr : "off".tr,
+                                  style: GoogleFonts.notoSansSc(
+                                    color: colorController.darkMode.value ? Colors.white : Colors.black
+                                  ),
+                                ),
+                                const SizedBox(width: 20,),
+                                GestureDetector(
+                                onTap: ()=>colorController.darkModePanel(context),
+                                child: MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  onEnter: (_){
+                                    setState(() {
+                                      hoverDark=true;
+                                    });
+                                  },
+                                  onExit: (_){
+                                    setState(() {
+                                      hoverDark=false;
+                                    });
+                                  },
+                                  child: Obx(()=>
+                                    AnimatedDefaultTextStyle(
+                                      style: GoogleFonts.notoSansSc(
+                                        color: hoverDark ? colorController.color6() : colorController.color5()
+                                      ), 
+                                      duration: const Duration(milliseconds: 200),
+                                      child: Text('change'.tr)
+                                    ),
+                                  ),
+                                ),
+                              )
+                              ],
+                            )
+                            // TODO 迁移代码到Dialog
+                            // Transform.scale(
+                            //   scale: 0.7,
+                            //   child: Switch(
+                            //     activeTrackColor: colorController.color6(),
+                            //     splashRadius: 0,
+                            //     value: colorController.darkMode.value, 
+                            //     onChanged: (val) async {
+                            //       colorController.darkMode.value=val;
+                            //       final prefs=await SharedPreferences.getInstance();
+                            //       prefs.setBool('darkMode', val);
+                            //     }
+                            //   ),
+                            // )
+                          )
+                        ),
                       ),
                     )
                   ],

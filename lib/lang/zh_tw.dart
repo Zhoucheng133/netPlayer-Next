@@ -168,6 +168,10 @@ const Map<String, String> zhTW = {
 
   'wheel': '色輪',
   'primary': '主色',
+
+  'auto': '自動',
+  'on': '開啟',
+  'off': '關閉',
   
   // macOS menu
   'About netPlayer': '關於 netPlayer',

@@ -9,10 +9,22 @@ class ColorController extends GetxController {
   Rx<Color> white=Colors.white.obs;
   Rx<Color> black=Colors.black.obs;
   RxBool darkMode = true.obs;
+  RxBool autoDark=true.obs;
 
-  ColorController(Color? basec, bool? dark){
+  ColorController(Color? basec, bool? dark, bool? auto){
     baseColor.value=basec??const Color.fromARGB(255, 33, 150, 243);
     darkMode.value=dark??false;
+    autoDark.value=auto??true;
+  }
+
+  void autoDarkMode(bool dark){
+    if(autoDark.value){
+      darkMode.value=dark;
+    }
+  }
+
+  void darkModePanel(BuildContext context){
+    
   }
 
   void colorPickerPanel(BuildContext context){
