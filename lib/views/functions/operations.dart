@@ -907,6 +907,7 @@ class Operations{
 
   // 修改语言
   void selectLanguage(BuildContext context){
+    String tempLang=c.lang.value;
     String langSelected=c.lang.value;
     showDialog(
       context: context, 
@@ -942,6 +943,15 @@ class Operations{
           ),
         ),
         actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+              var parts = tempLang.split('_');
+              var locale=Locale(parts[0], parts[1]);
+              Get.updateLocale(locale);
+            }, 
+            child: Text('cancel'.tr)
+          ),
           ElevatedButton(
             onPressed: () async {
               final SharedPreferences prefs = await SharedPreferences.getInstance();
