@@ -318,13 +318,23 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
               child: Platform.isWindows ? Row(
                 children: [
                   Expanded(child: DragToMoveArea(child: Container())),
-                  WindowCaptionButton.minimize(onPressed: minWindow,),
-                  Obx(()=>
-                    c.maxWindow.value ? WindowCaptionButton.unmaximize(onPressed: unmaxWindow) : WindowCaptionButton.maximize(onPressed: maxWindow,),
+                  WindowCaptionButton.minimize(
+                    onPressed: minWindow,
+                    brightness: colorController.darkMode.value ? Brightness.dark : Brightness.light,
                   ),
-                  WindowCaptionButton.close(onPressed: (){
-                    operations.closeWindow();
-                  },)
+                  Obx(()=>
+                    c.maxWindow.value ? WindowCaptionButton.unmaximize(
+                      onPressed: unmaxWindow,
+                      brightness: colorController.darkMode.value ? Brightness.dark : Brightness.light,
+                    ) : WindowCaptionButton.maximize(
+                      onPressed: maxWindow,
+                      brightness: colorController.darkMode.value ? Brightness.dark : Brightness.light,
+                    ),
+                  ),
+                  WindowCaptionButton.close(
+                    onPressed: ()=>operations.closeWindow(),
+                    brightness: colorController.darkMode.value ? Brightness.dark : Brightness.light,
+                  )
                 ],
               ) : DragToMoveArea(child: Container())
             ),

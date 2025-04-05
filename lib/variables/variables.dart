@@ -12,7 +12,7 @@ enum LyricFrom{
 
 class Controller extends GetxController{
   // 是否使用桌面歌词, 仅Windows
-  bool useDesktopLyric=true;
+  bool useDesktopLyric=false;
   // 当前页面索引
   RxInt pageIndex=0.obs;
   // 当前页面Id

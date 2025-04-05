@@ -339,30 +339,30 @@ class _SettingsViewState extends State<SettingsView> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                      onTap: ()=>colorController.darkModePanel(context),
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        onEnter: (_){
-                          setState(() {
-                            hoverDark=true;
-                          });
-                        },
-                        onExit: (_){
-                          setState(() {
-                            hoverDark=false;
-                          });
-                        },
-                        child: Obx(()=>
-                          AnimatedDefaultTextStyle(
-                            style: GoogleFonts.notoSansSc(
-                              color: hoverDark ? colorController.color6() : colorController.color5()
-                            ), 
-                            duration: const Duration(milliseconds: 200),
-                            child: Text(colorController.autoDark.value ? "auto".tr : colorController.darkMode.value ? "on".tr : "off".tr,)
+                        onTap: ()=>colorController.darkModePanel(context),
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          onEnter: (_){
+                            setState(() {
+                              hoverDark=true;
+                            });
+                          },
+                          onExit: (_){
+                            setState(() {
+                              hoverDark=false;
+                            });
+                          },
+                          child: Obx(()=>
+                            AnimatedDefaultTextStyle(
+                              style: GoogleFonts.notoSansSc(
+                                color: hoverDark ? colorController.color6() : colorController.color5()
+                              ), 
+                              duration: const Duration(milliseconds: 200),
+                              child: Text(colorController.autoDark.value ? "auto".tr : colorController.darkMode.value ? "on".tr : "off".tr,)
+                            ),
                           ),
                         ),
-                      ),
-                    )
+                      )
                     ],
                   )
                 ),
@@ -581,16 +581,18 @@ class _SettingsViewState extends State<SettingsView> {
                       });
                       refreshLibrary(context);
                     },
-                    child: MouseRegion(
-                      onEnter: (_) => setState(() => hoverRefresh = true),
-                      onExit: (_) => setState(() => hoverRefresh = false),
-                      cursor: SystemMouseCursors.click,
-                      child: AnimatedDefaultTextStyle(
-                        style: GoogleFonts.notoSansSc(
-                          color: hoverRefresh ? colorController.color6() : colorController.color5()
+                    child: Obx(()=>
+                      MouseRegion(
+                        onEnter: (_) => setState(() => hoverRefresh = true),
+                        onExit: (_) => setState(() => hoverRefresh = false),
+                        cursor: SystemMouseCursors.click,
+                        child: AnimatedDefaultTextStyle(
+                          style: GoogleFonts.notoSansSc(
+                            color: hoverRefresh ? colorController.color6() : colorController.color5()
+                          ),
+                          duration: const Duration(milliseconds: 200),
+                          child: Text('refresh'.tr)
                         ),
-                        duration: const Duration(milliseconds: 200),
-                        child: Text('refresh'.tr)
                       ),
                     ),
                   )
@@ -601,16 +603,18 @@ class _SettingsViewState extends State<SettingsView> {
                   showDivider: false,
                   item: GestureDetector(
                     onTap: ()=>operations.showAbout(context),
-                    child: MouseRegion(
-                      onEnter: (_) => setState(() => hoverAbout = true),
-                      onExit: (_) => setState(() => hoverAbout = false),
-                      cursor: SystemMouseCursors.click,
-                      child: AnimatedDefaultTextStyle(
-                        style: GoogleFonts.notoSansSc(
-                          color: hoverAbout ? colorController.color6() : colorController.color5()
+                    child: Obx(()=>
+                      MouseRegion(
+                        onEnter: (_) => setState(() => hoverAbout = true),
+                        onExit: (_) => setState(() => hoverAbout = false),
+                        cursor: SystemMouseCursors.click,
+                        child: AnimatedDefaultTextStyle(
+                          style: GoogleFonts.notoSansSc(
+                            color: hoverAbout ? colorController.color6() : colorController.color5()
+                          ),
+                          duration: const Duration(milliseconds: 200),
+                          child: Text("v$version")
                         ),
-                        duration: const Duration(milliseconds: 200),
-                        child: Text("v$version")
                       ),
                     ),
                   )
