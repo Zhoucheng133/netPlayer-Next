@@ -82,9 +82,11 @@ class _SettingDividerState extends State<SettingDivider> {
       alignment: Alignment.center,
       child: SizedBox(
         width: 360,
-        child: Divider(
-          height: 3,
-          color: colorController.color3(),
+        child: Obx(()=>
+          Divider(
+            height: 3,
+            color: colorController.color3(),
+          ),
         )
       ),
     );
