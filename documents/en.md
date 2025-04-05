@@ -36,7 +36,6 @@ Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 - [FAQ](#faq)
 - [Other links](#other-links)
 - [Config netPlayer Next on your own device](#config-netplayer-next-on-your-own-device)
-- [Update log](#update-log)
 - [Some APIs](#some-apis)
 
 
@@ -163,10 +162,6 @@ Recommand using Visual Studio Code. After installing Flutter and Dart extension 
 
 If you Debug or Release on **Windows**, make sure not do it in Chinese mainland network environment.
 
-### With desktop lyric kit
-
-Use the same way to pacakge [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit), and move it to `<netPlayer program path>/lyric`
-
 Build on Windows：
 ```bash
 flutter build windows
@@ -177,7 +172,15 @@ Build on Mac:
 flutter build macos
 ```
 
-I have not tried it on Linux. You can try it by yourself.
+### With desktop lyric kit
+
+Use the same way to pacakge [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit), and move it to `<netPlayer program path>/lyric`
+
+### About PR
+> [!NOTE]
+> If you need to PR, target to branch `dev` instead of branch `main`
+
+Make sure your code does NOT affect other functions!
 
 ## Some APIs
 

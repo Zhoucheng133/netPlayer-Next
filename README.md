@@ -33,7 +33,6 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 - [常见问题](#常见问题)
 - [其它链接](#其它链接)
 - [在你的设备上配置netPlayer Next](#在你的设备上配置netplayer-next)
-- [更新日志](#更新日志)
 - [一些API](#一些api)
 
 ## 使用
@@ -168,17 +167,15 @@ flutter build windows
 flutter build macos
 ```
 
-## 关于PR
-> [!NOTE]
-> 如果你有需要PR，请将目标函数选择dev分支而不是主分支
-
-本项目中不乏很多屎山代码（是的，虽然基本上我是唯一的开发者），但是如果不能确保不影响正常的功能请保持现状
-
-我尝试修改了一部分，但是有一些部分对整个项目影响过大然后崩溃了;w;
-
 ### 桌面歌词组件
 
 你需要前往[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)页面中以同样的方法打包，放置到`<程序路径>/lyric`下即可
+
+### 关于PR
+> [!NOTE]
+> 如果你有需要PR，请将目标分支选择dev分支而不是主分支
+
+本项目中不乏很多屎山代码（是的，虽然基本上我是唯一的开发者），但是如果不能确保不影响正常的功能请保持现状
 
 ## 一些API
 
