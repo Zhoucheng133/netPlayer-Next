@@ -46,7 +46,7 @@ class _UserNameInputState extends State<UserNameInput> {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
+              color: isFocus ? Colors.grey.withAlpha(2) : Colors.grey.withAlpha(0),
               spreadRadius: 1,
               blurRadius: 5,
             ),
@@ -142,7 +142,7 @@ class _URLInputState extends State<URLInput> {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
+              color: isFocus ? Colors.grey.withAlpha(2) : Colors.grey.withAlpha(0),
               spreadRadius: 1,
               blurRadius: 5,
             ),
@@ -239,7 +239,7 @@ class _PasswordInputState extends State<PasswordInput> {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: isFocus ? Colors.grey.withOpacity(0.2) : Colors.grey.withOpacity(0),
+              color: isFocus ? Colors.grey.withAlpha(2) : Colors.grey.withAlpha(0),
               spreadRadius: 1,
               blurRadius: 5,
             ),

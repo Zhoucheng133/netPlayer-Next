@@ -156,7 +156,7 @@ class ColorController extends GetxController {
             onPressed: () async {
               Navigator.pop(context);
               final prefs=await SharedPreferences.getInstance();
-              prefs.setInt('theme', baseColor.value.value);
+              prefs.setInt('theme', baseColor.value.toARGB32());
             }, 
             child: Text('ok'.tr)
           )
