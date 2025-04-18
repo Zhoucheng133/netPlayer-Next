@@ -35,7 +35,7 @@ class _SideBarState extends State<SideBar> {
               color: Colors.grey[400],
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: colorController.color3(), width: 2.0),
+              borderSide: BorderSide(color: colorController.color4(), width: 2.0),
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(

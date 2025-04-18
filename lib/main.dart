@@ -97,12 +97,18 @@ class _MainAppState extends State<MainApp> {
           colorScheme: ColorScheme.fromSeed(
             seedColor: colorController.baseColor.value,
             brightness: Brightness.dark,
+          ),
+          dialogTheme: DialogTheme(
+            backgroundColor: colorController.color1(),
           )
         ) : ThemeData(
           splashColor: Colors.transparent,
           primaryColor: colorController.baseColor.value,
           colorScheme: ColorScheme.fromSeed(seedColor: colorController.baseColor.value),
           textTheme: GoogleFonts.notoSansScTextTheme(),
+          dialogTheme: DialogTheme(
+            backgroundColor: colorController.color1(),
+          )
         ),
         home: const Scaffold(
           body: MainWindow(),
