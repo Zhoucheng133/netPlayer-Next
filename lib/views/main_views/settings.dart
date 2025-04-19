@@ -126,7 +126,7 @@ class _SettingsViewState extends State<SettingsView> {
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: colorController.color4(), width: 2.0),
+                              borderSide: BorderSide(color: colorController.color4().withAlpha(100), width: 2.0),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             focusedBorder: OutlineInputBorder(
