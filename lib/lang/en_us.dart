@@ -15,6 +15,8 @@ const Map<String, String> enUS = {
   'love': 'Add to loved',
   'delove': 'Delove',
   'adjustVolume': 'Adjust volume',
+  'mute': 'Mute',
+  'unmute': 'Unmute',
   'playMode': 'Play mode',
   'loop': 'Loop',
   'shuffle': 'Shuffle',
@@ -188,7 +190,7 @@ const Map<String, String> enUS = {
   'Copy': 'Copy',
   'Paste': 'Paste',
   'Select All': 'Select All',
-  
+
   'Control': 'Control',
   'Play/Pause': 'Play/Pause',
   'Skip Next': "Skip Next",

@@ -111,8 +111,8 @@ class _PlayBarState extends State<PlayBar> {
                             ),
                             child: Center(
                               child: TweenAnimationBuilder(
-                                tween: ColorTween(end: hoverCover ? Colors.white : Colors.white.withAlpha(0),), 
-                                duration: const Duration(milliseconds: 200), 
+                                tween: ColorTween(end: hoverCover ? Colors.white : Colors.white.withAlpha(0),),
+                                duration: const Duration(milliseconds: 200),
                                 builder: (_, value, __)=>Icon(
                                   Icons.arrow_upward_rounded,
                                   color: value,
@@ -195,7 +195,7 @@ class _PlayBarState extends State<PlayBar> {
                                         });
                                       },
                                       child: TweenAnimationBuilder(
-                                        tween: ColorTween(end: hoverPre ? colorController.color6() : colorController.color5()), 
+                                        tween: ColorTween(end: hoverPre ? colorController.color6() : colorController.color5()),
                                         duration: const Duration(milliseconds: 200),
                                         builder: (_, value, __) => Icon(
                                           Icons.skip_previous_rounded,
@@ -267,7 +267,7 @@ class _PlayBarState extends State<PlayBar> {
                                         });
                                       },
                                       child: TweenAnimationBuilder(
-                                        tween: ColorTween(end: hoverSkip ? colorController.color6() : colorController.color5()), 
+                                        tween: ColorTween(end: hoverSkip ? colorController.color6() : colorController.color5()),
                                         duration: const Duration(milliseconds: 200),
                                         builder: (_, value, __) => Icon(
                                           Icons.skip_next_rounded,
@@ -298,7 +298,7 @@ class _PlayBarState extends State<PlayBar> {
                           inactiveTrackColor: colorController.color4(),
                         ),
                         child: Slider(
-                          value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
+                          value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"],
                           onChanged: (value){
                             operations.seekChange(value);
                           },
@@ -358,7 +358,7 @@ class _PlayBarState extends State<PlayBar> {
                         }else{
                           operations.loveSong(context, c.nowPlay['id']);
                         }
-                        
+
                       },
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,
@@ -376,8 +376,8 @@ class _PlayBarState extends State<PlayBar> {
                           message: 'love'.tr,
                           waitDuration: const Duration(seconds: 1),
                           child: TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverLove ? colorController.color6() : colorController.color5()), 
-                            duration: const Duration(milliseconds: 200), 
+                            tween: ColorTween(end: hoverLove ? colorController.color6() : colorController.color5()),
+                            duration: const Duration(milliseconds: 200),
                             builder: (_, value, __)=>Icon(
                               Icons.favorite_border_outlined,
                               size: 18,
@@ -388,7 +388,7 @@ class _PlayBarState extends State<PlayBar> {
                           message: 'delove'.tr,
                           waitDuration: const Duration(seconds: 1),
                           child: TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red), 
+                            tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red),
                             duration: const Duration(milliseconds: 200),
                             builder: (_, value, __)=>Icon(
                               Icons.favorite_rounded,
@@ -420,8 +420,8 @@ class _PlayBarState extends State<PlayBar> {
                           message: 'showLyric'.tr,
                           waitDuration: const Duration(seconds: 1),
                           child: TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverLyric ? colorController.color6() : colorController.color5()), 
-                            duration: const Duration(milliseconds: 200), 
+                            tween: ColorTween(end: hoverLyric ? colorController.color6() : colorController.color5()),
+                            duration: const Duration(milliseconds: 200),
                             builder: (_, value, __)=>Icon(
                               Icons.lyrics_rounded,
                               size: 18,
@@ -437,51 +437,82 @@ class _PlayBarState extends State<PlayBar> {
                         arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
                         backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
                         content: SizedBox(
-                          width: 120,
+                          width: 150,
                           height: 20,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: SliderTheme(
-                                  data: SliderThemeData(
-                                    thumbColor: colorController.color6(),
-                                    overlayColor: Colors.transparent,
-                                    overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                                    trackHeight: 2,
-                                    thumbShape: const RoundSliderThumbShape(
-                                      enabledThumbRadius: 5,
-                                      elevation: 0,
-                                      pressedElevation: 0,
-                                    ),
-                                    activeTrackColor: colorController.color5(),
-                                    inactiveTrackColor: colorController.color4(),
-                                  ),
-                                  child: Slider(
-                                    value: c.volume.value/100, 
-                                    onChanged: (val){
-                                      c.updateVolume((val*100).toInt());
+                          child: Obx(()=>
+                            Row(
+                              children: [
+                                // 静音按钮
+                                MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      // 保存当前音量值
+                                      if (c.volume.value > 0) {
+                                        // 如果当前不是静音，保存音量并设为0
+                                        c.lastVolume = c.volume.value;
+                                        c.updateVolume(0);
+                                      } else {
+                                        // 如果当前是静音，恢复之前的音量
+                                        c.updateVolume(c.lastVolume > 0 ? c.lastVolume : 50);
+                                      }
                                       c.handler.volumeSet(c.volume.value);
-                                    },
-                                    onChangeEnd: (_){
                                       operations.saveVolume();
                                     },
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 5,),
-                              SizedBox(
-                                width: 35,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "${c.volume}%",
-                                    style: GoogleFonts.notoSansSc(
-                                      fontSize: 12
+                                    child: Tooltip(
+                                      message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
+                                      child: FaIcon(
+                                        c.volume.value == 0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeHigh,
+                                        size: 14,
+                                        color: colorController.color5(),
+                                      ),
                                     ),
                                   ),
+                                ),
+                                const SizedBox(width: 8,),
+                                // 音量滑动条
+                                Expanded(
+                                  child: SliderTheme(
+                                    data: SliderThemeData(
+                                      thumbColor: colorController.color6(),
+                                      overlayColor: Colors.transparent,
+                                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                      trackHeight: 2,
+                                      thumbShape: const RoundSliderThumbShape(
+                                        enabledThumbRadius: 5,
+                                        elevation: 0,
+                                        pressedElevation: 0,
+                                      ),
+                                      activeTrackColor: colorController.color5(),
+                                      inactiveTrackColor: colorController.color4(),
+                                    ),
+                                    child: Slider(
+                                      value: c.volume.value/100,
+                                      onChanged: (val){
+                                        c.updateVolume((val*100).toInt());
+                                        c.handler.volumeSet(c.volume.value);
+                                      },
+                                      onChangeEnd: (_){
+                                        operations.saveVolume();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 5,),
+                                SizedBox(
+                                  width: 35,
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "${c.volume.value}%",
+                                      style: GoogleFonts.notoSansSc(
+                                        fontSize: 12
+                                      ),
+                                    ),
+                                  )
                                 )
-                              )
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         child: Tooltip(
@@ -500,8 +531,8 @@ class _PlayBarState extends State<PlayBar> {
                               });
                             },
                             child: TweenAnimationBuilder(
-                              tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()), 
-                              duration: const Duration(milliseconds: 200), 
+                              tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()),
+                              duration: const Duration(milliseconds: 200),
                               builder: (_, value, __) => FaIcon(
                                 c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
                                 size: 14,
@@ -591,8 +622,8 @@ class _PlayBarState extends State<PlayBar> {
                               });
                             },
                             child: TweenAnimationBuilder(
-                              tween: ColorTween(end: hoverMode ? colorController.color6() : colorController.color5()), 
-                              duration: const Duration(milliseconds: 200), 
+                              tween: ColorTween(end: hoverMode ? colorController.color6() : colorController.color5()),
+                              duration: const Duration(milliseconds: 200),
                               builder: (_, value, __)=>c.fullRandom.value ? Icon(
                                 Icons.shuffle,
                                 size: 18,
