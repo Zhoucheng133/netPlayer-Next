@@ -15,6 +15,8 @@ const Map<String, String> zhTW = {
   'love': '添加到喜歡',
   'delove': '取消喜歡',
   'adjustVolume': '調整音量',
+  'mute': '靜音',
+  'unmute': '取消靜音',
   'playMode': '播放模式',
   'loop': '列表播放',
   'shuffle': '隨機播放',
