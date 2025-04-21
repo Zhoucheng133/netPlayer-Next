@@ -432,7 +432,6 @@ class _PlayBarState extends State<PlayBar> {
                       ),
                     ),
                     const SizedBox(width: 25,),
-                    // TODO
                     Obx(()=>
                       CustomPopup(
                         arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
@@ -474,7 +473,7 @@ class _PlayBarState extends State<PlayBar> {
                                   ),
                                   const SizedBox(width: 8,),
                                   SizedBox(
-                                    width: 100,
+                                    width: 80,
                                     child: SliderTheme(
                                       data: SliderThemeData(
                                         thumbColor: colorController.color6(),

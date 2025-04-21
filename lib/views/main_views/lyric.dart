@@ -606,7 +606,7 @@ class _LyricViewState extends State<LyricView> {
                                               ),
                                               const SizedBox(width: 8,),
                                               SizedBox(
-                                                width: 100,
+                                                width: 80,
                                                 child: SliderTheme(
                                                   data: SliderThemeData(
                                                     thumbColor: colorController.color6(),
