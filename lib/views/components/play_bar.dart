@@ -437,81 +437,84 @@ class _PlayBarState extends State<PlayBar> {
                         arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
                         backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
                         content: SizedBox(
-                          width: 150,
-                          height: 20,
-                          child: Obx(()=>
-                            Row(
-                              children: [
-                                // 静音按钮
-                                MouseRegion(
-                                  cursor: SystemMouseCursors.click,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      // 保存当前音量值
-                                      if (c.volume.value > 0) {
-                                        // 如果当前不是静音，保存音量并设为0
-                                        c.lastVolume = c.volume.value;
-                                        c.updateVolume(0);
-                                      } else {
-                                        // 如果当前是静音，恢复之前的音量
-                                        c.updateVolume(c.lastVolume > 0 ? c.lastVolume : 50);
-                                      }
-                                      c.handler.volumeSet(c.volume.value);
-                                      operations.saveVolume();
-                                    },
-                                    child: Tooltip(
-                                      message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
-                                      child: FaIcon(
-                                        c.volume.value == 0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeHigh,
-                                        size: 14,
-                                        color: colorController.color5(),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 8,),
-                                // 音量滑动条
-                                Expanded(
-                                  child: SliderTheme(
-                                    data: SliderThemeData(
-                                      thumbColor: colorController.color6(),
-                                      overlayColor: Colors.transparent,
-                                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                                      trackHeight: 2,
-                                      thumbShape: const RoundSliderThumbShape(
-                                        enabledThumbRadius: 5,
-                                        elevation: 0,
-                                        pressedElevation: 0,
-                                      ),
-                                      activeTrackColor: colorController.color5(),
-                                      inactiveTrackColor: colorController.color4(),
-                                    ),
-                                    child: Slider(
-                                      value: c.volume.value/100,
-                                      onChanged: (val){
-                                        c.updateVolume((val*100).toInt());
+                          height: 25,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Obx(()=>
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // 静音按钮
+                                  MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        // 保存当前音量值
+                                        if (c.volume.value > 0) {
+                                          // 如果当前不是静音，保存音量并设为0
+                                          c.lastVolume = c.volume.value;
+                                          c.updateVolume(0);
+                                        } else {
+                                          // 如果当前是静音，恢复之前的音量
+                                          c.updateVolume(c.lastVolume > 0 ? c.lastVolume : 50);
+                                        }
                                         c.handler.volumeSet(c.volume.value);
-                                      },
-                                      onChangeEnd: (_){
                                         operations.saveVolume();
                                       },
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 5,),
-                                SizedBox(
-                                  width: 35,
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      "${c.volume.value}%",
-                                      style: GoogleFonts.notoSansSc(
-                                        fontSize: 12
+                                      child: Tooltip(
+                                        message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
+                                        child: FaIcon(
+                                          c.volume.value == 0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeHigh,
+                                          size: 14,
+                                          color: colorController.color5(),
+                                        ),
                                       ),
                                     ),
+                                  ),
+                                  const SizedBox(width: 8,),
+                                  SizedBox(
+                                    width: 100,
+                                    child: SliderTheme(
+                                      data: SliderThemeData(
+                                        thumbColor: colorController.color6(),
+                                        overlayColor: Colors.transparent,
+                                        overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                        trackHeight: 2,
+                                        thumbShape: const RoundSliderThumbShape(
+                                          enabledThumbRadius: 5,
+                                          elevation: 0,
+                                          pressedElevation: 0,
+                                        ),
+                                        activeTrackColor: colorController.color5(),
+                                        inactiveTrackColor: colorController.color4(),
+                                      ),
+                                      child: Slider(
+                                        value: c.volume.value/100,
+                                        onChanged: (val){
+                                          c.updateVolume((val*100).toInt());
+                                          c.handler.volumeSet(c.volume.value);
+                                        },
+                                        onChangeEnd: (_){
+                                          operations.saveVolume();
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 5,),
+                                  SizedBox(
+                                    width: 35,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "${c.volume.value}%",
+                                        style: GoogleFonts.notoSansSc(
+                                          fontSize: 12
+                                        ),
+                                      ),
+                                    )
                                   )
-                                )
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
