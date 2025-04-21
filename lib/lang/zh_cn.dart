@@ -15,6 +15,8 @@ const Map<String, String> zhCN = {
   'love': '添加到喜欢',
   'delove': '取消喜欢',
   'adjustVolume': '调整音量',
+  'mute': '静音',
+  'unmute': '取消静音',
   'playMode': '播放模式',
   'loop': '列表播放',
   'shuffle': '随机播放',
@@ -30,7 +32,7 @@ const Map<String, String> zhCN = {
   'shuffleAllSongs': '随机播放所有歌曲',
   'logoutTitle': '注销当前账户?',
   'logoutContent': '注销后会回到登录页面',
-  
+
   'savePlayed': '保存播放的歌曲',
   'autoLogin': '自动登录',
   'playBackground': '关闭窗口继续播放',
@@ -107,7 +109,7 @@ const Map<String, String> zhCN = {
   'updateOk': '更新成功',
 
   'connectLibrary': '连接到你的音乐库',
-  
+
   'getPlaylistsFail': '获取歌单列表失败',
   'getPlaylistFail': '获取歌单失败',
   'playlistNameEmpty': '歌单名称不能为空',
@@ -188,7 +190,7 @@ const Map<String, String> zhCN = {
   'Copy': '拷贝',
   'Paste': '粘贴',
   'Select All': '全选',
-  
+
   'Control': '控制',
   'Play/Pause': '播放/暂停',
   'Skip Next': "下一首",

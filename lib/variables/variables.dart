@@ -20,7 +20,7 @@ class Controller extends GetxController{
   // 页面对照
   var pages=[
     'all',      // id: ''
-    'loved',    // id: '' 
+    'loved',    // id: ''
     'artist',   // id: String / ''
     'album',    // id: String / ''
     'playList', // id: String / ''
@@ -64,6 +64,8 @@ class Controller extends GetxController{
   RxString playMode='list'.obs;
   // 音量大小，默认为100%
   RxInt volume=100.obs;
+  // 静音前的音量值
+  int lastVolume=100;
   // 随机播放所有歌曲
   RxBool fullRandom=false.obs;
   // 专辑列表
@@ -108,7 +110,7 @@ class Controller extends GetxController{
   RxInt wsPort=9098.obs;
   // ws服务状态
   RxBool wsOk=true.obs;
-  
+
   late SMTCWindows smtc;
 
   // 语言
