@@ -120,4 +120,7 @@ class Controller extends GetxController{
 
   // 封面图片
   var coverFuture = Rx<Uint8List?>(null);
+
+  // 版本号
+  RxString version=''.obs;
 }

@@ -866,7 +866,11 @@ class Operations{
             ),
             const SizedBox(height: 10),
             GestureDetector(
-              onTap: ()=>showLicensePage(context: context),
+              onTap: ()=>showLicensePage(
+                applicationName: 'netPlayer',
+                applicationVersion: c.version.value,
+                context: context
+              ),
               child: MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: Row(

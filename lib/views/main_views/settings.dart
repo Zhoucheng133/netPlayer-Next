@@ -40,16 +40,14 @@ class _SettingsViewState extends State<SettingsView> {
   bool hoverTheme=false;
   bool hoverDark=false;
   bool hoverRefresh=false;
-  String version="";
+  // String version="";
 
   final operations=Operations();
   int cacheSize=0;
 
   Future<void> getVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    setState(() {
-      version=packageInfo.version;
-    });
+    c.version.value='v${packageInfo.version}';
   }
 
   @override
@@ -613,7 +611,7 @@ class _SettingsViewState extends State<SettingsView> {
                             color: hoverAbout ? colorController.color6() : colorController.color5()
                           ),
                           duration: const Duration(milliseconds: 200),
-                          child: Text("v$version")
+                          child: Text(c.version.value)
                         ),
                       ),
                     ),
