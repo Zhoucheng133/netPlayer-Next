@@ -432,6 +432,7 @@ class _PlayBarState extends State<PlayBar> {
                       ),
                     ),
                     const SizedBox(width: 25,),
+                    // TODO
                     Obx(()=>
                       CustomPopup(
                         arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
@@ -464,7 +465,7 @@ class _PlayBarState extends State<PlayBar> {
                                       child: Tooltip(
                                         message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
                                         child: FaIcon(
-                                          c.volume.value == 0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeHigh,
+                                          c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
                                           size: 14,
                                           color: colorController.color5(),
                                         ),
@@ -537,7 +538,7 @@ class _PlayBarState extends State<PlayBar> {
                               tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()),
                               duration: const Duration(milliseconds: 200),
                               builder: (_, value, __) => FaIcon(
-                                c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeOff : FontAwesomeIcons.volumeLow,
+                                c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
                                 size: 14,
                                 color: value,
                               )
