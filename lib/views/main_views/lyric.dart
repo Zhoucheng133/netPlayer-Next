@@ -509,286 +509,297 @@ class _LyricViewState extends State<LyricView> {
                               ),
                             ),
                             const SizedBox(height: 20,),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                GestureDetector(
-                                  onTap: (){
-                                    if(isLoved()){
-                                      operations.deloveSong(context, c.nowPlay['id']);
-                                    }else{
-                                      operations.loveSong(context, c.nowPlay['id']);
-                                    }
-                                  },
-                                  child: MouseRegion(
-                                    cursor: SystemMouseCursors.click,
-                                    onEnter: (_){
-                                      setState(() {
-                                        hoverLove=true;
-                                      });
-                                    },
-                                    onExit: (_){
-                                      setState(() {
-                                        hoverLove=false;
-                                      });
-                                    },
-                                    child: Obx(()=>
-                                      !isLoved() ?
-                                      Tooltip(
-                                        message: 'love'.tr,
-                                        waitDuration: const Duration(seconds: 1),
-                                        child: TweenAnimationBuilder(
-                                          tween: ColorTween(end: hoverLove ? colorController.color6() : colorController.color5()), 
-                                          duration: const Duration(milliseconds: 200), 
-                                          builder: (_, value, __)=>Icon(
-                                            Icons.favorite_border_outlined,
-                                            size: 18,
-                                            color: value,
-                                          )
-                                        ),
-                                      ) : Tooltip(
-                                        message: 'delove'.tr,
-                                        waitDuration: const Duration(seconds: 1),
-                                        child: TweenAnimationBuilder(
-                                          tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red), 
-                                          duration: const Duration(milliseconds: 200),
-                                          builder: (_, value, __)=>Icon(
-                                            Icons.favorite_rounded,
-                                            size: 18,
-                                            color: value,
-                                          )
-                                        ),
-                                      )
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 25,),
-                                Obx(()=>
-                                  CustomPopup(
-                                    arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
-                                    backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
-                                    content: SizedBox(
-                                      height: 25,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 5),
-                                        child: Obx(()=>
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              MouseRegion(
-                                                cursor: SystemMouseCursors.click,
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    if (c.volume.value > 0) {
-                                                      c.lastVolume = c.volume.value;
-                                                      c.volume.value=0;
-                                                    } else {
-                                                      c.volume.value=c.lastVolume;
-                                                    }
-                                                    c.handler.volumeSet(c.volume.value);
-                                                    operations.saveVolume();
-                                                  },
-                                                  child: Tooltip(
-                                                    message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
-                                                    child: FaIcon(
-                                                      c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
-                                                      size: 14,
-                                                      color: colorController.color5(),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(width: 8,),
-                                              SizedBox(
-                                                width: 80,
-                                                child: SliderTheme(
-                                                  data: SliderThemeData(
-                                                    thumbColor: colorController.color6(),
-                                                    overlayColor: Colors.transparent,
-                                                    overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                                                    trackHeight: 2,
-                                                    thumbShape: const RoundSliderThumbShape(
-                                                      enabledThumbRadius: 5,
-                                                      elevation: 0,
-                                                      pressedElevation: 0,
-                                                    ),
-                                                    activeTrackColor: colorController.color5(),
-                                                    inactiveTrackColor: colorController.color4(),
-                                                  ),
-                                                  child: Slider(
-                                                    value: c.volume.value/100,
-                                                    onChanged: (val){
-                                                      c.volume.value=(val*100).toInt();
-                                                      c.handler.volumeSet(c.volume.value);
-                                                    },
-                                                    onChangeEnd: (_){
-                                                      operations.saveVolume();
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(width: 5,),
-                                              SizedBox(
-                                                width: 35,
-                                                child: Align(
-                                                  alignment: Alignment.centerLeft,
-                                                  child: Text(
-                                                    "${c.volume.value}%",
-                                                    style: GoogleFonts.notoSansSc(
-                                                      fontSize: 12
-                                                    ),
-                                                  ),
-                                                )
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    child: Tooltip(
-                                      waitDuration: const Duration(seconds: 1),
-                                      message: 'adjustVolume'.tr,
-                                      child: MouseRegion(
-                                        cursor: SystemMouseCursors.click,
-                                        onEnter: (_){
-                                          setState(() {
-                                            hoverVolume=true;
-                                          });
+                            SizedBox(
+                              width: 110,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                spacing: 25.0,
+                                children: [
+                                  Expanded(
+                                    child: Center(
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          if(isLoved()){
+                                            operations.deloveSong(context, c.nowPlay['id']);
+                                          }else{
+                                            operations.loveSong(context, c.nowPlay['id']);
+                                          }
                                         },
-                                        onExit: (_){
-                                          setState(() {
-                                            hoverVolume=false;
-                                          });
-                                        },
-                                        child: TweenAnimationBuilder(
-                                          tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()),
-                                          duration: const Duration(milliseconds: 200),
-                                          builder: (_, value, __) => Obx(()=>
-                                            SizedBox(
-                                              width: 18,
-                                              child: FaIcon(
-                                                c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
-                                                size: 14,
-                                                color: value,
-                                              ),
-                                            )
-                                          )
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 25,),
-                                Obx(()=>
-                                  PopupMenuButton(
-                                    color: Colors.white,
-                                    tooltip: "",
-                                    enabled: !c.fullRandom.value,
-                                    splashRadius: 0,
-                                    onSelected: (val) async {
-                                      c.playMode.value=val;
-                                      final SharedPreferences prefs = await SharedPreferences.getInstance();
-                                      await prefs.setString('playMode', val);
-                                    },
-                                    itemBuilder: (BuildContext context)=>[
-                                      PopupMenuItem(
-                                        value: "list",
-                                        height: 35,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            const Icon(
-                                              Icons.repeat_rounded,
-                                              size: 18,
-                                            ),
-                                            const SizedBox(width: 5,),
-                                            Text("loop".tr)
-                                          ],
-                                        ),
-                                      ),
-                                      PopupMenuItem(
-                                        value: "repeat",
-                                        height: 35,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            const Icon(
-                                              Icons.repeat_one_rounded,
-                                              size: 18,
-                                            ),
-                                            const SizedBox(width: 5,),
-                                            Text("single".tr)
-                                          ],
-                                        ),
-                                      ),
-                                      PopupMenuItem(
-                                        value: "random",
-                                        height: 35,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            const Icon(
-                                              Icons.shuffle_rounded,
-                                              size: 18,
-                                            ),
-                                            const SizedBox(width: 5,),
-                                            Text("shuffle".tr)
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                    child: Container(
-                                      color: colorController.darkMode.value ? colorController.color1() : Colors.white,
-                                      child: Tooltip(
-                                        waitDuration: const Duration(seconds: 1),
-                                        message: c.fullRandom.value ? 'nowFullShuffle'.tr : 'playMode'.tr,
                                         child: MouseRegion(
-                                          cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                                          cursor: SystemMouseCursors.click,
                                           onEnter: (_){
                                             setState(() {
-                                              hoverMode=true;
+                                              hoverLove=true;
                                             });
                                           },
                                           onExit: (_){
                                             setState(() {
-                                              hoverMode=false;
+                                              hoverLove=false;
                                             });
                                           },
                                           child: Obx(()=>
-                                            TweenAnimationBuilder(
-                                              tween: ColorTween(end: hoverMode ? colorController.color6() : colorController.color5()), 
-                                              duration: const Duration(milliseconds: 200), 
-                                              builder: (_, value, __)=>c.fullRandom.value ? Icon(
-                                                Icons.shuffle,
-                                                size: 18,
-                                                color: Colors.grey[300],
-                                              ) : c.playMode.value=='list' ?  Icon(
-                                                Icons.repeat_rounded,
-                                                size: 18,
-                                                color: value,
-                                              ) : c.playMode.value=='repeat' ?
-                                              Icon(
-                                                Icons.repeat_one_rounded,
-                                                size: 18,
-                                                color: value
-                                              ) : Icon(
-                                                Icons.shuffle_rounded,
-                                                size: 18,
-                                                color: value,
+                                            !isLoved() ?
+                                            Tooltip(
+                                              message: 'love'.tr,
+                                              waitDuration: const Duration(seconds: 1),
+                                              child: TweenAnimationBuilder(
+                                                tween: ColorTween(end: hoverLove ? colorController.color6() : colorController.color5()), 
+                                                duration: const Duration(milliseconds: 200), 
+                                                builder: (_, value, __)=>Icon(
+                                                  Icons.favorite_border_outlined,
+                                                  size: 18,
+                                                  color: value,
+                                                )
+                                              ),
+                                            ) : Tooltip(
+                                              message: 'delove'.tr,
+                                              waitDuration: const Duration(seconds: 1),
+                                              child: TweenAnimationBuilder(
+                                                tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red), 
+                                                duration: const Duration(milliseconds: 200),
+                                                builder: (_, value, __)=>Icon(
+                                                  Icons.favorite_rounded,
+                                                  size: 18,
+                                                  color: value,
+                                                )
+                                              ),
+                                            )
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Center(
+                                      child: Obx(()=>
+                                        CustomPopup(
+                                          arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                                          backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                                          content: SizedBox(
+                                            height: 25,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(left: 5),
+                                              child: Obx(()=>
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    MouseRegion(
+                                                      cursor: SystemMouseCursors.click,
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          if (c.volume.value > 0) {
+                                                            c.lastVolume = c.volume.value;
+                                                            c.volume.value=0;
+                                                          } else {
+                                                            c.volume.value=c.lastVolume;
+                                                          }
+                                                          c.handler.volumeSet(c.volume.value);
+                                                          operations.saveVolume();
+                                                        },
+                                                        child: Tooltip(
+                                                          message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
+                                                          child: FaIcon(
+                                                            c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
+                                                            size: 14,
+                                                            color: colorController.color5(),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 8,),
+                                                    SizedBox(
+                                                      width: 80,
+                                                      child: SliderTheme(
+                                                        data: SliderThemeData(
+                                                          thumbColor: colorController.color6(),
+                                                          overlayColor: Colors.transparent,
+                                                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                                          trackHeight: 2,
+                                                          thumbShape: const RoundSliderThumbShape(
+                                                            enabledThumbRadius: 5,
+                                                            elevation: 0,
+                                                            pressedElevation: 0,
+                                                          ),
+                                                          activeTrackColor: colorController.color5(),
+                                                          inactiveTrackColor: colorController.color4(),
+                                                        ),
+                                                        child: Slider(
+                                                          value: c.volume.value/100,
+                                                          onChanged: (val){
+                                                            c.volume.value=(val*100).toInt();
+                                                            c.handler.volumeSet(c.volume.value);
+                                                          },
+                                                          onChangeEnd: (_){
+                                                            operations.saveVolume();
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 5,),
+                                                    SizedBox(
+                                                      width: 35,
+                                                      child: Align(
+                                                        alignment: Alignment.centerLeft,
+                                                        child: Text(
+                                                          "${c.volume.value}%",
+                                                          style: GoogleFonts.notoSansSc(
+                                                            fontSize: 12
+                                                          ),
+                                                        ),
+                                                      )
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          child: Tooltip(
+                                            waitDuration: const Duration(seconds: 1),
+                                            message: 'adjustVolume'.tr,
+                                            child: MouseRegion(
+                                              cursor: SystemMouseCursors.click,
+                                              onEnter: (_){
+                                                setState(() {
+                                                  hoverVolume=true;
+                                                });
+                                              },
+                                              onExit: (_){
+                                                setState(() {
+                                                  hoverVolume=false;
+                                                });
+                                              },
+                                              child: TweenAnimationBuilder(
+                                                tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()),
+                                                duration: const Duration(milliseconds: 200),
+                                                builder: (_, value, __) => Obx(()=>
+                                                  FaIcon(
+                                                    c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
+                                                    size: 14,
+                                                    color: value,
+                                                  )
+                                                )
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    )
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Center(
+                                      child: Obx(()=>
+                                        PopupMenuButton(
+                                          color: Colors.white,
+                                          tooltip: "",
+                                          enabled: !c.fullRandom.value,
+                                          splashRadius: 0,
+                                          onSelected: (val) async {
+                                            c.playMode.value=val;
+                                            final SharedPreferences prefs = await SharedPreferences.getInstance();
+                                            await prefs.setString('playMode', val);
+                                          },
+                                          itemBuilder: (BuildContext context)=>[
+                                            PopupMenuItem(
+                                              value: "list",
+                                              height: 35,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  const Icon(
+                                                    Icons.repeat_rounded,
+                                                    size: 18,
+                                                  ),
+                                                  const SizedBox(width: 5,),
+                                                  Text("loop".tr)
+                                                ],
+                                              ),
+                                            ),
+                                            PopupMenuItem(
+                                              value: "repeat",
+                                              height: 35,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  const Icon(
+                                                    Icons.repeat_one_rounded,
+                                                    size: 18,
+                                                  ),
+                                                  const SizedBox(width: 5,),
+                                                  Text("single".tr)
+                                                ],
+                                              ),
+                                            ),
+                                            PopupMenuItem(
+                                              value: "random",
+                                              height: 35,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  const Icon(
+                                                    Icons.shuffle_rounded,
+                                                    size: 18,
+                                                  ),
+                                                  const SizedBox(width: 5,),
+                                                  Text("shuffle".tr)
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                          child: Container(
+                                            color: colorController.darkMode.value ? colorController.color1() : Colors.white,
+                                            child: Tooltip(
+                                              waitDuration: const Duration(seconds: 1),
+                                              message: c.fullRandom.value ? 'nowFullShuffle'.tr : 'playMode'.tr,
+                                              child: MouseRegion(
+                                                cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                                                onEnter: (_){
+                                                  setState(() {
+                                                    hoverMode=true;
+                                                  });
+                                                },
+                                                onExit: (_){
+                                                  setState(() {
+                                                    hoverMode=false;
+                                                  });
+                                                },
+                                                child: Obx(()=>
+                                                  TweenAnimationBuilder(
+                                                    tween: ColorTween(end: hoverMode ? colorController.color6() : colorController.color5()), 
+                                                    duration: const Duration(milliseconds: 200), 
+                                                    builder: (_, value, __)=>c.fullRandom.value ? Icon(
+                                                      Icons.shuffle,
+                                                      size: 18,
+                                                      color: Colors.grey[300],
+                                                    ) : c.playMode.value=='list' ?  Icon(
+                                                      Icons.repeat_rounded,
+                                                      size: 18,
+                                                      color: value,
+                                                    ) : c.playMode.value=='repeat' ?
+                                                    Icon(
+                                                      Icons.repeat_one_rounded,
+                                                      size: 18,
+                                                      color: value
+                                                    ) : Icon(
+                                                      Icons.shuffle_rounded,
+                                                      size: 18,
+                                                      color: value,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        )
+                                      ),
+                                    ),
                                   )
-                                )
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
