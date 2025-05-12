@@ -577,7 +577,6 @@ class _LyricViewState extends State<LyricView> {
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              // 静音按钮
                                               MouseRegion(
                                                 cursor: SystemMouseCursors.click,
                                                 child: GestureDetector(
@@ -667,10 +666,13 @@ class _LyricViewState extends State<LyricView> {
                                           tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()),
                                           duration: const Duration(milliseconds: 200),
                                           builder: (_, value, __) => Obx(()=>
-                                            FaIcon(
-                                              c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
-                                              size: 14,
-                                              color: value,
+                                            SizedBox(
+                                              width: 18,
+                                              child: FaIcon(
+                                                c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
+                                                size: 14,
+                                                color: value,
+                                              ),
                                             )
                                           )
                                         ),
