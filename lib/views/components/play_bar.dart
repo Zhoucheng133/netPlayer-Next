@@ -444,19 +444,15 @@ class _PlayBarState extends State<PlayBar> {
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  // 静音按钮
                                   MouseRegion(
                                     cursor: SystemMouseCursors.click,
                                     child: GestureDetector(
                                       onTap: () {
-                                        // 保存当前音量值
                                         if (c.volume.value > 0) {
-                                          // 如果当前不是静音，保存音量并设为0
                                           c.lastVolume = c.volume.value;
-                                          c.updateVolume(0);
+                                          c.volume.value=0;
                                         } else {
-                                          // 如果当前是静音，恢复之前的音量
-                                          c.updateVolume(c.lastVolume > 0 ? c.lastVolume : 50);
+                                          c.volume.value=c.lastVolume;
                                         }
                                         c.handler.volumeSet(c.volume.value);
                                         operations.saveVolume();
@@ -491,7 +487,7 @@ class _PlayBarState extends State<PlayBar> {
                                       child: Slider(
                                         value: c.volume.value/100,
                                         onChanged: (val){
-                                          c.updateVolume((val*100).toInt());
+                                          c.volume.value=(val*100).toInt();
                                           c.handler.volumeSet(c.volume.value);
                                         },
                                         onChangeEnd: (_){
@@ -536,10 +532,12 @@ class _PlayBarState extends State<PlayBar> {
                             child: TweenAnimationBuilder(
                               tween: ColorTween(end: hoverVolume ? colorController.color6() : colorController.color5()),
                               duration: const Duration(milliseconds: 200),
-                              builder: (_, value, __) => FaIcon(
-                                c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
-                                size: 14,
-                                color: value,
+                              builder: (_, value, __) => Obx(()=>
+                                FaIcon(
+                                  c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
+                                  size: 14,
+                                  color: value,
+                                )
                               )
                             ),
                           ),

@@ -98,11 +98,6 @@ class Controller extends GetxController{
   RxBool showLyric=false.obs;
   // 启用ws服务
   RxBool useWs=false.obs;
-
-  // 更新音量
-  void updateVolume(int val) {
-    volume.value=val;
-  }
   // 歌词字号
   RxInt lyricText=16.obs;
 
