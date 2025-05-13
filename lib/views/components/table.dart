@@ -288,7 +288,8 @@ class SongItem extends StatefulWidget {
   final dynamic refresh;
   final String artistId;
   final String albumId;
-  const SongItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from, this.list, this.refresh, required this.album, required this.artistId, required this.albumId});
+  final String created;
+  const SongItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from, this.list, this.refresh, required this.album, required this.artistId, required this.albumId, required this.created});
 
   @override
   State<SongItem> createState() => _SongItemState();
@@ -599,6 +600,7 @@ class _SongItemState extends State<SongItem> {
         "artist": widget.artist,
         "listId": widget.listId,
         "album": widget.album,
+        "created": widget.created,
       });
     }
   }

@@ -138,7 +138,8 @@ class _AlbumViewState extends State<AlbumView> {
                             list: list, 
                             album: list[index]['album'], 
                             artistId: list[index]['artistId']??'', 
-                            albumId: list[index]['albumId']??'',
+                            albumId: list[index]['albumId']??'', 
+                            created: list[index]['created']??'',
                           )
                         ) : list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                         Obx(()=>
@@ -155,6 +156,7 @@ class _AlbumViewState extends State<AlbumView> {
                             album: list[index]['album'], 
                             artistId: list[index]['artistId']??'', 
                             albumId: list[index]['albumId']??'',
+                            created: list[index]['created']??'',
                           )
                         ): Container();
                       }

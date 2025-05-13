@@ -168,6 +168,7 @@ class _PlayListViewState extends State<PlayListView> {
                           album: list[index]['album'], 
                           artistId: list[index]['artistId']??'', 
                           albumId: list[index]['albumId']??'',
+                          created: list[index]['created']??'',
                         ),
                       ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                       Obx(()=>SongItem(
@@ -184,6 +185,7 @@ class _PlayListViewState extends State<PlayListView> {
                         album: list[index]['album'], 
                         artistId: list[index]['artistId']??'', 
                         albumId: list[index]['albumId']??'',
+                        created: list[index]['created']??'',
                       )) : Container()
                     );
                   }

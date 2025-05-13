@@ -1324,6 +1324,7 @@ class Operations{
                   )
                 ],
               ),
+              const SizedBox(height: 5,),
               Row(
                 children: [
                   SizedBox(
@@ -1354,6 +1355,25 @@ class Operations{
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                    )
+                  )
+                ],
+              ),
+              const SizedBox(height: 5,),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text(
+                      'created'.tr,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      formatIsoString(data['created']),
                     )
                   )
                 ],
@@ -1389,10 +1409,14 @@ class Operations{
   }
 
   String formatIsoString(String isoString) {
-    DateTime dateTime = DateTime.parse(isoString).toLocal();
-    String formatted = "${dateTime.year}/${dateTime.month}/${dateTime.day} - ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
+    try {
+      DateTime dateTime = DateTime.parse(isoString).toLocal();
+      String formatted = "${dateTime.year}/${dateTime.month}/${dateTime.day} - ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
 
-    return formatted;
+      return formatted;
+    } catch (_) {
+      return "";
+    }
   }
 
 }
