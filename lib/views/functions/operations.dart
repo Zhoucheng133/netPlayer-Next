@@ -146,6 +146,20 @@ class Operations{
     }
   }
 
+  // 获取歌单信息
+  Future<Map> getPlayListInfo(BuildContext context, String id) async {
+    final rlt=await requests.getPlayListRequest(id);
+    if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
+      showMessage(false, 'getPlaylistFail'.tr, context);
+      return {};
+    }else{
+      try {
+        return rlt["subsonic-response"]["playlist"];
+      } catch (_) {}
+    }
+    return {};
+  }
+
   // 获取指定id歌单
   Future<List> getPlayList(BuildContext context, String id) async {
     final rlt=await requests.getPlayListRequest(id);

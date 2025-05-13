@@ -1,10 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -462,7 +464,133 @@ class _PlayListItemState extends State<PlayListItem> {
         )
       );
     }else if(val=='info'){
-      // TODO 歌单信息
+      // print(widget.id);
+      var getList=await operations.getPlayListInfo(context, widget.id);
+      if(getList.isEmpty){
+        return;
+      }
+      showDialog(
+        context: context, 
+        builder: (context)=>AlertDialog(
+          title: Text('playlistInfo'.tr, style: GoogleFonts.notoSansSc(),),
+          content: SizedBox(
+            width: 300,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${getList['id']}",
+                    height: 100,
+                    width: 100,
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        'playListName'.tr,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: (){
+                            FlutterClipboard.copy(getList['name']).then((_){
+                              if(context.mounted){
+                                showMessage(true, 'copied'.tr, context);
+                              }
+                            });
+                          },
+                          child: Text(
+                            getList['name'],
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      )
+                    )
+                  ],
+                ),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        'playListCount'.tr,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: (){
+                            FlutterClipboard.copy(getList['name']).then((_){
+                              if(context.mounted){
+                                showMessage(true, 'copied'.tr, context);
+                              }
+                            });
+                          },
+                          child: Text(
+                            getList['songCount'].toString(),
+                          ),
+                        ),
+                      )
+                    )
+                  ],
+                ),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        'totalDuration'.tr,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          onTap: (){
+                            FlutterClipboard.copy(getList['name']).then((_){
+                              if(context.mounted){
+                                showMessage(true, 'copied'.tr, context);
+                              }
+                            });
+                          },
+                          child: Text(
+                            getList['duration'].toString(),
+                          ),
+                        ),
+                      )
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: ()=>Navigator.pop(context), 
+              child: Text("ok".tr, style: GoogleFonts.notoSansSc(),)
+            )
+          ],
+        )
+      );
     }
   }
   
