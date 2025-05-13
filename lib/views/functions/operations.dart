@@ -1389,9 +1389,7 @@ class Operations{
   }
 
   String formatIsoString(String isoString) {
-    DateTime dateTime = DateTime.parse(isoString).toLocal(); // 转换为本地时间
-
-    // 构造格式化的字符串
+    DateTime dateTime = DateTime.parse(isoString).toLocal();
     String formatted = "${dateTime.year}/${dateTime.month}/${dateTime.day} - ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
 
     return formatted;
