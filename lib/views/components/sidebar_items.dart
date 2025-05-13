@@ -367,6 +367,28 @@ class _PlayListItemState extends State<PlayListItem> {
               )
             ],
           ),
+        ),
+        PopupMenuItem(
+          value: "info",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.info_rounded,
+                size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
+              ),
+              const SizedBox(width: 5,),
+              Text(
+                "playlistInfo".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
+            ],
+          ),
         )
       ]
     );
@@ -439,6 +461,8 @@ class _PlayListItemState extends State<PlayListItem> {
           ],
         )
       );
+    }else if(val=='info'){
+      // TODO 歌单信息
     }
   }
   

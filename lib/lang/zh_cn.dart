@@ -32,6 +32,7 @@ const Map<String, String> zhCN = {
   'shuffleAllSongs': '随机播放所有歌曲',
   'logoutTitle': '注销当前账户?',
   'logoutContent': '注销后会回到登录页面',
+  'playlistInfo': '歌单信息',
 
   'savePlayed': '保存播放的歌曲',
   'autoLogin': '自动登录',

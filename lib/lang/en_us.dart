@@ -32,6 +32,7 @@ const Map<String, String> enUS = {
   'shuffleAllSongs': 'Shuffle all the songs',
   'logoutTitle': 'Logout?',
   'logoutContent': 'Back to login view after logout',
+  'playlistInfo': 'Playlist info',
 
   'savePlayed': 'Save played songs',
   'autoLogin': 'Auto login',

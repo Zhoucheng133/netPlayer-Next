@@ -32,6 +32,7 @@ const Map<String, String> zhTW = {
   'shuffleAllSongs': '隨機播放所有歌曲',
   'logoutTitle': '註銷當前賬戶?',
   'logoutContent': '註銷後會回到登錄頁面',
+  'playlistInfo': '歌單訊息',
   
   'savePlayed': '保存播放的歌曲',
   'autoLogin': '自動登錄',
