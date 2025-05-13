@@ -531,20 +531,8 @@ class _PlayListItemState extends State<PlayListItem> {
                       ),
                     ),
                     Expanded(
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          onTap: (){
-                            FlutterClipboard.copy(getList['name']).then((_){
-                              if(context.mounted){
-                                showMessage(true, 'copied'.tr, context);
-                              }
-                            });
-                          },
-                          child: Text(
-                            getList['songCount'].toString(),
-                          ),
-                        ),
+                      child: Text(
+                        getList['songCount'].toString(),
                       )
                     )
                   ],
@@ -562,20 +550,78 @@ class _PlayListItemState extends State<PlayListItem> {
                       ),
                     ),
                     Expanded(
+                      child: Text(
+                        operations.convertDuration(getList['duration']),
+                      )
+                    )
+                  ],
+                ),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        'playlistId'.tr,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Expanded(
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: (){
-                            FlutterClipboard.copy(getList['name']).then((_){
+                            FlutterClipboard.copy(getList['id']).then((_){
                               if(context.mounted){
                                 showMessage(true, 'copied'.tr, context);
                               }
                             });
                           },
                           child: Text(
-                            getList['duration'].toString(),
+                            getList['id'],
+                            maxLines: 2,
                           ),
                         ),
+                      )
+                    )
+                  ],
+                ),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        'created'.tr,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        operations.formatIsoString(getList['created']),
+                      )
+                    )
+                  ],
+                ),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        'changed'.tr,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        operations.formatIsoString(getList['changed']),
                       )
                     )
                   ],

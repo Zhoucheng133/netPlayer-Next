@@ -36,6 +36,8 @@ const Map<String, String> zhTW = {
   'playListName': '名稱',
   'playListCount': '歌曲數',
   'totalDuration': '總時長',
+  'created': '創建於',
+  'changed': '修改於',
   
   'savePlayed': '保存播放的歌曲',
   'autoLogin': '自動登錄',

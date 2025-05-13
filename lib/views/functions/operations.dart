@@ -1373,4 +1373,28 @@ class Operations{
     );
   }
 
+  String convertDuration(int time) {
+    int hours = time ~/ 3600;
+    int minutes = (time % 3600) ~/ 60;
+    int seconds = time % 60;
+
+    String formattedMin = minutes.toString().padLeft(2, '0');
+    String formattedSec = seconds.toString().padLeft(2, '0');
+
+    if (hours > 0) {
+      return "$hours:$formattedMin:$formattedSec";
+    } else {
+      return "$minutes:$formattedSec";
+    }
+  }
+
+  String formatIsoString(String isoString) {
+    DateTime dateTime = DateTime.parse(isoString).toLocal(); // 转换为本地时间
+
+    // 构造格式化的字符串
+    String formatted = "${dateTime.year}/${dateTime.month}/${dateTime.day} - ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
+
+    return formatted;
+  }
+
 }

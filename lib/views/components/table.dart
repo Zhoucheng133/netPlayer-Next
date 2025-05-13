@@ -301,13 +301,6 @@ class _SongItemState extends State<SongItem> {
   final ColorController colorController=Get.find();
   final operations=Operations();
 
-  String convertDuration(int time){
-    int min = time ~/ 60;
-    int sec = time % 60;
-    String formattedSec = sec.toString().padLeft(2, '0');
-    return "$min:$formattedSec";
-  }
-
   bool isLoved(){
     for (var val in c.lovedSongs) {
       if(val["id"]==widget.id){
@@ -601,7 +594,7 @@ class _SongItemState extends State<SongItem> {
     }else if(val=="info"){
       operations.songInfo(context, {
         "title": widget.title,
-        "duration": convertDuration(widget.duration),
+        "duration": operations.convertDuration(widget.duration),
         "id": widget.id,
         "artist": widget.artist,
         "listId": widget.listId,
@@ -688,7 +681,7 @@ class _SongItemState extends State<SongItem> {
                     width: 70,
                     child: Center(
                       child: Text(
-                        convertDuration(widget.duration),
+                        operations.convertDuration(widget.duration),
                         style: GoogleFonts.notoSansSc(
                           fontSize: 13,
                           color: widget.isplay ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,

@@ -35,6 +35,8 @@ const Map<String, String> enUS = {
   'playlistInfo': 'Playlist info',
   'playListName': 'Name',
   'playListCount': 'Count',
+  'created': 'Created',
+  'changed': 'Changed',
 
   'savePlayed': 'Save played songs',
   'autoLogin': 'Auto login',

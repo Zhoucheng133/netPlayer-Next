@@ -36,6 +36,8 @@ const Map<String, String> zhCN = {
   'playListName': '名称',
   'playListCount': '歌曲数量',
   'totalDuration': '总时长',
+  'created': '创建于',
+  'changed': '修改于',
 
   'savePlayed': '保存播放的歌曲',
   'autoLogin': '自动登录',
