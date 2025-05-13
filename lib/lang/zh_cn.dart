@@ -33,6 +33,9 @@ const Map<String, String> zhCN = {
   'logoutTitle': '注销当前账户?',
   'logoutContent': '注销后会回到登录页面',
   'playlistInfo': '歌单信息',
+  'playListName': '名称',
+  'playListCount': '歌曲数量',
+  'totalDuration': '总时长',
 
   'savePlayed': '保存播放的歌曲',
   'autoLogin': '自动登录',

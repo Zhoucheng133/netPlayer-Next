@@ -33,6 +33,9 @@ const Map<String, String> zhTW = {
   'logoutTitle': '註銷當前賬戶?',
   'logoutContent': '註銷後會回到登錄頁面',
   'playlistInfo': '歌單訊息',
+  'playListName': '名稱',
+  'playListCount': '歌曲數',
+  'totalDuration': '總時長',
   
   'savePlayed': '保存播放的歌曲',
   'autoLogin': '自動登錄',

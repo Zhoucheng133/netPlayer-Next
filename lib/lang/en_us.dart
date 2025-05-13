@@ -33,6 +33,8 @@ const Map<String, String> enUS = {
   'logoutTitle': 'Logout?',
   'logoutContent': 'Back to login view after logout',
   'playlistInfo': 'Playlist info',
+  'playListName': 'Name',
+  'playListCount': 'Count',
 
   'savePlayed': 'Save played songs',
   'autoLogin': 'Auto login',
@@ -64,6 +66,7 @@ const Map<String, String> enUS = {
   'duration': "Duration",
   'songId': "Song id",
   'playlistId': 'Playlist id',
+  'totalDuration': 'Total duration',
 
   'album': 'Album',
   'searchSong': 'Search songs',
