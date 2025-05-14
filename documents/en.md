@@ -73,7 +73,10 @@ Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 ### Desktop lyric kit
 
 > [!NOTE]
-> Desktop lyric kit's code [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit). You can download netPlayer without this feature on Relase page. You can enable it on `Settings - Enable lyric kit`. You need to enable ws service before using it.
+> Desktop lyric kit's code [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit). For detailed instructions, see the README of this repository.
+
+> [!WARNING]
+> It was removed from main App from `v3.5.2`. You need to enable ws service to use it.
 
 <img src="../demo/lyric1.png" width="400px">
 <img src="../demo/lyric2.png" width="400px">

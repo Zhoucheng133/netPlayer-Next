@@ -70,7 +70,10 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 ### 桌面歌词组件
 
 > [!NOTE]
-> 歌词组件的代码[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)，你可以在Release页中下载没有这个功能的版本，桌面歌词的开关在`设置-启用歌词组件`，**打开这个功能需要启用ws服务**
+> 歌词组件的代码[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)，详细的使用教程见这个仓库的README
+
+> [!WARNING]
+> 从`v3.5.2`开始从主程序中移除，**打开这个功能需要启用ws服务**
 
 <img src="demo/lyric1.png" width="400px">
 <img src="demo/lyric2.png" width="400px">
