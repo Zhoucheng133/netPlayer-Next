@@ -70,17 +70,12 @@ Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 <img src="../demo/demo2.png" width="600px">
 
 
-### Desktop lyric kit
+### ~~Desktop lyric kit~~ (Deprecated Project)
 
-> [!NOTE]
-> Desktop lyric kit's code [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit). For detailed instructions, see the README of this repository.
+Desktop lyric kit's code [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 
 > [!WARNING]
 > It was removed from main App from `v3.5.2`. You need to enable ws service to use it.
-
-<img src="../demo/lyric1.png" width="400px">
-<img src="../demo/lyric2.png" width="400px">
-<img src="../demo/lyric3.png" width="400px">
 
 ## Language support
 

@@ -67,17 +67,12 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 <img src="demo/demo2.png" width="600px">
 
-### 桌面歌词组件
+### ~~桌面歌词组件~~ (遗弃的项目)
 
-> [!NOTE]
-> 歌词组件的代码[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)，详细的使用教程见这个仓库的README
+歌词组件的代码[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 
 > [!WARNING]
 > 从`v3.5.2`开始从主程序中移除，**打开这个功能需要启用ws服务**
-
-<img src="demo/lyric1.png" width="400px">
-<img src="demo/lyric2.png" width="400px">
-<img src="demo/lyric3.png" width="400px">
 
 ## 多语言支持
 
