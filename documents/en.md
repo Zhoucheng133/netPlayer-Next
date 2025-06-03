@@ -8,12 +8,12 @@
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
-This is a Subsonic (Navidrome) API based desktop App. You can [click here](https://www.navidrome.org/docs/installation/) to see how to create a music server with Navidrome (Recommend).
+This is a Subsonic (Navidrome) API based desktop App. You can [click here](https://www.navidrome.org/docs/installation/) to see how to create a music server with Navidrome (Recommend). If you are looking for mobile version, please visit [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile).
 
 Make sure your device running netPlayer can connect to your music server.
 
 
-**★ netPlayer Next** | [**netPlayer**](https://github.com/Zhoucheng133/net-player) | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
+**★ netPlayer Next** | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
 > [!NOTE]
 > Notice: This is netPlayer Flutter version starts from v2.0.0
