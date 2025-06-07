@@ -46,9 +46,10 @@ class _LyricViewState extends State<LyricView> {
     }
     bool flag=false;
     try {
-      flag=c.playProgress.value>=c.lyric[index]['time'] && c.playProgress<c.lyric[index+1]['time'];
+      // flag=c.playProgress.value>=c.lyric[index]['time'] && c.playProgress<c.lyric[index+1]['time'];
+      flag=c.playProgress.value>=c.lyric[index].time && c.playProgress<c.lyric[index+1].time;
     } catch (_) {
-      if(c.lyric.length==index+1 && c.playProgress.value>=c.lyric[index]['time']){
+      if(c.lyric.length==index+1 && c.playProgress.value>=c.lyric[index].time){
         flag=true;
       }else{
         flag=false;
@@ -821,18 +822,36 @@ class _LyricViewState extends State<LyricView> {
                                     children: [
                                       index==0 ? SizedBox(height: (MediaQuery.of(context).size.height-160)/2,) : Container(),
                                       Obx(() => 
-                                        AutoScrollTag(
-                                          key: ValueKey(index), 
-                                          controller: lyricController.controller.value, 
-                                          index: index,
-                                          child: SelectableText(
-                                            c.lyric[index]['content'],
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.notoSansSc(
-                                              fontSize: c.lyricText.value.toDouble(),
-                                              height: 2.3,
-                                              color: playedLyric(index) ? colorController.color5() : colorController.color3(),
-                                              fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 5),
+                                          child: AutoScrollTag(
+                                            key: ValueKey(index), 
+                                            controller: lyricController.controller.value, 
+                                            index: index,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                SelectableText(
+                                                  c.lyric[index].lyric,
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.notoSansSc(
+                                                    fontSize: c.lyricText.value.toDouble(),
+                                                    color: playedLyric(index) ? colorController.color5() : colorController.color3(),
+                                                    fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
+                                                  ),
+                                                ),
+                                                if(c.lyric[index].translate.isNotEmpty) SelectableText(
+                                                  c.lyric[index].translate,
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.notoSansSc(
+                                                    fontSize: c.lyricText.value.toDouble()*0.8,
+                                                    height: 2.3,
+                                                    color: playedLyric(index) ? colorController.color5() : colorController.color3(),
+                                                    fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         )

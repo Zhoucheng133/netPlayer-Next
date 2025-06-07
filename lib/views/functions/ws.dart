@@ -27,7 +27,7 @@ class WsService {
           'artist': c.nowPlay['artist'],
           'lyric': content,
           'cover': "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
-          'fullLyric': c.lyric,
+          'fullLyric': c.lyric.map((item)=>item.toJson()).toList(),
           'line': c.lyricLine.value,
           'isPlay': c.isPlay.value,
           'mode': c.playMode.value,
@@ -75,11 +75,11 @@ class WsService {
         break;
       case 'get':
         try {
-          var content = c.lyric[c.lyricLine.value - 1]['content'];
+          var content = c.lyric[c.lyricLine.value - 1].lyric;
           c.ws.sendMsg(content);
         } catch (e) {
           if (c.lyric.length == 1) {
-            var content = c.lyric[0]['content'];
+            var content = c.lyric[0].lyric;
             sendMsg(content);
           }else{
             sendMsg("");

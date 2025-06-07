@@ -26,10 +26,11 @@ class LyricGet{
       if(!(await lrclib())){
         c.lyricFrom.value=LyricFrom.none;
         c.lyric.value=[
-          {
-            'time': 0,
-            'content': 'noLyric'.tr,
-          }
+          // {
+          //   'time': 0,
+          //   'content': 'noLyric'.tr,
+          // }
+          LyricItem('noLyric'.tr, "", 0)
         ];
         var content='noLyric'.tr;
         if(c.useWs.value){
@@ -45,7 +46,7 @@ class LyricGet{
     if(response==''){
       return false;
     }
-    List lyricCovert=[];
+    List<LyricItem> lyricCovert=[];
     List<String> lines = LineSplitter.split(response).toList();
     for(String line in lines){
       int pos1=line.indexOf("[");
@@ -53,10 +54,11 @@ class LyricGet{
       if(pos1==-1 || pos2==-1){
         return false;
       }
-      lyricCovert.add({
-        'time': timeToMilliseconds(line.substring(pos1+1, pos2)),
-        'content': line.substring(pos2 + 1).trim(),
-      });
+      // lyricCovert.add({
+      //   'time': timeToMilliseconds(line.substring(pos1+1, pos2)),
+      //   'content': line.substring(pos2 + 1).trim(),
+      // });
+      lyricCovert.add(LyricItem(line.substring(pos2 + 1).trim(), "", timeToMilliseconds(line.substring(pos1+1, pos2))));
     }
     c.lyric.value=lyricCovert;
     c.lyricFrom.value=LyricFrom.lrclib;
@@ -68,12 +70,18 @@ class LyricGet{
   }
 
   Future<bool> netease() async {
-    final String? lyricPainText=await requests.netease(c.nowPlay['title'], c.nowPlay['artist']);
-    if(lyricPainText==null){
+    // final String? lyricPainText=(await requests.netease(c.nowPlay['title'], c.nowPlay['artist']));
+    final Map? lyricResponse=await requests.netease(c.nowPlay['title'], c.nowPlay['artist']);
+    if(lyricResponse==null){
       return false;
     }
-    List lyricCovert=[];
-    List<String> lines = LineSplitter.split(lyricPainText).toList();
+    List<LyricItem> lyricCovert=[];
+    List<String> lines = LineSplitter.split(lyricResponse["lyric"]).toList();
+    bool hasTranslate=lyricResponse["translate"].length!=0;
+    List<String> tlines=[];
+    if(hasTranslate){
+      tlines=LineSplitter.split(lyricResponse["translate"]).toList();
+    }
     for(String line in lines){
       int pos1=line.indexOf("[");
       int pos2=line.indexOf("]");
@@ -81,25 +89,39 @@ class LyricGet{
         continue;
       }
       late int time;
-      late String content;
+      late String lyricItem;
+      String lyricTranslate="";
       try {
-        time=timeToMilliseconds(line.substring(pos1+1, pos2));
-        content = (pos2 + 1 < line.length) ? line.substring(pos2 + 1).trim() : "";
-        if(content=='' && lyricCovert.last['content']==''){
+        final timeInString=line.substring(pos1+1, pos2);
+        time=timeToMilliseconds(timeInString);
+        lyricItem = (pos2 + 1 < line.length) ? line.substring(pos2 + 1).trim() : "";
+        if(lyricItem=='' && lyricCovert.last.lyric==''){
           continue;
+        }
+        if(hasTranslate){
+          for(final t in tlines){
+            if(t.startsWith("[$timeInString]")){
+              lyricTranslate = (pos2 + 1 < t.length) ? t.substring(pos2 + 1).trim() : "";
+            }
+          }
         }
       } catch (_) {
         continue;
       }
-      lyricCovert.add({
-        'time': time,
-        'content': content,
-      });
+      // lyricCovert.add({
+      //   'time': time,
+      //   'content': content,
+      // });
+      lyricCovert.add(LyricItem(
+        lyricItem,
+        lyricTranslate,
+        time,
+      ));
     }
     if(lyricCovert.isEmpty){
       return false;
     }
-    lyricCovert.sort((a, b)=>a['time'].compareTo(b['time']));
+    lyricCovert.sort((a, b)=>a.time.compareTo(b.time));
     c.lyric.value=lyricCovert;
     c.lyricFrom.value=LyricFrom.netease;
     var content='';

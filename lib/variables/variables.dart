@@ -10,6 +10,19 @@ enum LyricFrom{
   none,
 }
 
+class LyricItem{
+  String lyric;
+  String translate;
+  int time;
+  LyricItem(this.lyric, this.translate, this.time);
+
+  Map toJson()=>{
+    "lyric": lyric,
+    "translate": translate,
+    "time": time,
+  };
+}
+
 class Controller extends GetxController{
   // 是否使用桌面歌词, 仅Windows
   bool useDesktopLyric=false;
@@ -75,7 +88,7 @@ class Controller extends GetxController{
   // 窗口最大化
   RxBool maxWindow=false.obs;
   // 歌词内容
-  RxList lyric=[].obs;
+  RxList<LyricItem> lyric=<LyricItem>[].obs;
   // 当前歌词到多少行了
   RxInt lyricLine=0.obs;
   // ws服务

@@ -111,7 +111,7 @@ class HttpRequests{
     return await httpRequest('https://lrclib.net/api/get?artist_name=$artist&track_name=$title&album_name=$album&duration=$duration');
   }
   // 从网易云获取歌词
-  Future<String?>  netease(String title, String artist) async {
+  Future<Map?> netease(String title, String artist) async {
     String id="";
     try {
       final keyword="$title $artist";
@@ -129,16 +129,19 @@ class HttpRequests{
     if(id.isEmpty){
       return null;
     }
-    String lyric="";
+    Map lyric={};
     try {
-      final lyricAPI="https://music.163.com/api/song/media?id=$id";
+      final lyricAPI="https://music.163.com/api/song/lyric?id=$id&tv=-1&os=pc&lv=-1";
       final response=await http.get(Uri.parse(lyricAPI));
-      lyric=json.decode(utf8.decode(response.bodyBytes))["lyric"];
+      lyric=json.decode(utf8.decode(response.bodyBytes));
     } catch (_) {
       return null;
     }
     if(lyric.isNotEmpty){
-      return lyric;
+      return {
+        "lyric": lyric["lrc"]["lyric"],
+        "translate": lyric["tlyric"]["lyric"]
+      };
     }
     return null;
   }

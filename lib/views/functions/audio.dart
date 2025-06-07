@@ -32,10 +32,10 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
           if(i==c.lyric.length-1){
             c.lyricLine.value=c.lyric.length;
             break;
-          }else if(i==0 && data<c.lyric[i]['time']){
+          }else if(i==0 && data<c.lyric[i].time){
             c.lyricLine.value=0;
             break;
-          }else if(data>=c.lyric[i]['time'] && data<c.lyric[i+1]['time']){
+          }else if(data>=c.lyric[i].time && data<c.lyric[i+1].time){
             c.lyricLine.value=i+1;
             break;
           }

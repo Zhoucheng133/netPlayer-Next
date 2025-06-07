@@ -101,7 +101,8 @@ class _MainViewState extends State<MainView> {
 
   void lyricChange(){
     try {
-      var content=c.lyric[c.lyricLine.value-1]['content'];
+      // var content=c.lyric[c.lyricLine.value-1]['content'];
+      var content=c.lyric[c.lyricLine.value-1].lyric;
       if(c.useWs.value){
         c.ws.sendMsg(content);
       }
@@ -132,10 +133,11 @@ class _MainViewState extends State<MainView> {
     // 如果id不为空，获取歌词
     c.lyricFrom.value=LyricFrom.none;
     c.lyric.value=[
-      {
-        'time': 0,
-        'content': 'searchingLyric'.tr,
-      }
+      // {
+      //   'time': 0,
+      //   'content': 'searchingLyric'.tr,
+      // }
+      LyricItem('searchingLyric'.tr, "", 0)
     ];
     var content='searchingLyric'.tr;
     if(c.useWs.value){
@@ -148,7 +150,8 @@ class _MainViewState extends State<MainView> {
 
   void statusChange(){
     try {
-      var content=c.lyric[c.lyricLine.value-1]['content'];
+      // var content=c.lyric[c.lyricLine.value-1]['content'];
+      var content=c.lyric[c.lyricLine.value-1].lyric;
       if(c.useWs.value){
         c.ws.sendMsg(content);
       }
