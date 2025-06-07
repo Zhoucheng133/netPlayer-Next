@@ -242,6 +242,12 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
       return;
     }
 
+    final lyricTranslate=prefs.getBool('lyricTranslate');
+
+    if(lyricTranslate==false){
+      c.lyricTranslate.value=false;
+    }
+
 
     final userInfo=prefs.getString('userInfo');
     if(userInfo!=null){

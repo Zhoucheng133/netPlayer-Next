@@ -35,6 +35,7 @@ const Map<String, String> enUS = {
   'playlistInfo': 'Playlist info',
   'playListName': 'Name',
   'playListCount': 'Count',
+  'totalDuration': 'Total duration',
   'created': 'Created',
   'changed': 'Changed',
 
@@ -55,6 +56,7 @@ const Map<String, String> enUS = {
   'lyricTip': 'Notice: Lyrics may not accurate',
   'lyricNetease': 'Lyrics from NeteaseMusic',
   'lyricLrclib': 'Lyrics from lrclib.net',
+  'enableLyricTranslate': 'Enable lyric translation',
 
   'overCountTip': 'Notice: Songs count may over 500\nFull shuffle is not affected',
   'hideLyric': 'Hide lyrics',
@@ -68,7 +70,6 @@ const Map<String, String> enUS = {
   'duration': "Duration",
   'songId': "Song id",
   'playlistId': 'Playlist id',
-  'totalDuration': 'Total duration',
 
   'album': 'Album',
   'searchSong': 'Search songs',

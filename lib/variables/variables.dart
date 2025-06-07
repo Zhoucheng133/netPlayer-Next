@@ -113,6 +113,8 @@ class Controller extends GetxController{
   RxBool useWs=false.obs;
   // 歌词字号
   RxInt lyricText=17.obs;
+  // 启用歌词翻译
+  RxBool lyricTranslate=true.obs;
 
   // ws端口
   RxInt wsPort=9098.obs;

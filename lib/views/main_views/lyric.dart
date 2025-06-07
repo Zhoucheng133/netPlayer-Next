@@ -841,7 +841,7 @@ class _LyricViewState extends State<LyricView> {
                                                     fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
                                                   ),
                                                 ),
-                                                if(c.lyric[index].translate.isNotEmpty) SelectableText(
+                                                if(c.lyric[index].translate.isNotEmpty && c.lyricTranslate.value) SelectableText(
                                                   c.lyric[index].translate,
                                                   textAlign: TextAlign.center,
                                                   style: GoogleFonts.notoSansSc(

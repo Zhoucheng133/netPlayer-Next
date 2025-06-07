@@ -766,6 +766,13 @@ class Operations{
     await prefs.setBool('autoLogin', val);
   }
 
+  // 翻译歌词切换
+  Future<void> lyricTranslate(bool val) async {
+    c.lyricTranslate.value=val;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('lyricTranslate', val);
+  }
+
   // 保存播放信息切换
   Future<void> savePlay(bool val) async {
     c.savePlay.value=val;

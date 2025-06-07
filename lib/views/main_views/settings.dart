@@ -263,6 +263,22 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
                 SettingItem(
+                  label: 'enableLyricTranslate'.tr, 
+                  item: Obx(()=>
+                    Transform.scale(
+                      scale: 0.7,
+                      child: Switch(
+                        activeTrackColor: colorController.color6(),
+                        splashRadius: 0,
+                        value: c.lyricTranslate.value, 
+                        onChanged: (value){
+                          operations.lyricTranslate(value);
+                        }
+                      ),
+                    )
+                  )
+                ),
+                SettingItem(
                   label: 'enableWs'.tr, 
                   item: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

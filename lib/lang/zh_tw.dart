@@ -56,6 +56,7 @@ const Map<String, String> zhTW = {
   'lyricTip': '注意: 歌詞內容未必準確',
   'lyricNetease': '歌詞內容來自網易雲音樂',
   'lyricLrclib': '歌詞內容來自lrclib.net',
+  'enableLyricTranslate': '啟用歌詞翻譯',
 
   'overCountTip': '注意，所有歌曲數量可能大於500首\n完全隨機播放不受影響',
   'hideLyric': '隱藏歌詞',
