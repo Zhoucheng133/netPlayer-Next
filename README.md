@@ -26,14 +26,32 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 ## 目录
 
 - [简介](#简介)
-- [使用](#使用)
 - [截图](#截图)
+- [使用](#使用)
 - [多语言支持](#多语言支持)
 - [WebSocket服务](#websocket服务)
 - [常见问题](#常见问题)
 - [其它链接](#其它链接)
 - [在你的设备上配置netPlayer Next](#在你的设备上配置netplayer-next)
 - [一些API](#一些api)
+
+## 截图
+
+### 主界面
+
+> [!TIP]
+> 现已支持自定义主题色&深色模式
+
+<img src="demo/demo1.png" width="600px">
+
+<img src="demo/demo2.png" width="600px">
+
+### ~~桌面歌词组件~~ (遗弃的项目)
+
+歌词组件的代码[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)
+
+> [!WARNING]
+> 从`v3.5.2`开始从主程序中移除，**打开这个功能需要启用ws服务**
 
 ## 使用
 
@@ -55,24 +73,6 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 - ⏯️(macOS & Windows)或`Ctrl Alt 空格`(Windows)：播放/暂停
 - ⏩(macOS & Windows)或`Ctrl Alt →`(Windows)：下一首
 - ⏪(macOS & Windows)或`Ctrl Alt ←`(Windows)：上一首
-
-## 截图
-
-### 主界面
-
-> [!TIP]
-> 现已支持自定义主题色&深色模式
-
-<img src="demo/demo1.png" width="600px">
-
-<img src="demo/demo2.png" width="600px">
-
-### ~~桌面歌词组件~~ (遗弃的项目)
-
-歌词组件的代码[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)
-
-> [!WARNING]
-> 从`v3.5.2`开始从主程序中移除，**打开这个功能需要启用ws服务**
 
 ## 多语言支持
 

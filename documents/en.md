@@ -29,8 +29,8 @@ Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 ## Contents
 
 - [Intro](#intro)
-- [Usage](#usage)
 - [Screenshot](#screenshot)
+- [Usage](#usage)
 - [Language support](#language-support)
 - [WebSocket service](#websocket-service)
 - [FAQ](#faq)
@@ -38,6 +38,23 @@ Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 - [Config netPlayer Next on your own device](#config-netplayer-next-on-your-own-device)
 - [Some APIs](#some-apis)
 
+
+## Screenshot
+
+> [!TIP]
+> Customized theme colors & dark mode are now supported!
+
+<img src="../demo/demo1.png" width="600px">
+
+<img src="../demo/demo2.png" width="600px">
+
+
+### ~~Desktop lyric kit~~ (Deprecated Project)
+
+Desktop lyric kit's code [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
+
+> [!WARNING]
+> It was removed from main App from `v3.5.2`. You need to enable ws service to use it.
 
 ## Usage
 
@@ -59,23 +76,6 @@ Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 - ⏯️(macOS & Windows) or `Ctrl Alt Space`(Windows)：Play/Pause
 - ⏩(macOS & Windows) or `Ctrl Alt →`(Windows)：Next song
 - ⏪(macOS & Windows) or `Ctrl Alt ←`(Windows)：Previous song
-
-## Screenshot
-
-> [!TIP]
-> Customized theme colors & dark mode are now supported!
-
-<img src="../demo/demo1.png" width="600px">
-
-<img src="../demo/demo2.png" width="600px">
-
-
-### ~~Desktop lyric kit~~ (Deprecated Project)
-
-Desktop lyric kit's code [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
-
-> [!WARNING]
-> It was removed from main App from `v3.5.2`. You need to enable ws service to use it.
 
 ## Language support
 
