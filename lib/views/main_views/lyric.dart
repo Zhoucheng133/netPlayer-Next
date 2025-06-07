@@ -772,24 +772,26 @@ class _LyricViewState extends State<LyricView> {
                                                   TweenAnimationBuilder(
                                                     tween: ColorTween(end: hoverMode ? colorController.color6() : colorController.color5()), 
                                                     duration: const Duration(milliseconds: 200), 
-                                                    builder: (_, value, __)=>c.fullRandom.value ? Icon(
-                                                      Icons.shuffle,
-                                                      size: 18,
-                                                      color: Colors.grey[300],
-                                                    ) : c.playMode.value=='list' ?  Icon(
-                                                      Icons.repeat_rounded,
-                                                      size: 18,
-                                                      color: value,
-                                                    ) : c.playMode.value=='repeat' ?
-                                                    Icon(
-                                                      Icons.repeat_one_rounded,
-                                                      size: 18,
-                                                      color: value
-                                                    ) : Icon(
-                                                      Icons.shuffle_rounded,
-                                                      size: 18,
-                                                      color: value,
-                                                    ),
+                                                    builder: (_, value, __)=> Obx(()=>
+                                                      c.fullRandom.value ? Icon(
+                                                        Icons.shuffle,
+                                                        size: 18,
+                                                        color: Colors.grey[300],
+                                                      ) : c.playMode.value=='list' ?  Icon(
+                                                        Icons.repeat_rounded,
+                                                        size: 18,
+                                                        color: value,
+                                                      ) : c.playMode.value=='repeat' ?
+                                                      Icon(
+                                                        Icons.repeat_one_rounded,
+                                                        size: 18,
+                                                        color: value
+                                                      ) : Icon(
+                                                        Icons.shuffle_rounded,
+                                                        size: 18,
+                                                        color: value,
+                                                      ),
+                                                    )
                                                   ),
                                                 ),
                                               ),
