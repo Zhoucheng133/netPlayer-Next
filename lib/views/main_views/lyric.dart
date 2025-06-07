@@ -823,7 +823,7 @@ class _LyricViewState extends State<LyricView> {
                                       index==0 ? SizedBox(height: (MediaQuery.of(context).size.height-160)/2,) : Container(),
                                       Obx(() => 
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 6),
+                                          padding: const EdgeInsets.symmetric(vertical: 7),
                                           child: AutoScrollTag(
                                             key: ValueKey(index), 
                                             controller: lyricController.controller.value, 
