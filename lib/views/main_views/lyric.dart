@@ -823,7 +823,7 @@ class _LyricViewState extends State<LyricView> {
                                       index==0 ? SizedBox(height: (MediaQuery.of(context).size.height-160)/2,) : Container(),
                                       Obx(() => 
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 5),
+                                          padding: const EdgeInsets.symmetric(vertical: 6),
                                           child: AutoScrollTag(
                                             key: ValueKey(index), 
                                             controller: lyricController.controller.value, 
@@ -845,8 +845,7 @@ class _LyricViewState extends State<LyricView> {
                                                   c.lyric[index].translate,
                                                   textAlign: TextAlign.center,
                                                   style: GoogleFonts.notoSansSc(
-                                                    fontSize: c.lyricText.value.toDouble()*0.8,
-                                                    height: 2.3,
+                                                    fontSize: c.lyricText.value.toDouble()*0.85,
                                                     color: playedLyric(index) ? colorController.color5() : colorController.color3(),
                                                     fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
                                                   ),
