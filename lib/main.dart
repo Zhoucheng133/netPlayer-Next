@@ -98,7 +98,7 @@ class _MainAppState extends State<MainApp> {
             seedColor: colorController.baseColor.value,
             brightness: Brightness.dark,
           ),
-          dialogTheme: DialogTheme(
+          dialogTheme: DialogThemeData(
             backgroundColor: colorController.color1(),
           )
         ) : ThemeData(
@@ -106,7 +106,7 @@ class _MainAppState extends State<MainApp> {
           primaryColor: colorController.baseColor.value,
           colorScheme: ColorScheme.fromSeed(seedColor: colorController.baseColor.value),
           textTheme: GoogleFonts.notoSansScTextTheme(),
-          dialogTheme: DialogTheme(
+          dialogTheme: DialogThemeData(
             backgroundColor: colorController.color1(),
           )
         ),
