@@ -11,8 +11,7 @@ class Infos {
   final Operations operations=Operations();
 
   // 专辑信息
-  Future<void> albumInfo(BuildContext context, String id) async {
-    final data=await operations.getAlbumData(context, id);
+  Future<void> albumInfo(BuildContext context, Map data) async {
     if(context.mounted){
       showDialog(
         context: context, 
@@ -101,6 +100,25 @@ class Infos {
                     SizedBox(
                       width: 100,
                       child: Text(
+                        'songCount'.tr,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        data['songCount'].toString(),
+                      )
+                    )
+                  ],
+                ),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Text(
                         'albumId'.tr,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold
@@ -133,6 +151,25 @@ class Infos {
                     SizedBox(
                       width: 100,
                       child: Text(
+                        'totalDuration'.tr,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        operations.convertDuration(data["duration"]),
+                      )
+                    )
+                  ],
+                ),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: Text(
                         'year'.tr,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold
@@ -141,7 +178,7 @@ class Infos {
                     ),
                     Expanded(
                       child: Text(
-                        data['year'].toString(),
+                        data['year']==null ? "/" : data['year'].toString(),
                       )
                     )
                   ],

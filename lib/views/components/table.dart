@@ -771,7 +771,7 @@ class _AlbumItemState extends State<AlbumItem> {
       c.pageIndex.value=2;
       c.pageId.value=widget.artistId;
     }else if(val=='info'){
-      infos.albumInfo(context, widget.id);
+      infos.albumInfo(context, c.albums[widget.index]);
     }
   }
 
