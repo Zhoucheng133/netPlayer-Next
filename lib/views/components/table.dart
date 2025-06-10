@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -508,57 +509,27 @@ class _SongItemState extends State<SongItem> {
       ]
     );
     if(val=='add'){
-      String selectItem = c.playLists[0]["id"];
+      // String selectItem = c.playLists[0]["id"];
+      String selectedItem=c.playLists[0]["id"];
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
           title: Text('addToList'.tr),
           content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState){
-              return SizedBox(
-                height: 200,
-                width: 300,
-                child: Obx(()=>
-                  ListView.builder(
-                    itemCount: c.playLists.length,
-                    itemBuilder: (BuildContext context, int index){
-                      return SizedBox(
-                        height: 40,
-                        child: Row(
-                          children: [
-                            Obx(()=>
-                              Radio(
-                                value: c.playLists[index]["id"], 
-                                activeColor: colorController.color6(),
-                                groupValue: selectItem, 
-                                onChanged: (val){
-                                  setState(()=>
-                                    selectItem=val
-                                  );
-                                }
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: (){
-                                setState(() {
-                                  selectItem=c.playLists[index]["id"];
-                                });
-                              },
-                              child: MouseRegion(
-                                cursor: SystemMouseCursors.click,
-                                child: Text(
-                                  c.playLists[index]["name"]
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    }
-                  )
-                ),
-              );
-            }
+            builder: (BuildContext context, StateSetter setState)=>DropdownButton2(
+              value: selectedItem,
+              items: List.generate(c.playLists.length, (index){
+                return DropdownMenuItem(
+                  value: c.playLists[index]["id"],
+                  child: Text(c.playLists[index]["name"]),
+                );
+              }),
+              onChanged: (val){
+                setState((){
+                  selectedItem=val as String;
+                });
+              },
+            )
           ),
           actions: [
             TextButton(
@@ -569,7 +540,7 @@ class _SongItemState extends State<SongItem> {
             ),
             ElevatedButton(
               onPressed: (){
-                operations.addToList(context, widget.id, selectItem);
+                operations.addToList(context, widget.id, selectedItem);
                 Navigator.pop(context);
               }, 
               child: Text('add'.tr)
