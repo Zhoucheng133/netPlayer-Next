@@ -75,6 +75,8 @@ const Map<String, String> zhTW = {
   'searchSong': '搜索歌曲',
   'searchAlbum': '搜索專輯',
   'searchArtist': '搜索藝人',
+  'albumInfo': '專輯訊息',
+  'artistInfo': '藝人資訊',
 
   'total': '共有',
   'albumTotal': '個專輯',

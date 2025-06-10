@@ -75,6 +75,8 @@ const Map<String, String> enUS = {
   'searchSong': 'Search songs',
   'searchAlbum': 'Search albums',
   'searchArtist': 'Search artists',
+  'albumInfo': 'Album info',
+  'artistInfo': 'Artist info',
 
   'total': 'Total: ',
   'albumTotal': ' album(s)',
