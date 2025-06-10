@@ -874,7 +874,7 @@ class ArtistItem extends StatefulWidget {
   final int index;
   final String id;
   final String name;
-  final int albumCount;
+  final int? albumCount;
   const ArtistItem({super.key, required this.id, required this.name, required this.albumCount, required this.index});
 
   @override
@@ -946,7 +946,7 @@ class _ArtistItemState extends State<ArtistItem> {
                   width: 100,
                   child: Center(
                     child: Text(
-                      widget.albumCount.toString(),
+                      widget.albumCount==null ? "/" : widget.albumCount.toString(),
                       style: GoogleFonts.notoSansSc(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
