@@ -704,6 +704,7 @@ class _AlbumItemState extends State<AlbumItem> {
   bool hover=false;
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
+  final Infos infos=Infos();
 
   Future<void> showAlbumMenu(BuildContext context, TapDownDetails details) async {
     final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
@@ -770,7 +771,7 @@ class _AlbumItemState extends State<AlbumItem> {
       c.pageIndex.value=2;
       c.pageId.value=widget.artistId;
     }else if(val=='info'){
-      // TODO 专辑信息
+      infos.albumInfo(context, widget.id);
     }
   }
 

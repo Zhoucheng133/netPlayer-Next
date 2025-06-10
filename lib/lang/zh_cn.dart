@@ -77,6 +77,8 @@ const Map<String, String> zhCN = {
   'searchArtist': '搜索艺人',
   'albumInfo': '专辑信息',
   'artistInfo': '艺人信息',
+  'albumId': '专辑id',
+  'year': '年份',
 
   'total': '共有',
   'albumTotal': '个专辑',
