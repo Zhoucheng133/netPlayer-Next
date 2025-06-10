@@ -147,7 +147,7 @@ C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer
 
 ### netPlayer Next本体
 
-本项目使用Flutter 3.29开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
+本项目使用Flutter 3.32开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
 建议直接使用Visual Studio Code，在安装完Flutter扩展和Dart扩展之后就可以Debug/Profile/Release了，我已经在.vscode文件夹中添加了launch类型
 
 如果你在**Windows**上Debug或者Release，注意不要在国内的网络环境下操作，可能会等非常长的时间，Mac上没有这个问题
