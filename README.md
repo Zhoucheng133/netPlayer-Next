@@ -15,10 +15,7 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 **★ netPlayer Next** | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
-> [!NOTE]
-> 这是netPlayer的Flutter版本，本仓库发布的netPlayer版本从2.0.0开始
-
->[!WARNING]
+>[!NOTE]
 > 这个版本的netPlayer不兼容Windows 7系统，如果你要查找支持Windows 7版本的netPlayer，转至[netPlayer](https://github.com/Zhoucheng133/net-player)查找v1版本的netPlayer
 
 \** 多语言从**v3.2.0** 版本开始支持多语言，你[**点击这里**](#多语言支持)查看详细的语言支持
@@ -128,10 +125,14 @@ WebSocket服务器默认地址为: `localhost:9098`
 >Subsonic音乐库的API并不支持查看所有的歌曲，因此至多只能显示500首歌曲
 但是你可以通过完全随机播放来随机播放所有的歌曲，不受歌曲数量显示，v2版本在左边栏，v3版本在所有歌曲页标题右侧
 ### 打开页面灰色方块或者崩溃不显示内容
-> 可能老版本的netPlayer Next和新版本冲突  
+> 有两种可能  
+> 1. 老版本的netPlayer Next和新版本冲突  
 解决办法为删除这两个目录:  
 C:\Users\<你的用户名>\AppData\Roaming\zhouc\net_player_next  
 C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer
+> 2. 软件出现了Bug，常见于某个API找不到指定的参数会出现灰块  
+建议你首先尝试更新Subsonic服务 (比如更新Navidrome)  
+如果还是会稳定出现这个问题，你可以添加一个Issue
 ### 没有找到歌词:
 >歌词API见文末，没有找到歌词就是字面意思  
 歌词的内容取决于歌曲标题、所属专辑、艺人和歌曲长度
@@ -169,8 +170,6 @@ flutter build macos
 ### 关于PR
 > [!NOTE]
 > 如果你有需要PR，请将目标分支选择dev分支而不是主分支
-
-本项目中不乏很多屎山代码（是的，虽然基本上我是唯一的开发者），但是如果不能确保不影响正常的功能请保持现状
 
 ## 一些API
 

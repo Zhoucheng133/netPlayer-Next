@@ -16,12 +16,7 @@ Make sure your device running netPlayer can connect to your music server.
 **★ netPlayer Next** | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
 > [!NOTE]
-> Notice: This is netPlayer Flutter version starts from v2.0.0
-
-> [!WARNING]
 > This version of netPlayer does NOT support Windows 7. If you need netPlayer on Windows7, you should find [v1 netPlayer](https://github.com/Zhoucheng133/net-player)
-
-Desktop Lyric Kit [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
 
 
 \*\* From **v3.2.0**, You can see the detail of multi language support at [**Language support**](#language-support). Other version support Simplified Chinese only.
@@ -133,10 +128,14 @@ This function can be used for live streaming to display bgm information. You can
 >Subsonic API does not support to display all the songs. The limit of songs to get is 500.  
 But you can shuffle all the songs through "Shuffle all the songs", which is not affect by songs displayed. You can see this button right of the "All" page title.
 ### See gray block or crashed
->Maybe old version of netPlayer affect  
+> Maybe caused by following 2 reasons
+> 1. Old version of netPlayer affect  
 Delete these directory:   
 C:\Users\<your username>\AppData\Roaming\zhouc\net_player_next  
 C:\Users\<your username>\AppData\Roaming\zhouc\netPlayer  
+> 2. Caused by a bug, which can't get a specified parameter  
+Recommended try to update the Subsonic service first (such as updating Navidrome)  
+If this problem still occurs stably, you can add an Issue
 ### No lyrics found:
 >You can see lyrics API at the end of this page. It just what it says.  
 Lyrics depends on the song's title, album, artist and duration.
@@ -174,8 +173,6 @@ Use the same way to pacakge [netPlayer-mini-kit](https://github.com/Zhoucheng133
 ### About PR
 > [!NOTE]
 > If you need to PR, target to branch `dev` instead of branch `main`
-
-Make sure your code does NOT affect other functions!
 
 ## Some APIs
 
