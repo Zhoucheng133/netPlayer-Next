@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/views/functions/infos.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -301,6 +302,7 @@ class _SongItemState extends State<SongItem> {
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
   final operations=Operations();
+  final Infos infos=Infos();
 
   bool isLoved(){
     for (var val in c.lovedSongs) {
@@ -593,7 +595,7 @@ class _SongItemState extends State<SongItem> {
       final Uri url = Uri.parse('${c.userInfo['url']}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${widget.id}');
       await launchUrl(url);
     }else if(val=="info"){
-      operations.songInfo(context, {
+      infos.songInfo(context, {
         "title": widget.title,
         "duration": operations.convertDuration(widget.duration),
         "id": widget.id,
@@ -718,8 +720,9 @@ class AlbumItem extends StatefulWidget {
   final String title;
   final String artist;
   final int songCount;
+  final String artistId;
   final VoidCallback clearSearch;
-  const AlbumItem({super.key, required this.id, required this.title, required this.artist, required this.songCount, required this.index, required this.clearSearch});
+  const AlbumItem({super.key, required this.id, required this.title, required this.artist, required this.songCount, required this.index, required this.clearSearch, required this.artistId});
 
   @override
   State<AlbumItem> createState() => _AlbumItemState();
@@ -731,6 +734,75 @@ class _AlbumItemState extends State<AlbumItem> {
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
 
+  Future<void> showAlbumMenu(BuildContext context, TapDownDetails details) async {
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+    final Offset position = overlay.localToGlobal(details.globalPosition);
+    var val=await showMenu(
+      color: colorController.darkMode.value ? colorController.color3() : Colors.white,
+      context: context, 
+      position: RelativeRect.fromLTRB(
+        position.dx,
+        position.dy,
+        position.dx + 50,
+        position.dy + 50,
+      ),
+      items: [
+        PopupMenuItem(
+          value: "artist",
+          enabled: c.playLists.isNotEmpty,
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.mic_rounded,
+                size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
+              ),
+              SizedBox(width: 5,),
+              Text(
+                "showArtist".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
+            ],
+          ),
+        ),
+        PopupMenuItem(
+          value: "info",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.info_rounded,
+                size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
+              ),
+              SizedBox(width: 5,),
+              Text(
+                "albumInfo".tr,
+                style: GoogleFonts.notoSansSc(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
+            ],
+          ),
+        )
+      ]
+    );
+
+    if(val=='artist'){
+      c.pageIndex.value=2;
+      c.pageId.value=widget.artistId;
+    }else if(val=='info'){
+      // TODO 专辑信息
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -741,6 +813,7 @@ class _AlbumItemState extends State<AlbumItem> {
         c.pageId.value=widget.id;
         widget.clearSearch();
       },
+      onSecondaryTapDown: (val) => showAlbumMenu(context, val),
       child: MouseRegion(
         onEnter: (_){
           setState(() {

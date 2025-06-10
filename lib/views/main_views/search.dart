@@ -116,7 +116,8 @@ class _SearchViewState extends State<SearchView> {
                     artist: albumList[index]['artist'], 
                     songCount: albumList[index]['songCount'], 
                     index: index, 
-                    clearSearch: () {}
+                    clearSearch: () {},
+                    artistId: c.albums[index]['artistId'],
                   )
                 ) : ListView.builder(
                   itemCount: artistList.length,
