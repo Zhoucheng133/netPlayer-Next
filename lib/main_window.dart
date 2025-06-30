@@ -411,24 +411,30 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                   menus: [
                     PlatformMenuItem(
                       label: "Copy".tr,
-                      shortcut: const SingleActivator(
-                        LogicalKeyboardKey.keyC,
-                        meta: true
-                      ),
+                      onSelected: (){
+                        final focusedContext = FocusManager.instance.primaryFocus?.context;
+                        if (focusedContext != null) {
+                          Actions.invoke(focusedContext, CopySelectionTextIntent.copy);
+                        }
+                      }
                     ),
                     PlatformMenuItem(
                       label: "Paste".tr,
-                      shortcut: const SingleActivator(
-                        LogicalKeyboardKey.keyV,
-                        meta: true
-                      ),
+                      onSelected: (){
+                        final focusedContext = FocusManager.instance.primaryFocus?.context;
+                        if (focusedContext != null) {
+                          Actions.invoke(focusedContext, const PasteTextIntent(SelectionChangedCause.keyboard));
+                        }
+                      },
                     ),
                     PlatformMenuItem(
                       label: "Select All".tr,
-                      shortcut: const SingleActivator(
-                        LogicalKeyboardKey.keyA,
-                        meta: true
-                      ),
+                      onSelected: (){
+                        final focusedContext = FocusManager.instance.primaryFocus?.context;
+                        if (focusedContext != null) {
+                          Actions.invoke(focusedContext, const SelectAllTextIntent(SelectionChangedCause.keyboard));
+                        }
+                      }
                     )
                   ]
                 ),
