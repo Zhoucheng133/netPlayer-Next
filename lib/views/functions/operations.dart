@@ -882,7 +882,7 @@ class Operations{
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             GestureDetector(
               onTap: ()=>showLicensePage(
                 applicationName: 'netPlayer',
