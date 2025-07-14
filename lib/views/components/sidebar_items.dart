@@ -424,6 +424,7 @@ class _PlayListItemState extends State<PlayListItem> {
         builder: (BuildContext context)=>AlertDialog(
           title: Text('rename'.tr),
           content: TextField(
+            controller: newName,
             decoration: InputDecoration(
               hintText: widget.name,
               hintStyle: TextStyle(
