@@ -940,32 +940,44 @@ class Operations{
       builder: (context)=>AlertDialog(
         title: Text('selectLang'.tr),
         content: StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState)=> DropdownButton2(
-            value: langSelected,
-            items: const [
-              DropdownMenuItem(
-                value: 'en_US',
-                child: Text('English')
+          builder: (BuildContext context, StateSetter setState)=> DropdownButtonHideUnderline(
+            child: DropdownButton2(
+              buttonStyleData: ButtonStyleData(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                )
               ),
-              DropdownMenuItem(
-                value: 'zh_CN',
-                child: Text('简体中文')
+              dropdownStyleData: DropdownStyleData(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                )
               ),
-              DropdownMenuItem(
-                value: 'zh_TW',
-                child: Text('繁體中文')
-              )
-            ], 
-            onChanged: (val){
-              if(val!=null){
-                var parts = val.split('_');
-                var locale=Locale(parts[0], parts[1]);
-                Get.updateLocale(locale);
-                setState((){
-                  langSelected=val;
-                });
-              }
-            },
+              value: langSelected,
+              items: const [
+                DropdownMenuItem(
+                  value: 'en_US',
+                  child: Text('English')
+                ),
+                DropdownMenuItem(
+                  value: 'zh_CN',
+                  child: Text('简体中文')
+                ),
+                DropdownMenuItem(
+                  value: 'zh_TW',
+                  child: Text('繁體中文')
+                )
+              ], 
+              onChanged: (val){
+                if(val!=null){
+                  var parts = val.split('_');
+                  var locale=Locale(parts[0], parts[1]);
+                  Get.updateLocale(locale);
+                  setState((){
+                    langSelected=val;
+                  });
+                }
+              },
+            ),
           ),
         ),
         actions: [

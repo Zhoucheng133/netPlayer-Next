@@ -516,19 +516,31 @@ class _SongItemState extends State<SongItem> {
         builder: (BuildContext context)=>AlertDialog(
           title: Text('addToList'.tr),
           content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState)=>DropdownButton2(
-              value: selectedItem,
-              items: List.generate(c.playLists.length, (index){
-                return DropdownMenuItem(
-                  value: c.playLists[index]["id"],
-                  child: Text(c.playLists[index]["name"]),
-                );
-              }),
-              onChanged: (val){
-                setState((){
-                  selectedItem=val as String;
-                });
-              },
+            builder: (BuildContext context, StateSetter setState)=>DropdownButtonHideUnderline(
+              child: DropdownButton2(
+                buttonStyleData: ButtonStyleData(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  )
+                ),
+                dropdownStyleData: DropdownStyleData(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  )
+                ),
+                value: selectedItem,
+                items: List.generate(c.playLists.length, (index){
+                  return DropdownMenuItem(
+                    value: c.playLists[index]["id"],
+                    child: Text(c.playLists[index]["name"]),
+                  );
+                }),
+                onChanged: (val){
+                  setState((){
+                    selectedItem=val as String;
+                  });
+                },
+              ),
             )
           ),
           actions: [
