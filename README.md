@@ -11,7 +11,8 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 这是一个基于Subsonic (Navidrome) API的一个桌面端App，你可以[**点击这里**](https://www.navidrome.org/docs/installation/)查看如何使用Navidrome (推荐) 搭建一个音乐服务器。如果你要查找移动端版本，应该访问[**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)仓库
 
-在使用前务必确保运行netPlayer的设备可以通过网络连接到你的音乐服务器
+在使用前务必确保运行netPlayer的设备可以通过网络连接到你的音乐服务器  
+若有任何bug欢迎提交至Issues
 
 **★ netPlayer Next** | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
@@ -22,15 +23,31 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 ## 目录
 
-- [简介](#简介)
-- [截图](#截图)
-- [使用](#使用)
-- [多语言支持](#多语言支持)
-- [WebSocket服务](#websocket服务)
-- [常见问题](#常见问题)
-- [其它链接](#其它链接)
-- [在你的设备上配置netPlayer Next](#在你的设备上配置netplayer-next)
-- [一些API](#一些api)
+- [netPlayer Next版本](#netplayer-next版本)
+  - [简介](#简介)
+  - [目录](#目录)
+  - [截图](#截图)
+    - [主界面](#主界面)
+    - [~~桌面歌词组件~~ (遗弃的项目)](#桌面歌词组件-遗弃的项目)
+  - [使用](#使用)
+    - [快捷键](#快捷键)
+      - [App内快捷键](#app内快捷键)
+      - [全局快捷键](#全局快捷键)
+  - [多语言支持](#多语言支持)
+  - [WebSocket服务](#websocket服务)
+    - [发送的消息](#发送的消息)
+    - [接收的消息](#接收的消息)
+  - [常见问题](#常见问题)
+    - [无法连接到音乐服务器:](#无法连接到音乐服务器)
+    - [所有歌曲显示不全:](#所有歌曲显示不全)
+    - [打开页面灰色方块或者崩溃不显示内容](#打开页面灰色方块或者崩溃不显示内容)
+    - [没有找到歌词:](#没有找到歌词)
+  - [其它链接](#其它链接)
+  - [在你的设备上配置netPlayer Next](#在你的设备上配置netplayer-next)
+    - [netPlayer Next本体](#netplayer-next本体)
+    - [桌面歌词组件](#桌面歌词组件)
+    - [关于PR](#关于pr)
+  - [一些API](#一些api)
 
 ## 截图
 
