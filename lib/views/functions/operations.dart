@@ -37,7 +37,11 @@ class Operations{
       return;
     }else{
       try {
-        c.playLists.value=rlt['subsonic-response']['playlists']['playlist'];
+        if(rlt['subsonic-response']['playlists'].isEmpty){
+          c.playLists.value=[];
+        }else{
+          c.playLists.value=rlt['subsonic-response']['playlists']['playlist'];
+        }
       } catch (_) {}
     }
   }
