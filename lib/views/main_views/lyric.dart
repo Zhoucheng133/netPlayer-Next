@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:clipboard/clipboard.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,6 +31,7 @@ class _LyricViewState extends State<LyricView> {
   bool hoverPre=false;
   bool hoverSkip=false;
   bool hoverLove=false;
+  bool hoverAdd=false;
   bool hoverLyric=false;
   bool hoverVolume=false;
   bool hoverMode=false;
@@ -511,7 +513,7 @@ class _LyricViewState extends State<LyricView> {
                             ),
                             const SizedBox(height: 20,),
                             SizedBox(
-                              width: 110,
+                              width: 150,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -800,6 +802,85 @@ class _LyricViewState extends State<LyricView> {
                                         )
                                       ),
                                     ),
+                                  ),
+                                  Expanded(
+                                    child: Center(
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          String selectedItem=c.playLists[0]["id"];
+                                          await showDialog(
+                                            context: context, 
+                                            builder: (BuildContext context)=>AlertDialog(
+                                              title: Text('addToList'.tr),
+                                              content: StatefulBuilder(
+                                                builder: (BuildContext context, StateSetter setState)=>DropdownButtonHideUnderline(
+                                                  child: DropdownButton2(
+                                                    buttonStyleData: ButtonStyleData(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(10),
+                                                      )
+                                                    ),
+                                                    dropdownStyleData: DropdownStyleData(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(10),
+                                                      )
+                                                    ),
+                                                    value: selectedItem,
+                                                    items: List.generate(c.playLists.length, (index){
+                                                      return DropdownMenuItem(
+                                                        value: c.playLists[index]["id"],
+                                                        child: Text(c.playLists[index]["name"]),
+                                                      );
+                                                    }),
+                                                    onChanged: (val){
+                                                      setState((){
+                                                        selectedItem=val as String;
+                                                      });
+                                                    },
+                                                  ),
+                                                )
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: (){
+                                                    Navigator.pop(context);
+                                                  }, 
+                                                  child: Text('cancel'.tr)
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: (){
+                                                    operations.addToList(context, c.nowPlay['id'], selectedItem);
+                                                    Navigator.pop(context);
+                                                  }, 
+                                                  child: Text('add'.tr)
+                                                )
+                                              ],
+                                            )
+                                          );
+                                        },
+                                        child: MouseRegion(
+                                          cursor: SystemMouseCursors.click,
+                                          onEnter: (_)=>setState(() {
+                                            hoverAdd=true;
+                                          }),
+                                          onExit: (_)=>setState(() {
+                                            hoverAdd=false;
+                                          }),
+                                          child: Tooltip(
+                                            message: 'addToList'.tr,
+                                            child: TweenAnimationBuilder(
+                                              tween: ColorTween(end: hoverAdd ? colorController.color6() : colorController.color5()), 
+                                              duration: const Duration(milliseconds: 200), 
+                                              builder: (_, value, __)=>Icon(
+                                                Icons.add_rounded,
+                                                size: 20,
+                                                color: value,
+                                              )
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
                                   )
                                 ],
                               ),
