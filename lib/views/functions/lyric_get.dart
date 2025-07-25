@@ -70,7 +70,6 @@ class LyricGet{
   }
 
   Future<bool> netease() async {
-    // final String? lyricPainText=(await requests.netease(c.nowPlay['title'], c.nowPlay['artist']));
     final Map? lyricResponse=await requests.netease(c.nowPlay['title'], c.nowPlay['artist']);
     if(lyricResponse==null){
       return false;

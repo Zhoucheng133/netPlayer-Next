@@ -140,7 +140,7 @@ class HttpRequests{
     if(lyric.isNotEmpty){
       return {
         "lyric": lyric["lrc"]["lyric"],
-        "translate": lyric["tlyric"]["lyric"]
+        "translate": lyric["tlyric"]==null ? [] : lyric["tlyric"]["lyric"]
       };
     }
     return null;
