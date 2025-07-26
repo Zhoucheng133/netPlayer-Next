@@ -338,13 +338,13 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.add_rounded,
                 size: 18,
-                color: colorController.darkMode.value ? Colors.white : Colors.black,
+                color: c.playLists.isEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               SizedBox(width: 5,),
               Text(
                 "addToList".tr,
                 style: GoogleFonts.notoSansSc(
-                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                  color: c.playLists.isEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
             ],
