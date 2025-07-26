@@ -134,14 +134,14 @@ class HttpRequests{
       final lyricAPI="https://music.163.com/api/song/lyric?id=$id&tv=-1&os=pc&lv=-1";
       final response=await http.get(Uri.parse(lyricAPI));
       lyric=json.decode(utf8.decode(response.bodyBytes));
+      if(lyric.isNotEmpty && lyric["lrc"]!=null){
+        return {
+          "lyric": lyric["lrc"]["lyric"],
+          "translate": lyric["tlyric"]==null ? [] : lyric["tlyric"]["lyric"]
+        };
+      }
     } catch (_) {
       return null;
-    }
-    if(lyric.isNotEmpty){
-      return {
-        "lyric": lyric["lrc"]["lyric"],
-        "translate": lyric["tlyric"]==null ? [] : lyric["tlyric"]["lyric"]
-      };
     }
     return null;
   }
