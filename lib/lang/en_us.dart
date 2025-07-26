@@ -163,6 +163,9 @@ const Map<String, String> enUS = {
   'kitFailed': 'Launch lyric kit failed',
   'kitFailedContent': 'Lyric kit files is missing. Please reinstall netPlayer',
 
+  'addPlayListErr': 'Failed to add to playlist',
+  'playListEmpty': 'No playlists created',
+
   'license': 'License',
 
   'restartTitle': 'Restart to fully apply',

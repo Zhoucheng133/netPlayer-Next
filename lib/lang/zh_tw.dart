@@ -163,6 +163,9 @@ const Map<String, String> zhTW = {
   'kitFailed': '啟動歌詞元件失敗',
   'kitFailedContent': "缺少歌詞組件的文件，請重新下載安裝netPlayer",
 
+  'addPlayListErr': '新增到歌單失敗',
+  'playListEmpty': '沒有創建任何歌單',
+
   'license': '許可證',
 
   'restartTitle': '重新啟動以完全應用修改',

@@ -807,6 +807,19 @@ class _LyricViewState extends State<LyricView> {
                                     child: Center(
                                       child: GestureDetector(
                                         onTap: () async {
+                                          if(c.playLists.isEmpty){
+                                            showDialog(
+                                              context: context, 
+                                              builder: (context)=>AlertDialog(
+                                                title: Text('addPlayListErr'.tr),
+                                                content: Text('playListEmpty'.tr),
+                                                actions: [
+                                                  ElevatedButton(onPressed: ()=>Navigator.pop(context), child: Text('ok'.tr))
+                                                ],
+                                              )
+                                            );
+                                            return;
+                                          }
                                           String selectedItem=c.playLists[0]["id"];
                                           await showDialog(
                                             context: context, 
