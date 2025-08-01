@@ -969,7 +969,7 @@ class _LyricViewState extends State<LyricView> {
                                     arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
                                     backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
                                     content: SizedBox(
-                                      height: 20,
+                                      height: 25,
                                       width: 100,
                                       child: Row(
                                         crossAxisAlignment: CrossAxisAlignment.center,
