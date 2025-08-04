@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +21,7 @@ class _PlayBarState extends State<PlayBar> {
   final Controller c = Get.find();
   Operations operations=Operations();
   final ColorController colorController=Get.find();
+  final SongController songController=Get.find();
 
   bool hoverPause=false;
   bool hoverPre=false;
@@ -37,8 +39,8 @@ class _PlayBarState extends State<PlayBar> {
   }
 
   bool isLoved(){
-    for (var val in c.lovedSongs) {
-      if(val["id"]==c.nowPlay['id']){
+    for (var val in songController.lovedSongs) {
+      if(val.id==c.nowPlay['id']){
         return true;
       }
     }

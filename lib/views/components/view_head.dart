@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -24,6 +25,7 @@ class _ViewHeaderState extends State<ViewHeader> {
   
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
+  final SongController songController=Get.find();
 
   bool hoverLocate=false;
   bool hoverRefresh=false;
@@ -132,9 +134,9 @@ class _ViewHeaderState extends State<ViewHeader> {
                       fontSize: 13
                     ),
                   ),
-                  c.allSongs.length>=500 && widget.page=='all' ? const SizedBox(width: 10,) : Container(),
+                  songController.allSongs.length>=500 && widget.page=='all' ? const SizedBox(width: 10,) : Container(),
                   Obx(()=>
-                    c.allSongs.length>=500 && widget.page=='all' ? 
+                    songController.allSongs.length>=500 && widget.page=='all' ? 
                     Tooltip(
                       message: 'overCountTip'.tr,
                       child: MouseRegion(

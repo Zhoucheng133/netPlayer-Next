@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
 import 'package:net_player_next/views/components/view_head.dart';
@@ -19,6 +20,7 @@ class _AllViewState extends State<AllView> {
   final operations=Operations();
   final Controller c = Get.find();
   final AutoScrollController controller=AutoScrollController();
+  final SongController songController=Get.find();
   TextEditingController inputController = TextEditingController();
 
   String searchKeyWord='';
@@ -60,7 +62,7 @@ class _AllViewState extends State<AllView> {
         children: [
           Column(
             children: [
-              Obx(() => ViewHeader(title: 'allSongs'.tr, subTitle: 'total'.tr+c.allSongs.length.toString()+'songTotal'.tr, page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(context), controller: inputController,),),
+              Obx(() => ViewHeader(title: 'allSongs'.tr, subTitle: 'total'.tr+songController.allSongs.length.toString()+'songTotal'.tr, page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(context), controller: inputController,),),
               const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
@@ -68,7 +70,7 @@ class _AllViewState extends State<AllView> {
                 child: Obx(()=>
                   ListView.builder(
                     controller: controller,
-                    itemCount: c.allSongs.length,
+                    itemCount: songController.allSongs.length,
                     itemBuilder: (BuildContext context, int index){
                       return AutoScrollTag(
                         key: ValueKey(index),
@@ -76,31 +78,31 @@ class _AllViewState extends State<AllView> {
                         index: index,
                         child: searchKeyWord.isEmpty ? Obx(() => SongItem(
                             index: index, 
-                            title: c.allSongs[index]['title'], 
-                            duration: c.allSongs[index]['duration'], 
-                            id: c.allSongs[index]['id'], 
+                            title: songController.allSongs[index].title, 
+                            duration: songController.allSongs[index].duration, 
+                            id: songController.allSongs[index].id, 
                             isplay: isPlay(index), 
-                            artist: c.allSongs[index]['artist'], 
+                            artist: songController.allSongs[index].artist, 
                             from: 'all', 
-                            album: c.allSongs[index]['album'], 
-                            artistId: c.allSongs[index]['artistId']??'',
-                            albumId: c.allSongs[index]['albumId']??'',
-                            created: c.allSongs[index]['created']??'',
+                            album: songController.allSongs[index].album, 
+                            artistId: songController.allSongs[index].artistId,
+                            albumId: songController.allSongs[index].albumId,
+                            created: songController.allSongs[index].created,
                           )
                         ) : Obx(()=>
-                          c.allSongs[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.allSongs[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                          songController.allSongs[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || songController.allSongs[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                           SongItem(
                             index: index, 
-                            title: c.allSongs[index]['title'], 
-                            duration: c.allSongs[index]['duration'], 
-                            id: c.allSongs[index]['id'], 
+                            title: songController.allSongs[index].title, 
+                            duration: songController.allSongs[index].duration, 
+                            id: songController.allSongs[index].id, 
                             isplay: isPlay(index), 
-                            artist: c.allSongs[index]['artist'], 
+                            artist: songController.allSongs[index].artist, 
                             from: 'all',
-                            album: c.allSongs[index]['album'], 
-                            artistId: c.allSongs[index]['artistId']??'',
-                            albumId: c.allSongs[index]['albumId']??'',
-                            created: c.allSongs[index]['created']??'',
+                            album: songController.allSongs[index].album, 
+                            artistId: songController.allSongs[index].artistId,
+                            albumId: songController.allSongs[index].albumId,
+                            created: songController.allSongs[index].created,
                           ) : Container()
                         ),
                       );

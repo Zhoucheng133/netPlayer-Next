@@ -9,6 +9,7 @@ import 'package:net_player_next/lang/en_us.dart';
 import 'package:net_player_next/lang/zh_cn.dart';
 import 'package:net_player_next/lang/zh_tw.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/functions/audio.dart';
 import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -34,6 +35,7 @@ Future<void> main(List<String> args) async {
   final themeColor=prefs.getInt("theme");
   final darkMode=prefs.getBool("darkMode");
   final autoDark=prefs.getBool("autoDark");
+  Get.put(SongController());
   Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode, autoDark));
   c.handler=await AudioService.init(
     builder: () => audioHandler(),

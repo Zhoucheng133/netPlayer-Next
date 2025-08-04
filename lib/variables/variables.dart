@@ -18,6 +18,7 @@ enum Pages{
   playList, // 4 id: String / ''
   search,   // 5 id: String / ''
   settings, // 6 id: ''
+  none,     // 7 仅作为播放来源使用
 }
 
 class LyricItem{
@@ -65,10 +66,6 @@ class Controller extends GetxController{
   RxInt playProgress=0.obs;
   // 播放控制
   var handler;
-  // 所有歌曲
-  RxList allSongs=[].obs;
-  // 喜欢的歌曲
-  RxList lovedSongs=[].obs;
   // 是否正在播放
   RxBool isPlay=false.obs;
   // 正在输入

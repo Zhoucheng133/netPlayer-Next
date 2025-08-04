@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
 import 'package:net_player_next/views/components/view_head.dart';
@@ -19,7 +20,7 @@ class _PlayListViewState extends State<PlayListView> {
   final Controller c = Get.find();
   final operations=Operations();
   final AutoScrollController controller=AutoScrollController();
-  List list=[];
+  List<SongItemClass> list=[];
   String listId='';
   TextEditingController inputController = TextEditingController();
   String searchKeyWord='';
@@ -51,7 +52,7 @@ class _PlayListViewState extends State<PlayListView> {
       });
       var temp=await operations.getPlayList(context, newId);
       setState(() {
-        list=temp;
+        list=temp.map((item)=>SongItemClass.fromJson(item)).toList();
       });
     }
   }
@@ -72,10 +73,10 @@ class _PlayListViewState extends State<PlayListView> {
   Future<void> silentRefresh() async {
     var tmpList=await operations.getPlayList(context, listId);
     setState(() {
-      list=tmpList;
+      list=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
     });
     if(c.nowPlay['playFrom']=='playList' && c.nowPlay['fromId']==listId){
-      int index=list.indexWhere((item) => item['id']==c.nowPlay['id']);
+      int index=list.indexWhere((item) => item.id==c.nowPlay['id']);
       if(index!=-1){
         c.nowPlay['index']=index;
         c.nowPlay['list']=list;
@@ -102,10 +103,10 @@ class _PlayListViewState extends State<PlayListView> {
   Future<void> refresh(BuildContext context) async {
     var tmpList=await operations.getPlayList(context, listId);
     setState(() {
-      list=tmpList;
+      list=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
     });
     if(c.nowPlay['playFrom']=='playList' && c.nowPlay['fromId']==listId){
-      int index=list.indexWhere((item) => item['id']==c.nowPlay['id']);
+      int index=list.indexWhere((item) => item.id==c.nowPlay['id']);
       if(index!=-1){
         c.nowPlay['index']=index;
         c.nowPlay['list']=list;
@@ -154,36 +155,36 @@ class _PlayListViewState extends State<PlayListView> {
                       child: searchKeyWord.isEmpty ? Obx(()=>
                         SongItem(
                           index: index, 
-                          title: list[index]['title'], 
-                          duration: list[index]['duration'], 
-                          id: list[index]['id'], 
+                          title: list[index].title, 
+                          duration: list[index].duration, 
+                          id: list[index].id, 
                           isplay: isPlay(index), 
-                          artist: list[index]['artist'], 
+                          artist: list[index].artist, 
                           from: 'playList', 
                           listId: listId, 
                           list: list, 
                           refresh: ()=>silentRefresh(),
-                          album: list[index]['album'], 
-                          artistId: list[index]['artistId']??'', 
-                          albumId: list[index]['albumId']??'',
-                          created: list[index]['created']??'',
+                          album: list[index].album, 
+                          artistId: list[index].artistId, 
+                          albumId: list[index].albumId,
+                          created: list[index].created,
                         ),
-                      ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                       Obx(()=>SongItem(
                         index: index, 
-                        title: list[index]['title'], 
-                        duration: list[index]['duration'], 
-                        id: list[index]['id'], 
+                        title: list[index].title, 
+                        duration: list[index].duration, 
+                        id: list[index].id, 
                         isplay: isPlay(index), 
-                        artist: list[index]['artist'], 
+                        artist: list[index].artist, 
                         from: 'playList', 
                         listId: listId, 
                         list: list, 
                         refresh: ()=>silentRefresh(),
-                        album: list[index]['album'], 
-                        artistId: list[index]['artistId']??'', 
-                        albumId: list[index]['albumId']??'',
-                        created: list[index]['created']??'',
+                        album: list[index].album, 
+                        artistId: list[index].artistId, 
+                        albumId: list[index].albumId,
+                        created: list[index].created,
                       )) : Container()
                     );
                   }

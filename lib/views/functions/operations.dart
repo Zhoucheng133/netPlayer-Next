@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image/image.dart' show decodeImage;
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/hotkeys.dart';
 import 'package:net_player_next/views/functions/lyric_get.dart';
@@ -28,6 +29,7 @@ class Operations{
   final requests=HttpRequests();
   final Controller c = Get.find();
   final lyricGet = LyricGet();
+  final SongController songController=Get.find();
 
   // 获取所有的歌单
   Future<void> getAllPlayLists(BuildContext context) async {
@@ -94,13 +96,13 @@ class Operations{
       return;
     }else{
       try {
-        var tmpList=rlt['subsonic-response']['randomSongs']['song'];
+        List tmpList=rlt['subsonic-response']['randomSongs']['song'];
         tmpList.sort((a, b) {
           DateTime dateTimeA = DateTime.parse(a['created']);
           DateTime dateTimeB = DateTime.parse(b['created']);
           return dateTimeB.compareTo(dateTimeA);
         });
-        c.allSongs.value=tmpList;
+        songController.allSongs.value=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
       } catch (_) {
         showMessage(false, 'anayliseAllSongFail'.tr, context);
         return;
@@ -117,10 +119,11 @@ class Operations{
     }else{
       try {
         if(rlt['subsonic-response']['starred']['song']==null){
-          c.lovedSongs.value=[];
+          songController.lovedSongs.value=[];
           return;
         }else{
-          c.lovedSongs.value=rlt['subsonic-response']['starred']['song'];
+          List songList=rlt['subsonic-response']['starred']['song'];
+          songController.lovedSongs.value=songList.map((item)=>SongItemClass.fromJson(item)).toList();
         }
       } catch (_) {
         showMessage(false, 'analiseLovedSongFail'.tr, context);
@@ -200,10 +203,10 @@ class Operations{
   // 重新刷新播放内容
   void refreshFromLoved(){
     if(c.nowPlay['playFrom']=='loved'){
-      int index=c.lovedSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
+      int index=songController.lovedSongs.indexWhere((item) => item.id==c.nowPlay['id']);
       if(index!=-1){
         c.nowPlay['index']=index;
-        c.nowPlay['list']=c.lovedSongs;
+        c.nowPlay['list']=songController.lovedSongs.toJson();
         c.nowPlay.refresh();
       }else{
         c.handler.stop();
@@ -267,7 +270,7 @@ class Operations{
   Future<void> checkLovedSongPlay(BuildContext context) async {
     await getLovedSongs(context);
     if(c.nowPlay['playFrom']=='loved'){
-      int index=c.lovedSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
+      int index=songController.lovedSongs.indexWhere((item) => item.id==c.nowPlay['id']);
       if(index!=-1){
         // c.nowPlay['index']=index;
         // c.nowPlay['list']=c.lovedSongs;
@@ -281,7 +284,7 @@ class Operations{
           'fromId': c.nowPlay['fromId'],
           'album': c.nowPlay['album'],
           'index': index,
-          'list': c.lovedSongs,
+          'list': songController.lovedSongs.toJson(),
         };
         c.nowPlay.value=tmp;
         // c.nowPlay.refresh();
@@ -308,7 +311,7 @@ class Operations{
   Future<void> checkAllSongPlay(BuildContext context) async {
     await getAllSongs(context);
     if(c.nowPlay['playFrom']=='all'){
-      int index=c.allSongs.indexWhere((item) => item['id']==c.nowPlay['id']);
+      int index=songController.allSongs.indexWhere((item) => item.id==c.nowPlay['id']);
       if(index!=-1){
         // c.nowPlay['index']=index;
         // c.nowPlay['list']=c.allSongs;
@@ -322,7 +325,7 @@ class Operations{
           'fromId': c.nowPlay['fromId'],
           'album': c.nowPlay['album'],
           'index': index,
-          'list': c.allSongs,
+          'list': songController.allSongs,
         };
         c.nowPlay.value=tmp;
         // c.nowPlay.refresh();
@@ -649,9 +652,9 @@ class Operations{
   Future<void> playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index, List list, String album) async {
     List playList=[];
     if(playFrom=='all'){
-      playList=c.allSongs;
+      playList=songController.allSongs.toJson();
     }else if(playFrom=='loved'){
-      playList=c.lovedSongs;
+      playList=songController.lovedSongs.toJson();
     }else{
       playList=list;
     }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/infos.dart';
 import 'package:net_player_next/views/functions/operations.dart';
@@ -134,12 +135,13 @@ class _SongItemState extends State<SongItem> {
   bool hover=false;
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
+  final SongController songController=Get.find();
   final operations=Operations();
   final Infos infos=Infos();
 
   bool isLoved(){
-    for (var val in c.lovedSongs) {
-      if(val["id"]==widget.id){
+    for (var val in songController.lovedSongs) {
+      if(val.id==widget.id){
         return true;
       }
     }

@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/lyric_controller.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -41,6 +42,7 @@ class _LyricViewState extends State<LyricView> {
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
   final operations=Operations();
+  final SongController songController=Get.find();
 
   bool playedLyric(index){
     if(c.lyric.length==1){
@@ -68,8 +70,8 @@ class _LyricViewState extends State<LyricView> {
   }
 
   bool isLoved(){
-    for (var val in c.lovedSongs) {
-      if(val["id"]==c.nowPlay['id']){
+    for (var val in songController.lovedSongs) {
+      if(val.id==c.nowPlay['id']){
         return true;
       }
     }
