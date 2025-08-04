@@ -33,7 +33,7 @@ class _SideBarItemState extends State<SideBarItem> {
       padding: const EdgeInsets.only(left: 10, top: 5),
       child: GestureDetector(
         onTap: (){
-          c.pageIndex.value=widget.index;
+          c.page.value=Pages.values[widget.index];
           c.pageId.value='';
         },
         child: MouseRegion(
@@ -54,7 +54,7 @@ class _SideBarItemState extends State<SideBarItem> {
               height: 35,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: c.pageIndex.value==widget.index ? colorController.color3() :  onHover ? colorController.color2() : colorController.color1(),
+                color: c.page.value.index==widget.index ? colorController.color3() :  onHover ? colorController.color2() : colorController.color1(),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),
@@ -174,7 +174,7 @@ class _AccountPartState extends State<AccountPart> {
           Expanded(
             child: GestureDetector(
               onTap: (){
-                c.pageIndex.value=6;
+                c.page.value=Pages.settings;
                 c.pageId.value='';
               },
               child: Tooltip(
@@ -198,7 +198,7 @@ class _AccountPartState extends State<AccountPart> {
                       duration: const Duration(milliseconds: 200),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: c.pageIndex.value==6 ? colorController.color3() : hoverSetting ? colorController.color2() : colorController.color1(),
+                        color: c.page.value==Pages.settings ? colorController.color3() : hoverSetting ? colorController.color2() : colorController.color1(),
                       ),
                       child: Center(
                         child: Icon(
@@ -647,7 +647,7 @@ class _PlayListItemState extends State<PlayListItem> {
       padding: const EdgeInsets.only(top: 5),
       child: GestureDetector(
         onTap: (){
-          c.pageIndex.value=4;
+          c.page.value=Pages.playList;
           c.pageId.value=widget.id;
         },
         onSecondaryTapDown: (val) => showPlaylistMenu(context, val),
@@ -669,7 +669,7 @@ class _PlayListItemState extends State<PlayListItem> {
               height: 35,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: c.pageIndex.value==4 && c.pageId.value==widget.id ? colorController.color3() :  onHover ? colorController.color2() : colorController.color1(),
+                color: c.page.value==Pages.playList && c.pageId.value==widget.id ? colorController.color3() :  onHover ? colorController.color2() : colorController.color1(),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10),

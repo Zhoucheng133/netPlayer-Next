@@ -36,7 +36,7 @@ class _AlbumViewState extends State<AlbumView> {
       });
     });
     listener = ever(c.pageId, (String albumId) async {
-      if(c.pageIndex.value==3 && c.pageId.value!=''){
+      if(c.page.value==Pages.album && c.pageId.value!=''){
         Map rlt=await operations.getAlbumData(context, albumId);
         if(rlt.isNotEmpty){
           try {

@@ -258,7 +258,7 @@ class _MainViewState extends State<MainView> {
                       ),
                       child: Obx(()=>
                         IndexedStack(
-                          index: c.pageIndex.value,
+                          index: c.page.value.index,
                           children: const [
                             AllView(),
                             LovedView(),

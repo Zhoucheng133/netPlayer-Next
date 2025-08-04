@@ -10,6 +10,16 @@ enum LyricFrom{
   none,
 }
 
+enum Pages{
+  all,      // 0 id: ''
+  loved,    // 1 id: ''
+  artist,   // 2 id: String / ''
+  album,    // 3 id: String / ''
+  playList, // 4 id: String / ''
+  search,   // 5 id: String / ''
+  settings, // 6 id: ''
+}
+
 class LyricItem{
   String lyric;
   String translate;
@@ -27,19 +37,9 @@ class Controller extends GetxController{
   // 是否使用桌面歌词, 仅Windows
   bool useDesktopLyric=false;
   // 当前页面索引
-  RxInt pageIndex=0.obs;
+  Rx<Pages> page=Pages.all.obs;
   // 当前页面Id
   RxString pageId=''.obs;
-  // 页面对照
-  var pages=[
-    'all',      // id: ''
-    'loved',    // id: ''
-    'artist',   // id: String / ''
-    'album',    // id: String / ''
-    'playList', // id: String / ''
-    'search'    // id: String / ''
-    'settings'  // id: ''
-  ];
   // 用户信息
   RxMap<String, String?> userInfo=<String, String?>{
     'url': null,      // String?

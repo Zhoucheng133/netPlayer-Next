@@ -58,7 +58,7 @@ class _ViewHeaderState extends State<ViewHeader> {
     super.dispose();
   }
   bool hasBackButton(){
-    if(c.pageId.value.isNotEmpty && (c.pageIndex.value==2 || c.pageIndex.value==3)){
+    if(c.pageId.value.isNotEmpty && (c.page.value==Pages.artist || c.page.value==Pages.album)){
       return true;
     }
     return false;

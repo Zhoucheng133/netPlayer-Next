@@ -35,7 +35,7 @@ class _ArtistViewState extends State<ArtistView> {
       });
     });
     listener = ever(c.pageId, (String id) async {
-      if(c.pageIndex.value==2 && c.pageId.value!=''){
+      if(c.page.value==Pages.artist && c.pageId.value!=''){
         Map rlt=await operations.getArtistData(context, id);
         if(rlt.isNotEmpty){
           try {

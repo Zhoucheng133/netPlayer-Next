@@ -387,7 +387,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
                             if(c.showLyric.value){
                               operations.toggleLyric(context);
                             }
-                            c.pageIndex.value=6;
+                            c.page.value=Pages.settings;
                           } : null
                         ),
                       ]

@@ -1036,7 +1036,7 @@ class Operations{
       return;
     }
     toggleLyric(context);
-    c.pageIndex.value=2;
+    c.page.value=Pages.artist;
     final data=await getSongInfo(c.nowPlay['id']);
     if(data.isEmpty){
       return;
@@ -1056,7 +1056,7 @@ class Operations{
       return;
     }
     toggleLyric(context);
-    c.pageIndex.value=3;
+    c.page.value=Pages.album;
     final data=await getSongInfo(c.nowPlay['id']);
     if(data.isEmpty){
       return;

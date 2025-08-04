@@ -569,10 +569,10 @@ class _SongItemState extends State<SongItem> {
         widget.refresh();
       }
     }else if(val=='album'){
-      c.pageIndex.value=3;
+      c.page.value=Pages.album;
       c.pageId.value=widget.albumId;
     }else if(val=='artist'){
-      c.pageIndex.value=2;
+      c.page.value=Pages.artist;
       c.pageId.value=widget.artistId;
     }else if(val=='download'){
       final Uri url = Uri.parse('${c.userInfo['url']}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${widget.id}');
@@ -780,7 +780,7 @@ class _AlbumItemState extends State<AlbumItem> {
     );
 
     if(val=='artist'){
-      c.pageIndex.value=2;
+      c.page.value=Pages.artist;
       c.pageId.value=widget.artistId;
     }else if(val=='info'){
       infos.albumInfo(context, c.albums[widget.index]);
@@ -791,8 +791,8 @@ class _AlbumItemState extends State<AlbumItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: (){
-        if(c.pageIndex.value!=3){
-          c.pageIndex.value=3;
+        if(c.page.value!=Pages.album){
+          c.page.value=Pages.album;
         }
         c.pageId.value=widget.id;
         widget.clearSearch();
@@ -903,8 +903,8 @@ class _ArtistItemState extends State<ArtistItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: (){
-        if(c.pageIndex.value!=2){
-          c.pageIndex.value=2;
+        if(c.page.value!=Pages.artist){
+          c.page.value=Pages.artist;
         }
         c.pageId.value=widget.id;
       },
