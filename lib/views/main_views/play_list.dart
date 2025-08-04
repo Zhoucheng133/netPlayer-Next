@@ -1,9 +1,7 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/components/message.dart';
-import 'package:net_player_next/views/components/table.dart';
+import 'package:net_player_next/views/components/song_item.dart';
 import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -101,7 +99,7 @@ class _PlayListViewState extends State<PlayListView> {
     }
   }
 
-  Future<void> refresh() async {
+  Future<void> refresh(BuildContext context) async {
     var tmpList=await operations.getPlayList(context, listId);
     setState(() {
       list=tmpList;
@@ -129,7 +127,7 @@ class _PlayListViewState extends State<PlayListView> {
         c.isPlay.value=false;
       }
     }
-    showMessage(true, 'updateOk'.tr, context);
+    if(context.mounted) showMessage(true, 'updateOk'.tr, context);
   }
 
   @override
@@ -140,7 +138,7 @@ class _PlayListViewState extends State<PlayListView> {
         children: [
           Column(
             children: [
-              Obx(()=>ViewHeader(title: name, subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: 'playList', id: c.pageId.value, locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
+              Obx(()=>ViewHeader(title: name, subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: 'playList', id: c.pageId.value, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,),),
               const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

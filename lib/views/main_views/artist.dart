@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/views/components/album_item.dart';
 import 'package:net_player_next/views/components/message.dart';
-import 'package:net_player_next/views/components/table.dart';
+import 'package:net_player_next/views/components/artist_item.dart';
 import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';

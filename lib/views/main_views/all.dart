@@ -1,11 +1,7 @@
-// use_build_context_synchronously
-
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/components/message.dart';
-import 'package:net_player_next/views/components/table.dart';
+import 'package:net_player_next/views/components/song_item.dart';
 import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -51,9 +47,9 @@ class _AllViewState extends State<AllView> {
     controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
   }
 
-  Future<void> refresh() async {
+  Future<void> refresh(BuildContext context) async {
     await operations.checkAllSongPlay(context);
-    showMessage(true, 'updateOk'.tr, context);
+    if(context.mounted) showMessage(true, 'updateOk'.tr, context);
   }
 
   @override
@@ -64,7 +60,7 @@ class _AllViewState extends State<AllView> {
         children: [
           Column(
             children: [
-              Obx(() => ViewHeader(title: 'allSongs'.tr, subTitle: 'total'.tr+c.allSongs.length.toString()+'songTotal'.tr, page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(), controller: inputController,),),
+              Obx(() => ViewHeader(title: 'allSongs'.tr, subTitle: 'total'.tr+c.allSongs.length.toString()+'songTotal'.tr, page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(context), controller: inputController,),),
               const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
