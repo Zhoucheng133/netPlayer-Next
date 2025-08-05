@@ -51,8 +51,8 @@ class _MainViewState extends State<MainView> {
         songController.nowPlay.value=NowPlay.fromJson(tmpNowPlay);
         WidgetsBinding.instance.addPostFrameCallback((_) async {
           await operations.nowPlayCheck(context);
-          if(Platform.isWindows){
-            c.smtc.updateMetadata(
+          if(Platform.isWindows && c.smtc!=null){
+            c.smtc?.updateMetadata(
               MusicMetadata(
                 title: songController.nowPlay.value.title,
                 album: songController.nowPlay.value.album,
@@ -61,7 +61,7 @@ class _MainViewState extends State<MainView> {
                 thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}"
               ),
             );
-            c.smtc.setPlaybackStatus(PlaybackStatus.Paused);
+            c.smtc?.setPlaybackStatus(PlaybackStatus.Paused);
           }
         });
       }
@@ -193,16 +193,16 @@ class _MainViewState extends State<MainView> {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         try {
           // Listen to button events and update playback status accordingly
-          c.smtc.buttonPressStream.listen((event) {
+          c.smtc!.buttonPressStream.listen((event) {
             switch (event) {
               case PressedButton.play:
                 // Update playback status
                 operations.play();
-                c.smtc.setPlaybackStatus(PlaybackStatus.Playing);
+                c.smtc?.setPlaybackStatus(PlaybackStatus.Playing);
                 break;
               case PressedButton.pause:
                 operations.pause();
-                c.smtc.setPlaybackStatus(PlaybackStatus.Paused);
+                c.smtc?.setPlaybackStatus(PlaybackStatus.Paused);
                 break;
               case PressedButton.next:
                 // print('Next');
@@ -213,16 +213,14 @@ class _MainViewState extends State<MainView> {
                 operations.skipPre();
                 break;
               case PressedButton.stop:
-                c.smtc.setPlaybackStatus(PlaybackStatus.Stopped);
-                c.smtc.disableSmtc();
+                c.smtc?.setPlaybackStatus(PlaybackStatus.Stopped);
+                c.smtc?.disableSmtc();
                 break;
               default:
                 break;
             }
           });
-        } catch (e) {
-          // print("Error: $e");
-        }
+        } catch (_) {}
       });
     }
   }
@@ -232,7 +230,9 @@ class _MainViewState extends State<MainView> {
     listener.dispose();
     statusListener.dispose();
     lineListener.dispose();
-    c.smtc.dispose();
+    if(c.smtc!=null){
+      c.smtc?.dispose();
+    }
     super.dispose();
   }
 

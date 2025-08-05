@@ -107,7 +107,7 @@ class Controller extends GetxController{
   // ws服务状态
   RxBool wsOk=true.obs;
 
-  late SMTCWindows smtc;
+  SMTCWindows? smtc;
 
   // 语言
   RxString lang='zh_CN'.obs;

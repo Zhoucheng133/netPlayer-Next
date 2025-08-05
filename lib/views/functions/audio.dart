@@ -55,8 +55,8 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   }
 
   void setMedia(bool isPlay){
-    if(Platform.isWindows){
-      c.smtc.updateMetadata(
+    if(Platform.isWindows && c.smtc!=null){
+      c.smtc?.updateMetadata(
         MusicMetadata(
           title: songController.nowPlay.value.title,
           album: songController.nowPlay.value.album,
@@ -65,7 +65,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
           thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}"
         ),
       );
-      c.smtc.setPlaybackStatus(isPlay ? PlaybackStatus.Playing : PlaybackStatus.Paused);
+      c.smtc?.setPlaybackStatus(isPlay ? PlaybackStatus.Playing : PlaybackStatus.Paused);
     }
     item=MediaItem(
       id: songController.nowPlay.value.id,
