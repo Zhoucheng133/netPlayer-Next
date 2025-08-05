@@ -40,7 +40,7 @@ class _PlayBarState extends State<PlayBar> {
 
   bool isLoved(){
     for (var val in songController.lovedSongs) {
-      if(val.id==c.nowPlay['id']){
+      if(val.id==songController.nowPlay.value.id){
         return true;
       }
     }
@@ -69,7 +69,7 @@ class _PlayBarState extends State<PlayBar> {
                 borderRadius: BorderRadius.circular(5),
                 child: GestureDetector(
                   onTap: (){
-                    if(c.nowPlay['id']!=""){
+                    if(songController.nowPlay.value.id!=""){
                       operations.toggleLyric(context);
                     }
                   },
@@ -77,16 +77,16 @@ class _PlayBarState extends State<PlayBar> {
                     message: 'showLyric'.tr,
                     waitDuration: const Duration(seconds: 1),
                     child: MouseRegion(
-                      cursor: c.nowPlay['id']=="" ? SystemMouseCursors.basic : SystemMouseCursors.click,
+                      cursor: songController.nowPlay.value.id=="" ? SystemMouseCursors.basic : SystemMouseCursors.click,
                       onEnter: (_){
-                        if(c.nowPlay['id']!=""){
+                        if(songController.nowPlay.value.id!=""){
                           setState(() {
                             hoverCover=true;
                           });
                         }
                       },
                       onExit: (_){
-                        if(c.nowPlay['id']!=""){
+                        if(songController.nowPlay.value.id!=""){
                           setState(() {
                             hoverCover=false;
                           });
@@ -139,7 +139,7 @@ class _PlayBarState extends State<PlayBar> {
                 SizedBox(
                   width: 165,
                   child: Text(
-                    c.nowPlay['title'],
+                    songController.nowPlay.value.title,
                     style: GoogleFonts.notoSansSc(
                       fontWeight: FontWeight.bold,
                       color: colorController.darkMode.value ? Colors.white : Colors.black,
@@ -151,7 +151,7 @@ class _PlayBarState extends State<PlayBar> {
                 SizedBox(
                   width: 165,
                   child: Text(
-                    c.nowPlay['artist'],
+                    songController.nowPlay.value.artist,
                     style: GoogleFonts.notoSansSc(
                       color: Colors.grey[500],
                       fontSize: 12,
@@ -300,7 +300,7 @@ class _PlayBarState extends State<PlayBar> {
                           inactiveTrackColor: colorController.color4(),
                         ),
                         child: Slider(
-                          value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"],
+                          value: songController.nowPlay.value.duration==0 ? 0.0 : c.playProgress.value/1000/songController.nowPlay.value.duration>1 ? 1.0 : c.playProgress.value/1000/songController.nowPlay.value.duration<0 ? 0 : c.playProgress.value/1000/songController.nowPlay.value.duration,
                           onChanged: (value){
                             operations.seekChange(value);
                           },
@@ -319,7 +319,7 @@ class _PlayBarState extends State<PlayBar> {
                         Padding(
                           padding: const EdgeInsets.only(top: 5),
                           child: Text(
-                            c.nowPlay['duration']==0 ? "" : convertDuration(c.playProgress.value~/1000),
+                            songController.nowPlay.value.duration==0 ? "" : convertDuration(c.playProgress.value~/1000),
                             style: GoogleFonts.notoSansSc(
                               fontSize: 12,
                               color: colorController.color5()
@@ -330,7 +330,7 @@ class _PlayBarState extends State<PlayBar> {
                         Padding(
                           padding: const EdgeInsets.only(top: 5),
                           child: Text(
-                            c.nowPlay['duration']==0 ? "" : convertDuration(c.nowPlay['duration']),
+                            songController.nowPlay.value.duration==0 ? "" : convertDuration(songController.nowPlay.value.duration),
                             style: GoogleFonts.notoSansSc(
                               fontSize: 12,
                               color: colorController.color5()
@@ -359,9 +359,9 @@ class _PlayBarState extends State<PlayBar> {
                         child: GestureDetector(
                           onTap: (){
                             if(isLoved()){
-                              operations.deloveSong(context, c.nowPlay['id']);
+                              operations.deloveSong(context, songController.nowPlay.value.id);
                             }else{
-                              operations.loveSong(context, c.nowPlay['id']);
+                              operations.loveSong(context, songController.nowPlay.value.id);
                             }
                         
                           },

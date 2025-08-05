@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/album_item.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
@@ -18,6 +19,7 @@ class _AlbumViewState extends State<AlbumView> {
 
   final Controller c = Get.find();
   TextEditingController inputController = TextEditingController();
+  final SongController songController=Get.find();
   String searchKeyWord='';
   late Worker listener;
   String albumName='';
@@ -63,7 +65,7 @@ class _AlbumViewState extends State<AlbumView> {
     showMessage(true, '更新成功', context);
   }
   bool isPlay(int index){
-     if(index==c.nowPlay['index'] && c.nowPlay['playFrom']=='album' && c.nowPlay['fromId']==id){
+     if(index==songController.nowPlay.value.index && songController.nowPlay.value.playFrom==Pages.album && songController.nowPlay.value.fromId==id){
       return true;
     }
     return false;
@@ -78,8 +80,8 @@ class _AlbumViewState extends State<AlbumView> {
           Column(
             children: [
               Obx(() => 
-                c.pageId.value=='' ? ViewHeader(title: 'albums'.tr, subTitle: 'total'.tr+c.albums.length.toString()+'albumTotal'.tr, page: 'album', refresh: ()=>refresh(context), controller: inputController,) :
-                ViewHeader(title: '${"album".tr}: $albumName', subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: 'album', refresh: ()=>(){},)
+                c.pageId.value=='' ? ViewHeader(title: 'albums'.tr, subTitle: 'total'.tr+c.albums.length.toString()+'albumTotal'.tr, page: Pages.album, refresh: ()=>refresh(context), controller: inputController,) :
+                ViewHeader(title: '${"album".tr}: $albumName', subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: Pages.album, refresh: ()=>(){},)
               ),
               // const albumHeader(),
               Obx(()=>
@@ -136,7 +138,7 @@ class _AlbumViewState extends State<AlbumView> {
                             id: list[index]['id'], 
                             isplay: isPlay(index), 
                             artist: list[index]['artist'], 
-                            from: 'album', 
+                            from: Pages.album, 
                             listId: id, 
                             list: list, 
                             album: list[index]['album'], 
@@ -153,7 +155,7 @@ class _AlbumViewState extends State<AlbumView> {
                             id: list[index]['id'], 
                             isplay: isPlay(index), 
                             artist: list[index]['artist'], 
-                            from: 'album', 
+                            from: Pages.album, 
                             listId: id, 
                             list: list,
                             album: list[index]['album'], 

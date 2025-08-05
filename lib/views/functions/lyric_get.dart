@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/requests.dart';
 
@@ -8,6 +9,7 @@ class LyricGet{
 
   HttpRequests requests=HttpRequests();
   final Controller c = Get.find();
+  final SongController songController=Get.find();
 
   // 时间戳转换成毫秒
   int timeToMilliseconds(timeString) {
@@ -41,7 +43,7 @@ class LyricGet{
   }
 
   Future<bool> lrclib() async {
-    final rlt=await requests.lrclib(c.nowPlay['title'], c.nowPlay['album'], c.nowPlay['artist'], c.nowPlay['duration'].toString());
+    final rlt=await requests.lrclib(songController.nowPlay.value.title, songController.nowPlay.value.album, songController.nowPlay.value.artist, songController.nowPlay.value.duration.toString());
     var response=rlt['syncedLyrics']??"";
     if(response==''){
       return false;
@@ -70,7 +72,7 @@ class LyricGet{
   }
 
   Future<bool> netease() async {
-    final Map? lyricResponse=await requests.netease(c.nowPlay['title'], c.nowPlay['artist']);
+    final Map? lyricResponse=await requests.netease(songController.nowPlay.value.title, songController.nowPlay.value.artist);
     if(lyricResponse==null){
       return false;
     }

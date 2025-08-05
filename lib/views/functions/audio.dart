@@ -7,6 +7,7 @@ import 'dart:math';
 import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:smtc_windows/smtc_windows.dart';
@@ -14,6 +15,7 @@ import 'package:smtc_windows/smtc_windows.dart';
 class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   final Controller c = Get.find();
+  final SongController songController=Get.find();
   final player = Player();
   var playURL="";
   bool skipHandler=false;
@@ -56,22 +58,22 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     if(Platform.isWindows){
       c.smtc.updateMetadata(
         MusicMetadata(
-          title: c.nowPlay["title"]??'',
-          album: c.nowPlay["album"]??'',
-          albumArtist: c.nowPlay["artist"]??'',
-          artist: c.nowPlay["artist"]??'',
-          thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"
+          title: songController.nowPlay.value.title,
+          album: songController.nowPlay.value.album,
+          albumArtist: songController.nowPlay.value.artist,
+          artist: songController.nowPlay.value.artist,
+          thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}"
         ),
       );
       c.smtc.setPlaybackStatus(isPlay ? PlaybackStatus.Playing : PlaybackStatus.Paused);
     }
     item=MediaItem(
-      id: c.nowPlay["id"],
-      title: c.nowPlay["title"],
-      artist: c.nowPlay["artist"],
-      artUri: Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"),
-      album: c.nowPlay["album"],
-      duration: Duration(seconds: c.nowPlay["duration"]),
+      id: songController.nowPlay.value.id,
+      title: songController.nowPlay.value.title,
+      artist: songController.nowPlay.value.artist,
+      artUri: Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}"),
+      album: songController.nowPlay.value.album,
+      duration: Duration(seconds: songController.nowPlay.value.duration),
     );
     mediaItem.add(item);
 
@@ -94,7 +96,7 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 播放
   @override
   Future<void> play() async {
-    var url="${c.userInfo["url"]}/rest/stream?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}";
+    var url="${c.userInfo["url"]}/rest/stream?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}";
     if(url!=playURL || skipHandler){
       final media=Media(url);
       await player.open(media);
@@ -148,17 +150,17 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       operations.fullRandomPlay();
       return;
     }
-    var tmpList=c.nowPlay.value;
-    tmpList['index']=preHandler(c.nowPlay.value['index'], c.nowPlay.value['list'].length);
-    tmpList['id']=tmpList['list'][tmpList['index']]['id'];
-    tmpList['title']=tmpList['list'][tmpList['index']]['title'];
-    tmpList['artist']=tmpList['list'][tmpList['index']]['artist'];
-    tmpList['duration']=tmpList['list'][tmpList['index']]['duration'];
-    tmpList['album']=tmpList['list'][tmpList['index']]['album'];
+    var tmpList=songController.nowPlay.value;
+    tmpList.index=preHandler(songController.nowPlay.value.index, songController.nowPlay.value.list.length);
+    tmpList.id=tmpList.list[tmpList.index].id;
+    tmpList.title=tmpList.list[tmpList.index].title;
+    tmpList.artist=tmpList.list[tmpList.index].artist;
+    tmpList.duration=tmpList.list[tmpList.index].duration;
+    tmpList.album=tmpList.list[tmpList.index].album;
     // c.nowPlay.value=tmpList;
     // c.updateNowPlay(tmpList);
-    c.nowPlay.value=tmpList;
-    c.nowPlay.refresh();
+    songController.nowPlay.value=tmpList;
+    songController.nowPlay.refresh();
     skipHandler=true;
     play();
     setMedia(true);
@@ -189,16 +191,16 @@ class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       operations.fullRandomPlay();
       return;
     }
-    Map<String, dynamic> tmpList=c.nowPlay.value;
-    tmpList['index']=nextHandler(c.nowPlay.value['index'], c.nowPlay.value['list'].length);
-    tmpList['id']=tmpList['list'][tmpList['index']]['id'];
-    tmpList['title']=tmpList['list'][tmpList['index']]['title'];
-    tmpList['artist']=tmpList['list'][tmpList['index']]['artist'];
-    tmpList['duration']=tmpList['list'][tmpList['index']]['duration'];
-    tmpList['album']=tmpList['list'][tmpList['index']]['album'];
+    NowPlay tmpList=songController.nowPlay.value;
+    tmpList.index=nextHandler(songController.nowPlay.value.index, songController.nowPlay.value.list.length);
+    tmpList.id=tmpList.list[tmpList.index].id;
+    tmpList.title=tmpList.list[tmpList.index].title;
+    tmpList.artist=tmpList.list[tmpList.index].artist;
+    tmpList.duration=tmpList.list[tmpList.index].duration;
+    tmpList.album=tmpList.list[tmpList.index].album;
     // c.updateNowPlay(tmpList);
-    c.nowPlay.value=tmpList;
-    c.nowPlay.refresh();
+    songController.nowPlay.value=tmpList;
+    songController.nowPlay.refresh();
     skipHandler=true;
     play();
     setMedia(true);

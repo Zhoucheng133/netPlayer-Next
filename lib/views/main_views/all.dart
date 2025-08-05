@@ -39,14 +39,14 @@ class _AllViewState extends State<AllView> {
   }
 
   bool isPlay(int index){
-    if(index==c.nowPlay['index'] && c.nowPlay['playFrom']=='all'){
+    if(index==songController.nowPlay.value.index && songController.nowPlay.value.playFrom==Pages.all){
       return true;
     }
     return false;
   }
 
   void locateSong(){
-    controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
+    controller.scrollToIndex(songController.nowPlay.value.index, preferPosition: AutoScrollPosition.middle);
   }
 
   Future<void> refresh(BuildContext context) async {
@@ -62,7 +62,7 @@ class _AllViewState extends State<AllView> {
         children: [
           Column(
             children: [
-              Obx(() => ViewHeader(title: 'allSongs'.tr, subTitle: 'total'.tr+songController.allSongs.length.toString()+'songTotal'.tr, page: 'all', locate: ()=>locateSong(), refresh: ()=>refresh(context), controller: inputController,),),
+              Obx(() => ViewHeader(title: 'allSongs'.tr, subTitle: 'total'.tr+songController.allSongs.length.toString()+'songTotal'.tr, page: Pages.all, locate: ()=>locateSong(), refresh: ()=>refresh(context), controller: inputController,),),
               const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
@@ -83,7 +83,7 @@ class _AllViewState extends State<AllView> {
                             id: songController.allSongs[index].id, 
                             isplay: isPlay(index), 
                             artist: songController.allSongs[index].artist, 
-                            from: 'all', 
+                            from: Pages.all, 
                             album: songController.allSongs[index].album, 
                             artistId: songController.allSongs[index].artistId,
                             albumId: songController.allSongs[index].albumId,
@@ -98,7 +98,7 @@ class _AllViewState extends State<AllView> {
                             id: songController.allSongs[index].id, 
                             isplay: isPlay(index), 
                             artist: songController.allSongs[index].artist, 
-                            from: 'all',
+                            from: Pages.all,
                             album: songController.allSongs[index].album, 
                             artistId: songController.allSongs[index].artistId,
                             albumId: songController.allSongs[index].albumId,

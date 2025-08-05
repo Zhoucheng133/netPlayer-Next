@@ -20,6 +20,7 @@ class _PlayListViewState extends State<PlayListView> {
   final Controller c = Get.find();
   final operations=Operations();
   final AutoScrollController controller=AutoScrollController();
+  final SongController songController=Get.find();
   List<SongItemClass> list=[];
   String listId='';
   TextEditingController inputController = TextEditingController();
@@ -60,14 +61,14 @@ class _PlayListViewState extends State<PlayListView> {
   String name='';
 
   bool isPlay(int index){
-    if(index==c.nowPlay['index'] && c.nowPlay['playFrom']=='playList' && c.nowPlay['fromId']==listId){
+    if(index==songController.nowPlay.value.index && songController.nowPlay.value.playFrom==Pages.playList && songController.nowPlay.value.fromId==listId){
       return true;
     }
     return false;
   }
 
   void locateSong(){
-    controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
+    controller.scrollToIndex(songController.nowPlay.value.index, preferPosition: AutoScrollPosition.middle);
   }
 
   Future<void> silentRefresh() async {
@@ -75,26 +76,28 @@ class _PlayListViewState extends State<PlayListView> {
     setState(() {
       list=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
     });
-    if(c.nowPlay['playFrom']=='playList' && c.nowPlay['fromId']==listId){
-      int index=list.indexWhere((item) => item.id==c.nowPlay['id']);
+    if(songController.nowPlay.value.playFrom==Pages.playList && songController.nowPlay.value.fromId==listId){
+      int index=list.indexWhere((item) => item.id==songController.nowPlay.value.id);
       if(index!=-1){
-        c.nowPlay['index']=index;
-        c.nowPlay['list']=list;
-        c.nowPlay.refresh();
+        songController.nowPlay.value.index=index;
+        songController.nowPlay.value.list=list;
+        songController.nowPlay.refresh();
       }else{
         c.handler.stop();
-        Map<String, Object> tmp={
-          'id': '',
-          'title': '',
-          'artist': '',
-          'playFrom': '',
-          'duration': 0,
-          'fromId': '',
-          'album': '',
-          'index': 0,
-          'list': [],
-        };
-        c.nowPlay.value=tmp;
+        songController.nowPlay.value=NowPlay(
+          id: '', 
+          title: '', 
+          artist: '', 
+          duration: 0, 
+          fromId: '', 
+          album: '', 
+          albumId: '', 
+          artistId: '', 
+          created: '', 
+          list: [], 
+          playFrom: Pages.none, 
+          index: 0
+        );
         c.isPlay.value=false;
       }
     }
@@ -105,26 +108,28 @@ class _PlayListViewState extends State<PlayListView> {
     setState(() {
       list=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
     });
-    if(c.nowPlay['playFrom']=='playList' && c.nowPlay['fromId']==listId){
-      int index=list.indexWhere((item) => item.id==c.nowPlay['id']);
+    if(songController.nowPlay.value.playFrom==Pages.playList && songController.nowPlay.value.fromId==listId){
+      int index=list.indexWhere((item) => item.id==songController.nowPlay.value.id);
       if(index!=-1){
-        c.nowPlay['index']=index;
-        c.nowPlay['list']=list;
-        c.nowPlay.refresh();
+        songController.nowPlay.value.index=index;
+        songController.nowPlay.value.list=list;
+        songController.nowPlay.refresh();
       }else{
         c.handler.stop();
-        Map<String, Object> tmp={
-          'id': '',
-          'title': '',
-          'artist': '',
-          'playFrom': '',
-          'duration': 0,
-          'fromId': '',
-          'album': '',
-          'index': 0,
-          'list': [],
-        };
-        c.nowPlay.value=tmp;
+        songController.nowPlay.value=NowPlay(
+          id: '', 
+          title: '', 
+          artist: '', 
+          duration: 0, 
+          fromId: '', 
+          album: '', 
+          albumId: '', 
+          artistId: '', 
+          created: '', 
+          list: [], 
+          playFrom: Pages.none, 
+          index: 0
+        );
         c.isPlay.value=false;
       }
     }
@@ -139,7 +144,7 @@ class _PlayListViewState extends State<PlayListView> {
         children: [
           Column(
             children: [
-              Obx(()=>ViewHeader(title: name, subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: 'playList', id: c.pageId.value, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,),),
+              Obx(()=>ViewHeader(title: name, subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: Pages.playList, id: c.pageId.value, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,),),
               const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
@@ -160,7 +165,7 @@ class _PlayListViewState extends State<PlayListView> {
                           id: list[index].id, 
                           isplay: isPlay(index), 
                           artist: list[index].artist, 
-                          from: 'playList', 
+                          from: Pages.playList, 
                           listId: listId, 
                           list: list, 
                           refresh: ()=>silentRefresh(),
@@ -177,7 +182,7 @@ class _PlayListViewState extends State<PlayListView> {
                         id: list[index].id, 
                         isplay: isPlay(index), 
                         artist: list[index].artist, 
-                        from: 'playList', 
+                        from: Pages.playList, 
                         listId: listId, 
                         list: list, 
                         refresh: ()=>silentRefresh(),

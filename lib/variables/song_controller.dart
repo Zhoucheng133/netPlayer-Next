@@ -75,6 +75,45 @@ class NowPlay extends SongItemClass{
     required this.playFrom,
     required this.index
   });
+
+  // 反序列化
+  factory NowPlay.fromJson(Map<String, dynamic> json) {
+    return NowPlay(
+      id: json['id'] ?? '',
+      title: json['title'] ?? '',
+      artist: json['artist'] ?? '',
+      duration: json['duration'] ?? 0,
+      fromId: json['fromId'] ?? '',
+      album: json['album'] ?? '',
+      albumId: json['albumId'] ?? '',
+      artistId: json['artistId'] ?? '',
+      created: json['created'] ?? '',
+      list: (json['list'] as List<dynamic>? ?? [])
+          .map((e) => SongItemClass.fromJson(e))
+          .toList(),
+      playFrom: Pages.values[
+          json['playFrom'] is int ? json['playFrom'] : 0],
+      index: json['index'] ?? 0,
+    );
+  }
+  
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'artist': artist,
+      'duration': duration,
+      'fromId': fromId,
+      'album': album,
+      'albumId': albumId,
+      'artistId': artistId,
+      'created': created,
+      'list': list.map((e) => e.toJson()).toList(),
+      'playFrom': playFrom.index, // Pages 转 index
+      'index': index,
+    };
+  }
 }
 
 class SongController extends GetxController {

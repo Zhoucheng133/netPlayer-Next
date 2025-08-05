@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/sidebar_items.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -18,6 +19,7 @@ class _SideBarState extends State<SideBar> {
 
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
+  final SongController songController=Get.find();
   final operations=Operations();
 
   Future<void> addPlayListHandler(BuildContext context) async {
@@ -70,18 +72,20 @@ class _SideBarState extends State<SideBar> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('userInfo');
     operations.stop();
-    Map<String, Object> tmp={
-      'id': '',
-      'title': '',
-      'artist': '',
-      'playFrom': '',
-      'duration': 0,
-      'fromId': '',
-      'album': '',
-      'index': 0,
-      'list': [],
-    };
-    c.nowPlay.value=tmp;
+    songController.nowPlay.value=NowPlay(
+      id: '', 
+      title: '', 
+      artist: '', 
+      duration: 0, 
+      fromId: '', 
+      album: '', 
+      albumId: '', 
+      artistId: '', 
+      created: '', 
+      list: [], 
+      playFrom: Pages.none, 
+      index: 0
+    );
     c.userInfo.value={
       'url': null,
       'username': null,

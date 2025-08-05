@@ -19,6 +19,7 @@ enum Pages{
   search,   // 5 id: String / ''
   settings, // 6 id: ''
   none,     // 7 仅作为播放来源使用
+  random    // 8 仅作为播放来源使用
 }
 
 class LyricItem{
@@ -50,18 +51,6 @@ class Controller extends GetxController{
   }.obs;
   // 所有的歌单
   RxList playLists=[].obs;
-  // 现在播放信息
-  RxMap<String, dynamic> nowPlay={
-    'id': '',
-    'title': '',
-    'artist': '',
-    'playFrom': '',
-    'duration': 0,  // 注意这里使用的是秒~1000ms
-    'fromId': '',
-    'index': 0,
-    'album': '',
-    'list': [],
-  }.obs;
   // 播放进度, 注意单位为毫秒~1000ms=1s
   RxInt playProgress=0.obs;
   // 播放控制

@@ -193,7 +193,7 @@ class _SettingsViewState extends State<SettingsView> {
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
-          ViewHeader(title: 'settings'.tr, subTitle: '', page: 'settings',),
+          ViewHeader(title: 'settings'.tr, subTitle: '', page: Pages.settings,),
           const SizedBox(height: 10,),
           Expanded(
             child: ListView(

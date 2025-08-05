@@ -39,14 +39,14 @@ class _LovedViewState extends State<LovedView> {
   }
 
   bool isPlay(int index){
-    if(index==c.nowPlay['index'] && c.nowPlay['playFrom']=='loved'){
+    if(index==songController.nowPlay.value.index && songController.nowPlay.value.playFrom==Pages.loved){
       return true;
     }
     return false;
   }
 
   void locateSong(){
-    controller.scrollToIndex(c.nowPlay['index'], preferPosition: AutoScrollPosition.middle);
+    controller.scrollToIndex(songController.nowPlay.value.index, preferPosition: AutoScrollPosition.middle);
   }
 
   Future<void> refresh(BuildContext context) async {
@@ -62,7 +62,7 @@ class _LovedViewState extends State<LovedView> {
         children: [
           Column(
             children: [
-              Obx(()=>ViewHeader(title: 'lovedSongs'.tr, subTitle: 'total'.tr+songController.lovedSongs.length.toString()+'songTotal'.tr, page: 'loved', locate: locateSong, refresh: ()=>refresh(context), controller: inputController,)),
+              Obx(()=>ViewHeader(title: 'lovedSongs'.tr, subTitle: 'total'.tr+songController.lovedSongs.length.toString()+'songTotal'.tr, page: Pages.loved, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,)),
               const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
@@ -84,7 +84,7 @@ class _LovedViewState extends State<LovedView> {
                             id: songController.lovedSongs[index].id, 
                             isplay: isPlay(index),
                             artist: songController.lovedSongs[index].artist, 
-                            from: 'loved',
+                            from: Pages.loved,
                             album: songController.lovedSongs[index].album,
                             artistId: songController.lovedSongs[index].artistId, 
                             albumId: songController.lovedSongs[index].albumId,
@@ -99,7 +99,7 @@ class _LovedViewState extends State<LovedView> {
                             id: songController.lovedSongs[index].id, 
                             isplay: isPlay(index), 
                             artist: songController.lovedSongs[index].artist, 
-                            from: 'loved',
+                            from: Pages.loved,
                             album: songController.lovedSongs[index].album, 
                             artistId: songController.lovedSongs[index].artistId, 
                             albumId: songController.lovedSongs[index].albumId,

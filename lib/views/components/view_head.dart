@@ -10,7 +10,7 @@ class ViewHeader extends StatefulWidget {
 
   final String title;
   final String subTitle;
-  final String page;
+  final Pages page;
   final dynamic id;
   final dynamic locate;
   final dynamic refresh;
@@ -134,9 +134,9 @@ class _ViewHeaderState extends State<ViewHeader> {
                       fontSize: 13
                     ),
                   ),
-                  songController.allSongs.length>=500 && widget.page=='all' ? const SizedBox(width: 10,) : Container(),
+                  songController.allSongs.length>=500 && widget.page==Pages.all ? const SizedBox(width: 10,) : Container(),
                   Obx(()=>
-                    songController.allSongs.length>=500 && widget.page=='all' ? 
+                    songController.allSongs.length>=500 && widget.page==Pages.all ? 
                     Tooltip(
                       message: 'overCountTip'.tr,
                       child: MouseRegion(
@@ -163,7 +163,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                     ) : Container()
                   ),
                   const SizedBox(width: 10,),
-                  widget.page=='all' ? GestureDetector(
+                  widget.page==Pages.all ? GestureDetector(
                     onTap: (){
                       operations.fullRandomPlaySwitcher(context);
                     },
@@ -200,7 +200,7 @@ class _ViewHeaderState extends State<ViewHeader> {
               ),
             ),
           ),
-          widget.page!='settings' && widget.page!='search' ?
+          widget.page!=Pages.settings && widget.page!=Pages.search ?
           Obx(()=>
             AnimatedContainer(
               width: 180,
@@ -249,10 +249,10 @@ class _ViewHeaderState extends State<ViewHeader> {
             ),
           ) : Container(),
           const SizedBox(width: 15,),
-          widget.page=='playList' || widget.page=='all' || widget.page=='loved' ?
+          widget.page==Pages.playList || widget.page==Pages.all || widget.page==Pages.loved ?
           GestureDetector(
             onTap: (){
-              if(c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id)){
+              if(songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id)){
                 widget.locate();
               }
             },
@@ -261,7 +261,7 @@ class _ViewHeaderState extends State<ViewHeader> {
               message: 'locate'.tr,
               child: Obx(()=>
                 MouseRegion(
-                  cursor: c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? SystemMouseCursors.click : SystemMouseCursors.forbidden,
+                  cursor: songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id) ? SystemMouseCursors.click : SystemMouseCursors.forbidden,
                   onEnter: (_){
                     setState(() {
                       hoverLocate=true;
@@ -273,7 +273,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                     });
                   },
                   child: TweenAnimationBuilder(
-                    tween: ColorTween(end:  c.nowPlay['playFrom']==widget.page && (c.nowPlay['playFrom']!='playList' || c.nowPlay['fromId']==widget.id) ? hoverLocate ? colorController.color6() : colorController.color5() : Colors.grey[300]), 
+                    tween: ColorTween(end:  songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id) ? hoverLocate ? colorController.color6() : colorController.color5() : Colors.grey[300]), 
                     duration: const Duration(milliseconds: 200), 
                     builder: (_, value, __) => Icon(
                       Icons.my_location_rounded,
@@ -287,7 +287,7 @@ class _ViewHeaderState extends State<ViewHeader> {
           ):Container(),
           const SizedBox(width: 10,),
           Obx(()=>
-            !(c.pageId.value.isNotEmpty && (widget.page=='album' || widget.page=='artist')) && widget.page!='settings' && widget.page!='search' ? 
+            !(c.pageId.value.isNotEmpty && (widget.page==Pages.album || widget.page==Pages.artist)) && widget.page!=Pages.settings && widget.page!=Pages.search ? 
             GestureDetector(
               onTap: (){
                 widget.refresh();

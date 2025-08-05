@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/side_bar.dart';
 import 'package:net_player_next/views/components/play_bar.dart';
 import 'package:net_player_next/views/functions/operations.dart';
@@ -35,6 +36,7 @@ class _MainViewState extends State<MainView> {
   late Worker lineListener;
   late Worker statusListener;
   Operations operations=Operations();
+  final SongController songController=Get.find();
   String? preId;
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式
@@ -45,18 +47,18 @@ class _MainViewState extends State<MainView> {
       final nowPlay=prefs.getString('nowPlay');
       if(nowPlay!=null){
         Map<String, dynamic> decodedMap = jsonDecode(nowPlay);
-        Map<String, Object> tmpList=Map<String, Object>.from(decodedMap);
-        c.nowPlay.value=tmpList;
+        Map<String, Object> tmpNowPlay=Map<String, Object>.from(decodedMap);
+        songController.nowPlay.value=NowPlay.fromJson(tmpNowPlay);
         WidgetsBinding.instance.addPostFrameCallback((_) async {
           await operations.nowPlayCheck(context);
           if(Platform.isWindows){
             c.smtc.updateMetadata(
               MusicMetadata(
-                title: c.nowPlay["title"]??'',
-                album: c.nowPlay["album"]??'',
-                albumArtist: c.nowPlay["artist"]??'',
-                artist: c.nowPlay["artist"]??'',
-                thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}"
+                title: songController.nowPlay.value.title,
+                album: songController.nowPlay.value.album,
+                albumArtist: songController.nowPlay.value.artist,
+                artist: songController.nowPlay.value.artist,
+                thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}"
               ),
             );
             c.smtc.setPlaybackStatus(PlaybackStatus.Paused);
@@ -113,15 +115,15 @@ class _MainViewState extends State<MainView> {
     c.coverFuture.value=await operations.fetchCover();
   }
 
-  Future<void> nowplayChange(Map val) async {
+  Future<void> nowplayChange(NowPlay val) async {
 
-    if(preId!=null && c.nowPlay['id']==preId){
+    if(preId!=null && val.id==preId){
       // 实际播放内容没有任何变化
       return;
     }
 
-    if(c.nowPlay['id']!=null && c.nowPlay['id'].isNotEmpty){
-      preId=c.nowPlay['id'];
+    if(val.id!="" && val.id.isNotEmpty){
+      preId=songController.nowPlay.value.id;
     }
 
     updateCover();
@@ -143,7 +145,7 @@ class _MainViewState extends State<MainView> {
     if(c.useWs.value){
       c.ws.sendMsg(content);
     }
-    if(val['id']!=''){
+    if(val.id!=''){
       await operations.getLyric();
     }
   }
@@ -162,7 +164,7 @@ class _MainViewState extends State<MainView> {
   void initState() {
     super.initState();
     initPrefs();
-    listener=ever(c.nowPlay, (val)=>nowplayChange(val));
+    listener=ever(songController.nowPlay, (val)=>nowplayChange(val));
     lineListener=ever(c.lyricLine, (val)=>lyricChange());
     statusListener=ever(c.isPlay, (val)=>statusChange());
     initSMTC();
@@ -172,11 +174,11 @@ class _MainViewState extends State<MainView> {
     if(Platform.isWindows){
       c.smtc = SMTCWindows(
         metadata: MusicMetadata(
-          title: c.nowPlay["title"]??'',
-          album: c.nowPlay["album"]??'',
-          albumArtist: c.nowPlay["artist"]??'',
-          artist: c.nowPlay["artist"]??'',
-          thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
+          title: songController.nowPlay.value.title,
+          album: songController.nowPlay.value.album,
+          albumArtist: songController.nowPlay.value.artist,
+          artist: songController.nowPlay.value.artist,
+          thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}",
         ),
         config: const SMTCConfig(
           fastForwardEnabled: false,

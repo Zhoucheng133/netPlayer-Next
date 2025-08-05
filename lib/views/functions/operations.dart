@@ -202,26 +202,28 @@ class Operations{
 
   // 重新刷新播放内容
   void refreshFromLoved(){
-    if(c.nowPlay['playFrom']=='loved'){
-      int index=songController.lovedSongs.indexWhere((item) => item.id==c.nowPlay['id']);
+    if(songController.nowPlay.value.playFrom==Pages.loved){
+      int index=songController.lovedSongs.indexWhere((item) => item.id==songController.nowPlay.value.id);
       if(index!=-1){
-        c.nowPlay['index']=index;
-        c.nowPlay['list']=songController.lovedSongs.toJson();
-        c.nowPlay.refresh();
+        songController.nowPlay.value.index=index;
+        songController.nowPlay.value.list=songController.lovedSongs;
+        songController.nowPlay.refresh();
       }else{
         c.handler.stop();
-        Map<String, Object> tmp={
-          'id': '',
-          'title': '',
-          'artist': '',
-          'playFrom': '',
-          'duration': 0,
-          'fromId': '',
-          'album': '',
-          'index': 0,
-          'list': [],
-        };
-        c.nowPlay.value=tmp;
+        songController.nowPlay.value=NowPlay(
+          id: '', 
+          title: '', 
+          artist: '', 
+          duration: 0, 
+          fromId: '', 
+          album: '', 
+          albumId: '', 
+          artistId: '', 
+          created: '', 
+          list: [], 
+          playFrom: Pages.none, 
+          index: 0
+        );
         c.isPlay.value=false;
       }
     }
@@ -262,46 +264,35 @@ class Operations{
     }else{
       showMessage(true, 'addSuccess'.tr, context);
     }
-    c.nowPlay['list']=await getPlayList(context, listId);
-    c.nowPlay.refresh();
+    songController.nowPlay.value.list=(await getPlayList(context, listId)).map((item)=>SongItemClass.fromJson(item)).toList();
+    songController.nowPlay.refresh();
   }
 
   // 喜欢的歌曲播放检查
   Future<void> checkLovedSongPlay(BuildContext context) async {
     await getLovedSongs(context);
-    if(c.nowPlay['playFrom']=='loved'){
-      int index=songController.lovedSongs.indexWhere((item) => item.id==c.nowPlay['id']);
+    if(songController.nowPlay.value.playFrom==Pages.loved){
+      int index=songController.lovedSongs.indexWhere((item) => item.id==songController.nowPlay.value.id);
       if(index!=-1){
-        // c.nowPlay['index']=index;
-        // c.nowPlay['list']=c.lovedSongs;
-        // c.nowPlay.refresh();
-        Map<String, Object> tmp={
-          'id': c.nowPlay['id'],
-          'title': c.nowPlay['title'],
-          'artist': c.nowPlay['artist'],
-          'playFrom': c.nowPlay['playFrom'],
-          'duration': c.nowPlay['duration'],
-          'fromId': c.nowPlay['fromId'],
-          'album': c.nowPlay['album'],
-          'index': index,
-          'list': songController.lovedSongs.toJson(),
-        };
-        c.nowPlay.value=tmp;
-        // c.nowPlay.refresh();
+        songController.nowPlay.value.index=index;
+        songController.nowPlay.value.list=songController.lovedSongs;
+        songController.nowPlay.refresh();
       }else{
         c.handler.stop();
-        Map<String, Object> tmp={
-          'id': '',
-          'title': '',
-          'artist': '',
-          'playFrom': '',
-          'duration': 0,
-          'fromId': '',
-          'index': 0,
-          'album': '',
-          'list': [],
-        };
-        c.nowPlay.value=tmp;
+        songController.nowPlay.value=NowPlay(
+          id: '', 
+          title: '', 
+          artist: '', 
+          duration: 0, 
+          fromId: '', 
+          album: '', 
+          albumId: '', 
+          artistId: '', 
+          created: '', 
+          list: [], 
+          playFrom: Pages.none, 
+          index: 0
+        );
         c.isPlay.value=false;
       }
     }
@@ -310,39 +301,31 @@ class Operations{
   // 所有歌曲播放检查
   Future<void> checkAllSongPlay(BuildContext context) async {
     await getAllSongs(context);
-    if(c.nowPlay['playFrom']=='all'){
-      int index=songController.allSongs.indexWhere((item) => item.id==c.nowPlay['id']);
+    if(songController.nowPlay.value.playFrom==Pages.all){
+      int index=songController.allSongs.indexWhere((item) => item.id==songController.nowPlay.value.id);
       if(index!=-1){
-        // c.nowPlay['index']=index;
-        // c.nowPlay['list']=c.allSongs;
+        // songController.nowPlay.value.index=index;
+        // songController.nowPlay.value.list=c.allSongs;
         // c.nowPlay.refresh();
-        Map<String, Object> tmp={
-          'id': c.nowPlay['id'],
-          'title': c.nowPlay['title'],
-          'artist': c.nowPlay['artist'],
-          'playFrom': c.nowPlay['playFrom'],
-          'duration': c.nowPlay['duration'],
-          'fromId': c.nowPlay['fromId'],
-          'album': c.nowPlay['album'],
-          'index': index,
-          'list': songController.allSongs,
-        };
-        c.nowPlay.value=tmp;
-        // c.nowPlay.refresh();
+        songController.nowPlay.value.index=index;
+        songController.nowPlay.value.list=songController.allSongs;
+        songController.nowPlay.refresh();
       }else{
         c.handler.stop();
-        Map<String, Object> tmp={
-          'id': '',
-          'title': '',
-          'artist': '',
-          'playFrom': '',
-          'duration': 0,
-          'fromId': '',
-          'index': 0,
-          'list': [],
-          'album': '',
-        };
-        c.nowPlay.value=tmp;
+        songController.nowPlay.value=NowPlay(
+          id: '', 
+          title: '', 
+          artist: '', 
+          duration: 0, 
+          fromId: '', 
+          album: '', 
+          albumId: '', 
+          artistId: '', 
+          created: '', 
+          list: [], 
+          playFrom: Pages.none, 
+          index: 0
+        );
         c.isPlay.value=false;
       }
     }
@@ -351,38 +334,31 @@ class Operations{
   // 歌单播放检查
   Future<void> checkPlayListPlay(BuildContext context, String listId) async {
     var tmpList=await getPlayList(context, listId);
-    if(c.nowPlay['playFrom']=='playList' && c.nowPlay['fromId']==listId){
-      int index=tmpList.indexWhere((item) => item['id']==c.nowPlay['id']);
+    if(songController.nowPlay.value.playFrom==Pages.playList && songController.nowPlay.value.fromId==listId){
+      int index=tmpList.indexWhere((item) => item['id']==songController.nowPlay.value.id);
       if(index!=-1){
-        // c.nowPlay['index']=index;
-        // c.nowPlay['list']=tmpList;
-        Map<String, Object> tmp={
-          'id': c.nowPlay['id'],
-          'title': c.nowPlay['title'],
-          'artist': c.nowPlay['artist'],
-          'playFrom': c.nowPlay['playFrom'],
-          'duration': c.nowPlay['duration'],
-          'fromId': c.nowPlay['fromId'],
-          'album': c.nowPlay['album'],
-          'index': index,
-          'list': tmpList,
-        };
-        c.nowPlay.value=tmp;
+        // songController.nowPlay.value.index=index;
+        // songController.nowPlay.value.list=tmpList;
+        songController.nowPlay.value.index=index;
+        songController.nowPlay.value.list=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
         // c.nowPlay.refresh();
+        songController.nowPlay.refresh();
       }else{
         c.handler.stop();
-        Map<String, Object> tmp={
-          'id': '',
-          'title': '',
-          'artist': '',
-          'playFrom': '',
-          'duration': 0,
-          'fromId': '',
-          'album': '',
-          'index': 0,
-          'list': [],
-        };
-        c.nowPlay.value=tmp;
+        songController.nowPlay.value=NowPlay(
+          id: '', 
+          title: '', 
+          artist: '', 
+          duration: 0, 
+          fromId: '', 
+          album: '', 
+          albumId: '', 
+          artistId: '', 
+          created: '', 
+          list: [], 
+          playFrom: Pages.none, 
+          index: 0
+        );
         c.isPlay.value=false;
       }
     }
@@ -390,29 +366,31 @@ class Operations{
 
   // 自动修正nowPlay
   Future<void> nowPlayCheck(BuildContext context) async {
-    if(c.nowPlay['id']==''){
+    if(songController.nowPlay.value.id==''){
       return;
     }else{
-      if(c.nowPlay['playFrom']=='all'){
+      if(songController.nowPlay.value.playFrom==Pages.all){
         await checkAllSongPlay(context);
-      }else if(c.nowPlay['playFrom']=='loved'){
+      }else if(songController.nowPlay.value.playFrom==Pages.loved){
         await checkLovedSongPlay(context);
-      }else if(c.nowPlay['playFrom']=='playList'){
-        await checkPlayListPlay(context, c.nowPlay['fromId']);
-      }else if(c.nowPlay['playFrom']=='album' || c.nowPlay['playFrom']=='search'){
+      }else if(songController.nowPlay.value.playFrom==Pages.playList){
+        await checkPlayListPlay(context, songController.nowPlay.value.fromId);
+      }else if(songController.nowPlay.value.playFrom==Pages.album || songController.nowPlay.value.playFrom==Pages.search){
         c.handler.stop();
-        Map<String, Object> tmp={
-          'id': '',
-          'title': '',
-          'artist': '',
-          'playFrom': '',
-          'duration': 0,
-          'fromId': '',
-          'index': 0,
-          'album': '',
-          'list': [],
-        };
-        c.nowPlay.value=tmp;
+        songController.nowPlay.value=NowPlay(
+          id: '', 
+          title: '', 
+          artist: '', 
+          duration: 0, 
+          fromId: '', 
+          album: '', 
+          albumId: '', 
+          artistId: '', 
+          created: '', 
+          list: [], 
+          playFrom: Pages.none, 
+          index: 0
+        );
         c.isPlay.value=false;
       }
     }
@@ -489,34 +467,38 @@ class Operations{
     final rlt=await requests.getRandomSongRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
       c.handler.stop();
-      Map<String, Object> tmp={
-        'id': '',
-        'title': '',
-        'artist': '',
-        'playFrom': '',
-        'duration': 0,
-        'fromId': '',
-        'index': 0,
-        'album': '',
-        'list': [],
-      };
-      c.nowPlay.value=tmp;
+      songController.nowPlay.value=NowPlay(
+        id: '', 
+        title: '', 
+        artist: '', 
+        duration: 0, 
+        fromId: '', 
+        album: '', 
+        albumId: '', 
+        artistId: '', 
+        created: '', 
+        list: [], 
+        playFrom: Pages.none, 
+        index: 0
+      );
       c.isPlay.value=false;
       return;
     }else{
       var tmp=rlt['subsonic-response']['randomSongs']['song'][0];
-      Map<String, Object> rdSong={
-        'id': tmp['id'],
-        'title': tmp['title'],
-        'artist': tmp['artist'],
-        'playFrom': 'fullRandom',
-        'duration': tmp['duration'],
-        'album': tmp['album'],
-        'fromId': '',
-        'index': 0,
-        'list': [],
-      };
-      c.nowPlay.value=rdSong;
+      songController.nowPlay.value=NowPlay(
+        id: tmp['id'], 
+        title: tmp['title'], 
+        artist: tmp['artist'], 
+        duration: tmp['duration'], 
+        fromId: "",
+        album: tmp['album'], 
+        albumId: tmp['albumId'], 
+        artistId: tmp['artistId'], 
+        created: tmp['created'], 
+        list: [], 
+        playFrom: Pages.random, 
+        index: 0
+      );
       c.handler.play();
       c.isPlay.value=true;
     }
@@ -528,18 +510,20 @@ class Operations{
       fullRandomPlay();
     }else{
       c.handler.stop();
-      Map<String, Object> tmp={
-        'id': '',
-        'title': '',
-        'artist': '',
-        'playFrom': '',
-        'duration': 0,
-        'fromId': '',
-        'album': '',
-        'index': 0,
-        'list': [],
-      };
-      c.nowPlay.value=tmp;
+      songController.nowPlay.value=NowPlay(
+        id: '', 
+        title: '', 
+        artist: '', 
+        duration: 0, 
+        fromId: '', 
+        album: '', 
+        albumId: '', 
+        artistId: '', 
+        created: '', 
+        list: [], 
+        playFrom: Pages.none, 
+        index: 0
+      );
       c.isPlay.value=false;
     }
     c.fullRandom.value=!c.fullRandom.value;
@@ -649,27 +633,29 @@ class Operations{
   }
 
   // 播放歌曲
-  Future<void> playSong(BuildContext context, String id, String title, String artist, String playFrom, int duration, String listId, int index, List list, String album) async {
-    List playList=[];
-    if(playFrom=='all'){
-      playList=songController.allSongs.toJson();
-    }else if(playFrom=='loved'){
+  Future<void> playSong(BuildContext context, String id, String title, String artist, Pages playFrom, int duration, String listId, int index, List<SongItemClass> list, String album) async {
+    List<SongItemClass> playList=[];
+    if(playFrom==Pages.all){
+      playList=songController.allSongs;
+    }else if(playFrom==Pages.loved){
       playList=songController.lovedSongs.toJson();
     }else{
       playList=list;
     }
-    Map<String, Object> data={
-      'id': id,
-      'title': title,
-      'artist': artist,
-      'playFrom': playFrom,
-      'duration': duration,
-      'fromId': listId,
-      'album': album,
-      'index': index,
-      'list': playList,
-    };
-    c.nowPlay.value=data;
+    songController.nowPlay.value=NowPlay(
+      id: id, 
+      title: title, 
+      artist: artist, 
+      duration: duration, 
+      fromId: listId, 
+      album: album, 
+      albumId: "", 
+      artistId: "", 
+      created: "", 
+      list: playList, 
+      playFrom: playFrom, 
+      index: index
+    );
     c.handler.play();
     c.isPlay.value=true;
     if(c.fullRandom.value){
@@ -693,7 +679,7 @@ class Operations{
 
   // 停止播放
   void stop(){
-    if(c.nowPlay['id']==''){
+    if(songController.nowPlay.value.id==''){
       return;
     }
     c.handler.stop();
@@ -702,7 +688,7 @@ class Operations{
 
   // 暂停
   void pause(){
-    if(c.nowPlay['id']==''){
+    if(songController.nowPlay.value.id==''){
       return;
     }
     c.handler.pause();
@@ -711,7 +697,7 @@ class Operations{
 
   // 播放
   void play(){
-    if(c.nowPlay['id']==''){
+    if(songController.nowPlay.value.id==''){
       return;
     }
     c.handler.play();
@@ -720,7 +706,7 @@ class Operations{
 
   // 下一首
   void skipNext(){
-    if(c.nowPlay['id']==''){
+    if(songController.nowPlay.value.id==''){
       return;
     }
     c.handler.skipToNext();
@@ -729,7 +715,7 @@ class Operations{
 
   // 上一首
   void skipPre(){
-    if(c.nowPlay['id']==''){
+    if(songController.nowPlay.value.id==''){
       return;
     }
     c.handler.skipToPrevious();
@@ -747,20 +733,20 @@ class Operations{
 
   void seekChange(double val){
     pause();
-    if(c.nowPlay['id']==''){
+    if(songController.nowPlay.value.id==''){
       return;
     }
-    int progress=(c.nowPlay['duration']*1000*val).toInt();
+    int progress=(songController.nowPlay.value.duration*1000*val).toInt();
     c.playProgress.value=progress;
   }
 
   // 定位时间轴
   Future<void> seekSong(double val) async {
-    if(c.nowPlay['id']==''){
+    if(songController.nowPlay.value.id==''){
       return;
     }
     pause();
-    int progress=(c.nowPlay['duration']*1000*val).toInt();
+    int progress=(songController.nowPlay.value.duration*1000*val).toInt();
     c.playProgress.value=progress;
     await seek(Duration(milliseconds: c.playProgress.value));
   }
@@ -1035,12 +1021,12 @@ class Operations{
   }
 
   Future<void> toArtist(BuildContext context) async {
-    if(c.nowPlay['id']==""){
+    if(songController.nowPlay.value.id==""){
       return;
     }
     toggleLyric(context);
     c.page.value=Pages.artist;
-    final data=await getSongInfo(c.nowPlay['id']);
+    final data=await getSongInfo(songController.nowPlay.value.id);
     if(data.isEmpty){
       return;
     }
@@ -1055,12 +1041,12 @@ class Operations{
 
   // 跳转到某个专辑
   Future<void> toAlbum(BuildContext context) async {
-    if(c.nowPlay['id']==""){
+    if(songController.nowPlay.value.id==""){
       return;
     }
     toggleLyric(context);
     c.page.value=Pages.album;
-    final data=await getSongInfo(c.nowPlay['id']);
+    final data=await getSongInfo(songController.nowPlay.value.id);
     if(data.isEmpty){
       return;
     }
@@ -1114,12 +1100,12 @@ class Operations{
 
   Future<Uint8List?> fetchCover() async {
     // print("fetch!");
-    if(c.nowPlay["id"]=="" || c.userInfo["url"]==null){
+    if(songController.nowPlay.value.id=="" || c.userInfo["url"]==null){
       return null;
     }
     try {
       // 获取文件流
-      var response = await http.get(Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}")).timeout(const Duration(seconds: 2));
+      var response = await http.get(Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}")).timeout(const Duration(seconds: 2));
       if (response.statusCode == 200) {
         return decodeImage(response.bodyBytes)==null ? null:response.bodyBytes;
       } else {

@@ -71,8 +71,8 @@ class _ArtistViewState extends State<ArtistView> {
           Column(
             children: [
               Obx(()=>
-                c.pageId.value=='' ? ViewHeader(title: 'artists'.tr, subTitle: 'total'.tr+c.artists.length.toString()+'artistTotal'.tr, page: 'artist', refresh: ()=>refresh(context), controller: inputController,) : 
-                ViewHeader(title: "${'artist'.tr}: $artistName", subTitle: 'total'.tr+list.length.toString()+'albumTotal'.tr, page: 'artist')
+                c.pageId.value=='' ? ViewHeader(title: 'artists'.tr, subTitle: 'total'.tr+c.artists.length.toString()+'artistTotal'.tr, page: Pages.artist, refresh: ()=>refresh(context), controller: inputController,) : 
+                ViewHeader(title: "${'artist'.tr}: $artistName", subTitle: 'total'.tr+list.length.toString()+'albumTotal'.tr, page: Pages.artist)
               ),
               Obx(()=>
                 c.pageId.value=='' ? const ArtistHeader() : const AlbumHeader(),

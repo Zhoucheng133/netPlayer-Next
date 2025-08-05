@@ -71,7 +71,7 @@ class _LyricViewState extends State<LyricView> {
 
   bool isLoved(){
     for (var val in songController.lovedSongs) {
-      if(val.id==c.nowPlay['id']){
+      if(val.id==songController.nowPlay.value.id){
         return true;
       }
     }
@@ -121,7 +121,7 @@ class _LyricViewState extends State<LyricView> {
               ),
               onTap: (){
                 Navigator.pop(context);
-                FlutterClipboard.copy(c.nowPlay['artist']).then((_){
+                FlutterClipboard.copy(songController.nowPlay.value.artist).then((_){
                   if(context.mounted){
                     showMessage(true, 'copied'.tr, context);
                   }
@@ -174,7 +174,7 @@ class _LyricViewState extends State<LyricView> {
               ),
               onTap: (){
                 Navigator.pop(context);
-                FlutterClipboard.copy(c.nowPlay['title']).then((_){
+                FlutterClipboard.copy(songController.nowPlay.value.title).then((_){
                   if(context.mounted){
                     showMessage(true, 'copied'.tr, context);
                   }
@@ -294,7 +294,7 @@ class _LyricViewState extends State<LyricView> {
                                 cursor: SystemMouseCursors.click,
                                 child: Obx(()=>
                                   Text(
-                                    c.nowPlay['title'],
+                                    songController.nowPlay.value.title,
                                     style: GoogleFonts.notoSansSc(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 24,
@@ -315,7 +315,7 @@ class _LyricViewState extends State<LyricView> {
                                 cursor: SystemMouseCursors.click,
                                 child: Obx(()=>
                                   Text(
-                                    c.nowPlay['artist'],
+                                    songController.nowPlay.value.artist,
                                     style: GoogleFonts.notoSansSc(
                                       fontSize: 13,
                                       color: Colors.grey[400]
@@ -467,7 +467,7 @@ class _LyricViewState extends State<LyricView> {
                                         inactiveTrackColor: colorController.color3(),
                                       ),
                                       child: Slider(
-                                        value: c.nowPlay['duration']==0 ? 0.0 : c.playProgress.value/1000/c.nowPlay["duration"]>1 ? 1.0 : c.playProgress.value/1000/c.nowPlay["duration"]<0 ? 0 : c.playProgress.value/1000/c.nowPlay["duration"], 
+                                        value: songController.nowPlay.value.duration==0 ? 0.0 : c.playProgress.value/1000/songController.nowPlay.value.duration>1 ? 1.0 : c.playProgress.value/1000/songController.nowPlay.value.duration<0 ? 0 : c.playProgress.value/1000/songController.nowPlay.value.duration, 
                                         onChanged: (value){
                                           operations.seekChange(value);
                                         },
@@ -486,7 +486,7 @@ class _LyricViewState extends State<LyricView> {
                                           padding: const EdgeInsets.only(top: 10),
                                           child: Obx(()=>
                                             Text(
-                                              c.nowPlay['duration']==0 ? "" : convertDuration(c.playProgress.value~/1000),
+                                              songController.nowPlay.value.duration==0 ? "" : convertDuration(c.playProgress.value~/1000),
                                               style: GoogleFonts.notoSansSc(
                                                 fontSize: 12,
                                                 color: colorController.color5()
@@ -499,7 +499,7 @@ class _LyricViewState extends State<LyricView> {
                                           padding: const EdgeInsets.only(top: 5),
                                           child: Obx(()=>
                                             Text(
-                                              c.nowPlay['duration']==0 ? "" : convertDuration(c.nowPlay['duration']),
+                                              songController.nowPlay.value.duration==0 ? "" : convertDuration(songController.nowPlay.value.duration),
                                               style: GoogleFonts.notoSansSc(
                                                 fontSize: 12,
                                                 color: colorController.color5()
@@ -527,9 +527,9 @@ class _LyricViewState extends State<LyricView> {
                                       child: GestureDetector(
                                         onTap: (){
                                           if(isLoved()){
-                                            operations.deloveSong(context, c.nowPlay['id']);
+                                            operations.deloveSong(context, songController.nowPlay.value.id);
                                           }else{
-                                            operations.loveSong(context, c.nowPlay['id']);
+                                            operations.loveSong(context, songController.nowPlay.value.id);
                                           }
                                         },
                                         child: MouseRegion(
@@ -864,7 +864,7 @@ class _LyricViewState extends State<LyricView> {
                                                 ),
                                                 ElevatedButton(
                                                   onPressed: (){
-                                                    operations.addToList(context, c.nowPlay['id'], selectedItem);
+                                                    operations.addToList(context, songController.nowPlay.value.id, selectedItem);
                                                     Navigator.pop(context);
                                                   }, 
                                                   child: Text('add'.tr)

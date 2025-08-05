@@ -118,7 +118,7 @@ class SongItem extends StatefulWidget {
   final String artist;
   final dynamic listId;
   final String album;
-  final String from;
+  final Pages from;
   final dynamic list;
   final dynamic refresh;
   final String artistId;

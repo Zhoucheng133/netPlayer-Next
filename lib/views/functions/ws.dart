@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,15 +19,16 @@ class WsService {
   final List<WebSocketChannel> _clients = [];
   final Controller c = Get.find();
   Operations operations=Operations();
+  final SongController songController=Get.find();
 
   void sendMsg(String content) {
     for (var client in _clients) {
       client.sink.add(
         jsonEncode({
-          'title': c.nowPlay['title'],
-          'artist': c.nowPlay['artist'],
+          'title': songController.nowPlay.value.title,
+          'artist': songController.nowPlay.value.artist,
           'lyric': content,
-          'cover': "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${c.nowPlay["id"]}",
+          'cover': "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}",
           'fullLyric': c.lyric.map((item)=>item.toJson()).toList(),
           'line': c.lyricLine.value,
           'isPlay': c.isPlay.value,
@@ -98,7 +100,7 @@ class WsService {
         }
       case 'seek':
         if(msg['data']!=null && msg['data'] is int){
-          if(Duration(milliseconds: msg['data'])>Duration(seconds: c.nowPlay['duration'])){
+          if(Duration(milliseconds: msg['data'])>Duration(seconds: songController.nowPlay.value.duration)){
             return;
           }
           operations.seek(Duration(milliseconds: msg['data']));

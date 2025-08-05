@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/album_item.dart';
 import 'package:net_player_next/views/components/song_item.dart';
 import 'package:net_player_next/views/components/artist_item.dart';
@@ -17,6 +18,7 @@ class SearchView extends StatefulWidget {
 class _SearchViewState extends State<SearchView> {
 
   TextEditingController controller=TextEditingController();
+  final SongController songController=Get.find();
   final operations=Operations();
   final Controller c = Get.find();
   String type='song';
@@ -34,7 +36,7 @@ class _SearchViewState extends State<SearchView> {
   }
 
   bool isPlay(int index){
-    if(index==c.nowPlay['index'] && c.nowPlay['playFrom']=='search' && c.nowPlay['fromId']==nowSearch){
+    if(index==songController.nowPlay.value.index && songController.nowPlay.value.playFrom==Pages.search && songController.nowPlay.value.fromId==nowSearch){
       return true;
     }
     return false;
@@ -101,7 +103,7 @@ class _SearchViewState extends State<SearchView> {
                       id: songList[index]['id'], 
                       isplay: isPlay(index), 
                       artist: songList[index]['artist'], 
-                      from: 'search', 
+                      from: Pages.search, 
                       album: songList[index]['album'],
                       list: songList,
                       listId: nowSearch, 
