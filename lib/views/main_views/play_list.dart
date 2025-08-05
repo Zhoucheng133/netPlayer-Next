@@ -47,6 +47,7 @@ class _PlayListViewState extends State<PlayListView> {
 
   Future<void> pageIdListener(String newId) async {
     if(c.page.value==Pages.playList){
+      list=[];
       setState(() {
         name=c.playLists.firstWhere((item)=>item['id']==newId)['name'];
         listId=newId;
