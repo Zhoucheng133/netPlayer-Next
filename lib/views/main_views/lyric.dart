@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/lyric_controller.dart';
+import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/operations.dart';
@@ -41,6 +42,7 @@ class _LyricViewState extends State<LyricView> {
   final LyricController lyricController=Get.put(LyricController());
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
+  final PlaylistController playlistController=Get.find();
   final operations=Operations();
   final SongController songController=Get.find();
 
@@ -809,7 +811,7 @@ class _LyricViewState extends State<LyricView> {
                                     child: Center(
                                       child: GestureDetector(
                                         onTap: () async {
-                                          if(c.playLists.isEmpty){
+                                          if(playlistController.playLists.isEmpty){
                                             showDialog(
                                               context: context, 
                                               builder: (context)=>AlertDialog(
@@ -822,7 +824,7 @@ class _LyricViewState extends State<LyricView> {
                                             );
                                             return;
                                           }
-                                          String selectedItem=c.playLists[0]["id"];
+                                          String selectedItem=playlistController.playLists[0].id;
                                           await showDialog(
                                             context: context, 
                                             builder: (BuildContext context)=>AlertDialog(
@@ -841,10 +843,10 @@ class _LyricViewState extends State<LyricView> {
                                                       )
                                                     ),
                                                     value: selectedItem,
-                                                    items: List.generate(c.playLists.length, (index){
+                                                    items: List.generate(playlistController.playLists.length, (index){
                                                       return DropdownMenuItem(
-                                                        value: c.playLists[index]["id"],
-                                                        child: Text(c.playLists[index]["name"]),
+                                                        value: playlistController.playLists[index].id,
+                                                        child: Text(playlistController.playLists[index].name),
                                                       );
                                                     }),
                                                     onChanged: (val){

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -271,6 +272,7 @@ class PlayListPart extends StatefulWidget {
 class _PlayListPartState extends State<PlayListPart> {
 
   final Controller c = Get.find();
+  final PlaylistController playlistController=Get.find();
   final operations=Operations();
 
   @override
@@ -288,8 +290,8 @@ class _PlayListPartState extends State<PlayListPart> {
         padding: const EdgeInsets.only(left: 10),
         child: Obx(()=>
           ListView.builder(
-            itemCount: c.playLists.length,
-            itemBuilder: (BuildContext context, int index)=>PlayListItem(name: c.playLists[index]['name'], id: c.playLists[index]['id'])
+            itemCount: playlistController.playLists.length,
+            itemBuilder: (BuildContext context, int index)=>PlayListItem(name: playlistController.playLists[index].name, id: playlistController.playLists[index].id)
           )
         )
       ),

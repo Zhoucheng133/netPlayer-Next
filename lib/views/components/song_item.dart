@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/infos.dart';
@@ -136,6 +137,7 @@ class _SongItemState extends State<SongItem> {
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
   final SongController songController=Get.find();
+  final PlaylistController playlistController=Get.find();
   final operations=Operations();
   final Infos infos=Infos();
 
@@ -163,7 +165,7 @@ class _SongItemState extends State<SongItem> {
       items: [
         PopupMenuItem(
           value: "add",
-          enabled: c.playLists.isNotEmpty,
+          enabled: playlistController.playLists.isNotEmpty,
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -172,13 +174,13 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.add_rounded,
                 size: 18,
-                color: c.playLists.isEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
+                color: playlistController.playLists.isEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               const SizedBox(width: 5,),
               Text(
                 "addToList".tr,
                 style: GoogleFonts.notoSansSc(
-                  color: c.playLists.isEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
+                  color: playlistController.playLists.isEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
             ],
@@ -344,7 +346,7 @@ class _SongItemState extends State<SongItem> {
     );
     if(val=='add' && context.mounted){
       // String selectItem = c.playLists[0]["id"];
-      String selectedItem=c.playLists[0]["id"];
+      String selectedItem=playlistController.playLists[0].id;
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
@@ -363,10 +365,10 @@ class _SongItemState extends State<SongItem> {
                   )
                 ),
                 value: selectedItem,
-                items: List.generate(c.playLists.length, (index){
+                items: List.generate(playlistController.playLists.length, (index){
                   return DropdownMenuItem(
-                    value: c.playLists[index]["id"],
-                    child: Text(c.playLists[index]["name"]),
+                    value: playlistController.playLists[index].id,
+                    child: Text(playlistController.playLists[index].name),
                   );
                 }),
                 onChanged: (val){

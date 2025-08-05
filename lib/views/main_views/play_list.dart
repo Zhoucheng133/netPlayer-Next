@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
@@ -21,6 +22,7 @@ class _PlayListViewState extends State<PlayListView> {
   final operations=Operations();
   final AutoScrollController controller=AutoScrollController();
   final SongController songController=Get.find();
+  final PlaylistController playlistController=Get.find();
   List<SongItemClass> list=[];
   String listId='';
   TextEditingController inputController = TextEditingController();
@@ -49,7 +51,8 @@ class _PlayListViewState extends State<PlayListView> {
     if(c.page.value==Pages.playList){
       list=[];
       setState(() {
-        name=c.playLists.firstWhere((item)=>item['id']==newId)['name'];
+        name=playlistController.playLists.firstWhere((item)=>item.id==newId).name;
+        length=playlistController.playLists.firstWhere((item)=>item.id==newId).songCount;
         listId=newId;
       });
       var temp=await operations.getPlayList(context, newId);
@@ -60,6 +63,7 @@ class _PlayListViewState extends State<PlayListView> {
   }
 
   String name='';
+  int length=0;
 
   bool isPlay(int index){
     if(index==songController.nowPlay.value.index && songController.nowPlay.value.playFrom==Pages.playList && songController.nowPlay.value.fromId==listId){
@@ -145,7 +149,7 @@ class _PlayListViewState extends State<PlayListView> {
         children: [
           Column(
             children: [
-              Obx(()=>ViewHeader(title: name, subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: Pages.playList, id: c.pageId.value, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,),),
+              Obx(()=>ViewHeader(title: name, subTitle: 'total'.tr+length.toString()+'songTotal'.tr, page: Pages.playList, id: c.pageId.value, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,),),
               const SongHeader(),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,

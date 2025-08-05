@@ -49,8 +49,6 @@ class Controller extends GetxController{
     'salt': null,     // String?
     'token': null,    // String?
   }.obs;
-  // 所有的歌单
-  RxList playLists=[].obs;
   // 播放进度, 注意单位为毫秒~1000ms=1s
   RxInt playProgress=0.obs;
   // 播放控制

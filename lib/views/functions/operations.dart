@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image/image.dart' show decodeImage;
+import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/hotkeys.dart';
@@ -29,6 +30,7 @@ class Operations{
   final requests=HttpRequests();
   final Controller c = Get.find();
   final lyricGet = LyricGet();
+  final PlaylistController playlistController=Get.find();
   final SongController songController=Get.find();
 
   // 获取所有的歌单
@@ -40,9 +42,10 @@ class Operations{
     }else{
       try {
         if(rlt['subsonic-response']['playlists'].isEmpty){
-          c.playLists.value=[];
+          playlistController.playLists.value=[];
         }else{
-          c.playLists.value=rlt['subsonic-response']['playlists']['playlist'];
+          final List list=rlt['subsonic-response']['playlists']['playlist'];
+          playlistController.playLists.value=list.map((item)=>PlayListItem.fromJson(item)).toList();
         }
       } catch (_) {}
     }
