@@ -130,7 +130,7 @@ class _AlbumItemState extends State<AlbumItem> {
       items: [
         PopupMenuItem(
           value: "artist",
-          enabled: c.playLists.isNotEmpty,
+          enabled: widget.artistId.isNotEmpty,
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
