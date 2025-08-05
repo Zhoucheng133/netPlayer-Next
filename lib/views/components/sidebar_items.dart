@@ -333,6 +333,7 @@ class _PlayListItemState extends State<PlayListItem> {
   final Controller c = Get.find();
   Operations operations=Operations();
   final ColorController colorController=Get.find();
+  final PlaylistController playlistController=Get.find();
 
   Future<void> showPlaylistMenu(BuildContext context, TapDownDetails details) async {
     final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
@@ -487,10 +488,14 @@ class _PlayListItemState extends State<PlayListItem> {
       );
     }else if(val=='info'){
       // print(widget.id);
-      var getList=await operations.getPlayListInfo(context, widget.id);
-      if(getList.isEmpty){
+      // var getList=await operations.getPlayListInfo(context, widget.id);
+      // if(getList.isEmpty){
+      //   return;
+      // }
+      if(playlistController.playLists.isEmpty){
         return;
       }
+      PlayListItemClass item=playlistController.playLists.firstWhere((item)=>item.id==widget.id);
       showDialog(
         context: context, 
         builder: (context)=>AlertDialog(
@@ -503,7 +508,7 @@ class _PlayListItemState extends State<PlayListItem> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${getList['id']}",
+                    "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${item.id}",
                     height: 100,
                     width: 100,
                   ),
@@ -525,14 +530,14 @@ class _PlayListItemState extends State<PlayListItem> {
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: (){
-                            FlutterClipboard.copy(getList['name']).then((_){
+                            FlutterClipboard.copy(item.name).then((_){
                               if(context.mounted){
                                 showMessage(true, 'copied'.tr, context);
                               }
                             });
                           },
                           child: Text(
-                            getList['name'],
+                            item.name,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -554,7 +559,8 @@ class _PlayListItemState extends State<PlayListItem> {
                     ),
                     Expanded(
                       child: Text(
-                        getList['songCount'].toString(),
+                        // getList['songCount'].toString(),
+                        item.songCount.toString()
                       )
                     )
                   ],
@@ -573,7 +579,7 @@ class _PlayListItemState extends State<PlayListItem> {
                     ),
                     Expanded(
                       child: Text(
-                        operations.convertDuration(getList['duration']),
+                        operations.convertDuration(item.duration),
                       )
                     )
                   ],
@@ -595,14 +601,15 @@ class _PlayListItemState extends State<PlayListItem> {
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: (){
-                            FlutterClipboard.copy(getList['id']).then((_){
+                            FlutterClipboard.copy(item.id).then((_){
                               if(context.mounted){
                                 showMessage(true, 'copied'.tr, context);
                               }
                             });
                           },
                           child: Text(
-                            getList['id'],
+                            // getList['id'],
+                            item.id,
                             maxLines: 2,
                           ),
                         ),
@@ -624,7 +631,7 @@ class _PlayListItemState extends State<PlayListItem> {
                     ),
                     Expanded(
                       child: Text(
-                        operations.formatIsoString(getList['created']),
+                        operations.formatIsoString(item.created),
                       )
                     )
                   ],
@@ -643,7 +650,7 @@ class _PlayListItemState extends State<PlayListItem> {
                     ),
                     Expanded(
                       child: Text(
-                        operations.formatIsoString(getList['changed']),
+                        operations.formatIsoString(item.changed),
                       )
                     )
                   ],

@@ -45,7 +45,7 @@ class Operations{
           playlistController.playLists.value=[];
         }else{
           final List list=rlt['subsonic-response']['playlists']['playlist'];
-          playlistController.playLists.value=list.map((item)=>PlayListItem.fromJson(item)).toList();
+          playlistController.playLists.value=list.map((item)=>PlayListItemClass.fromJson(item)).toList();
         }
         if(showOkFlash){
           showMessage(true, 'updateOk'.tr, context);
@@ -272,6 +272,7 @@ class Operations{
     }else{
       showMessage(true, 'addSuccess'.tr, context);
     }
+    getAllPlayLists(context);
     songController.nowPlay.value.list=(await getPlayList(context, listId)).map((item)=>SongItemClass.fromJson(item)).toList();
     songController.nowPlay.refresh();
   }
