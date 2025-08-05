@@ -34,7 +34,7 @@ class Operations{
   final SongController songController=Get.find();
 
   // 获取所有的歌单
-  Future<void> getAllPlayLists(BuildContext context) async {
+  Future<void> getAllPlayLists(BuildContext context, {bool showOkFlash=false}) async {
     final rlt=await requests.playListsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
       showMessage(false, 'getPlaylistsFail'.tr, context);
@@ -47,7 +47,12 @@ class Operations{
           final List list=rlt['subsonic-response']['playlists']['playlist'];
           playlistController.playLists.value=list.map((item)=>PlayListItem.fromJson(item)).toList();
         }
-      } catch (_) {}
+        if(showOkFlash){
+          showMessage(true, 'updateOk'.tr, context);
+        }
+      } catch (_) {
+        showMessage(false, 'getPlaylistsFail'.tr, context);
+      }
     }
   }
 

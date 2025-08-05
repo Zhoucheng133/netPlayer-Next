@@ -105,12 +105,31 @@ class _PlayListLabelState extends State<PlayListLabel> {
           padding: const EdgeInsets.only(top: 10, left: 20, right: 10),
           child: Obx(()=>
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text('playLists'.tr, style: GoogleFonts.notoSansSc(
                   fontSize: 13,
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),),
+                const SizedBox(width: 10,),
+                GestureDetector(
+                  onTap: (){
+                    Operations().getAllPlayLists(context, showOkFlash: true);
+                  },
+                  child: Tooltip(
+                    message: 'refresh'.tr,
+                    waitDuration: const Duration(seconds: 1),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Icon(
+                        Icons.refresh,
+                        size: 15,
+                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(child: Container()),
                 GestureDetector(
                   onTap: (){
                     widget.addPlayListHandler();
