@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -40,7 +38,7 @@ class _MainViewState extends State<MainView> {
   String? preId;
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式
-  Future<void> initPrefs() async {
+  Future<void> initPrefs(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final savePlay=prefs.getBool('savePlay');
     if(savePlay!=false){
@@ -98,7 +96,7 @@ class _MainViewState extends State<MainView> {
       }
       c.ws=WsService(wsPort??9098);
     }
-    operations.initHotkey(context);
+    if(context.mounted) operations.initHotkey(context);
   }
 
   void lyricChange(){
@@ -163,7 +161,9 @@ class _MainViewState extends State<MainView> {
   @override
   void initState() {
     super.initState();
-    initPrefs();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      initPrefs(context);
+    });
     listener=ever(songController.nowPlay, (val)=>nowplayChange(val));
     lineListener=ever(c.lyricLine, (val)=>lyricChange());
     statusListener=ever(c.isPlay, (val)=>statusChange());

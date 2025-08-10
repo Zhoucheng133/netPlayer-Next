@@ -40,7 +40,7 @@ Future<void> main(List<String> args) async {
   Get.put(PlaylistController());
   Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode, autoDark));
   c.handler=await AudioService.init(
-    builder: () => audioHandler(),
+    builder: () => MainAudioHanlder(),
     config: const AudioServiceConfig(
       androidNotificationChannelId: 'zhouc.netPlayer.channel.audio',
       androidNotificationChannelName: 'Music playback',
