@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:convert';
 import 'dart:math';
 
@@ -125,7 +123,7 @@ class _LoginViewState extends State<LoginView> {
     var bytes = utf8.encode(password.text+salt);
     var token = md5.convert(bytes);
     final rlt=await requests.loginRequest(url.text, username.text, salt, token.toString());
-    if(rlt.isEmpty){
+    if(rlt.isEmpty && context.mounted){
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
@@ -142,7 +140,7 @@ class _LoginViewState extends State<LoginView> {
         ),
       );
       return;
-    }else if(rlt['subsonic-response']['status']=='failed'){
+    }else if(rlt['subsonic-response']['status']=='failed' && context.mounted){
       await showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(

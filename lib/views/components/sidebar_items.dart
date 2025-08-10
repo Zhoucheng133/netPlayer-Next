@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
@@ -416,7 +414,7 @@ class _PlayListItemState extends State<PlayListItem> {
         )
       ]
     );
-    if(val=='del'){
+    if(val=='del' && context.mounted){
       showDialog(
         context: context, 
         builder: (BuildContext context)=>AlertDialog(
@@ -439,7 +437,7 @@ class _PlayListItemState extends State<PlayListItem> {
           ],
         )
       );
-    }else if(val=='rename'){
+    }else if(val=='rename' && context.mounted){
       var newName=TextEditingController();
       showDialog(
         context: context, 
@@ -486,7 +484,7 @@ class _PlayListItemState extends State<PlayListItem> {
           ],
         )
       );
-    }else if(val=='info'){
+    }else if(val=='info' && context.mounted){
       // print(widget.id);
       // var getList=await operations.getPlayListInfo(context, widget.id);
       // if(getList.isEmpty){

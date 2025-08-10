@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
 // import 'dart:convert';
 import 'dart:io';
@@ -37,7 +35,7 @@ class Operations{
   Future<void> getAllPlayLists(BuildContext context, {bool showOkFlash=false}) async {
     final rlt=await requests.playListsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getPlaylistsFail'.tr, context);
+      if(context.mounted) showMessage(false, 'getPlaylistsFail'.tr, context);
       return;
     }else{
       try {
@@ -48,10 +46,10 @@ class Operations{
           playlistController.playLists.value=list.map((item)=>PlayListItemClass.fromJson(item)).toList();
         }
         if(showOkFlash){
-          showMessage(true, 'updateOk'.tr, context);
+          if(context.mounted) showMessage(true, 'updateOk'.tr, context);
         }
       } catch (_) {
-        showMessage(false, 'getPlaylistsFail'.tr, context);
+        if(context.mounted) showMessage(false, 'getPlaylistsFail'.tr, context);
       }
     }
   }
@@ -62,13 +60,13 @@ class Operations{
       showMessage(false, 'playlistNameEmpty'.tr, context);
     }else{
       final rlt=await requests.createPlayListRequest(name);
-      Navigator.pop(context);
+      if(context.mounted) Navigator.pop(context);
       if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-        showMessage(false, 'createPlaylistFail'.tr, context);
+        if(context.mounted) showMessage(false, 'createPlaylistFail'.tr, context);
       }else{
-        showMessage(true, 'createPlaylistSuccess'.tr, context);
+        if(context.mounted) showMessage(true, 'createPlaylistSuccess'.tr, context);
       }
-      getAllPlayLists(context);
+      if(context.mounted) getAllPlayLists(context);
     }
   }
 
@@ -76,11 +74,13 @@ class Operations{
   Future<void> renamePlayList(BuildContext context, String id, String name) async {
     final rlt=await requests.renameList(id, name);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'renameFail'.tr, context);
+      if(context.mounted) showMessage(false, 'renameFail'.tr, context);
       return;
     }else{
-      showMessage(true, 'renameSuccess'.tr, context);
-      getAllPlayLists(context);
+      if(context.mounted){
+        showMessage(true, 'renameSuccess'.tr, context);
+        getAllPlayLists(context);
+      }
     }
   }
 
@@ -88,11 +88,13 @@ class Operations{
   Future<void> delPlayList(BuildContext context, String id) async {
     final rlt=await requests.delPlayListRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'delFail'.tr, context);
+      if(context.mounted) showMessage(false, 'delFail'.tr, context);
       return;
     }else{
-      showMessage(true, 'delSuccess'.tr, context);
-      getAllPlayLists(context);
+      if(context.mounted){
+        showMessage(true, 'delSuccess'.tr, context);
+        getAllPlayLists(context);
+      }
     }
   }
 
@@ -100,7 +102,7 @@ class Operations{
   Future<void> getAllSongs(BuildContext context) async {
     final rlt=await requests.getAllSongsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getAllSongFail'.tr, context);
+      if(context.mounted) showMessage(false, 'getAllSongFail'.tr, context);
       return;
     }else{
       try {
@@ -112,7 +114,7 @@ class Operations{
         });
         songController.allSongs.value=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
       } catch (_) {
-        showMessage(false, 'anayliseAllSongFail'.tr, context);
+        if(context.mounted) showMessage(false, 'anayliseAllSongFail'.tr, context);
         return;
       }
     }
@@ -122,7 +124,7 @@ class Operations{
   Future<void> getLovedSongs(BuildContext context) async {
     final rlt=await requests.getLovedSongsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getLovedSongFail'.tr, context);
+      if(context.mounted) showMessage(false, 'getLovedSongFail'.tr, context);
       return;
     }else{
       try {
@@ -134,7 +136,7 @@ class Operations{
           songController.lovedSongs.value=songList.map((item)=>SongItemClass.fromJson(item)).toList();
         }
       } catch (_) {
-        showMessage(false, 'analiseLovedSongFail'.tr, context);
+        if(context.mounted) showMessage(false, 'analiseLovedSongFail'.tr, context);
         return;
       }
     }
@@ -144,7 +146,7 @@ class Operations{
   Future<void> getAlbums(BuildContext context) async {
     final rlt=await requests.getAlbumsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getAllAlbumFail'.tr, context);
+      if(context.mounted) showMessage(false, 'getAllAlbumFail'.tr, context);
       return;
     }else{
       try {
@@ -154,7 +156,7 @@ class Operations{
           c.albums.value=rlt['subsonic-response']['albumList']['album'];
         }
       } catch (_) {
-        showMessage(false, 'analiseAllAlbumFail'.tr, context);
+        if(context.mounted) showMessage(false, 'analiseAllAlbumFail'.tr, context);
         return;
       }
     }
@@ -164,7 +166,7 @@ class Operations{
   Future<Map> getPlayListInfo(BuildContext context, String id) async {
     final rlt=await requests.getPlayListRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getPlaylistFail'.tr, context);
+      if(context.mounted) showMessage(false, 'getPlaylistFail'.tr, context);
       return {};
     }else{
       try {
@@ -178,7 +180,7 @@ class Operations{
   Future<List> getPlayList(BuildContext context, String id) async {
     final rlt=await requests.getPlayListRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getPlaylistFail'.tr, context);
+      if(context.mounted) showMessage(false, 'getPlaylistFail'.tr, context);
       return [];
     }else{
       try {
@@ -192,7 +194,7 @@ class Operations{
   Future<void> getArtists(BuildContext context) async {
     final rlt=await requests.getArtistRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getAllArtistFail'.tr, context);
+      if(context.mounted) showMessage(false, 'getAllArtistFail'.tr, context);
       return;
     }else{
       try {
@@ -241,12 +243,12 @@ class Operations{
   Future<void> loveSong(BuildContext context, String id) async {
     final rlt=await requests.loveSongRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'addFail'.tr, context);
+      if(context.mounted) showMessage(false, 'addFail'.tr, context);
       return;
     }else{
-      showMessage(true, 'addSuccess'.tr, context);
+      if(context.mounted) showMessage(true, 'addSuccess'.tr, context);
     }
-    await getLovedSongs(context);
+    if(context.mounted) await getLovedSongs(context);
     refreshFromLoved();
   }
 
@@ -254,12 +256,12 @@ class Operations{
   Future<void> deloveSong(BuildContext context, String id) async {
     final rlt=await requests.deLoveSongRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'deloveFail'.tr, context);
+      if(context.mounted) showMessage(false, 'deloveFail'.tr, context);
       return;
     }else{
-      showMessage(true, 'deloveSuccess'.tr, context);
+      if(context.mounted) showMessage(true, 'deloveSuccess'.tr, context);
     }
-    await getLovedSongs(context);
+    if(context.mounted) await getLovedSongs(context);
     refreshFromLoved();
   }
 
@@ -267,13 +269,15 @@ class Operations{
   Future<void> addToList(BuildContext context, String songId, String listId) async {
     final rlt=await requests.addToListRequest(songId, listId);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'addFail'.tr, context);
+      if(context.mounted) showMessage(false, 'addFail'.tr, context);
       return;
     }else{
-      showMessage(true, 'addSuccess'.tr, context);
+      if(context.mounted) showMessage(true, 'addSuccess'.tr, context);
     }
-    getAllPlayLists(context);
-    songController.nowPlay.value.list=(await getPlayList(context, listId)).map((item)=>SongItemClass.fromJson(item)).toList();
+    if(context.mounted){
+      getAllPlayLists(context);
+      songController.nowPlay.value.list=(await getPlayList(context, listId)).map((item)=>SongItemClass.fromJson(item)).toList();
+    }
     songController.nowPlay.refresh();
   }
 
@@ -550,11 +554,14 @@ class Operations{
   Future<bool> delFromList(BuildContext context, String listId, int songId) async {
     final rlt=await requests.delFromListRequest(listId, songId);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'delFail'.tr, context);
+      if(context.mounted) showMessage(false, 'delFail'.tr, context);
       return false;
     }else{
-      showMessage(true, 'delSuccess'.tr, context);
-      checkPlayListPlay(context, listId);
+      if(context.mounted){
+        showMessage(true, 'delSuccess'.tr, context);
+        checkPlayListPlay(context, listId);
+      }
+      
       return true;
     }
   }
@@ -563,7 +570,7 @@ class Operations{
   Future<Map> getAlbumData(BuildContext context, String id) async {
     final rlt=await requests.getAlbumDataRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getAlbumInfoFail'.tr, context);
+      if(context.mounted) showMessage(false, 'getAlbumInfoFail'.tr, context);
       return {};
     }else{
       try {
@@ -578,7 +585,7 @@ class Operations{
   Future<Map> getArtistData(BuildContext context, String id) async {
     final rlt=await requests.getArtistDataRequest(id);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'getArtistInfoFail'.tr, context);
+      if(context.mounted) showMessage(false, 'getArtistInfoFail'.tr, context);
       return {};
     }else{
       try {
@@ -592,7 +599,7 @@ class Operations{
   Future<Map> getSearch(BuildContext context, String val) async {
     final rlt=await requests.searchRequest(val);
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      showMessage(false, 'searchFail'.tr, context);
+      if(context.mounted) showMessage(false, 'searchFail'.tr, context);
       return {};
     }else{
       try {
@@ -801,7 +808,7 @@ class Operations{
       await HotkeyHandler().toggleHandler();
       await HotkeyHandler().skipNextHandler();
       await HotkeyHandler().skipPreHandler();
-      await HotkeyHandler().toggleLyric(context);
+      if(context.mounted) await HotkeyHandler().toggleLyric(context);
       if(c.useShortcut.value){
         await HotkeyHandler().globalSkipNext();
         await HotkeyHandler().globalSkipPre();
@@ -826,107 +833,109 @@ class Operations{
   // 显示关于
   Future<void> showAbout(BuildContext context) async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    showDialog(
-      context: context, 
-      builder: (BuildContext context)=>AlertDialog(
-        title: Text('about'.tr),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/icon.png',
-              width: 100,
-            ),
-            const SizedBox(height: 10,),
-            Text(
-              'netPlayer',
-              style: GoogleFonts.notoSansSc(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+    if(context.mounted){
+      showDialog(
+        context: context, 
+        builder: (BuildContext context)=>AlertDialog(
+          title: Text('about'.tr),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/icon.png',
+                width: 100,
               ),
-            ),
-            const SizedBox(height: 3,),
-            Text(
-              'Next v${packageInfo.version}',
-              style: GoogleFonts.notoSansSc(
-                fontSize: 13,
-                color: Colors.grey[400]
-              ),
-            ),
-            const SizedBox(height: 20,),
-            GestureDetector(
-              onTap: (){
-                final url=Uri.parse('https://github.com/Zhoucheng133/netPlayer-Next');
-                launchUrl(url);
-              },
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const FaIcon(
-                      FontAwesomeIcons.github,
-                      size: 15,
-                    ),
-                    const SizedBox(width: 5,),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 2),
-                      child: Text(
-                        'projectURL'.tr,
-                        style: GoogleFonts.notoSansSc(
-                          fontSize: 13,
-                        ),
-                      ),
-                    )
-                  ],
+              const SizedBox(height: 10,),
+              Text(
+                'netPlayer',
+                style: GoogleFonts.notoSansSc(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
                 ),
               ),
-            ),
-            const SizedBox(height: 5),
-            GestureDetector(
-              onTap: ()=>showLicensePage(
-                applicationName: 'netPlayer',
-                applicationVersion: c.version.value,
-                context: context
-              ),
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const FaIcon(
-                      FontAwesomeIcons.certificate,
-                      size: 15,
-                    ),
-                    const SizedBox(width: 5,),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 2),
-                      child: Text(
-                        'license'.tr,
-                        style: GoogleFonts.notoSansSc(
-                          fontSize: 13,
-                        ),
-                      ),
-                    )
-                  ],
+              const SizedBox(height: 3,),
+              Text(
+                'Next v${packageInfo.version}',
+                style: GoogleFonts.notoSansSc(
+                  fontSize: 13,
+                  color: Colors.grey[400]
                 ),
               ),
-            ),
+              const SizedBox(height: 20,),
+              GestureDetector(
+                onTap: (){
+                  final url=Uri.parse('https://github.com/Zhoucheng133/netPlayer-Next');
+                  launchUrl(url);
+                },
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const FaIcon(
+                        FontAwesomeIcons.github,
+                        size: 15,
+                      ),
+                      const SizedBox(width: 5,),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          'projectURL'.tr,
+                          style: GoogleFonts.notoSansSc(
+                            fontSize: 13,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 5),
+              GestureDetector(
+                onTap: ()=>showLicensePage(
+                  applicationName: 'netPlayer',
+                  applicationVersion: c.version.value,
+                  context: context
+                ),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const FaIcon(
+                        FontAwesomeIcons.certificate,
+                        size: 15,
+                      ),
+                      const SizedBox(width: 5,),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          'license'.tr,
+                          style: GoogleFonts.notoSansSc(
+                            fontSize: 13,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: (){
+                Navigator.pop(context);
+              }, 
+              child: Text('ok'.tr)
+            )
           ],
         ),
-        actions: [
-          ElevatedButton(
-            onPressed: (){
-              Navigator.pop(context);
-            }, 
-            child: Text('ok'.tr)
-          )
-        ],
-      ),
-    );
+      );
+    }
   }
 
   // 修改语言
@@ -993,22 +1002,24 @@ class Operations{
               final SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.setString('lang', langSelected);
               c.lang.value=langSelected;
-              Navigator.pop(context);
-              showDialog(
-                context: context, 
-                builder: (context)=>AlertDialog(
-                  title: Text('restartTitle'.tr),
-                  content: Text('restartToApply'.tr),
-                  actions: [
-                    ElevatedButton(
-                      onPressed: (){
-                        Navigator.pop(context);
-                      }, 
-                      child: Text("ok".tr)
-                    )
-                  ],
-                )
-              );
+              if(context.mounted){
+                Navigator.pop(context);
+                showDialog(
+                  context: context, 
+                  builder: (context)=>AlertDialog(
+                    title: Text('restartTitle'.tr),
+                    content: Text('restartToApply'.tr),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: (){
+                          Navigator.pop(context);
+                        }, 
+                        child: Text("ok".tr)
+                      )
+                    ],
+                  )
+                );
+              }
             }, 
             child: Text('finish'.tr)
           )

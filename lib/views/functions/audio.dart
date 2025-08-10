@@ -1,6 +1,3 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, invalid_use_of_protected_member, prefer_const_constructors
-
-
 import 'dart:io';
 import 'dart:math';
 
@@ -12,18 +9,18 @@ import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 
-class audioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
+class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   final Controller c = Get.find();
   final SongController songController=Get.find();
   final player = Player();
   var playURL="";
   bool skipHandler=false;
-  MediaItem item=MediaItem(id: "", title: "");
+  MediaItem item=const MediaItem(id: "", title: "");
   final operations=Operations();
 
 
-  audioHandler(){
+  MainAudioHanlder(){
     player.stream.position.listen((position) {
       var data=position.inMilliseconds;
       if(!c.onslide.value){

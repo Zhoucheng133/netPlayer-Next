@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:io';
 
 import 'package:flex_color_picker/flex_color_picker.dart';
@@ -75,12 +73,12 @@ class _SettingsViewState extends State<SettingsView> {
 
   Future<void> refreshLibrary(BuildContext context) async {
     await HttpRequests().refreshLibrary();
-    showMessage(true, 'refreshSuccess'.tr, context);
-    await operations.getAllSongs(context);
-    await operations.getAlbums(context);
-    await operations.getArtists(context);
-    await operations.getLovedSongs(context);
-    operations.nowPlayCheck(context);
+    if(context.mounted) showMessage(true, 'refreshSuccess'.tr, context);
+    if(context.mounted) await operations.getAllSongs(context);
+    if(context.mounted) await operations.getAlbums(context);
+    if(context.mounted) await operations.getArtists(context);
+    if(context.mounted) await operations.getLovedSongs(context);
+    if(context.mounted) operations.nowPlayCheck(context);
     setState(() {
       refreshing=false;
     });
@@ -163,22 +161,24 @@ class _SettingsViewState extends State<SettingsView> {
               c.wsPort.value=int.parse(portController.text);
               final SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.setInt('wsPort', int.parse(portController.text));
-              Navigator.pop(context);
-              showDialog(
-                context: context, 
-                builder: (BuildContext context)=>AlertDialog(
-                  title: Text('applyWS'.tr),
-                  content: Text('restartNetp'.tr),
-                  actions: [
-                    ElevatedButton(
-                      onPressed: (){
-                        Navigator.pop(context);
-                      }, 
-                      child: Text('ok'.tr)
-                    )
-                  ],
-                )
-              );
+              if(context.mounted){
+                Navigator.pop(context);
+                showDialog(
+                  context: context, 
+                  builder: (BuildContext context)=>AlertDialog(
+                    title: Text('applyWS'.tr),
+                    content: Text('restartNetp'.tr),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: (){
+                          Navigator.pop(context);
+                        }, 
+                        child: Text('ok'.tr)
+                      )
+                    ],
+                  )
+                );
+              }
             }, 
             child: Text('finish'.tr)
           )
