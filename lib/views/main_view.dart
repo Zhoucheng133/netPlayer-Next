@@ -58,7 +58,7 @@ class _MainViewState extends State<MainView> {
                 album: songController.nowPlay.value.album,
                 albumArtist: songController.nowPlay.value.artist,
                 artist: songController.nowPlay.value.artist,
-                thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}"
+                thumbnail: "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}"
               ),
             );
             c.smtc?.setPlaybackStatus(PlaybackStatus.Paused);
@@ -178,7 +178,7 @@ class _MainViewState extends State<MainView> {
           album: songController.nowPlay.value.album,
           albumArtist: songController.nowPlay.value.artist,
           artist: songController.nowPlay.value.artist,
-          thumbnail: "${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}",
+          thumbnail: "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}",
         ),
         config: const SMTCConfig(
           fastForwardEnabled: false,

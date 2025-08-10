@@ -86,12 +86,7 @@ class _SideBarState extends State<SideBar> {
       playFrom: Pages.none, 
       index: 0
     );
-    c.userInfo.value={
-      'url': null,
-      'username': null,
-      'salt': null,
-      'token': null,
-    };
+    c.userInfo.value=UserInfo(null, null, null, null);
     try {
       c.ws.stop();
     } catch (_) {}

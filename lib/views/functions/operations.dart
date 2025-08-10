@@ -1109,12 +1109,12 @@ class Operations{
 
   Future<Uint8List?> fetchCover() async {
     // print("fetch!");
-    if(songController.nowPlay.value.id=="" || c.userInfo["url"]==null){
+    if(songController.nowPlay.value.id=="" || c.userInfo.value.url==null){
       return null;
     }
     try {
       // 获取文件流
-      var response = await http.get(Uri.parse("${c.userInfo["url"]}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${songController.nowPlay.value.id}")).timeout(const Duration(seconds: 2));
+      var response = await http.get(Uri.parse("${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}")).timeout(const Duration(seconds: 2));
       if (response.statusCode == 200) {
         return decodeImage(response.bodyBytes)==null ? null:response.bodyBytes;
       } else {

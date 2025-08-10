@@ -194,7 +194,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   var isLoading=true;
 
   void setLogin(){
-    if(c.userInfo['username']!=null){
+    if(c.userInfo.value.username!=null){
       setState(() {
         isLogin=true;
       });
@@ -299,12 +299,12 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
         });
         return;
       }
-      c.userInfo.value={
+      c.userInfo.value=UserInfo.fromJson({
         'url': userData['url'],
         'username': userData['username'],
         'salt': userData['salt'],
         'token': userData['token'],
-      };
+      });
     }
     setState(() {
       isLoading=false;

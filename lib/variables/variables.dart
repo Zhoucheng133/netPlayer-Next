@@ -35,6 +35,33 @@ class LyricItem{
   };
 }
 
+class UserInfo{
+  String? url;
+  String? username;
+  String? salt;
+  String? token;
+
+  factory UserInfo.fromJson(Map<String, dynamic> json){
+    return UserInfo(
+      json['url'], 
+      json['username'], 
+      json['salt'], 
+      json['token']
+    );
+  }
+
+  Map toJson(){
+    return {
+      "url": url??"",
+      "username": username??"",
+      "salt": salt??"",
+      "token": token??"",
+    };
+  }
+
+  UserInfo(this.url, this.username, this.salt, this.token);
+}
+
 class Controller extends GetxController{
   // 是否使用桌面歌词, 仅Windows
   bool useDesktopLyric=false;
@@ -43,12 +70,13 @@ class Controller extends GetxController{
   // 当前页面Id
   RxString pageId=''.obs;
   // 用户信息
-  RxMap<String, String?> userInfo=<String, String?>{
-    'url': null,      // String?
-    'username': null, // String?
-    'salt': null,     // String?
-    'token': null,    // String?
-  }.obs;
+  // Rx<UserInfo> userInfo=<String, String?>{
+  //   'url': null,      // String?
+  //   'username': null, // String?
+  //   'salt': null,     // String?
+  //   'token': null,    // String?
+  // }.obs;
+  Rx<UserInfo> userInfo=Rx(UserInfo(null, null, null, null));
   // 播放进度, 注意单位为毫秒~1000ms=1s
   RxInt playProgress=0.obs;
   // 播放控制

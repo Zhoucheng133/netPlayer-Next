@@ -160,14 +160,9 @@ class _LoginViewState extends State<LoginView> {
       );
       return;
     }
-    c.userInfo.value={
-      'url': url.text,
-      'username': username.text,
-      'salt': salt,
-      'token': token.toString(),
-    };
+    c.userInfo.value=UserInfo(url.text, username.text, salt, token.toString());
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('userInfo', jsonEncode(c.userInfo));
+    await prefs.setString('userInfo', jsonEncode(c.userInfo.value));
   }
 
   @override

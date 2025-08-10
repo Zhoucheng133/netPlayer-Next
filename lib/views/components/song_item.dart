@@ -413,7 +413,7 @@ class _SongItemState extends State<SongItem> {
       c.page.value=Pages.artist;
       c.pageId.value=widget.artistId;
     }else if(val=='download'){
-      final Uri url = Uri.parse('${c.userInfo['url']}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo["username"]}&t=${c.userInfo["token"]}&s=${c.userInfo["salt"]}&id=${widget.id}');
+      final Uri url = Uri.parse('${c.userInfo.value.url}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${widget.id}');
       await launchUrl(url);
     }else if(val=="info" && context.mounted){
       infos.songInfo(context, {

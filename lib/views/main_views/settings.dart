@@ -551,7 +551,7 @@ class _SettingsViewState extends State<SettingsView> {
                   item: GestureDetector(
                     onTap: () async {
                       try {
-                        final url=Uri.parse(c.userInfo['url']!);
+                        final url=Uri.parse(c.userInfo.value.url!);
                         await launchUrl(url);
                       } catch (_) {
                         return;
@@ -576,7 +576,7 @@ class _SettingsViewState extends State<SettingsView> {
                           ), 
                           duration: const Duration(milliseconds: 200),
                           child: Text(
-                            c.userInfo['url']??'',
+                            c.userInfo.value.url??'',
                             softWrap: false,
                             overflow: TextOverflow.fade,
                           )
