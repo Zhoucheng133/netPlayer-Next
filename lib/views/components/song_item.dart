@@ -278,13 +278,13 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.playlist_remove_rounded,
                 size: 18,
-                color: widget.song.fromId.isNotEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
+                color: widget.song.fromId.isEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               const SizedBox(width: 5,),
               Text(
                 "removeFromList".tr,
                 style: GoogleFonts.notoSansSc(
-                  color: widget.song.fromId.isNotEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
+                  color: widget.song.fromId.isEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
             ],
