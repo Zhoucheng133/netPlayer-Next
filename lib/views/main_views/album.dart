@@ -101,28 +101,20 @@ class _AlbumViewState extends State<AlbumView> {
                       itemCount: c.albums.length,
                       itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
                         AlbumItem(
-                          id: c.albums[index]['id'], 
-                          title: c.albums[index]['title'], 
-                          artist: c.albums[index]['artist'], 
-                          songCount: c.albums[index]['songCount'], 
+                          data: c.albums[index], 
                           index: index, 
                           clearSearch: () {}, 
-                          artistId: c.albums[index]['artistId'],
                         )
                       ) : Obx(()=>
-                        c.albums[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                        c.albums[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                         AlbumItem(
-                          id: c.albums[index]['id'], 
-                          title: c.albums[index]['title'], 
-                          artist: c.albums[index]['artist'], 
-                          songCount: c.albums[index]['songCount'], 
+                          data: c.albums[index], 
                           index: index,
                           clearSearch: () {
                             setState(() {
                               inputController.text='';
                             });
                           },
-                          artistId: c.albums[index]['artistId'],
                         ) : Container()
                       )
                     )

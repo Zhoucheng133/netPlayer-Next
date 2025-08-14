@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/components/message.dart';
@@ -12,7 +13,7 @@ class Infos {
   final Operations operations=Operations();
 
   // 专辑信息
-  Future<void> albumInfo(BuildContext context, Map data) async {
+  Future<void> albumInfo(BuildContext context, AlbumItemClass data) async {
     if(context.mounted){
       showDialog(
         context: context, 
@@ -26,7 +27,7 @@ class Infos {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${data['coverArt']}",
+                    "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${data.coverArt}",
                     height: 100,
                     width: 100,
                   ),
@@ -48,14 +49,14 @@ class Infos {
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: (){
-                            FlutterClipboard.copy(data['name']).then((_){
+                            FlutterClipboard.copy(data.title).then((_){
                               if(context.mounted){
                                 showMessage(true, 'copied'.tr, context);
                               }
                             });
                           },
                           child: Text(
-                            data['name'],
+                            data.title,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -80,14 +81,14 @@ class Infos {
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: (){
-                            FlutterClipboard.copy(data['artist']).then((_){
+                            FlutterClipboard.copy(data.artist).then((_){
                               if(context.mounted){
                                 showMessage(true, 'copied'.tr, context);
                               }
                             });
                           },
                           child: Text(
-                            data['artist'],
+                            data.artist,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -109,7 +110,7 @@ class Infos {
                     ),
                     Expanded(
                       child: Text(
-                        data['songCount'].toString(),
+                        data.songCount.toString(),
                       )
                     )
                   ],
@@ -131,14 +132,14 @@ class Infos {
                         cursor: SystemMouseCursors.click,
                         child: GestureDetector(
                           onTap: (){
-                            FlutterClipboard.copy(data['id']).then((_){
+                            FlutterClipboard.copy(data.id).then((_){
                               if(context.mounted){
                                 showMessage(true, 'copied'.tr, context);
                               }
                             });
                           },
                           child: Text(
-                            data['id'],
+                            data.id,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -160,7 +161,7 @@ class Infos {
                     ),
                     Expanded(
                       child: Text(
-                        operations.convertDuration(data["duration"]),
+                        operations.convertDuration(data.duration),
                       )
                     )
                   ],
@@ -179,7 +180,7 @@ class Infos {
                     ),
                     Expanded(
                       child: Text(
-                        data['year']==null ? "/" : data['year'].toString(),
+                        data.year==0 ? "N/A" : data.year.toString(),
                       )
                     )
                   ],
@@ -198,7 +199,7 @@ class Infos {
                     ),
                     Expanded(
                       child: Text(
-                        operations.formatIsoString(data['created']),
+                        operations.formatIsoString(data.created),
                       )
                     )
                   ],

@@ -2,6 +2,7 @@
 
 import 'dart:typed_data';
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/album_controller.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 
 enum LyricFrom{
@@ -94,7 +95,7 @@ class Controller extends GetxController{
   // 随机播放所有歌曲
   RxBool fullRandom=false.obs;
   // 专辑列表
-  RxList albums=[].obs;
+  RxList<AlbumItemClass> albums=RxList([]);
   // 艺人列表
   RxList artists=[].obs;
   // 窗口最大化

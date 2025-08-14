@@ -111,13 +111,9 @@ class _SearchViewState extends State<SearchView> {
                 ) : type=='album' ? ListView.builder(
                   itemCount: albumList.length,
                   itemBuilder: (BuildContext context, int index)=> AlbumItem(
-                    id: albumList[index]['id'], 
-                    title: albumList[index]['title'], 
-                    artist: albumList[index]['artist'], 
-                    songCount: albumList[index]['songCount'], 
                     index: index, 
                     clearSearch: () {},
-                    artistId: c.albums[index]['artistId'],
+                    data: c.albums[index],
                   )
                 ) : ListView.builder(
                   itemCount: artistList.length,

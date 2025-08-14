@@ -1,5 +1,4 @@
 import 'dart:async';
-// import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
@@ -9,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image/image.dart' show decodeImage;
+import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
@@ -153,7 +153,9 @@ class Operations{
         if(rlt['subsonic-response']['albumList']['album']==null){
           return;
         }else{
-          c.albums.value=rlt['subsonic-response']['albumList']['album'];
+          // c.albums.value=rlt['subsonic-response']['albumList']['album'];
+          List list=rlt['subsonic-response']['albumList']['album'];
+          c.albums.value=list.map((item)=>AlbumItemClass.fromJson(item)).toList();
         }
       } catch (_) {
         if(context.mounted) showMessage(false, 'analiseAllAlbumFail'.tr, context);

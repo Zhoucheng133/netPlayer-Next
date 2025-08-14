@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/infos.dart';
@@ -96,13 +97,9 @@ class _AlbumHeaderState extends State<AlbumHeader> {
 // 专辑Item
 class AlbumItem extends StatefulWidget {
   final int index;
-  final String id;
-  final String title;
-  final String artist;
-  final int songCount;
-  final String artistId;
+  final AlbumItemClass data;
   final VoidCallback clearSearch;
-  const AlbumItem({super.key, required this.id, required this.title, required this.artist, required this.songCount, required this.index, required this.clearSearch, required this.artistId});
+  const AlbumItem({super.key,  required this.data, required this.index, required this.clearSearch});
 
   @override
   State<AlbumItem> createState() => _AlbumItemState();
@@ -130,7 +127,7 @@ class _AlbumItemState extends State<AlbumItem> {
       items: [
         PopupMenuItem(
           value: "artist",
-          enabled: widget.artistId.isNotEmpty,
+          enabled: widget.data.artistId.isNotEmpty,
           height: 35,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -178,7 +175,7 @@ class _AlbumItemState extends State<AlbumItem> {
 
     if(val=='artist'){
       c.page.value=Pages.artist;
-      c.pageId.value=widget.artistId;
+      c.pageId.value=widget.data.artistId;
     }else if(val=='info' && context.mounted){
       infos.albumInfo(context, c.albums[widget.index]);
     }
@@ -191,7 +188,7 @@ class _AlbumItemState extends State<AlbumItem> {
         if(c.page.value!=Pages.album){
           c.page.value=Pages.album;
         }
-        c.pageId.value=widget.id;
+        c.pageId.value=widget.data.id;
         widget.clearSearch();
       },
       onSecondaryTapDown: (val) => showAlbumMenu(context, val),
@@ -231,7 +228,7 @@ class _AlbumItemState extends State<AlbumItem> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
-                      widget.title,
+                      widget.data.title,
                       style: GoogleFonts.notoSansSc(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
@@ -246,7 +243,7 @@ class _AlbumItemState extends State<AlbumItem> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
-                      widget.artist,
+                      widget.data.artist,
                       style: GoogleFonts.notoSansSc(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
@@ -260,7 +257,7 @@ class _AlbumItemState extends State<AlbumItem> {
                   width: 70,
                   child: Center(
                     child: Text(
-                      widget.songCount.toString(),
+                      widget.data.songCount.toString(),
                       style: GoogleFonts.notoSansSc(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,

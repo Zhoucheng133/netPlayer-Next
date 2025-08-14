@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/views/components/album_item.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/artist_item.dart';
@@ -20,7 +21,7 @@ class _ArtistViewState extends State<ArtistView> {
   final Controller c = Get.find();
   String searchKeyWord='';
   String artistName='';
-  List list=[];
+  List<AlbumItemClass> list=[];
   late Worker listener;
   final operations=Operations();
 
@@ -42,7 +43,8 @@ class _ArtistViewState extends State<ArtistView> {
           try {
             setState(() {
               artistName=rlt['name'];
-              list=rlt['album'];
+              final List tempList=rlt['album'];
+              list=tempList.map((item)=>AlbumItemClass.fromJson(item)).toList();
               id=rlt['id'];
             });
           } catch (_) {}
@@ -111,25 +113,17 @@ class _ArtistViewState extends State<ArtistView> {
                     ListView.builder(
                       itemCount: list.length,
                       itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? AlbumItem(
-                        id: list[index]['id'], 
-                        title: list[index]['title'], 
-                        artist: list[index]['artist'], 
-                        songCount: list[index]['songCount'], 
+                        data: list[index], 
                         index: index, 
                         clearSearch: () {  },
-                        artistId: c.albums[index]['artistId'],
-                      ): list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                       AlbumItem(
-                        id: list[index]['id'], 
-                        title: list[index]['title'], 
-                        artist: list[index]['artist'], 
-                        songCount: list[index]['songCount'], 
+                        data: list[index], 
                         index: index, clearSearch: () {
                           setState(() {
                             inputController.text='';
                           });
                         },
-                        artistId: c.albums[index]['artistId'],
                       ) : Container()
                     )
                   ),
