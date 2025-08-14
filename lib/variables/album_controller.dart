@@ -24,4 +24,18 @@ class AlbumItemClass {
       map["created"]??"",
     );
   }
+
+  Map toJson(){
+    return {
+      "id": id,
+      "title": title,
+      "artist": artist,
+      "songCount": songCount,
+      "artistId": artistId,
+      "coverArt": coverArt,
+      "year": year,
+      "duration": duration,
+      "created": created
+    };
+  }
 }

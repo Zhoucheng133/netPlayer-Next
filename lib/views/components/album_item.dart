@@ -177,7 +177,7 @@ class _AlbumItemState extends State<AlbumItem> {
       c.page.value=Pages.artist;
       c.pageId.value=widget.data.artistId;
     }else if(val=='info' && context.mounted){
-      infos.albumInfo(context, c.albums[widget.index]);
+      infos.albumInfo(context, widget.data);
     }
   }
 
