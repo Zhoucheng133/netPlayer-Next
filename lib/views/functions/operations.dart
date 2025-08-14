@@ -649,7 +649,7 @@ class Operations{
   }
 
   // 播放歌曲
-  Future<void> playSong(BuildContext context, String id, String title, String artist, Pages playFrom, int duration, String listId, int index, List<SongItemClass> list, String album) async {
+  Future<void> playSong(BuildContext context, SongItemClass song ,Pages playFrom, int index, List<SongItemClass> list) async {
     List<SongItemClass> playList=[];
     if(playFrom==Pages.all){
       playList=songController.allSongs;
@@ -659,15 +659,15 @@ class Operations{
       playList=list;
     }
     songController.nowPlay.value=NowPlay(
-      id: id, 
-      title: title, 
-      artist: artist, 
-      duration: duration, 
-      fromId: listId, 
-      album: album, 
-      albumId: "", 
-      artistId: "", 
-      created: "", 
+      id: song.id, 
+      title: song.title, 
+      artist: song.artist, 
+      duration: song.duration, 
+      fromId: song.fromId, 
+      album: song.album, 
+      albumId: song.albumId, 
+      artistId: song.artistId, 
+      created: song.created, 
       list: playList, 
       playFrom: playFrom, 
       index: index
