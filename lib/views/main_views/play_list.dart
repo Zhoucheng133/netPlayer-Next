@@ -58,6 +58,9 @@ class _PlayListViewState extends State<PlayListView> {
       var temp=await operations.getPlayList(context, newId);
       setState(() {
         list=temp.map((item)=>SongItemClass.fromJson(item)).toList();
+        for (var item in list) {
+          item.fromId=listId;
+        }
       });
     }
   }
@@ -165,36 +168,20 @@ class _PlayListViewState extends State<PlayListView> {
                       child: searchKeyWord.isEmpty ? Obx(()=>
                         SongItem(
                           index: index, 
-                          title: list[index].title, 
-                          duration: list[index].duration, 
-                          id: list[index].id, 
+                          song: list[index], 
                           isplay: isPlay(index), 
-                          artist: list[index].artist, 
                           from: Pages.playList, 
-                          listId: listId, 
                           list: list, 
                           refresh: ()=>silentRefresh(),
-                          album: list[index].album, 
-                          artistId: list[index].artistId, 
-                          albumId: list[index].albumId,
-                          created: list[index].created,
                         ),
                       ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                       Obx(()=>SongItem(
                         index: index, 
-                        title: list[index].title, 
-                        duration: list[index].duration, 
-                        id: list[index].id, 
+                        song: list[index], 
                         isplay: isPlay(index), 
-                        artist: list[index].artist, 
                         from: Pages.playList, 
-                        listId: listId, 
                         list: list, 
                         refresh: ()=>silentRefresh(),
-                        album: list[index].album, 
-                        artistId: list[index].artistId, 
-                        albumId: list[index].albumId,
-                        created: list[index].created,
                       )) : Container()
                     );
                   }

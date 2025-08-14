@@ -79,31 +79,17 @@ class _LovedViewState extends State<LovedView> {
                         child: searchKeyWord.isEmpty ? Obx(()=>
                           SongItem(
                             index: index, 
-                            title: songController.lovedSongs[index].title, 
-                            duration: songController.lovedSongs[index].duration, 
-                            id: songController.lovedSongs[index].id, 
+                            song: songController.lovedSongs[index], 
                             isplay: isPlay(index),
-                            artist: songController.lovedSongs[index].artist, 
                             from: Pages.loved,
-                            album: songController.lovedSongs[index].album,
-                            artistId: songController.lovedSongs[index].artistId, 
-                            albumId: songController.lovedSongs[index].albumId,
-                            created: songController.lovedSongs[index].created,
                           )
                         ) : Obx(()=>
                           songController.lovedSongs[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||  songController.lovedSongs[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                           SongItem(
                             index: index, 
-                            title: songController.lovedSongs[index].title, 
-                            duration: songController.lovedSongs[index].duration, 
-                            id: songController.lovedSongs[index].id, 
                             isplay: isPlay(index), 
-                            artist: songController.lovedSongs[index].artist, 
                             from: Pages.loved,
-                            album: songController.lovedSongs[index].album, 
-                            artistId: songController.lovedSongs[index].artistId, 
-                            albumId: songController.lovedSongs[index].albumId,
-                            created: songController.lovedSongs[index].created,
+                            song: songController.lovedSongs[index], 
                           ) : Container()
                         )
                       );

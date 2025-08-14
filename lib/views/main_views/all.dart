@@ -78,31 +78,17 @@ class _AllViewState extends State<AllView> {
                         index: index,
                         child: searchKeyWord.isEmpty ? Obx(() => SongItem(
                             index: index, 
-                            title: songController.allSongs[index].title, 
-                            duration: songController.allSongs[index].duration, 
-                            id: songController.allSongs[index].id, 
+                            song: songController.allSongs[index],
                             isplay: isPlay(index), 
-                            artist: songController.allSongs[index].artist, 
                             from: Pages.all, 
-                            album: songController.allSongs[index].album, 
-                            artistId: songController.allSongs[index].artistId,
-                            albumId: songController.allSongs[index].albumId,
-                            created: songController.allSongs[index].created,
                           )
                         ) : Obx(()=>
                           songController.allSongs[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || songController.allSongs[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                           SongItem(
                             index: index, 
-                            title: songController.allSongs[index].title, 
-                            duration: songController.allSongs[index].duration, 
-                            id: songController.allSongs[index].id, 
                             isplay: isPlay(index), 
-                            artist: songController.allSongs[index].artist, 
                             from: Pages.all,
-                            album: songController.allSongs[index].album, 
-                            artistId: songController.allSongs[index].artistId,
-                            albumId: songController.allSongs[index].albumId,
-                            created: songController.allSongs[index].created,
+                            song: songController.allSongs[index],
                           ) : Container()
                         ),
                       );

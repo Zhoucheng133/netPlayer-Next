@@ -23,7 +23,7 @@ class _SearchViewState extends State<SearchView> {
   final Controller c = Get.find();
   String type='song';
 
-  List songList=[];
+  List<SongItemClass> songList=[];
   List albumList=[];
   List artistList=[];
 
@@ -51,8 +51,12 @@ class _SearchViewState extends State<SearchView> {
     });
     Map data=await operations.getSearch(context, controller.text);
     try {
+      final List songs=data['songs'];
       setState(() {
-        songList=data['songs'];
+        songList=songs.map((item)=>SongItemClass.fromJson(item)).toList();
+        for (var item in songList) {
+          item.fromId=controller.text;
+        }
         albumList=data['albums'];
         artistList=data['artists'];
       });
@@ -98,18 +102,10 @@ class _SearchViewState extends State<SearchView> {
                   itemBuilder: (BuildContext context, int index)=>Obx(()=>
                     SongItem(
                       index: index, 
-                      title: songList[index]['title'], 
-                      duration: songList[index]['duration'], 
-                      id: songList[index]['id'], 
+                      song: songList[index], 
                       isplay: isPlay(index), 
-                      artist: songList[index]['artist'], 
                       from: Pages.search, 
-                      album: songList[index]['album'],
                       list: songList,
-                      listId: nowSearch, 
-                      artistId: songList[index]['artistId']??'', 
-                      albumId: songList[index]['albumId']??'',
-                      created: songList[index]['created']??'',
                     )
                   )
                 ) : type=='album' ? ListView.builder(

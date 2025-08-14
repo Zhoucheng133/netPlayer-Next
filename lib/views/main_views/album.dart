@@ -24,7 +24,7 @@ class _AlbumViewState extends State<AlbumView> {
   late Worker listener;
   String albumName='';
   String id='';
-  List list=[];
+  List<SongItemClass> list=[];
   final operations=Operations();
 
   @override
@@ -45,7 +45,11 @@ class _AlbumViewState extends State<AlbumView> {
           try {
             setState(() {
               albumName=rlt['name'];
-              list=rlt['song'];
+              final List songs=rlt['song'];
+              list=songs.map((item)=>SongItemClass.fromJson(item)).toList();
+              for (var item in list) {
+                item.fromId=rlt['id'];
+              }
               id=rlt['id'];
             });
           } catch (_) {}
@@ -133,35 +137,19 @@ class _AlbumViewState extends State<AlbumView> {
                         return searchKeyWord.isEmpty ? Obx(()=>
                           SongItem(
                             index: index, 
-                            title: list[index]['title'], 
-                            duration: list[index]['duration'], 
-                            id: list[index]['id'], 
                             isplay: isPlay(index), 
-                            artist: list[index]['artist'], 
                             from: Pages.album, 
-                            listId: id, 
                             list: list, 
-                            album: list[index]['album'], 
-                            artistId: list[index]['artistId']??'', 
-                            albumId: list[index]['albumId']??'', 
-                            created: list[index]['created']??'',
+                            song: list[index],
                           )
-                        ) : list[index]['title'].toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index]['artist'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                        ) : list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
                         Obx(()=>
                           SongItem(
                             index: index, 
-                            title: list[index]['title'], 
-                            duration: list[index]['duration'], 
-                            id: list[index]['id'], 
+                            song: list[index],
                             isplay: isPlay(index), 
-                            artist: list[index]['artist'], 
                             from: Pages.album, 
-                            listId: id, 
                             list: list,
-                            album: list[index]['album'], 
-                            artistId: list[index]['artistId']??'', 
-                            albumId: list[index]['albumId']??'',
-                            created: list[index]['created']??'',
                           )
                         ): Container();
                       }

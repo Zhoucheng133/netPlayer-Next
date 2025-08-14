@@ -111,21 +111,13 @@ class _SongHeaderState extends State<SongHeader> {
 
 // 歌曲Item
 class SongItem extends StatefulWidget {
+  final SongItemClass song;
   final int index;
-  final String title;
-  final int duration;
-  final String id;
   final bool isplay;
-  final String artist;
-  final dynamic listId;
-  final String album;
   final Pages from;
   final dynamic list;
   final dynamic refresh;
-  final String artistId;
-  final String albumId;
-  final String created;
-  const SongItem({super.key, required this.index, required this.title, required this.duration, required this.isplay, required this.artist, required this.id, this.listId, required this.from, this.list, this.refresh, required this.album, required this.artistId, required this.albumId, required this.created});
+  const SongItem({super.key, required this.index, required this.isplay, required this.from, this.list, this.refresh, required this.song});
 
   @override
   State<SongItem> createState() => _SongItemState();
@@ -143,7 +135,7 @@ class _SongItemState extends State<SongItem> {
 
   bool isLoved(){
     for (var val in songController.lovedSongs) {
-      if(val.id==widget.id){
+      if(val.id==widget.song.id){
         return true;
       }
     }
@@ -232,7 +224,7 @@ class _SongItemState extends State<SongItem> {
         PopupMenuItem(
           value: "album",
           height: 35,
-          enabled: widget.albumId.isNotEmpty,
+          enabled: widget.song.albumId.isNotEmpty,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -255,7 +247,7 @@ class _SongItemState extends State<SongItem> {
         PopupMenuItem(
           value: "artist",
           height: 35,
-          enabled: widget.artistId.isNotEmpty,
+          enabled: widget.song.artistId.isNotEmpty,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -278,7 +270,7 @@ class _SongItemState extends State<SongItem> {
         PopupMenuItem(
           value: "del",
           height: 35,
-          enabled: widget.listId!=null,
+          enabled: widget.song.fromId.isNotEmpty,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -286,13 +278,13 @@ class _SongItemState extends State<SongItem> {
               Icon(
                 Icons.playlist_remove_rounded,
                 size: 18,
-                color: widget.listId==null ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
+                color: widget.song.fromId.isNotEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
               ),
               const SizedBox(width: 5,),
               Text(
                 "removeFromList".tr,
                 style: GoogleFonts.notoSansSc(
-                  color: widget.listId==null ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
+                  color: widget.song.fromId.isNotEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
             ],
@@ -388,7 +380,7 @@ class _SongItemState extends State<SongItem> {
             ),
             ElevatedButton(
               onPressed: (){
-                operations.addToList(context, widget.id, selectedItem);
+                operations.addToList(context, widget.song.id, selectedItem);
                 Navigator.pop(context);
               }, 
               child: Text('add'.tr)
@@ -397,34 +389,26 @@ class _SongItemState extends State<SongItem> {
         )
       );
     }else if(val=='delove'){
-      if(context.mounted) operations.deloveSong(context, widget.id);
+      if(context.mounted) operations.deloveSong(context, widget.song.id);
     }else if(val=='love'){
-      if(context.mounted) operations.loveSong(context, widget.id);
+      if(context.mounted) operations.loveSong(context, widget.song.id);
     }else if(val=='del'){
       if(context.mounted){
-        if(await operations.delFromList(context, widget.listId, widget.index)){
+        if(await operations.delFromList(context, widget.song.fromId, widget.index)){
           widget.refresh();
         }
       }
     }else if(val=='album'){
       c.page.value=Pages.album;
-      c.pageId.value=widget.albumId;
+      c.pageId.value=widget.song.albumId;
     }else if(val=='artist'){
       c.page.value=Pages.artist;
-      c.pageId.value=widget.artistId;
+      c.pageId.value=widget.song.artistId;
     }else if(val=='download'){
-      final Uri url = Uri.parse('${c.userInfo.value.url}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${widget.id}');
+      final Uri url = Uri.parse('${c.userInfo.value.url}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${widget.song.id}');
       await launchUrl(url);
     }else if(val=="info" && context.mounted){
-      infos.songInfo(context, {
-        "title": widget.title,
-        "duration": operations.convertDuration(widget.duration),
-        "id": widget.id,
-        "artist": widget.artist,
-        "listId": widget.listId,
-        "album": widget.album,
-        "created": widget.created,
-      });
+      infos.songInfo(context, widget.song);
     }
   }
   
@@ -432,7 +416,7 @@ class _SongItemState extends State<SongItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: (){
-        operations.playSong(context, widget.id, widget.title, widget.artist, widget.from, widget.duration, widget.listId??'', widget.index, widget.list??[], widget.album);
+        operations.playSong(context, widget.song.id, widget.song.title, widget.song.artist, widget.from, widget.song.duration, widget.song.fromId, widget.index, widget.list??[], widget.song.album);
       },
       onSecondaryTapDown: (val) => showSongMenu(context, val),
       child: MouseRegion(
@@ -475,7 +459,7 @@ class _SongItemState extends State<SongItem> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        widget.title,
+                        widget.song.title,
                         style: GoogleFonts.notoSansSc(
                           fontSize: 13,
                           color: widget.isplay ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,
@@ -491,7 +475,7 @@ class _SongItemState extends State<SongItem> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        widget.artist,
+                        widget.song.artist,
                         style: GoogleFonts.notoSansSc(
                           fontSize: 13,
                           color: widget.isplay ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,
@@ -506,7 +490,7 @@ class _SongItemState extends State<SongItem> {
                     width: 70,
                     child: Center(
                       child: Text(
-                        operations.convertDuration(widget.duration),
+                        operations.convertDuration(widget.song.duration),
                         style: GoogleFonts.notoSansSc(
                           fontSize: 13,
                           color: widget.isplay ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,
