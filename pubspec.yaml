@@ -63,10 +63,10 @@ flutter_launcher_icons:
     image_path: "assets/icon.png"
 
 msix_config:
-  display_name: Bit Flow
+  display_name: netPlayer Next
   publisher_display_name: ZhouCheng
-  identity_name: ZhouCheng.BitFlow
-  msix_version: 1.1.6.0
+  identity_name: ZhouCheng.netPlayerNext
+  msix_version: 3.6.1.0
   logo_path: assets/icon.png
   trim_logo: false
   capabilities: internetClient, internetClientServer
