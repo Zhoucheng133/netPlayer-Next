@@ -8,8 +8,9 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
-<a href="https://apps.microsoft.com/store/detail/9NFMTFPZ1ZCT?cid=DevShareMCLPCS"><img src="demo/ms_badge.svg" width="150px"></a>
-
+<a href="https://apps.microsoft.com/detail/9nfmtfpz1zct?referrer=appbadge&mode=direct">
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
 
 这是一个基于Subsonic (Navidrome) API的一个桌面端App，你可以[**点击这里**](https://www.navidrome.org/docs/installation/)查看如何使用Navidrome (推荐) 搭建一个音乐服务器。如果你要查找移动端版本，应该访问[**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)仓库
 
