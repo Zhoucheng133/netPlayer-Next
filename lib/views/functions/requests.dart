@@ -149,4 +149,48 @@ class HttpRequests{
   Future<Map> getSong(String id) async {
     return await httpRequest('${c.userInfo.value.url}/rest/getSong?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=$id');
   }
+  // Navidrome获取用户验证信息
+  Future<bool> getNavidromeAuth() async {
+    try {
+      final response=await http.post(
+        Uri.parse('${c.userInfo.value.url}/auth/login'),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode({
+          "username": c.userInfo.value.username,
+          "password": c.userInfo.value.password,
+        }),
+      );
+      String responseBody = utf8.decode(response.bodyBytes);
+      Map<String, dynamic> data = json.decode(responseBody);
+      if(data['token'].isNotEmpty && data['id'].isNotEmpty){
+        c.authorization="Bearer ${data['token']}";
+        c.uniqueId=data['id'];
+        return true;
+      }
+    } catch (_) {
+      return false;
+    }
+    return false;
+  }
+  Future<List> getAllSongByNavidrome() async {
+    try {
+      try {
+        final response=await http.get(
+          Uri.parse('${c.userInfo.value.url}/api/song'),
+          headers: {
+            "x-nd-authorization": c.authorization,
+            "x-nd-client-unique-id": c.uniqueId,
+          },
+        );
+        String responseBody = utf8.decode(response.bodyBytes);
+        return json.decode(responseBody);
+      } catch (e) {
+        return [];
+      }
+    } catch (_) {
+      return [];
+    }
+  }
 }

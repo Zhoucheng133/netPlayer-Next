@@ -100,6 +100,19 @@ class Operations{
 
   // 获取所有歌曲
   Future<void> getAllSongs(BuildContext context) async {
+    if(await requests.getNavidromeAuth()){
+      // print((await requests.getAllSongByNavidrome()).length);
+      List tmpList=await requests.getAllSongByNavidrome();
+      if(tmpList.isNotEmpty){
+        tmpList.sort((a, b) {
+          DateTime dateTimeA = DateTime.parse(a['createdAt']??a['created']);
+          DateTime dateTimeB = DateTime.parse(b['createdAt']??b['created']);
+          return dateTimeB.compareTo(dateTimeA);
+        });
+        songController.allSongs.value=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
+        return;
+      }
+    }
     final rlt=await requests.getAllSongsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
       if(context.mounted) showMessage(false, 'getAllSongFail'.tr, context);
