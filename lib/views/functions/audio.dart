@@ -49,6 +49,9 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
         skipToNext();
       }
     });
+    player.stream.error.listen((error) {
+      skipToNext();
+    });
   }
 
   void setMedia(bool isPlay){
