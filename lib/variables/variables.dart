@@ -41,13 +41,15 @@ class UserInfo{
   String? username;
   String? salt;
   String? token;
+  String? password;
 
   factory UserInfo.fromJson(Map<String, dynamic> json){
     return UserInfo(
       json['url'], 
       json['username'], 
       json['salt'], 
-      json['token']
+      json['token'],
+      json['password']
     );
   }
 
@@ -57,10 +59,11 @@ class UserInfo{
       "username": username??"",
       "salt": salt??"",
       "token": token??"",
+      "password": password??"",
     };
   }
 
-  UserInfo(this.url, this.username, this.salt, this.token);
+  UserInfo(this.url, this.username, this.salt, this.token, this.password);
 }
 
 class Controller extends GetxController{
@@ -71,13 +74,12 @@ class Controller extends GetxController{
   // 当前页面Id
   RxString pageId=''.obs;
   // 用户信息
-  // Rx<UserInfo> userInfo=<String, String?>{
-  //   'url': null,      // String?
-  //   'username': null, // String?
-  //   'salt': null,     // String?
-  //   'token': null,    // String?
-  // }.obs;
-  Rx<UserInfo> userInfo=Rx(UserInfo(null, null, null, null));
+  Rx<UserInfo> userInfo=Rx(UserInfo(null, null, null, null, null));
+
+  // 测试 -> NavidromeAPI认证
+  String authorization="";
+  String uniqueId="";
+
   // 播放进度, 注意单位为毫秒~1000ms=1s
   RxInt playProgress=0.obs;
   // 播放控制

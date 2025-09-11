@@ -31,12 +31,12 @@ class SongItemClass{
       id: json['id'] ?? '',
       title: json['title'] ?? '',
       artist: json['artist'] ?? '',
-      duration: json['duration'] ?? 0,
+      duration: json['duration'].toInt() ?? 0,
       fromId: json['fromId'] ?? '',
       album: json['album'] ?? '',
       albumId: json['albumId'] ?? '',
       artistId: json['artistId'] ?? '',
-      created: json['created'] ?? ''
+      created: json['created'] ?? json['createdAt'] ?? ''
     );
   }
 

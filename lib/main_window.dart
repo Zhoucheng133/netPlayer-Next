@@ -304,6 +304,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
         'username': userData['username'],
         'salt': userData['salt'],
         'token': userData['token'],
+        'password': userData['password']
       });
     }
     setState(() {
