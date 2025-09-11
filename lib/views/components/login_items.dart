@@ -172,11 +172,14 @@ class _URLInputState extends State<URLInput> {
                     child: TextField(
                       focusNode: onFocus,
                       controller: widget.controller,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'http(s)://',
                         isCollapsed: true,
-                        contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
+                        contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
+                        hintStyle: GoogleFonts.notoSansSc(
+                          color: Colors.grey[400]
+                        )
                       ),
                       onEditingComplete: () => widget.loginHandler(),
                       autocorrect: false,
