@@ -299,6 +299,44 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
         });
         return;
       }
+      bool? useNavidrome=prefs.getBool("useNavidrome");
+      c.useNavidromeAPI.value=useNavidrome??true;
+      if((userData['password']==null || userData['password'].isEmpty) && useNavidrome!=false && context.mounted){
+        bool enableNavidrome=true;
+        await showDialog(
+          context: context, 
+          builder: (BuildContext context)=>AlertDialog(
+            title: Text('useNavidromeAPI'.tr),
+            content: Text('enableNavidromeContent'.tr),
+            actions: [
+              TextButton(
+                onPressed: (){
+                  enableNavidrome=false;
+                  Navigator.pop(context);
+                }, 
+                child: Text('disable'.tr)
+              ),
+              ElevatedButton(
+                onPressed: (){
+                  setState(() {
+                    isLoading=false;
+                  });
+                  Navigator.pop(context);
+                }, 
+                child: Text('enableNavidromeReLogin'.tr)
+              ),
+            ],
+          ),
+        );
+        if(enableNavidrome){
+          c.useNavidromeAPI.value=true;
+          prefs.setBool("useNavidrome", true);
+          return;
+        }else{
+          c.useNavidromeAPI.value=false;
+          prefs.setBool("useNavidrome", false);
+        }
+      }
       c.userInfo.value=UserInfo.fromJson({
         'url': userData['url'],
         'username': userData['username'],

@@ -1192,7 +1192,8 @@ class Operations{
   }
 
   Future<void> toggleNavidromeAPI(bool value, BuildContext context) async {
-    if(value){
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(value && context.mounted){
       await showDialog(
         context: context, 
         builder: (context)=>AlertDialog(
@@ -1200,12 +1201,16 @@ class Operations{
           content: Text('enableNavidromeContent'.tr),
           actions: [
             TextButton(
-              onPressed: ()=>Navigator.pop(context), 
+              onPressed: (){
+                Navigator.pop(context);
+                prefs.setBool("useNavidrome", false);
+              }, 
               child: Text('cancel'.tr)
             ),
             ElevatedButton(
               onPressed: (){
                 c.useNavidromeAPI.value=true;
+                prefs.setBool("useNavidrome", true);
                 Navigator.pop(context);
               }, 
               child: Text('enable'.tr)
@@ -1215,6 +1220,7 @@ class Operations{
       );
     }else{
       c.useNavidromeAPI.value=false;
+      prefs.setBool("useNavidrome", false);
     }
   }
 
