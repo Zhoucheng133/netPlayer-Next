@@ -43,21 +43,11 @@ Make sure your device running netPlayer can connect to your music server.
 
 <img src="../demo/demo2.png" width="600px">
 
-
-### ~~Desktop lyric kit~~ (Deprecated Project)
-
-Desktop lyric kit's code [is here](https://github.com/Zhoucheng133/netPlayer-mini-kit)
-
-> [!WARNING]
-> It was removed from main App from `v3.5.2`. You need to enable ws service to use it.
-
 ## Usage
 
-> [!NOTE]
-> Subsonic API does NOT support get 500 songs. All songs you can see is get random 500 songs and sort by time.
-
 > [!TIP]
-> You can use full random play button next to song number on all songs page, which is not affected by restrictions of Subsonic API
+> Subsonic API does NOT support get 500 songs. All songs you can see is get random 500 songs and sort by time.  
+> Supports displaying "All Songs" and "Albums" of the **Navidrome** service from `v3.6.2`
 
 ### Shortcuts
 

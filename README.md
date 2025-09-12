@@ -63,20 +63,11 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 <img src="demo/demo2.png" width="600px">
 
-### ~~桌面歌词组件~~ (遗弃的项目)
-
-歌词组件的代码[在这里](https://github.com/Zhoucheng133/netPlayer-mini-kit)
-
-> [!WARNING]
-> 从`v3.5.2`开始从主程序中移除，**打开这个功能需要启用ws服务**
-
 ## 使用
 
-> [!NOTE]
-> 受限于Subsonic API，“所有歌曲”和“专辑”只能显示500首/张（随机的500首歌曲排序展示）
-
 > [!TIP]
-> 在所有歌曲页面歌曲数量的右侧有完全随机播放按钮，这个功能不受歌曲数量限制
+> 受限于Subsonic API，“所有歌曲”和“专辑”只能显示500首/张（随机的500首歌曲排序展示）  
+> `v3.6.2`版本开始支持显示Navidrome服务的“所有歌曲”和“专辑”（默认开启，优先检查是否支持Navidrome API）
 
 ### 快捷键
 
@@ -196,5 +187,7 @@ flutter build macos
 [Subsonic API](http://www.subsonic.org/pages/api.jsp)
 
 [lrclib API](https://lrclib.net/docs)
+
+Navidrome API
 
 网易云音乐
