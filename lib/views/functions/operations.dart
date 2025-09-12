@@ -99,16 +99,21 @@ class Operations{
 
   // 获取所有歌曲
   Future<void> getAllSongs(BuildContext context) async {
-    if(c.useNavidromeAPI.value && (await requests.getNavidromeAuth())){
-      List tmpList=await requests.getAllSongByNavidrome();
-      if(tmpList.isNotEmpty){
-        tmpList.sort((a, b) {
-          DateTime dateTimeA = DateTime.parse(a['createdAt']??a['created']);
-          DateTime dateTimeB = DateTime.parse(b['createdAt']??b['created']);
-          return dateTimeB.compareTo(dateTimeA);
-        });
-        songController.allSongs.value=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
-        return;
+    if(c.useNavidromeAPI.value){
+      if(c.uniqueId.value.isEmpty || c.authorization.value.isEmpty){
+        await requests.getNavidromeAuth();
+      }
+      if(c.authorization.isNotEmpty && c.uniqueId.value.isNotEmpty){
+        List tmpList=await requests.getAllSongByNavidrome();
+        if(tmpList.isNotEmpty){
+          tmpList.sort((a, b) {
+            DateTime dateTimeA = DateTime.parse(a['createdAt']??a['created']);
+            DateTime dateTimeB = DateTime.parse(b['createdAt']??b['created']);
+            return dateTimeB.compareTo(dateTimeA);
+          });
+          songController.allSongs.value=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
+          return;
+        }
       }
     }
     final rlt=await requests.getAllSongsRequest();
@@ -155,6 +160,18 @@ class Operations{
 
   // 获取所有的专辑
   Future<void> getAlbums(BuildContext context) async {
+    if(c.useNavidromeAPI.value){
+      if(c.uniqueId.value.isEmpty || c.authorization.value.isEmpty){
+        await requests.getNavidromeAuth();
+      }
+      if(c.authorization.isNotEmpty && c.uniqueId.value.isNotEmpty){
+        List tmpList=await requests.getAlbumsByNavidrome();
+        if(tmpList.isNotEmpty){
+          c.albums.value=tmpList.map((item)=>AlbumItemClass.fromJson(item)).toList();
+          return;
+        }
+      }
+    }
     final rlt=await requests.getAlbumsRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
       if(context.mounted) showMessage(false, 'getAllAlbumFail'.tr, context);
@@ -164,7 +181,6 @@ class Operations{
         if(rlt['subsonic-response']['albumList']['album']==null){
           return;
         }else{
-          // c.albums.value=rlt['subsonic-response']['albumList']['album'];
           List list=rlt['subsonic-response']['albumList']['album'];
           c.albums.value=list.map((item)=>AlbumItemClass.fromJson(item)).toList();
         }

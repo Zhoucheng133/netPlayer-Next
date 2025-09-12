@@ -14,14 +14,14 @@ class AlbumItemClass {
   factory AlbumItemClass.fromJson(Map map){
     return AlbumItemClass(
       map['id']??"", 
-      map["title"]??"", 
-      map["artist"]??"", 
+      map["title"]??map["name"]??"", 
+      map["artist"]??map['albumArtist']??"", 
       map["songCount"]??0, 
-      map["artistId"]??"",
+      map["artistId"]??map["albumArtistId"]??"",
       map["coverArt"]??"",
-      map['year']??0,
-      map["duration"]??0,
-      map["created"]??"",
+      map['year']??map['maxYear']??0,
+      map['duration'].toInt() ?? 0,
+      map['created'] ?? map['createdAt'] ?? ''
     );
   }
 

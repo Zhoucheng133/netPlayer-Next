@@ -193,4 +193,23 @@ class HttpRequests{
       return [];
     }
   }
+  Future<List> getAlbumsByNavidrome() async {
+    try {
+      try {
+        final response=await http.get(
+          Uri.parse('${c.userInfo.value.url}/api/album'),
+          headers: {
+            "x-nd-authorization": c.authorization.value,
+            "x-nd-client-unique-id": c.uniqueId.value,
+          },
+        );
+        String responseBody = utf8.decode(response.bodyBytes);
+        return json.decode(responseBody);
+      } catch (e) {
+        return [];
+      }
+    } catch (_) {
+      return [];
+    }
+  }
 }
