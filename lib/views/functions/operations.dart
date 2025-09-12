@@ -1225,8 +1225,11 @@ class Operations{
       );
     }else{
       c.useNavidromeAPI.value=false;
-      prefs.setBool("useNavidrome", false);
+      c.authorization.value="";
+      c.uniqueId.value="";
+      await prefs.setBool("useNavidrome", false);
     }
+    if(context.mounted) await getAllSongs(context);
   }
 
   Future<void> logout() async {
