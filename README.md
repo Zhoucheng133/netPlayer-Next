@@ -26,35 +26,17 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 ## 目录
 
-- [netPlayer Next版本](#netplayer-next版本)
-  - [简介](#简介)
-  - [目录](#目录)
-  - [截图](#截图)
-    - [主界面](#主界面)
-    - [~~桌面歌词组件~~ (遗弃的项目)](#桌面歌词组件-遗弃的项目)
-  - [使用](#使用)
-    - [快捷键](#快捷键)
-      - [App内快捷键](#app内快捷键)
-      - [全局快捷键](#全局快捷键)
-  - [多语言支持](#多语言支持)
-  - [WebSocket服务](#websocket服务)
-    - [发送的消息](#发送的消息)
-    - [接收的消息](#接收的消息)
-  - [常见问题](#常见问题)
-    - [无法连接到音乐服务器:](#无法连接到音乐服务器)
-    - [所有歌曲显示不全:](#所有歌曲显示不全)
-    - [打开页面灰色方块或者崩溃不显示内容](#打开页面灰色方块或者崩溃不显示内容)
-    - [没有找到歌词:](#没有找到歌词)
-  - [其它链接](#其它链接)
-  - [在你的设备上配置netPlayer Next](#在你的设备上配置netplayer-next)
-    - [netPlayer Next本体](#netplayer-next本体)
-    - [桌面歌词组件](#桌面歌词组件)
-    - [关于PR](#关于pr)
-  - [一些API](#一些api)
+- [简介](#简介)
+- [截图](#截图)
+- [使用](#使用)
+- [多语言支持](#多语言支持)
+- [WebSocket服务](#websocket服务)
+- [常见问题](#常见问题)
+- [其它链接](#其它链接)
+- [在你的设备上配置netPlayer Next](#在你的设备上配置netplayer-next)
+- [一些API](#一些api)
 
 ## 截图
-
-### 主界面
 
 > [!TIP]
 > 现已支持自定义主题色&深色模式
@@ -67,7 +49,7 @@ Also available  in English. Click [HERE](/documents/en.md) to see document of En
 
 > [!TIP]
 > 受限于Subsonic API，“所有歌曲”和“专辑”只能显示500首/张（随机的500首歌曲排序展示）  
-> `v3.6.2`版本开始支持显示Navidrome服务的“所有歌曲”和“专辑”（默认开启，优先检查是否支持Navidrome API）
+> 从`v3.6.2`版本开始支持显示Navidrome服务的“所有歌曲”和“专辑”（默认开启，优先检查是否支持Navidrome API）
 
 ### 快捷键
 
@@ -153,7 +135,7 @@ C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer
 
 - [spotify-downloader](https://github.com/spotDL/spotify-downloader)用于下载歌曲，通过这种方式下载的歌曲一般会包含一些信息
 - [Live-BG](https://github.com/Zhoucheng133/Live-BG)用于直播的配合netPlayer显示当前播放歌曲信息和歌词的背景
-- [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)桌面歌词系统
+- ~~[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)桌面歌词系统~~
 
 ## 在你的设备上配置netPlayer Next
 
@@ -173,10 +155,6 @@ flutter build windows
 ```bash
 flutter build macos
 ```
-
-### 桌面歌词组件
-
-你需要前往[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)页面中以同样的方法打包，放置到`<程序路径>/lyric`下即可
 
 ### 关于PR
 > [!NOTE]

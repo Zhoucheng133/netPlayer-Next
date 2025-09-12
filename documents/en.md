@@ -135,7 +135,7 @@ Lyrics depends on the song's title, album, artist and duration.
 
 - [spotify-downloader](https://github.com/spotDL/spotify-downloader) For download songs. It contains songs' informations.
 - [Live-BG](https://github.com/Zhoucheng133/Live-BG) Used for live streaming to display bgm information developed by myself.
-- [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)Desktop lyric kit
+- ~~[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)Desktop lyric kit~~
   
 ## Config netPlayer Next on your own device
 
@@ -155,10 +155,6 @@ Build on Mac:
 ```bash
 flutter build macos
 ```
-
-### With desktop lyric kit
-
-Use the same way to pacakge [netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit), and move it to `<netPlayer program path>/lyric`
 
 ### About PR
 > [!NOTE]
