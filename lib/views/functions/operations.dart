@@ -100,9 +100,6 @@ class Operations{
   // 获取所有歌曲
   Future<void> getAllSongs(BuildContext context) async {
     if(c.useNavidromeAPI.value){
-      if(c.uniqueId.value.isEmpty || c.authorization.value.isEmpty){
-        await requests.getNavidromeAuth();
-      }
       if(c.authorization.isNotEmpty && c.uniqueId.value.isNotEmpty){
         List tmpList=await requests.getAllSongByNavidrome();
         if(tmpList.isNotEmpty){
@@ -161,9 +158,6 @@ class Operations{
   // 获取所有的专辑
   Future<void> getAlbums(BuildContext context) async {
     if(c.useNavidromeAPI.value){
-      if(c.uniqueId.value.isEmpty || c.authorization.value.isEmpty){
-        await requests.getNavidromeAuth();
-      }
       if(c.authorization.isNotEmpty && c.uniqueId.value.isNotEmpty){
         List tmpList=await requests.getAlbumsByNavidrome();
         if(tmpList.isNotEmpty){

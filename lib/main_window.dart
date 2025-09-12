@@ -254,24 +254,22 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
       final userData=jsonDecode(userInfo);
       final requests=HttpRequests();
       final rlt=await requests.loginRequest(userData['url'], userData['username'], userData['salt'], userData['token']);
-      if(rlt.isEmpty){
-        WidgetsBinding.instance.addPostFrameCallback((_){
-          showDialog(
-            context: context, 
-            builder: (BuildContext context)=>AlertDialog(
-              title: Text('loginFail'.tr),
-              content: Text('loginConnectFail'.tr),
-              actions: [
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.pop(context);
-                  }, 
-                  child: Text('ok'.tr)
-                )
-              ],
-            ),
-          );
-        });
+      if(rlt.isEmpty && context.mounted){
+        await showDialog(
+          context: context, 
+          builder: (BuildContext context)=>AlertDialog(
+            title: Text('loginFail'.tr),
+            content: Text('loginConnectFail'.tr),
+            actions: [
+              ElevatedButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                }, 
+                child: Text('ok'.tr)
+              )
+            ],
+          ),
+        );
         setState(() {
           isLoading=false;
         });
@@ -301,6 +299,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
       }
       bool? useNavidrome=prefs.getBool("useNavidrome");
       c.useNavidromeAPI.value=useNavidrome??true;
+      // 从旧版本更新
       if((userData['password']==null || userData['password'].isEmpty) && useNavidrome!=false && context.mounted){
         bool enableNavidrome=true;
         await showDialog(
@@ -344,6 +343,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
         'token': userData['token'],
         'password': userData['password']
       });
+      if(c.useNavidromeAPI.value && c.userInfo.value.password!=null){
+        await requests.getNavidromeAuth();
+      }
     }
     setState(() {
       isLoading=false;
