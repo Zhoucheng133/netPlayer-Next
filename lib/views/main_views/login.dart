@@ -46,6 +46,13 @@ class _LoginViewState extends State<LoginView> {
     return result;
   }
 
+  String normalizeUrl(String url) {
+    if (url.endsWith('/')) {
+      return url.substring(0, url.length - 1);
+    }
+    return url;
+  }
+
   Future<void> loginHandler(BuildContext context) async {
     if(url.text.isEmpty){
       await showDialog(
@@ -122,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
     String salt=generateRandomString(6);
     var bytes = utf8.encode(password.text+salt);
     var token = md5.convert(bytes);
-    final rlt=await requests.loginRequest(url.text, username.text, salt, token.toString());
+    final rlt=await requests.loginRequest(normalizeUrl(url.text), username.text, salt, token.toString());
     if(rlt.isEmpty && context.mounted){
       await showDialog(
         context: context, 
@@ -158,7 +165,7 @@ class _LoginViewState extends State<LoginView> {
       );
       return;
     }
-    c.userInfo.value=UserInfo(url.text, username.text, salt, token.toString(), password.text);
+    c.userInfo.value=UserInfo(normalizeUrl(url.text), username.text, salt, token.toString(), password.text);
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('userInfo', jsonEncode(c.userInfo.value));
   }
