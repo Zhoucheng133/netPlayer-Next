@@ -14,6 +14,10 @@ class Infos {
 
   // 专辑信息
   Future<void> albumInfo(BuildContext context, AlbumItemClass data) async {
+    if(data.coverArt.isEmpty){
+      Map rlt=await operations.getAlbumData(context, data.id);
+      data.coverArt=rlt['coverArt'];
+    }
     if(context.mounted){
       showDialog(
         context: context, 
