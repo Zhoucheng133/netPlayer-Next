@@ -1227,11 +1227,6 @@ class Operations{
               onPressed: (){
                 prefs.setBool("useNavidrome", true);
                 c.useNavidromeAPI.value=true;
-                if(c.userInfo.value.password==null){
-                  Navigator.pop(context); 
-                  logout();
-                  return;
-                }
                 Navigator.pop(context);
               }, 
               child: Text(c.userInfo.value.password==null?'enableNavidromeReLogin'.tr:'enable'.tr)
@@ -1239,6 +1234,10 @@ class Operations{
           ],
         )
       );
+      if(c.userInfo.value.password==null){
+        logout();
+        return;
+      }
     }else{
       c.useNavidromeAPI.value=false;
       c.authorization.value="";
