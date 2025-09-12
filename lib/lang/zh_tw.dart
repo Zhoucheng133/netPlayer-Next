@@ -213,6 +213,12 @@ const Map<String, String> zhTW = {
 
   'Window': '視窗',
   'Minimize': '最小化',
-  'Fill': '進入全螢幕'
+  'Fill': '進入全螢幕',
+
+  'useNavidromeAPI': '使用Navidrome API',
+  'enableNavidromeContent': "取得所有的歌曲和專輯避免Subsonic API的限制\n如果不是Navidrome的服務，這個功能開啟沒有任何影響",
+  'enable': '啟用',
+  'enableNavidromeReLogin': '啟用並重新登入',
+  'disable': '停用'
 
 };

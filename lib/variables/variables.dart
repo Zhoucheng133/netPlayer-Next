@@ -67,8 +67,6 @@ class UserInfo{
 }
 
 class Controller extends GetxController{
-  // 是否使用桌面歌词, 仅Windows
-  bool useDesktopLyric=false;
   // 当前页面索引
   Rx<Pages> page=Pages.all.obs;
   // 当前页面Id
@@ -77,8 +75,10 @@ class Controller extends GetxController{
   Rx<UserInfo> userInfo=Rx(UserInfo(null, null, null, null, null));
 
   // 测试 -> NavidromeAPI认证
-  String authorization="";
-  String uniqueId="";
+  RxString authorization="".obs;
+  RxString uniqueId="".obs;
+
+  RxBool useNavidromeAPI=true.obs;
 
   // 播放进度, 注意单位为毫秒~1000ms=1s
   RxInt playProgress=0.obs;

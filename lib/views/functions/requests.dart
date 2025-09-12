@@ -165,8 +165,8 @@ class HttpRequests{
       String responseBody = utf8.decode(response.bodyBytes);
       Map<String, dynamic> data = json.decode(responseBody);
       if(data['token'].isNotEmpty && data['id'].isNotEmpty){
-        c.authorization="Bearer ${data['token']}";
-        c.uniqueId=data['id'];
+        c.authorization.value="Bearer ${data['token']}";
+        c.uniqueId.value=data['id'];
         return true;
       }
     } catch (_) {
@@ -180,8 +180,8 @@ class HttpRequests{
         final response=await http.get(
           Uri.parse('${c.userInfo.value.url}/api/song'),
           headers: {
-            "x-nd-authorization": c.authorization,
-            "x-nd-client-unique-id": c.uniqueId,
+            "x-nd-authorization": c.authorization.value,
+            "x-nd-client-unique-id": c.uniqueId.value,
           },
         );
         String responseBody = utf8.decode(response.bodyBytes);

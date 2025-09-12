@@ -136,7 +136,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                   ),
                   songController.allSongs.length>=500 && widget.page==Pages.all ? const SizedBox(width: 10,) : Container(),
                   Obx(()=>
-                    songController.allSongs.length>=500 && widget.page==Pages.all ? 
+                    songController.allSongs.length>=500 && widget.page==Pages.all && c.authorization.isEmpty ? 
                     Tooltip(
                       message: 'overCountTip'.tr,
                       child: MouseRegion(

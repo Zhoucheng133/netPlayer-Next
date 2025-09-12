@@ -279,6 +279,22 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
                 SettingItem(
+                  label: 'useNavidromeAPI'.tr, 
+                  item: Obx(()=>
+                    Transform.scale(
+                      scale: 0.7,
+                      child: Switch(
+                        activeTrackColor: colorController.color6(),
+                        splashRadius: 0,
+                        value: c.useNavidromeAPI.value, 
+                        onChanged: (value){
+                          operations.toggleNavidromeAPI(value, context);
+                        }
+                      ),
+                    )
+                  )
+                ),
+                SettingItem(
                   label: 'enableWs'.tr, 
                   item: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -330,22 +346,6 @@ class _SettingsViewState extends State<SettingsView> {
                     ],
                   ),
                 ),
-                Platform.isWindows && c.useDesktopLyric ? SettingItem(
-                  label: 'enableKit'.tr, 
-                  item: Obx(()=>
-                    Transform.scale(
-                      scale: 0.7,
-                      child: Switch(
-                        activeTrackColor: colorController.color6(),
-                        splashRadius: 0,
-                        value: c.useLyricKit.value, 
-                        onChanged: c.useWs.value ? (value){
-                          operations.useKit(value, context);
-                        }: null
-                      ),
-                    )
-                  )
-                ) : Container(),
                 SettingItem(
                   label: 'darkMode'.tr,
                   gap: 10.0,
