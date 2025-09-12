@@ -1209,11 +1209,16 @@ class Operations{
             ),
             ElevatedButton(
               onPressed: (){
-                c.useNavidromeAPI.value=true;
                 prefs.setBool("useNavidrome", true);
+                c.useNavidromeAPI.value=true;
+                if(c.userInfo.value.password==null){
+                  Navigator.pop(context); 
+                  logout();
+                  return;
+                }
                 Navigator.pop(context);
               }, 
-              child: Text('enable'.tr)
+              child: Text(c.userInfo.value.password==null?'enableNavidromeReLogin'.tr:'enable'.tr)
             )
           ],
         )
@@ -1222,6 +1227,30 @@ class Operations{
       c.useNavidromeAPI.value=false;
       prefs.setBool("useNavidrome", false);
     }
+  }
+
+  Future<void> logout() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('userInfo');
+    stop();
+    songController.nowPlay.value=NowPlay(
+      id: '', 
+      title: '', 
+      artist: '', 
+      duration: 0, 
+      fromId: '', 
+      album: '', 
+      albumId: '', 
+      artistId: '', 
+      created: '', 
+      list: [], 
+      playFrom: Pages.none, 
+      index: 0
+    );
+    c.userInfo.value=UserInfo(null, null, null, null, null);
+    try {
+      c.ws.stop();
+    } catch (_) {}
   }
 
 }

@@ -6,7 +6,6 @@ import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/sidebar_items.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SideBar extends StatefulWidget {
   const SideBar({super.key});
@@ -68,30 +67,6 @@ class _SideBarState extends State<SideBar> {
     );
   }
 
-  Future<void> logout() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('userInfo');
-    operations.stop();
-    songController.nowPlay.value=NowPlay(
-      id: '', 
-      title: '', 
-      artist: '', 
-      duration: 0, 
-      fromId: '', 
-      album: '', 
-      albumId: '', 
-      artistId: '', 
-      created: '', 
-      list: [], 
-      playFrom: Pages.none, 
-      index: 0
-    );
-    c.userInfo.value=UserInfo(null, null, null, null, null);
-    try {
-      c.ws.stop();
-    } catch (_) {}
-  }
-
   Future<void> logoutHandler() async {
     await showDialog(
       context: context, 
@@ -107,7 +82,7 @@ class _SideBarState extends State<SideBar> {
           ),
           ElevatedButton(
             onPressed: (){
-              logout();
+              operations.logout();
               Navigator.pop(context);
             }, 
             child: Text('logout'.tr)
