@@ -207,6 +207,10 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   
   Future<void> initPref(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? removeMissing=prefs.getBool("removeMissing");
+    if(removeMissing==false){
+      c.removeMissing.value=false;
+    }
     final lang=prefs.getString('lang');
     if(lang!=null){
       var parts = lang.split('_');

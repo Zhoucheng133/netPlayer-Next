@@ -219,6 +219,7 @@ const Map<String, String> zhCN = {
   'enableNavidromeContent': "获取所有的歌曲和专辑来避免Subsonic API的限制\n如果不是Navidrome的服务，这个功能开启没有任何影响",
   'enable': '启用',
   'enableNavidromeReLogin': '启用并重新登录',
-  'disable': '禁用'
+  'disable': '禁用',
+  'removeMissing': '忽略失效的文件',
 
 };

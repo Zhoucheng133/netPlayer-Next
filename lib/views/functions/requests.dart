@@ -185,7 +185,13 @@ class HttpRequests{
           },
         );
         String responseBody = utf8.decode(response.bodyBytes);
-        return json.decode(responseBody);
+        List ls= json.decode(responseBody);
+        if(c.removeMissing.value){
+          ls=ls.where((item){
+            return item['missing']!=true;
+          }).toList();
+        }
+        return ls;
       } catch (e) {
         return [];
       }
@@ -204,7 +210,13 @@ class HttpRequests{
           },
         );
         String responseBody = utf8.decode(response.bodyBytes);
-        return json.decode(responseBody);
+        List ls= json.decode(responseBody);
+        if(c.removeMissing.value){
+          ls=ls.where((item){
+            return item['missing']!=true;
+          }).toList();
+        }
+        return ls;
       } catch (e) {
         return [];
       }

@@ -295,6 +295,25 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
                 SettingItem(
+                  label: 'removeMissing'.tr, 
+                  item: Obx(()=>
+                    Transform.scale(
+                      scale: 0.7,
+                      child: Switch(
+                        activeTrackColor: colorController.color6(),
+                        splashRadius: 0,
+                        value: c.removeMissing.value, 
+                        onChanged: c.useNavidromeAPI.value ?  (value) async {
+                          c.removeMissing.value=value;
+                          final prefs=await SharedPreferences.getInstance();
+                          prefs.setBool("removeMissing", value);
+                          if(context.mounted) operations.nowPlayCheck(context);
+                        } : null,
+                      ),
+                    )
+                  )
+                ),
+                SettingItem(
                   label: 'enableWs'.tr, 
                   item: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

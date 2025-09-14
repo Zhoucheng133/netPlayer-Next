@@ -79,6 +79,7 @@ class Controller extends GetxController{
   RxString uniqueId="".obs;
 
   RxBool useNavidromeAPI=true.obs;
+  RxBool removeMissing=true.obs;
 
   // 播放进度, 注意单位为毫秒~1000ms=1s
   RxInt playProgress=0.obs;

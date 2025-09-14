@@ -219,6 +219,7 @@ const Map<String, String> enUS = {
   'enableNavidromeContent': "Get all songs and albums to avoid subsonic API's limitation\nThis feature have no effect on non-Navidrome service",
   'enable': 'Enable',
   'enableNavidromeReLogin': 'Enable and re-login',
-  'disable': 'Disable'
+  'disable': 'Disable',
+  'removeMissing': 'Ignore missing files',
 
 };
