@@ -21,7 +21,7 @@ dependencies:
   scroll_to_index: ^3.0.1
   shared_preferences: ^2.2.2
   url_launcher: ^6.2.5
-  window_manager: ^0.3.8
+  window_manager: ^0.5.1
   path_provider: ^2.1.2
   tray_manager: ^0.2.1
   google_fonts: ^6.2.1
