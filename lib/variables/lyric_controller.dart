@@ -9,6 +9,9 @@ class LyricController extends GetxController {
   var controller=AutoScrollController().obs;
 
   void scrollLyric(){
+    if(!c.windowFocus.value){
+      return;
+    }
     if(c.lyricLine.value==0){
       controller.value.animateTo(0, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
       return;

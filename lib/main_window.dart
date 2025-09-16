@@ -164,6 +164,20 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     }
   }
 
+   @override
+  void onWindowFocus() {
+    c.windowFocus.value=true;
+    if(c.showLyric.value){
+      LyricController lyricController=Get.find();
+      lyricController.scrollLyric();
+    }
+  }
+
+  @override
+  void onWindowBlur() {
+    c.windowFocus.value=false;
+  }
+
   @override
   void onTrayMenuItemClick(MenuItem menuItem) {
     if(menuItem.key == 'exit_app') {

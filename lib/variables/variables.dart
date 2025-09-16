@@ -81,6 +81,8 @@ class Controller extends GetxController{
   RxBool useNavidromeAPI=true.obs;
   RxBool removeMissing=true.obs;
 
+  RxBool windowFocus=true.obs;
+
   // 播放进度, 注意单位为毫秒~1000ms=1s
   RxInt playProgress=0.obs;
   // 播放控制
