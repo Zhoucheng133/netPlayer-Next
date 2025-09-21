@@ -166,16 +166,20 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
 
    @override
   void onWindowFocus() {
-    c.windowFocus.value=true;
-    if(c.showLyric.value){
-      LyricController lyricController=Get.find();
-      lyricController.scrollLyric();
+    if(Platform.isMacOS){
+      c.windowFocus.value=true;
+      if(c.showLyric.value){
+        LyricController lyricController=Get.find();
+        lyricController.scrollLyric();
+      }
     }
   }
 
   @override
   void onWindowBlur() {
-    c.windowFocus.value=false;
+    if(Platform.isMacOS){
+      c.windowFocus.value=false;
+    }
   }
 
   @override
