@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
@@ -21,15 +23,21 @@ class _AllViewState extends State<AllView> {
   final Controller c = Get.find();
   final AutoScrollController controller=AutoScrollController();
   final SongController songController=Get.find();
+  final ColorController colorController=Get.find();
   TextEditingController inputController = TextEditingController();
 
   String searchKeyWord='';
 
+  bool loading=true;
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      operations.getAllSongs(context);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await operations.getAllSongs(context);
+      setState(() {
+        loading=false;
+      });
     });
     inputController.addListener((){
       setState(() {
@@ -68,7 +76,10 @@ class _AllViewState extends State<AllView> {
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
                 child: Obx(()=>
-                  ListView.builder(
+                  loading ? LoadingAnimationWidget.beat(
+                    color: colorController.color6(), 
+                    size: 30
+                  ) : ListView.builder(
                     controller: controller,
                     itemCount: songController.allSongs.length,
                     itemBuilder: (BuildContext context, int index){
