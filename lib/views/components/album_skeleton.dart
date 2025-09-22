@@ -4,7 +4,10 @@ import 'package:net_player_next/variables/color_controller.dart';
 import 'package:skeletons_forked/skeletons_forked.dart';
 
 class AlbumSkeleton extends StatefulWidget {
-  const AlbumSkeleton({super.key});
+
+  final int? count;
+
+  const AlbumSkeleton({super.key, this.count});
 
   @override
   State<AlbumSkeleton> createState() => _AlbumSkeletonState();
@@ -18,6 +21,7 @@ class _AlbumSkeletonState extends State<AlbumSkeleton> {
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
+      itemCount: widget.count,
       itemBuilder: (BuildContext context, int index)=>Container(
         color: colorController.darkMode.value ? colorController.color2() : Colors.white,
         height: 40,

@@ -185,6 +185,7 @@ class _AlbumItemState extends State<AlbumItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: (){
+        c.childCount.value=widget.data.songCount;
         if(c.page.value!=Pages.album){
           c.page.value=Pages.album;
         }

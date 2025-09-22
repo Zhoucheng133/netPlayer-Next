@@ -84,6 +84,7 @@ class Controller extends GetxController{
   RxBool windowFocus=true.obs;
 
   RxBool loading=true.obs;
+  RxInt childCount=0.obs;
 
   // 播放进度, 注意单位为毫秒~1000ms=1s
   RxInt playProgress=0.obs;

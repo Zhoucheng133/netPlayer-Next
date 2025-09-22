@@ -6,8 +6,9 @@ import 'package:skeletons_forked/skeletons_forked.dart';
 class SongSkeleton extends StatefulWidget {
 
   final bool lovedInclude; 
+  final int? count;
 
-  const SongSkeleton({super.key, this.lovedInclude=false});
+  const SongSkeleton({super.key, this.lovedInclude=false, this.count});
 
   @override
   State<SongSkeleton> createState() => _SongSkeletonState();
@@ -19,6 +20,7 @@ class _SongSkeletonState extends State<SongSkeleton> {
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
+      itemCount: widget.count,
       itemBuilder: (BuildContext context, int index)=>Container(
         color: colorController.darkMode.value ? colorController.color2() : Colors.white,
         height: 40,

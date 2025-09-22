@@ -131,7 +131,7 @@ class _ArtistViewState extends State<ArtistView> {
                   width: MediaQuery.of(context).size.width - 200,
                   height: MediaQuery.of(context).size.height - 222,
                   child: Obx(()=>
-                    c.loading.value ? const AlbumSkeleton() : ListView.builder(
+                    c.loading.value ? AlbumSkeleton(count: c.childCount.value,) : ListView.builder(
                       itemCount: list.length,
                       itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? AlbumItem(
                         data: list[index], 
