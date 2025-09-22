@@ -797,6 +797,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.1.2"
+  skeletons_forked:
+    dependency: "direct main"
+    description:
+      name: skeletons_forked
+      sha256: "9715c7cbffe2ec68cb69be4a5e0fc0e382dfa7bd96166104386f48b5f853dcaa"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.4"
   sky_engine:
     dependency: transitive
     description: flutter
