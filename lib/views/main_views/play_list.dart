@@ -122,6 +122,7 @@ class _PlayListViewState extends State<PlayListView> {
   }
 
   Future<void> refresh(BuildContext context) async {
+    c.childCount.value=playlistController.playLists.where((item)=>item.id==c.pageId.value).first.songCount;
     final start = DateTime.now();
     c.loading.value=true;
     var tmpList=await operations.getPlayList(context, listId);

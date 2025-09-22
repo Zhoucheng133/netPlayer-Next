@@ -587,6 +587,7 @@ class Operations{
       return false;
     }else{
       if(context.mounted){
+        getAllPlayLists(context);
         showMessage(true, 'delSuccess'.tr, context);
         checkPlayListPlay(context, listId);
       }
