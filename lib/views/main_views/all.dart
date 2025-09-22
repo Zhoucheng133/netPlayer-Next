@@ -26,16 +26,18 @@ class _AllViewState extends State<AllView> {
 
   String searchKeyWord='';
 
-  bool loading=true;
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final start = DateTime.now();
       await operations.getAllSongs(context);
-      setState(() {
-        loading=false;
-      });
+      final elapsed = DateTime.now().difference(start);
+      const minDuration = Duration(milliseconds: 200);
+      if (elapsed < minDuration) {
+        await Future.delayed(minDuration - elapsed);
+      }
+      c.loading.value=false;
     });
     inputController.addListener((){
       setState(() {
@@ -56,7 +58,15 @@ class _AllViewState extends State<AllView> {
   }
 
   Future<void> refresh(BuildContext context) async {
+    final start = DateTime.now();
+    c.loading.value=true;
     await operations.checkAllSongPlay(context);
+    final elapsed = DateTime.now().difference(start);
+    const minDuration = Duration(milliseconds: 200);
+    if (elapsed < minDuration) {
+      await Future.delayed(minDuration - elapsed);
+    }
+    c.loading.value=false;
     if(context.mounted) showMessage(true, 'updateOk'.tr, context);
   }
 
@@ -73,8 +83,8 @@ class _AllViewState extends State<AllView> {
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
-                child: loading ? const SongSkeleton() : Obx(()=>
-                  ListView.builder(
+                child: Obx(()=>
+                  c.loading.value ? const SongSkeleton() : ListView.builder(
                     controller: controller,
                     itemCount: songController.allSongs.length,
                     itemBuilder: (BuildContext context, int index){

@@ -4,7 +4,10 @@ import 'package:net_player_next/variables/color_controller.dart';
 import 'package:skeletons_forked/skeletons_forked.dart';
 
 class SongSkeleton extends StatefulWidget {
-  const SongSkeleton({super.key});
+
+  final bool lovedInclude; 
+
+  const SongSkeleton({super.key, this.lovedInclude=false});
 
   @override
   State<SongSkeleton> createState() => _SongSkeletonState();
@@ -53,12 +56,14 @@ class _SongSkeletonState extends State<SongSkeleton> {
                 ),
               ),
             ),
-            const SizedBox(
+            SizedBox(
               width: 50,
               child: Center(
-                child: SkeletonAvatar(
-                  style: SkeletonAvatarStyle(width: 20, height: 20)
-                ),
+                child: widget.lovedInclude ? const Icon(
+                  Icons.favorite_rounded,
+                  color: Colors.red,
+                  size: 16,
+                ) : Container(),
               ),
             ),
           ],

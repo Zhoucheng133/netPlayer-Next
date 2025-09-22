@@ -4,6 +4,7 @@ import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
+import 'package:net_player_next/views/components/song_skeleton.dart';
 import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -49,6 +50,8 @@ class _PlayListViewState extends State<PlayListView> {
 
   Future<void> pageIdListener(String newId) async {
     if(c.page.value==Pages.playList){
+      c.loading.value=true;
+      final start = DateTime.now();
       list=[];
       setState(() {
         name=playlistController.playLists.firstWhere((item)=>item.id==newId).name;
@@ -62,6 +65,14 @@ class _PlayListViewState extends State<PlayListView> {
           item.fromId=listId;
         }
       });
+      final elapsed = DateTime.now().difference(start);
+      const minDuration = Duration(milliseconds: 200);
+      if (elapsed < minDuration) {
+        await Future.delayed(minDuration - elapsed);
+      }
+      c.loading.value=false;
+    }else if(c.loading.value==true){
+      c.loading.value=false;
     }
   }
 
@@ -112,10 +123,18 @@ class _PlayListViewState extends State<PlayListView> {
   }
 
   Future<void> refresh(BuildContext context) async {
+    final start = DateTime.now();
+    c.loading.value=true;
     var tmpList=await operations.getPlayList(context, listId);
     setState(() {
       list=tmpList.map((item)=>SongItemClass.fromJson(item)).toList();
     });
+    final elapsed = DateTime.now().difference(start);
+    const minDuration = Duration(milliseconds: 200);
+    if (elapsed < minDuration) {
+      await Future.delayed(minDuration - elapsed);
+    }
+    c.loading.value=false;
     if(songController.nowPlay.value.playFrom==Pages.playList && songController.nowPlay.value.fromId==listId){
       int index=list.indexWhere((item) => item.id==songController.nowPlay.value.id);
       if(index!=-1){
@@ -157,35 +176,37 @@ class _PlayListViewState extends State<PlayListView> {
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
-                child: ListView.builder(
-                  controller: controller,
-                  itemCount: list.length,
-                  itemBuilder: (BuildContext context, int index){
-                    return AutoScrollTag(
-                      key: ValueKey(index), 
-                      controller: controller, 
-                      index: index,
-                      child: searchKeyWord.isEmpty ? Obx(()=>
-                        SongItem(
+                child: Obx(()=>
+                  c.loading.value ? const SongSkeleton() : ListView.builder(
+                    controller: controller,
+                    itemCount: list.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return AutoScrollTag(
+                        key: ValueKey(index), 
+                        controller: controller, 
+                        index: index,
+                        child: searchKeyWord.isEmpty ? Obx(()=>
+                          SongItem(
+                            index: index, 
+                            song: list[index], 
+                            isplay: isPlay(index), 
+                            from: Pages.playList, 
+                            list: list, 
+                            refresh: ()=>silentRefresh(),
+                          ),
+                        ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                        Obx(()=>SongItem(
                           index: index, 
                           song: list[index], 
                           isplay: isPlay(index), 
                           from: Pages.playList, 
                           list: list, 
                           refresh: ()=>silentRefresh(),
-                        ),
-                      ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                      Obx(()=>SongItem(
-                        index: index, 
-                        song: list[index], 
-                        isplay: isPlay(index), 
-                        from: Pages.playList, 
-                        list: list, 
-                        refresh: ()=>silentRefresh(),
-                      )) : Container()
-                    );
-                  }
-                ),
+                        )) : Container()
+                      );
+                    }
+                  ),
+                )
               )
             ],
           )

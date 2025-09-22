@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
+import 'package:net_player_next/views/components/song_skeleton.dart';
 import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -50,7 +51,15 @@ class _LovedViewState extends State<LovedView> {
   }
 
   Future<void> refresh(BuildContext context) async {
+    final start = DateTime.now();
+    c.loading.value=true;
     await operations.checkLovedSongPlay(context);
+    final elapsed = DateTime.now().difference(start);
+    const minDuration = Duration(milliseconds: 200);
+    if (elapsed < minDuration) {
+      await Future.delayed(minDuration - elapsed);
+    }
+    c.loading.value=false;
     if(context.mounted) showMessage(true, 'updateOk'.tr, context);
   }
 
@@ -68,7 +77,7 @@ class _LovedViewState extends State<LovedView> {
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
                 child: Obx(()=>
-                  ListView.builder(
+                  c.loading.value ? const SongSkeleton(lovedInclude: true,) : ListView.builder(
                     controller: controller,
                     itemCount: songController.lovedSongs.length,
                     itemBuilder: (BuildContext context, int index){
