@@ -1,4 +1,3 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -337,57 +336,7 @@ class _SongItemState extends State<SongItem> {
       ]
     );
     if(val=='add' && context.mounted){
-      // String selectItem = c.playLists[0]["id"];
-      String selectedItem=playlistController.playLists[0].id;
-      await showDialog(
-        context: context, 
-        builder: (BuildContext context)=>AlertDialog(
-          title: Text('addToList'.tr),
-          content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState)=>DropdownButtonHideUnderline(
-              child: DropdownButton2(
-                buttonStyleData: ButtonStyleData(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  )
-                ),
-                dropdownStyleData: DropdownStyleData(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  )
-                ),
-                value: selectedItem,
-                items: List.generate(playlistController.playLists.length, (index){
-                  return DropdownMenuItem(
-                    value: playlistController.playLists[index].id,
-                    child: Text(playlistController.playLists[index].name),
-                  );
-                }),
-                onChanged: (val){
-                  setState((){
-                    selectedItem=val as String;
-                  });
-                },
-              ),
-            )
-          ),
-          actions: [
-            TextButton(
-              onPressed: (){
-                Navigator.pop(context);
-              }, 
-              child: Text('cancel'.tr)
-            ),
-            ElevatedButton(
-              onPressed: (){
-                operations.addToList(context, widget.song.id, selectedItem);
-                Navigator.pop(context);
-              }, 
-              child: Text('add'.tr)
-            )
-          ],
-        )
-      );
+      operations.addSongToList(context, widget.song.id, widget.song.title);
     }else if(val=='delove'){
       if(context.mounted) operations.deloveSong(context, widget.song.id);
     }else if(val=='love'){

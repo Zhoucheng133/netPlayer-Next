@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:clipboard/clipboard.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -824,56 +823,7 @@ class _LyricViewState extends State<LyricView> {
                                             );
                                             return;
                                           }
-                                          String selectedItem=playlistController.playLists[0].id;
-                                          await showDialog(
-                                            context: context, 
-                                            builder: (BuildContext context)=>AlertDialog(
-                                              title: Text('addToList'.tr),
-                                              content: StatefulBuilder(
-                                                builder: (BuildContext context, StateSetter setState)=>DropdownButtonHideUnderline(
-                                                  child: DropdownButton2(
-                                                    buttonStyleData: ButtonStyleData(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(10),
-                                                      )
-                                                    ),
-                                                    dropdownStyleData: DropdownStyleData(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(10),
-                                                      )
-                                                    ),
-                                                    value: selectedItem,
-                                                    items: List.generate(playlistController.playLists.length, (index){
-                                                      return DropdownMenuItem(
-                                                        value: playlistController.playLists[index].id,
-                                                        child: Text(playlistController.playLists[index].name),
-                                                      );
-                                                    }),
-                                                    onChanged: (val){
-                                                      setState((){
-                                                        selectedItem=val as String;
-                                                      });
-                                                    },
-                                                  ),
-                                                )
-                                              ),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: (){
-                                                    Navigator.pop(context);
-                                                  }, 
-                                                  child: Text('cancel'.tr)
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: (){
-                                                    operations.addToList(context, songController.nowPlay.value.id, selectedItem);
-                                                    Navigator.pop(context);
-                                                  }, 
-                                                  child: Text('add'.tr)
-                                                )
-                                              ],
-                                            )
-                                          );
+                                          operations.addSongToList(context, songController.nowPlay.value.id, songController.nowPlay.value.title);
                                         },
                                         child: MouseRegion(
                                           cursor: SystemMouseCursors.click,

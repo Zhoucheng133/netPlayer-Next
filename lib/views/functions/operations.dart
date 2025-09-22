@@ -1272,4 +1272,73 @@ class Operations{
     } catch (_) {}
   }
 
+  Future<void> addSongToList(BuildContext context, String songId, String title) async {
+    String selectedItem=playlistController.playLists[0].id;
+    await showDialog(
+      context: context, 
+      builder: (BuildContext context)=>AlertDialog(
+        title: Text(
+          'addToList'.tr
+        ),
+        content: StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState)=>DropdownButtonHideUnderline(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  width: 250,
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                  )
+                ),
+                const SizedBox(height: 10,),
+                DropdownButton2(
+                  isExpanded: true,
+                  buttonStyleData: ButtonStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    )
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    )
+                  ),
+                  value: selectedItem,
+                  items: List.generate(playlistController.playLists.length, (index){
+                    return DropdownMenuItem(
+                      value: playlistController.playLists[index].id,
+                      child: Text(playlistController.playLists[index].name),
+                    );
+                  }),
+                  onChanged: (val){
+                    setState((){
+                      selectedItem=val as String;
+                    });
+                  },
+                ),
+              ],
+            ),
+          )
+        ),
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: Text('cancel'.tr)
+          ),
+          ElevatedButton(
+            onPressed: (){
+              addToList(context, songId, selectedItem);
+              Navigator.pop(context);
+            }, 
+            child: Text('add'.tr)
+          )
+        ],
+      )
+    );
+  }
+
 }
