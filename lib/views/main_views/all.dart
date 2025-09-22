@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
+import 'package:net_player_next/views/components/song_skeleton.dart';
 import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -23,7 +22,6 @@ class _AllViewState extends State<AllView> {
   final Controller c = Get.find();
   final AutoScrollController controller=AutoScrollController();
   final SongController songController=Get.find();
-  final ColorController colorController=Get.find();
   TextEditingController inputController = TextEditingController();
 
   String searchKeyWord='';
@@ -75,11 +73,8 @@ class _AllViewState extends State<AllView> {
               SizedBox(
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
-                child: Obx(()=>
-                  loading ? LoadingAnimationWidget.beat(
-                    color: colorController.color6(), 
-                    size: 30
-                  ) : ListView.builder(
+                child: loading ? const SongSkeleton() : Obx(()=>
+                  ListView.builder(
                     controller: controller,
                     itemCount: songController.allSongs.length,
                     itemBuilder: (BuildContext context, int index){
