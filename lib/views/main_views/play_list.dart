@@ -50,6 +50,7 @@ class _PlayListViewState extends State<PlayListView> {
 
   Future<void> pageIdListener(String newId) async {
     if(c.page.value==Pages.playList){
+      c.childCount.value=playlistController.playLists.where((item)=>item.id==newId).first.songCount;
       c.loading.value=true;
       final start = DateTime.now();
       list=[];
@@ -175,7 +176,7 @@ class _PlayListViewState extends State<PlayListView> {
                 width: MediaQuery.of(context).size.width - 200,
                 height: MediaQuery.of(context).size.height - 222,
                 child: Obx(()=>
-                  c.loading.value ? const SongSkeleton() : ListView.builder(
+                  c.loading.value ? SongSkeleton(count: c.childCount.value,) : ListView.builder(
                     controller: controller,
                     itemCount: list.length,
                     itemBuilder: (BuildContext context, int index){
