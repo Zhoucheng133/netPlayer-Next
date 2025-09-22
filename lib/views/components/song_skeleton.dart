@@ -34,10 +34,14 @@ class _SongSkeletonState extends State<SongSkeleton> {
                 ),
               )
             ),
-            Expanded(
+            const Expanded(
               child: Padding(
-                padding: EdgeInsets.only(left: 10, right: MediaQuery.of(context).size.width - 700),
-                child: const SkeletonLine()
+                padding: EdgeInsets.only(left: 10),
+                child: SkeletonLine(
+                  style: SkeletonLineStyle(
+                    width: 180,
+                  ),
+                )
               )
             ),
             const SizedBox(
