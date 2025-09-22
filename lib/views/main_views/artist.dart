@@ -40,6 +40,9 @@ class _ArtistViewState extends State<ArtistView> {
     });
     listener = ever(c.pageId, (String id) async {
       if(c.page.value==Pages.artist && c.pageId.value!=''){
+        setState(() {
+          artistName="";
+        });
         final start = DateTime.now();
         c.loading.value=true;
         Map rlt=await operations.getArtistData(context, id);

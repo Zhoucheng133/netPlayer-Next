@@ -42,6 +42,9 @@ class _AlbumViewState extends State<AlbumView> {
     });
     listener = ever(c.pageId, (String albumId) async {
       if(c.page.value==Pages.album && c.pageId.value!=''){
+        setState(() {
+          albumName="";
+        });
         final start = DateTime.now();
         c.loading.value=true;
         Map rlt=await operations.getAlbumData(context, albumId);
