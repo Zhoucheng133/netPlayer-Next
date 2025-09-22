@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/album_item.dart';
+import 'package:net_player_next/views/components/album_skeleton.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
+import 'package:net_player_next/views/components/song_skeleton.dart';
 import 'package:net_player_next/views/components/view_head.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -40,6 +42,8 @@ class _AlbumViewState extends State<AlbumView> {
     });
     listener = ever(c.pageId, (String albumId) async {
       if(c.page.value==Pages.album && c.pageId.value!=''){
+        final start = DateTime.now();
+        c.loading.value=true;
         Map rlt=await operations.getAlbumData(context, albumId);
         if(rlt.isNotEmpty){
           try {
@@ -54,6 +58,12 @@ class _AlbumViewState extends State<AlbumView> {
             });
           } catch (_) {}
         }
+        final elapsed = DateTime.now().difference(start);
+        const minDuration = Duration(milliseconds: 200);
+        if (elapsed < minDuration) {
+          await Future.delayed(minDuration - elapsed);
+        }
+        c.loading.value=false;
       }
     });
   }
@@ -64,10 +74,19 @@ class _AlbumViewState extends State<AlbumView> {
     super.dispose();
   }
 
-  void refresh(BuildContext context){
-    operations.getAlbums(context);
-    showMessage(true, '更新成功', context);
+  Future<void> refresh(BuildContext context) async {
+    final start = DateTime.now();
+    c.loading.value=true;
+    await operations.getAlbums(context);
+    final elapsed = DateTime.now().difference(start);
+    const minDuration = Duration(milliseconds: 200);
+    if (elapsed < minDuration) {
+      await Future.delayed(minDuration - elapsed);
+    }
+    c.loading.value=false;
+    if(context.mounted) showMessage(true, '更新成功', context);
   }
+  
   bool isPlay(int index){
      if(index==songController.nowPlay.value.index && songController.nowPlay.value.playFrom==Pages.album && songController.nowPlay.value.fromId==id){
       return true;
@@ -97,7 +116,7 @@ class _AlbumViewState extends State<AlbumView> {
                   width: MediaQuery.of(context).size.width - 200,
                   height: MediaQuery.of(context).size.height - 222,
                   child: Obx(()=>
-                    ListView.builder(
+                    c.loading.value ? const AlbumSkeleton() : ListView.builder(
                       itemCount: c.albums.length,
                       itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
                         AlbumItem(
@@ -119,11 +138,12 @@ class _AlbumViewState extends State<AlbumView> {
                       )
                     )
                   ),
-                ) : SizedBox(
+                ) : 
+                SizedBox(
                   width: MediaQuery.of(context).size.width - 200,
                   height: MediaQuery.of(context).size.height - 222,
                   child: Obx(()=>
-                    ListView.builder(
+                    c.loading.value ? const SongSkeleton() : ListView.builder(
                       itemCount: list.length,
                       itemBuilder: (BuildContext context, int index){
                         return searchKeyWord.isEmpty ? Obx(()=>

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/views/components/album_item.dart';
+import 'package:net_player_next/views/components/album_skeleton.dart';
+import 'package:net_player_next/views/components/artist_skeleton.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/artist_item.dart';
 import 'package:net_player_next/views/components/view_head.dart';
@@ -38,6 +40,8 @@ class _ArtistViewState extends State<ArtistView> {
     });
     listener = ever(c.pageId, (String id) async {
       if(c.page.value==Pages.artist && c.pageId.value!=''){
+        final start = DateTime.now();
+        c.loading.value=true;
         Map rlt=await operations.getArtistData(context, id);
         if(rlt.isNotEmpty){
           try {
@@ -49,6 +53,12 @@ class _ArtistViewState extends State<ArtistView> {
             });
           } catch (_) {}
         }
+        final elapsed = DateTime.now().difference(start);
+        const minDuration = Duration(milliseconds: 200);
+        if (elapsed < minDuration) {
+          await Future.delayed(minDuration - elapsed);
+        }
+        c.loading.value=false;
       }
     });
   }
@@ -59,9 +69,17 @@ class _ArtistViewState extends State<ArtistView> {
     super.dispose();
   }
 
-  void refresh(BuildContext context){
-    operations.getArtists(context);
-    showMessage(true, 'updateOk'.tr, context);
+  Future<void> refresh(BuildContext context) async {
+    final start = DateTime.now();
+    c.loading.value=true;
+    await operations.getArtists(context);
+    final elapsed = DateTime.now().difference(start);
+    const minDuration = Duration(milliseconds: 200);
+    if (elapsed < minDuration) {
+      await Future.delayed(minDuration - elapsed);
+    }
+    c.loading.value=false;
+    if(context.mounted) showMessage(true, 'updateOk'.tr, context);
   }
 
   @override
@@ -85,7 +103,7 @@ class _ArtistViewState extends State<ArtistView> {
                   width: MediaQuery.of(context).size.width - 200,
                   height: MediaQuery.of(context).size.height - 222,
                   child: Obx(()=>
-                    ListView.builder(
+                    c.loading.value ? const ArtistSkeleton() : ListView.builder(
                       itemCount: c.artists.length,
                       itemBuilder:  (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
                         ArtistItem(
@@ -110,7 +128,7 @@ class _ArtistViewState extends State<ArtistView> {
                   width: MediaQuery.of(context).size.width - 200,
                   height: MediaQuery.of(context).size.height - 222,
                   child: Obx(()=>
-                    ListView.builder(
+                    c.loading.value ? const AlbumSkeleton() : ListView.builder(
                       itemCount: list.length,
                       itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? AlbumItem(
                         data: list[index], 

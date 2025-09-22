@@ -71,8 +71,6 @@ class _PlayListViewState extends State<PlayListView> {
         await Future.delayed(minDuration - elapsed);
       }
       c.loading.value=false;
-    }else if(c.loading.value==true){
-      c.loading.value=false;
     }
   }
 
