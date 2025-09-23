@@ -67,7 +67,7 @@ msix_config:
   display_name: netPlayer Next
   publisher_display_name: ZhouCheng
   identity_name: ZhouCheng.netPlayerNext
-  msix_version: 3.6.3.0
+  msix_version: 3.6.4.0
   logo_path: assets/icon.png
   trim_logo: false
   capabilities: internetClient, internetClientServer
