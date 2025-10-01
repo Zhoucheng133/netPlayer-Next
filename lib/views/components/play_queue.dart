@@ -44,7 +44,7 @@ class _PlayQueueState extends State<PlayQueue> {
       ) : Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 10,),
             child: SizedBox(
               height: 30,
               child: Row(
@@ -105,7 +105,8 @@ class _PlayQueueState extends State<PlayQueue> {
                 child: QueueItem(index: index)
               )
             ),
-          )
+          ),
+          const SizedBox(height: 10,),
         ],
       ),
     );
