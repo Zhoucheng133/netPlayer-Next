@@ -29,7 +29,17 @@ class _PlayQueueState extends State<PlayQueue> {
   Widget build(BuildContext context) {
     return Obx(
       ()=> c.fullRandom.value ? Center(
-        child: Text('queueNotAvaliable'.tr),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.block_rounded),
+            const SizedBox(height: 10,),
+            Text(
+              'queueNotAvaliable'.tr,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ) : Padding(
         padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
         child: Column(
