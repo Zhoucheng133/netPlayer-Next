@@ -30,6 +30,7 @@ class _PlayBarState extends State<PlayBar> {
   bool hoverLyric=false;
   bool hoverVolume=false;
   bool hoverMode=false;
+  bool hoverList=false;
 
   String convertDuration(int time){
     int min = time ~/ 60;
@@ -131,14 +132,14 @@ class _PlayBarState extends State<PlayBar> {
               )
             ),
             const SizedBox(width: 10,),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                SizedBox(
-                  width: 165,
-                  child: Text(
+            SizedBox(
+              width: 165,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
                     songController.nowPlay.value.title,
                     style: GoogleFonts.notoSansSc(
                       fontWeight: FontWeight.bold,
@@ -147,10 +148,8 @@ class _PlayBarState extends State<PlayBar> {
                     overflow: TextOverflow.fade,
                     softWrap: false,
                   ),
-                ),
-                SizedBox(
-                  width: 165,
-                  child: Text(
+                  const SizedBox(height: 3,),
+                  Text(
                     songController.nowPlay.value.artist,
                     style: GoogleFonts.notoSansSc(
                       color: Colors.grey[500],
@@ -158,9 +157,9 @@ class _PlayBarState extends State<PlayBar> {
                     ),
                     softWrap: false,
                     overflow: TextOverflow.fade,
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
             const SizedBox(width: 10,),
             Expanded(
@@ -345,9 +344,9 @@ class _PlayBarState extends State<PlayBar> {
             ),
             const SizedBox(width: 10,),
             SizedBox(
-              width: 210,
+              width: 220,
               child: Padding(
-                padding: const EdgeInsets.only(left: 15+25, right: 25),
+                padding: const EdgeInsets.only(left: 30, right: 25),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -397,41 +396,6 @@ class _PlayBarState extends State<PlayBar> {
                                 duration: const Duration(milliseconds: 200),
                                 builder: (_, value, __)=>Icon(
                                   Icons.favorite_rounded,
-                                  size: 18,
-                                  color: value,
-                                )
-                              ),
-                            )
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: (){
-                            operations.toggleLyric(context);
-                          },
-                          child: MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            onEnter: (_){
-                              setState(() {
-                                hoverLyric=true;
-                              });
-                            },
-                            onExit: (_){
-                              setState(() {
-                                hoverLyric=false;
-                              });
-                            },
-                            child: Tooltip(
-                              message: 'showLyric'.tr,
-                              waitDuration: const Duration(seconds: 1),
-                              child: TweenAnimationBuilder(
-                                tween: ColorTween(end: hoverLyric ? colorController.color6() : colorController.color5()),
-                                duration: const Duration(milliseconds: 200),
-                                builder: (_, value, __)=>Icon(
-                                  Icons.lyrics_rounded,
                                   size: 18,
                                   color: value,
                                 )
@@ -663,6 +627,25 @@ class _PlayBarState extends State<PlayBar> {
                           )
                         ),
                       ),
+                    ),
+                    Expanded(
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        onEnter: (_)=>setState(() {
+                          hoverList=true;
+                        }),
+                        onExit: (_)=>setState(() {
+                          hoverList=false;
+                        }),
+                        child: TweenAnimationBuilder(
+                          tween: ColorTween(end: hoverList ? colorController.color6() : colorController.color5()),
+                          duration: const Duration(milliseconds: 200),
+                          builder: (_, value, __) => Icon(
+                            Icons.playlist_play_rounded,
+                            color: value,
+                          )
+                        ),
+                      )
                     )
                   ],
                 ),
