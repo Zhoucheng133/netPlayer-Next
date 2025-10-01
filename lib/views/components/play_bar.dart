@@ -633,6 +633,7 @@ class _PlayBarState extends State<PlayBar> {
                       child: CustomPopup(
                         arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
                         backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                        contentPadding: EdgeInsets.zero,
                         content: const SizedBox(
                           height: 400,
                           width: 300,

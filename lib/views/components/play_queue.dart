@@ -41,11 +41,11 @@ class _PlayQueueState extends State<PlayQueue> {
             ),
           ],
         ),
-      ) : Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
-        child: Column(
-          children: [
-            SizedBox(
+      ) : Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+            child: SizedBox(
               height: 30,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -92,21 +92,21 @@ class _PlayQueueState extends State<PlayQueue> {
                 ],
               )
             ),
-            const SizedBox(height: 10,),
-            Expanded(
-              child: ListView.builder(
+          ),
+          const SizedBox(height: 10,),
+          Expanded(
+            child: ListView.builder(
+              controller: controller,
+              itemCount: songController.nowPlay.value.list.length,
+              itemBuilder: (item, index)=>AutoScrollTag(
+                key: ValueKey(index),
                 controller: controller,
-                itemCount: songController.nowPlay.value.list.length,
-                itemBuilder: (item, index)=>AutoScrollTag(
-                  key: ValueKey(index),
-                  controller: controller,
-                  index: index,
-                  child: QueueItem(index: index)
-                )
-              ),
-            )
-          ],
-        ),
+                index: index,
+                child: QueueItem(index: index)
+              )
+            ),
+          )
+        ],
       ),
     );
   }
