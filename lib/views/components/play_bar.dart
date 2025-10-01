@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
+import 'package:net_player_next/views/components/play_queue.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -629,21 +630,30 @@ class _PlayBarState extends State<PlayBar> {
                       ),
                     ),
                     Expanded(
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        onEnter: (_)=>setState(() {
-                          hoverList=true;
-                        }),
-                        onExit: (_)=>setState(() {
-                          hoverList=false;
-                        }),
-                        child: TweenAnimationBuilder(
-                          tween: ColorTween(end: hoverList ? colorController.color6() : colorController.color5()),
-                          duration: const Duration(milliseconds: 200),
-                          builder: (_, value, __) => Icon(
-                            Icons.playlist_play_rounded,
-                            color: value,
-                          )
+                      child: CustomPopup(
+                        arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                        backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                        content: const SizedBox(
+                          height: 400,
+                          width: 300,
+                          child: PlayQueue(),
+                        ),
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          onEnter: (_)=>setState(() {
+                            hoverList=true;
+                          }),
+                          onExit: (_)=>setState(() {
+                            hoverList=false;
+                          }),
+                          child: TweenAnimationBuilder(
+                            tween: ColorTween(end: hoverList ? colorController.color6() : colorController.color5()),
+                            duration: const Duration(milliseconds: 200),
+                            builder: (_, value, __) => Icon(
+                              Icons.playlist_play_rounded,
+                              color: value,
+                            )
+                          ),
                         ),
                       )
                     )

@@ -222,4 +222,6 @@ const Map<String, String> zhCN = {
   'disable': '禁用',
   'removeMissing': '忽略失效的文件',
 
+  'playqueue': "播放队列",
+  'queueNotAvaliable': '播放队列不可用\n现在处于完全随机播放模式'
 };

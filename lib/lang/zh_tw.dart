@@ -222,4 +222,6 @@ const Map<String, String> zhTW = {
   'disable': '停用',
   'removeMissing': '忽略失效的文件',
 
+  'playqueue': "播放隊列",
+  'queueNotAvaliable': '播放隊列不可用\n現在處於完全隨機播放模式'
 };
