@@ -647,13 +647,16 @@ class _PlayBarState extends State<PlayBar> {
                           onExit: (_)=>setState(() {
                             hoverList=false;
                           }),
-                          child: TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverList ? colorController.color6() : colorController.color5()),
-                            duration: const Duration(milliseconds: 200),
-                            builder: (_, value, __) => Icon(
-                              Icons.playlist_play_rounded,
-                              color: value,
-                            )
+                          child:  Tooltip(
+                            message: "playqueue".tr,
+                            child: TweenAnimationBuilder(
+                              tween: ColorTween(end: hoverList ? colorController.color6() : colorController.color5()),
+                              duration: const Duration(milliseconds: 200),
+                              builder: (_, value, __) => Icon(
+                                Icons.playlist_play_rounded,
+                                color: value,
+                              )
+                            ),
                           ),
                         ),
                       )
