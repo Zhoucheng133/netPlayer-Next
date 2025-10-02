@@ -525,7 +525,7 @@ class _PlayBarState extends State<PlayBar> {
                     Expanded(
                       child: Center(
                         child: PopupMenuButton(
-                          color: Colors.white,
+                          color: colorController.darkMode.value ? colorController.color3() : Colors.white,
                           tooltip: "",
                           enabled: !c.fullRandom.value,
                           splashRadius: 0,

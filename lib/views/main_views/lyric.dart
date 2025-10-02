@@ -697,7 +697,7 @@ class _LyricViewState extends State<LyricView> {
                                     child: Center(
                                       child: Obx(()=>
                                         PopupMenuButton(
-                                          color: Colors.white,
+                                          color: colorController.darkMode.value ? colorController.color3() : Colors.white,
                                           tooltip: "",
                                           enabled: !c.fullRandom.value,
                                           splashRadius: 0,
