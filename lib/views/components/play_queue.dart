@@ -27,6 +27,17 @@ class _PlayQueueState extends State<PlayQueue> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final maxScroll = controller.position.maxScrollExtent;
+      double targetOffset = (35 * songController.nowPlay.value.index - 35 * 4).toDouble();
+      targetOffset = targetOffset.clamp(0.0, maxScroll);
+      controller.jumpTo(targetOffset);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Obx(
       ()=> c.fullRandom.value ? Center(
