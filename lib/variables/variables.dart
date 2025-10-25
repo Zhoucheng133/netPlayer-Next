@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/album_controller.dart';
 import 'package:smtc_windows/smtc_windows.dart';
@@ -148,9 +147,6 @@ class Controller extends GetxController{
   RxString lang='zh_CN'.obs;
   //启用歌词组件
   RxBool useLyricKit=false.obs;
-
-  // 封面图片
-  var coverFuture = Rx<Uint8List?>(null);
 
   // 版本号
   RxString version=''.obs;

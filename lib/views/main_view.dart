@@ -109,10 +109,6 @@ class _MainViewState extends State<MainView> {
     } catch (_) {}
   }
 
-  Future<void> updateCover() async {
-    c.coverFuture.value=await operations.fetchCover();
-  }
-
   Future<void> nowplayChange(NowPlay val) async {
 
     if(preId!=null && val.id==preId){
@@ -123,8 +119,6 @@ class _MainViewState extends State<MainView> {
     if(val.id!="" && val.id.isNotEmpty){
       preId=songController.nowPlay.value.id;
     }
-
-    updateCover();
 
     // 保存现在播放的内容
     final SharedPreferences prefs = await SharedPreferences.getInstance();

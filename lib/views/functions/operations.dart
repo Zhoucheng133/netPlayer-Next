@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
-import 'package:http/http.dart' as http;
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image/image.dart' show decodeImage;
 import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
@@ -1107,25 +1104,6 @@ class Operations{
       return;
     }
     c.pageId.value=albumId;
-  }
-
-  Future<Uint8List?> fetchCover() async {
-    if(songController.nowPlay.value.id=="" || c.userInfo.value.url==null){
-      return null;
-    }
-    try {
-      // 获取文件流
-      var response = await http.get(Uri.parse("${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}")).timeout(const Duration(seconds: 2));
-      if (response.statusCode == 200) {
-        return decodeImage(response.bodyBytes)==null ? null:response.bodyBytes;
-      } else {
-        return null;
-      }
-    } on TimeoutException {
-      return null;
-    } catch (e) {
-      return null;
-    }
   }
 
   // 文件大小计算

@@ -99,12 +99,20 @@ class _PlayBarState extends State<PlayBar> {
                         children: [
                           Hero(
                             tag: 'cover',
-                            child: c.coverFuture.value==null ? Image.asset(
+                            child: songController.nowPlay.value.id=="" ? Image.asset(
                               "assets/blank.jpg",
                               fit: BoxFit.contain,
-                            ) : Image.memory(
-                              c.coverFuture.value!,
-                              fit: BoxFit.contain,
+                            ) : Stack(
+                              children: [
+                                Image.asset(
+                                  "assets/blank.jpg",
+                                  fit: BoxFit.contain,
+                                ),
+                                Image.network(
+                                  "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}",
+                                  fit: BoxFit.contain,
+                                ),
+                              ],
                             ),
                           ),
                           AnimatedContainer(
