@@ -28,7 +28,7 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController password=TextEditingController();
 
   var mouseInButton=false;
-  var isLoading=false;
+  bool isLoading=false;
 
   final requests=HttpRequests();
 
@@ -126,6 +126,9 @@ class _LoginViewState extends State<LoginView> {
       );
       return;
     }
+    setState(() {
+      isLoading=true;
+    });
     String salt=generateRandomString(6);
     var bytes = utf8.encode(password.text+salt);
     var token = md5.convert(bytes);
@@ -168,6 +171,9 @@ class _LoginViewState extends State<LoginView> {
     c.userInfo.value=UserInfo(normalizeUrl(url.text), username.text, salt, token.toString(), password.text);
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('userInfo', jsonEncode(c.userInfo.value));
+    setState(() {
+      isLoading=false;
+    });
   }
 
   @override
@@ -265,7 +271,14 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         duration: const Duration(milliseconds: 200),
                         child: Center(
-                          child: Icon(
+                          child: isLoading ? SizedBox(
+                            height: 15,
+                            width: 15,
+                            child: CircularProgressIndicator(
+                              color: colorController.color5(),
+                              strokeWidth: 2,
+                            ),
+                          ) : Icon(
                             Icons.arrow_forward_rounded,
                             color: colorController.color5(),
                           ),
