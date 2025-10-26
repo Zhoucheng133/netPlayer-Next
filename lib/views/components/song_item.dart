@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +9,6 @@ import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/infos.dart';
 import 'package:net_player_next/views/functions/operations.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SongHeader extends StatefulWidget {
   const SongHeader({super.key});
@@ -354,8 +355,17 @@ class _SongItemState extends State<SongItem> {
       c.page.value=Pages.artist;
       c.pageId.value=widget.song.artistId;
     }else if(val=='download'){
-      final Uri url = Uri.parse('${c.userInfo.value.url}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${widget.song.id}');
-      await launchUrl(url);
+      // final Uri url = Uri.parse('${c.userInfo.value.url}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${widget.song.id}');
+      // await launchUrl(url);
+
+      String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+      if (selectedDirectory != null) {
+        final dio = Dio();
+        await dio.download(
+          '${c.userInfo.value.url}/rest/download?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${widget.song.id}',
+          '$selectedDirectory/${widget.song.title}-${widget.song.artist}.mp3',
+        );
+      }
     }else if(val=="info" && context.mounted){
       infos.songInfo(context, widget.song);
     }
