@@ -279,17 +279,9 @@ class _LyricViewState extends State<LyricView> {
                                   songController.nowPlay.value.id=="" ? Image.asset(
                                     "assets/blank.jpg",
                                     fit: BoxFit.contain,
-                                  ) : Stack(
-                                    children: [
-                                      Image.asset(
-                                        "assets/blank.jpg",
-                                        fit: BoxFit.contain,
-                                      ),
-                                      Image.network(
-                                        "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}",
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ],
+                                  ) : Image.network(
+                                    "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}",
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                               ),
