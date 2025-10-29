@@ -61,13 +61,9 @@ class _PlayBarState extends State<PlayBar> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // 封面
-            Container(
+            SizedBox(
               width: 45,
               height: 45,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
-              ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: GestureDetector(
@@ -97,22 +93,16 @@ class _PlayBarState extends State<PlayBar> {
                       },
                       child: Stack(
                         children: [
-                          Hero(
-                            tag: 'cover',
-                            child: songController.nowPlay.value.id=="" ? Image.asset(
-                              "assets/blank.jpg",
-                              fit: BoxFit.contain,
-                            ) : Stack(
-                              children: [
-                                Image.asset(
-                                  "assets/blank.jpg",
-                                  fit: BoxFit.contain,
-                                ),
-                                Image.network(
-                                  "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}",
-                                  fit: BoxFit.contain,
-                                ),
-                              ],
+                          Center(
+                            child: Hero(
+                              tag: 'cover',
+                              child: songController.nowPlay.value.id=="" ? Image.asset(
+                                "assets/blank.jpg",
+                                fit: BoxFit.contain,
+                              ) : Image.network(
+                                "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}",
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                           AnimatedContainer(
