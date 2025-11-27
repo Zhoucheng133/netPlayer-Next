@@ -1,7 +1,7 @@
 name: net_player_next
 description: netPlayer Flutter version
 publish_to: 'none'
-version: 3.6.8
+version: 3.6.9
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -73,6 +73,6 @@ msix_config:
   logo_path: assets/icon.png
   trim_logo: false
   capabilities: internetClient, internetClientServer
-  languages: zh-cn
+  languages: zh-cn, en-us, zh-tw
   publisher: # Publisher HERE
   store: true
