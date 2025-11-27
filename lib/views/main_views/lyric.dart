@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:clipboard/clipboard.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -583,80 +584,89 @@ class _LyricViewState extends State<LyricView> {
                                         CustomPopup(
                                           arrowColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
                                           backgroundColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
-                                          content: SizedBox(
-                                            height: 25,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(left: 5),
-                                              child: Obx(()=>
-                                                Row(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: [
-                                                    MouseRegion(
-                                                      cursor: SystemMouseCursors.click,
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          if (c.volume.value > 0) {
-                                                            c.lastVolume = c.volume.value;
-                                                            c.volume.value=0;
-                                                          } else {
-                                                            c.volume.value=c.lastVolume;
-                                                          }
-                                                          c.handler.volumeSet(c.volume.value);
-                                                          operations.saveVolume();
-                                                        },
-                                                        child: Tooltip(
-                                                          message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
-                                                          child: FaIcon(
-                                                            c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
-                                                            size: 14,
-                                                            color: colorController.color5(),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(width: 8,),
-                                                    SizedBox(
-                                                      width: 80,
-                                                      child: SliderTheme(
-                                                        data: SliderThemeData(
-                                                          thumbColor: colorController.color6(),
-                                                          overlayColor: Colors.transparent,
-                                                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                                                          trackHeight: 2,
-                                                          thumbShape: const RoundSliderThumbShape(
-                                                            enabledThumbRadius: 5,
-                                                            elevation: 0,
-                                                            pressedElevation: 0,
-                                                          ),
-                                                          activeTrackColor: colorController.color5(),
-                                                          inactiveTrackColor: colorController.color4(),
-                                                        ),
-                                                        child: Slider(
-                                                          value: c.volume.value/100,
-                                                          onChanged: (val){
-                                                            c.volume.value=(val*100).toInt();
+                                          content: Listener(
+                                            onPointerSignal: (event) {
+                                              if (event is PointerScrollEvent) {
+                                                c.volume.value = (c.volume.value + (event.scrollDelta.dy * 0.1)).clamp(0, 100).toInt();
+                                                c.handler.volumeSet(c.volume.value);
+                                                operations.saveVolume();
+                                              }
+                                            },
+                                            child: SizedBox(
+                                              height: 25,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(left: 5),
+                                                child: Obx(()=>
+                                                  Row(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      MouseRegion(
+                                                        cursor: SystemMouseCursors.click,
+                                                        child: GestureDetector(
+                                                          onTap: () {
+                                                            if (c.volume.value > 0) {
+                                                              c.lastVolume = c.volume.value;
+                                                              c.volume.value=0;
+                                                            } else {
+                                                              c.volume.value=c.lastVolume;
+                                                            }
                                                             c.handler.volumeSet(c.volume.value);
-                                                          },
-                                                          onChangeEnd: (_){
                                                             operations.saveVolume();
                                                           },
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(width: 5,),
-                                                    SizedBox(
-                                                      width: 35,
-                                                      child: Align(
-                                                        alignment: Alignment.centerLeft,
-                                                        child: Text(
-                                                          "${c.volume.value}%",
-                                                          style: GoogleFonts.notoSansSc(
-                                                            fontSize: 12
+                                                          child: Tooltip(
+                                                            message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
+                                                            child: FaIcon(
+                                                              c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
+                                                              size: 14,
+                                                              color: colorController.color5(),
+                                                            ),
                                                           ),
                                                         ),
+                                                      ),
+                                                      const SizedBox(width: 8,),
+                                                      SizedBox(
+                                                        width: 80,
+                                                        child: SliderTheme(
+                                                          data: SliderThemeData(
+                                                            thumbColor: colorController.color6(),
+                                                            overlayColor: Colors.transparent,
+                                                            overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                                            trackHeight: 2,
+                                                            thumbShape: const RoundSliderThumbShape(
+                                                              enabledThumbRadius: 5,
+                                                              elevation: 0,
+                                                              pressedElevation: 0,
+                                                            ),
+                                                            activeTrackColor: colorController.color5(),
+                                                            inactiveTrackColor: colorController.color4(),
+                                                          ),
+                                                          child: Slider(
+                                                            value: c.volume.value/100,
+                                                            onChanged: (val){
+                                                              c.volume.value=(val*100).toInt();
+                                                              c.handler.volumeSet(c.volume.value);
+                                                            },
+                                                            onChangeEnd: (_){
+                                                              operations.saveVolume();
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(width: 5,),
+                                                      SizedBox(
+                                                        width: 35,
+                                                        child: Align(
+                                                          alignment: Alignment.centerLeft,
+                                                          child: Text(
+                                                            "${c.volume.value}%",
+                                                            style: GoogleFonts.notoSansSc(
+                                                              fontSize: 12
+                                                            ),
+                                                          ),
+                                                        )
                                                       )
-                                                    )
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),

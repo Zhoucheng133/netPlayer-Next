@@ -415,6 +415,8 @@ class _PlayBarState extends State<PlayBar> {
                               onPointerSignal: (event) {
                                 if (event is PointerScrollEvent) {
                                   c.volume.value = (c.volume.value + (event.scrollDelta.dy * 0.1)).clamp(0, 100).toInt();
+                                  c.handler.volumeSet(c.volume.value);
+                                  operations.saveVolume();
                                 }
                               },
                               child: SizedBox(
