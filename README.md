@@ -1,6 +1,6 @@
 # netPlayer Next版本
 
-Also available  in English. Click [HERE](/documents/en.md) to see document of English version
+Also available in English. Click [HERE](/documents/en.md) to view the English version of the README
 
 ## 简介
 
