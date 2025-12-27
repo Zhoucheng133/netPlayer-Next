@@ -873,7 +873,7 @@ class Operations{
                 width: 100,
               ),
               const SizedBox(height: 10,),
-              Text(
+              const Text(
                 'netPlayer',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -909,7 +909,7 @@ class Operations{
                         padding: const EdgeInsets.only(bottom: 2),
                         child: Text(
                           'projectURL'.tr,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13,
                           ),
                         ),
@@ -940,7 +940,7 @@ class Operations{
                         padding: const EdgeInsets.only(bottom: 2),
                         child: Text(
                           'license'.tr,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13,
                           ),
                         ),

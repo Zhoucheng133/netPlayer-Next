@@ -490,7 +490,7 @@ class _PlayBarState extends State<PlayBar> {
                                             alignment: Alignment.centerLeft,
                                             child: Text(
                                               "${c.volume.value}%",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 12
                                               ),
                                             ),

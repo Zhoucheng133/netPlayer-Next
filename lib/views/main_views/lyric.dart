@@ -660,7 +660,7 @@ class _LyricViewState extends State<LyricView> {
                                                           alignment: Alignment.centerLeft,
                                                           child: Text(
                                                             "${c.volume.value}%",
-                                                            style: TextStyle(
+                                                            style: const TextStyle(
                                                               fontSize: 12
                                                             ),
                                                           ),

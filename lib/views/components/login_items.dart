@@ -59,7 +59,7 @@ class _UserNameInputState extends State<UserNameInput> {
             children: [
               Text(
                 "username".tr,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 13,
                 ),
@@ -83,7 +83,7 @@ class _UserNameInputState extends State<UserNameInput> {
                       onEditingComplete: () => widget.loginHandler(),
                       autocorrect: false,
                       enableSuggestions: false,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14
                       ),
                     )
@@ -155,7 +155,7 @@ class _URLInputState extends State<URLInput> {
             children: [
               Text(
                 "serverURL".tr,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 13,
                 ),
@@ -183,7 +183,7 @@ class _URLInputState extends State<URLInput> {
                       onEditingComplete: () => widget.loginHandler(),
                       autocorrect: false,
                       enableSuggestions: false,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14
                       ),
                     )
@@ -255,7 +255,7 @@ class _PasswordInputState extends State<PasswordInput> {
             children: [
               Text(
                 "password".tr,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 13,
                 ),
@@ -280,7 +280,7 @@ class _PasswordInputState extends State<PasswordInput> {
                       onEditingComplete: () => widget.loginHandler(),
                       autocorrect: false,
                       enableSuggestions: false,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14
                       ),
                     )

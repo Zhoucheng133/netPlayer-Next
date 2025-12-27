@@ -238,7 +238,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                         isCollapsed: true,
                         contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12
                       ),
                     ),
@@ -544,7 +544,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                         isCollapsed: true,
                         contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12
                       ),
                       onEditingComplete: (){

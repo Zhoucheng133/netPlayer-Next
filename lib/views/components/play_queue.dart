@@ -63,7 +63,7 @@ class _PlayQueueState extends State<PlayQueue> {
                   Expanded(
                     child: Text(
                       'playqueue'.tr,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16
                       ),
                     )

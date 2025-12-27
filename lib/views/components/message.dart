@@ -24,7 +24,7 @@ void showMessage(bool isSuccess, String text, BuildContext context){
       controller: controller, 
       content: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 14,
         ),

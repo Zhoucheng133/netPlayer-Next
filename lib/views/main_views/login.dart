@@ -213,7 +213,7 @@ class _LoginViewState extends State<LoginView> {
                         const SizedBox(width: 10,),
                         Text(
                           "connectLibrary".tr,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),

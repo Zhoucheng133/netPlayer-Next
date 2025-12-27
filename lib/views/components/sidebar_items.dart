@@ -496,7 +496,7 @@ class _PlayListItemState extends State<PlayListItem> {
       showDialog(
         context: context, 
         builder: (context)=>AlertDialog(
-          title: Text('playlistInfo'.tr, style: TextStyle(),),
+          title: Text('playlistInfo'.tr),
           content: SizedBox(
             width: 300,
             child: Column(
@@ -657,7 +657,7 @@ class _PlayListItemState extends State<PlayListItem> {
           actions: [
             ElevatedButton(
               onPressed: ()=>Navigator.pop(context), 
-              child: Text("ok".tr, style: TextStyle(),)
+              child: Text("ok".tr)
             )
           ],
         )
