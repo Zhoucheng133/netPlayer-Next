@@ -93,13 +93,13 @@ class _MainAppState extends State<MainApp> {
           Locale('zh', 'TW'),
         ],
         theme: ThemeData(
-          brightness: brightness,
+          brightness: colorController.darkMode.value ? Brightness.dark : Brightness.light,
           fontFamily: 'Noto', 
           colorScheme: ColorScheme.fromSeed(
             seedColor: colorController.baseColor.value,
-            brightness: brightness,
+            brightness: colorController.darkMode.value ? Brightness.dark : Brightness.light,
           ),
-          textTheme: brightness==Brightness.dark ? ThemeData.dark().textTheme.apply(
+          textTheme: colorController.darkMode.value ? ThemeData.dark().textTheme.apply(
             fontFamily: 'Noto',
             bodyColor: Colors.white,
             displayColor: Colors.white,
