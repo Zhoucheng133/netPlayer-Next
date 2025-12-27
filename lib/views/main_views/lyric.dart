@@ -103,6 +103,7 @@ class _LyricViewState extends State<LyricView> {
     showDialog(
       context: context, 
       builder: (context)=>AlertDialog(
+        clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10)
         ),
@@ -156,6 +157,7 @@ class _LyricViewState extends State<LyricView> {
     showDialog(
       context: context, 
       builder: (context)=>AlertDialog(
+        clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10)
         ),
