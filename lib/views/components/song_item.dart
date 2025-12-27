@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
@@ -40,7 +39,7 @@ class _SongHeaderState extends State<SongHeader> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       'no.'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     ),
@@ -51,7 +50,7 @@ class _SongHeaderState extends State<SongHeader> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       'songTitle'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     ),
@@ -63,7 +62,7 @@ class _SongHeaderState extends State<SongHeader> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       'artist'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     ),
@@ -171,7 +170,7 @@ class _SongItemState extends State<SongItem> {
               const SizedBox(width: 5,),
               Text(
                 "addToList".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: playlistController.playLists.isEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -193,7 +192,7 @@ class _SongItemState extends State<SongItem> {
               const SizedBox(width: 5,),
               Text(
                 "delove".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -214,7 +213,7 @@ class _SongItemState extends State<SongItem> {
               const SizedBox(width: 5,),
               Text(
                 "love".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -237,7 +236,7 @@ class _SongItemState extends State<SongItem> {
               const SizedBox(width: 5,),
               Text(
                 "showAlbum".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -260,7 +259,7 @@ class _SongItemState extends State<SongItem> {
               const SizedBox(width: 5,),
               Text(
                 "showArtist".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -283,7 +282,7 @@ class _SongItemState extends State<SongItem> {
               const SizedBox(width: 5,),
               Text(
                 "removeFromList".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: widget.song.fromId.isEmpty ? Colors.grey[400] : colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -305,7 +304,7 @@ class _SongItemState extends State<SongItem> {
               const SizedBox(width: 5,),
               Text(
                 "download".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -327,7 +326,7 @@ class _SongItemState extends State<SongItem> {
               const SizedBox(width: 5,),
               Text(
                 "songInfo".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -407,7 +406,7 @@ class _SongItemState extends State<SongItem> {
                         size: 15,
                       ) : Text(
                         (widget.index+1).toString(),
-                        style: GoogleFonts.notoSansSc(
+                        style: TextStyle(
                           fontSize: 13,
                           color: colorController.darkMode.value ? Colors.white : Colors.black,
                         ),
@@ -419,7 +418,7 @@ class _SongItemState extends State<SongItem> {
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
                         widget.song.title,
-                        style: GoogleFonts.notoSansSc(
+                        style: TextStyle(
                           fontSize: 13,
                           color: widget.isplay ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,
                           fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal,
@@ -435,7 +434,7 @@ class _SongItemState extends State<SongItem> {
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
                         widget.song.artist,
-                        style: GoogleFonts.notoSansSc(
+                        style: TextStyle(
                           fontSize: 13,
                           color: widget.isplay ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,
                           fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal
@@ -450,7 +449,7 @@ class _SongItemState extends State<SongItem> {
                     child: Center(
                       child: Text(
                         operations.convertDuration(widget.song.duration),
-                        style: GoogleFonts.notoSansSc(
+                        style: TextStyle(
                           fontSize: 13,
                           color: widget.isplay ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,
                           fontWeight: widget.isplay ? FontWeight.bold : FontWeight.normal

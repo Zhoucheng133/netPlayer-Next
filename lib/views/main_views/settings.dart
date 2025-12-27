@@ -4,7 +4,6 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/setting_item.dart';
@@ -336,7 +335,7 @@ class _SettingsViewState extends State<SettingsView> {
                           },
                           child: Obx(()=>
                             AnimatedDefaultTextStyle(
-                              style: GoogleFonts.notoSansSc(
+                              style: TextStyle(
                                 color: hoverWs ? colorController.color6() : colorController.color5()
                               ), 
                               duration: const Duration(milliseconds: 200),
@@ -387,7 +386,7 @@ class _SettingsViewState extends State<SettingsView> {
                           },
                           child: Obx(()=>
                             AnimatedDefaultTextStyle(
-                              style: GoogleFonts.notoSansSc(
+                              style: TextStyle(
                                 color: hoverDark ? colorController.color6() : colorController.color5()
                               ), 
                               duration: const Duration(milliseconds: 200),
@@ -431,7 +430,7 @@ class _SettingsViewState extends State<SettingsView> {
                           },
                           child: Obx(()=>
                             AnimatedDefaultTextStyle(
-                              style: GoogleFonts.notoSansSc(
+                              style: TextStyle(
                                 color: hoverTheme ? colorController.color6() : colorController.color5()
                               ), 
                               duration: const Duration(milliseconds: 200),
@@ -453,7 +452,7 @@ class _SettingsViewState extends State<SettingsView> {
                       Obx(()=>
                         Text(
                           'selfLang'.tr,
-                          style: GoogleFonts.notoSansSc(
+                          style: TextStyle(
                             color: colorController.darkMode.value ? Colors.white : Colors.black
                           ),
                         )
@@ -477,7 +476,7 @@ class _SettingsViewState extends State<SettingsView> {
                           },
                           child: Obx(()=>
                             AnimatedDefaultTextStyle(
-                              style: GoogleFonts.notoSansSc(
+                              style: TextStyle(
                                 color: hoverLang ? colorController.color6() : colorController.color5()
                               ), 
                               duration: const Duration(milliseconds: 200),
@@ -498,7 +497,7 @@ class _SettingsViewState extends State<SettingsView> {
                       Obx(()=>
                         Text(
                           operations.sizeConvert(cacheSize),
-                          style: GoogleFonts.notoSansSc(
+                          style: TextStyle(
                             color: colorController.darkMode.value ? Colors.white : Colors.black
                           ),
                         )
@@ -552,7 +551,7 @@ class _SettingsViewState extends State<SettingsView> {
                           },
                           child: Obx(()=>
                             AnimatedDefaultTextStyle(
-                              style: GoogleFonts.notoSansSc(
+                              style: TextStyle(
                                 color: hoverClear ? colorController.color6() : colorController.color5()
                               ), 
                               duration: const Duration(milliseconds: 200),
@@ -590,7 +589,7 @@ class _SettingsViewState extends State<SettingsView> {
                       },
                       child: Obx(()=>
                         AnimatedDefaultTextStyle(
-                          style: GoogleFonts.notoSansSc(
+                          style: TextStyle(
                             color: hoverURL ? colorController.color6() : colorController.darkMode.value ? Colors.white : Colors.black,
                           ), 
                           duration: const Duration(milliseconds: 200),
@@ -620,7 +619,7 @@ class _SettingsViewState extends State<SettingsView> {
                         onExit: (_) => setState(() => hoverRefresh = false),
                         cursor: SystemMouseCursors.click,
                         child: AnimatedDefaultTextStyle(
-                          style: GoogleFonts.notoSansSc(
+                          style: TextStyle(
                             color: hoverRefresh ? colorController.color6() : colorController.color5()
                           ),
                           duration: const Duration(milliseconds: 200),
@@ -642,7 +641,7 @@ class _SettingsViewState extends State<SettingsView> {
                         onExit: (_) => setState(() => hoverAbout = false),
                         cursor: SystemMouseCursors.click,
                         child: AnimatedDefaultTextStyle(
-                          style: GoogleFonts.notoSansSc(
+                          style: TextStyle(
                             color: hoverAbout ? colorController.color6() : colorController.color5()
                           ),
                           duration: const Duration(milliseconds: 200),

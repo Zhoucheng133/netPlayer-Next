@@ -2,7 +2,6 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/lang/en_us.dart';
@@ -93,23 +92,20 @@ class _MainAppState extends State<MainApp> {
           Locale('zh', 'CN'),
           Locale('zh', 'TW'),
         ],
-        theme: colorController.darkMode.value ? ThemeData.dark().copyWith(
-          textTheme: GoogleFonts.notoSansScTextTheme().apply(
-            bodyColor: Colors.white,
-            displayColor: Colors.white, 
-          ),
+        theme: ThemeData(
+          brightness: brightness,
+          fontFamily: 'Noto', 
           colorScheme: ColorScheme.fromSeed(
             seedColor: colorController.baseColor.value,
-            brightness: Brightness.dark,
+            brightness: brightness,
           ),
-          dialogTheme: DialogThemeData(
-            backgroundColor: colorController.color1(),
-          )
-        ) : ThemeData(
-          splashColor: Colors.transparent,
-          primaryColor: colorController.baseColor.value,
-          colorScheme: ColorScheme.fromSeed(seedColor: colorController.baseColor.value),
-          textTheme: GoogleFonts.notoSansScTextTheme(),
+          textTheme: brightness==Brightness.dark ? ThemeData.dark().textTheme.apply(
+            fontFamily: 'Noto',
+            bodyColor: Colors.white,
+            displayColor: Colors.white,
+          ) : ThemeData.light().textTheme.apply(
+            fontFamily: 'Noto',
+          ),
           dialogTheme: DialogThemeData(
             backgroundColor: colorController.color1(),
           )

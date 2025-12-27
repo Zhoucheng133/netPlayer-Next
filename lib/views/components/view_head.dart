@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
@@ -117,7 +116,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                     ),
                     child: Text(
                       widget.title,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.color5(),
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -129,7 +128,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                   const SizedBox(width: 10,),
                   Text(
                     widget.subTitle,
-                    style: GoogleFonts.notoSansSc(
+                    style: TextStyle(
                       color: colorController.color5(),
                       fontSize: 13
                     ),
@@ -239,7 +238,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                         isCollapsed: true,
                         contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
                       ),
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 12
                       ),
                     ),
@@ -389,7 +388,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                   child: Obx(()=>
                     Text(
                       '${'search'.tr}:',
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.color5(),
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -545,7 +544,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                         isCollapsed: true,
                         contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
                       ),
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 12
                       ),
                       onEditingComplete: (){

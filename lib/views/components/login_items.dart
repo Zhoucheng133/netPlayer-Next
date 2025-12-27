@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 
 class UserNameInput extends StatefulWidget {
@@ -60,7 +59,7 @@ class _UserNameInputState extends State<UserNameInput> {
             children: [
               Text(
                 "username".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: Colors.grey,
                   fontSize: 13,
                 ),
@@ -84,7 +83,7 @@ class _UserNameInputState extends State<UserNameInput> {
                       onEditingComplete: () => widget.loginHandler(),
                       autocorrect: false,
                       enableSuggestions: false,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 14
                       ),
                     )
@@ -156,7 +155,7 @@ class _URLInputState extends State<URLInput> {
             children: [
               Text(
                 "serverURL".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: Colors.grey,
                   fontSize: 13,
                 ),
@@ -177,14 +176,14 @@ class _URLInputState extends State<URLInput> {
                         hintText: 'http(s)://',
                         isCollapsed: true,
                         contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 0, right: 10),
-                        hintStyle: GoogleFonts.notoSansSc(
+                        hintStyle: TextStyle(
                           color: Colors.grey[400]
                         )
                       ),
                       onEditingComplete: () => widget.loginHandler(),
                       autocorrect: false,
                       enableSuggestions: false,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 14
                       ),
                     )
@@ -256,7 +255,7 @@ class _PasswordInputState extends State<PasswordInput> {
             children: [
               Text(
                 "password".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: Colors.grey,
                   fontSize: 13,
                 ),
@@ -281,7 +280,7 @@ class _PasswordInputState extends State<PasswordInput> {
                       onEditingComplete: () => widget.loginHandler(),
                       autocorrect: false,
                       enableSuggestions: false,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 14
                       ),
                     )

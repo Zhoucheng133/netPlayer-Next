@@ -4,7 +4,6 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
@@ -876,7 +875,7 @@ class Operations{
               const SizedBox(height: 10,),
               Text(
                 'netPlayer',
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -884,7 +883,7 @@ class Operations{
               const SizedBox(height: 3,),
               Text(
                 'v${packageInfo.version}',
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   fontSize: 13,
                   color: Colors.grey[400]
                 ),
@@ -910,7 +909,7 @@ class Operations{
                         padding: const EdgeInsets.only(bottom: 2),
                         child: Text(
                           'projectURL'.tr,
-                          style: GoogleFonts.notoSansSc(
+                          style: TextStyle(
                             fontSize: 13,
                           ),
                         ),
@@ -941,7 +940,7 @@ class Operations{
                         padding: const EdgeInsets.only(bottom: 2),
                         child: Text(
                           'license'.tr,
-                          style: GoogleFonts.notoSansSc(
+                          style: TextStyle(
                             fontSize: 13,
                           ),
                         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 
 class SettingItem extends StatefulWidget {
@@ -38,7 +37,7 @@ class _SettingItemState extends State<SettingItem> {
                   child: Obx(()=>
                     Text(
                       widget.label,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black
                       ),
                     ),

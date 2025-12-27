@@ -1,6 +1,5 @@
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void showMessage(bool isSuccess, String text, BuildContext context){
   showFlash(
@@ -25,7 +24,7 @@ void showMessage(bool isSuccess, String text, BuildContext context){
       controller: controller, 
       content: Text(
         text,
-        style: GoogleFonts.notoSansSc(
+        style: TextStyle(
           color: Colors.white,
           fontSize: 14,
         ),

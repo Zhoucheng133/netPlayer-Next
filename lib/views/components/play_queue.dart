@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -64,7 +63,7 @@ class _PlayQueueState extends State<PlayQueue> {
                   Expanded(
                     child: Text(
                       'playqueue'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 16
                       ),
                     )

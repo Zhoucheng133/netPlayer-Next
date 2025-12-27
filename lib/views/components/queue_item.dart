@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -58,7 +57,7 @@ class _QueueItemState extends State<QueueItem> {
                       size: 15,
                     ) : Text(
                       (widget.index+1).toString(),
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
@@ -70,7 +69,7 @@ class _QueueItemState extends State<QueueItem> {
                   child: Text(
                     songController.nowPlay.value.list[widget.index].title,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.notoSansSc(
+                    style: TextStyle(
                       color: songController.nowPlay.value.list[widget.index].id==songController.nowPlay.value.id ? colorController.color6(): colorController.darkMode.value ? Colors.white : Colors.black,
                       fontWeight: songController.nowPlay.value.list[widget.index].id==songController.nowPlay.value.id ? FontWeight.bold : FontWeight.normal
                     ),

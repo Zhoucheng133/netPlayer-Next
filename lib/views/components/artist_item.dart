@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -34,7 +33,7 @@ class _ArtistHeaderState extends State<ArtistHeader> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       'no.'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     ),
@@ -45,7 +44,7 @@ class _ArtistHeaderState extends State<ArtistHeader> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       'artist'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     ),
@@ -56,7 +55,7 @@ class _ArtistHeaderState extends State<ArtistHeader> {
                   child: Center(
                     child: Text(
                       'albumCount'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     )
@@ -133,7 +132,7 @@ class _ArtistItemState extends State<ArtistItem> {
                   child: Center(
                     child: Text(
                       (widget.index+1).toString(),
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
@@ -145,7 +144,7 @@ class _ArtistItemState extends State<ArtistItem> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       widget.name,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
@@ -159,7 +158,7 @@ class _ArtistItemState extends State<ArtistItem> {
                   child: Center(
                     child: Text(
                       widget.albumCount==null ? "/" : widget.albumCount.toString(),
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),

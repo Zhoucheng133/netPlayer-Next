@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
@@ -299,7 +298,7 @@ class _LyricViewState extends State<LyricView> {
                                 child: Obx(()=>
                                   Text(
                                     songController.nowPlay.value.title,
-                                    style: GoogleFonts.notoSansSc(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 24,
                                       color: colorController.darkMode.value ? Colors.white : Colors.black,
@@ -320,7 +319,7 @@ class _LyricViewState extends State<LyricView> {
                                 child: Obx(()=>
                                   Text(
                                     songController.nowPlay.value.artist,
-                                    style: GoogleFonts.notoSansSc(
+                                    style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.grey[400]
                                     ),
@@ -491,7 +490,7 @@ class _LyricViewState extends State<LyricView> {
                                           child: Obx(()=>
                                             Text(
                                               songController.nowPlay.value.duration==0 ? "" : convertDuration(c.playProgress.value~/1000),
-                                              style: GoogleFonts.notoSansSc(
+                                              style: TextStyle(
                                                 fontSize: 12,
                                                 color: colorController.color5()
                                               ),
@@ -504,7 +503,7 @@ class _LyricViewState extends State<LyricView> {
                                           child: Obx(()=>
                                             Text(
                                               songController.nowPlay.value.duration==0 ? "" : convertDuration(songController.nowPlay.value.duration),
-                                              style: GoogleFonts.notoSansSc(
+                                              style: TextStyle(
                                                 fontSize: 12,
                                                 color: colorController.color5()
                                               ),
@@ -661,7 +660,7 @@ class _LyricViewState extends State<LyricView> {
                                                           alignment: Alignment.centerLeft,
                                                           child: Text(
                                                             "${c.volume.value}%",
-                                                            style: GoogleFonts.notoSansSc(
+                                                            style: TextStyle(
                                                               fontSize: 12
                                                             ),
                                                           ),
@@ -897,7 +896,7 @@ class _LyricViewState extends State<LyricView> {
                                                 SelectableText(
                                                   c.lyric[index].lyric,
                                                   textAlign: TextAlign.center,
-                                                  style: GoogleFonts.notoSansSc(
+                                                  style: TextStyle(
                                                     fontSize: c.lyricText.value.toDouble(),
                                                     color: playedLyric(index) ? colorController.color5() : colorController.color3(),
                                                     fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,
@@ -906,7 +905,7 @@ class _LyricViewState extends State<LyricView> {
                                                 if(c.lyric[index].translate.isNotEmpty && c.lyricTranslate.value) SelectableText(
                                                   c.lyric[index].translate,
                                                   textAlign: TextAlign.center,
-                                                  style: GoogleFonts.notoSansSc(
+                                                  style: TextStyle(
                                                     fontSize: c.lyricText.value.toDouble()*0.85,
                                                     color: playedLyric(index) ? colorController.color5() : colorController.color3(),
                                                     fontWeight: playedLyric(index) ? FontWeight.bold: FontWeight.normal,

@@ -24,7 +24,6 @@ dependencies:
   window_manager: ^0.5.1
   path_provider: ^2.1.2
   tray_manager: ^0.2.1
-  google_fonts: ^6.2.1
   font_awesome_flutter: ^10.7.0
   flutter_popup: ^3.3.0
   shelf: ^1.4.1
@@ -54,6 +53,13 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
+  fonts:
+    - family: "Noto"
+      fonts:
+        - asset: assets/NotoSansSC-Regular.ttf
+          weight: 400
+        - asset: assets/NotoSansSC-Bold.ttf
+          weight: 700
   uses-material-design: true
 
 flutter_launcher_icons:

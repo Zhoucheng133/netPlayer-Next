@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -35,7 +34,7 @@ class _AlbumHeaderState extends State<AlbumHeader> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       'no.'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     ),
@@ -46,7 +45,7 @@ class _AlbumHeaderState extends State<AlbumHeader> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       'albumTitle'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     ),
@@ -58,7 +57,7 @@ class _AlbumHeaderState extends State<AlbumHeader> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       'artist'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     )
@@ -69,7 +68,7 @@ class _AlbumHeaderState extends State<AlbumHeader> {
                   child: Center(
                     child: Text(
                       'songCount'.tr,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     )
@@ -141,7 +140,7 @@ class _AlbumItemState extends State<AlbumItem> {
               const SizedBox(width: 5,),
               Text(
                 "showArtist".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -163,7 +162,7 @@ class _AlbumItemState extends State<AlbumItem> {
               const SizedBox(width: 5,),
               Text(
                 "albumInfo".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -218,7 +217,7 @@ class _AlbumItemState extends State<AlbumItem> {
                   child: Center(
                     child: Text(
                       (widget.index+1).toString(),
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
@@ -230,7 +229,7 @@ class _AlbumItemState extends State<AlbumItem> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       widget.data.title,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
@@ -245,7 +244,7 @@ class _AlbumItemState extends State<AlbumItem> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       widget.data.artist,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
@@ -259,7 +258,7 @@ class _AlbumItemState extends State<AlbumItem> {
                   child: Center(
                     child: Text(
                       widget.data.songCount.toString(),
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         fontSize: 13,
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),

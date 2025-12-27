@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/sidebar_items.dart';
@@ -32,7 +31,7 @@ class _SideBarState extends State<SideBar> {
           decoration: InputDecoration(
             isCollapsed: true,
             hintText: "newListPlaceholder".tr,
-            hintStyle: GoogleFonts.notoSansSc(
+            hintStyle: TextStyle(
               color: Colors.grey[400],
             ),
             enabledBorder: OutlineInputBorder(

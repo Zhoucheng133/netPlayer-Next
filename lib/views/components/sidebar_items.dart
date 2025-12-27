@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
@@ -67,7 +66,7 @@ class _SideBarItemState extends State<SideBarItem> {
                     const SizedBox(width: 5,),
                     Text(
                       widget.name,
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: colorController.darkMode.value ? Colors.white : Colors.black,
                       ),
                     )
@@ -105,7 +104,7 @@ class _PlayListLabelState extends State<PlayListLabel> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text('playLists'.tr, style: GoogleFonts.notoSansSc(
+                Text('playLists'.tr, style: TextStyle(
                   fontSize: 13,
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),),
@@ -361,7 +360,7 @@ class _PlayListItemState extends State<PlayListItem> {
               const SizedBox(width: 5,),
               Text(
                 "rename".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -383,7 +382,7 @@ class _PlayListItemState extends State<PlayListItem> {
               const SizedBox(width: 5,),
               Text(
                 "delete".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -405,7 +404,7 @@ class _PlayListItemState extends State<PlayListItem> {
               const SizedBox(width: 5,),
               Text(
                 "playlistInfo".tr,
-                style: GoogleFonts.notoSansSc(
+                style: TextStyle(
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),
               )
@@ -497,7 +496,7 @@ class _PlayListItemState extends State<PlayListItem> {
       showDialog(
         context: context, 
         builder: (context)=>AlertDialog(
-          title: Text('playlistInfo'.tr, style: GoogleFonts.notoSansSc(),),
+          title: Text('playlistInfo'.tr, style: TextStyle(),),
           content: SizedBox(
             width: 300,
             child: Column(
@@ -658,7 +657,7 @@ class _PlayListItemState extends State<PlayListItem> {
           actions: [
             ElevatedButton(
               onPressed: ()=>Navigator.pop(context), 
-              child: Text("ok".tr, style: GoogleFonts.notoSansSc(),)
+              child: Text("ok".tr, style: TextStyle(),)
             )
           ],
         )
@@ -709,7 +708,7 @@ class _PlayListItemState extends State<PlayListItem> {
                     Expanded(
                       child: AutoSizeText(
                         widget.name,
-                        style: GoogleFonts.notoSansSc(
+                        style: TextStyle(
                           fontSize: 14,
                           color: colorController.darkMode.value ? Colors.white : Colors.black,
                         ),

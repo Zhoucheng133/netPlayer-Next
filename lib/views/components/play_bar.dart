@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/play_queue.dart';
@@ -141,7 +140,7 @@ class _PlayBarState extends State<PlayBar> {
                 children: [
                   Text(
                     songController.nowPlay.value.title,
-                    style: GoogleFonts.notoSansSc(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: colorController.darkMode.value ? Colors.white : Colors.black,
                     ),
@@ -151,7 +150,7 @@ class _PlayBarState extends State<PlayBar> {
                   const SizedBox(height: 3,),
                   Text(
                     songController.nowPlay.value.artist,
-                    style: GoogleFonts.notoSansSc(
+                    style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 12,
                     ),
@@ -319,7 +318,7 @@ class _PlayBarState extends State<PlayBar> {
                           padding: const EdgeInsets.only(top: 5),
                           child: Text(
                             songController.nowPlay.value.duration==0 ? "" : convertDuration(c.playProgress.value~/1000),
-                            style: GoogleFonts.notoSansSc(
+                            style: TextStyle(
                               fontSize: 12,
                               color: colorController.color5()
                             ),
@@ -330,7 +329,7 @@ class _PlayBarState extends State<PlayBar> {
                           padding: const EdgeInsets.only(top: 5),
                           child: Text(
                             songController.nowPlay.value.duration==0 ? "" : convertDuration(songController.nowPlay.value.duration),
-                            style: GoogleFonts.notoSansSc(
+                            style: TextStyle(
                               fontSize: 12,
                               color: colorController.color5()
                             ),
@@ -491,7 +490,7 @@ class _PlayBarState extends State<PlayBar> {
                                             alignment: Alignment.centerLeft,
                                             child: Text(
                                               "${c.volume.value}%",
-                                              style: GoogleFonts.notoSansSc(
+                                              style: TextStyle(
                                                 fontSize: 12
                                               ),
                                             ),

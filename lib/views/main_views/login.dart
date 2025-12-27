@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/components/login_items.dart';
 import 'package:net_player_next/views/functions/requests.dart';
@@ -214,7 +213,7 @@ class _LoginViewState extends State<LoginView> {
                         const SizedBox(width: 10,),
                         Text(
                           "connectLibrary".tr,
-                          style: GoogleFonts.notoSansSc(
+                          style: TextStyle(
                             fontSize: 20,
                           ),
                         ),
