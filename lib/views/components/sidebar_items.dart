@@ -443,11 +443,12 @@ class _PlayListItemState extends State<PlayListItem> {
         builder: (BuildContext context)=>AlertDialog(
           title: Text('rename'.tr),
           content: TextField(
+            autofocus: true,
             controller: newName,
             decoration: InputDecoration(
               hintText: widget.name,
               hintStyle: TextStyle(
-                color: Colors.grey[400]
+                color: colorController.color4()
               ),
               border: const OutlineInputBorder(),
               enabledBorder: OutlineInputBorder(

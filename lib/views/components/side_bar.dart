@@ -27,12 +27,13 @@ class _SideBarState extends State<SideBar> {
       builder: (BuildContext context)=>AlertDialog(
         title: Text('addPlayList'.tr),
         content: TextField(
+          autofocus: true,
           controller: newListName,
           decoration: InputDecoration(
             isCollapsed: true,
             hintText: "newListPlaceholder".tr,
             hintStyle: TextStyle(
-              color: Colors.grey[400],
+              color: colorController.color4()
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: colorController.color4().withAlpha(100), width: 2.0),
