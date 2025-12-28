@@ -94,17 +94,17 @@ class _MainAppState extends State<MainApp> {
         ],
         theme: ThemeData(
           brightness: colorController.darkMode.value ? Brightness.dark : Brightness.light,
-          fontFamily: 'Noto', 
+          fontFamily: 'PuHui', 
           colorScheme: ColorScheme.fromSeed(
             seedColor: colorController.baseColor.value,
             brightness: colorController.darkMode.value ? Brightness.dark : Brightness.light,
           ),
           textTheme: colorController.darkMode.value ? ThemeData.dark().textTheme.apply(
-            fontFamily: 'Noto',
+            fontFamily: 'PuHui',
             bodyColor: Colors.white,
             displayColor: Colors.white,
           ) : ThemeData.light().textTheme.apply(
-            fontFamily: 'Noto',
+            fontFamily: 'PuHui',
           ),
           dialogTheme: DialogThemeData(
             backgroundColor: colorController.color1(),

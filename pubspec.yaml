@@ -54,11 +54,11 @@ flutter:
   assets:
     - assets/
   fonts:
-    - family: "Noto"
+    - family: "PuHui"
       fonts:
-        - asset: fonts/NotoSansSC-Regular.ttf
+        - asset: fonts/AlibabaPuHuiTi-3-Regular.ttf
           weight: 400
-        - asset: fonts/NotoSansSC-Bold.ttf
+        - asset: fonts/AlibabaPuHuiTi-3-Bold.ttf
           weight: 700
   uses-material-design: true
 
