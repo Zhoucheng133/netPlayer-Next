@@ -114,6 +114,21 @@ class NowPlay extends SongItemClass{
       'index': index,
     };
   }
+
+  Map<String, dynamic> toPrefs() {
+    return {
+      'id': id,
+      'title': title,
+      'artist': artist,
+      'duration': duration,
+      'fromId': fromId,
+      'album': album,
+      'albumId': albumId,
+      'artistId': artistId,
+      'created': created,
+      'playFrom': playFrom.index,
+    };
+  }
 }
 
 class SongController extends GetxController {

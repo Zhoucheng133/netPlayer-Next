@@ -342,9 +342,6 @@ class Operations{
     if(songController.nowPlay.value.playFrom==Pages.all){
       int index=songController.allSongs.indexWhere((item) => item.id==songController.nowPlay.value.id);
       if(index!=-1){
-        // songController.nowPlay.value.index=index;
-        // songController.nowPlay.value.list=c.allSongs;
-        // c.nowPlay.refresh();
         songController.nowPlay.value.index=index;
         songController.nowPlay.value.list=songController.allSongs;
         songController.nowPlay.refresh();
