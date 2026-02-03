@@ -19,6 +19,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   MediaItem item=const MediaItem(id: "", title: "");
   final operations=Operations();
 
+  bool isSettingUrl = false;
 
   MainAudioHanlder(){
     player.stream.position.listen((position) {
@@ -146,6 +147,10 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 上一首
   @override
   Future<void> skipToPrevious() async {
+
+    if (isSettingUrl) return;
+    isSettingUrl = true;
+
     if(c.fullRandom.value){
       operations.fullRandomPlay();
       return;
@@ -162,8 +167,10 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
     songController.nowPlay.value=tmpList;
     songController.nowPlay.refresh();
     skipHandler=true;
-    play();
+    await play();
     setMedia(true);
+
+    isSettingUrl = false;
   }
 
   int nextHandler(int index, int length){
@@ -187,6 +194,10 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 下一首
   @override
   Future<void> skipToNext() async {
+
+    if (isSettingUrl) return;
+    isSettingUrl = true;
+
     if(c.fullRandom.value){
       operations.fullRandomPlay();
       return;
@@ -202,8 +213,10 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
     songController.nowPlay.value=tmpList;
     songController.nowPlay.refresh();
     skipHandler=true;
-    play();
+    await play();
     setMedia(true);
+
+    isSettingUrl = false;
   }
 
   Future<void> volumeSet(val) async {
