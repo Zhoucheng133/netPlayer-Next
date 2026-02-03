@@ -32,7 +32,7 @@ class HttpRequests{
   }
   // 登录请求
   Future<Map> loginRequest(String url, String username, String salt, String token) async {
-    return await httpRequest("$url/rest/ping.view?v=1.12.0&c=myapp&f=json&u=$username&t=$token&s=$salt");
+    return await httpRequest("$url/rest/ping.view?v=1.12.0&c=netPlayer&f=json&u=$username&t=$token&s=$salt");
   }
   // 所有歌单请求
   Future<Map> playListsRequest() async {
