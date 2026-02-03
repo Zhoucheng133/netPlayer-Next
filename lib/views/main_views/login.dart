@@ -148,6 +148,9 @@ class _LoginViewState extends State<LoginView> {
           ],
         ),
       );
+      setState(() {
+        isLoading=false;
+      });
       return;
     }else if(rlt['subsonic-response']['status']=='failed' && context.mounted){
       await showDialog(
@@ -165,6 +168,9 @@ class _LoginViewState extends State<LoginView> {
           ],
         ),
       );
+      setState(() {
+        isLoading=false;
+      });
       return;
     }
     c.userInfo.value=UserInfo(normalizeUrl(url.text), username.text, salt, token.toString(), password.text);
