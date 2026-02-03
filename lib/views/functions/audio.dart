@@ -102,7 +102,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
       final media=Media(url);
       await player.open(media);
     }
-    player.play();
+    await player.play();
     c.isPlay.value=true;
     if(skipHandler){
       skipHandler=false;
@@ -114,7 +114,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 暂停
   @override
   Future<void> pause() async {
-    player.pause();
+    await player.pause();
     setMedia(false);
     c.isPlay.value=false;
   }
@@ -123,7 +123,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<void> stop() async {
     c.isPlay.value=false;
-    player.stop();
+    await player.stop();
   }
 
   // 跳转
