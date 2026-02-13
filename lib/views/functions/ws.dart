@@ -28,7 +28,7 @@ class WsService {
           'title': songController.nowPlay.value.title,
           'artist': songController.nowPlay.value.artist,
           'lyric': content,
-          'cover': "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}&size=400",
+          'cover': "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}",
           'fullLyric': c.lyric.map((item)=>item.toJson()).toList(),
           'line': c.lyricLine.value,
           'isPlay': c.isPlay.value,

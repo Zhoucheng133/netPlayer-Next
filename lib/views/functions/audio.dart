@@ -63,7 +63,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
           album: songController.nowPlay.value.album,
           albumArtist: songController.nowPlay.value.artist,
           artist: songController.nowPlay.value.artist,
-          thumbnail: "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}&size=400"
+          thumbnail: "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}"
         ),
       );
       c.smtc?.setPlaybackStatus(isPlay ? PlaybackStatus.Playing : PlaybackStatus.Paused);
@@ -72,7 +72,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
       id: songController.nowPlay.value.id,
       title: songController.nowPlay.value.title,
       artist: songController.nowPlay.value.artist,
-      artUri: Uri.parse("${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}&size=400"),
+      artUri: Uri.parse("${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}"),
       album: songController.nowPlay.value.album,
       duration: Duration(seconds: songController.nowPlay.value.duration),
     );

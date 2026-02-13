@@ -282,7 +282,7 @@ class _LyricViewState extends State<LyricView> {
                                     "assets/blank.jpg",
                                     fit: BoxFit.contain,
                                   ) : Image.network(
-                                    "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}&size=400",
+                                    "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}",
                                     fit: BoxFit.contain,
                                   ),
                                 ),
