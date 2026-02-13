@@ -45,7 +45,6 @@ class _SideBarItemState extends State<SideBarItem> {
               onHover=false;
             });
           },
-          cursor: SystemMouseCursors.click,
           child: Obx(()=>
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
@@ -198,7 +197,6 @@ class _AccountPartState extends State<AccountPart> {
                 message: 'settings'.tr,
                 waitDuration: const Duration(seconds: 1),
                 child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
                   onEnter: (_){
                     setState(() {
                       hoverSetting=true;
@@ -240,7 +238,6 @@ class _AccountPartState extends State<AccountPart> {
                 message: 'logout'.tr,
                 waitDuration: const Duration(seconds: 1),
                 child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
                   onEnter: (_){
                     setState(() {
                       hoverLogout=true;
@@ -677,7 +674,6 @@ class _PlayListItemState extends State<PlayListItem> {
         },
         onSecondaryTapDown: (val) => showPlaylistMenu(context, val),
         child: MouseRegion(
-          cursor: SystemMouseCursors.click,
           onEnter: (_){
             setState(() {
               onHover=true;
