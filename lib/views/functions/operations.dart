@@ -501,7 +501,7 @@ class Operations{
   Future<void> fullRandomPlay() async {
     final rlt=await requests.getRandomSongRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
-      c.handler.stop();
+      await c.handler.stop();
       songController.nowPlay.value=NowPlay(
         id: '', 
         title: '', 
@@ -534,7 +534,7 @@ class Operations{
         playFrom: Pages.random, 
         index: 0
       );
-      c.handler.play();
+      await c.handler.play();
       c.isPlay.value=true;
     }
   }

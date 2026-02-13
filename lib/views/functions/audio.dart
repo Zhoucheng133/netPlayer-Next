@@ -199,7 +199,8 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
     isSettingUrl = true;
 
     if(c.fullRandom.value){
-      operations.fullRandomPlay();
+      await operations.fullRandomPlay();
+      isSettingUrl = false;
       return;
     }
     NowPlay tmpList=songController.nowPlay.value;
