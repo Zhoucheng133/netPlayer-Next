@@ -111,6 +111,7 @@ class _LyricViewState extends State<LyricView> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
+              mouseCursor: SystemMouseCursors.basic,
               title: Text(
                 'copyArtist'.tr,
                 style: const TextStyle(
@@ -131,6 +132,7 @@ class _LyricViewState extends State<LyricView> {
               },
             ),
             ListTile(
+              mouseCursor: SystemMouseCursors.basic,
               title: Text(
                 'showArtist'.tr,
                 style: const TextStyle(
@@ -165,6 +167,7 @@ class _LyricViewState extends State<LyricView> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
+              mouseCursor: SystemMouseCursors.basic,
               title: Text(
                 'copyTitle'.tr,
                 style: const TextStyle(
@@ -185,6 +188,7 @@ class _LyricViewState extends State<LyricView> {
               },
             ),
             ListTile(
+              mouseCursor: SystemMouseCursors.basic,
               title: Text(
                 'showAlbum'.tr,
                 style: const TextStyle(
