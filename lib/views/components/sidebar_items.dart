@@ -107,7 +107,7 @@ class _PlayListLabelState extends State<PlayListLabel> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text('playLists'.tr, style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 14,
                   color: colorController.darkMode.value ? Colors.white : Colors.black,
                 ),),
                 const SizedBox(width: 10,),
@@ -130,12 +130,12 @@ class _PlayListLabelState extends State<PlayListLabel> {
                         });
                       },
                       child: TweenAnimationBuilder(
-                        tween: ColorTween(end: hoverRefresh ? colorController.color5() : colorController.darkMode.value ? Colors.white : Colors.black), 
+                        tween: ColorTween(end: hoverRefresh ? colorController.color6() : colorController.color5()), 
                         duration: const Duration(milliseconds: 200), 
                         builder: (_, value, __) => Icon(
                           Icons.refresh_rounded,
                           color: value,
-                          size: 15,
+                          size: 17,
                         )
                       )
                     ),
@@ -161,12 +161,12 @@ class _PlayListLabelState extends State<PlayListLabel> {
                         });
                       },
                       child: TweenAnimationBuilder(
-                        tween: ColorTween(end: hoverAdd ? colorController.color5() : colorController.darkMode.value ? Colors.white : Colors.black), 
+                        tween: ColorTween(end: hoverAdd ? colorController.color6() : colorController.color5()), 
                         duration: const Duration(milliseconds: 200), 
                         builder: (_, value, __) => Icon(
                           Icons.add_rounded,
                           color: value,
-                          size: 16,
+                          size: 19,
                         )
                       ),
                     ),
