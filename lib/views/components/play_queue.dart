@@ -75,7 +75,6 @@ class _PlayQueueState extends State<PlayQueue> {
                       message: 'locate'.tr,
                       child: Obx(()=>
                         MouseRegion(
-                          cursor: SystemMouseCursors.click,
                           onEnter: (_){
                             setState(() {
                               hoverLocate=true;

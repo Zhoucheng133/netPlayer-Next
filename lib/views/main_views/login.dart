@@ -263,7 +263,7 @@ class _LoginViewState extends State<LoginView> {
                         mouseInButton=false;
                       });
                     },
-                    cursor: isLoading ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                    cursor: isLoading ? SystemMouseCursors.forbidden : SystemMouseCursors.basic,
                     child: Obx(()=>
                       AnimatedContainer(
                         width: 60,

@@ -297,20 +297,17 @@ class _LyricViewState extends State<LyricView> {
                               onTap: (){
                                 showTitleOp(context);
                               },
-                              child: MouseRegion(
-                                cursor: SystemMouseCursors.click,
-                                child: Obx(()=>
-                                  Text(
-                                    songController.nowPlay.value.title,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 24,
-                                      color: colorController.darkMode.value ? Colors.white : Colors.black,
-                                    ),
-                                    softWrap: false,
-                                    overflow: TextOverflow.fade,
-                                  )
-                                ),
+                              child: Obx(()=>
+                                Text(
+                                  songController.nowPlay.value.title,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                    color: colorController.darkMode.value ? Colors.white : Colors.black,
+                                  ),
+                                  softWrap: false,
+                                  overflow: TextOverflow.fade,
+                                )
                               ),
                             ),
                             const SizedBox(height: 5,),
@@ -318,19 +315,16 @@ class _LyricViewState extends State<LyricView> {
                               onTap: (){
                                 showArtistOp(context);
                               },
-                              child: MouseRegion(
-                                cursor: SystemMouseCursors.click,
-                                child: Obx(()=>
-                                  Text(
-                                    songController.nowPlay.value.artist,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: Colors.grey[400]
-                                    ),
-                                    softWrap: false,
-                                    overflow: TextOverflow.fade,
-                                  )
-                                ),
+                              child: Obx(()=>
+                                Text(
+                                  songController.nowPlay.value.artist,
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: Colors.grey[400]
+                                  ),
+                                  softWrap: false,
+                                  overflow: TextOverflow.fade,
+                                )
                               ),
                             ),
                             const SizedBox(height: 30,),
@@ -345,7 +339,6 @@ class _LyricViewState extends State<LyricView> {
                                     waitDuration: const Duration(seconds: 1),
                                     message: 'skipPre'.tr,
                                     child: MouseRegion(
-                                      cursor: SystemMouseCursors.click,
                                       onEnter: (_){
                                         setState(() {
                                           hoverPre=true;
@@ -379,7 +372,6 @@ class _LyricViewState extends State<LyricView> {
                                     waitDuration: const Duration(seconds: 1),
                                     message: 'play/pause'.tr,
                                     child: MouseRegion(
-                                      cursor: SystemMouseCursors.click,
                                       onEnter: (_){
                                         setState(() {
                                           hoverPause=true;
@@ -426,7 +418,6 @@ class _LyricViewState extends State<LyricView> {
                                     waitDuration: const Duration(seconds: 1),
                                     message: 'skipNext'.tr,
                                     child: MouseRegion(
-                                      cursor: SystemMouseCursors.click,
                                       onEnter: (_){
                                         setState(() {
                                           hoverSkip=true;
@@ -540,7 +531,6 @@ class _LyricViewState extends State<LyricView> {
                                           }
                                         },
                                         child: MouseRegion(
-                                          cursor: SystemMouseCursors.click,
                                           onEnter: (_){
                                             setState(() {
                                               hoverLove=true;
@@ -605,26 +595,23 @@ class _LyricViewState extends State<LyricView> {
                                                   Row(
                                                     mainAxisSize: MainAxisSize.min,
                                                     children: [
-                                                      MouseRegion(
-                                                        cursor: SystemMouseCursors.click,
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            if (c.volume.value > 0) {
-                                                              c.lastVolume = c.volume.value;
-                                                              c.volume.value=0;
-                                                            } else {
-                                                              c.volume.value=c.lastVolume;
-                                                            }
-                                                            c.handler.volumeSet(c.volume.value);
-                                                            operations.saveVolume();
-                                                          },
-                                                          child: Tooltip(
-                                                            message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
-                                                            child: FaIcon(
-                                                              c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
-                                                              size: 14,
-                                                              color: colorController.color5(),
-                                                            ),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          if (c.volume.value > 0) {
+                                                            c.lastVolume = c.volume.value;
+                                                            c.volume.value=0;
+                                                          } else {
+                                                            c.volume.value=c.lastVolume;
+                                                          }
+                                                          c.handler.volumeSet(c.volume.value);
+                                                          operations.saveVolume();
+                                                        },
+                                                        child: Tooltip(
+                                                          message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
+                                                          child: FaIcon(
+                                                            c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
+                                                            size: 14,
+                                                            color: colorController.color5(),
                                                           ),
                                                         ),
                                                       ),
@@ -680,7 +667,6 @@ class _LyricViewState extends State<LyricView> {
                                             waitDuration: const Duration(seconds: 1),
                                             message: 'adjustVolume'.tr,
                                             child: MouseRegion(
-                                              cursor: SystemMouseCursors.click,
                                               onEnter: (_){
                                                 setState(() {
                                                   hoverVolume=true;
@@ -777,7 +763,7 @@ class _LyricViewState extends State<LyricView> {
                                               waitDuration: const Duration(seconds: 1),
                                               message: c.fullRandom.value ? 'nowFullShuffle'.tr : 'playMode'.tr,
                                               child: MouseRegion(
-                                                cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                                                cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.basic,
                                                 onEnter: (_){
                                                   setState(() {
                                                     hoverMode=true;
@@ -841,7 +827,6 @@ class _LyricViewState extends State<LyricView> {
                                           operations.addSongToList(context, songController.nowPlay.value.id, songController.nowPlay.value.title);
                                         },
                                         child: MouseRegion(
-                                          cursor: SystemMouseCursors.click,
                                           onEnter: (_)=>setState(() {
                                             hoverAdd=true;
                                           }),
@@ -947,10 +932,7 @@ class _LyricViewState extends State<LyricView> {
                                             onTap: (){
                                               c.lyricText.value-=1;
                                             },
-                                            child: const MouseRegion(
-                                              cursor: SystemMouseCursors.click,
-                                              child: Icon(Icons.remove_rounded)
-                                            ),
+                                            child: const Icon(Icons.remove_rounded),
                                           ),
                                           Expanded(
                                             child: Center(child: Obx(()=>Text(c.lyricText.value.toString()))),
@@ -959,16 +941,12 @@ class _LyricViewState extends State<LyricView> {
                                             onTap: (){
                                               c.lyricText.value+=1;
                                             },
-                                            child: const MouseRegion(
-                                              cursor: SystemMouseCursors.click,
-                                              child: Icon(Icons.add_rounded)
-                                            ),
+                                            child: const Icon(Icons.add_rounded),
                                           )
                                         ],
                                       ),
                                     ),
                                     child: MouseRegion(
-                                      cursor: SystemMouseCursors.click,
                                       onEnter: (_){
                                         setState(() {
                                           hoverFont=true;
@@ -1052,7 +1030,6 @@ class _LyricViewState extends State<LyricView> {
                           hoverBack=false;
                         });
                       },
-                      cursor: SystemMouseCursors.click,
                       child: Obx(()=>
                         TweenAnimationBuilder(
                           tween: ColorTween(end: hoverBack ? colorController.color6() : colorController.color4()), 

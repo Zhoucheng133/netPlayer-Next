@@ -75,7 +75,6 @@ class _PlayBarState extends State<PlayBar> {
                     message: 'showLyric'.tr,
                     waitDuration: const Duration(seconds: 1),
                     child: MouseRegion(
-                      cursor: songController.nowPlay.value.id=="" ? SystemMouseCursors.basic : SystemMouseCursors.click,
                       onEnter: (_){
                         if(songController.nowPlay.value.id!=""){
                           setState(() {
@@ -183,7 +182,6 @@ class _PlayBarState extends State<PlayBar> {
                                     waitDuration: const Duration(seconds: 1),
                                     message: 'skipPre'.tr,
                                     child: MouseRegion(
-                                      cursor: SystemMouseCursors.click,
                                       onEnter: (_){
                                         setState(() {
                                           hoverPre=true;
@@ -214,7 +212,6 @@ class _PlayBarState extends State<PlayBar> {
                                     waitDuration: const Duration(seconds: 1),
                                     message: 'play/pause'.tr,
                                     child: MouseRegion(
-                                      cursor: SystemMouseCursors.click,
                                       onEnter: (_){
                                         setState(() {
                                           hoverPause=true;
@@ -255,7 +252,6 @@ class _PlayBarState extends State<PlayBar> {
                                     waitDuration: const Duration(seconds: 1),
                                     message: 'skipNext'.tr,
                                     child: MouseRegion(
-                                      cursor: SystemMouseCursors.click,
                                       onEnter: (_){
                                         setState(() {
                                           hoverSkip=true;
@@ -364,7 +360,6 @@ class _PlayBarState extends State<PlayBar> {
                         
                           },
                           child: MouseRegion(
-                            cursor: SystemMouseCursors.click,
                             onEnter: (_){
                               setState(() {
                                 hoverLove=true;
@@ -429,26 +424,23 @@ class _PlayBarState extends State<PlayBar> {
                                         SizedBox(
                                           width: 15,
                                           child: Center(
-                                            child: MouseRegion(
-                                              cursor: SystemMouseCursors.click,
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  if (c.volume.value > 0) {
-                                                    c.lastVolume = c.volume.value;
-                                                    c.volume.value=0;
-                                                  } else {
-                                                    c.volume.value=c.lastVolume;
-                                                  }
-                                                  c.handler.volumeSet(c.volume.value);
-                                                  operations.saveVolume();
-                                                },
-                                                child: Tooltip(
-                                                  message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
-                                                  child: FaIcon(
-                                                    c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
-                                                    size: 14,
-                                                    color: colorController.color5(),
-                                                  ),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                if (c.volume.value > 0) {
+                                                  c.lastVolume = c.volume.value;
+                                                  c.volume.value=0;
+                                                } else {
+                                                  c.volume.value=c.lastVolume;
+                                                }
+                                                c.handler.volumeSet(c.volume.value);
+                                                operations.saveVolume();
+                                              },
+                                              child: Tooltip(
+                                                message: c.volume.value == 0 ? 'unmute'.tr : 'mute'.tr,
+                                                child: FaIcon(
+                                                  c.volume.value > 50 ? FontAwesomeIcons.volumeHigh : c.volume.value==0 ? FontAwesomeIcons.volumeXmark : FontAwesomeIcons.volumeLow,
+                                                  size: 14,
+                                                  color: colorController.color5(),
                                                 ),
                                               ),
                                             ),
@@ -506,7 +498,6 @@ class _PlayBarState extends State<PlayBar> {
                               waitDuration: const Duration(seconds: 1),
                               message: 'adjustVolume'.tr,
                               child: MouseRegion(
-                                cursor: SystemMouseCursors.click,
                                 onEnter: (_){
                                   setState(() {
                                     hoverVolume=true;
@@ -602,7 +593,7 @@ class _PlayBarState extends State<PlayBar> {
                               waitDuration: const Duration(seconds: 1),
                               message: c.fullRandom.value ? 'nowFullShuffle'.tr : 'playMode'.tr,
                               child: MouseRegion(
-                                cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                                cursor: c.fullRandom.value ? SystemMouseCursors.forbidden : SystemMouseCursors.basic,
                                 onEnter: (_){
                                   setState(() {
                                     hoverMode=true;
@@ -652,7 +643,6 @@ class _PlayBarState extends State<PlayBar> {
                           child: PlayQueue(),
                         ),
                         child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
                           onEnter: (_)=>setState(() {
                             hoverList=true;
                           }),

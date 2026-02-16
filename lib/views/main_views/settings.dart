@@ -203,6 +203,7 @@ class _SettingsViewState extends State<SettingsView> {
                     Transform.scale(
                       scale: 0.7,
                       child: Switch(
+                        mouseCursor: SystemMouseCursors.basic,
                         activeTrackColor: colorController.color6(),
                         splashRadius: 0,
                         value: c.savePlay.value, 
@@ -219,6 +220,7 @@ class _SettingsViewState extends State<SettingsView> {
                     Transform.scale(
                       scale: 0.7,
                       child: Switch(
+                        mouseCursor: SystemMouseCursors.basic,
                         activeTrackColor: colorController.color6(),
                         splashRadius: 0,
                         value: c.autoLogin.value, 
@@ -235,6 +237,7 @@ class _SettingsViewState extends State<SettingsView> {
                     Transform.scale(
                       scale: 0.7,
                       child: Switch(
+                        mouseCursor: SystemMouseCursors.basic,
                         activeTrackColor: colorController.color6(),
                         splashRadius: 0,
                         value: c.closeOnRun.value, 
@@ -251,6 +254,7 @@ class _SettingsViewState extends State<SettingsView> {
                     Transform.scale(
                       scale: 0.7,
                       child: Switch(
+                        mouseCursor: SystemMouseCursors.basic,
                         activeTrackColor: colorController.color6(),
                         splashRadius: 0,
                         value: c.useShortcut.value, 
@@ -267,6 +271,7 @@ class _SettingsViewState extends State<SettingsView> {
                     Transform.scale(
                       scale: 0.7,
                       child: Switch(
+                        mouseCursor: SystemMouseCursors.basic,
                         activeTrackColor: colorController.color6(),
                         splashRadius: 0,
                         value: c.lyricTranslate.value, 
@@ -283,6 +288,7 @@ class _SettingsViewState extends State<SettingsView> {
                     Transform.scale(
                       scale: 0.7,
                       child: Switch(
+                        mouseCursor: SystemMouseCursors.basic,
                         activeTrackColor: colorController.color6(),
                         splashRadius: 0,
                         value: c.useNavidromeAPI.value, 
@@ -299,6 +305,7 @@ class _SettingsViewState extends State<SettingsView> {
                     Transform.scale(
                       scale: 0.7,
                       child: Switch(
+                        mouseCursor: SystemMouseCursors.basic,
                         activeTrackColor: colorController.color6(),
                         splashRadius: 0,
                         value: c.removeMissing.value, 
@@ -322,7 +329,6 @@ class _SettingsViewState extends State<SettingsView> {
                           wsSetting(context);
                         },
                         child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
                           onEnter: (_){
                             setState(() {
                               hoverWs=true;
@@ -351,6 +357,7 @@ class _SettingsViewState extends State<SettingsView> {
                           Transform.scale(
                             scale: 0.7,
                             child: Switch(
+                              mouseCursor: SystemMouseCursors.basic,
                               activeTrackColor: colorController.color6(),
                               splashRadius: 0,
                               value: c.useWs.value, 
@@ -373,7 +380,6 @@ class _SettingsViewState extends State<SettingsView> {
                       GestureDetector(
                         onTap: ()=>colorController.darkModePanel(context),
                         child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
                           onEnter: (_){
                             setState(() {
                               hoverDark=true;
@@ -417,7 +423,6 @@ class _SettingsViewState extends State<SettingsView> {
                       GestureDetector(
                         onTap: ()=>colorController.colorPickerPanel(context),
                         child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
                           onEnter: (_){
                             setState(() {
                               hoverTheme=true;
@@ -463,7 +468,6 @@ class _SettingsViewState extends State<SettingsView> {
                           operations.selectLanguage(context);
                         },
                         child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
                           onEnter: (_){
                             setState(() {
                               hoverLang=true;
@@ -510,7 +514,6 @@ class _SettingsViewState extends State<SettingsView> {
                           builder: (_, value, __) => GestureDetector(
                             onTap: ()=>getCacheSize(),
                             child: MouseRegion(
-                              cursor: SystemMouseCursors.click,
                               onEnter: (_){
                                 setState(() {
                                   hoverReloadCache=true;
@@ -538,7 +541,6 @@ class _SettingsViewState extends State<SettingsView> {
                           }
                         },
                         child: MouseRegion(
-                          cursor: SystemMouseCursors.click,
                           onEnter: (_){
                             setState(() {
                               hoverClear=true;
@@ -576,7 +578,6 @@ class _SettingsViewState extends State<SettingsView> {
                       }
                     },
                     child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
                       onEnter: (_){
                         setState(() {
                           hoverURL=true;
@@ -617,7 +618,6 @@ class _SettingsViewState extends State<SettingsView> {
                       MouseRegion(
                         onEnter: (_) => setState(() => hoverRefresh = true),
                         onExit: (_) => setState(() => hoverRefresh = false),
-                        cursor: SystemMouseCursors.click,
                         child: AnimatedDefaultTextStyle(
                           style: TextStyle(
                             color: hoverRefresh ? colorController.color6() : colorController.color5()
@@ -639,7 +639,6 @@ class _SettingsViewState extends State<SettingsView> {
                       MouseRegion(
                         onEnter: (_) => setState(() => hoverAbout = true),
                         onExit: (_) => setState(() => hoverAbout = false),
-                        cursor: SystemMouseCursors.click,
                         child: AnimatedDefaultTextStyle(
                           style: TextStyle(
                             color: hoverAbout ? colorController.color6() : colorController.color5()

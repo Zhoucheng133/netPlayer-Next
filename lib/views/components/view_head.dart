@@ -80,7 +80,6 @@ class _ViewHeaderState extends State<ViewHeader> {
                   c.pageId.value='';
                 },
                 child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
                   onEnter: (_){
                     setState(() {
                       hoverBack=true;
@@ -180,7 +179,6 @@ class _ViewHeaderState extends State<ViewHeader> {
                             hoverRandom=false;
                           });
                         },
-                        cursor: SystemMouseCursors.click,
                         child: Obx(()=>
                           TweenAnimationBuilder(
                             tween: ColorTween(end: hoverRandom ? colorController.color6() : c.fullRandom.value ? colorController.color5() : Colors.grey[400]), 
@@ -260,7 +258,7 @@ class _ViewHeaderState extends State<ViewHeader> {
               message: 'locate'.tr,
               child: Obx(()=>
                 MouseRegion(
-                  cursor: songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id) ? SystemMouseCursors.click : SystemMouseCursors.forbidden,
+                  cursor: songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id) ? SystemMouseCursors.basic : SystemMouseCursors.forbidden,
                   onEnter: (_){
                     setState(() {
                       hoverLocate=true;
@@ -295,7 +293,6 @@ class _ViewHeaderState extends State<ViewHeader> {
                 waitDuration: const Duration(seconds: 1),
                 message: 'refresh'.tr,
                 child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
                   onEnter: (_){
                     setState(() {
                       hoverRefresh=true;
@@ -409,7 +406,6 @@ class _SearchHeaderState extends State<SearchHeader> {
                     waitDuration: const Duration(seconds: 1),
                     message: 'searchSong'.tr,
                     child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
                       onEnter: (_){
                         setState(() {
                           hoverSong=true;
@@ -444,7 +440,6 @@ class _SearchHeaderState extends State<SearchHeader> {
                     waitDuration: const Duration(seconds: 1),
                     message: 'searchAlbum'.tr,
                     child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
                       onEnter: (_){
                         setState(() {
                           hoverAlbum=true;
@@ -479,7 +474,6 @@ class _SearchHeaderState extends State<SearchHeader> {
                     waitDuration: const Duration(seconds: 1),
                     message: 'searchArtist'.tr,
                     child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
                       onEnter: (_){
                         setState(() {
                           hoverArtist=true;
