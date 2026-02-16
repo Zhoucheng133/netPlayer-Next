@@ -93,6 +93,9 @@ class _PlayListLabelState extends State<PlayListLabel> {
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
 
+  bool hoverRefresh=false;
+  bool hoverAdd=false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -116,12 +119,25 @@ class _PlayListLabelState extends State<PlayListLabel> {
                     message: 'refresh'.tr,
                     waitDuration: const Duration(seconds: 1),
                     child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: Icon(
-                        Icons.refresh,
-                        size: 15,
-                        color: colorController.darkMode.value ? Colors.white : Colors.black,
-                      ),
+                      onEnter: (_){
+                        setState(() {
+                          hoverRefresh=true;
+                        });
+                      },
+                      onExit: (_){
+                        setState(() {
+                          hoverRefresh=false;
+                        });
+                      },
+                      child: TweenAnimationBuilder(
+                        tween: ColorTween(end: hoverRefresh ? colorController.color5() : colorController.darkMode.value ? Colors.white : Colors.black), 
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __) => Icon(
+                          Icons.refresh_rounded,
+                          color: value,
+                          size: 15,
+                        )
+                      )
                     ),
                   ),
                 ),
@@ -134,11 +150,24 @@ class _PlayListLabelState extends State<PlayListLabel> {
                     message: 'addPlayList'.tr,
                     waitDuration: const Duration(seconds: 1),
                     child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: Icon(
-                        Icons.add_rounded,
-                        size: 16,
-                        color: colorController.darkMode.value ? Colors.white : Colors.black,
+                      onEnter: (_){
+                        setState(() {
+                          hoverAdd=true;
+                        });
+                      },
+                      onExit: (_){
+                        setState(() {
+                          hoverAdd=false;
+                        });
+                      },
+                      child: TweenAnimationBuilder(
+                        tween: ColorTween(end: hoverAdd ? colorController.color5() : colorController.darkMode.value ? Colors.white : Colors.black), 
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __) => Icon(
+                          Icons.add_rounded,
+                          color: value,
+                          size: 16,
+                        )
                       ),
                     ),
                   ),
