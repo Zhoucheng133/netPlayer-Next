@@ -49,6 +49,7 @@ class ColorController extends GetxController {
                     Transform.scale(
                       scale: 0.7,
                       child: Switch(
+                        mouseCursor: SystemMouseCursors.basic,
                         activeTrackColor: color6(),
                         splashRadius: 0,
                         value: autoDark.value, 
@@ -78,6 +79,7 @@ class ColorController extends GetxController {
                     Transform.scale(
                       scale: 0.7,
                       child: Switch(
+                        mouseCursor: SystemMouseCursors.basic,
                         activeTrackColor: color6(),
                         splashRadius: 0,
                         value: darkMode.value, 
