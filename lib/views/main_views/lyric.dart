@@ -452,6 +452,7 @@ class _LyricViewState extends State<LyricView> {
                                   Obx(()=>
                                     SliderTheme(
                                       data: SliderThemeData(
+                                        mouseCursor: WidgetStateProperty.all(SystemMouseCursors.basic),
                                         overlayColor: Colors.transparent,
                                         overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
                                         trackHeight: 1,

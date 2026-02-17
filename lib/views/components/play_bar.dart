@@ -281,6 +281,7 @@ class _PlayBarState extends State<PlayBar> {
                       const SizedBox(height: 10,),
                       SliderTheme(
                         data: SliderThemeData(
+                          mouseCursor: WidgetStateProperty.all(SystemMouseCursors.basic),
                           overlayColor: Colors.transparent,
                           overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
                           trackHeight: 1,
