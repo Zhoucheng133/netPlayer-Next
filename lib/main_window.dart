@@ -87,7 +87,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     windowManager.removeListener(this);
     listener.dispose();
     wsOkListener.dispose();
-    // c.ws.stop();
     try {
       c.ws.stop();
     } catch (_) {}
@@ -229,30 +228,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     if(removeMissing==false){
       c.removeMissing.value=false;
     }
-    final lang=prefs.getString('lang');
-    if(lang!=null){
-      var parts = lang.split('_');
-      c.lang.value=lang;
-      var locale=Locale(parts[0], parts[1]);
-      Get.updateLocale(locale);
-    }else{
-      if(context.mounted){
-        Locale locale = Localizations.localeOf(context);
-        String countryCode = locale.countryCode ?? '';
-        switch (countryCode) {
-          case 'US':
-          case 'CN':
-          case 'TW':
-            Get.updateLocale(locale);
-            c.lang.value="${locale.languageCode}_${locale.countryCode}";
-            break;
-          default:
-            Get.updateLocale(const Locale('zh', 'CN'));
-            c.lang.value="zh_CN";
-        }
-      }
-    }
-
 
     final autoLogin=prefs.getBool('autoLogin');
 

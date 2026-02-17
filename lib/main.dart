@@ -45,6 +45,7 @@ Future<void> main(List<String> args) async {
       androidNotificationChannelName: 'Music playback',
     ),
   );
+  await c.initLang();
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
     await windowManager.focus();
@@ -78,6 +79,8 @@ class _MainAppState extends State<MainApp> {
     final Brightness brightness = MediaQuery.of(context).platformBrightness;
     colorController.autoDarkMode(brightness == Brightness.dark);
 
+    final Controller c = Get.find();
+
     return Obx(()=>
       GetMaterialApp(
         translations: MainTranslations(),
@@ -87,11 +90,9 @@ class _MainAppState extends State<MainApp> {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
-        supportedLocales: const [
-          Locale('en', 'US'),
-          Locale('zh', 'CN'),
-          Locale('zh', 'TW'),
-        ],
+        locale: c.lang.value.locale, 
+        supportedLocales: supportedLocales.map((item)=>item.locale).toList(),
+        fallbackLocale: supportedLocales[0].locale,
         theme: ThemeData(
           brightness: colorController.darkMode.value ? Brightness.dark : Brightness.light,
           fontFamily: 'PuHui', 

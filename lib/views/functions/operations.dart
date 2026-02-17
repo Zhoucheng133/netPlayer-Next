@@ -963,8 +963,6 @@ class Operations{
 
   // 修改语言
   void selectLanguage(BuildContext context){
-    String tempLang=c.lang.value;
-    String langSelected=c.lang.value;
     showDialog(
       context: context, 
       builder: (context)=>AlertDialog(
@@ -982,67 +980,65 @@ class Operations{
                   borderRadius: BorderRadius.circular(10),
                 )
               ),
-              value: langSelected,
-              items: const [
-                DropdownMenuItem(
-                  value: 'en_US',
-                  child: Text('English')
+              customButton: SizedBox(
+                height: 45,
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.basic,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          c.lang.value.name,
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                        Expanded(child: Container()),
+                        const Icon(
+                          Icons.arrow_drop_down,
+                          size: 22,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                DropdownMenuItem(
-                  value: 'zh_CN',
-                  child: Text('简体中文')
+              ),
+              value: c.lang.value.name,
+              items: supportedLocales.map((item)=>DropdownMenuItem<String>(
+                value: item.name,
+                child: Text(
+                  item.name
                 ),
-                DropdownMenuItem(
-                  value: 'zh_TW',
-                  child: Text('繁體中文')
-                )
-              ], 
+              )).toList(),
               onChanged: (val){
-                if(val!=null){
-                  var parts = val.split('_');
-                  var locale=Locale(parts[0], parts[1]);
-                  Get.updateLocale(locale);
-                  setState((){
-                    langSelected=val;
-                  });
-                }
+                final index=supportedLocales.indexWhere((element) => element.name==val);
+                c.changeLanguage(index);
               },
             ),
           ),
         ),
         actions: [
-          TextButton(
-            onPressed: (){
-              Navigator.pop(context);
-              var parts = tempLang.split('_');
-              var locale=Locale(parts[0], parts[1]);
-              Get.updateLocale(locale);
-            }, 
-            child: Text('cancel'.tr)
-          ),
           ElevatedButton(
             onPressed: () async {
-              final SharedPreferences prefs = await SharedPreferences.getInstance();
-              prefs.setString('lang', langSelected);
-              c.lang.value=langSelected;
-              if(context.mounted){
-                Navigator.pop(context);
-                showDialog(
-                  context: context, 
-                  builder: (context)=>AlertDialog(
-                    title: Text('restartTitle'.tr),
-                    content: Text('restartToApply'.tr),
-                    actions: [
-                      ElevatedButton(
-                        onPressed: (){
-                          Navigator.pop(context);
-                        }, 
-                        child: Text("ok".tr)
-                      )
-                    ],
-                  )
-                );
-              }
+              Navigator.pop(context);
+              showDialog(
+                context: context, 
+                builder: (context)=>AlertDialog(
+                  title: Text('restartTitle'.tr),
+                  content: Text('restartToApply'.tr),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: (){
+                        Navigator.pop(context);
+                      }, 
+                      child: Text("ok".tr)
+                    )
+                  ],
+                )
+              );
             }, 
             child: Text('finish'.tr)
           )

@@ -1,8 +1,24 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'dart:ui';
+
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/album_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smtc_windows/smtc_windows.dart';
+
+class LanguageType{
+  String name;
+  Locale locale;
+
+  LanguageType(this.name, this.locale);
+}
+
+List<LanguageType> get supportedLocales => [
+  LanguageType("English", const Locale("en", "US")),
+  LanguageType("简体中文", const Locale("zh", "CN")),
+  LanguageType("繁體中文", const Locale("zh", "TW")),
+];
 
 enum LyricFrom{
   netease,
@@ -66,6 +82,34 @@ class UserInfo{
 }
 
 class Controller extends GetxController{
+
+  late SharedPreferences prefs;
+
+  Future<void> initLang() async {
+    prefs=await SharedPreferences.getInstance();
+
+    int? langIndex=prefs.getInt("langIndex");
+
+    if(langIndex==null){
+      final deviceLocale=PlatformDispatcher.instance.locale;
+      final local=Locale(deviceLocale.languageCode, deviceLocale.countryCode);
+      int index=supportedLocales.indexWhere((element) => element.locale==local);
+      if(index!=-1){
+        lang.value=supportedLocales[index];
+        lang.refresh();
+      }
+    }else{
+      lang.value=supportedLocales[langIndex];
+    }
+  }
+
+  void changeLanguage(int index){
+    lang.value=supportedLocales[index];
+    prefs.setInt("langIndex", index);
+    lang.refresh();
+    Get.updateLocale(lang.value.locale);
+  }
+
   // 当前页面索引
   Rx<Pages> page=Pages.all.obs;
   // 当前页面Id
@@ -144,7 +188,7 @@ class Controller extends GetxController{
   SMTCWindows? smtc;
 
   // 语言
-  RxString lang='zh_CN'.obs;
+  Rx<LanguageType> lang=Rx(supportedLocales[0]);
   //启用歌词组件
   RxBool useLyricKit=false.obs;
 
