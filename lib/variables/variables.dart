@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
 import 'dart:ui';
 
+import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/album_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -132,7 +131,7 @@ class Controller extends GetxController{
   // 播放进度, 注意单位为毫秒~1000ms=1s
   RxInt playProgress=0.obs;
   // 播放控制
-  var handler;
+  late AudioHandler handler;
   // 是否正在播放
   RxBool isPlay=false.obs;
   // 正在输入

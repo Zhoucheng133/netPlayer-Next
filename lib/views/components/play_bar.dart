@@ -409,7 +409,7 @@ class _PlayBarState extends State<PlayBar> {
                               onPointerSignal: (event) {
                                 if (event is PointerScrollEvent) {
                                   c.volume.value = (c.volume.value + (event.scrollDelta.dy * 0.1)).clamp(0, 100).toInt();
-                                  c.handler.volumeSet(c.volume.value);
+                                  c.handler.customAction('setVolume', {'volume': c.volume.value});
                                   operations.saveVolume();
                                 }
                               },
@@ -432,7 +432,7 @@ class _PlayBarState extends State<PlayBar> {
                                                 } else {
                                                   c.volume.value=c.lastVolume;
                                                 }
-                                                c.handler.volumeSet(c.volume.value);
+                                                c.handler.customAction('setVolume', {'volume': c.volume.value});
                                                 operations.saveVolume();
                                               },
                                               child: Tooltip(
@@ -467,7 +467,7 @@ class _PlayBarState extends State<PlayBar> {
                                               value: c.volume.value/100,
                                               onChanged: (val){
                                                 c.volume.value=(val*100).toInt();
-                                                c.handler.volumeSet(c.volume.value);
+                                                c.handler.customAction('setVolume', {'volume': c.volume.value});
                                               },
                                               onChangeEnd: (_){
                                                 operations.saveVolume();

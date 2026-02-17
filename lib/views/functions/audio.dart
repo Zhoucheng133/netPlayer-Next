@@ -221,7 +221,20 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
     isSettingUrl = false;
   }
 
-  Future<void> volumeSet(val) async {
-    await player.setVolume(val.toDouble());
+  @override
+  Future<dynamic> customAction(String name, [Map<String, dynamic>? extras]) async {
+    if (name == 'setVolume') {
+      final double volume = extras?['volume'].toDouble() ?? 100.0;
+      await player.setVolume(volume);
+      return true;
+    }
+    return super.customAction(name, extras);
+  }
+
+  @override
+  Future<void> onTaskRemoved() async {
+    await player.stop();
+    await player.dispose();
+    return super.onTaskRemoved();
   }
 }

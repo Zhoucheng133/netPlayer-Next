@@ -85,7 +85,7 @@ class _MainViewState extends State<MainView> {
     final volume=prefs.getInt('volume');
     if(volume!=null && volume!=100){
       c.volume.value=volume;
-      c.handler.volumeSet(c.volume.value);
+      c.handler.customAction('setVolume', {'volume': c.volume.value});
     }
     final ws=prefs.getBool('useWs');
     if(ws==true){
@@ -220,7 +220,7 @@ class _MainViewState extends State<MainView> {
   }
 
   @override
-  void dispose() {
+  Future<void> dispose() async {
     listener.dispose();
     statusListener.dispose();
     lineListener.dispose();
