@@ -50,6 +50,7 @@ class _PlayBarState extends State<PlayBar> {
   }
 
   bool hoverCover=false;
+  bool hoverSlider=false;
 
   @override
   Widget build(BuildContext context) {
@@ -279,29 +280,42 @@ class _PlayBarState extends State<PlayBar> {
                         ],
                       ),
                       const SizedBox(height: 10,),
-                      SliderTheme(
-                        data: SliderThemeData(
-                          mouseCursor: WidgetStateProperty.all(SystemMouseCursors.basic),
-                          overlayColor: Colors.transparent,
-                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                          trackHeight: 1,
-                          thumbShape: const RoundSliderThumbShape(
-                            enabledThumbRadius: 5,
-                            elevation: 0,
-                            pressedElevation: 0,
+                      MouseRegion(
+                        onEnter: (_){
+                          setState(() {
+                            hoverSlider=true;
+                          });
+                        },
+                        onExit: (_){
+                          setState(() {
+                            hoverSlider=false;
+                          });
+                        },
+                        child: SliderTheme(
+                          data: SliderThemeData(
+                            mouseCursor: WidgetStateProperty.all(SystemMouseCursors.basic),
+                            overlayColor: Colors.transparent,
+                            overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                            trackHeight: 1,
+                            thumbShape: const RoundSliderThumbShape(
+                              enabledThumbRadius: 5,
+                              elevation: 0,
+                              pressedElevation: 0,
+                            ),
+                            // thumbColor: colorController.color6(),
+                            thumbColor: hoverSlider ? colorController.color6() : colorController.color5(),
+                            activeTrackColor: colorController.color5(),
+                            inactiveTrackColor: colorController.color4(),
                           ),
-                          thumbColor: colorController.color6(),
-                          activeTrackColor: colorController.color5(),
-                          inactiveTrackColor: colorController.color4(),
-                        ),
-                        child: Slider(
-                          value: songController.nowPlay.value.duration==0 ? 0.0 : c.playProgress.value/1000/songController.nowPlay.value.duration>1 ? 1.0 : c.playProgress.value/1000/songController.nowPlay.value.duration<0 ? 0 : c.playProgress.value/1000/songController.nowPlay.value.duration,
-                          onChanged: (value){
-                            operations.seekChange(value);
-                          },
-                          onChangeEnd: (value){
-                            operations.seekSong(value);
-                          },
+                          child: Slider(
+                            value: songController.nowPlay.value.duration==0 ? 0.0 : c.playProgress.value/1000/songController.nowPlay.value.duration>1 ? 1.0 : c.playProgress.value/1000/songController.nowPlay.value.duration<0 ? 0 : c.playProgress.value/1000/songController.nowPlay.value.duration,
+                            onChanged: (value){
+                              operations.seekChange(value);
+                            },
+                            onChangeEnd: (value){
+                              operations.seekSong(value);
+                            },
+                          ),
                         ),
                       )
                     ],
