@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/album_controller.dart';
+import 'package:net_player_next/views/functions/ws.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 
@@ -155,7 +156,7 @@ class Controller extends GetxController{
   // 当前歌词到多少行了
   RxInt lyricLine=0.obs;
   // ws服务
-  var ws;
+  late WsService ws;
   RxBool onslide=false.obs;
 
   // 歌词来源
