@@ -128,10 +128,17 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<void> seek(Duration position) async {
     c.onslide.value=true;
+    if(player.source==null){
+      await play();
+      await player.seek(position);
+      setMedia(true);
+      c.onslide.value=false;
+      return;
+    }
     await player.seek(position);
     setMedia(true);
     c.onslide.value=false;
-    play();
+    await play();
   }
 
   int preHandler(int index, int length){
