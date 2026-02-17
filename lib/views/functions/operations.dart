@@ -771,7 +771,8 @@ class Operations{
   }
 
   void seekChange(double val){
-    pause();
+    // pause();
+    c.onslide.value=true;
     if(songController.nowPlay.value.id==''){
       return;
     }
@@ -781,10 +782,11 @@ class Operations{
 
   // 定位时间轴
   Future<void> seekSong(double val) async {
+    c.onslide.value=false;
     if(songController.nowPlay.value.id==''){
       return;
     }
-    pause();
+    // pause();
     int progress=(songController.nowPlay.value.duration*1000*val).toInt();
     c.playProgress.value=progress;
     await seek(Duration(milliseconds: c.playProgress.value));

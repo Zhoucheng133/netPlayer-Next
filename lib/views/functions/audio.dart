@@ -2,8 +2,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:audio_service/audio_service.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get.dart';
-import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -13,7 +13,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   final Controller c = Get.find();
   final SongController songController=Get.find();
-  final player = Player();
+  final player = AudioPlayer();
   var playURL="";
   bool skipHandler=false;
   MediaItem item=const MediaItem(id: "", title: "");
@@ -22,8 +22,8 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   bool isSettingUrl = false;
 
   MainAudioHanlder(){
-    player.stream.position.listen((position) {
-      var data=position.inMilliseconds;
+    player.onPositionChanged.listen((Duration p) {
+      var data=p.inMilliseconds;
       if(!c.onslide.value){
         c.playProgress.value=data;
       }
@@ -45,12 +45,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
         c.lyricLine.value=0;
       }
     });
-    player.stream.completed.listen((state) {
-      if(state){
-        skipToNext();
-      }
-    });
-    player.stream.error.listen((error) {
+    player.onPlayerComplete.listen((_) {
       skipToNext();
     });
   }
@@ -98,11 +93,14 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<void> play() async {
     var url="${c.userInfo.value.url}/rest/stream?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}";
-    if(url!=playURL || skipHandler){
-      final media=Media(url);
-      await player.open(media);
+    if (url != playURL || skipHandler) {
+      c.playProgress.value = 0;
+      player.seek(Duration.zero);
+      await player.setSource(UrlSource(url)); 
+      playURL = url;
+      skipHandler = false;
     }
-    await player.play();
+    await player.resume();
     c.isPlay.value=true;
     if(skipHandler){
       skipHandler=false;
@@ -130,7 +128,6 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<void> seek(Duration position) async {
     c.onslide.value=true;
-    await player.pause();
     await player.seek(position);
     setMedia(true);
     c.onslide.value=false;
@@ -195,7 +192,6 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 下一首
   @override
   Future<void> skipToNext() async {
-
     if (isSettingUrl) return;
     isSettingUrl = true;
 
@@ -224,7 +220,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<dynamic> customAction(String name, [Map<String, dynamic>? extras]) async {
     if (name == 'setVolume') {
-      final double volume = extras?['volume'].toDouble() ?? 100.0;
+      final double volume = (extras?['volume']/100).toDouble() ?? 1.0;
       await player.setVolume(volume);
       return true;
     }
