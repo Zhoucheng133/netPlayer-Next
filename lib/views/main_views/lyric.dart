@@ -38,6 +38,7 @@ class _LyricViewState extends State<LyricView> {
   bool hoverMode=false;
   bool hoverTip=false;
   bool hoverFont=false;
+  bool hoverSlider=false;
   final LyricController lyricController=Get.put(LyricController());
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
@@ -450,29 +451,41 @@ class _LyricViewState extends State<LyricView> {
                               child: Stack(
                                 children: [
                                   Obx(()=>
-                                    SliderTheme(
-                                      data: SliderThemeData(
-                                        mouseCursor: WidgetStateProperty.all(SystemMouseCursors.basic),
-                                        overlayColor: Colors.transparent,
-                                        overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
-                                        trackHeight: 1,
-                                        thumbShape: const RoundSliderThumbShape(
-                                          enabledThumbRadius: 5,
-                                          elevation: 0,
-                                          pressedElevation: 0,
+                                    MouseRegion(
+                                      onEnter: (_){
+                                        setState(() {
+                                          hoverSlider=true;
+                                        });
+                                      },
+                                      onExit: (_){
+                                        setState(() {
+                                          hoverSlider=false;
+                                        });
+                                      },
+                                      child: SliderTheme(
+                                        data: SliderThemeData(
+                                          mouseCursor: WidgetStateProperty.all(SystemMouseCursors.basic),
+                                          overlayColor: Colors.transparent,
+                                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 0.0),
+                                          trackHeight: 1,
+                                          thumbShape: const RoundSliderThumbShape(
+                                            enabledThumbRadius: 5,
+                                            elevation: 0,
+                                            pressedElevation: 0,
+                                          ),
+                                          thumbColor: hoverSlider ? colorController.color6() : colorController.color5(),
+                                          activeTrackColor: colorController.color5(),
+                                          inactiveTrackColor: colorController.color3(),
                                         ),
-                                        thumbColor: colorController.color6(),
-                                        activeTrackColor: colorController.color5(),
-                                        inactiveTrackColor: colorController.color3(),
-                                      ),
-                                      child: Slider(
-                                        value: songController.nowPlay.value.duration==0 ? 0.0 : c.playProgress.value/1000/songController.nowPlay.value.duration>1 ? 1.0 : c.playProgress.value/1000/songController.nowPlay.value.duration<0 ? 0 : c.playProgress.value/1000/songController.nowPlay.value.duration, 
-                                        onChanged: (value){
-                                          operations.seekChange(value);
-                                        },
-                                        onChangeEnd: (value){
-                                          operations.seekSong(value);
-                                        },
+                                        child: Slider(
+                                          value: songController.nowPlay.value.duration==0 ? 0.0 : c.playProgress.value/1000/songController.nowPlay.value.duration>1 ? 1.0 : c.playProgress.value/1000/songController.nowPlay.value.duration<0 ? 0 : c.playProgress.value/1000/songController.nowPlay.value.duration, 
+                                          onChanged: (value){
+                                            operations.seekChange(value);
+                                          },
+                                          onChangeEnd: (value){
+                                            operations.seekSong(value);
+                                          },
+                                        ),
                                       ),
                                     )
                                   ),
