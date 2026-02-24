@@ -27,6 +27,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
         return;
       }
       var data=position.inMilliseconds;
+      c.playProgress.value=data;
       if(c.lyric.isNotEmpty && c.lyric.length!=1){
         for (var i = 0; i < c.lyric.length; i++) {
           if(i==c.lyric.length-1){
@@ -129,12 +130,13 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 跳转
   @override
   Future<void> seek(Duration position) async {
-    c.onslide.value=true;
-    await player.pause();
+    if(songController.nowPlay.value.id.isEmpty){
+      return;
+    }
     await player.seek(position);
     setMedia(true);
     c.onslide.value=false;
-    play();
+    await play();
   }
 
   int preHandler(int index, int length){
