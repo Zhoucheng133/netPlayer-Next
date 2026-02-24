@@ -23,10 +23,10 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   MainAudioHanlder(){
     player.stream.position.listen((position) {
-      var data=position.inMilliseconds;
-      if(!c.onslide.value){
-        c.playProgress.value=data;
+      if(c.onslide.value){
+        return;
       }
+      var data=position.inMilliseconds;
       if(c.lyric.isNotEmpty && c.lyric.length!=1){
         for (var i = 0; i < c.lyric.length; i++) {
           if(i==c.lyric.length-1){
