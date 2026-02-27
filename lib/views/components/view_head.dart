@@ -234,7 +234,7 @@ class _ViewHeaderState extends State<ViewHeader> {
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         isCollapsed: true,
-                        contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
+                        contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 5, right: 10),
                       ),
                       style: const TextStyle(
                         fontSize: 12
@@ -536,7 +536,7 @@ class _SearchHeaderState extends State<SearchHeader> {
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         isCollapsed: true,
-                        contentPadding: EdgeInsets.only(top: 9, bottom: 10, left: 5, right: 10),
+                        contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 5, right: 10),
                       ),
                       style: const TextStyle(
                         fontSize: 12

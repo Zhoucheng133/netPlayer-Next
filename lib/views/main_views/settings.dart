@@ -129,7 +129,7 @@ class _SettingsViewState extends State<SettingsView> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             isCollapsed: true,
-                            contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+                            contentPadding: const EdgeInsets.all(10),
                           ),
                           autocorrect: false,
                           enableSuggestions: false,

@@ -43,7 +43,7 @@ class _SideBarState extends State<SideBar> {
               borderSide: BorderSide(color: colorController.color5(), width: 2.0),
               borderRadius: BorderRadius.circular(10),
             ),
-            contentPadding: const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10)
+            contentPadding: const EdgeInsets.all(10)
           ),
           onEditingComplete: (){
             operations.addPlayList(context, newListName.text);
