@@ -36,10 +36,14 @@ class _MainViewState extends State<MainView> {
   Operations operations=Operations();
   final SongController songController=Get.find();
   String? preId;
+  late SharedPreferences prefs;
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式
   Future<void> initPrefs(BuildContext context) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      sidebarWidth=prefs.getDouble('sidebarWidth') ?? 150;
+    });
     final savePlay=prefs.getBool('savePlay');
     if(savePlay!=false){
       final nowPlay=prefs.getString('nowPlay');
@@ -121,7 +125,6 @@ class _MainViewState extends State<MainView> {
     }
 
     // 保存现在播放的内容
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('nowPlay', jsonEncode(val.toPrefs()));
     c.lyricLine.value=0;
     // 如果id不为空，获取歌词
@@ -285,6 +288,9 @@ class _MainViewState extends State<MainView> {
                       sidebarWidth += details.delta.dx;
                       sidebarWidth = sidebarWidth.clamp(150, 300);
                     });
+                  },
+                  onHorizontalDragEnd: (details) {
+                    prefs.setDouble('sidebarWidth', sidebarWidth);
                   },
                   child: MouseRegion(
                     cursor: SystemMouseCursors.resizeLeftRight,
