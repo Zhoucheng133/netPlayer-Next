@@ -232,44 +232,69 @@ class _MainViewState extends State<MainView> {
 
   final ColorController colorController=Get.find();
 
+  double sidebarWidth=150;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
-          child: Row(
+          child: Stack(
             children: [
-              const SizedBox(
-                width: 150,
-                child: SideBar(),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10, left: 10, top: 5),
-                  child: Obx(()=>
-                    Container(
-                      decoration: BoxDecoration(
-                        color: colorController.darkMode.value ? colorController.color2() : Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: sidebarWidth,
+                    child: const SideBar(),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10, left: 10, top: 5),
                       child: Obx(()=>
-                        IndexedStack(
-                          index: c.page.value.index,
-                          children: const [
-                            AllView(),
-                            LovedView(),
-                            ArtistView(),
-                            AlbumView(),
-                            PlayListView(),
-                            SearchView(),
-                            SettingsView()
-                          ],
-                        )
+                        Container(
+                          decoration: BoxDecoration(
+                            color: colorController.darkMode.value ? colorController.color2() : Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Obx(()=>
+                            IndexedStack(
+                              index: c.page.value.index,
+                              children: const [
+                                AllView(),
+                                LovedView(),
+                                ArtistView(),
+                                AlbumView(),
+                                PlayListView(),
+                                SearchView(),
+                                SettingsView()
+                              ],
+                            )
+                          ),
+                        ),
                       ),
+                    )
+                  )
+                ],
+              ),
+              Transform.translate(
+                offset: Offset(5+sidebarWidth, 0),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onHorizontalDragUpdate: (details) {
+                    setState(() {
+                      sidebarWidth += details.delta.dx;
+                      sidebarWidth = sidebarWidth.clamp(150, 300);
+                    });
+                  },
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.resizeLeftRight,
+                    child: Container(
+                      width: 10,
+                      color: Colors.transparent,
                     ),
                   ),
-                )
-              )
+                ),
+              ),
             ],
           ),
         ),
