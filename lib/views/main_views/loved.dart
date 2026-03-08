@@ -67,46 +67,40 @@ class _LovedViewState extends State<LovedView> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: Row(
+      child: Column(
         children: [
-          Column(
-            children: [
-              Obx(()=>ViewHeader(title: 'lovedSongs'.tr, subTitle: 'total'.tr+songController.lovedSongs.length.toString()+'songTotal'.tr, page: Pages.loved, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,)),
-              const SongHeader(),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 200,
-                height: MediaQuery.of(context).size.height - 222,
-                child: Obx(()=>
-                  c.loading.value ? const SongSkeleton(lovedInclude: true,) : ListView.builder(
+          Obx(()=>ViewHeader(title: 'lovedSongs'.tr, subTitle: 'total'.tr+songController.lovedSongs.length.toString()+'songTotal'.tr, page: Pages.loved, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,)),
+          const SongHeader(),
+          Expanded(
+            child: Obx(()=>
+              c.loading.value ? const SongSkeleton(lovedInclude: true,) : ListView.builder(
+                controller: controller,
+                itemCount: songController.lovedSongs.length,
+                itemBuilder: (BuildContext context, int index){
+                  return AutoScrollTag(
+                    key: ValueKey(index),
                     controller: controller,
-                    itemCount: songController.lovedSongs.length,
-                    itemBuilder: (BuildContext context, int index){
-                      return AutoScrollTag(
-                        key: ValueKey(index),
-                        controller: controller,
-                        index: index,
-                        child: searchKeyWord.isEmpty ? Obx(()=>
-                          SongItem(
-                            index: index, 
-                            song: songController.lovedSongs[index], 
-                            isplay: isPlay(index),
-                            from: Pages.loved,
-                          )
-                        ) : Obx(()=>
-                          songController.lovedSongs[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||  songController.lovedSongs[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                          SongItem(
-                            index: index, 
-                            isplay: isPlay(index), 
-                            from: Pages.loved,
-                            song: songController.lovedSongs[index], 
-                          ) : Container()
-                        )
-                      );
-                    }
-                  )
-                ),
+                    index: index,
+                    child: searchKeyWord.isEmpty ? Obx(()=>
+                      SongItem(
+                        index: index, 
+                        song: songController.lovedSongs[index], 
+                        isplay: isPlay(index),
+                        from: Pages.loved,
+                      )
+                    ) : Obx(()=>
+                      songController.lovedSongs[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||  songController.lovedSongs[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      SongItem(
+                        index: index, 
+                        isplay: isPlay(index), 
+                        from: Pages.loved,
+                        song: songController.lovedSongs[index], 
+                      ) : Container()
+                    )
+                  );
+                }
               )
-            ],
+            ),
           )
         ],
       )

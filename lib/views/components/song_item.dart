@@ -28,7 +28,6 @@ class _SongHeaderState extends State<SongHeader> {
         const SizedBox(height: 10,),
         SizedBox(
           height: 35,
-          width: MediaQuery.of(context).size.width - 200,
           child: Obx(()=>
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,7 +94,6 @@ class _SongHeaderState extends State<SongHeader> {
         Obx(()=>
           Container(
             height: 2,
-            width: MediaQuery.of(context).size.width - 200,
             decoration: BoxDecoration(
               color: colorController.color4(),
               borderRadius: BorderRadius.circular(2)
@@ -393,7 +391,7 @@ class _SongItemState extends State<SongItem> {
             duration: const Duration(milliseconds: 200),
             color: hover ?  colorController.color1(): colorController.darkMode.value ? colorController.color2() : Colors.white,
             height: 40,
-            width: MediaQuery.of(context).size.width - 200,
+            width: double.infinity,
             child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

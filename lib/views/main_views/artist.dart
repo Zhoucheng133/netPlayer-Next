@@ -89,68 +89,60 @@ class _ArtistViewState extends State<ArtistView> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: Row(
+      child: Column(
         children: [
-          Column(
-            children: [
-              Obx(()=>
-                c.pageId.value=='' ? ViewHeader(title: 'artists'.tr, subTitle: 'total'.tr+c.artists.length.toString()+'artistTotal'.tr, page: Pages.artist, refresh: ()=>refresh(context), controller: inputController,) : 
-                ViewHeader(title: "${'artist'.tr}: $artistName", subTitle: 'total'.tr+list.length.toString()+'albumTotal'.tr, page: Pages.artist)
-              ),
-              Obx(()=>
-                c.pageId.value=='' ? const ArtistHeader() : const AlbumHeader(),
-              ),
-              Obx(()=>
-                c.pageId.value=='' ?
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 200,
-                  height: MediaQuery.of(context).size.height - 222,
-                  child: Obx(()=>
-                    c.loading.value ? const ArtistSkeleton() : ListView.builder(
-                      itemCount: c.artists.length,
-                      itemBuilder:  (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
-                        ArtistItem(
-                          id: c.artists[index]['id'], 
-                          name: c.artists[index]['name'], 
-                          albumCount: c.artists[index]['albumCount'], 
-                          index: index
-                        )
-                      ) : Obx(()=>
-                        c.artists[index]['name'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                        ArtistItem(
-                          id: c.artists[index]['id'], 
-                          name: c.artists[index]['name'], 
-                          albumCount: c.artists[index]['albumCount'], 
-                          index: index
-                        ) : Container()
-                      )
+          Obx(()=>
+            c.pageId.value=='' ? ViewHeader(title: 'artists'.tr, subTitle: 'total'.tr+c.artists.length.toString()+'artistTotal'.tr, page: Pages.artist, refresh: ()=>refresh(context), controller: inputController,) : 
+            ViewHeader(title: "${'artist'.tr}: $artistName", subTitle: 'total'.tr+list.length.toString()+'albumTotal'.tr, page: Pages.artist)
+          ),
+          Obx(()=>
+            c.pageId.value=='' ? const ArtistHeader() : const AlbumHeader(),
+          ),
+          Obx(()=>
+            c.pageId.value=='' ?
+            Expanded(
+              child: Obx(()=>
+                c.loading.value ? const ArtistSkeleton() : ListView.builder(
+                  itemCount: c.artists.length,
+                  itemBuilder:  (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
+                    ArtistItem(
+                      id: c.artists[index]['id'], 
+                      name: c.artists[index]['name'], 
+                      albumCount: c.artists[index]['albumCount'], 
+                      index: index
                     )
-                  ),
-                ):
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 200,
-                  height: MediaQuery.of(context).size.height - 222,
-                  child: Obx(()=>
-                    c.loading.value ? AlbumSkeleton(count: c.childCount.value,) : ListView.builder(
-                      itemCount: list.length,
-                      itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? AlbumItem(
-                        data: list[index], 
-                        index: index, 
-                        clearSearch: () {  },
-                      ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                      AlbumItem(
-                        data: list[index], 
-                        index: index, clearSearch: () {
-                          setState(() {
-                            inputController.text='';
-                          });
-                        },
-                      ) : Container()
-                    )
-                  ),
+                  ) : Obx(()=>
+                    c.artists[index]['name'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                    ArtistItem(
+                      id: c.artists[index]['id'], 
+                      name: c.artists[index]['name'], 
+                      albumCount: c.artists[index]['albumCount'], 
+                      index: index
+                    ) : Container()
+                  )
                 )
-              )
-            ],
+              ),
+            ):
+            Expanded(
+              child: Obx(()=>
+                c.loading.value ? AlbumSkeleton(count: c.childCount.value,) : ListView.builder(
+                  itemCount: list.length,
+                  itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? AlbumItem(
+                    data: list[index], 
+                    index: index, 
+                    clearSearch: () {  },
+                  ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                  AlbumItem(
+                    data: list[index], 
+                    index: index, clearSearch: () {
+                      setState(() {
+                        inputController.text='';
+                      });
+                    },
+                  ) : Container()
+                )
+              ),
+            )
           )
         ],
       )

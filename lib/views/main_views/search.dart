@@ -81,51 +81,46 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: Row(
+      child: Column(
         children: [
-          Column(
-            children: [
-              SearchHeader(
-                controller: controller, 
-                type: type, 
-                changeType: (value) => changeType(value), 
-                search: ()=>search(context),
-              ),
-              type=='song' ? const SongHeader() : 
-              type=='album' ? const AlbumHeader() :
-              const ArtistHeader(),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 200,
-                height: MediaQuery.of(context).size.height - 222,
-                child: type=='song' ? ListView.builder(
-                  itemCount: songList.length,
-                  itemBuilder: (BuildContext context, int index)=>Obx(()=>
-                    SongItem(
-                      index: index, 
-                      song: songList[index], 
-                      isplay: isPlay(index), 
-                      from: Pages.search, 
-                      list: songList,
-                    )
-                  )
-                ) : type=='album' ? ListView.builder(
-                  itemCount: albumList.length,
-                  itemBuilder: (BuildContext context, int index)=> AlbumItem(
-                    index: index, 
-                    clearSearch: () {},
-                    data: c.albums[index],
-                  )
-                ) : ListView.builder(
-                  itemCount: artistList.length,
-                  itemBuilder:  (BuildContext context, int index)=> ArtistItem(
-                    id: artistList[index]['id'], 
-                    name: artistList[index]['name'], 
-                    albumCount: artistList[index]['albumCount'], 
-                    index: index
-                  )
-                ),
+          SearchHeader(
+            controller: controller, 
+            type: type, 
+            changeType: (value) => changeType(value), 
+            search: ()=>search(context),
+          ),
+          type=='song' ? const SongHeader() : 
+          type=='album' ? const AlbumHeader() :
+          const ArtistHeader(),
+
+          Expanded(
+            child: type=='song' ? ListView.builder(
+              itemCount: songList.length,
+              itemBuilder: (BuildContext context, int index)=>Obx(()=>
+                SongItem(
+                  index: index, 
+                  song: songList[index], 
+                  isplay: isPlay(index), 
+                  from: Pages.search, 
+                  list: songList,
+                )
               )
-            ],
+            ) : type=='album' ? ListView.builder(
+              itemCount: albumList.length,
+              itemBuilder: (BuildContext context, int index)=> AlbumItem(
+                index: index, 
+                clearSearch: () {},
+                data: c.albums[index],
+              )
+            ) : ListView.builder(
+              itemCount: artistList.length,
+              itemBuilder:  (BuildContext context, int index)=> ArtistItem(
+                id: artistList[index]['id'], 
+                name: artistList[index]['name'], 
+                albumCount: artistList[index]['albumCount'], 
+                index: index
+              )
+            ),
           )
         ],
       )

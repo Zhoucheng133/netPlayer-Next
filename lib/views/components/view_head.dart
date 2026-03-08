@@ -68,7 +68,6 @@ class _ViewHeaderState extends State<ViewHeader> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width - 200,
       height: 30,
       child: Row(
         children: [
@@ -107,93 +106,100 @@ class _ViewHeaderState extends State<ViewHeader> {
           ) : Container(),
           Expanded(
             child: Obx(()=>
-              Row(
-                children: [
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width - 550,
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Row(
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.loose,
+                      child: Text(
+                        widget.title,
+                        style: TextStyle(
+                          color: colorController.color5(),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                        maxLines: 1,
+                      ),
                     ),
-                    child: Text(
-                      widget.title,
+                    const SizedBox(width: 10,),
+                    Text(
+                      widget.subTitle,
                       style: TextStyle(
                         color: colorController.color5(),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 13
                       ),
-                      overflow: TextOverflow.fade,
-                      softWrap: false,
                     ),
-                  ),
-                  const SizedBox(width: 10,),
-                  Text(
-                    widget.subTitle,
-                    style: TextStyle(
-                      color: colorController.color5(),
-                      fontSize: 13
-                    ),
-                  ),
-                  songController.allSongs.length>=500 && widget.page==Pages.all ? const SizedBox(width: 10,) : Container(),
-                  Obx(()=>
-                    songController.allSongs.length>=500 && widget.page==Pages.all && c.authorization.isEmpty ? 
-                    Tooltip(
-                      message: 'overCountTip'.tr,
-                      child: MouseRegion(
-                        onEnter: (_){
-                          setState(() {
-                            hoverWarning=true;
-                          });
-                        },
-                        onExit: (_){
-                          setState(() {
-                            hoverWarning=false;
-                          });
-                        },
-                        child: TweenAnimationBuilder(
-                          tween: ColorTween(end: hoverWarning ? Colors.orange : Colors.grey[400]), 
-                          duration: const Duration(milliseconds: 200), 
-                          builder: (_, value, __)=>Icon(
-                            Icons.warning_rounded,
-                            size: 17,
-                            color: value,
-                          )
+                    Obx(()=>
+                      songController.allSongs.length>=500 && widget.page==Pages.all && c.authorization.isEmpty ? 
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Tooltip(
+                          message: 'overCountTip'.tr,
+                          child: MouseRegion(
+                            onEnter: (_){
+                              setState(() {
+                                hoverWarning=true;
+                              });
+                            },
+                            onExit: (_){
+                              setState(() {
+                                hoverWarning=false;
+                              });
+                            },
+                            child: TweenAnimationBuilder(
+                              tween: ColorTween(end: hoverWarning ? Colors.orange : Colors.grey[400]), 
+                              duration: const Duration(milliseconds: 200), 
+                              builder: (_, value, __)=>Icon(
+                                Icons.warning_rounded,
+                                size: 17,
+                                color: value,
+                              )
+                            ),
+                          ),
                         ),
-                      ),
-                    ) : Container()
-                  ),
-                  const SizedBox(width: 10,),
-                  widget.page==Pages.all ? GestureDetector(
-                    onTap: (){
-                      operations.fullRandomPlaySwitcher(context);
-                    },
-                    child: Tooltip(
-                      message: 'shuffleAllSongs'.tr,
-                      waitDuration: const Duration(seconds: 1),
-                      child: MouseRegion(
-                        onEnter: (_){
-                          setState(() {
-                            hoverRandom=true;
-                          });
+                      ) : Container()
+                    ),
+                    if(widget.page==Pages.all) Padding(
+                      padding: const EdgeInsetsGeometry.only(left: 10),
+                      child: GestureDetector(
+                        onTap: (){
+                          operations.fullRandomPlaySwitcher(context);
                         },
-                        onExit: (_){
-                          setState(() {
-                            hoverRandom=false;
-                          });
-                        },
-                        child: Obx(()=>
-                          TweenAnimationBuilder(
-                            tween: ColorTween(end: hoverRandom ? colorController.color6() : c.fullRandom.value ? colorController.color5() : Colors.grey[400]), 
-                            duration: const Duration(milliseconds: 200), 
-                            builder: (_, value, __)=>Icon(
-                              Icons.shuffle_rounded,
-                              size: 17,
-                              color: value,
+                        child: Tooltip(
+                          message: 'shuffleAllSongs'.tr,
+                          waitDuration: const Duration(seconds: 1),
+                          child: MouseRegion(
+                            onEnter: (_){
+                              setState(() {
+                                hoverRandom=true;
+                              });
+                            },
+                            onExit: (_){
+                              setState(() {
+                                hoverRandom=false;
+                              });
+                            },
+                            child: Obx(()=>
+                              TweenAnimationBuilder(
+                                tween: ColorTween(end: hoverRandom ? colorController.color6() : c.fullRandom.value ? colorController.color5() : Colors.grey[400]), 
+                                duration: const Duration(milliseconds: 200), 
+                                builder: (_, value, __)=>Icon(
+                                  Icons.shuffle_rounded,
+                                  size: 17,
+                                  color: value,
+                                )
+                              ),
                             )
                           ),
-                        )
+                        ),
                       ),
                     ),
-                  ) :   Container(),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -245,73 +251,76 @@ class _ViewHeaderState extends State<ViewHeader> {
               ),
             ),
           ) : Container(),
-          const SizedBox(width: 15,),
-          widget.page==Pages.playList || widget.page==Pages.all || widget.page==Pages.loved ?
-          GestureDetector(
-            onTap: (){
-              if(songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id)){
-                widget.locate();
-              }
-            },
-            child: Tooltip(
-              waitDuration: const Duration(seconds: 1),
-              message: 'locate'.tr,
-              child: Obx(()=>
-                MouseRegion(
-                  cursor: songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id) ? SystemMouseCursors.basic : SystemMouseCursors.forbidden,
-                  onEnter: (_){
-                    setState(() {
-                      hoverLocate=true;
-                    });
-                  },
-                  onExit: (_){
-                    setState(() {
-                      hoverLocate=false;
-                    });
-                  },
-                  child: TweenAnimationBuilder(
-                    tween: ColorTween(end:  songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id) ? hoverLocate ? colorController.color6() : colorController.color5() : Colors.grey[300]), 
-                    duration: const Duration(milliseconds: 200), 
-                    builder: (_, value, __) => Icon(
-                      Icons.my_location_rounded,
-                      size: 17,
-                      color: value,
-                    )
-                  ),
-                ),
-              ),
-            )
-          ):Container(),
-          const SizedBox(width: 10,),
-          Obx(()=>
-            !(c.pageId.value.isNotEmpty && (widget.page==Pages.album || widget.page==Pages.artist)) && widget.page!=Pages.settings && widget.page!=Pages.search ? 
-            GestureDetector(
+          if(widget.page==Pages.playList || widget.page==Pages.all || widget.page==Pages.loved) Padding(
+            padding: const EdgeInsets.only(left: 15),
+            child: GestureDetector(
               onTap: (){
-                widget.refresh();
+                if(songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id)){
+                  widget.locate();
+                }
               },
               child: Tooltip(
                 waitDuration: const Duration(seconds: 1),
-                message: 'refresh'.tr,
-                child: MouseRegion(
-                  onEnter: (_){
-                    setState(() {
-                      hoverRefresh=true;
-                    });
-                  },
-                  onExit: (_){
-                    setState(() {
-                      hoverRefresh=false;
-                    });
-                  },
-                  child: TweenAnimationBuilder(
-                    tween: ColorTween(end: hoverRefresh ? colorController.color6() : colorController.color5()),
-                    duration: const Duration(milliseconds: 200), 
-                    builder: (_, value, __) => Icon(
-                      Icons.refresh_rounded,
-                      size: 18,
-                      color: value,
+                message: 'locate'.tr,
+                child: Obx(()=>
+                  MouseRegion(
+                    cursor: songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id) ? SystemMouseCursors.basic : SystemMouseCursors.forbidden,
+                    onEnter: (_){
+                      setState(() {
+                        hoverLocate=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverLocate=false;
+                      });
+                    },
+                    child: TweenAnimationBuilder(
+                      tween: ColorTween(end:  songController.nowPlay.value.playFrom==widget.page && (songController.nowPlay.value.playFrom!=Pages.playList || songController.nowPlay.value.fromId==widget.id) ? hoverLocate ? colorController.color6() : colorController.color5() : Colors.grey[300]), 
+                      duration: const Duration(milliseconds: 200), 
+                      builder: (_, value, __) => Icon(
+                        Icons.my_location_rounded,
+                        size: 17,
+                        color: value,
+                      )
                     ),
-                  )
+                  ),
+                ),
+              )
+            ),
+          ),
+          Obx(()=>
+            !(c.pageId.value.isNotEmpty && (widget.page==Pages.album || widget.page==Pages.artist)) && widget.page!=Pages.settings && widget.page!=Pages.search ? 
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: GestureDetector(
+                onTap: (){
+                  widget.refresh();
+                },
+                child: Tooltip(
+                  waitDuration: const Duration(seconds: 1),
+                  message: 'refresh'.tr,
+                  child: MouseRegion(
+                    onEnter: (_){
+                      setState(() {
+                        hoverRefresh=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverRefresh=false;
+                      });
+                    },
+                    child: TweenAnimationBuilder(
+                      tween: ColorTween(end: hoverRefresh ? colorController.color6() : colorController.color5()),
+                      duration: const Duration(milliseconds: 200), 
+                      builder: (_, value, __) => Icon(
+                        Icons.refresh_rounded,
+                        size: 18,
+                        color: value,
+                      ),
+                    )
+                  ),
                 ),
               ),
             ) : Container()
@@ -371,28 +380,22 @@ class _SearchHeaderState extends State<SearchHeader> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width - 200,
       height: 30,
       child: Row(
         children: [
           Expanded(
             child: Row(
               children: [
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width - 550,
-                  ),
-                  child: Obx(()=>
-                    Text(
-                      '${'search'.tr}:',
-                      style: TextStyle(
-                        color: colorController.color5(),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                      overflow: TextOverflow.fade,
-                      softWrap: false,
+                Obx(()=>
+                  Text(
+                    '${'search'.tr}:',
+                    style: TextStyle(
+                      color: colorController.color5(),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
                     ),
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
                   ),
                 ),
                 const SizedBox(width: 10,),

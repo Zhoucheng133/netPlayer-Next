@@ -101,78 +101,69 @@ class _AlbumViewState extends State<AlbumView> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: Row(
+      child: Column(
         children: [
-          Column(
-            children: [
-              Obx(() => 
-                c.pageId.value=='' ? ViewHeader(title: 'albums'.tr, subTitle: 'total'.tr+c.albums.length.toString()+'albumTotal'.tr, page: Pages.album, refresh: ()=>refresh(context), controller: inputController,) :
-                ViewHeader(title: '${"album".tr}: $albumName', subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: Pages.album, refresh: ()=>(){},)
-              ),
-              // const albumHeader(),
-              Obx(()=>
-                c.pageId.value=='' ? const AlbumHeader() : const SongHeader()
-              ),
-              Obx(()=>
-                c.pageId.value=='' ?
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 200,
-                  height: MediaQuery.of(context).size.height - 222,
-                  child: Obx(()=>
-                    c.loading.value ? const AlbumSkeleton() : ListView.builder(
-                      itemCount: c.albums.length,
-                      itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
-                        AlbumItem(
-                          data: c.albums[index], 
-                          index: index, 
-                          clearSearch: () {}, 
-                        )
-                      ) : Obx(()=>
-                        c.albums[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                        AlbumItem(
-                          data: c.albums[index], 
-                          index: index,
-                          clearSearch: () {
-                            setState(() {
-                              inputController.text='';
-                            });
-                          },
-                        ) : Container()
-                      )
+          Obx(() => 
+            c.pageId.value=='' ? ViewHeader(title: 'albums'.tr, subTitle: 'total'.tr+c.albums.length.toString()+'albumTotal'.tr, page: Pages.album, refresh: ()=>refresh(context), controller: inputController,) :
+            ViewHeader(title: '${"album".tr}: $albumName', subTitle: 'total'.tr+list.length.toString()+'songTotal'.tr, page: Pages.album, refresh: ()=>(){},)
+          ),
+          Obx(()=>
+            c.pageId.value=='' ? const AlbumHeader() : const SongHeader()
+          ),
+          Obx(()=>
+            c.pageId.value=='' ?
+            Expanded(
+              child: Obx(()=>
+                c.loading.value ? const AlbumSkeleton() : ListView.builder(
+                  itemCount: c.albums.length,
+                  itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
+                    AlbumItem(
+                      data: c.albums[index], 
+                      index: index, 
+                      clearSearch: () {}, 
                     )
-                  ),
-                ) : 
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 200,
-                  height: MediaQuery.of(context).size.height - 222,
-                  child: Obx(()=>
-                    c.loading.value ? SongSkeleton(count: c.childCount.value,) : ListView.builder(
-                      itemCount: list.length,
-                      itemBuilder: (BuildContext context, int index){
-                        return searchKeyWord.isEmpty ? Obx(()=>
-                          SongItem(
-                            index: index, 
-                            isplay: isPlay(index), 
-                            from: Pages.album, 
-                            list: list, 
-                            song: list[index],
-                          )
-                        ) : list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                        Obx(()=>
-                          SongItem(
-                            index: index, 
-                            song: list[index],
-                            isplay: isPlay(index), 
-                            from: Pages.album, 
-                            list: list,
-                          )
-                        ): Container();
-                      }
-                    ),
-                  ),
+                  ) : Obx(()=>
+                    c.albums[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                    AlbumItem(
+                      data: c.albums[index], 
+                      index: index,
+                      clearSearch: () {
+                        setState(() {
+                          inputController.text='';
+                        });
+                      },
+                    ) : Container()
+                  )
                 )
-              )
-            ],
+              ),
+            ) : 
+            Expanded(
+              child: Obx(()=>
+                c.loading.value ? SongSkeleton(count: c.childCount.value,) : ListView.builder(
+                  itemCount: list.length,
+                  itemBuilder: (BuildContext context, int index){
+                    return searchKeyWord.isEmpty ? Obx(()=>
+                      SongItem(
+                        index: index, 
+                        isplay: isPlay(index), 
+                        from: Pages.album, 
+                        list: list, 
+                        song: list[index],
+                      )
+                    ) : list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                    Obx(()=>
+                      SongItem(
+                        index: index, 
+                        song: list[index],
+                        isplay: isPlay(index), 
+                        from: Pages.album, 
+                        list: list,
+                      )
+                    ): Container();
+                  }
+                ),
+              ),
+            )
           )
         ],
       )

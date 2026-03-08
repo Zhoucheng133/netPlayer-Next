@@ -24,7 +24,6 @@ class _SongSkeletonState extends State<SongSkeleton> {
       itemBuilder: (BuildContext context, int index)=>Container(
         color: colorController.darkMode.value ? colorController.color2() : Colors.white,
         height: 40,
-        width: MediaQuery.of(context).size.width - 200,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

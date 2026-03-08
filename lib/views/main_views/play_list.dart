@@ -167,48 +167,42 @@ class _PlayListViewState extends State<PlayListView> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: Row(
+      child: Column(
         children: [
-          Column(
-            children: [
-              Obx(()=>ViewHeader(title: name, subTitle: 'total'.tr+length.toString()+'songTotal'.tr, page: Pages.playList, id: c.pageId.value, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,),),
-              const SongHeader(),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 200,
-                height: MediaQuery.of(context).size.height - 222,
-                child: Obx(()=>
-                  c.loading.value ? SongSkeleton(count: c.childCount.value,) : ListView.builder(
-                    controller: controller,
-                    itemCount: list.length,
-                    itemBuilder: (BuildContext context, int index){
-                      return AutoScrollTag(
-                        key: ValueKey(index), 
-                        controller: controller, 
-                        index: index,
-                        child: searchKeyWord.isEmpty ? Obx(()=>
-                          SongItem(
-                            index: index, 
-                            song: list[index], 
-                            isplay: isPlay(index), 
-                            from: Pages.playList, 
-                            list: list, 
-                            refresh: ()=>silentRefresh(),
-                          ),
-                        ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                        Obx(()=>SongItem(
-                          index: index, 
-                          song: list[index], 
-                          isplay: isPlay(index), 
-                          from: Pages.playList, 
-                          list: list, 
-                          refresh: ()=>silentRefresh(),
-                        )) : Container()
-                      );
-                    }
-                  ),
-                )
-              )
-            ],
+          Obx(()=>ViewHeader(title: name, subTitle: 'total'.tr+length.toString()+'songTotal'.tr, page: Pages.playList, id: c.pageId.value, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,),),
+          const SongHeader(),
+          Expanded(
+            child: Obx(()=>
+              c.loading.value ? SongSkeleton(count: c.childCount.value,) : ListView.builder(
+                controller: controller,
+                itemCount: list.length,
+                itemBuilder: (BuildContext context, int index){
+                  return AutoScrollTag(
+                    key: ValueKey(index), 
+                    controller: controller, 
+                    index: index,
+                    child: searchKeyWord.isEmpty ? Obx(()=>
+                      SongItem(
+                        index: index, 
+                        song: list[index], 
+                        isplay: isPlay(index), 
+                        from: Pages.playList, 
+                        list: list, 
+                        refresh: ()=>silentRefresh(),
+                      ),
+                    ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                    Obx(()=>SongItem(
+                      index: index, 
+                      song: list[index], 
+                      isplay: isPlay(index), 
+                      from: Pages.playList, 
+                      list: list, 
+                      refresh: ()=>silentRefresh(),
+                    )) : Container()
+                  );
+                }
+              ),
+            ),
           )
         ],
       )

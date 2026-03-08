@@ -23,7 +23,6 @@ class _ArtistHeaderState extends State<ArtistHeader> {
         const SizedBox(height: 10,),
         SizedBox(
           height: 35,
-          width: MediaQuery.of(context).size.width - 200,
           child: Obx(()=>
             Row(
               children: [
@@ -68,7 +67,6 @@ class _ArtistHeaderState extends State<ArtistHeader> {
         Obx(()=>
           Container(
             height: 2,
-            width: MediaQuery.of(context).size.width - 200,
             decoration: BoxDecoration(
               color: colorController.color4(),
               borderRadius: BorderRadius.circular(2)
@@ -123,7 +121,7 @@ class _ArtistItemState extends State<ArtistItem> {
             duration: const Duration(milliseconds: 200),
             color: hover ? colorController.color1() : colorController.darkMode.value ? colorController.color2() : Colors.white,
             height: 40,
-            width: MediaQuery.of(context).size.width - 200,
+            width: double.infinity,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
