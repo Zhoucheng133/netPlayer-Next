@@ -11,4 +11,4 @@ PRODUCT_NAME = netPlayer
 PRODUCT_BUNDLE_IDENTIFIER = zhouc.netPlayerNext
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2024 zhouc. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024-2026 zhouc. All rights reserved.
