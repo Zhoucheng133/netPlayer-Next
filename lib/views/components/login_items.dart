@@ -41,6 +41,10 @@ class _UserNameInputState extends State<UserNameInput> {
       AnimatedContainer(
         width: 280,
         decoration: BoxDecoration(
+          border: Border.all(
+            color: isFocus ? colorController.color5() : colorController.color4().withAlpha(100),
+            width: 2
+          ),
           color: colorController.darkMode.value ? Colors.black : Colors.white,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
@@ -53,9 +57,10 @@ class _UserNameInputState extends State<UserNameInput> {
         ),
         duration: const Duration(milliseconds: 200),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "username".tr,
@@ -137,6 +142,10 @@ class _URLInputState extends State<URLInput> {
       AnimatedContainer(
         width: 280,
         decoration: BoxDecoration(
+          border: Border.all(
+            color: isFocus ? colorController.color5() : colorController.color4().withAlpha(100),
+            width: 2
+          ),
           color: colorController.darkMode.value ? Colors.black : Colors.white,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
@@ -149,7 +158,7 @@ class _URLInputState extends State<URLInput> {
         ),
         duration: const Duration(milliseconds: 200),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -237,6 +246,10 @@ class _PasswordInputState extends State<PasswordInput> {
       AnimatedContainer(
         width: 280,
         decoration: BoxDecoration(
+          border: Border.all(
+            color: isFocus ? colorController.color5() : colorController.color4().withAlpha(100),
+            width: 2
+          ),
           color: colorController.darkMode.value ? Colors.black : Colors.white,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
@@ -249,7 +262,7 @@ class _PasswordInputState extends State<PasswordInput> {
         ),
         duration: const Duration(milliseconds: 200),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
