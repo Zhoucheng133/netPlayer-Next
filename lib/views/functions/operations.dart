@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -970,43 +969,10 @@ class Operations{
         title: Text('selectLang'.tr),
         content: StatefulBuilder(
           builder: (BuildContext context, StateSetter setState)=> DropdownButtonHideUnderline(
-            child: DropdownButton2(
-              buttonStyleData: ButtonStyleData(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                )
-              ),
-              dropdownStyleData: DropdownStyleData(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                )
-              ),
-              customButton: SizedBox(
-                height: 45,
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.basic,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          c.lang.value.name,
-                          style: const TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                        Expanded(child: Container()),
-                        const Icon(
-                          Icons.arrow_drop_down,
-                          size: 22,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+            child: DropdownButton(
+              focusColor: Colors.transparent,
+              borderRadius: BorderRadius.circular(10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               value: c.lang.value.name,
               items: supportedLocales.map((item)=>DropdownMenuItem<String>(
                 value: item.name,
@@ -1264,18 +1230,11 @@ class Operations{
                   )
                 ),
                 const SizedBox(height: 10,),
-                DropdownButton2(
+                DropdownButton(
                   isExpanded: true,
-                  buttonStyleData: ButtonStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                    )
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                    )
-                  ),
+                  borderRadius: BorderRadius.circular(10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  focusColor: Colors.transparent,
                   value: selectedItem,
                   items: List.generate(playlistController.playLists.length, (index){
                     return DropdownMenuItem(
