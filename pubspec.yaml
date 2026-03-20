@@ -1,7 +1,7 @@
 name: net_player_next
 description: netPlayer Flutter version
 publish_to: 'none'
-version: 3.7.1
+version: 3.7.2
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -30,7 +30,6 @@ dependencies:
   shelf_web_socket: ^1.0.2
   flutter_rust_bridge: ^1.72.1
   smtc_windows: ^0.1.2
-  dropdown_button2: ^2.3.9
   loading_animation_widget: ^1.2.1
   auto_size_text: ^3.0.0
   path: ^1.9.0
@@ -75,7 +74,7 @@ msix_config:
   display_name: netPlayer Next
   publisher_display_name: ZhouCheng
   identity_name: ZhouCheng.netPlayerNext
-  msix_version: 3.7.1.0
+  msix_version: 3.7.2.0
   logo_path: assets/icon.png
   trim_logo: false
   capabilities: internetClient, internetClientServer

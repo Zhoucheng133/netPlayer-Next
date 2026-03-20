@@ -46,10 +46,11 @@ Future<void> main(List<String> args) async {
     ),
   );
   await c.initLang();
-  windowManager.waitUntilReadyToShow(windowOptions, () async {
-    await windowManager.show();
-    await windowManager.focus();
-  });
+  await windowManager.waitUntilReadyToShow(windowOptions);
+  // windowManager.waitUntilReadyToShow(windowOptions, () async {
+  //   await windowManager.show();
+  //   await windowManager.focus();
+  // });
   runApp(const MainApp());
 }
 
