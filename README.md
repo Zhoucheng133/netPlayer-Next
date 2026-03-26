@@ -1,4 +1,4 @@
-# netPlayer Next版本
+# netPlayer Next
 
 Also available in English. Click [HERE](/documents/en.md) to view the English version of the README
 
