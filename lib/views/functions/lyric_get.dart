@@ -17,7 +17,7 @@ class LyricGet{
     int minutes = int.parse(parts[0]);
     List<String> secondsParts = parts[1].split('.');
     int seconds = int.parse(secondsParts[0]);
-    int milliseconds = int.parse(secondsParts[1]);
+    int milliseconds = int.parse(secondsParts.length>1 ? secondsParts[1] : "0");
 
     // 将分钟、秒和毫秒转换为总毫秒数
     return (minutes * 60 * 1000) + (seconds * 1000) + milliseconds;
@@ -28,10 +28,6 @@ class LyricGet{
       if(!(await lrclib())){
         c.lyricFrom.value=LyricFrom.none;
         c.lyric.value=[
-          // {
-          //   'time': 0,
-          //   'content': 'noLyric'.tr,
-          // }
           LyricItem('noLyric'.tr, "", 0)
         ];
         var content='noLyric'.tr;
@@ -56,10 +52,6 @@ class LyricGet{
       if(pos1==-1 || pos2==-1){
         return false;
       }
-      // lyricCovert.add({
-      //   'time': timeToMilliseconds(line.substring(pos1+1, pos2)),
-      //   'content': line.substring(pos2 + 1).trim(),
-      // });
       lyricCovert.add(LyricItem(line.substring(pos2 + 1).trim(), "", timeToMilliseconds(line.substring(pos1+1, pos2))));
     }
     c.lyric.value=lyricCovert;
@@ -109,10 +101,6 @@ class LyricGet{
       } catch (_) {
         continue;
       }
-      // lyricCovert.add({
-      //   'time': time,
-      //   'content': content,
-      // });
       lyricCovert.add(LyricItem(
         lyricItem,
         lyricTranslate,
