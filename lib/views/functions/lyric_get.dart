@@ -68,48 +68,50 @@ class LyricGet{
     if(lyricResponse==null){
       return false;
     }
-    List<LyricItem> lyricCovert=[];
-    List<String> lines = LineSplitter.split(lyricResponse["lyric"]).toList();
-    bool hasTranslate=lyricResponse["translate"].length!=0;
-    List<String> tlines=[];
-    if(hasTranslate){
-      tlines=LineSplitter.split(lyricResponse["translate"]).toList();
-    }
-    for(String line in lines){
-      int pos1=line.indexOf("[");
-      int pos2=line.indexOf("]");
-      if(pos1==-1 || pos2==-1){
-        continue;
+    String lyricRaw = lyricResponse["lyric"];
+    String translateRaw = lyricResponse["translate"] ?? "";
+
+    final timeRegex = RegExp(r'\[(\d{2}:\d{2}(?:\.\d+)?)\]');
+
+    Map<String, String> translateMap = {};
+    List<String> tLines = LineSplitter.split(translateRaw).toList();
+    for (var line in tLines) {
+      var match = timeRegex.firstMatch(line);
+      if (match != null) {
+        String timeStr = match.group(1)!;
+        String content = line.replaceAll(timeRegex, "").trim();
+        translateMap[timeStr.split('.')[0]] = content;
       }
-      late int time;
-      late String lyricItem;
-      String lyricTranslate="";
-      try {
-        final timeInString=line.substring(pos1+1, pos2);
-        time=timeToMilliseconds(timeInString);
-        lyricItem = (pos2 + 1 < line.length) ? line.substring(pos2 + 1).trim() : "";
-        if(lyricItem=='' && lyricCovert.last.lyric==''){
+    }
+
+    List<LyricItem> lyricCovert = [];
+    List<String> lines = LineSplitter.split(lyricRaw).toList();
+
+    for (var line in lines) {
+      if (line.trim().isEmpty) continue;
+
+      Iterable<RegExpMatch> matches = timeRegex.allMatches(line);
+      if (matches.isEmpty) continue;
+
+      String content = line.replaceAll(timeRegex, "").trim();
+
+      for (var m in matches) {
+        String timeInString = m.group(1)!;
+        try {
+          int timeMs = timeToMilliseconds(timeInString);
+          String pureTimeKey = timeInString.split('.')[0];
+          String lyricTranslate = translateMap[pureTimeKey] ?? "";
+
+          lyricCovert.add(LyricItem(content, lyricTranslate, timeMs));
+        } catch (_) {
           continue;
         }
-        if(hasTranslate){
-          for(final t in tlines){
-            if(t.startsWith("[$timeInString]")){
-              lyricTranslate = (pos2 + 1 < t.length) ? t.substring(pos2 + 1).trim() : "";
-            }
-          }
-        }
-      } catch (_) {
-        continue;
       }
-      lyricCovert.add(LyricItem(
-        lyricItem,
-        lyricTranslate,
-        time,
-      ));
     }
-    if(lyricCovert.isEmpty){
-      return false;
-    }
+    lyricCovert.sort((a, b) => a.time.compareTo(b.time));
+    lyricCovert.removeWhere((item) => item.lyric.isEmpty && item.translate.isEmpty);
+    
+    if (lyricCovert.isEmpty) return false;
     lyricCovert.sort((a, b)=>a.time.compareTo(b.time));
     c.lyric.value=lyricCovert;
     c.lyricFrom.value=LyricFrom.netease;
