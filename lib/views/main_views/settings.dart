@@ -320,6 +320,25 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
                 SettingItem(
+                  label: 'keepScreenOnInLyric'.tr, 
+                  item: Obx(()=>
+                    Transform.scale(
+                      scale: 0.7,
+                      child: Switch(
+                        mouseCursor: SystemMouseCursors.basic,
+                        activeTrackColor: colorController.color6(),
+                        splashRadius: 0,
+                        value: c.wakeLockLyric.value, 
+                        onChanged: (value) async {
+                          c.wakeLockLyric.value=value;
+                          final prefs=await SharedPreferences.getInstance();
+                          prefs.setBool("wakeLockLyric", value);
+                        },
+                      ),
+                    )
+                  )
+                ),
+                SettingItem(
                   label: 'enableWs'.tr, 
                   item: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

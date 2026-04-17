@@ -223,5 +223,7 @@ const Map<String, String> zhTW = {
   'removeMissing': '忽略失效的文件',
 
   'playqueue': "播放隊列",
-  'queueNotAvaliable': '播放隊列不可用\n現在處於完全隨機播放模式'
+  'queueNotAvaliable': '播放隊列不可用\n現在處於完全隨機播放模式',
+
+  'keepScreenOnInLyric': '歌詞頁保持螢幕常亮',
 };

@@ -223,5 +223,7 @@ const Map<String, String> zhCN = {
   'removeMissing': '忽略失效的文件',
 
   'playqueue': "播放队列",
-  'queueNotAvaliable': '播放队列不可用\n现在处于完全随机播放模式'
+  'queueNotAvaliable': '播放队列不可用\n现在处于完全随机播放模式',
+
+  'keepScreenOnInLyric': '歌词页保持屏幕常亮',
 };

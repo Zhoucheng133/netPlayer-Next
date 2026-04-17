@@ -15,6 +15,7 @@ import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 
 class LyricView extends StatefulWidget {
@@ -91,11 +92,17 @@ class _LyricViewState extends State<LyricView> {
       });
       lyricController.scrollLyric();
     });
+    if(c.wakeLockLyric.value){
+      WakelockPlus.enable();
+    }
   }
   
   @override
   void dispose() {
     lyricLineListener.dispose();
+    if(c.wakeLockLyric.value){
+      WakelockPlus.disable();
+    }
     super.dispose();
   }
 

@@ -161,6 +161,8 @@ class Controller extends GetxController{
 
   // 歌词来源
   Rx<LyricFrom> lyricFrom=LyricFrom.none.obs;
+  // 歌词保持屏幕常亮
+  RxBool wakeLockLyric=true.obs;
 
   // # 一些设置属性 #
   // 保存播放内容

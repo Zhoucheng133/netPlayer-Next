@@ -223,5 +223,7 @@ const Map<String, String> enUS = {
   'removeMissing': 'Ignore missing files',
 
   'playqueue': "Play queue",
-  'queueNotAvaliable': 'Play queue not avaliable\nIn full random play mode now'
+  'queueNotAvaliable': 'Play queue not avaliable\nIn full random play mode now',
+
+  'keepScreenOnInLyric': "Keep screen on in lyrics",
 };
