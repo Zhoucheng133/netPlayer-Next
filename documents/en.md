@@ -8,6 +8,10 @@
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
+<a href="https://apps.microsoft.com/detail/9nfmtfpz1zct?referrer=appbadge&mode=direct">
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
+
 This is a Subsonic (Navidrome) API based desktop App. You can [click here](https://www.navidrome.org/docs/installation/) to see how to create a music server with Navidrome (Recommend). If you are looking for mobile version, please visit [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile).
 
 Make sure your device running netPlayer can connect to your music server.
@@ -15,11 +19,9 @@ Make sure your device running netPlayer can connect to your music server.
 
 **★ netPlayer Next** | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
-> [!NOTE]
-> This version of netPlayer does NOT support Windows 7. If you need netPlayer on Windows7, you should find [v1 netPlayer](https://github.com/Zhoucheng133/net-player)
-
-
 \*\* From **v3.2.0**, You can see the detail of multi language support at [**Language support**](#language-support). Other version support Simplified Chinese only.
+
+If this project was helpful, consider [buying me a coffee](https://blog.z-server.top/sponsor/). Cheers! ☕
 
 ## Contents
 
