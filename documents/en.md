@@ -135,15 +135,15 @@ Lyrics depends on the song's title, album, artist and duration.
 
 ## Other links
 
-- [spotify-downloader](https://github.com/spotDL/spotify-downloader) For download songs. It contains songs' informations.
-- [Live-BG](https://github.com/Zhoucheng133/Live-BG) Used for live streaming to display bgm information developed by myself.
-- ~~[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)Desktop lyric kit~~
+- 【[MusicDL-GUI](https://github.com/Zhoucheng133/MusicDL-GUI)】Music download tool
+- 【[Live-BG](https://github.com/Zhoucheng133/Live-BG)】Used for live streaming to display bgm information developed by myself.
+- ~~【[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)】Desktop lyric kit~~
   
 ## Config netPlayer Next on your own device
 
 ### netPlayer Next only
 
-This project is developed with Flutter 3.32. You can debug with it directly.
+This project is developed with Flutter 3.41. You can debug with it directly.
 Recommand using Visual Studio Code. After installing Flutter and Dart extension on Visual Studio Code, you can debug/profile/relese on your device.
 
 If you Debug or Release on **Windows**, make sure not do it in Chinese mainland network environment.

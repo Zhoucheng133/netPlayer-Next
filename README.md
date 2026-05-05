@@ -132,15 +132,15 @@ C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer
 
 ## 其它链接
 
-- [spotify-downloader](https://github.com/spotDL/spotify-downloader)用于下载歌曲，通过这种方式下载的歌曲一般会包含一些信息
-- [Live-BG](https://github.com/Zhoucheng133/Live-BG)用于直播的配合netPlayer显示当前播放歌曲信息和歌词的背景
-- ~~[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)桌面歌词系统~~
+- 【[MusicDL-GUI](https://github.com/Zhoucheng133/MusicDL-GUI)】下载歌曲的工具
+- 【[Live-BG](https://github.com/Zhoucheng133/Live-BG)】用于直播的配合netPlayer显示当前播放歌曲信息和歌词的背景
+- ~~【[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)】桌面歌词系统~~
 
 ## 在你的设备上配置netPlayer Next
 
 ### netPlayer Next本体
 
-本项目使用Flutter 3.32开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
+本项目使用Flutter 3.41开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
 建议直接使用Visual Studio Code，在安装完Flutter扩展和Dart扩展之后就可以Debug/Profile/Release了，我已经在.vscode文件夹中添加了launch类型
 
 如果你在**Windows**上Debug或者Release，注意不要在国内的网络环境下操作，可能会等非常长的时间，Mac上没有这个问题
