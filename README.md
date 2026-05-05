@@ -40,9 +40,9 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 > [!TIP]
 > 现已支持自定义主题色&深色模式
 
-<img src="demo/demo1.png" width="600px">
+<img src="screenshot/cn/cn1.png" width="600px">
 
-<img src="demo/demo2.png" width="600px">
+<img src="screenshot/cn/cn2.png" width="600px">
 
 ## 使用
 

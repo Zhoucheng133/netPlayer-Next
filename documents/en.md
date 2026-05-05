@@ -41,9 +41,9 @@ If this project was helpful, consider [buying me a coffee](https://blog.z-server
 > [!TIP]
 > Customized theme colors & dark mode are now supported!
 
-<img src="../demo/demo1.png" width="600px">
+<img src="../screenshot/en/en1.png" width="600px">
 
-<img src="../demo/demo2.png" width="600px">
+<img src="../screenshot/en/en2.png" width="600px">
 
 ## Usage
 
