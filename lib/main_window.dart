@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:net_player_next/variables/color_controller.dart';
-import 'package:net_player_next/variables/float_lyric_controlller.dart';
+import 'package:net_player_next/views/float_lyric/float_lyric_controlller.dart';
 import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/views/functions/requests.dart';

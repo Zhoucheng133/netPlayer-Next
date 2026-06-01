@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/color_controller.dart';
@@ -35,8 +36,16 @@ class _MainViewState extends State<MainView> {
   late Worker statusListener;
   Operations operations=Operations();
   final SongController songController=Get.find();
+  final WindowMethodChannel floatLyricChannel = const WindowMethodChannel(
+    'net_player_next/float_lyric',
+    mode: ChannelMode.unidirectional,
+  );
   String? preId;
   late SharedPreferences prefs;
+
+  void sendFloatLyric(String content) {
+    floatLyricChannel.invokeMethod('lyricChange', content).catchError((_) {});
+  }
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式
   Future<void> initPrefs(BuildContext context) async {
@@ -105,8 +114,8 @@ class _MainViewState extends State<MainView> {
 
   void lyricChange(){
     try {
-      // var content=c.lyric[c.lyricLine.value-1]['content'];
       var content=c.lyric[c.lyricLine.value-1].lyric;
+      sendFloatLyric(content);
       if(c.useWs.value){
         c.ws.sendMsg(content);
       }
@@ -130,13 +139,10 @@ class _MainViewState extends State<MainView> {
     // 如果id不为空，获取歌词
     c.lyricFrom.value=LyricFrom.none;
     c.lyric.value=[
-      // {
-      //   'time': 0,
-      //   'content': 'searchingLyric'.tr,
-      // }
       LyricItem('searchingLyric'.tr, "", 0)
     ];
     var content='searchingLyric'.tr;
+    sendFloatLyric(content);
     if(c.useWs.value){
       c.ws.sendMsg(content);
     }
@@ -147,8 +153,8 @@ class _MainViewState extends State<MainView> {
 
   void statusChange(){
     try {
-      // var content=c.lyric[c.lyricLine.value-1]['content'];
       var content=c.lyric[c.lyricLine.value-1].lyric;
+      sendFloatLyric(content);
       if(c.useWs.value){
         c.ws.sendMsg(content);
       }

@@ -4,6 +4,7 @@ import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/float_lyric/style_var.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
 class FloatLyric extends StatefulWidget {
@@ -19,28 +20,86 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
     'net_player_next/main_window',
     mode: ChannelMode.unidirectional,
   );
+  final WindowMethodChannel floatLyricChannel = const WindowMethodChannel(
+    'net_player_next/float_lyric',
+    mode: ChannelMode.unidirectional,
+  );
+
+  final RxString currentLyric = ''.obs;
+
+  late SharedPreferences prefs;
 
   Future<void> closeFloatLyric() async {
-    await mainWindowChannel.invokeMethod('floatLyricClosed');
-    await windowManager.hide();
+    try {
+      await mainWindowChannel.invokeMethod('floatLyricClosed');
+    } finally {
+      await windowManager.hide();
+    }
+  }
+
+  @override
+  Future<void> onWindowMoved() async {
+    super.onWindowMoved();
+    final offset=await windowManager.getPosition();
+    prefs.setDouble('positionX', offset.dx);
+    prefs.setDouble('positionY', offset.dy);
   }
 
   @override
   void initState() {
     super.initState();
     windowManager.addListener(this);
+    initFloatLyricChannel();
     initWindow();
   }
 
+  Future<void> initFloatLyricChannel() async {
+    await floatLyricChannel.setMethodCallHandler((call) async {
+      switch (call.method) {
+        case 'lyricChange':
+          currentLyric.value = call.arguments?.toString() ?? '';
+          return true;
+      }
+      return null;
+    });
+  }
+
+  @override
+  void dispose() {
+    floatLyricChannel.setMethodCallHandler(null);
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
   Future<void> initWindow() async {
-    await windowManager.setAlwaysOnTop(true);
+    prefs=await SharedPreferences.getInstance();
+    initPrefs();
     await windowManager.setResizable(false);
     await windowManager.setAsFrameless();
-    await windowManager.setHasShadow(false);
+  }
+
+  initPrefs() async { 
+    s.alwaysOnTop.value=prefs.getBool("alwaysOnTop")??true;
+    if(s.alwaysOnTop.value){
+      await windowManager.setAlwaysOnTop(true);
+    }
+    s.showShadow.value=prefs.getBool("showShadow")??false;
+    if(!s.showShadow.value){
+      await windowManager.setHasShadow(false);
+    }
+    s.fontSize.value=prefs.getInt("fontSize")??18;
+
+    final positionX=prefs.getDouble("positionX")??0;
+    final positionY=prefs.getDouble("positionY")??0;
+    if(positionX!=0&&positionY!=0){
+      await windowManager.setPosition(Offset(positionX, positionY));
+    }else{
+      await windowManager.center();
+    }
+    s.opacity.value=prefs.getInt("opacity")??100;
   }
 
   bool inWindows=false;
-  bool alwaysOnTop=false;
   bool hoverText=false;
   bool hoverOpacity=false;
   bool hoverPin=true;
@@ -94,6 +153,7 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                                         return;
                                       }
                                       s.fontSize.value-=1;
+                                      prefs.setInt("fontSize", s.fontSize.value);
                                     }, 
                                     icon: const Icon(
                                       Icons.remove,
@@ -118,6 +178,7 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                                         return;
                                       }
                                       s.fontSize.value+=1;
+                                      prefs.setInt("fontSize", s.fontSize.value);
                                     }, 
                                     icon: const Icon(
                                       Icons.add,
@@ -177,6 +238,7 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                                               await windowManager.setAsFrameless();
                                             }
                                             windowManager.setHasShadow(s.showShadow.value);
+                                            prefs.setBool("showShadow", s.showShadow.value);
                                           }
                                         ),
                                         const SizedBox(width: 10,),
@@ -187,6 +249,7 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                                               await windowManager.setAsFrameless();
                                             }
                                             windowManager.setHasShadow(s.showShadow.value);
+                                            prefs.setBool("showShadow", s.showShadow.value);
                                           },
                                           child: MouseRegion(
                                             cursor: SystemMouseCursors.click,
@@ -215,7 +278,10 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                                         value: (s.opacity.value)/255, 
                                         onChanged: (val){
                                           s.opacity.value=(val*255).toInt();
-                                        }
+                                        },
+                                        onChangeEnd: (value){
+                                          prefs.setInt("opacity", s.opacity.value);
+                                        },
                                       )
                                     ),
                                   ),
@@ -253,10 +319,9 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                           ),
                           GestureDetector(
                             onTap: (){
-                              setState(() {
-                                alwaysOnTop=!alwaysOnTop;
-                              });
-                              windowManager.setAlwaysOnTop(alwaysOnTop);
+                              s.alwaysOnTop.value=!s.alwaysOnTop.value;
+                              windowManager.setAlwaysOnTop(s.alwaysOnTop.value);
+                              prefs.setBool("alwaysOnTop", s.alwaysOnTop.value);
                             },
                             child: MouseRegion(
                               cursor: SystemMouseCursors.click,
@@ -281,7 +346,7 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                                   child: FaIcon(
                                     FontAwesomeIcons.thumbtack,
                                     size: 12,
-                                    color: alwaysOnTop ? Colors.grey[700] : Colors.grey[400],
+                                    color: s.alwaysOnTop.value ? Colors.grey[700] : Colors.grey[400],
                                   ),
                                 ),
                               ),
@@ -324,7 +389,46 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                       )
                     ],
                   ),
-                )
+                ),
+                Expanded(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Obx(
+                        ()=>Stack(
+                          children: [
+                            Text(
+                              currentLyric.value,
+                              style: TextStyle(
+                                fontSize: s.fontSize.value.toDouble(),
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.fade,
+                                fontFamily: "PuHui",
+                                foreground: Paint()
+                                ..style=PaintingStyle.stroke
+                                ..strokeWidth=3
+                                ..color=const Color.fromARGB(255, 24, 144, 255)
+                              ),
+                              softWrap: false,
+                            ),
+                            Text(
+                              currentLyric.value,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: s.fontSize.value.toDouble(),
+                                color: Colors.white,
+                                overflow: TextOverflow.fade,
+                                fontFamily: "PuHui"
+                              ),
+                              softWrap: false,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ),
+                const SizedBox(height: 25,)
               ],
             ),
           )

@@ -4,7 +4,7 @@ import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/color_controller.dart';
-import 'package:net_player_next/variables/float_lyric_controlller.dart';
+import 'package:net_player_next/views/float_lyric/float_lyric_controlller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/play_queue.dart';
 import 'package:net_player_next/views/functions/operations.dart';
@@ -435,6 +435,12 @@ class _PlayBarState extends State<PlayBar> {
                       child: Center(
                         child: GestureDetector(
                           onTap: () async {
+                            final SharedPreferences prefs = await SharedPreferences.getInstance();
+                            if(c.showFloatLyric.value){
+                              prefs.setBool("showFloatLyric", false);
+                            }else{
+                              prefs.setBool("showFloatLyric", true);
+                            }
                             floatLyricController.toggleLyricWindow();
                           },
                           child: MouseRegion(
