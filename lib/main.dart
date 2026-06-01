@@ -11,7 +11,7 @@ import 'package:net_player_next/lang/zh_tw.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
-import 'package:net_player_next/views/float_lyric.dart';
+import 'package:net_player_next/views/float_lyric/float_lyric.dart';
 import 'package:net_player_next/views/functions/audio.dart';
 import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -25,16 +25,15 @@ Future<void> main(List<String> args) async {
   await windowManager.ensureInitialized();
   if(windowArgs=="lyric"){
     WindowOptions windowOptions = const WindowOptions(
-      size: Size(900, 650),
-      minimumSize: Size(900, 650),
+      size: Size(600, 130),
+      minimumSize: Size(600, 130),
       center: true,
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.hidden,
-      title: 'Lyric'
+      title: 'Lyric',
     );
     await windowManager.waitUntilReadyToShow(windowOptions);
-    // await windowManager.show();
     runApp(const FloatLyric());
   }else{
     MediaKit.ensureInitialized();
