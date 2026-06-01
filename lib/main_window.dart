@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -31,6 +32,24 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   Operations operations=Operations();
   final ColorController colorController=Get.find();
 
+  final WindowMethodChannel mainWindowChannel = const WindowMethodChannel(
+    'net_player_next/main_window',
+    mode: ChannelMode.unidirectional,
+  );
+
+  Future<void> initWindowChannel() async {
+    await mainWindowChannel.setMethodCallHandler((call) async {
+      switch (call.method) {
+        case 'floatLyricClosed':
+          c.showFloatLyric.value = false;
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setBool("showFloatLyric", false);
+          return true;
+      }
+      return null;
+    });
+  }
+
   @override
   void onWindowClose() {
     c.ws.closeKit();
@@ -50,6 +69,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   @override
   void initState() {
     super.initState();
+    initWindowChannel();
     windowManager.addListener(this);
     trayManager.addListener(this);
     initMenuIcon();
@@ -86,6 +106,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
 
   @override
   void dispose() {
+    mainWindowChannel.setMethodCallHandler(null);
     trayManager.removeListener(this);
     windowManager.removeListener(this);
     listener.dispose();

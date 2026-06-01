@@ -1,3 +1,4 @@
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +14,16 @@ class FloatLyric extends StatefulWidget {
 }
 
 class _FloatLyricState extends State<FloatLyric> with WindowListener {
+
+  final WindowMethodChannel mainWindowChannel = const WindowMethodChannel(
+    'net_player_next/main_window',
+    mode: ChannelMode.unidirectional,
+  );
+
+  Future<void> closeFloatLyric() async {
+    await mainWindowChannel.invokeMethod('floatLyricClosed');
+    await windowManager.hide();
+  }
 
   @override
   void initState() {
@@ -278,8 +289,7 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                           ),
                           GestureDetector(
                             onTap: (){
-                              windowManager.close();
-                              // TODO 通知主窗口
+                              closeFloatLyric();
                             },
                             child: MouseRegion(
                               cursor: SystemMouseCursors.click,
