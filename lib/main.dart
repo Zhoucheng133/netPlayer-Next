@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +35,7 @@ Future<void> main(List<String> args) async {
       minimumSize: const Size(600, 130),
       center: styleVar.positionX.value==0.0 && styleVar.positionY.value==0.0 ? true : false,
       backgroundColor: Colors.transparent,
-      skipTaskbar: true,
+      skipTaskbar: Platform.isWindows,
       titleBarStyle: TitleBarStyle.hidden,
       title: 'Lyric',
     );
