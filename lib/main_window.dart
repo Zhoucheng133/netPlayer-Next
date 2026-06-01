@@ -54,7 +54,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   @override
   void onWindowClose() {
     c.ws.closeKit();
-    floatLyric.closeWindow();
     super.onWindowClose();
   }
 

@@ -33,7 +33,7 @@ Future<void> main(List<String> args) async {
       minimumSize: const Size(600, 130),
       center: styleVar.positionX.value==0.0 && styleVar.positionY.value==0.0 ? true : false,
       backgroundColor: Colors.transparent,
-      skipTaskbar: false,
+      skipTaskbar: true,
       titleBarStyle: TitleBarStyle.hidden,
       title: 'Lyric',
     );
