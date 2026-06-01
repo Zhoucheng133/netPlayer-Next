@@ -31,6 +31,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   late Worker wsOkListener;
   Operations operations=Operations();
   final ColorController colorController=Get.find();
+  final floatLyric=Get.put(FloatLyricControlller());
 
   final WindowMethodChannel mainWindowChannel = const WindowMethodChannel(
     'net_player_next/main_window',
@@ -53,6 +54,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   @override
   void onWindowClose() {
     c.ws.closeKit();
+    floatLyric.closeWindow();
     super.onWindowClose();
   }
 
@@ -271,7 +273,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
 
 
     final userInfo=prefs.getString('userInfo');
-    final floatLyric=Get.put(FloatLyricControlller());
     if(userInfo!=null){
       final userData=jsonDecode(userInfo);
       final requests=HttpRequests();

@@ -35,4 +35,11 @@ class FloatLyricControlller extends GetxController {
       floatLyricController?.show();
     }
   }
+
+  void closeWindow(){
+    if(floatLyricController!=null){
+      controller.showFloatLyric.value=false;
+      floatLyricController?.hide();
+    }
+  }
 }
