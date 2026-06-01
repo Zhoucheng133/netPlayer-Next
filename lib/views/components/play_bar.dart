@@ -4,6 +4,7 @@ import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/float_lyric_controlller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/play_queue.dart';
 import 'package:net_player_next/views/functions/operations.dart';
@@ -23,11 +24,13 @@ class _PlayBarState extends State<PlayBar> {
   Operations operations=Operations();
   final ColorController colorController=Get.find();
   final SongController songController=Get.find();
+  final FloatLyricControlller floatLyricController=Get.find();
 
   bool hoverPause=false;
   bool hoverPre=false;
   bool hoverSkip=false;
   bool hoverLove=false;
+  bool hoverFloatLyric=false;
   bool hoverLyric=false;
   bool hoverVolume=false;
   bool hoverMode=false;
@@ -132,31 +135,89 @@ class _PlayBarState extends State<PlayBar> {
             ),
             const SizedBox(width: 10,),
             SizedBox(
-              width: 165,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
+              width: 175,
+              child: Row(
                 children: [
-                  Text(
-                    songController.nowPlay.value.title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: colorController.darkMode.value ? Colors.white : Colors.black,
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          songController.nowPlay.value.title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: colorController.darkMode.value ? Colors.white : Colors.black,
+                          ),
+                          overflow: TextOverflow.fade,
+                          softWrap: false,
+                        ),
+                        const SizedBox(height: 3,),
+                        Text(
+                          songController.nowPlay.value.artist,
+                          style: TextStyle(
+                            color: Colors.grey[500],
+                            fontSize: 12,
+                          ),
+                          softWrap: false,
+                          overflow: TextOverflow.fade,
+                        )
+                      ],
                     ),
-                    overflow: TextOverflow.fade,
-                    softWrap: false,
                   ),
-                  const SizedBox(height: 3,),
-                  Text(
-                    songController.nowPlay.value.artist,
-                    style: TextStyle(
-                      color: Colors.grey[500],
-                      fontSize: 12,
+                  const SizedBox(width: 10,),
+                  Center(
+                    child: GestureDetector(
+                      onTap: (){
+                        if(isLoved()){
+                          operations.deloveSong(context, songController.nowPlay.value.id);
+                        }else{
+                          operations.loveSong(context, songController.nowPlay.value.id);
+                        }
+                    
+                      },
+                      child: MouseRegion(
+                        onEnter: (_){
+                          setState(() {
+                            hoverLove=true;
+                          });
+                        },
+                        onExit: (_){
+                          setState(() {
+                            hoverLove=false;
+                          });
+                        },
+                        child: !isLoved() ? Tooltip(
+                          message: 'love'.tr,
+                          waitDuration: const Duration(seconds: 1),
+                          child: TweenAnimationBuilder(
+                            tween: ColorTween(end: hoverLove ? colorController.color6() : colorController.color5()),
+                            duration: const Duration(milliseconds: 200),
+                            builder: (_, value, __)=>Icon(
+                              Icons.favorite_border_outlined,
+                              size: 18,
+                              color: value,
+                            )
+                          ),
+                        ) : Tooltip(
+                          message: 'delove'.tr,
+                          waitDuration: const Duration(seconds: 1),
+                          child: TweenAnimationBuilder(
+                            tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red),
+                            duration: const Duration(milliseconds: 200),
+                            builder: (_, value, __)=>Icon(
+                              Icons.favorite_rounded,
+                              size: 18,
+                              color: value,
+                            )
+                          ),
+                        )
+                      ),
                     ),
-                    softWrap: false,
-                    overflow: TextOverflow.fade,
-                  )
+                  ),
+                  const SizedBox(width: 10,)
                 ],
               ),
             ),
@@ -206,8 +267,15 @@ class _PlayBarState extends State<PlayBar> {
                                 ),
                                 const SizedBox(width: 15,),
                                 GestureDetector(
-                                  onTap: (){
+                                  onTap: () async {
                                     operations.toggleSong();
+                                    // final controller=await WindowController.create(
+                                    //   WindowConfiguration(
+                                    //     hiddenAtLaunch: true,
+                                    //     arguments: 'lyric',
+                                    //   ),
+                                    // );
+                                    // controller.show();
                                   },
                                   child: Tooltip(
                                     waitDuration: const Duration(seconds: 1),
@@ -354,7 +422,7 @@ class _PlayBarState extends State<PlayBar> {
             ),
             const SizedBox(width: 10,),
             SizedBox(
-              width: 220,
+              width: 230,
               child: Padding(
                 padding: const EdgeInsets.only(left: 30, right: 25),
                 child: Row(
@@ -366,53 +434,40 @@ class _PlayBarState extends State<PlayBar> {
                     Expanded(
                       child: Center(
                         child: GestureDetector(
-                          onTap: (){
-                            if(isLoved()){
-                              operations.deloveSong(context, songController.nowPlay.value.id);
-                            }else{
-                              operations.loveSong(context, songController.nowPlay.value.id);
-                            }
-                        
+                          onTap: () async {
+                            floatLyricController.toggleLyricWindow();
                           },
                           child: MouseRegion(
                             onEnter: (_){
                               setState(() {
-                                hoverLove=true;
+                                hoverFloatLyric=true;
                               });
                             },
                             onExit: (_){
                               setState(() {
-                                hoverLove=false;
+                                hoverFloatLyric=false;
                               });
                             },
-                            child: !isLoved() ? Tooltip(
-                              message: 'love'.tr,
-                              waitDuration: const Duration(seconds: 1),
-                              child: TweenAnimationBuilder(
-                                tween: ColorTween(end: hoverLove ? colorController.color6() : colorController.color5()),
-                                duration: const Duration(milliseconds: 200),
-                                builder: (_, value, __)=>Icon(
-                                  Icons.favorite_border_outlined,
-                                  size: 18,
-                                  color: value,
-                                )
-                              ),
-                            ) : Tooltip(
-                              message: 'delove'.tr,
-                              waitDuration: const Duration(seconds: 1),
-                              child: TweenAnimationBuilder(
-                                tween: ColorTween(end: hoverLove ? Colors.red[700] : Colors.red),
-                                duration: const Duration(milliseconds: 200),
-                                builder: (_, value, __)=>Icon(
-                                  Icons.favorite_rounded,
-                                  size: 18,
-                                  color: value,
-                                )
-                              ),
+                            child: c.showFloatLyric.value ?  TweenAnimationBuilder(
+                              tween: ColorTween(end: hoverFloatLyric ? colorController.color6() : colorController.color5()),
+                              duration: const Duration(milliseconds: 200),
+                              builder: (_, value, __)=>Icon(
+                                Icons.lyrics_rounded,
+                                size: 18,
+                                color: value,
+                              )
+                            ) : TweenAnimationBuilder(
+                              tween: ColorTween(end: hoverFloatLyric ? colorController.color6() : colorController.color5()),
+                              duration: const Duration(milliseconds: 200),
+                              builder: (_, value, __)=>Icon(
+                                Icons.lyrics_outlined,
+                                size: 18,
+                                color: value,
+                              )
                             )
                           ),
                         ),
-                      ),
+                      )
                     ),
                     Expanded(
                       child: Center(

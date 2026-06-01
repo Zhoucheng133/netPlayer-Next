@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:audio_service/audio_service.dart';
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/views/functions/ws.dart';
@@ -186,6 +187,9 @@ class Controller extends GetxController{
   RxInt wsPort=9098.obs;
   // ws服务状态
   RxBool wsOk=true.obs;
+
+  // 显示浮动歌词
+  RxBool showFloatLyric=false.obs;
 
   SMTCWindows? smtc;
 

@@ -1,4 +1,5 @@
 import 'package:audio_service/audio_service.dart';
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import 'package:net_player_next/lang/zh_tw.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
+import 'package:net_player_next/views/float_lyric.dart';
 import 'package:net_player_next/views/functions/audio.dart';
 import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -18,41 +20,59 @@ import 'package:window_manager/window_manager.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  final windowController = await WindowController.fromCurrentEngine();
+  final windowArgs=windowController.arguments;
   await windowManager.ensureInitialized();
-  MediaKit.ensureInitialized();
-  await hotKeyManager.unregisterAll();
-  WindowOptions windowOptions = const WindowOptions(
-    size: Size(900, 650),
-    minimumSize: Size(900, 650),
-    center: true,
-    backgroundColor: Colors.transparent,
-    skipTaskbar: false,
-    titleBarStyle: TitleBarStyle.hidden,
-    title: 'netPlayer'
-  );
-  final Controller c = Get.put(Controller());
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  final themeColor=prefs.getInt("theme");
-  final darkMode=prefs.getBool("darkMode");
-  final autoDark=prefs.getBool("autoDark");
-  c.wakeLockLyric.value=prefs.getBool("wakeLockLyric")??true;
-  Get.put(SongController());
-  Get.put(PlaylistController());
-  Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode, autoDark));
-  c.handler=await AudioService.init(
-    builder: () => MainAudioHanlder(),
-    config: const AudioServiceConfig(
-      androidNotificationChannelId: 'zhouc.netPlayer.channel.audio',
-      androidNotificationChannelName: 'Music playback',
-    ),
-  );
-  await c.initLang();
-  await windowManager.waitUntilReadyToShow(windowOptions);
-  // windowManager.waitUntilReadyToShow(windowOptions, () async {
-  //   await windowManager.show();
-  //   await windowManager.focus();
-  // });
-  runApp(const MainApp());
+  if(windowArgs=="lyric"){
+    WindowOptions windowOptions = const WindowOptions(
+      size: Size(900, 650),
+      minimumSize: Size(900, 650),
+      center: true,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.hidden,
+      title: 'Lyric'
+    );
+    await windowManager.waitUntilReadyToShow(windowOptions);
+    // await windowManager.show();
+    runApp(const FloatLyric());
+  }else{
+    MediaKit.ensureInitialized();
+    await hotKeyManager.unregisterAll();
+    WindowOptions windowOptions = const WindowOptions(
+      size: Size(900, 650),
+      minimumSize: Size(900, 650),
+      center: true,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.hidden,
+      title: 'netPlayer'
+    );
+    final Controller c = Get.put(Controller());
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final themeColor=prefs.getInt("theme");
+    final darkMode=prefs.getBool("darkMode");
+    final autoDark=prefs.getBool("autoDark");
+    c.wakeLockLyric.value=prefs.getBool("wakeLockLyric")??true;
+    Get.put(SongController());
+    Get.put(PlaylistController());
+    Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode, autoDark));
+
+    c.handler=await AudioService.init(
+      builder: () => MainAudioHanlder(),
+      config: const AudioServiceConfig(
+        androidNotificationChannelId: 'zhouc.netPlayer.channel.audio',
+        androidNotificationChannelName: 'Music playback',
+      ),
+    );
+    await c.initLang();
+    await windowManager.waitUntilReadyToShow(windowOptions);
+    // windowManager.waitUntilReadyToShow(windowOptions, () async {
+    //   await windowManager.show();
+    //   await windowManager.focus();
+    // });
+    runApp(const MainApp());
+  }
 }
 
 class MainTranslations extends Translations {
