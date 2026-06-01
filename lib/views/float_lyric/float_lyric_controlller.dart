@@ -1,4 +1,5 @@
 import 'package:desktop_multi_window/desktop_multi_window.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +20,10 @@ class FloatLyricControlller extends GetxController {
     final prefs=await SharedPreferences.getInstance();
     controller.showFloatLyric.value=prefs.getBool("showFloatLyric") ?? false;
     if(controller.showFloatLyric.value){
-      floatLyricController?.show();
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await Future.delayed(const Duration(milliseconds: 300));
+        floatLyricController?.show();
+      });
     }
   }
 
