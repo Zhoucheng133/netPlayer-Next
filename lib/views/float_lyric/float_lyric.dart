@@ -4,6 +4,7 @@ import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/views/float_lyric/style_var.dart';
+import 'package:screen_retriever/screen_retriever.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -82,6 +83,7 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
   bool hoverOpacity=false;
   bool hoverPin=true;
   bool hoverClose=false;
+  bool hoverMid=false;
 
   final StyleVar s=Get.put(StyleVar());
 
@@ -118,6 +120,43 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                       Expanded(child: DragToMoveArea(child: Container())),
                       if(inWindows) Row(
                         children: [
+                          GestureDetector(
+                            onTap: () async {
+                              Size windowSize = await windowManager.getSize();
+                              Offset currentPosition = await windowManager.getPosition();
+                              Display display = await screenRetriever.getPrimaryDisplay();
+                              double newX = (display.size.width - windowSize.width) / 2;
+                              await windowManager.setPosition(Offset(newX, currentPosition.dy));
+                            },
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              onEnter: (_){
+                                setState(() {
+                                  hoverMid=true;
+                                });
+                              },
+                              onExit: (_){
+                                setState(() {
+                                  hoverMid=false;
+                                });
+                              },
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                height: 25,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: hoverMid ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 230, 230, 230)
+                                ),
+                                child: Center(
+                                  child: FaIcon(
+                                    FontAwesomeIcons.alignCenter,
+                                    size: 12,
+                                    color: Colors.grey[700]
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                           CustomPopup(
                             content: SizedBox(
                               width: 120,
