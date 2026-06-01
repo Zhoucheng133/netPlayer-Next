@@ -7,6 +7,7 @@ import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
+import 'package:net_player_next/views/float_lyric/float_lyric_controlller.dart';
 import 'package:net_player_next/views/functions/hotkeys.dart';
 import 'package:net_player_next/views/functions/lyric_get.dart';
 import 'package:net_player_next/views/functions/requests.dart';
@@ -841,9 +842,11 @@ class Operations{
   }
 
   // 关闭窗口
-  void closeWindow(){
+  Future<void> closeWindow() async {
+    final FloatLyricControlller floatLyric=Get.find();
     if(Platform.isWindows){
       if(c.closeOnRun.value==false){
+        await floatLyric.closeWindow();
         windowManager.close();
       }else{
         windowManager.hide();

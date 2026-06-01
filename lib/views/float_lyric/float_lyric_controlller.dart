@@ -36,10 +36,9 @@ class FloatLyricControlller extends GetxController {
     }
   }
 
-  void closeWindow(){
+  Future<void> closeWindow() async {
     if(floatLyricController!=null){
-      controller.showFloatLyric.value=false;
-      floatLyricController?.hide();
+      await floatLyricController?.hide();
     }
   }
 }
