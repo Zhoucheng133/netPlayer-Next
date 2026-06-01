@@ -271,6 +271,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
 
 
     final userInfo=prefs.getString('userInfo');
+    final floatLyric=Get.put(FloatLyricControlller());
     if(userInfo!=null){
       final userData=jsonDecode(userInfo);
       final requests=HttpRequests();
@@ -367,7 +368,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
       if(c.useNavidromeAPI.value && c.userInfo.value.password!=null){
         await requests.getNavidromeAuth();
       }
-      final floatLyric=Get.put(FloatLyricControlller());
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         await floatLyric.initLyricWindow();
       });

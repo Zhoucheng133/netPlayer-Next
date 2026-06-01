@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FloatLyricControlller extends GetxController {
 
-  late WindowController floatLyricController;
+  WindowController? floatLyricController;
 
   final Controller controller= Get.find();
 
@@ -19,17 +19,20 @@ class FloatLyricControlller extends GetxController {
     final prefs=await SharedPreferences.getInstance();
     controller.showFloatLyric.value=prefs.getBool("showFloatLyric") ?? false;
     if(controller.showFloatLyric.value){
-      floatLyricController.show();
+      floatLyricController?.show();
     }
   }
 
-  void toggleLyricWindow(){ 
+  void toggleLyricWindow(){
+    if(floatLyricController==null){
+      initLyricWindow();
+    }
     if(controller.showFloatLyric.value){
       controller.showFloatLyric.value=false;
-      floatLyricController.hide();
+      floatLyricController?.hide();
     }else{
       controller.showFloatLyric.value=true;
-      floatLyricController.show();
+      floatLyricController?.show();
     }
   }
 }
