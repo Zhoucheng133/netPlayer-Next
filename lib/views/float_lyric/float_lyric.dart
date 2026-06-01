@@ -1,5 +1,6 @@
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,21 @@ class FloatLyric extends StatefulWidget {
 
   @override
   State<FloatLyric> createState() => _FloatLyricState();
+}
+
+class MainTranslations extends Translations {
+  @override
+  Map<String, Map<String, String>> get keys => {
+    'en_US': {
+      "showShadow": "Show Window Shadow",
+    },
+    'zh_CN': {
+      "showShadow": "显示窗口阴影",
+    },
+    'zh_TW': {
+      "showShadow": "顯示視窗陰影",
+    },
+  };
 }
 
 class _FloatLyricState extends State<FloatLyric> with WindowListener {
@@ -96,7 +112,14 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      translations: MainTranslations(),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      locale: s.lang.value.locale, 
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: ThemeData.light().textTheme.apply(
@@ -265,7 +288,6 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                                             prefs.setBool("showShadow", s.showShadow.value);
                                           }
                                         ),
-                                        const SizedBox(width: 10,),
                                         GestureDetector(
                                           onTap: () async {
                                             s.showShadow.value=!s.showShadow.value;

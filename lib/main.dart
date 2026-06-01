@@ -12,7 +12,7 @@ import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/float_lyric/float_lyric.dart';
-import 'package:net_player_next/views/float_lyric/style_var.dart';
+import 'package:net_player_next/views/float_lyric/style_var.dart' hide LanguageType, supportedLocales;
 import 'package:net_player_next/views/functions/audio.dart';
 import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -27,6 +27,7 @@ Future<void> main(List<String> args) async {
   if(windowArgs=="lyric"){
     final StyleVar styleVar=Get.put(StyleVar());
     await styleVar.initPrefs();
+    await styleVar.initLang();
     WindowOptions windowOptions = WindowOptions(
       size: const Size(600, 130),
       minimumSize: const Size(600, 130),
