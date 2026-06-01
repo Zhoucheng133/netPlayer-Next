@@ -37,6 +37,8 @@ Future<void> main(List<String> args) async {
       title: 'Lyric',
     );
     await windowManager.waitUntilReadyToShow(windowOptions, () async{
+      await windowManager.setResizable(false);
+      await windowManager.setAsFrameless();
       if(styleVar.alwaysOnTop.value){
         await windowManager.setAlwaysOnTop(true);
       }

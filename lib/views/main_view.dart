@@ -46,6 +46,11 @@ class _MainViewState extends State<MainView> {
   void sendFloatLyric(String content) {
     floatLyricChannel.invokeMethod('lyricChange', content).catchError((_) {});
   }
+
+  final WindowMethodChannel mainWindowChannel = const WindowMethodChannel(
+    'net_player_next/main_view',
+    mode: ChannelMode.unidirectional,
+  );
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式
   Future<void> initPrefs(BuildContext context) async {
@@ -79,6 +84,20 @@ class _MainViewState extends State<MainView> {
     }else{
       c.savePlay.value=false;
     }
+    await mainWindowChannel.setMethodCallHandler((call) async {
+      switch (call.method) {
+        case 'getLyric':
+          try{
+            var content=c.lyric[c.lyricLine.value-1].lyric;
+            sendFloatLyric(content);
+          }catch(e){
+            sendFloatLyric("${songController.nowPlay.value.artist} - ${songController.nowPlay.value.title}");
+          }
+          return true;
+      }
+      return null;
+    });
+
     final closeOnRun=prefs.getBool('closeOnRun');
     if(closeOnRun==false){
       c.closeOnRun.value=false;

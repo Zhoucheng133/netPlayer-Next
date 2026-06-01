@@ -25,6 +25,10 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
     'net_player_next/float_lyric',
     mode: ChannelMode.unidirectional,
   );
+  final WindowMethodChannel mainViewChannel = const WindowMethodChannel(
+    'net_player_next/main_view',
+    mode: ChannelMode.unidirectional,
+  );
 
   final RxString currentLyric = ''.obs;
 
@@ -51,7 +55,8 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
     super.initState();
     windowManager.addListener(this);
     initFloatLyricChannel();
-    initWindow();
+    init();
+    requestLyric();
   }
 
   Future<void> initFloatLyricChannel() async {
@@ -65,6 +70,10 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
     });
   }
 
+  void requestLyric(){
+    mainViewChannel.invokeMethod("getLyric");
+  }
+
   @override
   void dispose() {
     floatLyricChannel.setMethodCallHandler(null);
@@ -72,10 +81,8 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
     super.dispose();
   }
 
-  Future<void> initWindow() async {
+  Future<void> init() async {
     prefs=await SharedPreferences.getInstance();
-    await windowManager.setResizable(false);
-    await windowManager.setAsFrameless();
   }
 
   bool inWindows=false;
