@@ -104,7 +104,7 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
   bool inWindows=false;
   bool hoverText=false;
   bool hoverOpacity=false;
-  bool hoverPin=true;
+  bool hoverPin=false;
   bool hoverClose=false;
   bool hoverMid=false;
 
