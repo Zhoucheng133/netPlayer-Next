@@ -269,13 +269,6 @@ class _PlayBarState extends State<PlayBar> {
                                 GestureDetector(
                                   onTap: () async {
                                     operations.toggleSong();
-                                    // final controller=await WindowController.create(
-                                    //   WindowConfiguration(
-                                    //     hiddenAtLaunch: true,
-                                    //     arguments: 'lyric',
-                                    //   ),
-                                    // );
-                                    // controller.show();
                                   },
                                   child: Tooltip(
                                     waitDuration: const Duration(seconds: 1),
