@@ -73,30 +73,8 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
 
   Future<void> initWindow() async {
     prefs=await SharedPreferences.getInstance();
-    initPrefs();
     await windowManager.setResizable(false);
     await windowManager.setAsFrameless();
-  }
-
-  initPrefs() async { 
-    s.alwaysOnTop.value=prefs.getBool("alwaysOnTop")??true;
-    if(s.alwaysOnTop.value){
-      await windowManager.setAlwaysOnTop(true);
-    }
-    s.showShadow.value=prefs.getBool("showShadow")??false;
-    if(!s.showShadow.value){
-      await windowManager.setHasShadow(false);
-    }
-    s.fontSize.value=prefs.getInt("fontSize")??18;
-
-    final positionX=prefs.getDouble("positionX")??0;
-    final positionY=prefs.getDouble("positionY")??0;
-    if(positionX!=0&&positionY!=0){
-      await windowManager.setPosition(Offset(positionX, positionY));
-    }else{
-      await windowManager.center();
-    }
-    s.opacity.value=prefs.getInt("opacity")??100;
   }
 
   bool inWindows=false;

@@ -12,6 +12,7 @@ import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/float_lyric/float_lyric.dart';
+import 'package:net_player_next/views/float_lyric/style_var.dart';
 import 'package:net_player_next/views/functions/audio.dart';
 import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -24,16 +25,30 @@ Future<void> main(List<String> args) async {
   final windowArgs=windowController.arguments;
   await windowManager.ensureInitialized();
   if(windowArgs=="lyric"){
-    WindowOptions windowOptions = const WindowOptions(
-      size: Size(600, 130),
-      minimumSize: Size(600, 130),
-      center: true,
+    final StyleVar styleVar=Get.put(StyleVar());
+    await styleVar.initPrefs();
+    WindowOptions windowOptions = WindowOptions(
+      size: const Size(600, 130),
+      minimumSize: const Size(600, 130),
+      center: styleVar.positionX.value==0.0 && styleVar.positionY.value==0.0 ? true : false,
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.hidden,
       title: 'Lyric',
     );
-    await windowManager.waitUntilReadyToShow(windowOptions);
+    await windowManager.waitUntilReadyToShow(windowOptions, () async{
+      if(styleVar.alwaysOnTop.value){
+        await windowManager.setAlwaysOnTop(true);
+      }
+      if(!styleVar.showShadow.value){
+        await windowManager.setHasShadow(false);
+      }
+      if(styleVar.positionX.value!=0.0 && styleVar.positionY.value!=0.0){
+        await windowManager.setPosition(Offset(styleVar.positionX.value, styleVar.positionY.value));
+      }else{
+        await windowManager.center();
+      }
+    });
     runApp(const FloatLyric());
   }else{
     MediaKit.ensureInitialized();
