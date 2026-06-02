@@ -30,6 +30,7 @@ If this project was helpful, consider [buying me a coffee](https://blog.z-server
 - [Usage](#usage)
 - [Language support](#language-support)
 - [WebSocket service](#websocket-service)
+- [Desktop Floating Lyrics](#desktop-floating-lyrics)
 - [FAQ](#faq)
 - [Other links](#other-links)
 - [Config netPlayer Next on your own device](#config-netplayer-next-on-your-own-device)
@@ -111,6 +112,22 @@ Default port of WebSocket server is: `localhost:9098`.
 This function can be used for live streaming to display bgm information. You can develop your own live streaming background as follows:
 1. Design a web background for your stream.
 2. Find a place to display bgm information, and get it through WebSocket service.
+
+## Desktop Floating Lyrics
+
+> [!NOTE]
+> This feature requires at least version `v3.7.5`.
+
+<img src="../screenshot/float_lyric.png" width="600px">
+
+- <img src="../screenshot/icons/align.svg" width="15px"> Center the lyrics window horizontally on the screen
+- <img src="../screenshot/icons/text.svg" width="15px"> Set text size
+- <img src="../screenshot/icons/droplet.svg" width="15px"> Adjust appearance (opacity and window shadow visibility) **
+- <img src="../screenshot/icons/pin.svg" width="15px"> Pin the lyrics window to the top
+- <img src="../screenshot/icons/close.svg" width="15px"> Close floating lyrics
+
+\* All setting changes will be saved, including the position of the floating lyrics window. If you leave the floating lyrics open, they will automatically open it next time when you open netPlayer.  
+\*\* You can make the lyrics window completely transparent (simply set the opacity to 0 and disable the window shadow).
 
 ## FAQ
 

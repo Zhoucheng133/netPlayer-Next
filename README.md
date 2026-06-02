@@ -30,6 +30,7 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 - [使用](#使用)
 - [多语言支持](#多语言支持)
 - [WebSocket服务](#websocket服务)
+- [桌面悬浮歌词](#桌面悬浮歌词)
 - [常见问题](#常见问题)
 - [其它链接](#其它链接)
 - [在你的设备上配置netPlayer Next](#在你的设备上配置netplayer-next)
@@ -109,6 +110,23 @@ WebSocket服务器默认地址为: `localhost:9098`
 1. 设计一个Web页面用于直播（边框）
 2. 在你觉得合适的地方设计一个背景音乐信息显示，内容为WebSocket服务获取的信息
 
+## 桌面悬浮歌词
+
+> [!NOTE]
+> 此功能至少需要`v3.7.5`版本
+
+<img src="screenshot/float_lyric.png" width="600px">
+
+- <img src="screenshot/icons/align.svg" width="15px"> 让歌词窗口在屏幕上水平居中
+- <img src="screenshot/icons/text.svg" width="15px"> 设置文本大小
+- <img src="screenshot/icons/droplet.svg" width="15px"> 设置外观（透明度和是否显示窗口阴影）**
+- <img src="screenshot/icons/pin.svg" width="15px"> 让歌词窗口置于顶层
+- <img src="screenshot/icons/close.svg" width="15px"> 关闭悬浮歌词
+
+\* 修改所有的设置会保存，包括悬浮歌词的窗口位置。如果你打开悬浮歌词，下次启用会自动打开  
+\*\* 你可以将歌词窗口设置为完全透明（将透明度设置为0，并且不显示阴影即可）
+
+
 ## 常见问题
 ### 无法连接到音乐服务器:
 >你需要先检查你的客户端设备是否可以直接打开音乐库网页，很大概率是服务器防火墙或者设置问题  
@@ -134,7 +152,7 @@ C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer
 
 - 【[MusicDL-GUI](https://github.com/Zhoucheng133/MusicDL-GUI)】下载歌曲的工具
 - 【[Live-BG](https://github.com/Zhoucheng133/Live-BG)】用于直播的配合netPlayer显示当前播放歌曲信息和歌词的背景
-- ~~【[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)】桌面歌词系统~~
+- ~~【[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)】桌面歌词系统~~ (已整合进软件本体)
 
 ## 在你的设备上配置netPlayer Next
 
