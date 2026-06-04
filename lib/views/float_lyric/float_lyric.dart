@@ -21,12 +21,27 @@ class MainTranslations extends Translations {
   Map<String, Map<String, String>> get keys => {
     'en_US': {
       "showShadow": "Show Window Shadow",
+      'alignCenter': "Center Window Horizontally",
+      'fontSize': 'Font Size',
+      'appearance': 'Appearance',
+      'alwaysOnTop': "Always On Top",
+      'close': 'Close'
     },
     'zh_CN': {
       "showShadow": "显示窗口阴影",
+      'alignCenter': "窗口水平居中",
+      'fontSize': '字体大小',
+      'appearance': '外观',
+      'alwaysOnTop': "窗口置顶",
+      'close': '关闭'
     },
     'zh_TW': {
       "showShadow": "顯示視窗陰影",
+      'alignCenter': "視窗水平居中",
+      'fontSize': '字體大小',
+      'appearance': '外觀',
+      'alwaysOnTop': "視窗置頂",
+      'close': '關閉',
     },
   };
 }
@@ -150,38 +165,42 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                       Expanded(child: DragToMoveArea(child: Container())),
                       if(inWindows) Row(
                         children: [
-                          GestureDetector(
-                            onTap: () async {
-                              Size windowSize = await windowManager.getSize();
-                              Offset currentPosition = await windowManager.getPosition();
-                              Display display = await screenRetriever.getPrimaryDisplay();
-                              double newX = (display.size.width - windowSize.width) / 2;
-                              await windowManager.setPosition(Offset(newX, currentPosition.dy));
-                            },
-                            child: MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              onEnter: (_){
-                                setState(() {
-                                  hoverMid=true;
-                                });
+                          Tooltip(
+                            message: "alignCenter".tr,
+                            waitDuration: const Duration(seconds: 1),
+                            child: GestureDetector(
+                              onTap: () async {
+                                Size windowSize = await windowManager.getSize();
+                                Offset currentPosition = await windowManager.getPosition();
+                                Display display = await screenRetriever.getPrimaryDisplay();
+                                double newX = (display.size.width - windowSize.width) / 2;
+                                await windowManager.setPosition(Offset(newX, currentPosition.dy));
                               },
-                              onExit: (_){
-                                setState(() {
-                                  hoverMid=false;
-                                });
-                              },
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                height: 25,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: hoverMid ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 230, 230, 230)
-                                ),
-                                child: Center(
-                                  child: FaIcon(
-                                    FontAwesomeIcons.alignCenter,
-                                    size: 12,
-                                    color: Colors.grey[700]
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverMid=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverMid=false;
+                                  });
+                                },
+                                child: AnimatedContainer(
+                                  duration: const Duration(milliseconds: 200),
+                                  height: 25,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    color: hoverMid ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 230, 230, 230)
+                                  ),
+                                  child: Center(
+                                    child: FaIcon(
+                                      FontAwesomeIcons.alignCenter,
+                                      size: 12,
+                                      color: Colors.grey[700]
+                                    ),
                                   ),
                                 ),
                               ),
@@ -235,31 +254,35 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                                 ],
                               )
                             ),
-                            child: GestureDetector(
-                              child: MouseRegion(
-                                cursor: SystemMouseCursors.click,
-                                onEnter: (_){
-                                  setState(() {
-                                    hoverText=true;
-                                  });
-                                },
-                                onExit: (_){
-                                  setState(() {
-                                    hoverText=false;
-                                  });
-                                },
-                                child: AnimatedContainer(
-                                  duration: const Duration(milliseconds: 200),
-                                  decoration: BoxDecoration(
-                                    color: hoverText ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 230, 230, 230)
-                                  ),
-                                  height: 25,
-                                  width: 40,
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.text_fields,
-                                      size: 14,
-                                      color: Colors.grey[700],
+                            child: Tooltip(
+                              message: 'fontSize'.tr,
+                              waitDuration: const Duration(seconds: 1),
+                              child: GestureDetector(
+                                child: MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  onEnter: (_){
+                                    setState(() {
+                                      hoverText=true;
+                                    });
+                                  },
+                                  onExit: (_){
+                                    setState(() {
+                                      hoverText=false;
+                                    });
+                                  },
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 200),
+                                    decoration: BoxDecoration(
+                                      color: hoverText ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 230, 230, 230)
+                                    ),
+                                    height: 25,
+                                    width: 40,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.text_fields,
+                                        size: 14,
+                                        color: Colors.grey[700],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -334,98 +357,110 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
                                 ],
                               )
                             ),
-                            child: MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              onEnter: (_){
-                                setState(() {
-                                  hoverOpacity=true;
-                                });
-                              },
-                              onExit: (_){
-                                setState(() {
-                                  hoverOpacity=false;
-                                });
-                              },
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                height: 25,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: hoverOpacity ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 230, 230, 230)
-                                ),
-                                child: Center(
-                                  child: FaIcon(
-                                    FontAwesomeIcons.droplet,
-                                    size: 12,
-                                    color: Colors.grey[700],
+                            child: Tooltip(
+                              message: 'appearance'.tr,
+                              waitDuration: const Duration(seconds: 1),
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverOpacity=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverOpacity=false;
+                                  });
+                                },
+                                child: AnimatedContainer(
+                                  duration: const Duration(milliseconds: 200),
+                                  height: 25,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    color: hoverOpacity ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 230, 230, 230)
+                                  ),
+                                  child: Center(
+                                    child: FaIcon(
+                                      FontAwesomeIcons.droplet,
+                                      size: 12,
+                                      color: Colors.grey[700],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                          GestureDetector(
-                            onTap: (){
-                              s.alwaysOnTop.value=!s.alwaysOnTop.value;
-                              windowManager.setAlwaysOnTop(s.alwaysOnTop.value);
-                              prefs.setBool("alwaysOnTop", s.alwaysOnTop.value);
-                            },
-                            child: MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              onEnter: (_){
-                                setState(() {
-                                  hoverPin=true;
-                                });
+                          Tooltip(
+                            message: "alwaysOnTop".tr,
+                            waitDuration: const Duration(seconds: 1),
+                            child: GestureDetector(
+                              onTap: (){
+                                s.alwaysOnTop.value=!s.alwaysOnTop.value;
+                                windowManager.setAlwaysOnTop(s.alwaysOnTop.value);
+                                prefs.setBool("alwaysOnTop", s.alwaysOnTop.value);
                               },
-                              onExit: (_){
-                                setState(() {
-                                  hoverPin=false;
-                                });
-                              },
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                height: 25,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: hoverPin ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 230, 230, 230)
-                                ),
-                                child: Center(
-                                  child: FaIcon(
-                                    FontAwesomeIcons.thumbtack,
-                                    size: 12,
-                                    color: s.alwaysOnTop.value ? Colors.grey[700] : Colors.grey[400],
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverPin=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverPin=false;
+                                  });
+                                },
+                                child: AnimatedContainer(
+                                  duration: const Duration(milliseconds: 200),
+                                  height: 25,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    color: hoverPin ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 230, 230, 230)
+                                  ),
+                                  child: Center(
+                                    child: FaIcon(
+                                      FontAwesomeIcons.thumbtack,
+                                      size: 12,
+                                      color: s.alwaysOnTop.value ? Colors.grey[700] : Colors.grey[400],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                          GestureDetector(
-                            onTap: (){
-                              closeFloatLyric();
-                            },
-                            child: MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              onEnter: (_){
-                                setState(() {
-                                  hoverClose=true;
-                                });
+                          Tooltip(
+                            message: 'close'.tr,
+                            waitDuration: const Duration(seconds: 1),
+                            child: GestureDetector(
+                              onTap: (){
+                                closeFloatLyric();
                               },
-                              onExit: (_){
-                                setState(() {
-                                  hoverClose=false;
-                                });
-                              },
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                decoration: BoxDecoration(
-                                  color: hoverClose ? const Color.fromARGB(255, 210, 0, 0) : const Color.fromARGB(0, 230, 230, 230)
-                                ),
-                                height: 25,
-                                width: 40,
-                                child: Center(
-                                  child: FaIcon(
-                                    FontAwesomeIcons.xmark,
-                                    size: 14,
-                                    color: hoverClose ? Colors.white : Colors.grey[700],
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                onEnter: (_){
+                                  setState(() {
+                                    hoverClose=true;
+                                  });
+                                },
+                                onExit: (_){
+                                  setState(() {
+                                    hoverClose=false;
+                                  });
+                                },
+                                child: AnimatedContainer(
+                                  duration: const Duration(milliseconds: 200),
+                                  decoration: BoxDecoration(
+                                    color: hoverClose ? const Color.fromARGB(255, 210, 0, 0) : const Color.fromARGB(0, 230, 230, 230)
+                                  ),
+                                  height: 25,
+                                  width: 40,
+                                  child: Center(
+                                    child: FaIcon(
+                                      FontAwesomeIcons.xmark,
+                                      size: 14,
+                                      color: hoverClose ? Colors.white : Colors.grey[700],
+                                    ),
                                   ),
                                 ),
                               ),

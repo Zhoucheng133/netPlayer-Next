@@ -226,4 +226,7 @@ const Map<String, String> enUS = {
   'queueNotAvaliable': 'Play queue not avaliable\nIn full random play mode now',
 
   'keepScreenOnInLyric': "Keep screen on in lyrics",
+  
+  'showFloatLyric': "Show floating lyrics",
+  'hideFloatLyric': "Hide floating lyrics",
 };

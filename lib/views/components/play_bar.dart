@@ -436,34 +436,38 @@ class _PlayBarState extends State<PlayBar> {
                             }
                             floatLyricController.toggleLyricWindow();
                           },
-                          child: MouseRegion(
-                            onEnter: (_){
-                              setState(() {
-                                hoverFloatLyric=true;
-                              });
-                            },
-                            onExit: (_){
-                              setState(() {
-                                hoverFloatLyric=false;
-                              });
-                            },
-                            child: c.showFloatLyric.value ?  TweenAnimationBuilder(
-                              tween: ColorTween(end: hoverFloatLyric ? colorController.color6() : colorController.color5()),
-                              duration: const Duration(milliseconds: 200),
-                              builder: (_, value, __)=>Icon(
-                                Icons.lyrics_rounded,
-                                size: 18,
-                                color: value,
+                          child: Tooltip(
+                            message: c.showFloatLyric.value ? "hideFloatLyric".tr : "showFloatLyric".tr,
+                            waitDuration: const Duration(seconds: 1),
+                            child: MouseRegion(
+                              onEnter: (_){
+                                setState(() {
+                                  hoverFloatLyric=true;
+                                });
+                              },
+                              onExit: (_){
+                                setState(() {
+                                  hoverFloatLyric=false;
+                                });
+                              },
+                              child: c.showFloatLyric.value ?  TweenAnimationBuilder(
+                                tween: ColorTween(end: hoverFloatLyric ? colorController.color6() : colorController.color5()),
+                                duration: const Duration(milliseconds: 200),
+                                builder: (_, value, __)=>Icon(
+                                  Icons.lyrics_rounded,
+                                  size: 18,
+                                  color: value,
+                                )
+                              ) : TweenAnimationBuilder(
+                                tween: ColorTween(end: hoverFloatLyric ? colorController.color6() : colorController.color5()),
+                                duration: const Duration(milliseconds: 200),
+                                builder: (_, value, __)=>Icon(
+                                  Icons.lyrics_outlined,
+                                  size: 18,
+                                  color: value,
+                                )
                               )
-                            ) : TweenAnimationBuilder(
-                              tween: ColorTween(end: hoverFloatLyric ? colorController.color6() : colorController.color5()),
-                              duration: const Duration(milliseconds: 200),
-                              builder: (_, value, __)=>Icon(
-                                Icons.lyrics_outlined,
-                                size: 18,
-                                color: value,
-                              )
-                            )
+                            ),
                           ),
                         ),
                       )
