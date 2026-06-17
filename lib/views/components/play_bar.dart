@@ -370,7 +370,7 @@ class _PlayBarState extends State<PlayBar> {
                           ),
                           child: Slider(
                             value: songController.nowPlay.value.duration==0 ? 0.0 : c.playProgress.value/1000/songController.nowPlay.value.duration>1 ? 1.0 : c.playProgress.value/1000/songController.nowPlay.value.duration<0 ? 0 : c.playProgress.value/1000/songController.nowPlay.value.duration,
-                            onChanged: (value){
+                            onChanged: songController.nowPlay.value.duration==0 ? null : (value){
                               operations.seekChange(value);
                             },
                             onChangeEnd: (value){
