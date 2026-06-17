@@ -98,7 +98,7 @@ class _PlayBarState extends State<PlayBar> {
                           Center(
                             child: Hero(
                               tag: 'cover',
-                              child: songController.nowPlay.value.id=="" ? Image.asset(
+                              child: songController.nowPlay.value.id.isEmpty || (c.userInfo.value.url?.isEmpty ?? true) ? Image.asset(
                                 "assets/blank.jpg",
                                 fit: BoxFit.contain,
                               ) : Image.network(

@@ -290,7 +290,7 @@ class _LyricViewState extends State<LyricView> {
                               child: Hero(
                                 tag: 'cover',
                                 child: Obx(() =>
-                                  songController.nowPlay.value.id=="" ? Image.asset(
+                                  songController.nowPlay.value.id.isEmpty || (c.userInfo.value.url?.isEmpty ?? true) ? Image.asset(
                                     "assets/blank.jpg",
                                     fit: BoxFit.contain,
                                   ) : Image.network(
