@@ -7,9 +7,9 @@ import 'package:net_player_next/variables/variables.dart';
 class HttpRequests{
   final Controller c = Get.find();
   // 请求函数
-  Future<Map<String, dynamic>> httpRequest(String url, {int timeoutInSeconds = 5}) async {
+  Future<Map<String, dynamic>> httpRequest(String url, {Duration timeoutDuration = const Duration(seconds: 5)}) async {
     try {
-      final response = await http.get(Uri.parse(url)).timeout(Duration(seconds: timeoutInSeconds));
+      final response = await http.get(Uri.parse(url)).timeout(timeoutDuration);
 
       if (response.statusCode == 200) {
         String responseBody = utf8.decode(response.bodyBytes);
