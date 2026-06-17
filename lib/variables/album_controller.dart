@@ -20,7 +20,7 @@ class AlbumItemClass {
       map["artistId"]??map["albumArtistId"]??"",
       map["coverArt"]??"",
       map['year']??map['maxYear']??0,
-      map['duration'].toInt() ?? 0,
+      map['duration']?.toInt() ?? 0,
       map['created'] ?? map['createdAt'] ?? ''
     );
   }
