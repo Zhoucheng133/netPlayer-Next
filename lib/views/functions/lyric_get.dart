@@ -69,7 +69,12 @@ class LyricGet{
       return false;
     }
     String lyricRaw = lyricResponse["lyric"];
-    String translateRaw = lyricResponse["translate"] ?? "";
+    String translateRaw = "";
+    if(lyricResponse["translate"] is List){
+      translateRaw = lyricResponse["translate"].join("\n");
+    }else{
+      translateRaw = lyricResponse["translate"] ?? "";
+    }
 
     final timeRegex = RegExp(r'\[(\d{2}:\d{2}(?:\.\d+)?)\]');
 
