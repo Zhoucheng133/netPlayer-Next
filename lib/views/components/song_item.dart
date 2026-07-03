@@ -140,16 +140,15 @@ class _SongItemState extends State<SongItem> {
   }
 
   Future<void> showSongMenu(BuildContext context, TapDownDetails details) async {
-    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
-    final Offset position = overlay.localToGlobal(details.globalPosition);
+    final tapPosition = details.globalPosition;
     var val=await showMenu(
       context: context, 
       color: colorController.darkMode.value ? colorController.color3() : Colors.white,
       position: RelativeRect.fromLTRB(
-        position.dx,
-        position.dy,
-        position.dx + 50,
-        position.dy + 50,
+        tapPosition.dx,
+        tapPosition.dy,
+        tapPosition.dx,
+        tapPosition.dy
       ),
       items: [
         PopupMenuItem(
