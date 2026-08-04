@@ -193,11 +193,10 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
         return 0;
       }
       Random random =Random();
-      return random.nextInt(length-1);
+      return random.nextInt(length);
     }else{
       return index;
     }
-    
   }
 
   // 下一首
