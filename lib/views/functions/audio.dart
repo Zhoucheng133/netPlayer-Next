@@ -8,7 +8,6 @@ import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:smtc_windows/smtc_windows.dart';
-import 'package:rxdart/rxdart.dart';
 
 class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
 
@@ -43,6 +42,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
           }
         }
       }else if(c.lyric.length==1){
+        // updateLyricLine(0);
         c.lyricLine.value=0;
       }
     });
@@ -60,14 +60,8 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
         songController.nowPlay.refresh();
       }
     });
-    player.stream.buffering.switchMap((isBuffering) {
-      if (isBuffering) {
-        return Stream.value(true); 
-      } else {
-        return Stream.value(false).delay(const Duration(milliseconds: 300));
-      }
-    }).listen((isBuffering) {
-      c.buffer.value = isBuffering;
+    player.stream.buffering.listen((isBuffering) {
+      c.buffer.value=isBuffering;
     });
   }
 
