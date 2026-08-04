@@ -62,9 +62,9 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
     });
     player.stream.buffering.switchMap((isBuffering) {
       if (isBuffering) {
-        return Stream.value(true); 
-      } else {
         return Stream.value(false).delay(const Duration(milliseconds: 300));
+      } else {
+        return Stream.value(true);
       }
     }).listen((isBuffering) {
       c.buffer.value = isBuffering;
