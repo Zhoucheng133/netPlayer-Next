@@ -53,10 +53,15 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
 
   @override
   Future<void> onWindowClose() async {
-    if(c.useWs.value){
-      c.ws.closeKit();
-    }
-    super.onWindowClose();
+    const WindowMethodChannel floatLyricChannel = WindowMethodChannel(
+      'net_player_next/float_lyric',
+      mode: ChannelMode.unidirectional,
+    );
+    try {
+      await floatLyricChannel.invokeMethod('close');
+    } catch (_) {}
+    await windowManager.setPreventClose(false);
+    await windowManager.close();
   }
 
   @override
@@ -74,6 +79,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     super.initState();
     initWindowChannel();
     windowManager.addListener(this);
+    windowManager.setPreventClose(true);
     trayManager.addListener(this);
     initMenuIcon();
     listener=ever(c.userInfo, (callback)=>setLogin());
@@ -115,6 +121,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     listener.dispose();
     wsOkListener.dispose();
     try {
+      c.ws.closeKit();
       c.ws.stop();
     } catch (_) {}
     super.dispose();

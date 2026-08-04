@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -833,13 +832,6 @@ class Operations{
       windowManager.hide();
       return;
     }
-    const WindowMethodChannel floatLyricChannel = WindowMethodChannel(
-      'net_player_next/float_lyric',
-      mode: ChannelMode.unidirectional,
-    );
-    try {
-      await floatLyricChannel.invokeMethod('destroy');
-    } catch (_) {}
     windowManager.close();
   }
 
