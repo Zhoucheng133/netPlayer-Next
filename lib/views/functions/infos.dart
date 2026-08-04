@@ -6,6 +6,7 @@ import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/operations.dart';
+import 'package:skeletons_forked/skeletons_forked.dart';
 
 class Infos {
 
@@ -33,6 +34,20 @@ class Infos {
                   child: Image.network(
                     "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${data.coverArt}",
                     width: 100,
+                    frameBuilder:(context, child, frame, wasSynchronouslyLoaded){
+                      if (wasSynchronouslyLoaded) {
+                        return child;
+                      }
+                      return AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 200),
+                        child: frame != null ? child : const SkeletonAvatar(
+                          style: SkeletonAvatarStyle(
+                            width: 100,
+                            height: 100
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: 10,),
@@ -239,6 +254,20 @@ class Infos {
                 child: Image.network(
                   "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${data.id}",
                   width: 100,
+                  frameBuilder:(context, child, frame, wasSynchronouslyLoaded){
+                    if (wasSynchronouslyLoaded) {
+                      return child;
+                    }
+                    return AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: frame != null ? child : const SkeletonAvatar(
+                        style: SkeletonAvatarStyle(
+                          width: 100,
+                          height: 100
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 10,),
