@@ -259,7 +259,6 @@ class Operations{
           playFrom: Pages.none, 
           index: 0
         );
-        c.isPlay.value=false;
       }
     }
   }
@@ -331,7 +330,6 @@ class Operations{
           playFrom: Pages.none, 
           index: 0
         );
-        c.isPlay.value=false;
       }
     }
   }
@@ -361,7 +359,6 @@ class Operations{
           playFrom: Pages.none, 
           index: 0
         );
-        c.isPlay.value=false;
       }
     }
   }
@@ -394,7 +391,6 @@ class Operations{
           playFrom: Pages.none, 
           index: 0
         );
-        c.isPlay.value=false;
       }
     }
   }
@@ -426,7 +422,6 @@ class Operations{
           playFrom: Pages.none, 
           index: 0
         );
-        c.isPlay.value=false;
       }
     }
   }
@@ -516,7 +511,6 @@ class Operations{
         playFrom: Pages.none, 
         index: 0
       );
-      c.isPlay.value=false;
       return;
     }else{
       var tmp=rlt['subsonic-response']['randomSongs']['song'][0];
@@ -535,7 +529,6 @@ class Operations{
         index: 0
       );
       await c.handler.play();
-      c.isPlay.value=true;
     }
   }
 
@@ -559,7 +552,6 @@ class Operations{
         playFrom: Pages.none, 
         index: 0
       );
-      c.isPlay.value=false;
     }
     c.fullRandom.value=!c.fullRandom.value;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -696,7 +688,6 @@ class Operations{
       index: index
     );
     c.handler.play();
-    c.isPlay.value=true;
     if(c.fullRandom.value){
       c.fullRandom.value=false;
       final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -722,7 +713,6 @@ class Operations{
       return;
     }
     c.handler.stop();
-    c.isPlay.value=false;
   }
 
   // 暂停
@@ -731,7 +721,6 @@ class Operations{
       return;
     }
     c.handler.pause();
-    // c.isPlay.value=false;
   }
 
   // 播放
@@ -740,7 +729,6 @@ class Operations{
       return;
     }
     c.handler.play();
-    // c.isPlay.value=true;
   }
 
   // 下一首
@@ -749,7 +737,6 @@ class Operations{
       return;
     }
     c.handler.skipToNext();
-    c.isPlay.value=true;
   }
 
   // 上一首
@@ -758,7 +745,6 @@ class Operations{
       return;
     }
     c.handler.skipToPrevious();
-    c.isPlay.value=true;
   }
 
   // 定位

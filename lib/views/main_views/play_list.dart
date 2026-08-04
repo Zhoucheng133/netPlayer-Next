@@ -116,7 +116,6 @@ class _PlayListViewState extends State<PlayListView> {
           playFrom: Pages.none, 
           index: 0
         );
-        c.isPlay.value=false;
       }
     }
   }
@@ -157,7 +156,6 @@ class _PlayListViewState extends State<PlayListView> {
           playFrom: Pages.none, 
           index: 0
         );
-        c.isPlay.value=false;
       }
     }
     if(context.mounted) showMessage(true, 'updateOk'.tr, context);
