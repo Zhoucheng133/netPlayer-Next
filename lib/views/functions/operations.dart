@@ -451,7 +451,7 @@ class Operations{
                 Navigator.pop(context);
                 final SharedPreferences prefs = await SharedPreferences.getInstance();
                 await prefs.setBool('useWs', true);
-                closeWindow(forceExit: true);
+                windowManager.close();
               }, 
               child: Text('continueCloseApp'.tr)
             )
@@ -481,7 +481,7 @@ class Operations{
                 Navigator.pop(context);
                 final SharedPreferences prefs = await SharedPreferences.getInstance();
                 await prefs.setBool('useWs', false);
-                closeWindow(forceExit: true);
+                windowManager.close();
               }, 
               child: Text('continueCloseApp'.tr)
             )
@@ -828,8 +828,8 @@ class Operations{
   }
 
   // 关闭窗口
-  Future<void> closeWindow({bool forceExit = false}) async {
-    if(Platform.isWindows && c.closeOnRun.value && !forceExit){
+  Future<void> closeWindow() async {
+    if(Platform.isWindows && c.closeOnRun.value){
       windowManager.hide();
       return;
     }
