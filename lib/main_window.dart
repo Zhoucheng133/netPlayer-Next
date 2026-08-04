@@ -51,19 +51,11 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     });
   }
 
-  final WindowMethodChannel floatLyricChannel = const WindowMethodChannel(
-    'net_player_next/float_lyric',
-    mode: ChannelMode.unidirectional,
-  );
-
   @override
   Future<void> onWindowClose() async {
     if(c.useWs.value){
       c.ws.closeKit();
     }
-    try {
-      await floatLyricChannel.invokeMethod('destroy');
-    } catch (_) {}
     super.onWindowClose();
   }
 
@@ -219,7 +211,8 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   @override
   void onTrayMenuItemClick(MenuItem menuItem) {
     if(menuItem.key == 'exit_app') {
-      windowManager.close();
+      // windowManager.close();
+      operations.closeWindow();
     }else if(menuItem.key == 'toggle'){
       operations.toggleSong();
     }else if(menuItem.key=="next_song"){
