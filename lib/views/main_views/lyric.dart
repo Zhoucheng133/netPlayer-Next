@@ -415,23 +415,22 @@ class _LyricViewState extends State<LyricView> {
                                           ),
                                           duration: const Duration(milliseconds: 200),
                                           child: Center(
-                                            child: Obx(()=>
-                                              c.buffer.value ? const SizedBox(
-                                                width: 20,
-                                                height: 20,
-                                                child: CircularProgressIndicator(
-                                                  strokeWidth: 3,
-                                                  color: Colors.white,
-                                                ),
-                                              ) : c.isPlay.value ? const Icon(
+                                            child: c.isPlay.value ? TweenAnimationBuilder(
+                                              duration: const Duration(milliseconds: 200), 
+                                              tween: ColorTween(end: c.buffer.value ? colorController.color4() : Colors.white,),
+                                              builder: (context, value, child) => Icon(
                                                 Icons.pause_rounded,
-                                                color: Colors.white,
+                                                color: value,
                                                 size: 35,
-                                              ): const Icon(
+                                              ),
+                                            ) : TweenAnimationBuilder(
+                                              duration: const Duration(milliseconds: 200), 
+                                              tween: ColorTween(end: c.buffer.value ? colorController.color4() : Colors.white,),
+                                              builder: (context, value, child) => Icon(
                                                 Icons.play_arrow_rounded,
-                                                color: Colors.white,
+                                                color: value,
                                                 size: 35,
-                                              )
+                                              ),
                                             )
                                           ),
                                         ),

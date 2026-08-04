@@ -7,6 +7,7 @@ import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 
 class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
@@ -60,7 +61,13 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
         songController.nowPlay.refresh();
       }
     });
-    player.stream.buffering.listen((isBuffering) {
+    player.stream.buffering.switchMap((isBuffering){
+      if (isBuffering) {
+        return Stream.value(true).delay(const Duration(milliseconds: 300));
+      } else {
+        return Stream.value(false);
+      }
+    }).listen((isBuffering) {
       c.buffer.value=isBuffering;
     });
   }

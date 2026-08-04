@@ -308,20 +308,21 @@ class _PlayBarState extends State<PlayBar> {
                                         ),
                                         duration: const Duration(milliseconds: 200),
                                         child: Center(
-                                          child: c.buffer.value ? const SizedBox(
-                                            width: 15,
-                                            height: 15,
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: 2,
-                                              color: Colors.white,
-                                            ),
-                                          ) : c.isPlay.value ? const Icon(
-                                            Icons.pause_rounded,
-                                            color: Colors.white,
-                                          ): const Icon(
-                                            Icons.play_arrow_rounded,
-                                            color: Colors.white,
-                                          )
+                                          child: c.isPlay.value ? TweenAnimationBuilder(
+                                              duration: const Duration(milliseconds: 200), 
+                                              tween: ColorTween(end: c.buffer.value ? colorController.color4() : Colors.white,),
+                                              builder: (context, value, child) => Icon(
+                                                Icons.pause_rounded,
+                                                color: value,
+                                              ),
+                                            ) : TweenAnimationBuilder(
+                                              duration: const Duration(milliseconds: 200), 
+                                              tween: ColorTween(end: c.buffer.value ? colorController.color4() : Colors.white,),
+                                              builder: (context, value, child) => Icon(
+                                                Icons.play_arrow_rounded,
+                                                color: value,
+                                              ),
+                                            )
                                         ),
                                       ),
                                     ),
