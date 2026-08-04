@@ -97,7 +97,7 @@ class _FloatLyricState extends State<FloatLyric> with WindowListener {
           currentLyric.value = call.arguments?.toString() ?? '';
           return true;
         case 'destroy':
-          await windowManager.destroy();
+          await windowManager.close();
           return true;
       }
       return null;

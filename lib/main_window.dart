@@ -211,8 +211,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   @override
   void onTrayMenuItemClick(MenuItem menuItem) {
     if(menuItem.key == 'exit_app') {
-      // windowManager.close();
-      operations.closeWindow();
+      operations.closeWindow(forceExit: true);
     }else if(menuItem.key == 'toggle'){
       operations.toggleSong();
     }else if(menuItem.key=="next_song"){
