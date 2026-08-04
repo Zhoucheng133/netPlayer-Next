@@ -416,7 +416,14 @@ class _LyricViewState extends State<LyricView> {
                                           duration: const Duration(milliseconds: 200),
                                           child: Center(
                                             child: Obx(()=>
-                                              c.isPlay.value ? const Icon(
+                                              c.buffer.value ? const SizedBox(
+                                                width: 20,
+                                                height: 20,
+                                                child: CircularProgressIndicator(
+                                                  strokeWidth: 3,
+                                                  color: Colors.white,
+                                                ),
+                                              ) : c.isPlay.value ? const Icon(
                                                 Icons.pause_rounded,
                                                 color: Colors.white,
                                                 size: 35,

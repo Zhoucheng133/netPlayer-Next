@@ -308,7 +308,14 @@ class _PlayBarState extends State<PlayBar> {
                                         ),
                                         duration: const Duration(milliseconds: 200),
                                         child: Center(
-                                          child: c.isPlay.value ? const Icon(
+                                          child: c.buffer.value ? const SizedBox(
+                                            width: 15,
+                                            height: 15,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              color: Colors.white,
+                                            ),
+                                          ) : c.isPlay.value ? const Icon(
                                             Icons.pause_rounded,
                                             color: Colors.white,
                                           ): const Icon(

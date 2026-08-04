@@ -197,6 +197,9 @@ class Controller extends GetxController{
   //启用歌词组件
   RxBool useLyricKit=false.obs;
 
+  // 在缓冲
+  RxBool buffer=false.obs;
+
   // 版本号
   RxString version=''.obs;
 }
