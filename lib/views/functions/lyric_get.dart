@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/requests.dart';
@@ -39,7 +40,24 @@ class LyricGet{
   }
 
   Future<bool> lrclib() async {
-    final rlt=await requests.lrclib(songController.nowPlay.value.title, songController.nowPlay.value.album, songController.nowPlay.value.artist, songController.nowPlay.value.duration.toString());
+    final uri = Uri.parse('https://lrclib.net/api/get').replace(queryParameters: {
+      'artist_name': songController.nowPlay.value.artist,
+      'track_name': songController.nowPlay.value.title,
+      'album_name': songController.nowPlay.value.album,
+      'duration': songController.nowPlay.value.duration.toString(),
+    });
+    final res = await http.get(
+      uri,
+      headers: {
+        'User-Agent': 'netPlayer / (https://github.com/Zhoucheng133/netPlayer-Next)',
+        'X-Lrclib-Client': 'netPlayer',
+      },
+    );
+    if (res.statusCode != 200) {
+      return false;
+    }
+    String responseBody = utf8.decode(res.bodyBytes);
+    final rlt = jsonDecode(responseBody);
     var response=rlt['syncedLyrics']??"";
     if(response==''){
       return false;
