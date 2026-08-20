@@ -89,6 +89,13 @@ Future<void> main(List<String> args) async {
     windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.show();
       await windowManager.focus();
+      if (Platform.isWindows) {
+        WidgetsBinding.instance.addPostFrameCallback((_) async {
+          final size = await windowManager.getSize();
+          await windowManager.setSize(Size(size.width + 1, size.height + 1));
+          await windowManager.setSize(size);
+        });
+      }
     });
     runApp(const MainApp());
   }
