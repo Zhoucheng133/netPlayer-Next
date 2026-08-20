@@ -107,8 +107,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     });
      WidgetsBinding.instance.addPostFrameCallback((_) async {
       await initPref(context);
-      await windowManager.show();
-      await windowManager.focus();
     });
     
   }

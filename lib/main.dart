@@ -86,10 +86,10 @@ Future<void> main(List<String> args) async {
     );
     await c.initLang();
     await windowManager.waitUntilReadyToShow(windowOptions);
-    // windowManager.waitUntilReadyToShow(windowOptions, () async {
-    //   await windowManager.show();
-    //   await windowManager.focus();
-    // });
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
     runApp(const MainApp());
   }
 }
