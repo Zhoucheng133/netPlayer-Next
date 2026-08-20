@@ -4,6 +4,7 @@ import 'package:flutter_popup/flutter_popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/views/components/empty_cover.dart';
 import 'package:net_player_next/views/float_lyric/float_lyric_controlller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/play_queue.dart';
@@ -99,10 +100,7 @@ class _PlayBarState extends State<PlayBar> {
                           Center(
                             child: Hero(
                               tag: 'cover',
-                              child: songController.nowPlay.value.id.isEmpty || (c.userInfo.value.url?.isEmpty ?? true) ? Image.asset(
-                                "assets/blank.jpg",
-                                fit: BoxFit.contain,
-                              ) : Image.network(
+                              child: songController.nowPlay.value.id.isEmpty || (c.userInfo.value.url?.isEmpty ?? true) ? const EmptyCover() : Image.network(
                                 "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}",
                                 fit: BoxFit.contain,
                                 frameBuilder:(context, child, frame, wasSynchronouslyLoaded){

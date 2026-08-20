@@ -10,6 +10,7 @@ import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
+import 'package:net_player_next/views/components/empty_cover.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
@@ -291,10 +292,7 @@ class _LyricViewState extends State<LyricView> {
                               child: Hero(
                                 tag: 'cover',
                                 child: Obx(() =>
-                                  songController.nowPlay.value.id.isEmpty || (c.userInfo.value.url?.isEmpty ?? true) ? Image.asset(
-                                    "assets/blank.jpg",
-                                    fit: BoxFit.contain,
-                                  ) : Image.network(
+                                  songController.nowPlay.value.id.isEmpty || (c.userInfo.value.url?.isEmpty ?? true) ? const EmptyCover() : Image.network(
                                     "${c.userInfo.value.url}/rest/getCoverArt?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}",
                                     fit: BoxFit.contain,
                                     frameBuilder:(context, child, frame, wasSynchronouslyLoaded){
