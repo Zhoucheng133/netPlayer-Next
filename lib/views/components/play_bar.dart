@@ -183,7 +183,7 @@ class _PlayBarState extends State<PlayBar> {
                     ),
                   ),
                   const SizedBox(width: 10,),
-                  Center(
+                  if(songController.nowPlay.value.title.isNotEmpty) Center(
                     child: GestureDetector(
                       onTap: (){
                         if(isLoved()){
