@@ -85,8 +85,7 @@ Future<void> main(List<String> args) async {
       ),
     );
     await c.initLang();
-    await windowManager.waitUntilReadyToShow(windowOptions);
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.show();
       await windowManager.focus();
       if (Platform.isWindows) {
