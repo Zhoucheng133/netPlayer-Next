@@ -552,3 +552,280 @@ class _SearchHeaderState extends State<SearchHeader> {
     );
   }
 }
+
+class LovedHeader extends StatefulWidget {
+
+  final TextEditingController controller;
+  final String type;
+  final ValueChanged changeType;
+  final VoidCallback locate;
+  final VoidCallback refresh;
+
+  const LovedHeader({super.key, required this.controller, required this.type, required this.changeType, required this.locate, required this.refresh});
+
+  @override
+  State<LovedHeader> createState() => _LovedHeaderState();
+}
+
+class _LovedHeaderState extends State<LovedHeader> {
+
+  bool hasFocus=false;
+  bool hoverSong=false;
+  bool hoverAlbum=false;
+  bool hoverArtist=false;
+  bool hoverLocate=false;
+  bool hoverRefresh=false;
+  FocusNode focusOnSearch=FocusNode();
+
+  final Controller c = Get.find();
+  final ColorController colorController=Get.find();
+  final SongController songController=Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Row(
+            children: [
+              Obx(()=>
+                Text(
+                  'loved'.tr,
+                  style: TextStyle(
+                    color: colorController.color5(),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                  overflow: TextOverflow.fade,
+                  softWrap: false,
+                ),
+              ),
+              const SizedBox(width: 10,),
+              GestureDetector(
+                onTap: (){
+                  if(widget.type!='song'){
+                    widget.changeType('song');
+                  }
+                },
+                child: Tooltip(
+                  waitDuration: const Duration(seconds: 1),
+                  message: 'songs'.tr,
+                  child: MouseRegion(
+                    onEnter: (_){
+                      setState(() {
+                        hoverSong=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverSong=false;
+                      });
+                    },
+                    child: Obx(()=>
+                      TweenAnimationBuilder(
+                        tween: ColorTween(end: widget.type=='song' ? colorController.color5() : hoverSong ? colorController.color6() : colorController.color3()),
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __)=>Icon(
+                          Icons.music_note_rounded,
+                          color: value,
+                        )
+                      ),
+                    )
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10,),
+              GestureDetector(
+                onTap: (){
+                  if(widget.type!='album'){
+                    widget.changeType('album');
+                  }
+                },
+                child: Tooltip(
+                  waitDuration: const Duration(seconds: 1),
+                  message: 'albums'.tr,
+                  child: MouseRegion(
+                    onEnter: (_){
+                      setState(() {
+                        hoverAlbum=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverAlbum=false;
+                      });
+                    },
+                    child: Obx(()=>
+                      TweenAnimationBuilder(
+                        tween: ColorTween(end: widget.type=='album' ? colorController.color5() : hoverAlbum ? colorController.color6() : colorController.color3()),
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __)=>Icon(
+                          Icons.album_rounded,
+                          color: value,
+                        )
+                      ),
+                    )
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10,),
+              GestureDetector(
+                onTap: (){
+                  if(widget.type!='artist'){
+                    widget.changeType('artist');
+                  }
+                },
+                child: Tooltip(
+                  waitDuration: const Duration(seconds: 1),
+                  message: 'artists'.tr,
+                  child: MouseRegion(
+                    onEnter: (_){
+                      setState(() {
+                        hoverArtist=true;
+                      });
+                    },
+                    onExit: (_){
+                      setState(() {
+                        hoverArtist=false;
+                      });
+                    },
+                    child: Obx(()=>
+                      TweenAnimationBuilder(
+                        tween: ColorTween(end: widget.type=='artist' ? colorController.color5() : hoverArtist ? colorController.color6() : colorController.color3()),
+                        duration: const Duration(milliseconds: 200), 
+                        builder: (_, value, __)=>Icon(
+                          Icons.mic_rounded,
+                          color: value,
+                        )
+                      ),
+                    )
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Obx(()=>
+          AnimatedContainer(
+            width: 180,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: hasFocus ? Border.all(
+                color: colorController.color5(),
+                width: 2
+              ): Border.all(
+                color: colorController.color3(),
+                width: 2
+              )
+            ),
+            duration: const Duration(milliseconds: 200),
+            child: Row(
+              children: [
+                const SizedBox(width: 10,),
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: TweenAnimationBuilder(
+                    tween: ColorTween(end: hasFocus ? colorController.color5() : colorController.color3()), 
+                    duration: const Duration(milliseconds: 200),
+                    builder: (_, value, __)=>Icon(
+                      Icons.search_rounded,
+                      size: 18,
+                      color: value,
+                    ),
+                  )
+                ),
+                Expanded(
+                  child: TextField(
+                    controller: widget.controller,
+                    focusNode: focusOnSearch,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.only(top: 8, bottom: 8, left: 5, right: 10),
+                    ),
+                    style: const TextStyle(
+                      fontSize: 12
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: GestureDetector(
+            onTap: (){
+              if(songController.nowPlay.value.playFrom==Pages.loved ){
+                widget.locate();
+              }
+            },
+            child: Tooltip(
+              waitDuration: const Duration(seconds: 1),
+              message: 'locate'.tr,
+              child: Obx(()=>
+                MouseRegion(
+                  cursor: songController.nowPlay.value.playFrom==Pages.loved ? SystemMouseCursors.basic : SystemMouseCursors.forbidden,
+                  onEnter: (_){
+                    setState(() {
+                      hoverLocate=true;
+                    });
+                  },
+                  onExit: (_){
+                    setState(() {
+                      hoverLocate=false;
+                    });
+                  },
+                  child: TweenAnimationBuilder(
+                    tween: ColorTween(end:  songController.nowPlay.value.playFrom==Pages.loved ? hoverLocate ? colorController.color6() : colorController.color5() : Colors.grey[300]), 
+                    duration: const Duration(milliseconds: 200), 
+                    builder: (_, value, __) => Icon(
+                      Icons.my_location_rounded,
+                      size: 17,
+                      color: value,
+                    )
+                  ),
+                ),
+              ),
+            )
+          ),
+        ),
+        Obx(()=>
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: GestureDetector(
+              onTap: (){
+                widget.refresh();
+              },
+              child: Tooltip(
+                waitDuration: const Duration(seconds: 1),
+                message: 'refresh'.tr,
+                child: MouseRegion(
+                  onEnter: (_){
+                    setState(() {
+                      hoverRefresh=true;
+                    });
+                  },
+                  onExit: (_){
+                    setState(() {
+                      hoverRefresh=false;
+                    });
+                  },
+                  child: TweenAnimationBuilder(
+                    tween: ColorTween(end: hoverRefresh ? colorController.color6() : colorController.color5()),
+                    duration: const Duration(milliseconds: 200), 
+                    builder: (_, value, __) => Icon(
+                      Icons.refresh_rounded,
+                      size: 18,
+                      color: value,
+                    ),
+                  )
+                ),
+              ),
+            ),
+          )
+        )
+      ],
+    );
+  }
+}

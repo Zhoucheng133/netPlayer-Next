@@ -229,4 +229,7 @@ const Map<String, String> zhCN = {
   
   'showFloatLyric': '显示浮动歌词',
   'hideFloatLyric': '隐藏浮动歌词',
+  
+  'songs': '歌曲',
+  'loved': '收藏'
 };

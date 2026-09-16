@@ -26,6 +26,14 @@ class _LovedViewState extends State<LovedView> {
   TextEditingController inputController = TextEditingController();
   String searchKeyWord='';
 
+  String mode="song";
+  
+  void changeMode(String mode){
+    setState(() {
+      this.mode=mode;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -69,7 +77,8 @@ class _LovedViewState extends State<LovedView> {
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
-          Obx(()=>ViewHeader(title: 'lovedSongs'.tr, subTitle: 'total'.tr+songController.lovedSongs.length.toString()+'songTotal'.tr, page: Pages.loved, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,)),
+          // Obx(()=>ViewHeader(title: 'lovedSongs'.tr, subTitle: 'total'.tr+songController.lovedSongs.length.toString()+'songTotal'.tr, page: Pages.loved, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,)),
+          LovedHeader(controller: inputController, type: mode, changeType: (val)=>changeMode(val), refresh: ()=>refresh(context), locate: locateSong,),
           const SongHeader(),
           Expanded(
             child: Obx(()=>
