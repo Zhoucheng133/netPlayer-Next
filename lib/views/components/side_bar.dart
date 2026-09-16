@@ -100,7 +100,7 @@ class _SideBarState extends State<SideBar> {
         children: [
           SideBarItem(name: 'albums'.tr, icon: Icons.album_rounded, index: 3,),
           SideBarItem(name: 'artists'.tr, icon: Icons.mic_rounded, index: 2,),
-          SideBarItem(name: 'lovedSongs'.tr, icon: Icons.favorite_rounded, index: 1,),
+          SideBarItem(name: 'loved'.tr, icon: Icons.favorite_rounded, index: 1,),
           SideBarItem(name: 'allSongs'.tr, icon: Icons.queue_music_rounded, index: 0,),
           SideBarItem(name: 'search'.tr, icon: Icons.search_rounded, index: 5,),
           PlayListLabel(addPlayListHandler: () => addPlayListHandler(context),),

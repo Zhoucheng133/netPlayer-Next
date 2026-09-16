@@ -1,7 +1,7 @@
 const Map<String, String> zhCN = {
   'albums': '专辑',
   'artists': '艺人',
-  'lovedSongs': '喜欢的歌曲',
+  'loved': '收藏',
   'allSongs': '所有歌曲',
   'search': '搜索',
   'playLists': '歌单',
@@ -12,8 +12,8 @@ const Map<String, String> zhCN = {
   'skipPre': '上一首',
   'skipNext': '下一首',
   'play/pause': '播放/暂停',
-  'love': '添加到喜欢',
-  'delove': '取消喜欢',
+  'love': '添加到收藏',
+  'delove': '取消收藏',
   'adjustVolume': '调整音量',
   'mute': '静音',
   'unmute': '取消静音',
@@ -132,8 +132,8 @@ const Map<String, String> zhCN = {
   'delSuccess': '删除成功',
   'getAllSongFail': '获取所有歌曲失败',
   'anayliseAllSongFail': '解析所有歌曲失败',
-  'getLovedSongFail': '获取喜欢的歌曲失败',
-  'analiseLovedSongFail': '解析喜欢的歌曲失败',
+  'getLovedSongFail': '获取收藏的歌曲失败',
+  'analiseLovedSongFail': '解析收藏的歌曲失败',
   'getAllAlbumFail': '获取所有专辑失败',
   'analiseAllAlbumFail': '解析所有专辑失败',
   'getAllArtistFail': '获取所有艺人失败',
@@ -231,5 +231,4 @@ const Map<String, String> zhCN = {
   'hideFloatLyric': '隐藏浮动歌词',
   
   'songs': '歌曲',
-  'loved': '收藏'
 };

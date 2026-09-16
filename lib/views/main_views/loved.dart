@@ -77,7 +77,6 @@ class _LovedViewState extends State<LovedView> {
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
-          // Obx(()=>ViewHeader(title: 'lovedSongs'.tr, subTitle: 'total'.tr+songController.lovedSongs.length.toString()+'songTotal'.tr, page: Pages.loved, locate: locateSong, refresh: ()=>refresh(context), controller: inputController,)),
           LovedHeader(controller: inputController, type: mode, changeType: (val)=>changeMode(val), refresh: ()=>refresh(context), locate: locateSong,),
           const SongHeader(),
           Expanded(
