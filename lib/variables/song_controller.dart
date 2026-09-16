@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 
 class SongItemClass{
@@ -149,4 +150,6 @@ class SongController extends GetxController {
 
   RxList<SongItemClass> allSongs=RxList([]);
   RxList<SongItemClass> lovedSongs=RxList([]);
+  RxList<AlbumItemClass> lovedAlbums=RxList([]);
+  RxList lovedArtists=RxList([]);
 }

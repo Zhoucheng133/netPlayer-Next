@@ -55,7 +55,7 @@ class HttpRequests{
     return await httpRequest("${c.userInfo.value.url}/rest/getRandomSongs?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&size=500");
   }
   // 获取喜欢的歌曲
-  Future<Map> getLovedSongsRequest() async {
+  Future<Map> getLovedRequest() async {
     return await httpRequest("${c.userInfo.value.url}/rest/getStarred?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}");
   }
   // 获取指定id的歌单

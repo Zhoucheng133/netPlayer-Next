@@ -131,20 +131,31 @@ class Operations{
     }
   }
 
-  // 获取喜欢的歌曲
+  // 获取收藏
   Future<void> getLovedSongs(BuildContext context) async {
-    final rlt=await requests.getLovedSongsRequest();
+    final rlt=await requests.getLovedRequest();
     if(rlt.isEmpty || rlt['subsonic-response']['status']!='ok'){
       if(context.mounted) showMessage(false, 'getLovedSongFail'.tr, context);
       return;
     }else{
       try {
-        if(rlt['subsonic-response']['starred']['song']==null){
+         if(rlt['subsonic-response']['starred']['song']==null){
           songController.lovedSongs.value=[];
-          return;
         }else{
           List songList=rlt['subsonic-response']['starred']['song'];
           songController.lovedSongs.value=songList.map((item)=>SongItemClass.fromJson(item)).toList();
+        }
+        if(rlt['subsonic-response']['starred']['album']==null){
+          songController.lovedAlbums.value=[];
+        }else{
+          List albumList=rlt['subsonic-response']['starred']['album'];
+          songController.lovedAlbums.value=albumList.map((item)=>AlbumItemClass.fromJson(item)).toList();
+        }
+        if(rlt['subsonic-response']['starred']['artist']==null){
+          songController.lovedArtists.value=[];
+        }else{
+          List artistList=rlt['subsonic-response']['starred']['artist'];
+          songController.lovedArtists.value=artistList;
         }
       } catch (_) {
         if(context.mounted) showMessage(false, 'analiseLovedSongFail'.tr, context);
