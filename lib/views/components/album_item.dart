@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/infos.dart';
+import 'package:net_player_next/views/functions/operations.dart';
 
 class AlbumHeader extends StatefulWidget {
   const AlbumHeader({super.key});
@@ -72,7 +74,17 @@ class _AlbumHeaderState extends State<AlbumHeader> {
                       ),
                     )
                   ),
-                )
+                ),
+                SizedBox(
+                  width: 50,
+                  child: Center(
+                    child: Icon(
+                      Icons.favorite_border_rounded,
+                      size: 18,
+                      color: colorController.darkMode.value ? Colors.white : Colors.black,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -108,6 +120,17 @@ class _AlbumItemState extends State<AlbumItem> {
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
   final Infos infos=Infos();
+  final SongController songController=Get.find();
+  final Operations operations=Operations();
+
+  bool isLoved(){
+    for (var val in songController.lovedAlbums) {
+      if(val.id==widget.data.id){
+        return true;
+      }
+    }
+    return false;
+  }
 
   Future<void> showAlbumMenu(BuildContext context, TapDownDetails details) async {
     final tapPosition = details.globalPosition;
@@ -145,6 +168,28 @@ class _AlbumItemState extends State<AlbumItem> {
           ),
         ),
         PopupMenuItem(
+          value: isLoved() ? "delove" : "love",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                isLoved() ? Icons.heart_broken_rounded : Icons.favorite_rounded,
+                size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
+              ),
+              const SizedBox(width: 5,),
+              Text(
+                isLoved() ? "delove".tr : "love".tr,
+                style: TextStyle(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
+            ],
+          ),
+        ),
+        PopupMenuItem(
           value: "info",
           height: 35,
           child: Row(
@@ -174,6 +219,10 @@ class _AlbumItemState extends State<AlbumItem> {
       c.pageId.value=widget.data.artistId;
     }else if(val=='info' && context.mounted){
       infos.albumInfo(context, widget.data);
+    }else if(val=='delove'){
+      if(context.mounted) operations.deloveSong(context, widget.data.id);
+    }else if(val=='love'){
+      if(context.mounted) operations.loveSong(context, widget.data.id);
     }
   }
 
@@ -263,7 +312,17 @@ class _AlbumItemState extends State<AlbumItem> {
                       softWrap: false,
                     ),
                   ),
-                )
+                ),
+                SizedBox(
+                  width: 50,
+                  child: Center(
+                    child: isLoved() ? const Icon(
+                      Icons.favorite_rounded,
+                      color: Colors.red,
+                      size: 16,
+                    ) : Container(),
+                  ),
+                ),
               ],
             ),
           ),

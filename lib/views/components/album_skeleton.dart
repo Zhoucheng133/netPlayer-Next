@@ -66,6 +66,9 @@ class _AlbumSkeletonState extends State<AlbumSkeleton> {
                 )
               ),
             ),
+            SizedBox(
+              width: 50,
+            ),
           ],
         ),
       )
