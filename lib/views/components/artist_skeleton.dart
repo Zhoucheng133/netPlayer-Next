@@ -54,6 +54,9 @@ class _ArtistSkeletonState extends State<ArtistSkeleton> {
                 )
               ),
             ),
+            SizedBox(
+              width: 50,
+            ),
           ],
         ),
       )

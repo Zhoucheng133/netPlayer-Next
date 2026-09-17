@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:net_player_next/views/functions/operations.dart';
 
 // 艺人表头
 class ArtistHeader extends StatefulWidget {
@@ -59,7 +61,17 @@ class _ArtistHeaderState extends State<ArtistHeader> {
                       ),
                     )
                   ),
-                )
+                ),
+                SizedBox(
+                  width: 50,
+                  child: Center(
+                    child: Icon(
+                      Icons.favorite_border_rounded,
+                      size: 18,
+                      color: colorController.darkMode.value ? Colors.white : Colors.black,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -93,8 +105,63 @@ class _ArtistItemState extends State<ArtistItem> {
 
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
+  final SongController songController=Get.find();
+  final Operations operations=Operations();
   bool hover=false;
-  
+
+  bool isLoved(){
+    for (var val in songController.lovedArtists) {
+      if(val['id']==widget.id){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  Future<void> showArtistMenu(BuildContext context, TapDownDetails details) async {
+    final tapPosition = details.globalPosition;
+    var val=await showMenu(
+      color: colorController.darkMode.value ? colorController.color3() : Colors.white,
+      context: context, 
+      position: RelativeRect.fromLTRB(
+        tapPosition.dx,
+        tapPosition.dy,
+        tapPosition.dx,
+        tapPosition.dy,
+      ),
+      items: [
+        PopupMenuItem(
+          value: isLoved() ? "delove" : "love",
+          height: 35,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                isLoved() ? Icons.heart_broken_rounded : Icons.favorite_rounded,
+                size: 18,
+                color: colorController.darkMode.value ? Colors.white : Colors.black,
+              ),
+              const SizedBox(width: 5,),
+              Text(
+                isLoved() ? "delove".tr : "love".tr,
+                style: TextStyle(
+                  color: colorController.darkMode.value ? Colors.white : Colors.black,
+                ),
+              )
+            ],
+          ),
+        ),
+      ]
+    );
+
+    if(val=='delove'){
+      if(context.mounted) operations.deloveSong(context, widget.id);
+    }else if(val=='love'){
+      if(context.mounted) operations.loveSong(context, widget.id);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -105,6 +172,7 @@ class _ArtistItemState extends State<ArtistItem> {
         }
         c.pageId.value=widget.id;
       },
+      onSecondaryTapDown: (val) => showArtistMenu(context, val),
       child: MouseRegion(
         onEnter: (_){
           setState(() {
@@ -164,7 +232,17 @@ class _ArtistItemState extends State<ArtistItem> {
                       softWrap: false,
                     ),
                   ),
-                )
+                ),
+                SizedBox(
+                  width: 50,
+                  child: Center(
+                    child: isLoved() ? const Icon(
+                      Icons.favorite_rounded,
+                      color: Colors.red,
+                      size: 16,
+                    ) : Container(),
+                  ),
+                ),
               ]
             ),
           ),
