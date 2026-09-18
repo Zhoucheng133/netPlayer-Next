@@ -752,7 +752,7 @@ class _LovedHeaderState extends State<LovedHeader> {
             ),
           ),
         ),
-        Padding(
+        if(widget.type=='song') Padding(
           padding: const EdgeInsets.only(left: 15),
           child: GestureDetector(
             onTap: (){
