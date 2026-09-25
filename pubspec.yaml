@@ -1,10 +1,10 @@
 name: net_player_next
 description: netPlayer Flutter version
 publish_to: 'none'
-version: 3.8.0
+version: 3.8.1
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.10.0'
 
 dependencies:
   audio_service: ^0.18.12
@@ -78,7 +78,7 @@ msix_config:
   display_name: netPlayer Next
   publisher_display_name: ZhouCheng
   identity_name: ZhouCheng.netPlayerNext
-  msix_version: 3.8.0.0
+  msix_version: 3.8.1.0
   logo_path: assets/icon.png
   trim_logo: false
   capabilities: internetClient, internetClientServer
