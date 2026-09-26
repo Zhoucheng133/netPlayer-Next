@@ -11,6 +11,9 @@ class Empty extends StatefulWidget {
 }
 
 class _EmptyState extends State<Empty> {
+
+  final ColorController colorController=Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -20,8 +23,16 @@ class _EmptyState extends State<Empty> {
         crossAxisAlignment: .center,
         spacing: 10,
         children: [
-          const FaIcon(FontAwesomeIcons.boxOpen),
-          Text('empty'.tr),
+          FaIcon(
+            FontAwesomeIcons.boxOpen,
+            color: colorController.color5(),
+          ),
+          Text(
+            'empty'.tr,
+            style: TextStyle(
+              color: colorController.color5(),
+            ),
+          ),
         ],
       ),
     );

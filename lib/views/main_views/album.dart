@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/album_item.dart';
 import 'package:net_player_next/views/components/album_skeleton.dart';
+import 'package:net_player_next/views/components/empty.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
 import 'package:net_player_next/views/components/song_skeleton.dart';
@@ -114,54 +115,68 @@ class _AlbumViewState extends State<AlbumView> {
             c.pageId.value=='' ?
             Expanded(
               child: Obx(()=>
-                c.loading.value ? const AlbumSkeleton() : ListView.builder(
-                  itemCount: c.albums.length,
-                  itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
-                    AlbumItem(
-                      data: c.albums[index], 
-                      index: index, 
-                      clearSearch: () {}, 
+                c.loading.value ? const AlbumSkeleton() : (() {
+                  final filtered = c.albums.where((item) =>
+                    searchKeyWord.isEmpty ||
+                    item.title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||
+                    item.artist.toLowerCase().contains(searchKeyWord.toLowerCase())
+                  ).toList();
+                  return filtered.isEmpty ? const Empty() : ListView.builder(
+                    itemCount: c.albums.length,
+                    itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
+                      AlbumItem(
+                        data: c.albums[index], 
+                        index: index, 
+                        clearSearch: () {}, 
+                      )
+                    ) : Obx(()=>
+                      c.albums[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      AlbumItem(
+                        data: c.albums[index], 
+                        index: index,
+                        clearSearch: () {
+                          setState(() {
+                            inputController.text='';
+                          });
+                        },
+                      ) : Container()
                     )
-                  ) : Obx(()=>
-                    c.albums[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || c.albums[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                    AlbumItem(
-                      data: c.albums[index], 
-                      index: index,
-                      clearSearch: () {
-                        setState(() {
-                          inputController.text='';
-                        });
-                      },
-                    ) : Container()
-                  )
-                )
+                  );
+                })()
               ),
             ) : 
             Expanded(
               child: Obx(()=>
-                c.loading.value ? SongSkeleton(count: c.childCount.value,) : ListView.builder(
-                  itemCount: list.length,
-                  itemBuilder: (BuildContext context, int index){
-                    return searchKeyWord.isEmpty ? Obx(()=>
-                      SongItem(
-                        index: index, 
-                        isplay: isPlay(index), 
-                        from: Pages.album, 
-                        list: list, 
-                        song: list[index],
-                      )
-                    ) : list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                    Obx(()=>
-                      SongItem(
-                        index: index, 
-                        song: list[index],
-                        isplay: isPlay(index), 
-                        from: Pages.album, 
-                        list: list,
-                      )
-                    ): Container();
-                  }
-                ),
+                c.loading.value ? SongSkeleton(count: c.childCount.value,) : (() {
+                  final filtered = list.where((item) =>
+                    searchKeyWord.isEmpty ||
+                    item.title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||
+                    item.artist.toLowerCase().contains(searchKeyWord.toLowerCase())
+                  ).toList();
+                  return filtered.isEmpty ? const Empty() : ListView.builder(
+                    itemCount: list.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return searchKeyWord.isEmpty ? Obx(()=>
+                        SongItem(
+                          index: index, 
+                          isplay: isPlay(index), 
+                          from: Pages.album, 
+                          list: list, 
+                          song: list[index],
+                        )
+                      ) : list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      Obx(()=>
+                        SongItem(
+                          index: index, 
+                          song: list[index],
+                          isplay: isPlay(index), 
+                          from: Pages.album, 
+                          list: list,
+                        )
+                      ): Container();
+                    }
+                  );
+                })(),
               ),
             )
           )

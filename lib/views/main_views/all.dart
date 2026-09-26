@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/song_controller.dart';
+import 'package:net_player_next/views/components/empty.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
 import 'package:net_player_next/views/components/song_skeleton.dart';
@@ -80,32 +81,39 @@ class _AllViewState extends State<AllView> {
           const SongHeader(),
           Expanded(
             child: Obx(()=>
-              c.loading.value ? const SongSkeleton() : ListView.builder(
-                controller: controller,
-                itemCount: songController.allSongs.length,
-                itemBuilder: (BuildContext context, int index){
-                  return AutoScrollTag(
-                    key: ValueKey(index),
-                    controller: controller,
-                    index: index,
-                    child: searchKeyWord.isEmpty ? Obx(() => SongItem(
-                        index: index, 
-                        song: songController.allSongs[index],
-                        isplay: isPlay(index), 
-                        from: Pages.all, 
-                      )
-                    ) : Obx(()=>
-                      songController.allSongs[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || songController.allSongs[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                      SongItem(
-                        index: index, 
-                        isplay: isPlay(index), 
-                        from: Pages.all,
-                        song: songController.allSongs[index],
-                      ) : Container()
-                    ),
-                  );
-                }
-              )
+              c.loading.value ? const SongSkeleton() : (() {
+                final filtered = songController.allSongs.where((item) =>
+                  searchKeyWord.isEmpty ||
+                  item.title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||
+                  item.artist.toLowerCase().contains(searchKeyWord.toLowerCase())
+                ).toList();
+                return filtered.isEmpty ? const Empty() : ListView.builder(
+                  controller: controller,
+                  itemCount: songController.allSongs.length,
+                  itemBuilder: (BuildContext context, int index){
+                    return AutoScrollTag(
+                      key: ValueKey(index),
+                      controller: controller,
+                      index: index,
+                      child: searchKeyWord.isEmpty ? Obx(() => SongItem(
+                          index: index, 
+                          song: songController.allSongs[index],
+                          isplay: isPlay(index), 
+                          from: Pages.all, 
+                        )
+                      ) : Obx(()=>
+                        songController.allSongs[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || songController.allSongs[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                        SongItem(
+                          index: index, 
+                          isplay: isPlay(index), 
+                          from: Pages.all,
+                          song: songController.allSongs[index],
+                        ) : Container()
+                      ),
+                    );
+                  }
+                );
+              })()
             ),
           )
         ],

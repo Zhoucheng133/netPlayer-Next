@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/album_item.dart';
+import 'package:net_player_next/views/components/empty.dart';
 import 'package:net_player_next/views/components/song_item.dart';
 import 'package:net_player_next/views/components/artist_item.dart';
 import 'package:net_player_next/views/components/view_head.dart';
@@ -94,33 +95,51 @@ class _SearchViewState extends State<SearchView> {
           const ArtistHeader(),
 
           Expanded(
-            child: type=='song' ? ListView.builder(
-              itemCount: songList.length,
-              itemBuilder: (BuildContext context, int index)=>Obx(()=>
-                SongItem(
-                  index: index, 
-                  song: songList[index], 
-                  isplay: isPlay(index), 
-                  from: Pages.search, 
-                  list: songList,
+            child: type=='song' ? (() {
+              final filtered = songList.where((item) =>
+                controller.text.isEmpty ||
+                item.title.toLowerCase().contains(controller.text.toLowerCase()) ||
+                item.artist.toLowerCase().contains(controller.text.toLowerCase())
+              ).toList();
+              return filtered.isEmpty ? const Empty() : ListView.builder(
+                itemCount: songList.length,
+                itemBuilder: (BuildContext context, int index)=>Obx(()=>
+                  SongItem(
+                    index: index, 
+                    song: songList[index], 
+                    isplay: isPlay(index), 
+                    from: Pages.search, 
+                    list: songList,
+                  )
                 )
-              )
-            ) : type=='album' ? ListView.builder(
-              itemCount: albumList.length,
-              itemBuilder: (BuildContext context, int index)=> AlbumItem(
-                index: index, 
-                clearSearch: () {},
-                data: c.albums[index],
-              )
-            ) : ListView.builder(
-              itemCount: artistList.length,
-              itemBuilder:  (BuildContext context, int index)=> ArtistItem(
-                id: artistList[index]['id'], 
-                name: artistList[index]['name'], 
-                albumCount: artistList[index]['albumCount'], 
-                index: index
-              )
-            ),
+              );
+            })() : type=='album' ? (() {
+              final filtered = albumList.where((item) =>
+                controller.text.isEmpty
+              ).toList();
+              return filtered.isEmpty ? const Empty() : ListView.builder(
+                itemCount: albumList.length,
+                itemBuilder: (BuildContext context, int index)=> AlbumItem(
+                  index: index, 
+                  clearSearch: () {},
+                  data: c.albums[index],
+                )
+              );
+            })() : (() {
+              final filtered = artistList.where((item) =>
+                controller.text.isEmpty ||
+                item['name'].toLowerCase().contains(controller.text.toLowerCase())
+              ).toList();
+              return filtered.isEmpty ? const Empty() : ListView.builder(
+                itemCount: artistList.length,
+                itemBuilder:  (BuildContext context, int index)=> ArtistItem(
+                  id: artistList[index]['id'], 
+                  name: artistList[index]['name'], 
+                  albumCount: artistList[index]['albumCount'], 
+                  index: index
+                )
+              );
+            })()
           )
         ],
       )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
+import 'package:net_player_next/views/components/empty.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
 import 'package:net_player_next/views/components/song_skeleton.dart';
@@ -171,35 +172,42 @@ class _PlayListViewState extends State<PlayListView> {
           const SongHeader(),
           Expanded(
             child: Obx(()=>
-              c.loading.value ? SongSkeleton(count: c.childCount.value,) : ListView.builder(
-                controller: controller,
-                itemCount: list.length,
-                itemBuilder: (BuildContext context, int index){
-                  return AutoScrollTag(
-                    key: ValueKey(index), 
-                    controller: controller, 
-                    index: index,
-                    child: searchKeyWord.isEmpty ? Obx(()=>
-                      SongItem(
+              c.loading.value ? SongSkeleton(count: c.childCount.value,) : (() {
+                final filteredList = list.where((item) => 
+                  searchKeyWord.isEmpty || 
+                  item.title.toLowerCase().contains(searchKeyWord.toLowerCase()) || 
+                  item.artist.toLowerCase().contains(searchKeyWord.toLowerCase())
+                ).toList();
+                return filteredList.isEmpty ? const Empty() : ListView.builder(
+                  controller: controller,
+                  itemCount: list.length,
+                  itemBuilder: (BuildContext context, int index){
+                    return AutoScrollTag(
+                      key: ValueKey(index), 
+                      controller: controller, 
+                      index: index,
+                      child: searchKeyWord.isEmpty ? Obx(()=>
+                        SongItem(
+                          index: index, 
+                          song: list[index], 
+                          isplay: isPlay(index), 
+                          from: Pages.playList, 
+                          list: list, 
+                          refresh: ()=>silentRefresh(),
+                        ),
+                      ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      Obx(()=>SongItem(
                         index: index, 
                         song: list[index], 
                         isplay: isPlay(index), 
                         from: Pages.playList, 
                         list: list, 
                         refresh: ()=>silentRefresh(),
-                      ),
-                    ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                    Obx(()=>SongItem(
-                      index: index, 
-                      song: list[index], 
-                      isplay: isPlay(index), 
-                      from: Pages.playList, 
-                      list: list, 
-                      refresh: ()=>silentRefresh(),
-                    )) : Container()
-                  );
-                }
-              ),
+                      )) : Container()
+                    );
+                  }
+                );
+              })(),
             ),
           )
         ],

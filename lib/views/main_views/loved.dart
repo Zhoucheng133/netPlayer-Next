@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/album_item.dart';
 import 'package:net_player_next/views/components/artist_item.dart';
+import 'package:net_player_next/views/components/empty.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/song_item.dart';
 import 'package:net_player_next/views/components/song_skeleton.dart';
@@ -83,87 +84,107 @@ class _LovedViewState extends State<LovedView> {
           mode=='song' ? const SongHeader() : mode=='album' ? const AlbumHeader() : const ArtistHeader(),
           Expanded(
             child: Obx(()=>
-              c.loading.value ? const SongSkeleton(lovedInclude: true,) : mode=='song' ? ListView.builder(
-                controller: controller,
-                itemCount: songController.lovedSongs.length,
-                itemBuilder: (BuildContext context, int index){
-                  return AutoScrollTag(
-                    key: ValueKey(index),
-                    controller: controller,
-                    index: index,
-                    child: searchKeyWord.isEmpty ? Obx(()=>
-                      SongItem(
-                        index: index, 
-                        song: songController.lovedSongs[index], 
-                        isplay: isPlay(index),
-                        from: Pages.loved,
+              c.loading.value ? const SongSkeleton(lovedInclude: true,) : mode=='song' ? (() {
+                final filtered = songController.lovedSongs.where((item) =>
+                  searchKeyWord.isEmpty ||
+                  item.title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||
+                  item.artist.toLowerCase().contains(searchKeyWord.toLowerCase())
+                ).toList();
+                return filtered.isEmpty ? const Empty() : ListView.builder(
+                  controller: controller,
+                  itemCount: songController.lovedSongs.length,
+                  itemBuilder: (BuildContext context, int index){
+                    return AutoScrollTag(
+                      key: ValueKey(index),
+                      controller: controller,
+                      index: index,
+                      child: searchKeyWord.isEmpty ? Obx(()=>
+                        SongItem(
+                          index: index, 
+                          song: songController.lovedSongs[index], 
+                          isplay: isPlay(index),
+                          from: Pages.loved,
+                        )
+                      ) : Obx(()=>
+                        songController.lovedSongs[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||  songController.lovedSongs[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                        SongItem(
+                          index: index, 
+                          isplay: isPlay(index), 
+                          from: Pages.loved,
+                          song: songController.lovedSongs[index], 
+                        ) : Container()
                       )
-                    ) : Obx(()=>
-                      songController.lovedSongs[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||  songController.lovedSongs[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                      SongItem(
-                        index: index, 
-                        isplay: isPlay(index), 
-                        from: Pages.loved,
-                        song: songController.lovedSongs[index], 
-                      ) : Container()
-                    )
-                  );
-                }
-              ) : mode=='album' ? ListView.builder(
-                controller: controller,
-                itemCount: songController.lovedAlbums.length,
-                itemBuilder: (BuildContext context, int index){
-                  return AutoScrollTag(
-                    key: ValueKey(index),
-                    controller: controller,
-                    index: index,
-                    child: searchKeyWord.isEmpty ? Obx(()=>
-                      AlbumItem(
-                        index: index, 
-                        data: songController.lovedAlbums[index], 
-                        clearSearch: (){},
+                    );
+                  }
+                );
+              })() : mode=='album' ? (() {
+                final filtered = songController.lovedAlbums.where((item) =>
+                  searchKeyWord.isEmpty ||
+                  item.title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||
+                  item.artist.toLowerCase().contains(searchKeyWord.toLowerCase())
+                ).toList();
+                return filtered.isEmpty ? const Empty() : ListView.builder(
+                  controller: controller,
+                  itemCount: songController.lovedAlbums.length,
+                  itemBuilder: (BuildContext context, int index){
+                    return AutoScrollTag(
+                      key: ValueKey(index),
+                      controller: controller,
+                      index: index,
+                      child: searchKeyWord.isEmpty ? Obx(()=>
+                        AlbumItem(
+                          index: index, 
+                          data: songController.lovedAlbums[index], 
+                          clearSearch: (){},
+                        )
+                      ) : Obx(()=>
+                        songController.lovedAlbums[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||  songController.lovedAlbums[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                        AlbumItem(
+                          index: index, 
+                          data: songController.lovedAlbums[index], 
+                          clearSearch: (){
+                            setState(() {
+                              searchKeyWord="";
+                            });
+                          },
+                        ) : Container()
                       )
-                    ) : Obx(()=>
-                      songController.lovedAlbums[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||  songController.lovedAlbums[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                      AlbumItem(
-                        index: index, 
-                        data: songController.lovedAlbums[index], 
-                        clearSearch: (){
-                          setState(() {
-                            searchKeyWord="";
-                          });
-                        },
-                      ) : Container()
-                    )
-                  ); 
-                }
-              ) : ListView.builder(
-                controller: controller,
-                itemCount: songController.lovedArtists.length,
-                itemBuilder: (BuildContext context, int index){
-                  return AutoScrollTag(
-                    key: ValueKey(index),
-                    controller: controller,
-                    index: index,
-                    child: searchKeyWord.isEmpty ? Obx(()=>
-                      ArtistItem(
-                        id: songController.lovedArtists[index]['id'],
-                        index: index, 
-                        name: songController.lovedArtists[index]['name'],
-                        albumCount: null,
+                    ); 
+                  }
+                );
+              })() : (() {
+                final filtered = songController.lovedArtists.where((item) =>
+                  searchKeyWord.isEmpty ||
+                  item['name'].toLowerCase().contains(searchKeyWord.toLowerCase())
+                ).toList();
+                return filtered.isEmpty ? const Empty() : ListView.builder(
+                  controller: controller,
+                  itemCount: songController.lovedArtists.length,
+                  itemBuilder: (BuildContext context, int index){
+                    return AutoScrollTag(
+                      key: ValueKey(index),
+                      controller: controller,
+                      index: index,
+                      child: searchKeyWord.isEmpty ? Obx(()=>
+                        ArtistItem(
+                          id: songController.lovedArtists[index]['id'],
+                          index: index, 
+                          name: songController.lovedArtists[index]['name'],
+                          albumCount: null,
+                        )
+                      ) : Obx(()=>
+                        songController.lovedArtists[index]["name"].toLowerCase().contains(searchKeyWord.toLowerCase())? 
+                        ArtistItem(
+                          index: index, 
+                          id: songController.lovedArtists[index]['id'],
+                          name: songController.lovedArtists[index]['name'],
+                          albumCount: null,
+                        ) : Container()
                       )
-                    ) : Obx(()=>
-                      songController.lovedArtists[index]["name"].toLowerCase().contains(searchKeyWord.toLowerCase())? 
-                      ArtistItem(
-                        index: index, 
-                        id: songController.lovedArtists[index]['id'],
-                        name: songController.lovedArtists[index]['name'],
-                        albumCount: null,
-                      ) : Container()
-                    )
-                  ); 
-                }
-              )
+                    ); 
+                  }
+                );
+              })()
             ),
           )
         ],

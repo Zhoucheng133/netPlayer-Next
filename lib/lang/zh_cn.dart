@@ -231,4 +231,7 @@ const Map<String, String> zhCN = {
   'hideFloatLyric': '隐藏浮动歌词',
   
   'songs': '歌曲',
+
+  'empty': '没有内容',
+  'noplaylist': '没有歌单'
 };

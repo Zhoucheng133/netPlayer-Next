@@ -4,6 +4,7 @@ import 'package:net_player_next/variables/album_controller.dart';
 import 'package:net_player_next/views/components/album_item.dart';
 import 'package:net_player_next/views/components/album_skeleton.dart';
 import 'package:net_player_next/views/components/artist_skeleton.dart';
+import 'package:net_player_next/views/components/empty.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/artist_item.dart';
 import 'package:net_player_next/views/components/view_head.dart';
@@ -102,45 +103,58 @@ class _ArtistViewState extends State<ArtistView> {
             c.pageId.value=='' ?
             Expanded(
               child: Obx(()=>
-                c.loading.value ? const ArtistSkeleton() : ListView.builder(
-                  itemCount: c.artists.length,
-                  itemBuilder:  (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
-                    ArtistItem(
-                      id: c.artists[index]['id'], 
-                      name: c.artists[index]['name'], 
-                      albumCount: c.artists[index]['albumCount'], 
-                      index: index
+                c.loading.value ? const ArtistSkeleton() : (() {
+                  final filtered = c.artists.where((item) =>
+                    searchKeyWord.isEmpty ||
+                    item['name'].toLowerCase().contains(searchKeyWord.toLowerCase())
+                  ).toList();
+                  return filtered.isEmpty ? const Empty() : ListView.builder(
+                    itemCount: c.artists.length,
+                    itemBuilder:  (BuildContext context, int index)=> searchKeyWord.isEmpty ? Obx(()=>
+                      ArtistItem(
+                        id: c.artists[index]['id'], 
+                        name: c.artists[index]['name'], 
+                        albumCount: c.artists[index]['albumCount'], 
+                        index: index
+                      )
+                    ) : Obx(()=>
+                      c.artists[index]['name'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                      ArtistItem(
+                        id: c.artists[index]['id'], 
+                        name: c.artists[index]['name'], 
+                        albumCount: c.artists[index]['albumCount'], 
+                        index: index
+                      ) : Container()
                     )
-                  ) : Obx(()=>
-                    c.artists[index]['name'].toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                    ArtistItem(
-                      id: c.artists[index]['id'], 
-                      name: c.artists[index]['name'], 
-                      albumCount: c.artists[index]['albumCount'], 
-                      index: index
-                    ) : Container()
-                  )
-                )
+                  );
+                })()
               ),
             ):
             Expanded(
               child: Obx(()=>
-                c.loading.value ? AlbumSkeleton(count: c.childCount.value,) : ListView.builder(
-                  itemCount: list.length,
-                  itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? AlbumItem(
-                    data: list[index], 
-                    index: index, 
-                    clearSearch: () {  },
-                  ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
-                  AlbumItem(
-                    data: list[index], 
-                    index: index, clearSearch: () {
-                      setState(() {
-                        inputController.text='';
-                      });
-                    },
-                  ) : Container()
-                )
+                c.loading.value ? AlbumSkeleton(count: c.childCount.value,) : (() {
+                  final filtered = list.where((item) =>
+                    searchKeyWord.isEmpty ||
+                    item.title.toLowerCase().contains(searchKeyWord.toLowerCase()) ||
+                    item.artist.toLowerCase().contains(searchKeyWord.toLowerCase())
+                  ).toList();
+                  return filtered.isEmpty ? const Empty() : ListView.builder(
+                    itemCount: list.length,
+                    itemBuilder: (BuildContext context, int index)=> searchKeyWord.isEmpty ? AlbumItem(
+                      data: list[index], 
+                      index: index, 
+                      clearSearch: () {  },
+                    ): list[index].title.toLowerCase().contains(searchKeyWord.toLowerCase()) || list[index].artist.toLowerCase().contains(searchKeyWord.toLowerCase()) ? 
+                    AlbumItem(
+                      data: list[index], 
+                      index: index, clearSearch: () {
+                        setState(() {
+                          inputController.text='';
+                        });
+                      },
+                    ) : Container()
+                  );
+                })()
               ),
             )
           )
