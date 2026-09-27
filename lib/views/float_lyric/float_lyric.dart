@@ -45,6 +45,62 @@ class MainTranslations extends Translations {
       'alwaysOnTop': "視窗置頂",
       'close': '關閉',
     },
+    'ja_JP': {
+      "showShadow": "ウィンドウの影を表示",
+      'alignCenter': "ウィンドウを水平方向の中央に配置",
+      'fontSize': 'フォントサイズ',
+      'appearance': '外観',
+      'alwaysOnTop': "常に手前に表示",
+      'close': '閉じる'
+    },
+    'ko_KR': {
+      "showShadow": "창 그림자 표시",
+      'alignCenter': "창을 수평 중앙에 정렬",
+      'fontSize': '글꼴 크기',
+      'appearance': '모양',
+      'alwaysOnTop': "항상 위",
+      'close': '닫기'
+    },
+    'de_DE': {
+      "showShadow": "Fensterschatten anzeigen",
+      'alignCenter': "Fenster horizontal zentrieren",
+      'fontSize': 'Schriftgröße',
+      'appearance': 'Erscheinungsbild',
+      'alwaysOnTop': "Immer im Vordergrund",
+      'close': 'Schließen'
+    },
+    'ru_RU': {
+      "showShadow": "Показать тень окна",
+      'alignCenter': "Центрировать окно по горизонтали",
+      'fontSize': 'Размер шрифта',
+      'appearance': 'Внешний вид',
+      'alwaysOnTop': "Поверх всех окон",
+      'close': 'Закрыть'
+    },
+    'es_ES': {
+      "showShadow": "Mostrar sombra de ventana",
+      'alignCenter': "Centrar ventana horizontalmente",
+      'fontSize': 'Tamaño de fuente',
+      'appearance': 'Apariencia',
+      'alwaysOnTop': "Siempre encimera",
+      'close': 'Cerrar'
+    },
+    'pt_BR': {
+      "showShadow": "Mostrar Sombra da Janela",
+      'alignCenter': "Centralizar Janela Horizontalmente",
+      'fontSize': 'Tamanho da Fonte',
+      'appearance': 'Aparência',
+      'alwaysOnTop': "Sempre no Topo",
+      'close': 'Fechar'
+    },
+    'fr_FR': {
+      "showShadow": "Afficher l'ombre de la fenêtre",
+      'alignCenter': "Centrer la fenêtre horizontalement",
+      'fontSize': 'Taille de police',
+      'appearance': 'Apparence',
+      'alwaysOnTop': "Toujours au premier plan",
+      'close': 'Fermer'
+    },
   };
 }
 

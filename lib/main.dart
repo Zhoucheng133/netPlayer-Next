@@ -10,6 +10,13 @@ import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/lang/en_us.dart';
 import 'package:net_player_next/lang/zh_cn.dart';
 import 'package:net_player_next/lang/zh_tw.dart';
+import 'package:net_player_next/lang/ja_jp.dart';
+import 'package:net_player_next/lang/ko_kr.dart';
+import 'package:net_player_next/lang/de_de.dart';
+import 'package:net_player_next/lang/ru_ru.dart';
+import 'package:net_player_next/lang/es_es.dart';
+import 'package:net_player_next/lang/pt_br.dart';
+import 'package:net_player_next/lang/fr_fr.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
@@ -106,6 +113,13 @@ class MainTranslations extends Translations {
     'en_US': enUS,
     'zh_CN': zhCN,
     'zh_TW': zhTW,
+    'ja_JP': jaJP,
+    'ko_KR': koKR,
+    'de_DE': deDE,
+    'ru_RU': ruRU,
+    'es_ES': esES,
+    'pt_BR': ptBR,
+    'fr_FR': frFR,
   };
 }
 

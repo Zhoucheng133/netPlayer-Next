@@ -14,6 +14,13 @@ List<LanguageType> get supportedLocales => [
   LanguageType("English", const Locale("en", "US")),
   LanguageType("简体中文", const Locale("zh", "CN")),
   LanguageType("繁體中文", const Locale("zh", "TW")),
+  LanguageType("日本語", const Locale("ja", "JP")),
+  LanguageType("한국어", const Locale("ko", "KR")),
+  LanguageType("Deutsch", const Locale("de", "DE")),
+  LanguageType("Русский", const Locale("ru", "RU")),
+  LanguageType("Español", const Locale("es", "ES")),
+  LanguageType("Português (Brasil)", const Locale("pt", "BR")),
+  LanguageType("Français", const Locale("fr", "FR")),
 ];
 
 
