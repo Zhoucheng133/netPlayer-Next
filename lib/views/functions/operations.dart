@@ -784,7 +784,7 @@ class Operations{
     if(songController.nowPlay.value.id==''){
       return;
     }
-    pause();
+    // pause();
     int progress=(songController.nowPlay.value.duration*1000*val).toInt();
     c.playProgress.value=progress;
     await seek(Duration(milliseconds: c.playProgress.value));

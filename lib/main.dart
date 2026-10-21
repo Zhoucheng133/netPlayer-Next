@@ -9,12 +9,13 @@ import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:net_player_next/lang/en_us.dart';
 import 'package:net_player_next/lang/zh_cn.dart';
 import 'package:net_player_next/lang/zh_tw.dart';
+import 'package:net_player_next/service/audio_win.dart';
+import 'package:net_player_next/service/audio_macos.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/float_lyric/float_lyric.dart';
 import 'package:net_player_next/views/float_lyric/style_var.dart' hide LanguageType, supportedLocales;
-import 'package:net_player_next/views/functions/audio.dart';
 import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,7 +77,7 @@ Future<void> main(List<String> args) async {
     Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode, autoDark));
 
     c.handler=await AudioService.init(
-      builder: () => MainAudioHanlder(),
+      builder: () => Platform.isMacOS ? MainAudioHanlderMacOS() : MainAudioHanlderWin(),
       config: const AudioServiceConfig(
         androidNotificationChannelId: 'zhouc.netPlayer.channel.audio',
         androidNotificationChannelName: 'Music playback',
