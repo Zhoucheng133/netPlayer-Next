@@ -87,6 +87,9 @@ class Operations{
     }else{
       if(context.mounted){
         showMessage(true, 'delSuccess'.tr, context);
+        if(c.page.value==Pages.playList && c.pageId.value==id){
+          c.page.value=Pages.all;
+        }
         getAllPlayLists(context);
       }
     }
