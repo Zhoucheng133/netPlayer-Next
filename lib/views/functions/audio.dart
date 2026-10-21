@@ -3,18 +3,17 @@ import 'dart:math';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
-import 'package:media_kit/media_kit.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:smtc_windows/smtc_windows.dart';
 
 class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   final Controller c = Get.find();
   final SongController songController=Get.find();
-  final player = Player();
+  final player = AudioPlayer();
   var playURL="";
   bool skipHandler=false;
   MediaItem item=const MediaItem(id: "", title: "");
@@ -23,7 +22,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   bool isSettingUrl = false;
 
   MainAudioHanlder(){
-    player.stream.position.listen((position) {
+    player.positionStream.listen((position) {
       if(c.onslide.value){
         return;
       }
@@ -47,28 +46,23 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
         c.lyricLine.value=0;
       }
     });
-    player.stream.completed.listen((state) {
-      if(state){
+    player.playbackEventStream.listen(
+      (_) {},
+      onError: (Object error, StackTrace stackTrace) {
         skipToNext();
+      },
+    );
+    player.durationStream.listen((Duration? d) {
+      if(songController.nowPlay.value.duration==0){
+        songController.nowPlay.value.duration=d?.inSeconds ?? 0;
       }
     });
-    player.stream.error.listen((error) {
-      skipToNext();
-    });
-    player.stream.duration.listen((Duration d) {
-      if (d.inSeconds > 0 && songController.nowPlay.value.duration == 0) {
-        songController.nowPlay.value.duration = d.inSeconds;
-        songController.nowPlay.refresh();
+   player.playerStateStream.listen((state) {
+      if(state.processingState == ProcessingState.completed) {
+        skipToNext();
+      }else if(state.processingState == ProcessingState.ready){
+        c.buffer.value=false;
       }
-    });
-    player.stream.buffering.switchMap((isBuffering){
-      if (isBuffering) {
-        return Stream.value(true).delay(const Duration(milliseconds: 300));
-      } else {
-        return Stream.value(false);
-      }
-    }).listen((isBuffering) {
-      c.buffer.value=isBuffering;
     });
   }
 
@@ -114,12 +108,21 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 播放
   @override
   Future<void> play() async {
+    if(songController.nowPlay.value.id.isEmpty){
+      return;
+    }
     var url="${c.userInfo.value.url}/rest/stream?v=1.12.0&c=netPlayer&f=json&u=${c.userInfo.value.username}&t=${c.userInfo.value.token}&s=${c.userInfo.value.salt}&id=${songController.nowPlay.value.id}";
     if(url!=playURL || skipHandler){
-      final media=Media(url);
-      await player.open(media);
+      // final media=Media(url);
+      // await player.open(media);
+      c.buffer.value=true;
+      try {
+        await player.setUrl(url);
+      } catch (_) {
+        await skipToNext();
+      }
     }
-    await player.play();
+    player.play();
     c.isPlay.value=true;
     if(skipHandler){
       skipHandler=false;
@@ -131,6 +134,9 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   // 暂停
   @override
   Future<void> pause() async {
+    if(songController.nowPlay.value.id.isEmpty){
+      return;
+    }
     await player.pause();
     setMedia(false);
     c.isPlay.value=false;
@@ -228,7 +234,6 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
     tmpList.artist=tmpList.list[tmpList.index].artist;
     tmpList.duration=tmpList.list[tmpList.index].duration;
     tmpList.album=tmpList.list[tmpList.index].album;
-    // c.updateNowPlay(tmpList);
     songController.nowPlay.value=tmpList;
     songController.nowPlay.refresh();
     skipHandler=true;
@@ -241,7 +246,7 @@ class MainAudioHanlder extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<dynamic> customAction(String name, [Map<String, dynamic>? extras]) async {
     if (name == 'setVolume') {
-      final double volume = extras?['volume'].toDouble() ?? 100.0;
+      final double volume = (extras?['volume'].toDouble())/100 ?? 1.0;
       await player.setVolume(volume);
       return true;
     }

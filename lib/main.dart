@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
-import 'package:media_kit/media_kit.dart';
 import 'package:net_player_next/lang/en_us.dart';
 import 'package:net_player_next/lang/zh_cn.dart';
 import 'package:net_player_next/lang/zh_tw.dart';
@@ -56,7 +55,6 @@ Future<void> main(List<String> args) async {
     });
     runApp(const FloatLyric());
   }else{
-    MediaKit.ensureInitialized();
     await hotKeyManager.unregisterAll();
     WindowOptions windowOptions = const WindowOptions(
       size: Size(900, 650),
