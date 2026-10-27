@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,22 @@ class _PlayBarState extends State<PlayBar> {
   Operations operations=Operations();
   final ColorController colorController=Get.find();
   final SongController songController=Get.find();
+  NativeCallable<CloseCallbackFFI>? _closeCallable;
+
+  @override
+  void initState() {
+    super.initState();
+    _closeCallable = NativeCallable<CloseCallbackFFI>.listener(() {
+      c.showFloatLyric.value=false;
+    });
+    FFIBridge.registerCloseCallback(_closeCallable!.nativeFunction);
+  }
+
+  @override
+  void dispose() {
+    _closeCallable?.close();
+    super.dispose();
+  }
 
   bool hoverPause=false;
   bool hoverPre=false;
