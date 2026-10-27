@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:net_player_next/variables/color_controller.dart';
-import 'package:net_player_next/views/float_lyric/float_lyric_controlller.dart';
 import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/views/functions/requests.dart';
@@ -31,35 +29,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   late Worker wsOkListener;
   Operations operations=Operations();
   final ColorController colorController=Get.find();
-  final floatLyric=Get.put(FloatLyricControlller());
-
-  final WindowMethodChannel mainWindowChannel = const WindowMethodChannel(
-    'net_player_next/main_window',
-    mode: ChannelMode.unidirectional,
-  );
-
-  Future<void> initWindowChannel() async {
-    await mainWindowChannel.setMethodCallHandler((call) async {
-      switch (call.method) {
-        case 'floatLyricClosed':
-          c.showFloatLyric.value = false;
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setBool("showFloatLyric", false);
-          return true;
-      }
-      return null;
-    });
-  }
 
   @override
   Future<void> onWindowClose() async {
-    const WindowMethodChannel floatLyricChannel = WindowMethodChannel(
-      'net_player_next/float_lyric',
-      mode: ChannelMode.unidirectional,
-    );
-    try {
-      await floatLyricChannel.invokeMethod('close');
-    } catch (_) {}
     await windowManager.setPreventClose(false);
     await windowManager.close();
   }
@@ -77,7 +49,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   @override
   void initState() {
     super.initState();
-    initWindowChannel();
     windowManager.addListener(this);
     windowManager.setPreventClose(true);
     trayManager.addListener(this);
@@ -113,7 +84,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
 
   @override
   void dispose() {
-    mainWindowChannel.setMethodCallHandler(null);
     trayManager.removeListener(this);
     windowManager.removeListener(this);
     listener.dispose();
@@ -376,9 +346,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
       if(c.useNavidromeAPI.value && c.userInfo.value.password!=null){
         await requests.getNavidromeAuth();
       }
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await floatLyric.initLyricWindow();
-      });
     }
     setState(() {
       isLoading=false;

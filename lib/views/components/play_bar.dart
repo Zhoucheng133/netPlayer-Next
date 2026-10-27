@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/components/empty_cover.dart';
-import 'package:net_player_next/views/float_lyric/float_lyric_controlller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/play_queue.dart';
 import 'package:net_player_next/views/functions/operations.dart';
@@ -26,7 +25,6 @@ class _PlayBarState extends State<PlayBar> {
   Operations operations=Operations();
   final ColorController colorController=Get.find();
   final SongController songController=Get.find();
-  final FloatLyricControlller floatLyricController=Get.find();
 
   bool hoverPause=false;
   bool hoverPre=false;
@@ -455,7 +453,7 @@ class _PlayBarState extends State<PlayBar> {
                             }else{
                               prefs.setBool("showFloatLyric", true);
                             }
-                            floatLyricController.toggleLyricWindow();
+                            // TODO Toggle Lyric
                           },
                           child: Tooltip(
                             message: c.showFloatLyric.value ? "hideFloatLyric".tr : "showFloatLyric".tr,

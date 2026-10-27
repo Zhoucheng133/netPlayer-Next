@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -15,8 +14,6 @@ import 'package:net_player_next/service/audio_macos.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
-import 'package:net_player_next/views/float_lyric/float_lyric.dart';
-import 'package:net_player_next/views/float_lyric/style_var.dart' hide LanguageType, supportedLocales;
 import 'package:net_player_next/main_window.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,83 +21,50 @@ import 'package:window_manager/window_manager.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  final windowController = await WindowController.fromCurrentEngine();
-  final windowArgs=windowController.arguments;
   await windowManager.ensureInitialized();
-  if(windowArgs=="lyric"){
-    final StyleVar styleVar=Get.put(StyleVar());
-    await styleVar.initPrefs();
-    await styleVar.initLang();
-    WindowOptions windowOptions = WindowOptions(
-      size: const Size(600, 130),
-      minimumSize: const Size(600, 130),
-      center: styleVar.positionX.value==0.0 && styleVar.positionY.value==0.0 ? true : false,
-      backgroundColor: Colors.transparent,
-      skipTaskbar: Platform.isWindows,
-      titleBarStyle: TitleBarStyle.hidden,
-      title: 'Lyric',
-    );
-    await windowManager.waitUntilReadyToShow(windowOptions, () async{
-      await windowManager.setResizable(false);
-      await windowManager.setAsFrameless();
-      if(styleVar.alwaysOnTop.value){
-        await windowManager.setAlwaysOnTop(true);
-      }
-      if(!styleVar.showShadow.value){
-        await windowManager.setHasShadow(false);
-      }
-      if(styleVar.positionX.value!=0.0 && styleVar.positionY.value!=0.0){
-        await windowManager.setPosition(Offset(styleVar.positionX.value, styleVar.positionY.value));
-      }else{
-        await windowManager.center();
-      }
-    });
-    runApp(const FloatLyric());
-  }else{
-    if(Platform.isWindows){
-      MediaKit.ensureInitialized();
-    }
-    await hotKeyManager.unregisterAll();
-    WindowOptions windowOptions = const WindowOptions(
-      size: Size(900, 650),
-      minimumSize: Size(900, 650),
-      center: true,
-      backgroundColor: Colors.transparent,
-      skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.hidden,
-      title: 'netPlayer'
-    );
-    final Controller c = Get.put(Controller());
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final themeColor=prefs.getInt("theme");
-    final darkMode=prefs.getBool("darkMode");
-    final autoDark=prefs.getBool("autoDark");
-    c.wakeLockLyric.value=prefs.getBool("wakeLockLyric")??true;
-    Get.put(SongController());
-    Get.put(PlaylistController());
-    Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode, autoDark));
-
-    c.handler=await AudioService.init(
-      builder: () => Platform.isMacOS ? MainAudioHanlderMacOS() : MainAudioHanlderWin(),
-      config: const AudioServiceConfig(
-        androidNotificationChannelId: 'zhouc.netPlayer.channel.audio',
-        androidNotificationChannelName: 'Music playback',
-      ),
-    );
-    await c.initLang();
-    await windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.show();
-      await windowManager.focus();
-      if (Platform.isWindows) {
-        WidgetsBinding.instance.addPostFrameCallback((_) async {
-          final size = await windowManager.getSize();
-          await windowManager.setSize(Size(size.width + 1, size.height + 1));
-          await windowManager.setSize(size);
-        });
-      }
-    });
-    runApp(const MainApp());
+  if(Platform.isWindows){
+    MediaKit.ensureInitialized();
   }
+  await hotKeyManager.unregisterAll();
+  WindowOptions windowOptions = const WindowOptions(
+    size: Size(900, 650),
+    minimumSize: Size(900, 650),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.hidden,
+    title: 'netPlayer'
+  );
+  final Controller c = Get.put(Controller());
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  final themeColor=prefs.getInt("theme");
+  final darkMode=prefs.getBool("darkMode");
+  final autoDark=prefs.getBool("autoDark");
+  c.wakeLockLyric.value=prefs.getBool("wakeLockLyric")??true;
+  Get.put(SongController());
+  Get.put(PlaylistController());
+  Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode, autoDark));
+
+  c.handler=await AudioService.init(
+    builder: () => Platform.isMacOS ? MainAudioHanlderMacOS() : MainAudioHanlderWin(),
+    config: const AudioServiceConfig(
+      androidNotificationChannelId: 'zhouc.netPlayer.channel.audio',
+      androidNotificationChannelName: 'Music playback',
+    ),
+  );
+  await c.initLang();
+  await windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+    if (Platform.isWindows) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        final size = await windowManager.getSize();
+        await windowManager.setSize(Size(size.width + 1, size.height + 1));
+        await windowManager.setSize(size);
+      });
+    }
+  });
+  runApp(const MainApp());
 }
 
 class MainTranslations extends Translations {
