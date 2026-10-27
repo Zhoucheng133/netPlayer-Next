@@ -111,6 +111,10 @@ class _MainViewState extends State<MainView> {
       }
       c.ws=WsService(wsPort??9098);
     }
+    c.showFloatLyric.value=prefs.getBool("showFloatLyric")??false;
+    if(c.showFloatLyric.value){
+      FFIBridge.show();
+    }
     if(context.mounted) operations.initHotkey(context);
   }
 

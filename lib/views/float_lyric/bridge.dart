@@ -1,6 +1,10 @@
 import 'dart:ffi';
 import 'dart:io';
 import 'package:ffi/ffi.dart';
+import 'package:get/get.dart';
+import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/song_controller.dart';
+import 'package:net_player_next/variables/variables.dart';
 
 // 显示悬浮歌词
 // [lyric] 歌词
@@ -81,4 +85,22 @@ class FFIBridge {
   static final RegisterCloseCallbackDart registerCloseCallback = _dylib
       .lookup<NativeFunction<RegisterCloseCallback>>('RegisterCloseCallback')
       .asFunction<RegisterCloseCallbackDart>();
+
+  static void show(){
+    final Controller c=Get.find();
+    final SongController songController=Get.find();
+    final ColorController colorController=Get.find();
+
+    var content="";
+    try {
+      content=c.lyric[c.lyricLine.value-1].lyric;
+    } catch (_) {
+      content="${songController.nowPlay.value.artist} - ${songController.nowPlay.value.title}";
+    }
+    final ptr = content.toNativeUtf8();
+    // TODO (), 透明度, 字体大小
+    FFIBridge.showFloatLyric(ptr, 0, 30, (colorController.baseColor.value.r*255.0).round().clamp(0, 255), (colorController.baseColor.value.g*255.0).round().clamp(0, 255), (colorController.baseColor.value.b*255.0).round().clamp(0, 255));
+    malloc.free(ptr);
+    c.showFloatLyric.value=true;
+  }
 }

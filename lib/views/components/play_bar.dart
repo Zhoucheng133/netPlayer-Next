@@ -1,6 +1,5 @@
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
@@ -34,8 +33,10 @@ class _PlayBarState extends State<PlayBar> {
   @override
   void initState() {
     super.initState();
-    _closeCallable = NativeCallable<CloseCallbackFFI>.listener(() {
+    _closeCallable = NativeCallable<CloseCallbackFFI>.listener(() async {
       c.showFloatLyric.value=false;
+      final prefs=await SharedPreferences.getInstance();
+      prefs.setBool("showFloatLyric", false);
     });
     FFIBridge.registerCloseCallback(_closeCallable!.nativeFunction);
   }
@@ -474,17 +475,7 @@ class _PlayBarState extends State<PlayBar> {
                               c.showFloatLyric.value=false;
                             }else{
                               prefs.setBool("showFloatLyric", true);
-                              var content="";
-                              try {
-                                content=c.lyric[c.lyricLine.value-1].lyric;
-                              } catch (_) {
-                                content="${songController.nowPlay.value.artist} - ${songController.nowPlay.value.title}";
-                              }
-                              final ptr = content.toNativeUtf8();
-                              // TODO Lyric
-                              FFIBridge.showFloatLyric(ptr, 0, 30, (colorController.baseColor.value.r*255.0).round().clamp(0, 255), (colorController.baseColor.value.g*255.0).round().clamp(0, 255), (colorController.baseColor.value.b*255.0).round().clamp(0, 255));
-                              malloc.free(ptr);
-                              c.showFloatLyric.value=true;
+                              FFIBridge.show();
                             }
                           },
                           child: Tooltip(

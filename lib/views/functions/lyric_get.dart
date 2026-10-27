@@ -42,7 +42,13 @@ class LyricGet{
           FFIBridge.updateLyric(ptr);
           malloc.free(ptr);
         }
+        return;
       }
+    }
+    if(c.showFloatLyric.value){
+      final ptr="".toNativeUtf8();
+      FFIBridge.updateLyric(ptr);
+      malloc.free(ptr);
     }
   }
 
