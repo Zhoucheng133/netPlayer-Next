@@ -47,6 +47,7 @@ dependencies:
   just_audio: ^0.10.6
   media_kit: ^1.2.6
   media_kit_libs_audio: ^1.0.7
+  ffi: ^2.2.0
 
 dev_dependencies:
   flutter_test:
