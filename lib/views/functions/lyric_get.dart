@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:ffi/ffi.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
+import 'package:net_player_next/views/float_lyric/bridge.dart';
 import 'package:net_player_next/views/functions/requests.dart';
 
 class LyricGet{
@@ -34,6 +36,11 @@ class LyricGet{
         var content='noLyric'.tr;
         if(c.useWs.value){
           c.ws.sendMsg(content);
+        }
+        if(c.showFloatLyric.value){
+          final ptr=content.toNativeUtf8();
+          FFIBridge.updateLyric(ptr);
+          malloc.free(ptr);
         }
       }
     }

@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/side_bar.dart';
 import 'package:net_player_next/views/components/play_bar.dart';
+import 'package:net_player_next/views/float_lyric/bridge.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/views/functions/ws.dart';
 import 'package:net_player_next/views/main_views/album.dart';
@@ -39,7 +41,11 @@ class _MainViewState extends State<MainView> {
   late SharedPreferences prefs;
 
   void sendFloatLyric(String content) {
-    // TODO Send Lyric
+    if(c.showFloatLyric.value){
+      final ptr=content.toNativeUtf8();
+      FFIBridge.updateLyric(ptr);
+      calloc.free(ptr);
+    }
   }
   
   // 是否保存->(是)加载播放信息->是否后台播放->是否所有歌曲随机播放->是否启用全局快捷键->是否自定义播放模式

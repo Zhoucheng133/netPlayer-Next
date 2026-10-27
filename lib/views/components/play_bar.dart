@@ -1,3 +1,4 @@
+import 'package:ffi/ffi.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_popup/flutter_popup.dart';
@@ -7,6 +8,7 @@ import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/components/empty_cover.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/play_queue.dart';
+import 'package:net_player_next/views/float_lyric/bridge.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -450,10 +452,22 @@ class _PlayBarState extends State<PlayBar> {
                             final SharedPreferences prefs = await SharedPreferences.getInstance();
                             if(c.showFloatLyric.value){
                               prefs.setBool("showFloatLyric", false);
+                              FFIBridge.hideFloatLyric();
+                              c.showFloatLyric.value=false;
                             }else{
                               prefs.setBool("showFloatLyric", true);
+                              var content="";
+                              try {
+                                content=c.lyric[c.lyricLine.value-1].lyric;
+                              } catch (_) {
+                                content="${songController.nowPlay.value.artist} - ${songController.nowPlay.value.title}";
+                              }
+                              final ptr = content.toNativeUtf8();
+                              // TODO Lyric
+                              FFIBridge.showFloatLyric(ptr, 0, 30, (colorController.baseColor.value.r*255.0).round().clamp(0, 255), (colorController.baseColor.value.g*255.0).round().clamp(0, 255), (colorController.baseColor.value.b*255.0).round().clamp(0, 255));
+                              malloc.free(ptr);
+                              c.showFloatLyric.value=true;
                             }
-                            // TODO Toggle Lyric
                           },
                           child: Tooltip(
                             message: c.showFloatLyric.value ? "hideFloatLyric".tr : "showFloatLyric".tr,
