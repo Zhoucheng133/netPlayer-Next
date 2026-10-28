@@ -8,6 +8,8 @@ import 'package:net_player_next/variables/color_controller.dart';
 import 'package:net_player_next/views/components/message.dart';
 import 'package:net_player_next/views/components/setting_item.dart';
 import 'package:net_player_next/views/components/view_head.dart';
+import 'package:net_player_next/views/float_lyric/bridge.dart';
+import 'package:net_player_next/views/float_lyric/lyric_settings.dart';
 import 'package:net_player_next/views/functions/operations.dart';
 import 'package:net_player_next/variables/variables.dart';
 import 'package:net_player_next/views/functions/requests.dart';
@@ -37,7 +39,9 @@ class _SettingsViewState extends State<SettingsView> {
   bool hoverTheme=false;
   bool hoverDark=false;
   bool hoverRefresh=false;
-  // String version="";
+  bool hoverFloatLyric=false;
+
+  late SharedPreferences prefs;
 
   final operations=Operations();
   int cacheSize=0;
@@ -47,10 +51,15 @@ class _SettingsViewState extends State<SettingsView> {
     c.version.value='v${packageInfo.version}';
   }
 
+  Future<void> initPref() async {
+    prefs=await SharedPreferences.getInstance();
+  }
+
   @override
   void initState(){
     super.initState();
     getVersion();
+    initPref();
     if(Platform.isMacOS){
       getCacheSize();
     }
@@ -337,6 +346,63 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                     )
                   )
+                ),
+                SettingItem(
+                  label: 'floatLyric'.tr, 
+                  item: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: ()=>showLyricSettings(context),
+                        child: MouseRegion(
+                          onEnter: (_){
+                            setState(() {
+                              hoverFloatLyric=true;
+                            });
+                          },
+                          onExit: (_){
+                            setState(() {
+                              hoverFloatLyric=false;
+                            });
+                          },
+                          child: Obx(()=>
+                            AnimatedDefaultTextStyle(
+                              style: TextStyle(
+                                color: hoverFloatLyric ? colorController.color6() : colorController.color5()
+                              ), 
+                              duration: const Duration(milliseconds: 200),
+                              child: Text('settings'.tr)
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10,),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Obx(()=>
+                          Transform.scale(
+                            scale: 0.7,
+                            child: Switch(
+                              mouseCursor: SystemMouseCursors.basic,
+                              activeTrackColor: colorController.color6(),
+                              splashRadius: 0,
+                              value: c.showFloatLyric.value, 
+                              onChanged: (value){
+                                c.showFloatLyric.value=value;
+                                if(value){
+                                  FFIBridge.show();
+                                  prefs.setBool("showFloatLyric", true);
+                                }else{
+                                  FFIBridge.hideFloatLyric();
+                                  prefs.setBool("showFloatLyric", false);
+                                }
+                              }
+                            ),
+                          )
+                        )
+                      ),
+                    ],
+                  ),
                 ),
                 SettingItem(
                   label: 'enableWs'.tr, 
