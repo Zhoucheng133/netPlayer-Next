@@ -8,6 +8,9 @@ class LyricController extends GetxController {
   final Controller c = Get.find();
   var controller=AutoScrollController().obs;
 
+  RxInt fontSize = 30.obs;
+  RxInt opacity = 70.obs;
+
   void scrollLyric(){
     if(!c.windowFocus.value){
       return;

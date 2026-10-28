@@ -29,6 +29,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   late Worker wsOkListener;
   Operations operations=Operations();
   final ColorController colorController=Get.find();
+  final LyricController lyricController=Get.find();
 
   @override
   Future<void> onWindowClose() async {
@@ -40,7 +41,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
   void onWindowResized(){
     if(c.showLyric.value){
       try {
-        LyricController lyricController=Get.find();
         lyricController.scrollLyric();
       } catch (_) {}
     }
@@ -114,7 +114,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     if(c.showLyric.value){
       try {
         Future.delayed(const Duration(milliseconds: 300), (){
-          LyricController lyricController=Get.find();
           lyricController.scrollLyric();
         });
       } catch (_) {}
@@ -170,7 +169,6 @@ class _MainWindowState extends State<MainWindow> with WindowListener, TrayListen
     if(Platform.isMacOS){
       c.windowFocus.value=true;
       if(c.showLyric.value){
-        LyricController lyricController=Get.find();
         lyricController.scrollLyric();
       }
     }

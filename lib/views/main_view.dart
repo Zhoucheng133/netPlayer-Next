@@ -5,6 +5,7 @@ import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/views/components/side_bar.dart';
 import 'package:net_player_next/views/components/play_bar.dart';
@@ -39,6 +40,7 @@ class _MainViewState extends State<MainView> {
   final SongController songController=Get.find();
   String? preId;
   late SharedPreferences prefs;
+  final LyricController lyricController=Get.find();
 
   void sendFloatLyric(String content) {
     if(c.showFloatLyric.value){
@@ -111,6 +113,8 @@ class _MainViewState extends State<MainView> {
       }
       c.ws=WsService(wsPort??9098);
     }
+    lyricController.fontSize.value=prefs.getInt("fontSize")??30;
+    lyricController.opacity.value=prefs.getInt("opacity")?.clamp(0, 100)??50;
     c.showFloatLyric.value=prefs.getBool("showFloatLyric")??false;
     if(c.showFloatLyric.value){
       FFIBridge.show();

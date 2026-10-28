@@ -12,6 +12,7 @@ import 'package:net_player_next/lang/zh_tw.dart';
 import 'package:net_player_next/service/audio_win.dart';
 import 'package:net_player_next/service/audio_macos.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/variables/playlist_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/main_window.dart';
@@ -44,6 +45,7 @@ Future<void> main(List<String> args) async {
   Get.put(SongController());
   Get.put(PlaylistController());
   Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode, autoDark));
+  Get.put(LyricController());
 
   c.handler=await AudioService.init(
     builder: () => Platform.isMacOS ? MainAudioHanlderMacOS() : MainAudioHanlderWin(),

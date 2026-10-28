@@ -42,7 +42,7 @@ class _LyricViewState extends State<LyricView> {
   bool hoverTip=false;
   bool hoverFont=false;
   bool hoverSlider=false;
-  final LyricController lyricController=Get.put(LyricController());
+  final LyricController lyricController=Get.find();
   final Controller c = Get.find();
   final ColorController colorController=Get.find();
   final PlaylistController playlistController=Get.find();

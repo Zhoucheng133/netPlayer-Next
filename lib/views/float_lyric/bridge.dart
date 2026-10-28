@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:get/get.dart';
 import 'package:net_player_next/variables/color_controller.dart';
+import 'package:net_player_next/variables/lyric_controller.dart';
 import 'package:net_player_next/variables/song_controller.dart';
 import 'package:net_player_next/variables/variables.dart';
 
@@ -90,6 +91,7 @@ class FFIBridge {
     final Controller c=Get.find();
     final SongController songController=Get.find();
     final ColorController colorController=Get.find();
+    final LyricController lyricController=Get.find();
 
     var content="";
     try {
@@ -98,8 +100,8 @@ class FFIBridge {
       content="${songController.nowPlay.value.artist} - ${songController.nowPlay.value.title}";
     }
     final ptr = content.toNativeUtf8();
-    // TODO (), 透明度, 字体大小
-    FFIBridge.showFloatLyric(ptr, 0, 30, (colorController.baseColor.value.r*255.0).round().clamp(0, 255), (colorController.baseColor.value.g*255.0).round().clamp(0, 255), (colorController.baseColor.value.b*255.0).round().clamp(0, 255));
+
+    FFIBridge.showFloatLyric(ptr, lyricController.opacity.value.toDouble(), lyricController.fontSize.value, (colorController.baseColor.value.r*255.0).round().clamp(0, 255), (colorController.baseColor.value.g*255.0).round().clamp(0, 255), (colorController.baseColor.value.b*255.0).round().clamp(0, 255));
     malloc.free(ptr);
     c.showFloatLyric.value=true;
   }
