@@ -233,5 +233,10 @@ const Map<String, String> frFR = {
   'songs': 'Chansons',
 
   'empty': 'Aucun contenu',
-  'noplaylist': 'Aucune liste'
+  'noplaylist': 'Aucune liste',
+
+  'floatLyric': 'Paroles flottantes',
+  'opacity': 'Opacité',
+  'fontSize': 'Taille de police',
+  'floatLyricSettings': 'Paramètres des paroles flottantes',
 };

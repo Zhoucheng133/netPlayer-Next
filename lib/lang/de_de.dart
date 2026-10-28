@@ -233,5 +233,10 @@ const Map<String, String> deDE = {
   'songs': 'Lieder',
 
   'empty': 'Kein Inhalt',
-  'noplaylist': 'Keine Wiedergabeliste'
+  'noplaylist': 'Keine Wiedergabeliste',
+
+  'floatLyric': 'Schwebender Liedtext',
+  'opacity': 'Deckkraft',
+  'fontSize': 'Schriftgröße',
+  'floatLyricSettings': 'Einstellungen für schwebenden Text',
 };

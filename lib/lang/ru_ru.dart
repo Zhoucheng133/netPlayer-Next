@@ -233,5 +233,10 @@ const Map<String, String> ruRU = {
   'songs': 'Треки',
 
   'empty': 'Нет содержимого',
-  'noplaylist': 'Нет плейлистов'
+  'noplaylist': 'Нет плейлистов',
+
+  'floatLyric': 'Плавающий текст',
+  'opacity': 'Прозрачность',
+  'fontSize': 'Размер шрифта',
+  'floatLyricSettings': 'Настройки плавающего текста',
 };

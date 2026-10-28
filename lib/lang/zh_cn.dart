@@ -227,11 +227,16 @@ const Map<String, String> zhCN = {
 
   'keepScreenOnInLyric': '歌词页保持屏幕常亮',
   
-  'showFloatLyric': '显示浮动歌词',
-  'hideFloatLyric': '隐藏浮动歌词',
+  'showFloatLyric': '显示悬浮歌词',
+  'hideFloatLyric': '隐藏悬浮歌词',
   
   'songs': '歌曲',
 
   'empty': '没有内容',
-  'noplaylist': '没有歌单'
+  'noplaylist': '没有歌单',
+
+  'floatLyric': '悬浮歌词',
+  'opacity': '透明度',
+  'fontSize': '字体大小',
+  'floatLyricSettings': '悬浮歌词设置'
 };

@@ -233,5 +233,10 @@ const Map<String, String> koKR = {
   'songs': '곡',
 
   'empty': '내용 없음',
-  'noplaylist': '재생목록 없음'
+  'noplaylist': '재생목록 없음',
+
+  'floatLyric': '플로팅 가사',
+  'opacity': '불투명도',
+  'fontSize': '글꼴 크기',
+  'floatLyricSettings': '플로팅 가사 설정',
 };

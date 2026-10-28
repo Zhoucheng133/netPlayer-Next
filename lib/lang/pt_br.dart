@@ -233,5 +233,10 @@ const Map<String, String> ptBR = {
   'songs': 'Músicas',
 
   'empty': 'Sem conteúdo',
-  'noplaylist': 'Sem playlists'
+  'noplaylist': 'Sem playlists',
+
+  'floatLyric': 'Letra flutuante',
+  'opacity': 'Opacidade',
+  'fontSize': 'Tamanho da fonte',
+  'floatLyricSettings': 'Configurações da letra flutuante',
 };

@@ -233,5 +233,10 @@ const Map<String, String> jaJP = {
   'songs': '曲',
 
   'empty': '内容がありません',
-  'noplaylist': 'プレイリストがありません'
+  'noplaylist': 'プレイリストがありません',
+
+  'floatLyric': 'フローティング歌詞',
+  'opacity': '不透明度',
+  'fontSize': 'フォントサイズ',
+  'floatLyricSettings': 'フローティング歌詞設定',
 };

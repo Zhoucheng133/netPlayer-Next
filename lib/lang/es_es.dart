@@ -233,5 +233,10 @@ const Map<String, String> esES = {
   'songs': 'Canciones',
 
   'empty': 'Sin contenido',
-  'noplaylist': 'Sin listas'
+  'noplaylist': 'Sin listas',
+
+  'floatLyric': 'Letra flotante',
+  'opacity': 'Opacidad',
+  'fontSize': 'Tamaño de fuente',
+  'floatLyricSettings': 'Ajustes de letra flotante',
 };

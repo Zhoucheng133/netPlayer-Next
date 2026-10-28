@@ -227,8 +227,16 @@ const Map<String, String> zhTW = {
 
   'keepScreenOnInLyric': '歌詞頁保持螢幕常亮',
 
-  'showFloatLyric': '顯示浮動歌詞',
-  'hideFloatLyric': '隱藏浮動歌詞',
+  'showFloatLyric': '顯示懸浮歌詞',
+  'hideFloatLyric': '隱藏懸浮歌詞',
 
   'songs': '歌曲',
+
+  'empty': '沒有內容',
+  'noplaylist': '沒有歌單',
+
+  'floatLyric': '懸浮歌詞',
+  'opacity': '透明度',
+  'fontSize': '字體大小',
+  'floatLyricSettings': '懸浮歌詞設定',
 };

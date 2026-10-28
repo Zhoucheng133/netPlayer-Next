@@ -231,4 +231,12 @@ const Map<String, String> enUS = {
   'hideFloatLyric': 'Hide Floating Lyric',
 
   'songs': 'Songs',
+
+  'empty': 'Empty',
+  'noplaylist': 'No Playlist',
+
+  'floatLyric': 'Floating Lyric',
+  'opacity': 'Opacity',
+  'fontSize': 'Font Size',
+  'floatLyricSettings': 'Floating Lyric Settings',
 };
