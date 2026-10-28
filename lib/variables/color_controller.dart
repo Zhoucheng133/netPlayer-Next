@@ -1,6 +1,7 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:net_player_next/views/float_lyric/bridge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ColorController extends GetxController {
@@ -143,6 +144,11 @@ class ColorController extends GetxController {
             color: baseColor.value,
             onColorChanged: (Color color){
               baseColor.value=color;
+              FFIBridge.updateStrokeColor(
+                (baseColor.value.r*255.0).round().clamp(0, 255),
+                (baseColor.value.g*255.0).round().clamp(0, 255),
+                (baseColor.value.b*255.0).round().clamp(0, 255),
+              );
             }
           ),
         ),
@@ -150,6 +156,11 @@ class ColorController extends GetxController {
           TextButton(
             onPressed: (){
               baseColor.value=tmpColor;
+              FFIBridge.updateStrokeColor(
+                (baseColor.value.r*255.0).round().clamp(0, 255),
+                (baseColor.value.g*255.0).round().clamp(0, 255),
+                (baseColor.value.b*255.0).round().clamp(0, 255),
+              );
               Navigator.pop(context);
             }, 
             child: Text('cancel'.tr)
