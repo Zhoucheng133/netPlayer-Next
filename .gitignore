@@ -47,3 +47,4 @@ app.*.map.json
 
 test
 macos/libFloatLyric.dylib
+windows/libFloatLyric.dll
