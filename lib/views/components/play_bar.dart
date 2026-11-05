@@ -468,7 +468,12 @@ class _PlayBarState extends State<PlayBar> {
                       child: Center(
                         child: GestureDetector(
                           onTap: () async {
-                            final SharedPreferences prefs = await SharedPreferences.getInstance();
+                            if(c.playBarLyricButton.value){
+                              operations.toggleLyric(context);
+                              return;
+                            }
+                            final prefs = await SharedPreferences.getInstance();
+                            if(!mounted) return;
                             if(c.showFloatLyric.value){
                               prefs.setBool("showFloatLyric", false);
                               FFIBridge.hideFloatLyric();
@@ -479,7 +484,9 @@ class _PlayBarState extends State<PlayBar> {
                             }
                           },
                           child: Tooltip(
-                            message: c.showFloatLyric.value ? "hideFloatLyric".tr : "showFloatLyric".tr,
+                            message: c.playBarLyricButton.value 
+                              ? (c.showLyric.value ? "hideLyric".tr : "showLyric".tr)
+                              : (c.showFloatLyric.value ? "hideFloatLyric".tr : "showFloatLyric".tr),
                             waitDuration: const Duration(seconds: 1),
                             child: MouseRegion(
                               onEnter: (_){
@@ -492,7 +499,7 @@ class _PlayBarState extends State<PlayBar> {
                                   hoverFloatLyric=false;
                                 });
                               },
-                              child: c.showFloatLyric.value ?  TweenAnimationBuilder(
+                              child: (c.playBarLyricButton.value ? c.showLyric.value : c.showFloatLyric.value) ?  TweenAnimationBuilder(
                                 tween: ColorTween(end: hoverFloatLyric ? colorController.color6() : colorController.color5()),
                                 duration: const Duration(milliseconds: 200),
                                 builder: (_, value, __)=>Icon(

@@ -226,6 +226,7 @@ const Map<String, String> ptBR = {
   'queueNotAvaliable': 'Fila de reprodução indisponível\nAtualmente no modo aleatório completo',
 
   'keepScreenOnInLyric': 'Manter Tela Acesa na Página de Letras',
+  'playBarLyricButton': 'Botão de letra',
 
   'showFloatLyric': 'Mostrar Letra Flutuante',
   'hideFloatLyric': 'Ocultar Letra Flutuante',

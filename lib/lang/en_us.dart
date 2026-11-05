@@ -226,6 +226,7 @@ const Map<String, String> enUS = {
   'queueNotAvaliable': 'Play queue is not available\nCurrently in full shuffle mode',
 
   'keepScreenOnInLyric': 'Keep Screen On in Lyric Page',
+  'playBarLyricButton': 'Lyric Button',
 
   'showFloatLyric': 'Show Floating Lyric',
   'hideFloatLyric': 'Hide Floating Lyric',

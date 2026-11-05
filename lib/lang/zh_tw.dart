@@ -226,6 +226,7 @@ const Map<String, String> zhTW = {
   'queueNotAvaliable': '播放佇列不可用\n現在處於完全隨機播放模式',
 
   'keepScreenOnInLyric': '歌詞頁保持螢幕常亮',
+  'playBarLyricButton': '歌詞按鈕',
 
   'showFloatLyric': '顯示懸浮歌詞',
   'hideFloatLyric': '隱藏懸浮歌詞',

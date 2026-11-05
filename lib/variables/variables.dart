@@ -189,6 +189,8 @@ class Controller extends GetxController{
 
   // 显示浮动歌词
   RxBool showFloatLyric=false.obs;
+  // 播放栏歌词按钮用于打开歌词页
+  RxBool playBarLyricButton=false.obs;
 
   SMTCWindows? smtc;
 

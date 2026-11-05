@@ -226,6 +226,7 @@ const Map<String, String> jaJP = {
   'queueNotAvaliable': '再生キューは利用できません\n現在完全シャッフル再生中です',
 
   'keepScreenOnInLyric': '歌詞画面で画面を常時点灯',
+  'playBarLyricButton': '歌詞ボタン',
 
   'showFloatLyric': 'フローティング歌詞を表示',
   'hideFloatLyric': 'フローティング歌詞を非表示',

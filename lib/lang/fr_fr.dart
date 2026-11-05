@@ -226,6 +226,7 @@ const Map<String, String> frFR = {
   'queueNotAvaliable': "File d'attente indisponible\nActuellement en mode aléatoire complet",
 
   'keepScreenOnInLyric': "Garder l'écran allumé sur la page des paroles",
+  'playBarLyricButton': 'Bouton des paroles',
 
   'showFloatLyric': 'Afficher les paroles flottantes',
   'hideFloatLyric': 'Masquer les paroles flottantes',

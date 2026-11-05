@@ -226,6 +226,7 @@ const Map<String, String> esES = {
   'queueNotAvaliable': 'Cola de reproducción no disponible\nActualmente en modo aleatorio completo',
 
   'keepScreenOnInLyric': 'Mantener pantalla encendida en la página de letras',
+  'playBarLyricButton': 'Botón de letra',
 
   'showFloatLyric': 'Mostrar letra flotante',
   'hideFloatLyric': 'Ocultar letra flotante',

@@ -42,6 +42,7 @@ Future<void> main(List<String> args) async {
   final darkMode=prefs.getBool("darkMode");
   final autoDark=prefs.getBool("autoDark");
   c.wakeLockLyric.value=prefs.getBool("wakeLockLyric")??true;
+  c.playBarLyricButton.value=prefs.getBool("playBarLyricButton")??false;
   Get.put(SongController());
   Get.put(PlaylistController());
   Get.put(ColorController(themeColor==null ? null : Color(themeColor), darkMode, autoDark));

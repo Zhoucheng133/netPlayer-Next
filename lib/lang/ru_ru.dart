@@ -226,6 +226,7 @@ const Map<String, String> ruRU = {
   'queueNotAvaliable': 'Очередь недоступна\nСейчас включен полный случайный порядок',
 
   'keepScreenOnInLyric': 'Не гасить экран на странице текста',
+  'playBarLyricButton': 'Кнопка текста',
 
   'showFloatLyric': 'Показать плавающий текст',
   'hideFloatLyric': 'Скрыть плавающий текст',

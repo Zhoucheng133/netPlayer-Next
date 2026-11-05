@@ -226,6 +226,7 @@ const Map<String, String> zhCN = {
   'queueNotAvaliable': '播放队列不可用\n现在处于完全随机播放模式',
 
   'keepScreenOnInLyric': '歌词页保持屏幕常亮',
+  'playBarLyricButton': '歌词按钮',
   
   'showFloatLyric': '显示悬浮歌词',
   'hideFloatLyric': '隐藏悬浮歌词',

@@ -226,6 +226,7 @@ const Map<String, String> deDE = {
   'queueNotAvaliable': 'Wiedergabewarteschlange nicht verfügbar\nDerzeit im vollständigen Zufallsmodus',
 
   'keepScreenOnInLyric': 'Bildschirm auf Liedtext-Seite eingeschaltet lassen',
+  'playBarLyricButton': 'Liedtext-Schaltfläche',
 
   'showFloatLyric': 'Schwebenden Liedtext anzeigen',
   'hideFloatLyric': 'Schwebenden Liedtext ausblenden',

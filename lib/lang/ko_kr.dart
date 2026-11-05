@@ -226,6 +226,7 @@ const Map<String, String> koKR = {
   'queueNotAvaliable': '재생 대기열을 사용할 수 없습니다\n현재 전체 셔플 재생 모드입니다',
 
   'keepScreenOnInLyric': '가사 화면에서 화면 켜짐 유지',
+  'playBarLyricButton': '가사 버튼',
 
   'showFloatLyric': '플로팅 가사 표시',
   'hideFloatLyric': '플로팅 가사 숨기기',

@@ -348,6 +348,40 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
                 SettingItem(
+                  label: 'playBarLyricButton'.tr, 
+                  item: Obx(()=>
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton<bool>(
+                        focusColor: Colors.transparent,
+                        borderRadius: BorderRadius.circular(10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        value: c.playBarLyricButton.value,
+                        dropdownColor: colorController.darkMode.value ? colorController.color3() : Colors.white,
+                        style: TextStyle(
+                          color: colorController.darkMode.value ? Colors.white : Colors.black,
+                          fontSize: 14,
+                        ),
+                        items: [
+                          DropdownMenuItem<bool>(
+                            value: false,
+                            child: Text('floatLyric'.tr),
+                          ),
+                          DropdownMenuItem<bool>(
+                            value: true,
+                            child: Text('showLyric'.tr),
+                          ),
+                        ],
+                        onChanged: (value) async {
+                          if (value == null) return;
+                          c.playBarLyricButton.value = value;
+                          final prefs = await SharedPreferences.getInstance();
+                          prefs.setBool("playBarLyricButton", value);
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                SettingItem(
                   label: 'floatLyric'.tr, 
                   item: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
