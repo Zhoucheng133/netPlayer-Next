@@ -1,188 +1,167 @@
 # netPlayer Next
 
-Also available in English. Click [HERE](/documents/en.md) to view the English version of the README
+[English Version](/documents/en.md) | 简体中文
 
 ## 简介
 
-<img src="assets/icon.png" width="100px">
+<img src="assets/icon.png" width="100px" alt="netPlayer Next Logo">
 
-![License](https://img.shields.io/badge/License-MIT-dark_green)
+[![License](https://img.shields.io/badge/License-MIT-dark_green)](/DISCLAIMER.md)
 
 <a href="https://apps.microsoft.com/detail/9nfmtfpz1zct?referrer=appbadge&mode=direct">
-	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200" alt="Get it from Microsoft Store"/>
 </a>
 
-这是一个基于Subsonic (Navidrome) API的一个桌面端App，你可以[**点击这里**](https://www.navidrome.org/docs/installation/)查看如何使用Navidrome (推荐) 搭建一个音乐服务器。如果你要查找移动端版本，应该访问[**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)仓库
+**netPlayer Next** 是一款基于 Subsonic (Navidrome) API 开发的现代桌面端音乐播放器客户端。你可以[**点击这里**](https://www.navidrome.org/docs/installation/)查看如何搭建 Navidrome 音乐服务器（推荐）。
 
-在使用前务必确保运行netPlayer的设备可以通过网络连接到你的音乐服务器  
-若有任何bug欢迎提交至Issues
+如果你正在寻找移动端版本，请访问 [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile) 仓库。
+
+> [!NOTE]
+> - 在使用前，请确保运行 netPlayer 的设备能够正常通过网络连接到你的音乐服务器。
+> - 如遇到任何 Bug 或有新功能建议，欢迎提交 [Issues](https://github.com/Zhoucheng133/netPlayer-Next/issues)。
 
 **★ netPlayer Next** | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
-
-\** 多语言从**v3.2.0** 版本开始支持多语言，你[**点击这里**](#多语言支持)查看详细的语言支持
-
-如果有帮助到了你，欢迎[给我投喂](https://blog.z-server.top/sponsor/)谢谢 🙏  
 
 ## 目录
 
 - [简介](#简介)
-- [截图](#截图)
-- [使用](#使用)
+- [软件截图](#软件截图)
+- [主要功能与使用](#主要功能与使用)
 - [多语言支持](#多语言支持)
-- [WebSocket服务](#websocket服务)
-- [桌面悬浮歌词](#桌面悬浮歌词)
-- [常见问题](#常见问题)
-- [其它链接](#其它链接)
-- [在你的设备上配置netPlayer Next](#在你的设备上配置netplayer-next)
-- [一些API](#一些api)
+- [WebSocket 服务与二次开发](#websocket-服务与二次开发)
+- [常见问题 (FAQ)](#常见问题-faq)
+- [相关链接](#相关链接)
+- [本地开发与打包指南](#本地开发与打包指南)
+- [相关 API](#相关-api)
 
-## 截图
-
-> [!TIP]
-> 现已支持自定义主题色&深色模式
-
-<img src="screenshot/cn/cn1.png" width="600px">
-
-<img src="screenshot/cn/cn2.png" width="600px">
-
-## 使用
+## 软件截图
 
 > [!TIP]
-> 受限于Subsonic API，“所有歌曲”和“专辑”只能显示500首/张（随机的500首歌曲排序展示）  
-> 从`v3.6.2`版本开始支持显示Navidrome服务的“所有歌曲”和“专辑”（默认开启，优先检查是否支持Navidrome API）
+> 软件现已支持自定义主题色与深色模式！
 
-### 快捷键
+<img src="screenshot/cn/cn1.png" width="600px" alt="Screenshot CN 1">
 
-#### App内快捷键
-- `空格`：播放/暂停
-- `command →`(macOS)或`Ctrl →`(Windows)：下一首
-- `command ←`(macOS)或`Ctrl ←`(Windows)：上一首
-- `command L`(macOS)或`Ctrl L`(Windows)：显示/隐藏歌词
+<img src="screenshot/cn/cn2.png" width="600px" alt="Screenshot CN 2">
+
+## 主要功能与使用
+
+> [!TIP]
+> - **歌单与专辑数量说明**：受限于 Subsonic API，“所有歌曲”和“专辑”默认最多显示 500 首/张（随机抽样排序展示）。
+> - **Navidrome 增强支持**：从 `v3.6.2` 版本开始，支持完整显示 Navidrome 服务的“所有歌曲”和“专辑”（默认开启，优先检查服务端是否支持）。
+
+### 快捷键指南
+
+#### App 内快捷键
+- **空格 (Space)**：播放 / 暂停
+- **`Command` + `→`** (macOS) / **`Ctrl` + `→`** (Windows)：下一首
+- **`Command` + `←`** (macOS) / **`Ctrl` + `←`** (Windows)：上一首
+- **`Command` + `L`** (macOS) / **`Ctrl` + `L`** (Windows)：显示 / 隐藏歌词
 
 #### 全局快捷键
-- ⏯️(macOS & Windows)或`Ctrl Alt 空格`(Windows)：播放/暂停
-- ⏩(macOS & Windows)或`Ctrl Alt →`(Windows)：下一首
-- ⏪(macOS & Windows)或`Ctrl Alt ←`(Windows)：上一首
+- **媒体播放键** (macOS & Windows) 或 **`Ctrl` + `Alt` + `空格`** (Windows)：播放 / 暂停
+- **媒体下一首键** (macOS & Windows) 或 **`Ctrl` + `Alt` + `→`** (Windows)：下一首
+- **媒体上一首键** (macOS & Windows) 或 **`Ctrl` + `Alt` + `←`** (Windows)：上一首
+
+### 桌面悬浮歌词
+- 你可以在主界面播放栏进度条右侧的歌词按钮打开/关闭悬浮歌词。
+- 也可以在主界面的**设置**页面中，自定义该按钮的行为（控制显示浮动歌词或显示主页面歌词）。
+- 在设置页面中，还可以调整浮动歌词的字体大小和透明度，歌词颜色将自动跟随当前主题色。
 
 ## 多语言支持
 
-- 简体中文
-- 繁体中文 (由ChatGPT翻译)
-- 英语
+- 多语言配置文件位于 `lib/lang` 目录。
+- 自 `v3.2.0` 版本起正式支持多语言切换。如果您发现某些翻译不够准确，欢迎提交 PR 或 Issue 共同完善。
 
-你可以通过pull&request添加你所需要的语言。语言目录位于`lib/lang`
+## WebSocket 服务与二次开发
 
-如果有一些翻译不那么准确，你可以添加一个Issue
+> [!NOTE]
+> 此功能需要 **v3.0.0** 及以上版本，以下接口适用于 **v3.3.0** 或更新版本。
 
-## WebSocket服务
->[!NOTE]
-> 这个功能至少需要**v3.0.0**版本，下面的接口适用的版本为**v3.3.0**或更新的版本，如果你想要查看过去版本的接口，你可以查找以往版本Tag的README文档
+WebSocket 服务默认地址为：`localhost:9098`
 
-### 发送的消息
-
+### 发送的消息格式
 ```json
 {
-  "title": <标题>,
-  "artist": <艺人>,
-  "lyric": <当前歌词>,
-  "cover": <专辑封面链接>,
-  "fullLyric": <完整歌词>,
-  "line": <当前歌词进行到多少行>,
+  "title": "<歌曲标题>",
+  "artist": "<艺术家>",
+  "lyric": "<当前歌词行>",
+  "cover": "<专辑封面链接>",
+  "fullLyric": "<完整歌词>",
+  "line": "<当前歌词行号>",
   "isPlay": <是否正在播放>,
-  "mode": <播放模式>,
+  "mode": "<播放模式>"
 }
 ```
 
-### 接收的消息
-
-详细的见`lib/views/functions/ws.dart`内容
-
+### 接收的消息格式
+详细说明请参考 `lib/views/functions/ws.dart` 源码：
 ```json
 {
-  "command": <操作>
-  "data": <数据>
+  "command": "<操作命令>",
+  "data": "<相关数据>"
 }
 ```
 
-WebSocket服务器默认地址为: `localhost:9098`
+### 二次开发应用场景
+该功能可用于直播间背景音乐信息实时显示等场景，步骤如下：
+1. 设计一个用于直播展示的 Web 页面 / 浏览器源。
+2. 通过 WebSocket 服务获取当前播放的音乐与歌词信息并实时渲染。
 
-这个功能可以二次开发，用于直播背景音乐信息显示，详细步骤如下：
-1. 设计一个Web页面用于直播（边框）
-2. 在你觉得合适的地方设计一个背景音乐信息显示，内容为WebSocket服务获取的信息
+## 常见问题 (FAQ)
 
-## 桌面悬浮歌词
+### 1. 无法连接到音乐服务器？
+- 请先检查你的客户端设备是否能通过浏览器正常访问音乐库网页（极大概率是服务器防火墙、端口映射或反向代理配置问题）。
+- 检查服务器地址的协议（`http` / `https`）是否正确填写。
 
+### 2. 所有歌曲显示不全？
+- Subsonic API 本身对查看全部歌曲有限制，默认至多返回 500 首。
+- 你可以通过完全随机播放功能来随机畅听所有歌曲（v2 版本位于左侧栏，v3 版本位于“所有歌曲”页标题右侧）。
+
+### 3. 打开页面出现灰色方块或崩溃不显示？
+通常由以下两种原因导致：
+1. **版本冲突**：老版本的配置与新版本产生冲突。
+   - **解决办法**：清理配置目录后重试：
+     - Windows: `C:\Users\<你的用户名>\AppData\Roaming\zhouc\net_player_next`
+     - Windows 旧版: `C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer`
+2. **API 兼容性 Bug**：某些 Subsonic API 返回了未预期的参数。
+   - **建议**：首先尝试更新你的音乐服务器端（如升级 Navidrome）。如果问题持续存在，欢迎提交 Issue 反馈。
+
+### 4. 没有找到歌词？
+- 歌词依赖于在线歌词 API（见下方 API 参考），未找到即代表该歌曲暂无匹配歌词。
+- 歌词匹配精度取决于歌曲标题、所属专辑、艺术家以及歌曲长度。
+
+## 相关链接
+
+- [MusicDL-GUI](https://github.com/Zhoucheng133/MusicDL-GUI) - 歌曲下载辅助工具
+- [Live-BG](https://github.com/Zhoucheng133/Live-BG) - 配合 netPlayer 在直播中展示当前播放歌曲与歌词的背景页面
+
+## 本地开发与打包指南
+
+### 桌面悬浮歌词依赖 (Float-Lyric)
+- 悬浮歌词底层仓库：[Float-Lyric](https://github.com/Zhoucheng133/Float-Lyric)
+- 编译生成的动态链接库文件需放置于对应目录中：
+  - macOS: `macos/libFloatLyric.dylib`
+  - Windows: `windows/libFloatLyric.dll`
+
+### netPlayer Next 本体开发
+本项目基于 **Flutter 3.41+** 开发。推荐使用 Visual Studio Code 进行开发，并安装 Flutter 与 Dart 扩展。项目中已预置 `.vscode/launch.json` 调试配置。
+
+- **Windows 打包**：
+  ```bash
+  flutter build windows
+  ```
+- **macOS 打包**：
+  ```bash
+  flutter build macos
+  ```
+
+### 关于 Pull Request (PR)
 > [!NOTE]
-> 此功能至少需要`v3.7.5`版本
+> 如果您准备提交 PR，请将目标分支选择为 **`dev`** 分支而不是 `main` 主分支。
 
-<img src="screenshot/float_lyric.png" width="600px">
+## 相关 API
 
-- <img src="screenshot/icons/align.svg" width="15px"> 让歌词窗口在屏幕上水平居中
-- <img src="screenshot/icons/text.svg" width="15px"> 设置文本大小
-- <img src="screenshot/icons/droplet.svg" width="15px"> 设置外观（透明度和是否显示窗口阴影）**
-- <img src="screenshot/icons/pin.svg" width="15px"> 让歌词窗口置于顶层
-- <img src="screenshot/icons/close.svg" width="15px"> 关闭悬浮歌词
-
-\* 修改所有的设置会保存，包括悬浮歌词的窗口位置。如果你打开悬浮歌词，下次启用会自动打开  
-\*\* 你可以将歌词窗口设置为完全透明（将透明度设置为0，并且不显示阴影即可）
-
-
-## 常见问题
-### 无法连接到音乐服务器:
->你需要先检查你的客户端设备是否可以直接打开音乐库网页，很大概率是服务器防火墙或者设置问题  
-另外务必检查地址，http和https
-### 所有歌曲显示不全: 
->Subsonic音乐库的API并不支持查看所有的歌曲，因此至多只能显示500首歌曲
-但是你可以通过完全随机播放来随机播放所有的歌曲，不受歌曲数量显示，v2版本在左边栏，v3版本在所有歌曲页标题右侧
-### 打开页面灰色方块或者崩溃不显示内容
-> 有两种可能  
-> 1. 老版本的netPlayer Next和新版本冲突  
-解决办法为删除这两个目录:  
-C:\Users\<你的用户名>\AppData\Roaming\zhouc\net_player_next  
-C:\Users\<你的用户名>\AppData\Roaming\zhouc\netPlayer
-> 2. 软件出现了Bug，常见于某个API找不到指定的参数会出现灰块  
-建议你首先尝试更新Subsonic服务 (比如更新Navidrome)  
-如果还是会稳定出现这个问题，你可以添加一个Issue
-### 没有找到歌词:
->歌词API见文末，没有找到歌词就是字面意思  
-歌词的内容取决于歌曲标题、所属专辑、艺人和歌曲长度
-   
-
-## 其它链接
-
-- 【[MusicDL-GUI](https://github.com/Zhoucheng133/MusicDL-GUI)】下载歌曲的工具
-- 【[Live-BG](https://github.com/Zhoucheng133/Live-BG)】用于直播的配合netPlayer显示当前播放歌曲信息和歌词的背景
-- ~~【[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)】桌面歌词系统~~ (已整合进软件本体)
-
-## 在你的设备上配置netPlayer Next
-
-### netPlayer Next本体
-
-本项目使用Flutter 3.41开发，你可以直接使用这个版本的Flutter在你的设备上Debug  
-建议直接使用Visual Studio Code，在安装完Flutter扩展和Dart扩展之后就可以Debug/Profile/Release了，我已经在.vscode文件夹中添加了launch类型
-
-如果你在**Windows**上Debug或者Release，注意不要在国内的网络环境下操作，可能会等非常长的时间，Mac上没有这个问题
-
-在Windows上的打包：
-```bash
-flutter build windows
-```
-
-在macOS上打包：
-```bash
-flutter build macos
-```
-
-### 关于PR
-> [!NOTE]
-> 如果你有需要PR，请将目标分支选择dev分支而不是主分支
-
-## 一些API
-
-[Subsonic API](http://www.subsonic.org/pages/api.jsp)
-
-[lrclib API](https://lrclib.net/docs)
-
-Navidrome API
-
-网易云音乐
+- [Subsonic API](http://www.subsonic.org/pages/api.jsp)
+- [lrclib API](https://lrclib.net/docs)
+- Navidrome API
+- 网易云音乐 API

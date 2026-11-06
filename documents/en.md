@@ -1,186 +1,167 @@
 # netPlayer Next
 
-你可以[点击这里](../README.md)查看中文文档
+[简体中文](/README.md) | English
 
-## Intro
+## Introduction
 
-<img src="../assets/icon.png" width="100px">
+<img src="../assets/icon.png" width="100px" alt="netPlayer Next Logo">
 
-![License](https://img.shields.io/badge/License-MIT-dark_green)
+[![License](https://img.shields.io/badge/License-MIT-dark_green)](../DISCLAIMER.md)
 
 <a href="https://apps.microsoft.com/detail/9nfmtfpz1zct?referrer=appbadge&mode=direct">
-	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200" alt="Get it from Microsoft Store"/>
 </a>
 
-This is a Subsonic (Navidrome) API based desktop App. You can [click here](https://www.navidrome.org/docs/installation/) to see how to create a music server with Navidrome (Recommend). If you are looking for mobile version, please visit [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile).
+**netPlayer Next** is a modern desktop music player client based on the Subsonic (Navidrome) API. You can [**click here**](https://www.navidrome.org/docs/installation/) to learn how to set up a Navidrome music server (Recommended).
 
-Make sure your device running netPlayer can connect to your music server.
+If you are looking for the mobile version, please visit the [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile) repository.
 
+> [!NOTE]
+> - Before use, make sure the device running netPlayer can successfully connect to your music server over the network.
+> - If you encounter any bugs or have feature suggestions, feel free to open an [Issue](https://github.com/Zhoucheng133/netPlayer-Next/issues).
 
 **★ netPlayer Next** | [**netPlayer Mobile**](https://github.com/Zhoucheng133/netPlayer-Mobile)
 
-\*\* From **v3.2.0**, You can see the detail of multi language support at [**Language support**](#language-support). Other version support Simplified Chinese only.
+## Table of Contents
 
-If this project was helpful, consider [buying me a coffee](https://blog.z-server.top/sponsor/). Cheers! ☕
+- [Introduction](#introduction)
+- [Screenshots](#screenshots)
+- [Features & Usage](#features--usage)
+- [Multi-language Support](#multi-language-support)
+- [WebSocket Service & Integration](#websocket-service--integration)
+- [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
+- [Related Links](#related-links)
+- [Local Development & Build Guide](#local-development--build-guide)
+- [API References](#api-references)
 
-## Contents
-
-- [Intro](#intro)
-- [Screenshot](#screenshot)
-- [Usage](#usage)
-- [Language support](#language-support)
-- [WebSocket service](#websocket-service)
-- [Desktop Floating Lyrics](#desktop-floating-lyrics)
-- [FAQ](#faq)
-- [Other links](#other-links)
-- [Config netPlayer Next on your own device](#config-netplayer-next-on-your-own-device)
-- [Some APIs](#some-apis)
-
-
-## Screenshot
+## Screenshots
 
 > [!TIP]
-> Customized theme colors & dark mode are now supported!
+> Custom theme colors and dark mode are now supported!
 
-<img src="../screenshot/en/en1.png" width="600px">
+<img src="../screenshot/en/en1.png" width="600px" alt="Screenshot EN 1">
 
-<img src="../screenshot/en/en2.png" width="600px">
+<img src="../screenshot/en/en2.png" width="600px" alt="Screenshot EN 2">
 
-## Usage
+## Features & Usage
 
 > [!TIP]
-> Subsonic API does NOT support get 500 songs. All songs you can see is get random 500 songs and sort by time.  
-> Supports displaying "All Songs" and "Albums" of the **Navidrome** service from `v3.6.2`
+> - **Song & Album Limit Note**: Due to Subsonic API limitations, "All Songs" and "Albums" display a maximum of 500 items by default (randomly sampled and sorted).
+> - **Navidrome Enhanced Support**: Starting from `v3.6.2`, full listing of "All Songs" and "Albums" for Navidrome servers is supported (enabled by default, checks server capability first).
 
 ### Shortcuts
 
-#### Shortcuts in app
-- `Space`：Play/Pause
-- `command →`(macOS) or `Ctrl →`(Windows)：Next song
-- `command ←`(macOS) or `Ctrl ←`(Windows)：Previous song
-- `command L`(macOS) or `Ctrl L`(Windows)：Show/Hide lyrics
+#### In-App Shortcuts
+- **`Space`**: Play / Pause
+- **`Command` + `→`** (macOS) or **`Ctrl` + `→`** (Windows): Next track
+- **`Command` + `←`** (macOS) or **`Ctrl` + `←`** (Windows): Previous track
+- **`Command` + `L`** (macOS) or **`Ctrl` + `L`** (Windows): Show / Hide lyrics
 
-#### Global shortcuts
-- ⏯️(macOS & Windows) or `Ctrl Alt Space`(Windows)：Play/Pause
-- ⏩(macOS & Windows) or `Ctrl Alt →`(Windows)：Next song
-- ⏪(macOS & Windows) or `Ctrl Alt ←`(Windows)：Previous song
+#### Global Shortcuts
+- **Media Play/Pause** (macOS & Windows) or **`Ctrl` + `Alt` + `Space`** (Windows): Play / Pause
+- **Media Next** (macOS & Windows) or **`Ctrl` + `Alt` + `→`** (Windows): Next track
+- **Media Previous** (macOS & Windows) or **`Ctrl` + `Alt` + `←`** (Windows): Previous track
 
-## Language support
+### Desktop Floating Lyrics
+- You can toggle floating lyrics using the lyric button next to the playback progress bar in the main interface.
+- You can also configure this button in the **Settings** page to either show floating lyrics or main page lyrics.
+- In the **Settings** page, you can adjust the font size and transparency of the floating lyrics. The lyric color automatically follows the active theme color.
 
-- Simplified Chinese
-- Traditional Chinese (Translated by ChatGPT)
-- English (Translated by myself)
+## Multi-language Support
 
-You can add your language with pull&request. Here is the language directory: `lib/lang`
+- Multi-language configuration files are located in the `lib/lang` directory.
+- Multi-language support has been available since version **v3.2.0**. If you find any translations inaccurate, contributions via PR or Issue are welcome.
 
-If some translate is not accurate, you can add a issue.
+## WebSocket Service & Integration
 
-## WebSocket service
 > [!NOTE]
-> This function needs v3.0.0 or later
+> This feature requires version **v3.0.0** or higher, and the following endpoints apply to version **v3.3.0** or newer.
 
-If you open ws service on **settings**, netPlayer will be a WebSocket server, and it will send messages when lyric update or play song update. The message will be like:
+The default WebSocket server address is: `localhost:9098`
 
-### Send message
-
+### Sent Messages Format
 ```json
 {
-  "title": <song title>,
-  "artist": <song artist>,
-  "lyric": <lyric now>,
-  "cover": <cover image link>,
-  "fullLyric": <full lyric>,
-  "line": <line of lyric now>,
-  "isPlay": <now playing or not>,
-  "mode": <play mode>,
+  "title": "<Track Title>",
+  "artist": "<Artist>",
+  "lyric": "<Current Lyric Line>",
+  "cover": "<Album Art URL>",
+  "fullLyric": "<Full Lyrics>",
+  "line": "<Current Lyric Line Number>",
+  "isPlay": <Is Playing>,
+  "mode": "<Playback Mode>"
 }
 ```
 
-### Receive message
-
-More details see `lib/views/functions/ws.dart`
-
+### Received Messages Format
+For detailed implementation, please refer to `lib/views/functions/ws.dart`:
 ```json
 {
-  "command": <command>
-  "data": <data attached>
+  "command": "<Command>",
+  "data": "<Data>"
 }
 ```
 
-Default port of WebSocket server is: `localhost:9098`.
+### Secondary Development Use Case
+This feature can be used for live streaming background music display. Steps:
+1. Design a Web page / browser source overlay for your live stream.
+2. Fetch current playing music and lyric info via the WebSocket service and render it dynamically.
 
-This function can be used for live streaming to display bgm information. You can develop your own live streaming background as follows:
-1. Design a web background for your stream.
-2. Find a place to display bgm information, and get it through WebSocket service.
+## Frequently Asked Questions (FAQ)
 
-## Desktop Floating Lyrics
+### 1. Cannot connect to the music server?
+- First check whether your client device can open the music server web page directly in a browser (most likely a server firewall, port forwarding, or reverse proxy issue).
+- Verify that the server address protocol (`http` / `https`) is correct.
 
+### 2. "All Songs" list is incomplete?
+- The Subsonic API restricts viewing all songs, returning a maximum of 500 tracks.
+- However, you can use the full random play feature to randomly shuffle through all tracks without limit (v2 has it in the left sidebar, v3 has it next to the "All Songs" title).
+
+### 3. Grey blocks or crash when opening pages?
+This can happen due to two possible reasons:
+1. **Config Conflict**: Conflict between old and new configuration versions.
+   - **Solution**: Delete the configuration directories and retry:
+     - Windows: `C:\Users\<YourUsername>\AppData\Roaming\zhouc\net_player_next`
+     - Windows (Old): `C:\Users\<YourUsername>\AppData\Roaming\zhouc\netPlayer`
+2. **API Bug**: An unexpected parameter returned by a Subsonic API.
+   - **Recommendation**: Try updating your music server (e.g., updating Navidrome). If the issue persists consistently, please open an Issue.
+
+### 4. Lyrics not found?
+- Lyrics rely on online lyrics APIs (see API references below). "Not found" simply means no match was found.
+- Lyric matching depends on track title, album, artist, and track duration.
+
+## Related Links
+
+- [MusicDL-GUI](https://github.com/Zhoucheng133/MusicDL-GUI) - Song download utility tool
+- [Live-BG](https://github.com/Zhoucheng133/Live-BG) - Background page to display current playing song info and lyrics for live streaming with netPlayer
+
+## Local Development & Build Guide
+
+### Desktop Floating Lyric Dependency (Float-Lyric)
+- Repository: [Float-Lyric](https://github.com/Zhoucheng133/Float-Lyric)
+- The compiled dynamic library binaries must be placed in their respective directories:
+  - macOS: `macos/libFloatLyric.dylib`
+  - Windows: `windows/libFloatLyric.dll`
+
+### netPlayer Next App Development
+This project is built with **Flutter 3.41+**. It is recommended to use Visual Studio Code with the Flutter and Dart extensions installed. A preset `.vscode/launch.json` is included.
+
+- **Windows Build**:
+  ```bash
+  flutter build windows
+  ```
+- **macOS Build**:
+  ```bash
+  flutter build macos
+  ```
+
+### Pull Request (PR) Guidelines
 > [!NOTE]
-> This feature requires at least version `v3.7.5`.
+> If you are submitting a PR, please target the **`dev`** branch rather than the `main` branch.
 
-<img src="../screenshot/float_lyric.png" width="600px">
+## API References
 
-- <img src="../screenshot/icons/align.svg" width="15px"> Center the lyrics window horizontally on the screen
-- <img src="../screenshot/icons/text.svg" width="15px"> Set text size
-- <img src="../screenshot/icons/droplet.svg" width="15px"> Adjust appearance (opacity and window shadow visibility) **
-- <img src="../screenshot/icons/pin.svg" width="15px"> Pin the lyrics window to the top
-- <img src="../screenshot/icons/close.svg" width="15px"> Close floating lyrics
-
-\* All setting changes will be saved, including the position of the floating lyrics window. If you leave the floating lyrics open, they will automatically open it next time when you open netPlayer.  
-\*\* You can make the lyrics window completely transparent (simply set the opacity to 0 and disable the window shadow).
-
-## FAQ
-
-### Cannot connect to server
->You need to check whether your cilent device can access to your server. It probably that firewall of your server system blocked your access. Make sure your URL is avaliable (Be aware http and https).
-### Not all songs displayed
->Subsonic API does not support to display all the songs. The limit of songs to get is 500.  
-But you can shuffle all the songs through "Shuffle all the songs", which is not affect by songs displayed. You can see this button right of the "All" page title.
-### See gray block or crashed
-> Maybe caused by following 2 reasons
-> 1. Old version of netPlayer affect  
-Delete these directory:   
-C:\Users\<your username>\AppData\Roaming\zhouc\net_player_next  
-C:\Users\<your username>\AppData\Roaming\zhouc\netPlayer  
-> 2. Caused by a bug, which can't get a specified parameter  
-Recommended try to update the Subsonic service first (such as updating Navidrome)  
-If this problem still occurs stably, you can add an Issue
-### No lyrics found:
->You can see lyrics API at the end of this page. It just what it says.  
-Lyrics depends on the song's title, album, artist and duration.
-   
-
-## Other links
-
-- 【[MusicDL-GUI](https://github.com/Zhoucheng133/MusicDL-GUI)】Music download tool
-- 【[Live-BG](https://github.com/Zhoucheng133/Live-BG)】Used for live streaming to display bgm information developed by myself.
-- ~~【[netPlayer-mini-kit](https://github.com/Zhoucheng133/netPlayer-mini-kit)】Desktop lyric kit~~
-  
-## Config netPlayer Next on your own device
-
-### netPlayer Next only
-
-This project is developed with Flutter 3.41. You can debug with it directly.
-Recommand using Visual Studio Code. After installing Flutter and Dart extension on Visual Studio Code, you can debug/profile/relese on your device.
-
-If you Debug or Release on **Windows**, make sure not do it in Chinese mainland network environment.
-
-Build on Windows：
-```bash
-flutter build windows
-```
-
-Build on Mac: 
-```bash
-flutter build macos
-```
-
-### About PR
-> [!NOTE]
-> If you need to PR, target to branch `dev` instead of branch `main`
-
-## Some APIs
-
-[Subsonic API](http://www.subsonic.org/pages/api.jsp)
-
-[lrclib API](https://lrclib.net/docs)
+- [Subsonic API](http://www.subsonic.org/pages/api.jsp)
+- [lrclib API](https://lrclib.net/docs)
+- Navidrome API
+- Netease Cloud Music API
