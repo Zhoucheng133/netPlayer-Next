@@ -31,7 +31,7 @@ class _SettingItemState extends State<SettingItem> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 170,
+                width: 250,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5),
                   child: Obx(()=>
@@ -46,7 +46,7 @@ class _SettingItemState extends State<SettingItem> {
               ),
               const SizedBox(width: 10,),
               SizedBox(
-                width: 180,
+                width: 200,
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
@@ -80,7 +80,7 @@ class _SettingDividerState extends State<SettingDivider> {
     return Align(
       alignment: Alignment.center,
       child: SizedBox(
-        width: 360,
+        width: 460,
         child: Obx(()=>
           Divider(
             height: 3,
