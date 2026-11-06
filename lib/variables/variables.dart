@@ -18,6 +18,13 @@ List<LanguageType> get supportedLocales => [
   LanguageType("English", const Locale("en", "US")),
   LanguageType("简体中文", const Locale("zh", "CN")),
   LanguageType("繁體中文", const Locale("zh", "TW")),
+  LanguageType("Deutsch", const Locale("de", "DE")),
+  LanguageType("Español", const Locale("es", "ES")),
+  LanguageType("Français", const Locale("fr", "FR")),
+  LanguageType("日本語", const Locale("ja", "JP")),
+  LanguageType("한국어", const Locale("ko", "KR")),
+  LanguageType("Português (Brasil)", const Locale("pt", "BR")),
+  LanguageType("Русский", const Locale("ru", "RU")),
 ];
 
 enum LyricFrom{

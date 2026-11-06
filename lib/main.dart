@@ -6,7 +6,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:net_player_next/lang/de_de.dart';
 import 'package:net_player_next/lang/en_us.dart';
+import 'package:net_player_next/lang/es_es.dart';
+import 'package:net_player_next/lang/fr_fr.dart';
+import 'package:net_player_next/lang/ja_jp.dart';
+import 'package:net_player_next/lang/ko_kr.dart';
+import 'package:net_player_next/lang/pt_br.dart';
+import 'package:net_player_next/lang/ru_ru.dart';
 import 'package:net_player_next/lang/zh_cn.dart';
 import 'package:net_player_next/lang/zh_tw.dart';
 import 'package:net_player_next/service/audio_win.dart';
@@ -76,6 +83,13 @@ class MainTranslations extends Translations {
     'en_US': enUS,
     'zh_CN': zhCN,
     'zh_TW': zhTW,
+    'de_DE': deDE,
+    'es_ES': esES,
+    'fr_FR': frFR,
+    'ja_JP': jaJP,
+    'ko_KR': koKR,
+    'pt_BR': ptBR,
+    'ru_RU': ruRU,
   };
 }
 
